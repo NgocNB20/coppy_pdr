@@ -1,0 +1,7 @@
+type: object
+description: ショップユニークId取得リクエスト
+properties:
+  shopUniqueId:
+    type: string
+    description: ショップユニークId
+    example: 1001

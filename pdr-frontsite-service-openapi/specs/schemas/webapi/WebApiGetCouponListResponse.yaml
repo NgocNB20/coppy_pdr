@@ -1,0 +1,15 @@
+type: object
+description: 利用可能クーポン一覧取得Web-APIレスポンス
+properties:
+  info:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiGetCouponListResponseDetailDtoResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+components:
+  schemas:
+    WebApiGetCouponListResponseDetailDtoResponse:
+      $ref: ./WebApiGetCouponListResponseDetailDtoResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

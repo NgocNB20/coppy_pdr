@@ -1,0 +1,13 @@
+type: object
+description: コンビニEntityListレスポンス
+properties:
+  convenienceList:
+    type: array
+    description: コンビニEntityListレスポンス
+    items:
+      $ref: '#/components/schemas/ConvenienceResponse'
+
+components:
+  schemas:
+    ConvenienceResponse:
+      $ref: ./ConvenienceResponse.yaml

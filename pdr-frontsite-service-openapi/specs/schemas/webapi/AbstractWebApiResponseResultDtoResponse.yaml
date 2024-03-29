@@ -1,0 +1,11 @@
+type: object
+description: API連携取得結果DTO共通情報レスポンス
+properties:
+  status:
+    type: string
+    description: ステータス
+    example: 0
+  message:
+    type: string
+    description: メッセージ
+    example: 成功

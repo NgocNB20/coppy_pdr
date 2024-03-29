@@ -1,0 +1,16 @@
+type: object
+description: 商品グループDtoListレスポンス
+properties:
+  pageInfo:
+    $ref: "#/components/schemas/PageInfoResponse"
+  favoriteDtoListResponse:
+    type: array
+    items:
+      $ref: "#/components/schemas/FavoriteDtoResponse"
+
+components:
+  schemas:
+    PageInfoResponse:
+      $ref: ../PageInfoResponse.yaml
+    FavoriteDtoResponse:
+      $ref: ./FavoriteDtoResponse.yaml

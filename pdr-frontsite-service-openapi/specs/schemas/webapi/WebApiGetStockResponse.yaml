@@ -1,0 +1,17 @@
+type: object
+description: 商品在庫数取得レスポンス
+properties:
+  info:
+    type: array
+    description: 商品在庫数取得 詳細情報
+    items:
+      $ref: "#/components/schemas/WebApiGetStockResponseDetailDtoResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+
+components:
+  schemas:
+    WebApiGetStockResponseDetailDtoResponse:
+      $ref: ./WebApiGetStockResponseDetailDtoResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

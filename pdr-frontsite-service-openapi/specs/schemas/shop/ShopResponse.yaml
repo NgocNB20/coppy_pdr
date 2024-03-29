@@ -1,0 +1,51 @@
+type: object
+description: ショップ情報レスポンス
+properties:
+  shopId:
+    type: string
+    description: ショップID
+    example: ショップID
+  shopNamePC:
+    type: string
+    description: ショップ名pc
+    example: ショップ名pc
+  urlPC:
+    type: string
+    description: ショップurl-pc
+    example: ショップurl-pc
+  metaDescription:
+    type: string
+    description: meta-description
+    example: meta-description
+  metaKeyword:
+    type: string
+    description: meta-keyword
+    example: meta-keyword
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ
+    example: 65
+  autoApprovalFlag:
+    type: string
+    description: 自動承認フラグ
+    example: 0
+  shopOpenStatus:
+    type: string
+    description: ショップ公開状態
+    example: 0
+  shopOpenStartTime:
+    type: string
+    format: date-time
+    description: ショップ公開開始日時
+    example: 2022/01/01 12:00:00
+  shopOpenEndTime:
+    type: string
+    format: date-time
+    description: ショップ公開終了日時
+    example: 2022/01/01 12:00:00
+  creditErrorCount:
+    type: integer
+    format: int32
+    description: クレジットカードエラー回数上限
+    example: 1

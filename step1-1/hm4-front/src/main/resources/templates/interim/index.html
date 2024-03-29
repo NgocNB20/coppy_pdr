@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="regist">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <main class="l-page l-head__pattern2">
+        <div class="l-container">
+            <div class="l-main full">
+                <h2 class="c-title--page"><strong>新規会員登録</strong></h2>
+                <div th:replace="~{includehm4/header_member_regist :: headerMemberRegist('interim')}"></div>
+                <div class="regist__block l-head__pattern2__content">
+                    <h3 class="c-title--line c-font-bold">ご利用規約</h3>
+                    <p class="regist__block--text c-text--m c-margin--xs">当ショップをご利用になられるお客様は、下の「ご利用規約」を必ずお読みください。<br>ご利用規約を確認していただき、同意される方は下の「同意して送信する」ボタンをクリックしてください。
+                    </p>
+                    <div class="regist__rule c-text--m c-margin--xs">
+                        <div class="regist__rule--scroll">
+                            <time datetime="2021-09-01" class="c-font-bold">最終更新日　2021年9月1日</time>
+                            <p class="regist__rule--text">株式会社HIT-MALL（以下「当社」といいます）は、当社が運営する「HIT-MALL DEMO
+                                SHOP」（以下「本サービス」といいます）の利用について以下のとおり本規約を定めます。</p>
+                            <div class="regist__rule--item"><strong>第1条（本規約の適用範囲及び変更）</strong>
+                                <ol>
+                                    <li>本規約は本サービスの提供およびその利用に関し、当社および利用者（第3条で定義します。）に適用されるものとします。</li>
+                                    <li>当社は、利用者の事前の承諾を得ることなく、本規約を変更できるものとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第2条（本サービスの利用）</strong>
+                                <ol>
+                                    <li>利用者は、本規約および当社が別途定めるガイドなどに従い、本サービスを利用するものとします。</li>
+                                    <li>当社は、利用者に事前通知することなく、本サービスの内容を変更することができるものとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第3条（利用者）</strong>
+                                <ol>
+                                    <li>「利用者」とは、本サービスを閲覧、購入など、利用を行った方をいいます。また、本サービスを利用した場合は、本規約に利用者が同意したものとみなされます。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第4条（利用者登録）</strong>
+                                <ol>
+                                    <li>
+                                        はじめて本サービスをご利用になり、当社の商品をご注文いただく場合、本サービスの会員登録が必要となります。利用者は、会員登録ページから当社の指定する方法に従い会員登録申請を行うものとします。
+                                    </li>
+                                    <li>利用者は商品の購入をクレジットカードで行う場合は、本人名義のクレジットカードを使用するものとします。</li>
+                                    <li>当社は、第1項の申請に対し、登録を承諾するときは、登録確認メールを送信することにより申請に対する承諾を行うものとします。</li>
+                                    <li>
+                                        会員登録申請者が過去に本ご利用規約違反などにより会員登録の抹消処分を受けていることが判明した場合、会員登録申請者の申請内容に虚偽の事項が含まれている場合、その他登録申請を承認することが不適当であると当社が判断する場合には、当該登録申請を承認しない場合があります。
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第5条（変更の届出）</strong>
+                                <ol>
+                                    <li>利用者は、その住所、氏名、電話番号、その他当社に届け出ている事項に変更が生じた場合には、当社が別途指示する方法により届け出るものとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第6条（本サービスの提供停止、利用者登録の抹消）</strong>
+                                <ol>
+                                    <li>当社は、利用者が以下の各号の一つに該当する場合、利用者に事前通知することなく本サービスの提供の停止または利用者登録の抹消を行うことができるものとします。
+                                        <ol>
+                                            <li>過去に本ご利用規約違反などにより会員登録の抹消処分をうけていることが判明した場合</li>
+                                            <li>本サービスに関する料金などの支払債務の履行遅延その他の不履行があった場合</li>
+                                            <li>第7条の「禁止事項」の行為を行った場合</li>
+                                            <li>その他本規約に違反した場合</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第7条（禁止事項）</strong>
+                                <ol>
+                                    <li>利用者は以下の行為を行ってはならないものとします。
+                                        <ol>
+                                            <li>会員登録の際に虚偽の登録内容を申請する行為</li>
+                                            <li>本サービスの運営を妨げる行為、その他本サービスに支障をきたす恐れのある行為</li>
+                                            <li>クレジットカードを不正使用して本サービスを利用する行為</li>
+                                            <li>メールアドレスおよびパスワードを不正に使用する行為</li>
+                                            <li>他の利用者、第三者もしくは当社に迷惑、不利益もしくは損害を与える行為、またはそれらの恐れのある行為</li>
+                                            <li>他の利用者、第三者もしくは当社の商標権、著作権、プライバシーその他の権利を侵害する行為、またはそれらの恐れのある行為</li>
+                                            <li>公序良俗に反する行為その他法令に違反する行為、またはそれらの恐れのある行為</li>
+                                            <li>その他、当社が不適当と判断する行為<br>禁止行為に違反することは、単なるエチケット違反にとどまらず、刑法・不正アクセス禁止法・商標法・著作権法及び民商法の規定に違反し、刑事罰責任および民事的な損害賠償責任を負うことになります。
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第8条（著作権）</strong>
+                                <ol>
+                                    <li>
+                                        利用者は、権利者の許諾を得ないで、本サービスを通じて提供されるいかなる情報についても、著作権法で認められる利用者個人の私的複製など著作権による制約を受けない範囲を超えての使用をすることはできません。
+                                    </li>
+                                    <li>
+                                        本条の規定に違反して権利者あるいは第三者との間で問題が生じた場合、利用者は自己の責任と費用においてその問題を解決するとともに、当社に何の迷惑または損害を与えないものとします。
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第9条（会員IDおよびパスワードの管理）</strong>
+                                <ol>
+                                    <li>利用者は、利用者自身で設定した会員IDおよびパスワードの管理責任を負うものとします。</li>
+                                    <li>利用者は、会員IDおよびパスワードを第三者に譲渡、貸与、開示してはならないものとします。</li>
+                                    <li>利用者は、会員IDまたはパスワードの不適切な管理、使用上の過誤、第三者による使用などに起因する損害につき自ら責任を負うものとします。</li>
+                                    <li>利用者は、会員IDおよびパスワードが第三者によって不正に使用されていることが判明した場合には、直ちに当社に連絡するものとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第10条（利用者情報の利用）</strong>
+                                <ol>
+                                    <li>本サービスの利用に関連して当社が知り得た利用者の情報について、当社は以下の各号に該当する場合を除き、第三者に開示または提供しないものとします。
+                                        <ol>
+                                            <li>利用者が、自己の氏名、住所、性別、年齢、メールアドレスなどの開示に同意している場合</li>
+                                            <li>当社が本サービスの利用動向を把握する目的で収集した個人情報の統計を、個々の個人情報として特定できない形式で第三者に提供する場合</li>
+                                            <li>本サービスの提供に必要な場合（当社から利用者に商品を発送する際に運送会社に対して住所、氏名を開示する場合など）</li>
+                                            <li>その他、ガイドラインにより認められている場合</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第11条（商品の購入）</strong>
+                                <ol>
+                                    <li>利用者は、本サービスを利用して商品を購入することができます。</li>
+                                    <li>利用者は、商品の購入を希望する場合、当社が指定する方法に従って商品の購入を申込むものとします。</li>
+                                    <li>前項の申込みに対して、当社より承諾する旨のE-Mailを利用者宛に発信した時点で利用者と当社との間に当該商品などに関する売買契約が成立するものとします。
+                                    </li>
+                                    <li>第2項の申込み取り消しについては、当社が別途定めるガイドなどに定めるとおりとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第12条（契約の解除）</strong>
+                                <ol>
+                                    <li>次の各号の一つにあたる事由のあるときは、当社は当該契約を解除することができるものとします。
+                                        <ol>
+                                            <li>利用者が本規約に違反した場合</li>
+                                            <li>利用者の支払い能力が危うくなったと認めうる事情が判明した場合</li>
+                                            <li>商品が品切れとなり、容易にお届けできない場合</li>
+                                            <li>届先不明・長期不在でお届けできない場合</li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        前項の規定に関らず、本サービス利用に関して不正行為または不適切な行為があった場合、当社は売買契約を取り消しもしくは解除、その他適切な措置をとることができるものとします。
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第13条（支払い）</strong>
+                                <ol>
+                                    <li>商品の購入にあたりお支払いいただく価格は、商品購入代金、消費税および送料の合計額となります。</li>
+                                    <li>
+                                        1回のご注文で商品代金10,800円（税込）以上お買い上げの場合は、送料は無料です。但し、別々にご注文いただいた合計が10,800円以上であっても送料無料は適用されません。
+                                    </li>
+                                    <li>本サービスによって購入された商品のお支払いには、商品内容や利用者の年齢によってご利用いただけない支払い方法があるものとします。</li>
+                                    <li>
+                                        クレジットカードによるお支払いの場合は、利用者がカード会社との間で別途契約する条件に従うものとします。なお、利用者と当該クレジットカード会社などの間で紛争が発生した場合は、当該当事者双方で解決するものとし、当社には一切責任はないものとします。
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第14条（商品の返品など）</strong>
+                                <ol>
+                                    <li>
+                                        商品の返品は、ご配送中の破損、商品の不良、品違い、その他当社が認める場合を除き、できないものとします。また、商品の返品及び不良品の交換ないし交換できない場合の契約の解除は、利用者が商品を受領した後別途当社が定めた期間内に返品をした場合に限りできるものとします。
+                                    </li>
+                                    <li>利用者は、当社が別途定める方法に従い返品を行うものとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第15条（情報の管理）</strong>
+                                <ol>
+                                    <li>
+                                        当社は、利用者が発信したコメントその他の情報について、次の各号の一つにでも該当する場合には、当社の判断によって、利用者に断りなくこれを削除することができるものとします。
+                                        <ol>
+                                            <li>当該情報が当社もしくは第三者の著作権その他の権利を明らかに侵害し、または当社もしくは第三者の名誉もしくは信用を毀損していると認められる場合
+                                            </li>
+                                            <li>当該情報が第三者の著作権その他の権利を侵害し、または第三者の名誉もしくは信用を毀損しているとの警告を当社が当該第三者から受け取った場合</li>
+                                            <li>日本または適用ある外国の法令に違反していると認められた場合</li>
+                                            <li>法令上の根拠に基づき官公庁、公的機関から削除するよう命令を受けた場合</li>
+                                            <li>その他本サービスの運営にとって不適切と認められる場合</li>
+                                        </ol>
+                                    </li>
+                                    <li>当社は、自らの裁量で、何らの通知なく、利用者が本ウェブサイトの全部またはその一部にアクセスすることを拒否することができるものとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第16条（サービスの停止）</strong>
+                                <ol>
+                                    <li>
+                                        当社は、本サービスの稼動状態を良好に保つために、次の各号の一に該当する場合、利用者に事前に通知を行うことなく本サービスの提供の全部あるいは一部を停止することができるものとします。
+                                        <ol>
+                                            <li>システムの定期保守および緊急保守のために必要な場合</li>
+                                            <li>火災、停電、第三者による妨害行為などによりシステムの運用が困難になった場合</li>
+                                            <li>その他、止むを得ずシステムの停止が必要と当社が判断した場合</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第17条（その他免責事項）</strong>
+                                <ol>
+                                    <li>
+                                        当社は、利用者に対して通知義務を負う場合は、利用者があらかじめ登録しているE-Mailアドレスへ通知を発信することにより、また、商品のお届けについては、商品購入の際、利用者に指示された送付先に商品をご配送などすることにより、その義務を果たしたものとします。
+                                    </li>
+                                    <li>
+                                        当社は、法律上の請求原因如何を問わず、いかなる場合においても本サービスの利用および本サービスにおいて売買される商品に関する損害、損失、不利益などに関して前条に定める以外の責任を負わないものとします。
+                                    </li>
+                                    <li>当社は、利用者が本サービスをご利用になれなかったことにより発生した一切の損害について、いかなる責任も負わないものとします。</li>
+                                    <li>当社は、利用者の登録内容に従い事務を処理することにより免責されるものとします。</li>
+                                    <li>当社は、法律上の請求原因如何を問わず、いかなる場合においても本サービスの利用に関して生じた損害、損失、不利益などに関して責任を負わないものとします。</li>
+                                    <li>
+                                        利用者が、本サービスをご利用になることにより、他の利用者または第三者に対して損害などを与えた場合には、当該利用者は自己の責任と費用において解決し、当社には一切迷惑を与えないものとします。
+                                    </li>
+                                    <li>当社は、利用者のパスワードの変更などを行う場合、当社指定の方法で本人確認を行うことにより免責されるものとします。</li>
+                                </ol>
+                            </div>
+                            <div class="regist__rule--item"><strong>第18条（その他）</strong>
+                                <ol>
+                                    <li>当社と利用者との連絡方法は、原則としてE-Mailおよび電話によるものとします。</li>
+                                    <li>本サービスのご利用に関して、本利用者規約により解決できない問題が生じた場合には、当社と利用者との間で双方誠意をもって話し合い、これを解決するものとします。
+                                    </li>
+                                    <li>本サービスの利用に関して訴訟の必要が発生した場合には、大阪地方裁判所を第一審の専属管轄裁判所といたします。</li>
+                                </ol>
+                            </div>
+                            <aside class="c-font-bold">2021年9月1日発行<br>株式会社HIT-MALL</aside>
+                        </div>
+                    </div>
+                </div>
+                <div class="regist__block c-margin--l">
+                    <h3 class="c-title--line c-font-bold">仮登録メールアドレス入力</h3>
+                    <p class="regist__block--text c-text--m">当ショップでは、メールアドレスをIDとしてご利用いただきます。<br>会員登録されるメールアドレスを入力していただき、｢同意して送信する｣をクリックしてください。<br>入力していただいたメールアドレスに会員登録URLを送信いたします。<br>受け取られたメールより、会員登録を進めてください。
+                    </p>
+                    <form id="indexForm" th:action="@{/interim/index.html}" th:object="${interimModel}" method="POST"
+                          class="c-form c-text--m c-margin--xs">
+                        <div th:if="${allMessages}"
+                             th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                        <table>
+                            <colgroup class="c-form--wide"></colgroup>
+                            <tbody>
+                            <tr>
+                                <th>
+                                    <div class="note">
+                                        <p class="c-font-bold">メールアドレス<span
+                                                class="c-text--s c-font-bold--nomal">（半角英数字）</span></p>
+                                    </div>
+                                </th>
+                                <td>
+                                    <input type="email" th:field="*{memberInfoMail}" maxLength="160" title="メールアドレス"
+                                           class="c-input" placeholder="ここに入力してください" th:errorclass="field-error">
+                                    <p th:if="${#fields.hasErrors('memberInfoMail')}" th:errors="*{memberInfoMail}"
+                                       class="field-error-message"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="c-btn-wrap--2btn lg-rev c-margin--xl">
+                            <button name="doOnceTempMemberInfoRegist" type="submit" class="c-btn--blue">同意して送信する
+                            </button>
+                            <a th:href="@{/index.html}" class="c-btn--simple">同意しない</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{includehm4/footer_new}"></div>
+</div>
+<script th:src="@{/hm4/assets/js/bundle.js}" defer="defer"></script>
+<script>
+	if(document.getElementsByClassName("field-error-message").length > 0 ||
+	 document.getElementsByClassName("global-info-message").length > 0 ||
+	 document.getElementsByClassName("global-error-message").length > 0) {
+		document.getElementById("indexForm").scrollIntoView();
+	}
+
+</script>
+</body>
+</html>

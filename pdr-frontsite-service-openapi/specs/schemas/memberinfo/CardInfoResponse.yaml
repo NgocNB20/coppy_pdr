@@ -1,0 +1,33 @@
+type: object
+description: カード情報取得レスポンス
+properties:
+  resultStatus:
+    type: string
+    description: 処理結果
+    example: 処理結果
+  responseCode:
+    type: string
+    description: レスポンスコード(異常終了時)
+    example: 200
+  responseDetail:
+    type: string
+    description: レスポンス詳細(異常終了時)
+    example: レスポンス詳細(異常終了時)
+  messageList:
+    type: array
+    items:
+      $ref: "#/components/schemas/CheckMessageDtoResponse"
+  resultMap:
+    type: object
+    additionalProperties:
+      type: string
+  resultMapList:
+    type: array
+    items:
+      additionalProperties:
+        type: string
+
+components:
+  schemas:
+    CheckMessageDtoResponse:
+      $ref: ../cart/CheckMessageDtoResponse.yaml

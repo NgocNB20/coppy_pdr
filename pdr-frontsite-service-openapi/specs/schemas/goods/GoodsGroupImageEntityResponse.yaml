@@ -1,0 +1,27 @@
+type: object
+description: 商品グループ画像レスポンス
+properties:
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ (FK)（必須）
+    example: 1000
+  imageTypeVersionNo:
+    type: integer
+    format: int32
+    description: 画像種別内連番（必須）
+    example: 1
+  imageFileName:
+    type: string
+    description: 画像ファイル名
+    example: furniture-001/furniture-001_01.jpg
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00

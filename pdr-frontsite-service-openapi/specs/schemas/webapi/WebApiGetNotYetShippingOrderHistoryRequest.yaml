@@ -1,0 +1,8 @@
+type: object
+description: 注文履歴（未出荷）取得Web-APIリクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 2

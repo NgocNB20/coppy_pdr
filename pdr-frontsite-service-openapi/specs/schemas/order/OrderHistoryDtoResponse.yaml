@@ -1,0 +1,18 @@
+type: object
+description: 商品グループ画像レスポンス
+properties:
+  orderSummaryEntity:
+    $ref: '#/components/schemas/OrderSummaryEntityResponse'
+  settlementMethodEntity:
+    $ref: '#/components/schemas/SettlementMethodEntityResponse'
+  couponDiscountPrice:
+    type: number
+    description: クーポン割引額
+    example: 10000001
+
+components:
+  schemas:
+    OrderSummaryEntityResponse:
+      $ref: ../order/OrderSummaryEntityResponse.yaml
+    SettlementMethodEntityResponse:
+      $ref: ./SettlementMethodEntityResponse.yaml

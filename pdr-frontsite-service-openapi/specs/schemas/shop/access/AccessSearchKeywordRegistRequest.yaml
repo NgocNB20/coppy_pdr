@@ -1,0 +1,54 @@
+type: object
+description: アクセス検索キーワード情報登録リクエスト
+properties:
+  accessTime:
+    type: string
+    format: date-time
+    description: アクセス日時（必須）
+    example: 2021/12/12 12:00:00
+  accessUid:
+    type: string
+    description: 端末識別情報（必須）
+    example: uid
+  siteType:
+    type: integer
+    format: int32
+    description: サイト種別（必須）
+    example: 0
+    default: 0
+  searchkeyword:
+    type: string
+    description: 検索キー（必須）
+    example: ｃｈｏｃｏｌａｔｅ－００８
+  searchResultCount:
+    type: integer
+    format: int32
+    description: 検索結果件数（必須）
+    example: 1
+  searchCategorySeq:
+    type: integer
+    format: int32
+    description: 検索カテゴリSEQ
+    example: 1
+  searchPriceFrom:
+    type: number
+    description: 検索価格from
+    example: 100
+  searchPriceTo:
+    type: number
+    description: 検索価格to
+    example: 500
+  pageId:
+    type: string
+    description: 画面ID（必須）
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2021/12/12 12:05:00

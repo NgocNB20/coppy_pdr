@@ -1,0 +1,47 @@
+type: object
+description: カート商品エンティティリクエスト
+properties:
+  cartSeq:
+    type: integer
+    format: int32
+    description: カートSEQ
+    example: 10000001
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+    default: 0
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ
+    example: 10000001
+  cartGoodsCount:
+    type: number
+    description: カート内商品数量
+    example: 1
+    default: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2022/01/01 12:00:00
+  reserveFlag:
+    type: string
+    description: 取りおきフラグ
+    example: 0
+  reserveDeliveryDate:
+    type: string
+    format: date-time
+    description: 取りおきお届け希望日
+    example: 2022/01/01 12:00:00

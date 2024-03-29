@@ -1,0 +1,1 @@
+SELECT * FROM questionreplytotal WHERE questionseq = /*questionSeq*/''

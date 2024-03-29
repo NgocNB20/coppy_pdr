@@ -1,0 +1,256 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+
+ // カテゴリー
+.l-category {
+  $this: &;
+  border-bottom: solid 1px #bbb;
+
+  &__button {
+
+    &-accordion,
+    &-anchor {
+      min-height: 56px;
+      padding: 15px 40px 15px 0;
+      display: grid;
+      align-items: center;
+      @include font-style(15, 22);
+      cursor: pointer;
+    }
+
+    &-accordion {
+      position: relative;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        width: 11px;
+        height: 1px;
+        background-color: #bbb;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transition: transform $comMS $comES;
+      }
+
+      &:after {
+        transform: rotate(90deg);
+      }
+    }
+
+    &.is-opened {
+      #{$this}__button-accordion:after {
+        transform: rotate(0deg);
+      }
+    }
+
+
+    &-anchor {
+      // @include icon('arrow-right', 'bbbbbb');
+      // background-position: right 12px  center;
+      // background-size: 7px auto;
+
+      &.is-current {
+        color: $color-primary;
+      }
+
+    }
+  }
+
+  &__block {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: height $comMS $comES, opacity $comMS $comES, visibility $comMS $comES;
+    visibility: hidden;
+
+    &.is-opened {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  li {
+
+    // 第1階層
+    &[data-hierarchy = "1"] {
+      border-top: solid 1px #bbb;
+    }
+
+    // 第2階層
+    &[data-hierarchy = "2"] {
+      border-top: solid 1px #bbb;
+
+      #{$this}__button-accordion,
+      #{$this}__button-anchor {
+        padding-left: 20px;
+      }  
+    }
+
+    // 第3階層
+    &[data-hierarchy = "3"] {
+
+      #{$this}__button-anchor {
+        @include font-style(14, 22);
+        min-height: auto;
+        padding: 0;
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        @include media(lg) {
+          &::before {
+            content: "・";
+            display: inline-block;
+            margin-right: 5px;
+          }
+        }
+      }
+
+    }
+  }
+
+  // 第3階層
+  &__level3 {
+
+    padding: 4px 0 18px;
+
+    ul {
+      background-color: #f6f5f4;
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+  }
+
+  // 【メモ】hoverなど動きはまだ
+  // a {
+  //   transition: color $comMS $comES;
+
+  //   &:hover {
+  //     color: #2369ba;
+  //   }
+  // }
+
+
+  @include media(sm) {
+
+    border-bottom: solid 1px $color-primary;
+
+    &__button {
+
+      &-accordion,
+      &-anchor {
+        min-height: vwset(50);
+        padding: vwset(15) vwset(37) vwset(15) vwset(15);
+      }
+      
+      &-accordion {
+        position: relative;
+        &:before,
+        &:after {
+          width: 12px;
+          height: 2px;
+          right: 20px;
+          background-color: $color-primary;
+        }
+      }
+    }
+
+    li {
+
+      // 第1階層
+      &[data-hierarchy = "1"] {
+        border-top: solid 1px $color-primary;
+
+        #{$this}__button-accordion,
+        #{$this}__button-anchor {
+          @include font-sp-style(16, 23, bold);
+          color: $color-primary;
+        }
+
+        > #{$this}__button #{$this}__button-anchor {
+          @include icon('arrow-right', 'f36b30');
+          background-position: right 22px top 50%;
+          background-size: vwset(8) auto;
+        }
+      }
+  
+      // 第2階層
+      &[data-hierarchy = "2"] {
+        border-top: solid 1px #bbb;
+
+        &:first-child {
+          border-top: solid 1px $color-primary;
+        }
+  
+        #{$this}__button-accordion,
+        #{$this}__button-anchor {
+          padding-left: vwset(15);
+          @include font-sp-style(15, 23, normal);
+          color: $color-333;
+
+          &:before,
+          &:after {
+            background-color: $color-ccc;
+          }
+
+        }  
+      }
+  
+      // 第3階層
+      &[data-hierarchy = "3"] {
+
+        border-bottom: dotted 1px $color-a1;
+
+        &:nth-of-type(odd):nth-last-of-type(2),
+        &:last-of-type {
+          border-bottom: none;
+        }
+
+        &:nth-child(odd) {
+          border-right: dotted 1px $color-a1;
+        }
+  
+        #{$this}__button-anchor {
+          @include font-sp-style(15, 23, normal);
+          min-height: auto;
+          padding: vwset(9) vwset(13);
+        }
+  
+      }
+    }
+
+    // 第3階層
+    &__level3 {
+
+      padding: 0;
+
+      ul {
+        border-top: solid 1px $color-a1;
+        background-color: $color-fff;
+        padding: 0;
+        grid-template-columns: 50% 50%;
+        gap: 0;
+      }
+    }
+
+    &--footer {
+      margin-top: vwset(75);
+    }
+
+    
+
+  }
+
+
+
+
+
+}

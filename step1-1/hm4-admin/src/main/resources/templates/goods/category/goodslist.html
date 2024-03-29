@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>カテゴリー内商品一覧｜商品管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <script type="text/javascript">
+		function changeOrderBy(no, pnum) {
+			$("#valueInputDialog").val(no);
+			$("#changeorderby_dialog").dialog({
+				modal:true,
+				width: 600,
+				title:"並び順を入力してください。",
+				open:function(){
+					$('#valueInputDialog').append($(this).data(no).type);
+				},
+				buttons:[{
+					text: "変更する",
+					click: function() {
+						var targetNo = $("#valueInputDialog").val()
+						if (targetNo) {
+							$("#no").val(no);
+							$("#targetNo").val(targetNo);
+							$("#pageNumber").val(pnum);
+							$("#doChangeOrderBy").click();
+						}
+					}
+				}
+				]
+			});
+		}
+
+    </script>
+</head>
+
+<body id="goods">
+<div id="searchCategory" class="l-mainwrap">
+    <!--/* side */-->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!--/* header */-->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!--/* contents */-->
+            <div class="l-main">
+                <form th:action="@{/goods/category/goodslist/}" th:object="${categoryGoodsListModel}" method="post">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">カテゴリー内商品一覧</h1>
+                    </div>
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <div class="l-section">
+                        <div class="l-article">
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <div class="wrap_flex_equivalent">
+                                        <div class="col mr20">
+                                            <table class="c-tbl-base th_fntnormal">
+                                                <tbody>
+                                                <tr>
+                                                    <th class="w190px">カテゴリーID</th>
+                                                    <td th:text="*{categoryId}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col">
+                                            <table class="c-tbl-base th_fntnormal">
+                                                <tbody>
+                                                <tr>
+                                                    <th class="w190px">カテゴリー名</th>
+                                                    <td th:text="*{categoryName}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <th:block th:if="*{isResult}">
+                                        <input type="hidden" id="pageNumber" name="pageNumber"/>
+                                        <input type="submit" id="doDisplayChange" name="doDisplayChange"
+                                               style="display:none" value="表示切替"/>
+                                        <div class="l-conttitle_wrap mt40">
+                                            <div class="col wrap_flex">
+                                                <span class="as_end"
+                                                      th:text="'全' + *{#number.convert(totalCount)} + '件'"></span>
+                                            </div>
+                                        </div>
+                                        <th:block th:if="*{resultItems.size()} != 0">
+                                            <table class="c-tbl large60 tbl_search_goodslist">
+                                                <thead>
+                                                <tr>
+                                                    <th class="number">#</th>
+                                                    <th class="w240px">商品管理番号</th>
+                                                    <th class="">商品名</th>
+                                                    <th class="w100px">公開状態</th>
+                                                    <th class="w320px">公開期間</th>
+                                                    <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                                        <th class="w115px"></th>
+                                                    </th:block>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="item: *{resultItems}">
+                                                    <td class="number" th:text="${item.resultNo}"></td>
+                                                    <td class="alphabetic" th:text="${item.goodsGroupCode}"></td>
+                                                    <td th:text="${item.goodsGroupName}"></td>
+                                                    <td class="status"
+                                                        th:text="${#enumtype.getLabel('HTypeOpenDeleteStatus',item.goodsOpenStatusPC)}"></td>
+                                                    <td class="times">
+                                                        <span th:remove="tag"
+                                                              th:text="${#date.convert(item.goodsOpenFromDateTimePC,'yyyy/MM/dd HH:mm:ss')}"></span>
+                                                        <th:block
+                                                                th:if="${item.goodsOpenFromDateTimePC != null and item.goodsOpenToDateTimePC != null}">
+                                                            ～
+                                                        </th:block>
+                                                        <span th:remove="tag"
+                                                              th:text="${#date.convert(item.goodsOpenToDateTimePC,'yyyy/MM/dd HH:mm:ss')}"></span>
+                                                    </td>
+                                                    <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                                        <td>
+                                                            <button th:onclick="'changeOrderBy(' + ${item.resultNo} + ',' + __(*{pageNumber})__ + ');return false;'"
+                                                                    class="c-btn-small_over w95px" type="button">表示順を変更
+                                                            </button>
+                                                        </td>
+                                                    </th:block>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div th:replace="~{include/pager_new::pager1}"></div>
+                                        </th:block>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="changeorderby_dialog" style="display:none;">
+                            <div class="c-sticky-tbl-wrap">
+                                <table class="c-tbl tbl_relation_item only">
+                                    <thead>
+                                    <tr>
+                                        <th>並び順</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <input id="valueInputDialog" type="text" class="c-form-control w100p"
+                                                   placeholder="入力してください">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--/* 追尾ボタン */-->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button name="doReturn" type="submit" class="c-btn btn_back icon_left"><i
+                                        class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="no" value="" name="no"/>
+                    <input type="hidden" id="targetNo" value="" name="targetNo" title="並び順"/>
+                    <input type="submit" id="doChangeOrderBy" name="doChangeOrderBy" style="display:none"
+                           value="並び順の変更"/>
+                </form>
+            </div>
+        </div>
+        <!--/* footer */-->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

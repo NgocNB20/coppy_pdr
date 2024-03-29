@@ -1,0 +1,7 @@
+type: object
+description: 販売可否取得レスポンス
+properties:
+  salableGoodsType:
+    type: string
+    description: 販売可否取得
+    example: 販売可否取得

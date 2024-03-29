@@ -1,0 +1,11 @@
+type: object
+description: UK-API連携ユニサーチ（商品）レスポンス（fallBack）
+properties:
+  type:
+    type: string
+    description: フォールバック種別
+    example: word_delete
+  keyword:
+    type: string
+    description: フォールバック後キーワード
+    example: マスク

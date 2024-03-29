@@ -1,0 +1,31 @@
+type: object
+description: 税率レスポンス
+properties:
+  taxSeq:
+    type: integer
+    format: int32
+    description: 消費税SEQ
+    example: 0
+  rate:
+    type: number
+    description: 税率
+    example: 0
+  rateType:
+    type: string
+    description: 区分
+    example: 0
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順（必須）
+    example: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2021/12/12 12:00:00

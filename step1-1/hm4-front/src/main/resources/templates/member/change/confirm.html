@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="mypage">
+<a id="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <main class="l-page l-head__pattern1">
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" title="TOP" href="/"><span property="name">TOP</span></a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" title="マイページ" href="/member/">
+                            <span property="name">マイページ</span></a>
+                        <meta property="position" content="2">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <span property="name">会員情報の変更</span>
+                        <meta property="position" content="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-head__pattern1__content">
+            <h2 class="c-title--page mypage__title"><strong>会員情報の変更</strong></h2>
+            <div class="l-container mypage__container l-head__pattern1__content-main">
+                <div th:replace="~{includehm4/sidemenumember_new :: sidemenumember('change')}"></div>
+                <div class="l-main">
+                    <p class="c-text--xs">変更内容が正しければ「登録内容を送信する」ボタンをクリックしてください。</p>
+                    <form id="confirmForm" th:action="@{/member/change/confirm.html}" th:object="${memberChangeModel}"
+                          method="post" class="c-form c-text--m c-margin--s">
+                        <div th:if="${allMessages}"
+                             th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                        <div class="c-confirm-list">
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">氏名</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:classappend="*{#style.diff(modifiedList, {'memberInfoLastName', 'memberInfoFirstName'})}">
+                                    <span id="memberInfoLastName" th:text="*{memberInfoLastName}"></span>&nbsp;&nbsp;
+                                    <span id="memberInfoFirstName" th:text="*{memberInfoFirstName}"></span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">フリガナ</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:classappend="*{#style.diff(modifiedList, {'memberInfoLastKana', 'memberInfoFirstKana'})}">
+                                    <span id="memberInfoLastKana" th:text="*{memberInfoLastKana}"></span>&nbsp;&nbsp;
+                                    <span id="memberInfoFirstKana" th:text="*{memberInfoFirstKana}"></span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">生年月日</dt>
+                                <dd class="c-confirm-list__detail">
+                                    <span id="memberInfoBirthdayYear" th:text="*{memberInfoBirthdayYear}"></span>年&nbsp;<span
+                                        id="memberInfoBirthdayMonth" th:text="*{memberInfoBirthdayMonth}"></span>月&nbsp;<span
+                                        id="memberInfoBirthdayDay" th:text="*{memberInfoBirthdayDay}"></span>日
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">性別</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:classappend="*{#style.diff(modifiedList, {'memberInfoSex'})}">
+                                    <span id="memberInfoSex" th:text="*{memberInfoSexItems.get(memberInfoSex)}"></span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">電話番号</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:classappend="*{#style.diff(modifiedList, {'memberInfoTel'})}">
+                                    <span id="memberInfoTel" th:text="*{memberInfoTel}"></span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">連絡先電話番号</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:classappend="*{#style.diff(modifiedList, {'memberInfoContactTel'})}">
+                                    <span id="memberInfoContactTel" th:text="*{memberInfoContactTel}"></span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">FAX番号</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:classappend="*{#style.diff(modifiedList, {'memberInfoFax'})}">
+                                    <span id="memberInfoFax" th:text="*{memberInfoFax}"></span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">住所</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:classappend="*{#style.diff(modifiedList, {'memberInfoPrefecture', 'memberInfoAddress1', 'memberInfoAddress2', 'memberInfoAddress3'})}">
+                                    <span class="break-word">〒<span id="memberInfoZipCode1"
+                                                                    th:text="*{memberInfoZipCode1}"></span> - <span
+                                            id="memberInfoZipCode2" th:text="*{memberInfoZipCode2}"></span><br/><span
+                                            id="memberInfoPrefecture"
+                                            th:text="*{memberInfoPrefectureItems.get(memberInfoPrefecture)}"></span> <span
+                                            id="memberInfoAddress1" th:text="*{memberInfoAddress1}"></span> <span
+                                            id="memberInfoAddress2" th:text="*{memberInfoAddress2}"></span> <span
+                                            id="memberInfoAddress3" th:text="*{memberInfoAddress3}"></span></span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="c-confirm-list c-margin--xs">
+                            <div class="c-btn-wrap--2btn lg-rev c-margin--xl">
+                                <button name="doOnceMemberInfoUpdate" type="submit" class="c-btn--blue">登録内容を送信する
+                                </button>
+                                <button name="doIndex" type="submit" class="c-btn--simple">修正する</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{includehm4/footer_new}"></div>
+</div>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+</body>
+</html>

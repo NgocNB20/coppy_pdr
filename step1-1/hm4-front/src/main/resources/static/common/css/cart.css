@@ -1,0 +1,122 @@
+/* 2023-renew No14 from here */
+/* TODO This is sample. Needs correction when reflecting the design. */
+.confirm-order input[type="button"] {
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    background-color: #f4673c;
+    color: white;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.link-back-order, .link-setting-address {
+    color: #f4673c !important;
+    text-decoration: none !important;
+}
+
+.container_amount {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    align-items: center;
+}
+
+.container_amount span {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.title_table {
+    font-weight: 600;
+    display: inline-block;
+    margin: 10px 0px;
+}
+
+#d_cart #d_cart_item th {
+    padding: 0px;
+}
+
+.btn-confirm-information {
+    color: white;
+    background: #f4673c;
+    height: 40px !important;
+    margin-left: 10px;
+    width: 130px;
+    border: 1px solid #b7b7b7;
+    cursor: pointer;
+    border-radius: 18px !important;
+    text-align: center;
+}
+
+.btn-close-information {
+    height: 40px !important;
+    margin-left: 10px;
+    width: 130px;
+    border: 1px solid #f4673c;
+    cursor: pointer;
+    border-radius: 18px !important;
+    text-align: center;
+    background-color: white;
+    color: #f4673c;
+}
+
+.group-btn-dialog input:hover {
+    box-shadow: none;
+}
+
+.btn-close-information:hover {
+    box-shadow: 0 0 5px #000;
+    opacity: 1;
+    cursor: pointer
+}
+
+.group-btn-dialog {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.ui-widget-header {
+    background-color: white !important;
+}
+
+.cart-information {
+    text-align: left;
+    border-bottom: 2px solid #dcd6d6;
+    margin: 10px 0px;
+}
+
+.group-cart-information {
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #ebebeb;
+}
+
+.reserve-price {
+    width: 120px !important;
+}
+
+.reserve-gcnt {
+    width: 50px;
+}
+
+.reserve-price2 {
+    width: 100px;
+    font-weight: bold;
+}
+
+.reserve-change {
+    width: 70px;
+}
+
+#d_cart #d_cart_item td.price dd.price {
+    font-weight: bold;
+}
+
+.button-direct-to-reserve {
+    padding-bottom: 5px;
+}
+
+/* 2023-renew No14 to here */

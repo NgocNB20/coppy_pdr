@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-tab {
+
+  display: grid;
+  grid-template-columns: minmax(30%,430px) minmax(30%,430px);
+  gap: 20px;
+  padding-bottom: 30px;
+  border-bottom: solid 5px $color-orange-lightGray;
+  justify-content: center;
+  text-align: center;
+
+  &__button {
+    padding: 10px 10px 12px;
+    @include font-style(19,40);
+    color: $color-a1;
+    background: #f5f3f2;
+    border-radius: 9999px;
+    position: relative;
+
+    &.js-tab--active,
+    &--active {
+      background: $color-primary;
+      color: $color-fff;
+      font-weight: bold;
+
+      &::after {
+        position: absolute;
+        content: '';
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-style: solid;
+        border-width: 10px 8px 0 8px;
+        border-color: $color-primary transparent transparent transparent;
+      }
+    }
+
+    &:not(.js-tab--active) {
+      transition: opacity $comMS $comES;
+      cursor: pointer;
+
+      &:hover {
+        @include media(lg) {
+          opacity: .5;
+        }
+      }
+
+    }
+  }
+
+  &__contents {
+    display: none;
+
+    &.js-tab-contents--active {
+      display: block;
+    }
+  }
+
+  @include media(sm) {
+
+    grid-template-columns: vwset(162) vwset(162);
+    gap: vwset(10);
+    padding-bottom: vwset(28);
+
+    &__button {
+      padding: vwset(9) vwset(10) vwset(10);
+      @include font-sp-style(15,30);
+
+      &.js-tab--active {
+          
+        &::after {
+          border-width: 8px 6px 0 6px;
+        }
+      }
+    }
+  }
+}

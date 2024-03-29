@@ -1,0 +1,13 @@
+# 2023-renew No65 from here
+type: object
+description: 商品の入荷情報を取得するレスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: furniture-00201
+  stockQuantity:
+    type: number
+    description: 基幹側から在庫数をリターンする。
+    example: 1000
+# 2023-renew No65 to here

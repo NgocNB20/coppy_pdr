@@ -1,0 +1,48 @@
+type: object
+description: 注文画面用注文登録リクエスト
+properties:
+  receiveOrderDto:
+    type: string
+    description: 受注Dto
+  receiveOrderDtoList:
+    type: array
+    description: 受注Dtoリスト
+    items:
+      type: string
+  memberInfoId:
+    type: string
+    description: 会員ID
+    example: aa@example.com
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員情報SEQ
+    example: 10000000
+  userAgent:
+    type: string
+    description: User-Agent
+    example: User-Agent
+  sessionId:
+    type: string
+    description: sessionId
+    example: sessionId
+  accessUid:
+    type: string
+    description: AccessUid
+    example: AccessUid
+  deviceType:
+    type: string
+    description: デバイス種別
+  administratorLastName:
+    type: string
+    description: 運営者姓
+    example: yamada
+  administratorFirstName:
+    type: string
+    description: 運営者名
+    example: honda
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 1001

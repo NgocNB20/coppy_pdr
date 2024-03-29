@@ -1,0 +1,8 @@
+type: object
+description: WEB-API連携お届け先参照リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 2

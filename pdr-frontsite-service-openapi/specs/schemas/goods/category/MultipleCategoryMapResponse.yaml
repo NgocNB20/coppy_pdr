@@ -1,0 +1,14 @@
+type: object
+description: マルチカテゴリ一覧レスポンス
+properties:
+  multipleCategoryMap:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        $ref: '#/components/schemas/MultipleCategoryGoodsDetailsDtoResponse'
+
+components:
+  schemas:
+    MultipleCategoryGoodsDetailsDtoResponse:
+      $ref: ../category/MultipleCategoryGoodsDetailsDtoResponse.yaml

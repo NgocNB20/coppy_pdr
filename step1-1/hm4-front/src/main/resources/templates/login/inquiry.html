@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <th:block th:with="canonical='true'">
+        <meta th:replace="~{includehm4/head_new}"/>
+    </th:block>
+</head>
+<body id="gotop" class="login-inquiry">
+<a id="top"></a>
+<div class="l-mainwrap">
+    <!--/* LAYOUT */-->
+    <div th:replace="~{includehm4/header_new}"></div>
+    <main class="l-page l-head__pattern1">
+        <!--/*　MAIN　*/-->
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><a property="item"
+                                                                                                     typeof="WebPage"
+                                                                                                     title="TOP"
+                                                                                                     href="/"><span
+                            property="name">TOP</span></a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><span property="name">お問い合わせ認証</span>
+                        <meta property="position" content="2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-container l-head__pattern1__content">
+            <div class="l-main full">
+                <h2 class="c-title--page"><strong>お問い合わせ認証</strong></h2>
+                <p class="c-text--xs c-margin--m">お問い合わせ確認メールに記載のお問い合わせ番号と、<br>お問い合わせ時に入力したお電話番号を入力し、認証を行ってください。</p>
+                <form name="inquiryForm" id="inquiryForm" autocomplete="off" th:action="@{/login/inquiry/inquiry.html}"
+                      th:object="${loginInquiryModel}" method="post">
+                    <div class="c-margin--m">
+                        <div class="login-inquiry__area">
+                            <div th:if="${allMessages}"
+                                 th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+                            <dl class="login-inquiry__list">
+                                <dt class="c-title--table c-font-bold">お問い合わせ番号<span
+                                        class="c-text--s c-font-bold--nomal">（半角英数）</span></dt>
+                                <dd><input type="text" name="contact_id" id="inquiryCode" th:field="*{inquiryCode}"
+                                           maxlength="12" title="お問い合わせ番号" placeholder="ここに入力してください" class="c-input"
+                                           th:errorclass="field-error"/>
+                                    <div th:if="${#fields.hasErrors('inquiryCode')}" th:errors="*{inquiryCode}"
+                                         class="field-error-message"></div>
+                                </dd>
+                            </dl>
+                            <dl class="login-inquiry__list">
+                                <dt class="c-title--table c-font-bold">電話番号<span class="c-text--s c-font-bold--nomal">（半角数字）</span>
+                                </dt>
+                                <dd class="tel-txt">
+                                    <input type="tel" id="inquiryTel" th:field="*{inquiryTel}" maxlength="11"
+                                           title="電話番号" placeholder="ここに入力してください" class="c-input"
+                                           th:errorclass="field-error"/> <span class="c-text--xs">※ハイフンなし</span>
+                                    <div th:if="${#fields.hasErrors('inquiryTel')}" th:errors="*{inquiryTel}"
+                                         class="field-error-message"></div>
+                                </dd>
+                            </dl>
+                            <div class="c-btn-wrap--2btn c-margin--m">
+                                <button name="doLogin" type="doLogin" class="c-btn--blue">認証する</button>
+                            </div>
+                            <div class="login-inquiry__textlink">
+                                <a th:href="@{/member/inquiry/index.html}" class="c-textlink--right c-margin--xxs"><p>会員の方はこちら</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--/* MAIN */-->
+    </main>
+</div>
+<div th:replace="~{includehm4/footer_new}"></div>
+<a href="#gotop" class="pagetop" data-scroll="">
+    <svg viewBox="0 0 18.2 10.1" style="fill:#393939;">
+        <use xlink:href="/hm4/assets/images/icon/arrow-up.svg#arrow-up"></use>
+    </svg>
+</a>
+</body>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+</html>

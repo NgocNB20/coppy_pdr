@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>広告効果測定レポート｜広告管理</title>
+	<script type="text/javascript">
+		jQuery(function($){
+			// 日付補助ボタン
+			$("button[id^='targetDate_']").click(function() {
+				var mode = $(this).attr("id").replace("targetDate_", "").split("_");
+				setTargetDate(mode[0], mode[1]+"From", mode[1]+"To");
+			});
+		});
+
+	</script>
+</head>
+
+<body id="campaign">
+<div id="reportCampaign" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <div class="l-page">
+		<!-- header -->
+		<div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+			<!--contents-->
+			<div class="l-main">
+				<form th:action="@{/campaign/report/}" th:object="${campaignReportModel}" method="post">
+					<div class="l-pagetitle_wrap">
+						<h1 class="c-pagetitle_h1">広告効果測定レポート</h1>
+					</div>
+					<input type="hidden" name="limit" value="1000"/>
+
+					<div th:if="${allMessages}"
+						 th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+						<ul th:each="message : ${allMessages}">
+							<li th:utext="${message}"></li>
+						</ul>
+					</div>
+
+					<div id="allItemsSearch" class="l-section">
+						<div class="l-article">
+							<div class="l-article_inner">
+								<div class="l-inner_wrap">
+									<div class="c-detail-warp search_data_smp wrap">
+										<dl class="w330px">
+											<dt>期間</dt>
+											<dd class="wrap_flex_center">
+												<div class="wrap_flex_center">
+													<label class="c-datepicker w150px">
+														<input maxlength="10"
+															   th:field="*{campaignDateFrom}"
+															   autocomplete="off" type="text"
+															   class="c-form-control"
+															   placeholder="年/月/日"
+															   th:classappend="${#fields.hasErrors('campaignDateFrom')}?'error':''">
+													</label>
+													<span class="ml10">〜</span>
+													<label class="ml10 c-datepicker w150px">
+														<input maxlength="10"
+															   th:field="*{campaignDateTo}"
+															   autocomplete="off" type="text"
+															   class="c-form-control"
+															   placeholder="年/月/日"
+															   th:classappend="${#fields.hasErrors('campaignDateTo')}?'error':''">
+													</label>
+												</div>
+											</dd>
+											<dd>
+												<ul class="c-list-left list_sp5 mt10 w100p">
+													<li>
+														<button id="targetDate_today_campaignDate" class="c-btn-small" type="button">今日</button>
+													</li>
+													<li>
+														<button id="targetDate_yesterday_campaignDate" class="c-btn-small" type="button">昨日</button>
+													</li>
+													<li>
+														<button id="targetDate_crrentMonth_campaignDate" class="c-btn-small" type="button">今月</button>
+													</li>
+													<li>
+														<button id="targetDate_prevMonth_campaignDate" class="c-btn-small" type="button">先月</button>
+													</li>
+													<li>
+														<button id="targetDate_clear_campaignDate" class="c-btn-txt" type="button"><i class="material-icons close"></i>クリア</button>
+													</li>
+												</ul>
+
+												<div th:if="${#fields.hasErrors('campaignDateFrom')}"
+													 th:errors="*{campaignDateFrom}" class="c-error-txt mt5"></div>
+												<div th:if="${#fields.hasErrors('campaignDateTo')}"
+													 th:errors="*{campaignDateTo}" class="c-error-txt mt5"></div>
+											</dd>
+										</dl>
+
+										<dl class="w200px">
+											<dt>広告コード</dt>
+											<dd>
+												<input type="text" th:field="*{campaignCode}"
+													   class="c-form-control w200px" maxlength="12"
+													   placeholder="ここに入力してください"
+													   th:classappend="${#fields.hasErrors('campaignCode')}?'error':''"/>
+											</dd>
+											<div th:if="${#fields.hasErrors('campaignCode')}"
+												 th:errors="*{campaignCode}" class="c-error-txt mt5"></div>
+										</dl>
+
+										<dl class="w200px">
+											<dt>広告名</dt>
+											<dd>
+												<input type="text" th:field="*{campaignName}"
+													   class="c-form-control w200px" maxlength="80"
+													   placeholder="ここに入力してください"
+													   th:classappend="${#fields.hasErrors('campaignName')}?'error':''"/>
+											</dd>
+											<div th:if="${#fields.hasErrors('campaignName')}"
+												 th:errors="*{campaignName}" class="c-error-txt mt5"></div>
+										</dl>
+
+										<dl class="w550px">
+											<dt>広告メモ</dt>
+											<dd>
+												<input type="text" th:field="*{note}"
+													   class="c-form-control w550px" maxlength="200"
+													   placeholder="ここに入力してください"
+													   th:classappend="${#fields.hasErrors('note')}?'error':''"/>
+											</dd>
+											<div th:if="${#fields.hasErrors('note')}"
+												 th:errors="*{note}" class="c-error-txt mt5"></div>
+										</dl>
+
+									</div>
+
+									<div class="c-detail-warp search mt20">
+										<div class="c-contbtn_wrap_top">
+											<button class="c-btn btn_regular" type="submit" name="doSearch">検索する
+											</button>
+											<th:block sec:authorize="hasAnyAuthority('CAMPAIGN:8')">
+												<div class="col_left wrap_flex_center">
+													<button class="c-btn btn_back icon ml10" type="submit"
+															name="doCsvDownload"><i class="material-icons save_alt"></i>ダウンロード
+													</button>
+												</div>
+											</th:block>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 検索結果 -->
+						<article class="l-article" th:if="*{isResult}">
+
+							<input type="hidden" id="pageNumber" name="pageNumber"/>
+							<input type="hidden" id="orderField" th:field="*{orderField}"/>
+							<input type="hidden" id="orderAsc" th:field="*{orderAsc}"/>
+							<input type="submit" id="doDisplayChange" name="doDisplayChange" style="display:none" value="表示切替"/>
+
+							<div class="l-article_inner">
+								<div class="l-inner_wrap" th:if="*{resultItems.size()} == 0">
+									<div class="l-conttitle_wrap mb25">
+										<h2 class="c-pagetitle_h2 mr10">効果測定結果</h2>
+										<span class="as_end">全0件が該当しました</span>
+									</div>
+								</div>
+
+								<div class="l-inner_wrap" th:if="*{resultItems.size()} != 0">
+									<div class="l-conttitle_wrap">
+										<div th:replace="~{include/pager_new::pager2(totalCountDisplayFlag=true,duplicateSelectFlag=true)}"></div>
+									</div>
+
+									<table id="search_result" class="c-tbl large60 tbl_campaign_report">
+										<thead>
+											<tr th:with="sortStr=*{orderAsc}?'&nbsp;▲':'&nbsp;▼'">
+												<th rowspan="2" class="number">#</th>
+												<th rowspan="2">
+													<a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+													   id="headerCampaignCode">広告コード
+														<th:block th:if="*{orderField} == 'campaignCode'"><span
+																th:text="${sortStr}"></span></th:block>
+													</a>
+												</th>
+												<th rowspan="2" class="txt_center w180px">
+													<a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+													   id="headerCampaignName">広告名
+														<th:block th:if="*{orderField} == 'campaignName'"><span
+																th:text="${sortStr}"></span></th:block>
+													</a>
+												</th>
+												<th rowspan="2" class="txt_center w170px">
+													<a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+													   id="headerNote">広告メモ
+														<th:block th:if="*{orderField} == 'note'"><span
+																th:text="${sortStr}"></span></th:block>
+													</a>
+												</th>
+												<th class="txt_center" rowspan="2">クリック数</th>
+												<th class="txt_center" colspan="2">受注完了</th>
+												<th class="txt_center" colspan="2">会員登録</th>
+												<th class="txt_center" colspan="2">会員退会</th>
+												<th class="txt_center" rowspan="2">広告コスト</th>
+												<th class="txt_center" rowspan="2">受注金額</th>
+												<th class="txt_center w140px" rowspan="2">ROAS<br/>（受注金額/コスト）</th>
+											</tr>
+											<tr>
+												<th>CNV</th>
+												<th>CNVR</th>
+												<th>CNV</th>
+												<th>CNVR</th>
+												<th>CNV</th>
+												<th>CNVR</th>
+											</tr>
+										</thead>
+										<tbody id="resultItems">
+											<tr th:each="item,stat : *{resultItems}">
+												<td class="number"><span id="resultNo" th:text="${item.resultNo}" th:remove="tag"></span> </td>
+												<td class="left"><span id="campaignCode" th:text="${item.campaignCode}" th:remove="tag"></span></td>
+												<td class="left"><span id="campaignName" th:text="${item.campaignName}" th:remove="tag"/></td>
+												<td class="left"><span id="note" th:text="${item.note}" th:remove="tag"></span>&nbsp;</td>
+												<td class="price"><span id="clickCount"  th:text="${item.clickCount}" th:remove="tag"></span></td>
+												<td class="price"><span id="orderCount"  th:text="${item.orderCount}" th:remove="tag"></span></td>
+												<td class="price"><span id="orderCountRatio"  th:text="${item.orderCountRatio}" th:remove="tag"></span></td>
+												<td class="price"><span id="memberRegistCount"  th:text="${item.memberRegistCount}" th:remove="tag"></span></td>
+												<td class="price"><span id="memberRegistCountRatio"  th:text="${item.memberRegistCountRatio}" th:remove="tag"></span></td>
+												<td class="price"><span id="memberDeleteCount"  th:text="${item.memberDeleteCount}" th:remove="tag"></span></td>
+												<td class="price"><span id="memberDeleteCountRatio"  th:text="${item.memberDeleteCountRatio}" th:remove="tag"></span></td>
+												<td class="price"><span id="advertiseCost"  th:text="${item.advertiseCost}" th:remove="tag"></span></td>
+												<td class="price"><span id="orderPrice"  th:text="${item.orderPrice}" th:remove="tag"></span></td>
+												<td class="price"><span id="advertiseCostRatio"  th:text="${item.advertiseCostRatio}" th:remove="tag"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+						</article>
+					</div>
+
+				</form>
+			</div>
+
+        </div>
+		<div th:include="~{include/footer_new}"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<div id="isExistRelatedGoodsItems" th:if="*{isExistRelatedGoodsItems()}" >
+	<!--SIDE-->
+	<div id="d_related">
+		<h4 class="reTitle">関連商品</h4>
+		<div class="itemGroupThumbs">
+			<div id="relatedGoodsItems" te:omittag="true">
+				<div class="singleL">
+					<dl>
+						<div id="isNecessaryLoginGoods" te:omittag="true">
+						  <dt><img src="/images/common/goods_login.gif" alt="" width="150" height="150"/></dt>
+						</div>
+						<div id="isNoDispGoods" te:omittag="true">
+						  <dt><img src="/images/common/goods_purchase.gif" alt="" width="150" height="150"/></dt>
+						</div>
+						<div id="isNotNecessaryLoginGoods" te:omittag="true">
+							<div id="isNotNoDispGoods" te:omittag="true">
+								<dt><a id="goSideImageGoodsPage" href="/goods/index.html?ggcd=" ><img src="/images/goods/0000001c.jpg" alt="" width="150" height="150" id="goodsGroupImageThumbnail" /></a></dt>
+								<dd class="icon">
+									<span id="isSaleIconFlag" te:omittag="true"><img id="saleIcon" src="" alt="SALE" /></span>
+									<span id="isNewIconFlag" te:omittag="true"><img id="newIcon" src="" alt="NEW" /></span>
+									<span id="isReserveIconFlag" te:omittag="true"><img id="reserveIcon" src="" alt="RESERVE" /></span>
+								</dd>
+								<dd class="name"><a id="goSideNameGoodsPage" href="/goods/index.html?ggcd=" ><span id="goodsGroupNamePC-sg" te:omittag="true" /></a></dd>
+								<div id="isNotPriceHideGoods" te:omittag="true">
+									<dd class="sale_comment"><span id="goodsPreDiscountPrice" te:omittag="true" /></dd>
+									<span id="isSale" te:omittag="true">
+										<span id="isGroupSalePriceIntegrityFlag" te:omittag="true">
+											<dd class="sale_prePrice"><span class="priceT"><span id="goodsGroupDisplayPrice" te:omittag="true" te:escape="false" /> ⇒ </span><span id="goodsDisplayPreDiscountPrice" te:omittag="true" te:escape="false" /></dd>
+										</span>
+										<span id="isNotGroupSalePriceIntegrityFlag" te:omittag="true">
+											<dd class="price"><span id="goodsDisplayPreDiscountPrice" te:omittag="true" te:escape="false" /></dd>
+										</span>
+									</span>
+									<span id="isNotSale" te:omittag="true">
+										<dd class="price"><span id="goodsGroupDisplayPrice" te:omittag="true" te:escape="false" /></dd>
+									</span>
+								</div>
+								<div id="isStockStatusDisplay" te:omittag="true">
+									<div class="icon">
+										<!-- 非販売 -->
+										<span id="isRelationNoSaleIconDisp" te:omittag="true">
+											<img src="/images/icon/stockout_m.gif" alt="在庫切れ" class="icon" />
+										</span>
+										<!--販売期間終了 -->
+										<span id="isRelationSellOutIconDisp" te:omittag="true">
+											<img src="/images/icon/sellout_m.gif" alt="販売終了" class="icon" />
+										</span>
+										<!--販売前 -->
+										<span id="isRelationBeforeSaleIconDisp" te:omittag="true">
+											<!-- 表示しないためコメントアウト -->
+											<img src="/images/icon/sellout_m.gif" alt="販売終了" class="icon" />
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,37 @@
+<!-- PDR Migrate Customization from here--><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+</head>
+
+<body id="d_guide">
+
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="member"><span><!--MAIN--></span>
+
+                    <hm:freearea key="faq_info"/>
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

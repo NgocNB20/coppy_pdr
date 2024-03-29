@@ -1,0 +1,21 @@
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote11 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote12 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote13 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote14 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote15 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote16 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote17 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote18 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote19 varchar(4000);
+ALTER TABLE goodsgroupdisplay ADD COLUMN goodsnote20 varchar(4000);
+
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote11 IS 'メーカー';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote12 IS '洗濯アイコン';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote13 IS '商品詳細アイコン';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote14 IS '商品説明14';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote15 IS '商品説明15';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote16 IS '商品説明16';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote17 IS '商品説明17';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote18 IS '商品説明18';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote19 IS '商品説明19';
+COMMENT ON COLUMN goodsgroupdisplay.goodsnote20 IS '商品説明20';

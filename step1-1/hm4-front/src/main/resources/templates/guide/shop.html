@@ -1,0 +1,150 @@
+<!-- PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+</head>
+
+<body id="d_guide">
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="shop"><span><!--MAIN--></span>
+                    <div class="gSection mt0">
+                        <h3 class="mTitle">ショップについて</h3>
+                        <div id="d_gsn">
+                            <ul>
+                                <li><a th:href="@{/guide/shop.html#s1}" id="go-Guide-shop-1">初めての方へ</a></li>
+                                <li><a th:href="@{/guide/agreement.html}" id="go-Guide-agreement">ご利用規約</a></li>
+                                <li><a th:href="@{/guide/shop.html#s2}" id="go-Guide-shop-2">動作環境について</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="s1" class="gSection">
+                        <h4 class="subGTitle">初めての方へ</h4>
+                        <div class="subGsection">
+                            <p>
+                                P.D.R.オンラインショップへご来店いただき、誠にありがとうございます。<br/>
+                                P.D.R.オンラインショップは年中無休、24時間ご利用いただけます。（システムメンテナンス時を除く）
+                            </p>
+                        </div>
+                    </div>
+                    <div class="gSection">
+                        <h4 class="subGTitle">ピーディーアールオンラインショップの特徴</h4>
+                        <div class="subGsection">
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Point.1</h5>
+                                <div class="pointSubBox">
+                                    <p class="pointImg"><img src="/images/guide/pc_logo.gif" alt="P.D.R.オンラインショップ"/></p>
+                                    <p class="pointText pimg">P.D.R.オンラインショップは<br/>株式会社ピーディーアールが運営するオンラインショップです。</p>
+                                </div>
+                            </div>
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Point.2</h5>
+                                <div class="pointSubBox">
+                                    <p class="pointText">P.D.R.オンラインショップへのご登録は日本国内の歯科医療機関様、<br/>歯科技工所様、医療機関様に限らせていただきます。
+                                    </p>
+                                    <p>歯科関連学校及び歯科関連個人の方は、<br/>お手数ですがご注文デスク（TEL：0120-108648）までお問い合わせください。</p>
+                                </div>
+                            </div>
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Point.3</h5>
+                                <div class="pointSubBox">
+                                    <p class="pointText">P.D.R.オンラインショップをご利用いただくには会員登録が必要です。</p>
+                                    <p>初めてご利用される方は<a th:href="@{/guide/member.html#m1}" id="go-Member-1-gdn">会員登録方法</a>のページをご覧ください。
+                                    </p>
+                                    <div class="gbtnList">
+                                        <ul>
+                                            <li>
+                                                <a th:href="@{/login/member.html}" id="go-Login-shop" class="imgover"><img src="/images/button/shop_login.gif" alt="ログイン・新規登録"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gbtnList">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/guide/order.html#o1}" id="go-Order-1-shop" class="imgover"><img src="/images/button/shop_howtobuy.gif" alt="お買い物方法について"/></a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/guide/payment.html}" id="go-Payment-shop" class="imgover"><img src="/images/button/shop_paysend.gif" alt="お支払い・配送について"/></a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/inquiry/index.html}" id="go-Inquiry-shop" class="imgover"><img src="/images/button/shop_others.gif" alt="その他お問い合わせ"/></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="s2" class="gSection">
+                        <h4 class="subGTitle">動作環境について</h4>
+                        <div class="subGsection">
+                            <p>
+                                P.D.R.オンラインショップは以下の組み合わせで最適に動作するように設計・デザインされています。
+                            </p>
+                            <p>
+                                <strong class="gpText">Windows系</strong><br/>
+                                ［OS］ Windows 7、8<br/>
+                                ［ブラウザ］ Internet Explorer 10以降、Google Chrome （最新版）
+                            </p>
+
+                            <p>
+                                <strong class="gpText">Mac系</strong><br/>
+                                ［OS］ Mac OS X（バージョン10.9）<br/>
+                                ［ブラウザ］Mac OS X標準添付のSafari（最新版）
+                            </p>
+                            <p>
+                                <strong class="gpText">スマートフォン</strong><br/>
+                                ［iOS］ バージョン7以降　標準ブラウザ<br/>
+                                ［Android］ バージョン4.0以降　標準ブラウザ
+                            </p>
+                            <p class="must">
+                                ※推奨環境以外では正常に動作しない場合がありますので、あらかじめご了承ください。<br/>
+                                ※いずれも日本語版に限ります。<br/>
+                                ※ベータ版やリリース候補版などの正式版以外のバージョンは動作環境から除外いたします。
+                            </p>
+                            <h5 class="subGGTitle">ブラウザ設定について</h5>
+                            <p>
+                                ブラウザの設定により、JavaおよびJavaScriptが無効になっている場合があります。<br/>
+                                無効になっていると、ページが表示できない場合がございます。<br/>
+                                また、Cookie（クッキー）を使用しておりますので、ブラウザの設定を「Cookieを受け入れる」にしてご利用ください。
+                            </p>
+                            <h5 class="subGGTitle">セキュリティソフトについて</h5>
+                            <p>
+                                お客様のパソコンに搭載されたセキュリティソフトの利用状況によっては、 ポップアップブロック機能やCookie管理機能などの影響により、 「画面を表示できない」「ボタンをクリックできない」といった不具合が発生する場合がございます。
+                            </p>
+                            <p>
+                                そのような場合には、一度セキュリティソフトを無効にしてからご利用ください。
+                                セキュリティソフトの設定方法については、ソフトウェアの販売・配布元にお問い合わせくださいますようお願いいたします。
+                            </p>
+                            <p class="must">
+                                ※セキュリティソフトの設定変更については、お客様の責任により細心の注意をもって行ってください。
+                            </p>
+                        </div>
+                    </div>
+
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

@@ -1,0 +1,12 @@
+type: object
+description: 会員情報取得リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  status:
+    type: string
+    description: 会員状態
+    example: "1"

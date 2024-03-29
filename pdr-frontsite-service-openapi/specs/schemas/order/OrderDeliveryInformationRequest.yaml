@@ -1,0 +1,26 @@
+type: object
+description: 配送情報取得リクエスト
+properties:
+  orderGoodsEntityList:
+    type: array
+    description: 受注商品エンティティリスト
+    items:
+      $ref: '#/components/schemas/OrderGoodsRequest'
+  reqDto:
+    $ref: '#/components/schemas/WebApiGetDeliveryInformationRequestDtoRequest'
+    description: 配送情報取得 リクエストデータ
+  checkMessageDtoList:
+    type: array
+    description: エラーメッセージ用List
+    items:
+      $ref: '#/components/schemas/CheckMessageDtoRequest'
+
+
+components:
+  schemas:
+    OrderGoodsRequest:
+      $ref: ./OrderGoodsRequest.yaml
+    WebApiGetDeliveryInformationRequestDtoRequest:
+      $ref: ./WebApiGetDeliveryInformationRequestDtoRequest.yaml
+    CheckMessageDtoRequest:
+      $ref: ./CheckMessageDtoRequest.yaml

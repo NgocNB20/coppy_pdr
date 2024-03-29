@@ -1,0 +1,129 @@
+type: object
+description: 決済方法レスポンス
+properties:
+  settlementMethodSeq:
+    type: integer
+    format: int32
+    description: 決済方法SEQ
+    example: 1001
+  settlementMethodName:
+    type: string
+    description: 決済方法名
+    example: 決済方法名
+  settlementMethodDisplayName:
+    type: string
+    description: 決済方法表示名
+    example: 決済方法表示名
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 公開状態
+  settlementNote:
+    type: string
+    description: 決済方法説明文
+    example: 決済方法説明文
+  settlementMethodType:
+    type: string
+    description: 決済方法種別
+    example: 決済方法種別
+  settlementMethodCommissionType:
+    type: string
+    description: 決済方法手数料種別
+    example: 決済方法手数料種別
+  billType:
+    type: string
+    description: 請求種別
+    example: 請求種別
+  deliveryMethodSeq:
+    type: integer
+    format: int32
+    description: 配送方法SEQ
+    example: 1001
+  equalsCommission:
+    type: number
+    description: 一律手数料
+    default: 0
+    example: 1001
+  settlementMethodPriceCommissionFlag:
+    type: string
+    description: 決済方法金額別手数料フラグ
+    example: 決済方法金額別手数料フラグ
+  largeAmountDiscountPrice:
+    type: number
+    description: 高額割引下限金額
+    default: 0
+    example: 1001
+  largeAmountDiscountCommission:
+    type: number
+    description: 高額割引手数料
+    default: 0
+    example: 1001
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 1001
+  maxPurchasedPrice:
+    type: number
+    description: 最大購入金額
+    default: 0
+    example: 1001
+  paymentTimeLimitDayCount:
+    type: integer
+    format: int32
+    description: 支払期限猶予日数
+    example: 1001
+  minPurchasedPrice:
+    type: number
+    description: 最小購入金額
+    default: 0
+    example: 1001
+  cancelTimeLimitDayCount:
+    type: integer
+    format: int32
+    description: 期限後取消猶予日数
+    example: 1001
+  settlementMailRequired:
+    type: string
+    description: 決済関連メール要否フラグ
+    example: 決済関連メール要否フラグ
+  enableCardNoHolding:
+    type: string
+    description: ｸﾚｼﾞｯﾄｶｰﾄﾞ登録機能有効化ﾌﾗｸﾞ
+    example: 1
+  enableSecurityCode:
+    type: string
+    description: ｸﾚｼﾞｯﾄｾｷｭﾘﾃｨｺｰﾄﾞ有効化ﾌﾗｸﾞ
+    example: 1
+  enable3dSecure:
+    type: string
+    description: ｸﾚｼﾞｯﾄ3Dｾｷｭｱ有効化ﾌﾗｸﾞ
+    example: 1
+  enableInstallment:
+    type: string
+    description: ｸﾚｼﾞｯﾄ分割支払有効化ﾌﾗｸﾞ
+    example: 1
+  enableBonusSinglePayment:
+    type: string
+    description: ｸﾚｼﾞｯﾄﾎﾞｰﾅｽ一括支払有効化ﾌﾗｸﾞ
+    example: 1
+    default: 0
+  enableBonusInstallment:
+    type: string
+    description: ｸﾚｼﾞｯﾄﾎﾞｰﾅｽ分割支払有効化ﾌﾗｸﾞ
+    example: 1
+    default: 0
+  enableRevolving:
+    type: string
+    description: ｸﾚｼﾞｯﾄﾘﾎﾞ有効化ﾌﾗｸﾞ
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2022/01/01 12:00:00

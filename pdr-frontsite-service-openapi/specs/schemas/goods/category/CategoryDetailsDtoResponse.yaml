@@ -1,0 +1,115 @@
+type: object
+description: カテゴリ詳細Dtoレスポンス
+properties:
+  categoryId:
+    type: string
+    description: カテゴリID
+    example: 10000001
+  categoryNote:
+    type: string
+    description: カテゴリについての説明文
+    example: カテゴリについての説明【ＰＣ】１
+  freeText:
+    type: string
+    description: フリーテキスト
+    example: バナーなどを挿入できるフリーエリア
+  metaDescription:
+    type: string
+    description: meta-description
+    example: 概要１
+  metaKeyword:
+    type: string
+    description: meta-keyword
+    example: キーワード１
+  categoryImage:
+    type: string
+    description: カテゴリ画像
+    example:
+  categorySeq:
+    type: integer
+    format: int32
+    description: カテゴリSEQ
+    example: 1000000
+  categoryName:
+    type: string
+    description: カテゴリ表示名
+    example: TOP
+  categoryOpenStatus:
+    type: string
+    description: カテゴリ公開状態
+    example: 1
+    default: 0
+  categoryOpenStartTime:
+    type: string
+    format: date-time
+    description: カテゴリ公開開始日時
+    example: 2022/01/01 12:00:00
+  categoryOpenEndTime:
+    type: string
+    format: date-time
+    description: カテゴリ公開終了日時
+    example: 2022/01/01 12:00:00
+  categoryType:
+    type: string
+    description: カテゴリ種別
+    example: 0
+    default: 0
+  categorySeqPath:
+    type: string
+    description: カテゴリSEQパス
+    example: 0
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 2
+  rootCategorySeq:
+    type: integer
+    format: int32
+    description: ルートカテゴリSEQ
+    example: 2
+  categoryLevel:
+    type: integer
+    format: int32
+    description: カテゴリ階層
+    example: 2
+  categoryPath:
+    type: string
+    description: カテゴリパス
+    example: 0
+  manualDisplayFlag:
+    type: string
+    description: 手動表示フラグ
+    example: 0
+    default: 0
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ
+    example: 2
+    default: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2022/01/01 12:00:00
+  displayRegistTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2022/01/01 12:00:00
+  displayUpdateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2022/01/01 12:00:00
+  siteMapFlag:
+    type: string
+    description: サイトマップ出力フラグ
+    example: 0
+    default: 0

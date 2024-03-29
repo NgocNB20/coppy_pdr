@@ -1,0 +1,29 @@
+type: object
+description: 注文メッセージDtoレスポンス
+properties:
+  orderGoodsMessageMapMap:
+    type: object
+    additionalProperties:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: "#/components/schemas/CheckMessageDtoResponse"
+  orderGoodsMessageMap:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        $ref: "#/components/schemas/CheckMessageDtoResponse"
+  orderMessageList:
+    type: array
+    items:
+      $ref: "#/components/schemas/CheckMessageDtoResponse"
+  receiveOrderDto:
+    type: string
+    description: 受注Dto
+
+components:
+  schemas:
+    CheckMessageDtoResponse:
+      $ref: ../cart/CheckMessageDtoResponse.yaml

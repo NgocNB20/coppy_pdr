@@ -1,0 +1,339 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-modal {
+  z-index: 600;
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  &__overlay {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba($color: $color-000, $alpha: .8);
+    top: 0;
+    left: 0;
+    right: 0;
+  
+    &.js-open {
+      display: block;
+    }
+  }
+
+  &__contents {
+    position: fixed;
+    top: 50%;
+    left: calc(50%);
+    transform: translate(-50%, -50%);
+    background: #fff;
+  
+    &.js-open {
+      display: block;
+    }
+
+    &--normal {
+      max-width: 840px;
+      width: 100%;
+      text-align: center;
+      padding-block: 60px;
+    }
+  
+    &--alert {
+      max-width: 540px;
+      width: 100%;
+      text-align: center;
+    }
+
+    &--wide {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+      padding-block: 60px;
+    }
+
+  }
+
+  &__hl {
+    margin-block: 0 30px;
+    @include font-style(20,40,bold);
+    color: $color-000;
+  }
+
+  &__hl-wide {
+    margin-block: 0 50px;
+    @include font-style(26,36,normal);
+    color: $color-000;
+  }
+
+  &__lead {
+    margin-block: 0 30px;
+    @include font-style(16,32,bold);
+    color: $color-000;
+  }
+
+  &__detail {
+    background: $color-orange-lightGray;
+    padding-block: 30px;
+
+    &--wide {
+      background: $color-fff;
+      padding: 0 50px;
+      text-align: left;
+      @include font-style(16,30);
+    }
+
+    &-scroll {
+      max-height: 40vh;
+
+      &--wide {
+        max-height: 55vh;
+      }
+    }
+
+    &-inner {
+      width: fit-content;
+      max-width: 680px;
+      margin-inline: auto;
+      text-align: left;
+      @include font-style(16,30);
+
+      &--wide {
+        max-width: 1050px;
+        width: 100%;
+        margin-inline: inherit;
+      }
+    }
+
+    &-unit:not(:first-child) {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: solid 1px $color-orange-darkGray;
+    }
+
+    p + p {
+      margin-top: 12px;
+    }
+
+    // p+p をやめて、こちらに集約する
+    &--margin-m {
+      margin-top: 12px;
+    }
+
+    &--complete {
+      padding-block: 40px 50px;
+    }
+
+    &-complete-title {
+      margin-block: 5px;
+      text-align: center;
+      @include font-style(22,50,bold);
+      color: $color-000;
+    }
+
+    &-complete-text {
+      text-align: center;
+      @include font-style(16,30);
+    }
+
+
+
+  }
+
+  &__button {
+    display: grid;
+    grid-auto-flow: column;
+    place-content: center;
+    margin-block: 50px 0;
+    gap: 30px;
+  }
+
+  // 箇条書
+  &__bullet-point {
+
+    li {
+      text-indent: -11px;
+      padding-left: 11px;
+
+      &::before {
+        content: "・ ";
+      }
+    }
+
+    &--strong {
+      color: $color-primary;
+    }
+
+  }
+
+
+  @include media(sm) {
+
+    &__contents {
+      width: 94%;
+
+      &--normal {
+        width: 94%;
+        padding-block: vwset(35);
+      }
+    
+      &--alert {
+        width: 94%;
+      }
+
+      &--wide {
+        width: 94%;
+        padding-block: vwset(35);
+      }
+    }
+
+    &__hl {
+      margin: 0 vwset(20) vwset(20);
+      @include font-sp-style(16,29);
+    }
+
+    &__hl-wide {
+      margin: 0 vwset(25) vwset(30);
+      @include font-style(20,32,normal);
+      text-align: left;
+    }
+
+    &__lead {
+      margin: 0 vwset(20) vwset(20);
+      @include font-sp-style(14,25);
+      text-align: left;
+    }
+
+    &__detail {
+      padding-block: vwset(20);
+
+      &--wide {
+        padding: 0 vwset(10) 0 vwset(25);
+        @include font-sp-style(16,30);
+      }
+
+      &-scroll {
+        max-height: 30vh;
+
+        &--wide {
+          max-height: 50vh;
+        }
+      }
+
+      &-inner {
+        max-width: 76vw;
+        @include font-sp-style(14,25);
+
+        &--wide {
+          max-width: 76vw;
+        }
+
+      }
+
+
+
+  
+      p + p {
+        margin-top: vwset(10);
+      }
+
+      &--complete {
+        padding-block: vwset(20) vwset(25);
+      }
+
+      &-complete-title {
+        margin-block: vwset(5);
+        @include font-sp-style(15,25,bold);
+      }
+  
+      &-complete-text {
+        @include font-sp-style(14,25);
+      }
+
+    }
+
+    &__button {
+      grid-auto-flow: row;
+      gap: vwset(15);
+      margin-block: vwset(35) 0;
+
+      a:first-child,
+      button:first-child {
+          order: 2;
+      }
+
+      &--small {
+        grid-auto-flow: column;
+
+        a:first-child,
+        button:first-child {
+            order: inherit;
+        }
+
+
+      }
+    }
+
+
+
+  }
+
+  
+}
+
+
+.c-modal-close {
+  position: absolute;
+  right: 0;
+  top: -65px;
+  z-index: 950;
+  background-color: $color-primary;
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  transition: opacity $comMS $comES;
+
+  &:hover {
+    @include media(lg) {
+      opacity: .5;
+    }
+  }
+
+  span {
+    background-color: $color-fff;
+    position: absolute;
+    top: 46%;
+    left: 23%;
+    width: 28px;
+    height: 3px;
+    border-radius: 9999px;
+
+    &:nth-of-type(1) {
+      transform: rotate(-315deg);
+    }
+
+    &:nth-of-type(2) {
+      transform: rotate(315deg);
+    }
+  }
+
+  @include media(sm) {
+    
+    top: vwset(-50);
+    width: vwset(40);
+    height: vwset(40);
+ 
+    span {
+      top: 48%;
+      left: 24%;
+      width: vwset(22);
+      height: vwset(2);
+    }
+  }
+}

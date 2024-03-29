@@ -1,0 +1,26 @@
+<!--2023-renew No21 from here-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>結果レポート</title>
+</head>
+<body>
+<div>
+    <span th:text="${admin.get('BATCH_NAME')} + 'が終了しました。'"></span>
+    <br>
+    <br>
+    <span th:text="'処理結果：正常終了'"></span>
+    <br>
+    <br>
+    <span th:text="'更新対象商品数'"></span>
+    <br>
+    <span th:text="${admin.get('RESULT')} + '件'"></span>
+    <br>
+    <br>
+    <span>以上</span>
+</div>
+</body>
+</html>
+<!--2023-renew No21 to here-->

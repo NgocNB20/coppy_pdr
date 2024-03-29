@@ -1,0 +1,138 @@
+<!--/*
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ 【pager1フラグメント】ページングリンク表示部分
+ -------------------------------------------
+ - フラグメント引数（必須パラメータ）
+     [url] 呼び出し元のURL
+ -------------------------------------------
+ - 外部定義変数（任意パラメータ）
+     [additionalParam] ページャURLに付与する画面固有のGETパラメータ文字列（デフォルト：空文字）
+
+   ※表示イメージ
+   ====================================================================
+   < <前ページ 全〇商品  [1] [2] [3] [4] [5] 次ページ> >
+   ====================================================================
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+*/-->
+<div class="p-search__count" th:fragment="pager1(url)" th:with="additionalParam=${additionalParam} ?: ''">
+	<th:block id="totalCount" th:utext="|全 <span class='p-search__count-sum'>*{pageInfo.total}</span> 商品|"></th:block>
+	<nav class="c-pagination" th:if="${pageInfo}">
+		<th th:if="${pageInfo.isDisplayPrev}">
+			<a class="c-pagination--prev" th:href="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,__(${pageInfo.asc!=null?'asc=${pageInfo.asc}':','})__,pnum=${pageInfo.pnum}-1,__(${pageInfo.sort!=null?'sort=${pageInfo.sort}':','})__,__(${additionalParam})__)}">
+				<svg viewBox="0 0 18 28"><use xlink:href="/images/icon/arrow-left.svg#arrow-left"></use></svg>
+			</a>
+		</th>
+		<th th:unless="${pageInfo.isDisplayPrev}">
+			<span class="c-pagination--prev">
+				<svg viewBox="0 0 18 28"><use xlink:href="/images/icon/arrow-left.svg#arrow-left"></use></svg>
+			</span>
+		</th>
+
+		<th:block th:unless="${pageInfo.startPageNo} eq ${pageInfo.DEFAULT_PNUM}">
+			<a th:href="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,__(${pageInfo.asc!=null?'asc=${pageInfo.asc}':','})__,pnum=1,__(${pageInfo.sort!=null?'sort=${pageInfo.sort}':','})__,__(${additionalParam})__)}"
+			   th:text="1"
+			   class="c-pagination--page"></a>
+			<span class="c-pagination--abb">
+				<svg viewBox="0 0 31 5" style="fill:#e4e4e4;">
+					<use xlink:href="/images/icon/dot.svg#dot"></use>
+				</svg>
+			</span>
+		</th:block>
+
+		<th:block th:each="i : ${#numbers.sequence(pageInfo.startPageNo, pageInfo.endPageNo)}" th:remove="tag">
+			<span th:if="${i} eq ${pageInfo.pnum}" th:text="${i}" class="c-pagination--page is-current"></span>
+			<a th:unless="${i} eq ${pageInfo.pnum}"
+			   th:href="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,__(${pageInfo.asc!=null?'asc=${pageInfo.asc}':','})__,pnum=${i},__(${pageInfo.sort!=null?'sort=${pageInfo.sort}':','})__,__(${additionalParam})__)}"
+			   th:text="${i}"
+			   class="c-pagination--page"></a>
+		</th:block>
+
+		<th:block th:if="${pageInfo.endPageNo} < ${pageInfo.totalPages}">
+			<span class="c-pagination--abb">
+				<svg viewBox="0 0 31 5" style="fill:#e4e4e4;">
+					<use xlink:href="/images/icon/dot.svg#dot"></use>
+				</svg>
+			</span>
+			<a th:href="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,__(${pageInfo.asc!=null?'asc=${pageInfo.asc}':','})__,pnum=${pageInfo.totalPages},__(${pageInfo.sort!=null?'sort=${pageInfo.sort}':','})__,__(${additionalParam})__)}"
+			   th:text="${pageInfo.totalPages}"
+			   class="c-pagination--page"></a>
+		</th:block>
+
+		<th th:if="${pageInfo.isDisplayNext}">
+			<a class="c-pagination--next" th:if="${pageInfo.displayNext}" th:href="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,__(${pageInfo.asc!=null?'asc=${pageInfo.asc}':','})__,pnum=${pageInfo.pnum}+1,__(${pageInfo.sort!=null?'sort=${pageInfo.sort}':','})__,__(${additionalParam})__)}">
+				<svg viewBox="0 0 18 28"><use xlink:href="/images/icon/arrow-right.svg#arrow-right"></use></svg>
+			</a>
+		</th>
+		<th th:unless="${pageInfo.isDisplayNext}">
+			<span class="c-pagination--next">
+				<svg viewBox="0 0 18 28"><use xlink:href="/images/icon/arrow-right.svg#arrow-right"></use></svg>
+			</span>
+		</th>
+	</nav>
+</div>
+<!--/*
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ 【pager2フラグメント】一覧形式、ソート順、切り替え表示部分
+ -------------------------------------------
+ - フラグメント引数（必須パラメータ）
+     [url] 呼び出し元のURL
+     [viewTypeDisplayFlag] 表示形式を表示するかどうか　true...表示する
+ -------------------------------------------
+ - 外部定義変数（任意パラメータ）
+     [manualDisplayFlag] 標準ソート順を表示するかどうか（デフォルト：false） true...表示する
+     [additionalParam] ページャURLに付与する画面固有のGETパラメータ文字列（デフォルト：空文字）
+
+   ※表示イメージ
+   ================================================================
+   [サムネイル] [リスト]                   [標準][新着順][価格順][人気順]
+   ================================================================
+ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+*/-->
+<div class="p-search__header" th:if="${pageInfo}" th:fragment="pager2(url)" th:with="additionalParam=${additionalParam} ?: ''">
+	<span class="p-search__header-sort">
+		<ul class="p-search__header-view">
+			<th:block id="isViewTypeThumbnail-1" th:if="${pageInfo.isViewTypeThumbnail()}" >
+				<li>
+					<span>
+						<svg viewBox="0 0 35 35">
+							<use xlink:href="/images/icon/thumb.svg#thumb"></use>
+						</svg>
+					</span>
+				</li>
+				<li>
+					<a id="goChangeView-1" th:href="@{${url}(vtype=list,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,__(${pageInfo.asc!=null?'asc=${pageInfo.asc}':','})__,pnum=1,__(${pageInfo.sort!=null?'sort=${pageInfo.sort}':','})__,__(${additionalParam})__)}">
+						<svg viewBox="0 0 35 35">
+							<use xlink:href="/images/icon/list.svg#list"></use>
+						</svg>
+					</a>
+				</li>
+			</th:block>
+			<th:block id="isViewTypeList-1" th:if="${pageInfo.isViewTypeList()}" >
+				<li>
+					<a id="goChangeView-2" th:href="@{${url}(vtype=thumbs,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,__(${pageInfo.asc!=null?'asc=${pageInfo.asc}':','})__,pnum=1,__(${pageInfo.sort!=null?'sort=${pageInfo.sort}':','})__,__(${additionalParam})__)}">
+						<svg viewBox="0 0 35 35">
+							<use xlink:href="/images/icon/thumb.svg#thumb"></use>
+						</svg>
+					</a>
+				</li>
+				<li>
+					<span>
+						<svg viewBox="0 0 35 35">
+							<use xlink:href="/images/icon/list.svg#list"></use>
+						</svg>
+					</span>
+				</li>
+			</th:block>
+		</ul>
+		<!--/* ソート項目切替ドロップダウン */-->
+		<div class="c-select p-search__header-select">
+			<select class="c-select__inner" name="pref" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" >
+				<option th:value="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,pnum=1,sort='',__(${additionalParam})__)}" th:selected="${pageInfo.isUkSortTypeRecommend()}">おすすめ順</option>
+				<option th:value="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,pnum=1,sort='catalog_id asc',__(${additionalParam})__)}" th:selected="${pageInfo.isUkSortTypeCatalogId()}">カタログ掲載順</option>
+				<option th:value="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,pnum=1,sort='new_date desc',__(${additionalParam})__)}" th:selected="${pageInfo.isUkSortTypeNewDate()}">新着順</option>
+				<option th:value="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,pnum=1,sort='sale_min_price asc',__(${additionalParam})__)}" th:selected="${pageInfo.isUkSortTypeSaleMinPrice()}">価格（安い順）</option>
+				<option th:value="@{${url}(__(${pageInfo.vtype!=null?'vtype=${pageInfo.vtype}':','})__,__(${pageInfo.stype!=null?'stype=${pageInfo.stype}':','})__,pnum=1,sort='sale_max_price desc',__(${additionalParam})__)}" th:selected="${pageInfo.isUkSortTypeSaleMaxPrice()}">価格（高い）</option>
+			</select>
+		</div>
+    </span>
+</div>

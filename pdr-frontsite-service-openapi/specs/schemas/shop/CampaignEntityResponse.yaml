@@ -1,0 +1,57 @@
+type: object
+description: キャンペーンEntityレスポンス
+properties:
+  campaignSeq:
+    description: キャンペーンSEQ（必須）
+    type: integer
+    format: int32
+    example: 2
+  shopSeq:
+    description: ショップSEQ (FK)（必須）
+    type: integer
+    format: int32
+    example: 2
+  campaignCode:
+    description: キャンペーンコード
+    type: string
+    example: 'abc'
+  campaignName:
+    description: キャンペーン名（必須）
+    type: string
+    example: 'abc'
+  campaignStartDate:
+    type: string
+    description: キャンペーン開始日
+    format: date-time
+    example: 2022/01/01 12:00:00
+  campaignEndDate:
+    type: string
+    description: キャンペーン終了日
+    format: date-time
+    example: 2022/01/01 12:00:00
+  redirectUrl:
+    description: リダイレクト先url
+    type: string
+    example: 'http://localhost'
+  note:
+    description: 備考
+    type: string
+    example: 'abc'
+  campaignCost:
+    type: number
+    description: キャンペーンコスト
+    example: 100
+  deleteFlag:
+    type: string
+    description: 削除フラグ（必須）
+    example: '1'
+  registTime:
+    type: string
+    description: 登録日時（必須）
+    format: date-time
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    description: 更新日時（必須）
+    format: date-time
+    example: 2022/01/01 12:00:00

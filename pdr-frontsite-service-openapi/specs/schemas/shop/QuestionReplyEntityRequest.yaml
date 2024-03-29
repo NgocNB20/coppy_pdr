@@ -1,0 +1,22 @@
+type: object
+description: アンケート設問回答エンティティクラス
+properties:
+  questionnaireReplySeq:
+    type: integer
+    format: int32
+    description: アンケート回答SEQ（PK）
+    example: 10000001
+  questionSeq:
+    type: integer
+    format: int32
+    description: アンケート設問SEQ (FK)
+    example: 10000002
+  reply:
+    type: string
+    description: 回答内容
+    example:
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00

@@ -1,0 +1,12 @@
+type: object
+description: 注文履歴詳細情報取得リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 1000000
+  orderCode:
+    type: string
+    description: 受注番号
+    example: 1000000

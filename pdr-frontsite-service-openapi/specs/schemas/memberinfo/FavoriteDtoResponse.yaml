@@ -1,0 +1,22 @@
+type: object
+description: お気に入り情報DtoListレスポンス
+properties:
+  favoriteEntityResponse:
+    $ref: '#/components/schemas/FavoriteEntityResponse'
+  goodsDetailsDtoResponse:
+    $ref: '#/components/schemas/GoodsDetailsDtoResponse'
+  goodsGroupImageEntityListResponse:
+    $ref: '#/components/schemas/GoodsGroupImageEntityListResponse'
+  stockStatus:
+    type: string
+    description: 在庫表示
+    example: 1
+
+components:
+  schemas:
+    FavoriteEntityResponse:
+      $ref: ./FavoriteEntityResponse.yaml
+    GoodsDetailsDtoResponse:
+      $ref: ../goods/GoodsDetailsDtoResponse.yaml
+    GoodsGroupImageEntityListResponse:
+      $ref: ../goods/GoodsGroupImageEntityListResponse.yaml

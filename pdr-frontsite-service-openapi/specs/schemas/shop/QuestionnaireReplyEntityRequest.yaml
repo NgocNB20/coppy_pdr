@@ -1,0 +1,41 @@
+type: object
+description: アンケート回答エンティティクラス
+properties:
+  questionnaireReplySeq:
+    type: integer
+    format: int32
+    description: アンケート回答SEQ（PK）
+    example: 10000001
+  questionnaireSeq:
+    type: integer
+    format: int32
+    description: アンケートSEQ (FK)
+    example: 10000002
+  siteType:
+    type: string
+    description: サイト種別
+    example: 2
+    default: 0
+  deviceType:
+    type: string
+    description: デバイス種別
+    example: 2
+    default: 0
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000003
+  orderCode:
+    type: string
+    description: 受注コード
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  questionnaireKey:
+    type: string
+    description: アンケートキー
+    example: order

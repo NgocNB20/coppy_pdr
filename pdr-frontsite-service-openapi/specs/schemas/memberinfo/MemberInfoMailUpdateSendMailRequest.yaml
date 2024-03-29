@@ -1,0 +1,12 @@
+type: object
+description: メールアドレス変更リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  memberInfoNewMail:
+    type: string
+    description: 新しいメールアドレス
+    example: itec@itec.hankyu-hanshin.co.jp

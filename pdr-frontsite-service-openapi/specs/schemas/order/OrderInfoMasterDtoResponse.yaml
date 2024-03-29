@@ -1,0 +1,27 @@
+type: object
+description: 注文情報マスタDtoレスポンス
+properties:
+  goodsMaster:
+    type: object
+    description: 商品マスタマップ
+    additionalProperties:
+      $ref: '#/components/schemas/GoodsDetailsDtoResponse'
+  deliveryMethodMaster:
+    type: object
+    description: 商品マスタマップ
+    additionalProperties:
+      $ref: '#/components/schemas/DeliveryMethodDetailsDtoResponse'
+  taxRateMaster:
+    type: object
+    description: 商品マスタマップ
+    additionalProperties:
+      $ref: '#/components/schemas/TaxRateEntityResponse'
+
+components:
+  schemas:
+    GoodsDetailsDtoResponse:
+      $ref: ../goods/GoodsDetailsDtoResponse.yaml
+    DeliveryMethodDetailsDtoResponse:
+      $ref: ./DeliveryMethodDetailsDtoResponse.yaml
+    TaxRateEntityResponse:
+      $ref: ./TaxRateEntityResponse.yaml

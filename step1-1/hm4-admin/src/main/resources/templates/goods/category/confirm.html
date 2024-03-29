@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta th:replace="~{include/head_new}"/>
+    <script type="text/javascript" language="JavaScript" th:src="@{/assets/js/thickbox.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/thickbox.css}"/>
+    <title>カテゴリー登録更新確認 ｜商品管理</title>
+    <script>
+        $(function () {
+            // -------------------------------------------------------------------
+            // 商品画像プレビュー表示の初期化
+            // -------------------------------------------------------------------
+            initImagePreviewer();
+            prepareThickBox();
+        });
+
+    </script>
+</head>
+
+<body id="goods">
+<div id="registCategory" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form enctype="multipart/form-data" th:action="@{/goods/category/confirm/}"
+                      th:object="${categoryInputModel}" method="post">
+                    <input type="hidden" th:field="*{scCategorySeq}"/>
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">カテゴリー登録更新：確認</h1>
+                    </div>
+
+                    <div class="l-section">
+                        <!-- カテゴリー管理情報 -->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">カテゴリー管理情報</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div>
+                                            <dt>カテゴリーID</dt>
+                                            <dd th:text="*{categoryId}">
+                                            </dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>カテゴリー名</dt>
+                                            <dd th:class="*{#style.diff(modifiedCategoryList, {'categoryName'})}"
+                                                th:text="*{categoryName}">
+                                            </dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>管理オプション</dt>
+                                            <dd>
+                                                <ul class="c-list-left list_sp20">
+                                                    <li th:class="*{#style.diff(modifiedCategoryList, {'categoryType'})}">
+                                                        <label class="c-form-control disabled-checkbox"><input
+                                                                type="checkbox" name="" disabled value=""
+                                                                th:checked="*{categoryType eq '0'}"><i></i>カテゴリーをメニューに表示する</label>
+                                                    </li>
+                                                    <li th:class="*{#style.diff(modifiedCategoryList, {'manualDisplayFlag'})}">
+                                                        <label class="c-form-control disabled-checkbox"><input
+                                                                type="checkbox" name="" disabled value=""
+                                                                th:checked="*{manualDisplayFlag eq '1'}"><i></i>商品を手動で並び替える</label>
+                                                    </li>
+                                                    <li th:class="*{#style.diff(modifiedCategoryList, {'siteMapFlag'})}">
+                                                        <label class="c-form-control disabled-checkbox"><input
+                                                                type="checkbox" name="" disabled value=""
+                                                                th:checked="*{siteMapFlag eq '1'}"><i></i>サイトマップに出力する</label>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                        </div>
+                                        <div>
+                                            <dt>メタ説明文</dt>
+                                            <dd th:class="*{#style.diff(modifiedCategoryDisplayList, {'metaDescription'})}"
+                                                th:utext="*{metaDescription == null ? '―' : #pre.convert(metaDescription)}">
+                                            </dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>メタキーワード</dt>
+                                            <dd th:class="*{#style.diff(modifiedCategoryDisplayList, {'metaKeyword'})}"
+                                                th:utext="*{metaKeyword == null ? '―' : #pre.convert(metaKeyword)}">
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- 新規カテゴリー追加 -->
+                        <div class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">親カテゴリー</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <input type="hidden" id="categoryPathName" th:value="*{categoryPathName}">
+                                    <table class="c-tbl tbl_cat_list">
+                                        <thead>
+                                        <tr>
+                                            <th class="cat_name">カテゴリー名</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="catBody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- カテゴリー情報 -->
+                        <div class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">カテゴリー情報</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <!--2023-renew categoryCSV from here-->
+                                        <div>
+                                            <dt>カテゴリー名PC</dt>
+                                            <dd th:class="*{#style.diff(modifiedCategoryDisplayList, {'categoryNamePC'})}"
+                                                th:utext="*{categoryNamePC == null ? '―' : #pre.convert(categoryNamePC)}">
+                                            </dd>
+                                        </div>
+                                        <!--2023-renew categoryCSV to here-->
+                                        <div>
+                                            <dt>公開状態</dt>
+                                            <dd th:class="*{#style.diff(modifiedCategoryList, {'categoryOpenStatusPC'})}"
+                                                th:text="*{categoryOpenStatusPCItems.get(categoryOpenStatusPC)}">
+                                            </dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>公開期間</dt>
+                                            <dd class="c-times_inner"
+                                                th:class="*{#style.diff(modifiedCategoryList, {'categoryOpenStartTimePC', 'categoryOpenEndTimePC'})}">
+                                                <th:block th:if="*{isCategoryOpenFromToPcExist}">
+                                                    <span th:text="*{#date.convert(categoryOpenFromDatePC)}"></span>
+                                                    <span th:text="*{#date.convert(categoryOpenFromTimePC,'HH:mm:ss')}"></span>
+                                                    ～ <span th:text="*{#date.convert(categoryOpenToDatePC)}"></span>
+                                                    <span th:text="*{#date.convert(categoryOpenToTimePC,'HH:mm:ss')}"/></span>
+                                                </th:block>
+                                                <th:block th:if="*{!isCategoryOpenFromToPcExist}">―</th:block>
+                                            </dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>フリーエリア<br>（HTML可）</dt>
+                                            <dd th:class="*{#style.diff(modifiedCategoryDisplayList, {'freeTextPC'})}"
+                                                th:utext="*{freeTextPC == null ? '―' : #pre.convert(freeTextPC)}">
+                                            </dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>カテゴリー画像</dt>
+                                            <dd th:classappend="*{#style.diff(modifiedCategoryDisplayList, {'categoryImagePC'})}">
+                                                <th:block th:if="*{isExistCategoryImagePathPC()}">
+                                                    <div class="cat-container c-img imagePreviewer">
+                                                        <div class="cat-container-sub">
+                                                            <img th:src="*{categoryImagePathPC}" th:alt="*{fileNamePC}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-img-txt" th:text="*{fileNamePC}"></div>
+                                                </th:block>
+                                                <th:block th:if="*{!isExistCategoryImagePathPC()}">―</th:block>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button class="c-btn btn_back icon_left" name="doReturn" type="submit"><i
+                                        class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                            <div class="col_left">
+                                <button class="c-btn btn_regular" type="submit" name="doOnceRegist">登録</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+    <script type="text/javascript" language="javascript">
+        // 親カテゴリー
+        const categoryPathName = $("#categoryPathName").val();
+        const parentCat = categoryPathName.split(' > ');
+        let catBody = '';
+        let catTr = '';
+        for (let i = 0; i < parentCat.length; i++) {
+            if (i === 0) {
+                catTr = '<tr><td class="cat_name"><div class="cat_top" style="padding-left: 10px;">' + parentCat[i] + '</div></td></tr>';
+            } else {
+                if (i % 2 !== 0) {
+                    catTr = '<tr class="stripe"><td class="cat_name"><div class="cat_end" style="margin-left:' + (i - 1) * 30 + 'px">' + parentCat[i] + '</div></td></tr>';
+                } else {
+                    catTr = '<tr><td class="cat_name"><div class="cat_end" style="margin-left:' + (i - 1) * 30 + 'px">' + parentCat[i] + '</div></td></tr>';
+                }
+            }
+            catBody = catBody + catTr;
+        }
+        $('#catBody').html(catBody);
+
+    </script>
+</div>
+</body>
+</html>

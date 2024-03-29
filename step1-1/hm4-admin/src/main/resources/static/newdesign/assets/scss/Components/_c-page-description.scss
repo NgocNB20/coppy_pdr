@@ -1,0 +1,112 @@
+@charset "utf-8";
+
+// ==========================================================================
+//  c-page-description
+// ==========================================================================
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.c-page-description {
+  margin-block: 40px 50px;
+  @include font-style(16,30);
+
+  // 文
+  &__text {
+    @include font-style(16,30);
+
+    strong {
+      color: $color-primary;
+    }
+
+    em {
+      color: $color-f00;
+      font-style: normal;
+    }
+
+    &--small {
+      @include font-style(15,30);
+    }
+
+    .c-require,
+    .c-any {
+      margin-right: 10px;
+    }
+  }
+
+  // 箇条書
+  &__bullet-point {
+
+    li {
+      text-indent: -11px;
+      padding-left: 11px;
+
+      &::before {
+        content: "・ ";
+      }
+    }
+
+    &--strong {
+      color: $color-primary;
+    }
+
+  }
+
+  // 定義文
+  &__definition {
+    dt,dd {
+      @include font-style(16,30,normal);
+    }
+  }
+
+  // 余白
+  &--margin-m {
+    margin-top: 15px;
+  }
+
+
+  @include media(sm) {
+
+    margin-block: vwset(30) vwset(50); // bottom 60 から 50に変更。一部ページで余白がでかすぎる。
+    margin-inline: vwset(20);
+
+    @include font-sp-style(16,30);
+  
+    &__text {
+      @include font-sp-style(16,30);
+
+      &--small {
+        @include font-sp-style(15,30);
+      }
+
+    }
+  
+    &__bullet-point {
+  
+      li {
+        text-indent: -11px;
+        padding-left: 11px;
+  
+      }
+    }
+
+
+    // 定義文
+    &__definition {
+      dt,dd {
+        @include font-sp-style(16,30);
+      }
+    }
+
+    // 余白
+    &--margin-m {
+      margin-top: vwset(15);
+    }
+
+  
+
+
+  }
+}

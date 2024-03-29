@@ -1,0 +1,14 @@
+# 2023-renew No11-33-75-112 from here
+type: object
+description: 販売可否判定リクエスト
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品 (複数パイプ区切り)
+    example: furniture-00201
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 2
+# 2023-renew No11-33-75-112 to here

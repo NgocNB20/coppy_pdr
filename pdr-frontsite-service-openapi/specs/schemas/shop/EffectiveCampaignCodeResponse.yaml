@@ -1,0 +1,7 @@
+type: object
+description: 有効なキャンペーンコードレスポンス
+properties:
+  campaignCode:
+    type: string
+    description: キャンペーンコード
+    example: 'abc'

@@ -1,0 +1,247 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+
+.p-login {
+  $this: &;
+
+  &__main {
+    display: grid;
+    grid-template-columns: 1fr 35.3%;
+    grid-template-columns: minmax(500px,1fr) 35.3%;
+    gap: 2.5%;
+    justify-content: space-between;
+
+    @media screen and (max-width: 1100px) {
+      grid-template-columns: 1fr;
+    }
+
+    > div {
+      padding-top: 30px;
+      padding-inline: 3.12vw;
+
+      @media screen and (max-width: 1400px) {
+        padding-inline: 2.2vw;
+      }
+    }
+  }
+
+  &__title-contents {
+    margin-block: 5px 40px;
+    padding-block: 25px;
+    text-align: center;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 2px;
+      background-color: $color-primary;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%)
+  }
+
+    strong {
+      @include font-style(24,39,normal);
+    }
+  }
+
+  &__text {
+    @include font-style(16,30);
+  }
+
+  &__input {
+    margin-block: 25px 40px;
+    padding-block: 50px 40px;
+    border-top: solid 1px $color-orange-darkGray;
+    border-bottom: solid 1px $color-orange-darkGray;
+
+    &-list {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 25px;
+
+      dt {
+        height: 60px;
+        display: grid;
+        align-items: center;
+        @include font-style(20,39,normal);
+      }
+
+      input {
+        width: 100%;
+      }
+
+      + dl {
+        margin-top: 40px;
+      }
+    }
+  }
+
+  &__check {
+    margin-block: 40px 35px;
+    text-align: center;
+
+    &-memo {
+      margin-top: 18px;
+      @include font-style(15,22);
+    }
+  }
+
+  &__button {
+    text-align: center;
+
+    .c-button {
+      max-width: 310px;
+      width: 19.3vw;
+      padding-inline: 20px;
+    }
+  }
+
+  &__member {
+    background: #f6f5f4;
+    padding-bottom: 70px;
+  }
+
+  &__first {
+    background: $color-yellow-light;
+    padding-bottom: 30px;
+
+    #{$this}__button {
+      margin-block: 40px 60px;
+    }
+  }
+
+  &__service {
+
+    .c-service__unit {
+      min-height: 85px;
+      max-width: 400px;
+      margin-inline: auto;
+
+      &:not(:last-child) {
+        margin-bottom: 35px;
+      }
+    }
+  }
+
+  @include media(sm) {
+
+    &__main {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: vwset(15);
+  
+      > div {
+        padding: vwset(20) vwset(20) vwset(50);
+      }
+    }
+  
+    &__title-contents {
+      margin-block: 0 vwset(30);
+      padding: vwset(25);
+  
+      strong {
+        @include font-sp-style(19,29);
+      }
+    }
+  
+    &__text {
+      @include font-sp-style(16,30);
+    }
+  
+    &__input {
+      margin-block: vwset(30);
+      padding-block: vwset(20);
+  
+      &-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: vwset(12);
+  
+        dt {
+          height: inherit;
+          @include font-sp-style(17,29);
+        }
+  
+        + dl {
+          margin-top: vwset(20);
+          padding-top: vwset(20);
+          border-top: solid 1px $color-orange-darkGray;
+        }
+      }
+  
+    }
+  
+    &__check {
+      margin-block: vwset(30) vwset(23);
+      text-align: left;
+
+      .c-checkbox p {
+        line-height: 1.25;
+      }
+  
+      &-memo {
+        margin-top: vwset(12);
+        @include font-sp-style(15,22);
+      }
+    }
+  
+    &__button {
+      text-align: center;
+  
+      .c-button {
+        width: 310px;
+      }
+    }
+  
+    &__first {
+  
+      #{$this}__button {
+        margin-block: vwset(35) vwset(48);
+      }
+    }
+
+    &__service {
+
+      .c-service__unit {
+        min-height: inherit;
+      }
+    }
+
+  }
+
+
+  // 代理ログイン
+  &--proxy {
+
+    .c-title-page {
+      text-align: center;
+    }
+
+    #{$this}__main {
+      grid-template-columns: 1fr;
+    }
+
+    #{$this}__section {
+      background: #f6f5f4;
+    }
+
+    #{$this}__input {
+      max-width: 1000px;
+      margin: 0 auto 50px;
+      padding-inline: 130px;
+      border-top: none;
+    }
+  }
+
+
+}
+
+

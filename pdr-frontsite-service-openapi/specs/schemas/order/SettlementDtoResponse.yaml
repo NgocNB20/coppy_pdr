@@ -1,0 +1,34 @@
+type: object
+description: 決済Dtoリストレスポンス
+properties:
+  settlementDetailsDto:
+    type: object
+    description: 決済詳細Dto
+    $ref: '#/components/schemas/SettlementDetailsDtoResponse'
+  convenienceEntityList:
+    type: array
+    description: コンビニ名称エンティティリスト
+    items:
+      $ref: '#/components/schemas/ConvenienceResponse'
+  cardBrandEntityList:
+    type: array
+    description: カードブランドリスト
+    items:
+      $ref: '#/components/schemas/CardBrandResponse'
+  charge:
+    type: number
+    description: 決済手数料
+    example: 1
+  selectClass:
+    type: boolean
+    description: 選択区分
+    example: 1
+
+components:
+  schemas:
+    SettlementDetailsDtoResponse:
+      $ref: ./SettlementDetailsDtoResponse.yaml
+    ConvenienceResponse:
+      $ref: ./ConvenienceResponse.yaml
+    CardBrandResponse:
+      $ref: ../cart/CardBrandResponse.yaml

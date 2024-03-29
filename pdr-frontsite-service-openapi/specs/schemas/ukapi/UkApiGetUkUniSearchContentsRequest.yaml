@@ -1,0 +1,25 @@
+type: object
+description: UK-API連携ユニサーチ（コンテンツ）リクエスト
+properties:
+  kw:
+    type: string
+    description: 検索キーワード
+    example: 水
+  page:
+    type: integer
+    format: int32
+    description: 検索結果ページ数
+    example: 1
+  rows:
+    type: integer
+    format: int32
+    description: 検索結果数
+    example: 10
+  sortType:
+    type: string
+    description: ソート条件
+    example: sale_min_price asc
+  user:
+    type: string
+    dexcription: ユーザ識別情報
+    example: 0cf7e6a36f746c4e847c0aaa720b5822

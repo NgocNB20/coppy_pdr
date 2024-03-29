@@ -1,0 +1,7 @@
+type: object
+description: 会員変更メールアドレス取得リクエスト
+properties:
+  mid:
+    type: string
+    description: メールURLパラメータ
+    example: メールURLパラメータ

@@ -1,0 +1,86 @@
+type: object
+description: WEB-API連携取得結果DTOクラスレスポンス
+properties:
+  orderNo:
+    type: integer
+    format: int32
+    description: 受注番号
+    example: 2
+  receptionTypeName:
+    type: string
+    description: 受付方法
+    example: 受付方法
+  orderDate:
+    type: string
+    format: date-time
+    description: 注文日時
+    example: 2021/12/12 12:00:00
+  receiveOfficeName:
+    type: string
+    description: お届け先事業所名
+    example: お届け先事業所名
+  receiveZipcode:
+    type: string
+    description: お届け先郵便番号
+    example: お届け先郵便番号
+  receiveAddress1:
+    type: string
+    description: お届け先住所(都道府県・市区町村)
+    example: お届け先住所(都道府県・市区町村)
+  receiveAddress2:
+    type: string
+    description: お届け先住所(丁目・番地)
+    example: お届け先住所(丁目・番地)
+  receiveAddress3:
+    type: string
+    description: お届け先住所(建物名・部屋番号)
+    example: お届け先住所(建物名・部屋番号)
+  receiveAddress4:
+    type: string
+    description: お届け先住所(方書1)
+    example: お届け先住所(方書1)
+  receiveAddress5:
+    type: string
+    description: お届け先住所(方書2)
+    example: お届け先住所(方書2)
+  receiveDate:
+    type: string
+    format: date-time
+    description: お届け日
+    example: 2021/12/12 12:00:00
+  paymentType:
+    type: string
+    description: 支払方法
+    example: 2
+  paymentTotalPrice:
+    type: string
+    description: お支払い合計(税込)
+    example: 1000
+  couponNo:
+    type: string
+    description: 適用クーポン番号
+    example: A123456
+  couponName:
+    type: string
+    description: 適用クーポン名
+    example: 10000円引きクーポン
+  cancelYesNo:
+    type: integer
+    format: int32
+    description: キャンセル可否フラグ
+    example: 1
+  goodsList:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiOrderHistoryResponseGoodsInfoDtoResponse"
+  goodsDetailsMap:
+    type: object
+    description: 商品詳細情報Map
+    additionalProperties:
+      $ref: "#/components/schemas/GoodsDetailsDtoResponse"
+components:
+  schemas:
+    WebApiOrderHistoryResponseGoodsInfoDtoResponse:
+      $ref: ./WebApiOrderHistoryResponseGoodsInfoDtoResponse.yaml
+    GoodsDetailsDtoResponse:
+      $ref: ../goods/GoodsDetailsDtoResponse.yaml

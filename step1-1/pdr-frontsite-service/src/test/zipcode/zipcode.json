@@ -1,0 +1,110 @@
+{
+	"id": "c25fa549-872a-4b48-80ed-dd5d1f395f9b",
+	"name": "Zipcode",
+	"timestamp": "2023-10-23T10:01:59.805Z",
+	"collection_id": "30684847-845ce838-acfc-4a06-84e6-ca13fca91ff0",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-10-23T10:01:59.381Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "0327234e-0caf-4939-a2d1-5cc061b439c3",
+			"name": "郵便番号住所情報取得 - OK",
+			"url": "http://localhost:8888/zipcode/address?zipCode=0600000",
+			"time": 34,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				34
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "600c838b-40b8-4591-ab76-115ef8911102",
+			"name": "郵便番号住所情報取得 - NOTOK",
+			"url": "http://localhost:8888/zipcode/address?zipCode=060000x",
+			"time": 5,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2aadd657-19d2-4cc6-9580-d085b0a3c52c",
+			"name": "郵便番号整合性チェック - OK",
+			"url": "http://localhost:8888/zipcode/check-zipcode-matching",
+			"time": 31,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				31
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "827ef290-e0e5-49bf-9bfd-a7bf8fc70c61",
+			"name": "郵便番号整合性チェック - NOTOK",
+			"url": "http://localhost:8888/zipcode/check-zipcode-matching",
+			"time": 35,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				35
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 105,
+	"collection": {
+		"requests": [
+			{
+				"id": "0327234e-0caf-4939-a2d1-5cc061b439c3",
+				"method": "GET"
+			},
+			{
+				"id": "600c838b-40b8-4591-ab76-115ef8911102",
+				"method": "GET"
+			},
+			{
+				"id": "2aadd657-19d2-4cc6-9580-d085b0a3c52c",
+				"method": "POST"
+			},
+			{
+				"id": "827ef290-e0e5-49bf-9bfd-a7bf8fc70c61",
+				"method": "POST"
+			}
+		]
+	}
+}

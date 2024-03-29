@@ -1,0 +1,18 @@
+# 2023-renew No11-33-75-112 from here
+type: object
+description: WEB-API販売可否判定レスポンス
+properties:
+  info:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiGetSaleCheckDetailResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+
+components:
+  schemas:
+    WebApiGetSaleCheckDetailResponse:
+      $ref: ./WebApiGetSaleCheckDetailResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml
+# 2023-renew No11-33-75-112 to here

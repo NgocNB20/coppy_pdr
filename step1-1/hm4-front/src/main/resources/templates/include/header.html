@@ -1,0 +1,187 @@
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/848019204/?guid=ON&amp;script=0"/>
+    </div>
+    JavaScriptを有効にしてください
+</noscript>
+
+<div id="d_header">
+    <div class="wrap"><!--HEADER-->
+        <h1>
+            <a th:href="@{/index.html}" id="go-Home-logo" class="imgover"><img th:src="@{/images/header/logo.gif}" alt="ピーディーアールオンラインショップ" width="106" height="82"/></a>
+        </h1>
+
+        <th:block th:with="userInfo=${session.commonInfo.commonInfoUser}">
+            <div class="h_read">歯科材料の通販</div>
+            <div class="h_text">ピーディーアールの公式オンラインショップ |
+                <span>こんにちは、<span th:text="${userInfo.memberInfoLastName == null?'ゲスト':userInfo.memberInfoLastName}"/> 様</span>
+            </div>
+        </th:block>
+
+        <div id="d_hn">
+            <form id="header1Form" th:action="@{/logout}" method="POST"></form>
+            <ul>
+				<span id="isNotLogin" sec:authorize="!isAuthenticated()">
+					<li id="d_join"><a th:href="@{/regist/inputtel.html}" id="go-RegistInputTel-h"><img th:src="@{/images/header/hn_join.gif}" alt="新規会員登録" class="over"/></a></li>
+					<li id="logIn"><a th:href="@{/login/order.html}" id="go-Login-h"><img th:src="@{/images/header/hn_login.gif}" alt="ログイン" class="over"/></a></li>
+					<li id="logIn"><input type="image" th:src="@{/images/header/hn_logout.gif}" id="doLogout-h" value="ログアウト" alt="ログアウト" style="display:none"/></li>
+				</span>
+                <span id="isLogin" sec:authorize="isAuthenticated()">
+					<li id="d_member_change">
+<!--			    2023-renew No71 from here-->
+					<a th:href="@{/member/index.html}" id="go-Member-h" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                        <div th:if="${baseInfo.getMyPageAnnounceFlg == true}"
+                                            class="go-Member-h__icon">!</div>
+<!--                2023-renew No71 from here-->
+					<img th:src="@{/images/header/hn_member.gif}" alt="マイページ" class="over"/></a></li>
+					<li id="logIn"><a href="javascript:header1Form.submit()"><img th:src="@{/images/header/hn_logout.gif}" id="doLogout-h" value="ログアウト" alt="ログアウト" class="over"/></a></li>
+				</span>
+                <span th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+					<li id="cartCount">
+						<a th:href="@{/cart/index.html}" id="go-Cart-h" class="imgover"><img th:src="@{/images/header/hn_viewcart.gif}" alt="ショッピングカートを見る"/></a>
+						<span class="cart_item"><!--商品数-->
+							<span id="sumCount" th:text="${baseInfo.cartGoodsSumCount > 1000?'999+':baseInfo.cartGoodsSumCount}"></span>
+						</span>
+						<span class="cart_price">&yen;
+							<span id="sumPrice" th:text="${#number.convert(baseInfo.cartGoodsSumPrice)}"></span>
+						</span>
+					</li>
+				</span>
+            </ul>
+            </form>
+        </div>
+
+        <!-- PDR Migrate Customization from here -->
+        <div id="d_lookup"><!--LOOKUP-->
+            <!--div id="announce"></div-->
+            <form method="GET" th:action="@{/search/index.html}">
+                <input type="hidden" id="fromView" value="header" name="fromView"/>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="text" th:value="*{keyword}" id="search" name="keyword" maxlength="255" title="検索キーワード" placeholder="キーワード検索" autocomplete="off" />
+                        </td>
+                        <th>
+                            <input type="image" th:src="@{/images/button/lookup.gif}" alt="検索" class="over" name="doSearch"/>
+                        </th>
+                    </tr>
+                </table>
+                <!-- 2023-renew No3-suggest-goods-front from here -->
+                <div id="suggestBlock" class="suggestBlock" style="display:none;"></div>
+                <!-- 2023-renew No3-suggest-goods-front to here -->
+            </form>
+            <!-- PDR Migrate Customization to here -->
+            <!--LOOKUP-->
+        </div>
+        <!--HEADER-->
+    </div>
+</div>
+
+<!-- 2023-renew No24 from here -->
+<span th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+    <th:block th:if="${baseInfo.couponCount != null && baseInfo.couponCount > 0}">
+        <div class="coupon-notice-header">
+            <div class="coupon-notice">
+                <div class="coupon-notice-title">
+                        <img th:src="@{/images/header/coupon.png}" alt="" class="coupon-notice-img"/>
+                    </div>
+                <div class="coupon-notice-available">
+                    <a th:href="@{/member/index.html}">クーポンがあります</a>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</span>
+<!-- 2023-renew No24 to here -->
+
+<div id="d_gn"><!--GN-->
+    <ul>
+        <li><a th:href="@{/member/favorite/index.html}" id="go-Mylist-h">お気に入りリスト</a></li>
+        <!-- answer システム取り込みお願いいたします。 -->
+        <li><a th:href="@{/member/history/shipped.html}" id="go-Member-h">ご注文履歴</a></li>
+        <li><a th:href="@{/guide/index.html}" id="go-Guide-h">ご利用ガイド</a></li>
+        <li><a th:href="@{/inquiry/index.html}" id="go-Inquiry-h">お問い合わせ</a></li>
+    </ul>
+
+    <div id="d_quick_cart">
+        <dl>
+            <dd class="dq_text">
+                <hm:freearea key="header_msg"/>
+            </dd>
+        </dl>
+    </div>
+    <!--GN-->
+</div>
+
+<!-- 2023-renew No24 from here -->
+<div id="under_d_gn">
+    <div class="parent-div">
+<!--    2023-renew No71 from here-->
+        <div class="child-1-div" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+            <a th:if="${baseInfo.getTopSaleAnnounceFlg != null && baseInfo.getTopSaleAnnounceFlg.value == '1'}"
+                class="notice-area-container" th:href="@{/member/favorite/index.html}" >
+                <div th:if="${baseInfo.getSaleAnnounceWatchFlg != null && baseInfo.getSaleAnnounceWatchFlg.value == '0' }"
+                    class="notice-area-container__icon">!</div>
+                <div th:class="${baseInfo.getSaleAnnounceWatchFlg != null && baseInfo.getSaleAnnounceWatchFlg.value == '0'
+                    ? 'has-notification' : 'no-notification' }">お気に入り商品がセール中です</div>
+            </a>
+            <a th:if="${baseInfo.getTopStockAnnounceFlg != null && baseInfo.getTopStockAnnounceFlg.value == '1'}"
+                class="notice-area-container" th:href="@{/member/restock/index.html}">
+                <div th:if="${baseInfo.getStockAnnounceWatchFlg != null && baseInfo.getStockAnnounceWatchFlg.value == '0' }"
+                    class="notice-area-container__icon">!</div>
+                <div th:class="${baseInfo.getStockAnnounceWatchFlg != null && baseInfo.getStockAnnounceWatchFlg.value == '0'
+                    ? 'has-notification' : 'no-notification'}">入荷待ち商品が入荷しました</div>
+            </a>
+        </div>
+<!--    2023-renew No71 from here-->
+        <div class="child-2-div">
+            <a class="child-2-option" th:href="@{/member/coupon/index.html}">
+                <img th:src="@{/images/header/coupon.png}" alt="クーポン一覧"/>
+                <th:block th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                    <th:block th:if="${baseInfo.couponCount != null && baseInfo.couponCount > 0}">
+                    <span class="coupon_item_sum">
+                        <span id="sumCouponCount" th:text="${baseInfo.couponCount}"></span>
+                    </span>
+                    </th:block>
+                </th:block>
+                <div class="coupon_item">
+                    <strong class="dq_text">クーポン</strong>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- 2023-renew No24 to here -->
+
+<!--2023-renew No71 from here-->
+<script>
+    window.addEventListener('pageshow', function(event) {
+        // 「戻る」ボタンのクリックに応じて、ここでアクションを実行できます。
+        if (performance.navigation.type === 2) {
+            window.location.reload()
+        }
+    });
+</script>
+<!--2023-renew No71 to here-->
+
+<input id="appComplementUrl" type="hidden" th:value="${@environment.getProperty('app.complement.url')}"/>
+<input id="staticComplementUrl" type="hidden" th:value="${@environment.getProperty('static.complement.url')}"/>
+<input id="goodsImagePath" type="hidden" th:value="${@environment.getProperty('images.path.goods')}"/>
+<input id="goodsImageResizePrefixSrc" type="hidden"
+       th:value="${@environment.getProperty('images.path.goods.resize.p1')}"/>
+<input id="goodsImageResizePrefixSrcset" type="hidden"
+       th:value="${@environment.getProperty('images.path.goods.resize.p1x2')}"/>
+<!-- 2023-renew No3-suggest-goods-front from here -->
+<th:block th:with="userInfo=${session.commonInfo.commonInfoUser}">
+<input type="hidden" id="cryptUserId" th:value="${userInfo.cryptUserId}"/>
+</th:block>
+<th:block th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+<input type="hidden" id="accessUid" th:value="${baseInfo.accessUid}"/>
+</th:block>
+<input id="uniSuggestGoodsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.unisuggest.goods')}"/>
+<input id="deleteHistoryGoodsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.delete.history.goods')}"/>
+<input id="uniSuggestContentsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.unisuggest.contents')}"/>
+<input id="deleteHistoryContentsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.delete.history.contents')}"/>
+<!-- 2023-renew No3-suggest-goods-front to here -->
+<hm:freearea key="header_navi"/>
+

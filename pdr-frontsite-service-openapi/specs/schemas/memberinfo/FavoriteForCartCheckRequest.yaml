@@ -1,0 +1,16 @@
+type: object
+description: カートチェック用お気に入り情報リスト取得リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ (FK)（必須）
+    example: 10000001
+  cartDto:
+    $ref: "#/components/schemas/CartDtoRequest"
+
+components:
+  schemas:
+    CartDtoRequest:
+      $ref: ../cart/CartDtoRequest.yaml
+

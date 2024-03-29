@@ -1,0 +1,39 @@
+type: object
+description: 郵便番号住所Dtoレスポンス
+properties:
+  zipCode:
+    type: string
+    description: 郵便番号
+    example: 5530001
+  prefectureName:
+    type: string
+    description: 都道府県名
+    example: 大阪府
+  prefectureNameKana:
+    type: string
+    description: 都道府県名カナ
+    example: オオサカフ
+  cityName:
+    type: string
+    description: 市区町村名
+    example: 大阪市福島区海老江1-1-31
+  cityNameKana:
+    type: string
+    description: 市区町村名カナ
+    example: オオサカシフクシマクエビエ1-1-31
+  townName:
+    type: string
+    description: 町域名
+    example: HIT-MALLマンション
+  townNameKana:
+    type: string
+    description: 町域名カナ
+    example: HIT-MALLマンション
+  numbers:
+    type: string
+    description: 小字名、丁目、番地等
+    example: 1
+  zipCodeType:
+    type: string
+    description: 郵便番号タイプ
+    example: 0

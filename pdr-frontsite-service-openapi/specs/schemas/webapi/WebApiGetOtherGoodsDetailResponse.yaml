@@ -1,0 +1,13 @@
+# 2023-renew No92 from here
+type: object
+description: 後継品代替品情報取得 詳細情報レスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: furniture-00201
+  otherGoodsCode:
+    type: string
+    description: 後継品商品コード
+    example: furniture-00201
+# 2023-renew No92 to here

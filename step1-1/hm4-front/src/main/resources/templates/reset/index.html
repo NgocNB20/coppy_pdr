@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-reset">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <th:include id="layoutHeader" th:replace="~{newdesign/include/header}"/>
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}"
+                                                                                          class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">パスワードを忘れた場合</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="indexForm" th:action="@{/reset/index.html}" th:object="${resetModel}" method="post">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>パスワードを忘れた場合</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">パスワード再設定用メールの送信</h3>
+                </div>
+            </div>
+
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <div class="c-page-description">
+                        <p class="c-page-description__text">ご登録のメールアドレスと電話番号またはお客様番号を入力し、「送信する」ボタンを押してください。<br>
+                            ご登録メールアドレスに、パスワード再設定用URLを送信いたします。</p>
+                        <p class="c-page-description__text c-page-description--margin-m"><span class="c-require">必須</span>は、必須項目です。</p>
+                    </div>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p><span>ご登録メールアドレス</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="email" id="memberInfoMail" name="memberInfoMail"
+                                               autocomplete="email" maxlength="256" class="c-input c-input--width-l"
+                                               th:field="*{memberInfoMail}" th:errorclass="c-input--error">
+                                        <span class="l-form__list-memo">（半角）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoMail')}" th:errors="*{memberInfoMail}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>ご登録電話番号またはお客様番号</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" id="memberInfoTelOrCustomerNo" maxlength="14"
+                                               class="c-input c-input--width-l" th:field="*{memberInfoTelOrCustomerNo}"
+                                               th:errorclass="c-input--error">
+                                        <span class="l-form__list-memo">（半角数字・ハイフンなし）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoTelOrCustomerNo')}" th:errors="*{memberInfoTelOrCustomerNo}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="p-reset__sample">
+                            <div class="p-reset__sample-inner">
+                                <p class="p-reset__sample-inner-text">お客様番号は納品書 兼 請求書に記載があります。</p>
+                                <img th:src="@{/newdesign/assets/images/delivery-slip.jpg}" alt="納品書">
+                            </div>
+                            <p class="p-reset__sample-text">ご登録メールアドレス・ご登録電話番号またはお客様番号がわからない方は、カスタマーサービスデスク（TEL：0120-108394）までお電話ください。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-button-wrap">
+                <button id="doOncePassWordResetMailSend" name="doOncePassWordResetMailSend" type="submit"
+                        class="c-button c-button--primary c-button--width-l">送信する
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>

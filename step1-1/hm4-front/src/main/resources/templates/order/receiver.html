@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{/newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(function(){
+            $("#addReceiver").click(function(e){
+                e.preventDefault();
+                var val = $('input[name="receiverSelectTypeRadio"]:checked').val();
+                if (!val) {
+                    return;
+                }
+                if (val === '1') {
+                    $("#doAddReciever").click();
+                } else if (val === '2') {
+                    $("#doAddAddressBook").click();
+                } else {
+                    $("#doConfirm").click();
+                }
+            });
+        });
+        //]]>
+    </script>
+</head>
+
+<body id="gotop" class="p-order-confirm p-order-receive">
+<a id="top" name="top"></a>
+<div class="l-mainwrap l-order">
+    <div th:replace="~{newdesign/include/headerorder}"></div>
+    <main class="l-page">
+
+        <div class="c-orderflow">
+            <ul>
+                <li class="c-orderflow__step c-orderflow__step--already"><span>ショッピングカート</span></li>
+                <li class="c-orderflow__step c-orderflow__step--current"><span>注文内容確認</span></li>
+                <li class="c-orderflow__step"><span>注文完了</span></li>
+            </ul>
+        </div>
+
+        <form id="receiverForm" name="receiverForm" th:action="@{/order/receiver.html}" th:object="${receiverModel}" method="post">
+            <input type="hidden" id="pToken" th:field="${orderCommonModel.pToken}"/>
+            <input type="submit" id="doConfirm" name="doConfirm" style="display:none;"/>
+            <input type="submit" id="doAddReciever" name="doAddReciever" style="display:none;"/>
+            <input type="submit" id="doAddAddressBook" name="doAddAddressBook" style="display:none;"/>
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>お届け先</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo() ? 'global-info-message' : 'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="c-page-description">
+                        <p class="c-page-description__text">下記よりお届け先を選択してください。</p>
+                        <p class="c-page-description__text c-page-description--margin-m"><strong>※お届け先も歯科医療関係者のみとなります。<br>医薬品・注射針等は、請求先、お届け先ともに書類確認済みの病院、診療所・歯科技工所に限定させていただきます。</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-section p-order-receive__select">
+                <div class="l-section__inner">
+                    <div class="p-order-receive__select-unit">
+                        <div class="p-order-receive__select-radio"><input id="radio_group2_1" name="receiverSelectTypeRadio" type="radio" class="c-radio js-radio" data-radio="receive-1" th:checked="*{receiverSelectTypeRadio} == '0'" value = "0"><label for="radio_group2_1">請求先(ご登録住所)に送る</label></div>
+                        <div class="p-order-receive__select-radio"><input id="radio_group2_2" name="receiverSelectTypeRadio" type="radio" class="c-radio js-radio" data-radio="receive-2" th:checked="*{receiverSelectTypeRadio} == '2'" value = "2"><label for="radio_group2_2">お届け先リストから選ぶ</label></div>
+                        <div class="p-order-receive__select-radio"><input id="radio_group2_3" name="receiverSelectTypeRadio" type="radio" class="c-radio js-radio" data-radio="receive-3" th:checked="*{receiverSelectTypeRadio} == '1'" value = "1"><label for="radio_group2_3">新しいお届け先に送る<br><small>弊社にご登録がないお届け先の場合は、確認のためご連絡を差し上げます。ご注文の発送は確認後となりますのでご了承ください。</small></label></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="l-section p-order-receive__case" id="receive-1">
+                <div class="l-section__inner">
+                    <h4 class="c-title-form-m c-title-form-m--first"><p>請求先(ご登録住所)に送る</p></h4>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p>事業所名</p></dt>
+                                <dd><p><span id="orderLastName" th:remove="tag" th:text="*{orderLastName}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>電話番号</p></dt>
+                                <dd><p><span id="orderTel" th:remove="tag" th:text="*{orderTel}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>住所</p></dt>
+                                <dd><p>〒<span id="orderZipCode1" th:remove="tag" th:text="*{orderZipCode1}"/>-<span id="orderZipCode2" th:remove="tag" th:text="*{orderZipCode2}"/><br><span id="orderAddress1" th:remove="tag" th:text="*{orderAddress1}"/><span id="orderAddress2" th:remove="tag" th:text="*{orderAddress2}"/><span id="orderAddress3" th:remove="tag" th:text="*{orderAddress3}"/></p></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="l-section p-order-receive__case" id="receive-2" style="display: none;">
+                <div class="l-section__inner">
+                    <h4 class="c-title-form-m c-title-form-m--first"><p>お届け先リスト</p></h4>
+                    <p class="c-page-description__text c-page-description--margin-m">※お届け先は1か所となります。</p>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap p-order-receive__list-wrap">
+                            <dl class="l-form__list p-order-receive__list" th:each="item, stat : *{getDestinationDto().getInfo()}">
+                                <dt>
+                                    <div class="p-order-receive__list-radio">
+                                        <input th:id="'receiverAddressBook-' + ${stat.index}"
+                                               th:field="*{receiverAddressBook}" th:value="${item.getReceiveCustomerNo()}" type="radio" >
+                                        <label th:for="'receiverAddressBook-' + ${stat.index}" class="c-button c-button--primary-line c-button--width-m"></label>
+                                    </div>
+                                </dt>
+                                <dd>
+                                    <p>
+                                        <div th:text="${item.getOfficeName()}"></div>
+                                        <br>
+                                        <div th:text="${item.tel}"></div>
+                                        <br>
+                                        <div>
+                                            〒<span th:text="${#strings.substring(item.getZipCode(),0,3)}"></span>-<span th:text="${#strings.substring(item.getZipCode(),3,7)}"></span>
+                                        </div>
+                                        <br>
+                                        <span>
+                                            <span th:text="${item.city}"></span>
+                                            <span th:text="${item.address}"></span>
+                                            <span th:text="${item.building}"></span>
+                                            <span th:text="${item.other}"></span>
+                                        </span>
+                                    </p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="l-section p-order-receive__case" id="receive-3" style="display: none;">
+                <div class="l-section__inner">
+                    <h4 class="c-title-form-m c-title-form-m--first"><p>新しいお届け先</p></h4>
+                    <p class="c-page-description__text c-page-description--margin-m"><span class="c-require">必須</span>は、必須項目です。</p>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p><span>事業所名</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" autocomplete="name" id="receiverLastName" th:field="*{receiverLastName}" title="事業所名" maxLength="40" th:errorclass="c-input--error" class="c-input c-input--width-l"><span class="l-form__list-memo">（全角）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverLastName')}" th:errors="*{receiverLastName}" class="c-field-error c-field-error--top">選択してください。</span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>事業所名フリガナ</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" autocomplete="name" id="receiverLastKana" th:field="*{receiverLastKana}" title="事業所名フリガナ"  maxlength="30" class="c-input c-input--width-l" th:errorclass="c-input--error"><span class="l-form__list-memo">（全角カタカナ・スペースなし）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverLastKana')}" th:errors="*{receiverLastKana}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>代表者名</span><span class="c-any">任意</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" autocomplete="name" id="receiverFirstName" th:field="*{receiverFirstName}" title="事業所名フリガナ"  maxlength="30" class="c-input c-input--width-l" th:errorclass="c-input--error"><span class="l-form__list-memo">（全角カタカナ・スペースなし）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverFirstName')}" th:errors="*{receiverFirstName}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>業種</span><span class="c-require">必須</span></p></dt>
+                                <dd th:classappend="${#fields.hasErrors('receiverBusinessType')} ? 'l-form__list--error'">
+                                    <div class="l-form__list-radio-unit">
+                                        <th:block th:each="item, stat : *{receiverBusinessTypeItems}">
+                                            <div>
+                                                <input th:id="'receiverBusinessTypeItems'+ ${stat.index + '_' + item.key}" name="receiverBusinessType"
+                                                       th:value="${item.key}" th:checked="${item.key} == *{receiverBusinessType}" type="radio" class="c-radio">
+                                                <label th:for="'receiverBusinessTypeItems'+ ${stat.index + '_' + item.key}" th:text="${item.value}"></label>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                    <span th:if="${#fields.hasErrors('receiverBusinessType')}" th:errors="*{receiverBusinessType}" class="c-field-error c-field-error--top-large"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>電話番号</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="tel" name="" autocomplete="tel" id="receiverTel" th:field="*{receiverTel}"  maxlength="14" class="c-input c-input--width-l" th:errorclass="c-input--error"><span class="l-form__list-memo">（半角数字・ハイフンなし）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverTel')}" th:errors="*{receiverTel}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list l-form__list-zicode">
+                                <dt><p><span>郵便番号</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <span>
+                                            <input type="text" autocomplete="postal-code" id="receiverZipCode1" th:field="*{receiverZipCode1}" maxlength="3" title="郵便番号" class="c-input c-input--width-s"
+                                                   th:classappend="${#fields.hasErrors('receiverZipCode1') || #fields.hasErrors('receiverZipCode2')} ? 'c-input--error'">
+                                        </span>
+                                        <span>ー</span>
+                                        <span>
+                                            <input type="text" autocomplete="postal-code" id="receiverZipCode2" th:field="*{receiverZipCode2}" maxlength="4"  title="郵便番号" class="c-input c-input--width-s"
+                                                   th:classappend="${#fields.hasErrors('receiverZipCode1') || #fields.hasErrors('receiverZipCode2')} ? 'c-input--error'">
+                                        </span>
+                                        <span class="l-form__list-memo">（半角数字）</span>
+                                        <button type="button" id="doZipCodeSearchAjax" onClick="callZipSearchFunc();" class="c-button c-button--address" name=""><p>住所検索</p></button>
+                                    </p>
+                                    <span id="zipErrorMsg"></span>
+                                    <div th:if="${#fields.hasErrors('receiverZipCode1')}" th:errors="*{receiverZipCode1}" class="c-field-error c-field-error--top"></div>
+                                    <div th:if="${#fields.hasErrors('receiverZipCode2')}" th:errors="*{receiverZipCode2}" class="c-field-error c-field-error--top"></div>
+                                    <div class="l-form__list-text l-form__list-text--small l-form__list-text--top">※郵便番号を入力し、住所検索ボタンをクリックしてください。住所が自動で入力されます。</div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>都道府県</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <div class="c-select c-select--prefecture"
+                                         th:classappend="${#fields.hasErrors('receiverPrefecture')} ? 'c-select--error'">
+                                        <select id="receiverPrefecture" title="都道府県" name="receiverPrefecture" class="c-select__inner">
+                                            <option value="">選択してください</option>
+                                            <option th:each="item : *{receiverPrefectureItems}"
+                                                    th:value="${item.key}" th:text="${item.value}"
+                                                    th:selected="${item.key} == *{receiverPrefecture}">
+                                                選択してください
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <span th:if="${#fields.hasErrors('receiverPrefecture')}" th:errors="*{receiverPrefecture}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>市区郡</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" id="receiverAddress1" autocomplete="name" th:field="*{receiverAddress1}" placeholder="例：名古屋市" maxlength="36" class="c-input c-input--width-l" th:errorclass="c-input--error">
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverAddress1')}" th:errors="*{receiverAddress1}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>町村・番地</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" id="receiverAddress2" autocomplete="name" th:field="*{receiverAddress2}" placeholder="例：天白区原4-106" maxlength="40" class="c-input c-input--width-l" th:errorclass="c-input--error" />
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverAddress2')}" th:errors="*{receiverAddress2}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>マンション・建物名</span><span class="c-any">任意</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" id="receiverAddress3" autocomplete="name" th:field="*{receiverAddress3}" placeholder="例：○○ビル101号室" maxlength="40" class="c-input c-input--width-l" th:errorclass="c-input--error">
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverAddress3')}" th:errors="*{receiverAddress3}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>部屋番号</span><span class="c-any">任意</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" id="receiverAddress4" autocomplete="name" th:field="*{receiverAddress4}" placeholder="例：○○ビル101号室" maxlength="15" class="c-input c-input--width-l" th:errorclass="c-input--error">
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('receiverAddress4')}" th:errors="*{receiverAddress4}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-button-wrap">
+                <div>
+                    <button id="addReceiver" class="c-button c-button--primary c-button--width-l">選択した住所に届ける</button>
+                    <div class="c-button-wrap__memo">
+                        <a th:href="@{/order/confirm.html}" class="c-textlink c-textlink--left c-textlink--large c-textlink--text"><p>ご注文内容確認画面へ戻る</p></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </main>
+    <div th:replace="~{newdesign/include/footerorder}"></div>
+</div>
+
+<script type="text/javascript">
+    <!--
+    var zipsearch = new Zipsearch();
+    zipsearch.switchZipCodeButton();
+    function callZipSearchFunc() {
+        zipsearch.zipCodeSearchPrefectureNameReturn(true,document.getElementById('receiverPrefecture'),document.getElementById('receiverAddress1'),document.getElementById('receiverAddress2'),document.getElementById('receiverAddress3'),document.getElementById('receiverZipCode1'),document.getElementById('receiverZipCode2'));
+    }
+    -->
+
+</script>
+<script type="text/javascript">
+    function setDispArea() {
+        var checkedValue = $('input[name="receiverSelectTypeRadio"]:checked').val();
+        if( checkedValue !== '0' ){
+            $('#receive-1').hide();
+        } else {
+            $('#receive-1').show();
+        }
+        if( checkedValue !== '1' ){
+            $('#receive-3').hide();
+        } else {
+            $('#receive-3').show();
+        }
+        if( checkedValue !== '2' ){
+            $('#receive-2').hide();
+        } else {
+            $('#receive-2').show();
+        }
+
+    }
+    setDispArea();
+    $(function(){
+        $('input[name="receiverSelectTypeRadio"]').click(function(){
+            setDispArea();
+        });
+    });
+
+</script>
+
+</body></html>

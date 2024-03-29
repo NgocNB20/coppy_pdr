@@ -1,0 +1,258 @@
+<!-- 2023-renew No14 from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+    <script type="text/javascript" th:src="@{/common/js/reserve.js}"></script>
+</head>
+
+<body id="gotop" class="p-reserve">
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/headerorder}"></div>
+
+    <main class="l-page">
+
+        <div class="c-orderflow">
+            <ul>
+                <li class="c-orderflow__step c-orderflow__step--already"><span>ショッピングカート</span></li>
+                <li class="c-orderflow__step c-orderflow__step--current"><span>注文内容確認</span></li>
+                <li class="c-orderflow__step"><span>注文完了</span></li>
+            </ul>
+        </div>
+
+        <form id="reserveForm" th:action="@{/order/reserve.html}" th:object="${orderReserveModel}" th:method="post">
+            <input type="hidden" id="pToken" th:field="${orderCommonModel.pToken}"/>
+
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="p-reserve__title c-title-page">
+                        <span><img th:src="@{/newdesign/assets/images/icon/sale-reserve.svg}" width="44" alt="セールde予約"></span>
+                        <div><strong>セールde予約</strong> <br class="l-sm">（お届け日・お届け数量の入力）</div>
+                    </h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="c-page-description p-reserve__description">
+                        <p class="c-page-description__text">
+                            お届け希望日と数量を入力し「カートに入れる」ボタンを押してください。</p>
+                        <ul class="c-page-description__bullet-point c-page-description__bullet-point--strong c-page-description--margin-m">
+                            <li><strong>セール価格で先々のお届けの予約ができます。（セール終了後もセール価格で商品が届くのでお得です。）</strong></li>
+                            <li><strong>お支払いは先払いではなく、お届けの都度です。</strong></li>
+                            <li><strong>P.D.R.最安値を保証します。（お届け時に、予約価格より安くセールしていた場合、安い方の価格でお届けします。※ただし、数量限定セール、アウトレットなど特別なセールを除く）</strong></li>
+                            <li><strong>お届け期間は「お届け希望日」のカレンダーで選択できる範囲です。</strong></li>
+                        </ul>
+                        <ul class="c-page-description__bullet-point c-page-description--margin-m">
+                            <li>オンラインショップからセールde予約をご利用いただく場合は、お届け時間帯はご指定頂けません。
+                            </li>
+                            <li>お届けの変更・キャンセルはお届け日の１週間前までご注文デスク（TEL：０１２０‐１０８６４８）で承ります。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <th:block th:if="*{isDispFlg()}">
+                <input th:type="hidden" id="possibleReserveFromDay" th:value="*{possibleReserveFromDay}">
+                <input th:type="hidden" id="possibleReserveToDay" th:value="*{possibleReserveToDay}">
+                <input th:type="hidden" id="calendarNotSelectDateList" th:value="*{calendarNotSelectDateList}">
+
+                <div class="l-section p-reserve__main">
+                    <div class="l-section__inner p-reserve__main-inner">
+                        <div class="p-reserve__goods">
+                            <div class="p-reserve__goods-item">
+                                <div class="p-reserve__goods-item-inner">
+                                    <div class="p-reserve__goods-item-image">
+                                        <img th:id="'goodsImage-0'"
+                                             th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + *{goodsImage}}"
+                                             th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + *{goodsImage} + ' 2x'"
+                                             alt="" height="253" width="253" decoding="async" loading="lazy">
+                                    </div>
+                                    <div class="p-reserve__goods-item-overview">
+                                        <div class="p-reserve__goods-item-text">
+                                            <span th:remove="tag" th:text="*{goodsCode}"></span>
+                                        </div>
+                                        <div class="p-reserve__goods-item-title">
+                                            <span th:remove="tag" th:text="*{goodsName}"></span>
+                                        </div>
+                                        <th:block th:if="*{isViewUnit1()}">
+                                            <div class="p-reserve__goods-item-spec">
+                                                <div class="p-reserve__goods-item-heading">
+                                                    <span th:remove="tag" th:text="*{unitTitle1}"></span>：
+                                                </div>
+                                                <span th:remove="tag" th:text="*{unitValue1}"></span>
+                                            </div>
+                                        </th:block>
+                                        <th:block th:if="*{isViewUnit2()}">
+                                            <div class="p-reserve__goods-item-spec">
+                                                <div class="p-reserve__goods-item-heading">
+                                                    <span th:remove="tag" th:text="*{unitTitle2}"></span>：
+                                                </div>
+                                                <span th:remove="tag" th:text="*{unitValue2}"></span>
+                                            </div>
+                                        </th:block>
+
+                                        <div class="c-table__price p-reserve__goods-price l-lg">
+                                            <div class="c-product__item-price">
+                                                <th:block th:each="item, stat : *{goodsItems}">
+                                                    <small><span th:remove="tag" th:text="${item.level}"></span>&nbsp;：&nbsp;</small>
+                                                    <div class="c-product__item-price-unit">
+                                                        <span th:remove="tag" th:text="${item.price}"></span>
+                                                        <span>円</span>
+                                                    </div>
+                                                    <th:block th:if="*{isExistSalePrice()}">
+                                                        <small> → </small>
+                                                        <div class="c-product__item-price-unit c-product__item-price-unit--sale">
+                                                            <span th:remove="tag" th:text="${item.customerSalePrice}"></span>
+                                                            <span th:remove="tag" th:text="${item.salePrice}"></span>
+                                                            <span>円</span>
+                                                        </div>
+                                                    </th:block>
+                                                    <br>
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                        <th:block th:if="*{reserveDeliveryGoodsHistoryCount > 0}">
+                                            <div class="p-reserve__goods-item-memo l-lg">（参考）過去１年の購入数量：
+                                                <span th:remove="tag" th:text="*{#number.convert(reserveDeliveryGoodsHistoryCount)}"></span>
+                                                <span th:remove="tag" th:text="*{unit}"></span>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="c-table__price p-reserve__goods-price l-sm">
+                                <div class="p-reserve__goods-item-heading">単価<small>(税抜)</small>：</div>
+                                <div class="c-product__item-price">
+                                    <th:block th:each="item, stat : *{goodsItems}">
+                                        <th:block th:if="${item.customerSalePrice != null || item.salePrice != null}">
+                                            <div class="c-product__item-price">
+                                                <th:block th:if="${item.level != null && item.level != '1'}">
+                                                    <small>[[${item.level}]]&nbsp;:&nbsp;</small>
+                                                </th:block>
+                                                <th:block th:if="${item.level != null && item.level == '1' && item.multiLevelFlag}">
+                                                    <small>[[${item.level}]]&nbsp;:&nbsp;</small>
+                                                </th:block>
+                                                <div class="c-product__item-price-unit">
+                                                    [[${#number.convert(item.price)}]]円
+                                                </div>
+                                                <div class="c-product__item-price-unit c-product__item-price-unit--sale"
+                                                     th:if="${item.customerSalePrice != null || item.salePrice != null}">
+                                                    <small> → </small>
+                                                    <th:block th:if="${item.customerSalePrice != null}">[[${#number.convert(item.customerSalePrice)}]]円</th:block>
+                                                    <th:block th:if="${item.customerSalePrice == null && item.salePrice != null}">[[${#number.convert(item.salePrice)}]]円</th:block>
+                                                </div><br>
+                                            </div>
+                                        </th:block>
+                                        <th:block th:unless="${item.customerSalePrice != null || item.salePrice != null}">
+                                            <div class="c-product__item-price">
+                                                <th:block th:if="${item.level != null && item.level != '1'}">
+                                                    <small>[[${item.level}]]&nbsp;:&nbsp;</small>
+                                                </th:block>
+                                                <th:block th:if="${item.level != null && item.level == '1' && item.multiLevelFlag}">
+                                                    <small>[[${item.level}]]&nbsp;:&nbsp;</small>
+                                                </th:block>
+                                                <div class="c-product__item-price-unit">
+                                                    [[${#number.convert(item.price)}]]円
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                        <br>
+                                    </th:block>
+                                </div>
+                            </div>
+                            <th:block th:if="*{reserveDeliveryGoodsHistoryCount > 0}">
+                                <div class="p-reserve__goods-item-memo l-sm">（参考）過去１年の購入数量：
+                                    <span th:remove="tag" th:text="*{#number.convert(reserveDeliveryGoodsHistoryCount)}"></span>
+                                    <span th:remove="tag" th:text="*{unit}"></span>
+                                </div>
+                            </th:block>
+                        </div>
+                        <div id="reserveTableInfo" class="p-reserve__list">
+                            <table class="c-table">
+                                <tr class="c-table__tr">
+                                    <th class="c-table__th">お届け希望日</th>
+                                    <th class="c-table__th">数量</th>
+                                    <th class="c-table__th">削除</th>
+                                </tr>
+                                <div id="reserveDeliveryDatelist">
+                                    <th:block th:each="item, stat : ${orderReserveModel.reserveItem.reserveDetailItemList}">
+                                        <tr th:id="'rowAddNew-' + ${stat.index}" class="c-table__tr"
+                                            th:classappend="${item.reserveDeliveryDate == null && stat.index >= orderReserveModel.reserveItem.initCount ? 'display-none' : ''}">
+                                            <td class="p-reserve__list-date">
+                                                <label class="c-datepicker">
+                                                    <input type="text"
+                                                           th:name="'reserveItem.reserveDetailItemList[' + ${stat.index} + '].reserveDeliveryDate'"
+                                                           th:id="'inputReserveDeliveryDate-' + ${stat.index}"
+                                                           th:value="${#date.convert(item.reserveDeliveryDate, 'yyyy/MM/dd')}"
+                                                           autocomplete="off"
+                                                           th:errorclass="c-input--error"
+                                                           maxlength="10"
+                                                           class="c-input c-input--height-s js-datepicker">
+                                                    <div th:if="${#fields.hasErrors('reserveItem.reserveDetailItemList[' + stat.index + '].reserveDeliveryDate')}"
+                                                         th:errors="*{reserveItem.reserveDetailItemList[__${stat.index}__].reserveDeliveryDate}"
+                                                         class="c-field-error c-field-error--top"></div>
+                                                </label>
+                                                <p th:id="'noticeHoliday-' + ${stat.index}" class="display-none p-reserve__list-memo">※祝日</p>
+                                            </td>
+                                            <td class="c-table__quantity p-reserve__list-quantity">
+                                                <div class="p-reserve__list-quantity-inner">
+                                                    <div class="c-count-quantity--wrap">
+                                                        <div class="c-count-quantity js-count-quantity">
+                                                            <button type="button" class="c-count-quantity__minus minus_button"
+                                                                    data-type="minus" th:data-field="'reserveItem.reserveDetailItemList[' + ${stat.index} + '].inputGoodsCount'"></button>
+                                                            <input type="number"
+                                                                   th:id="'inputGoodsCount-' + ${stat.index}" th:value="${item.inputGoodsCount}"
+                                                                   th:name="'reserveItem.reserveDetailItemList[' + ${stat.index} + '].inputGoodsCount'" th:errorclass="c-input--error"
+                                                                   class="c-input c-count-quantity__result input_result" min="1" max="999">
+                                                            <button type="button" class="c-count-quantity__plus plus_button"
+                                                                    data-type="plus" th:data-field="'reserveItem.reserveDetailItemList[' + ${stat.index} + '].inputGoodsCount'"></button>
+                                                        </div>
+                                                        <div th:if="${#fields.hasErrors('reserveItem.reserveDetailItemList[' + stat.index + '].inputGoodsCount')}"
+                                                             th:errors="*{reserveItem.reserveDetailItemList[__${stat.index}__].inputGoodsCount}"
+                                                             class="c-field-error c-field-error--top"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-reserve__list-button">
+                                                <button th:onclick="'clearInputReserve(' + ${stat.index} + ')'"
+                                                        type="button" class="c-textlink c-textlink--text c-textlink--delete">
+                                                    <svg viewBox="0 0 10 10">
+                                                        <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use>
+                                                    </svg>
+                                                    削除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </div>
+                            </table>
+                            <div class="p-reserve__list-add">
+                                <button onclick="doAddNewLine();" type="button" class="c-button c-button--primary-line c-button--width-m">
+                                    <p><span></span>お届け日を増やす</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-button-wrap">
+                    <button name="doBack" class="c-button c-button--primary-line c-button--width-l">お届け内容の変更へ戻る</button>
+                    <button name="doOrderReserveConfirm" class="c-button c-button--primary c-button--width-l">変更する</button>
+                </div>
+            </th:block>
+        </form>
+    </main>
+
+    <div th:replace="~{newdesign/include/footerorder}"></div>
+</div>
+</body>
+</html>
+<!-- 2023-renew No14 to here -->

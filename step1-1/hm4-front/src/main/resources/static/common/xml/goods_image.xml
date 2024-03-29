@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<photo thmb="photo1_thmb.jpg" normal="photo1_normal.jpg" large="photo1_large.jpg" />
+	<photo thmb="photo2_thmb.jpg" normal="photo2_normal.jpg" large="photo2_large.jpg" />
+	<photo thmb="photo3_thmb.jpg" normal="photo3_normal.jpg" large="photo3_large.jpg" />
+	<photo thmb="photo4_thmb.jpg" normal="photo4_normal.jpg" large="photo4_large.jpg" />
+	<photo thmb="photo5_thmb.jpg" normal="photo5_normal.jpg" large="photo5_large.jpg" />
+	<photo thmb="photo6_thmb.jpg" normal="photo6_normal.jpg" large="photo6_large.jpg" />
+	<photo thmb="photo7_thmb.jpg" normal="photo7_normal.jpg" large="photo7_large.jpg" />
+	<photo thmb="photo8_thmb.jpg" normal="photo8_normal.jpg" large="photo8_large.jpg" />
+	<photo thmb="photo9_thmb.jpg" normal="photo9_normal.jpg" large="photo9_large.jpg" />
+	<photo thmb="photo10_thmb.jpg" normal="photo10_normal.jpg" large="photo10_large.jpg" />
+</data>

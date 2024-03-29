@@ -1,0 +1,26 @@
+type: object
+description: チェックメッセージDtoクラスリクエスト
+properties:
+  messageId:
+    type: string
+    description: メッセージID
+    example:
+  args:
+    type: array
+    description: args
+    items:
+      type: object
+  message:
+    type: string
+    description: メッセージ
+    example:
+  orderConsecutiveNo:
+    type: integer
+    format: int32
+    description: 注文連番
+    example: 1
+  error:
+    type: boolean
+    description: エラーフラグ
+    example: false
+    default: false

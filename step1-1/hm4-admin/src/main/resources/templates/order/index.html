@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>受注検索｜受注管理</title>
+    <script th:src="@{/assets/js/jquery.alerts.js}" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/css/jquery.alerts.css}"/>
+    <script>
+	jQuery(function($){
+		// カレンダー
+
+		// 検索条件：期間-時間の入力切替
+		changePeriodTime("timeType", "timeFrom", "timeTo");
+		$("#timeType").change(function (){
+			changePeriodTime("timeType", "timeFrom", "timeTo");
+		});
+
+		// 日付補助ボタン
+		$("button[id^='targetDate_']").click(function() {
+			var mode = $(this).attr("id").replace("targetDate_", "").split("_");
+			setTargetDate(mode[0], mode[1]+"From", mode[1]+"To", "day", mode[2]+"From", mode[2]+"To");
+		});
+
+		// キャンセルした商品を含む(チェックボックス)
+		$("#doOutput").click(function(){
+			if($("#notIncludeCancelGoodsFlag").prop('checked')) {
+				var orderOutDataOutput = $("#orderOutData").val();
+				// 0：納品書、1：受注明細の場合はキャンセルした商品を含む全件出力ができない
+				if (orderOutDataOutput == '0' || orderOutDataOutput == '1') {
+						alert("「キャンセルした商品を含む」のチェックを外してください。");
+						return false;
+				}
+			}
+		});
+
+		// 期間の検索条件のメッセージ表示
+		setTimeTypeMsg($('#timeType').val());
+		$('#timeType').change(function(){
+			setTimeTypeMsg($(this).val());
+		});
+	});
+
+	/**
+	 * 検索条件：期間-時間の入力切替
+	 *
+	 * key  期間区分                   id
+	 * From 期間-From（時間） id
+	 * To   期間-To（時間）      id
+	 */
+	function changePeriodTime(key, From, To) {
+		var value = $("#timeType").val();
+		if (value != "6" && value != "7") {
+			$("#" + From).removeAttr('disabled');
+			$("#" + To).removeAttr('disabled');
+		} else {
+			$("#" + From).attr('disabled', 'disabled');
+			$("#" + From).removeAttr('style');
+			$("#" + To).attr('disabled', 'disabled');
+			$("#" + To).removeAttr('style');
+		}
+	}
+
+	/**
+	 * 検索条件保持用
+	 */
+	function setTermType(type) {
+		var setVal = '';
+		if (type == 'today') {
+			setVal = '1';
+		} else if (type == 'yesterday') {
+			setVal = '2';
+		} else if (type == 'thisMonth') {
+			setVal = '3';
+		} else if (type == 'lastMonth') {
+			setVal = '4';
+		}
+		$('#termType').val(setVal);
+	}
+
+    // PDR Migrate Customization from here
+	// openCustomAlert 削除
+    // PDR Migrate Customization to here
+
+	/**
+	 * 期間の検索条件のメッセージ表示
+	 */
+	function setTimeTypeMsg(type) {
+		if (type == '3') {
+			$('#time_type_receipttime_msg').show();
+		} else {
+			$('#time_type_receipttime_msg').hide();
+		}
+	}
+
+	/**
+	 * 非同期受注CSVバッチの結果ダウンロード
+	 */
+	jQuery(function($){
+		var url = location.href;
+		var params = location.search.substring(1);
+		var param = params.split("=");
+
+		if (param[0] == 'file') {
+			$("#indexForm").attr('action', pkg_common.getAppComplementUrl() + '/order/?' + params);
+			document.getElementById("doDownload").click();
+			$("#indexForm").attr('action', pkg_common.getAppComplementUrl() + '/order/');
+		}
+	});
+
+
+
+    </script>
+</head>
+
+<body id="order">
+<div id="searchOrder" class="l-mainwrap">
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form id="indexForm" th:action="@{/order/}" th:object="${orderModel}" method="post">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">受注検索</h1>
+                        <!--                        <th:block sec:authorize="hasAnyAuthority('ORDER:8')">-->
+                        <!--                            <ul>-->
+                        <!--                                <li>-->
+                        <!--                                    <input type="submit" class="c-btn btn_move w130px" name="doShipmentUpload"-->
+                        <!--                                           value="出荷CSV登録" alt="出荷CSV登録"/>-->
+                        <!--                                </li>-->
+                        <!--                            </ul>-->
+                        <!--                        </th:block>-->
+
+                    </div>
+                    <!--/* エラーメッセージ */-->
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <!--/* 非同期受注CSV処理の選択判定 */-->
+                    <th:block th:if="*{isSelectOrderCSV()}">
+                        <script>alert('受注CSV出力の非同期処理を開始しました。\n結果はメールをご確認ください。');</script>
+                    </th:block>
+                    <input hidden="hidden" type="submit" id="doDownload" name="doDownload">
+
+                    <input type="hidden" name="limit" value="100"/>
+
+                    <div class="l-section" id="allItemsSearch">
+                        <!-- 検索 -->
+                        <div class="l-article">
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <div class="c-detail-warp search_smp wrap">
+										<span id="orderSiteTypeArray" title="サイト種別"
+                                              th:classappend="${#fields.hasErrors('orderSiteTypeArray')} ? 'error'"
+                                              style="display:none;">
+											<input type="checkbox" th:field="*{orderSiteTypeArray}"
+                                                   th:each="item : *{orderSiteTypeArrayItems}" th:value="${item.key}"
+                                                   th:text="${item.value}"/>
+										</span>
+                                        <dl>
+                                            <dt>受注番号</dt>
+                                            <dd>
+                                                <input type="text" name="conditionOrderCode" id="conditionOrderCode"
+                                                       th:field="*{conditionOrderCode}" class="c-form-control"
+                                                       title="受注番号" maxlength="12" th:errorclass="error"
+                                                       placeholder="ここに入力してください"/>
+                                                <div th:if="${#fields.hasErrors('conditionOrderCode')}"
+                                                     th:errors="*{conditionOrderCode}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>受注状態</dt>
+                                            <dd>
+                                                <select name="orderStatus" id="orderStatus" title="受注状態"
+                                                        class="c-form-control"
+                                                        th:classappend="${#fields.hasErrors('orderStatus')} ? 'error'">
+                                                    <option value="">選択してください</option>
+                                                    <option th:each="item : *{orderStatusItems}" th:value="${item.key}"
+                                                            th:text="${item.value}"
+                                                            th:selected="${item.key} == *{orderStatus}">
+                                                    </option>
+                                                </select>
+                                                <div th:if="${#fields.hasErrors('orderStatus')}"
+                                                     th:errors="*{orderStatus}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>検索期間</dt>
+                                            <dd>
+                                                <select name="timeType" class="c-form-control" th:errorclass="error"
+                                                        th:classappend="${#fields.hasErrors('timeType')} ? 'error'">
+                                                    <option value="">選択してください</option>
+                                                    <option th:each="item : *{timeTypeItems}" th:value="${item.key}"
+                                                            th:text="${item.value}"
+                                                            th:selected="${item.key} == *{timeType}">
+                                                    </option>
+                                                </select>
+                                                <div th:if="${#fields.hasErrors('timeType')}" th:errors="*{timeType}"
+                                                     class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                        <div class="wrap_flex_wrap">
+                                            <dl class="search_open">
+                                                <dt>検索開始日時</dt>
+                                                <dd class="wrap_flex_center">
+                                                    <label class="c-datepicker w150px">
+                                                        <input type="text" id="dateFrom" th:field="*{dateFrom}"
+                                                               autocomplete="off" class="c-form-control"
+                                                               placeholder="年/月/日" th:errorclass="error">
+                                                    </label>
+                                                    <input type="text" id="timeFrom" th:field="*{timeFrom}"
+                                                           autocomplete="off" class="c-form-control w80px ml10" maxlength="5"
+                                                           placeholder="00:00" th:errorclass="error">
+                                                    <span class="ml10">〜</span>
+                                                </dd>
+                                            </dl>
+                                            <dl class="search_close mlm20">
+                                                <dt>検索終了日時</dt>
+                                                <dd class="wrap_flex_center">
+                                                    <label class="c-datepicker w150px">
+                                                        <input type="text" id="dateTo" th:field="*{dateTo}"
+                                                               autocomplete="off" class="c-form-control"
+                                                               placeholder="年/月/日" th:errorclass="error">
+                                                    </label>
+                                                    <input type="text" id="timeTo" th:field="*{timeTo}"
+                                                           autocomplete="off" class="c-form-control w80px ml10" maxlength="5"
+                                                           placeholder="00:00" th:errorclass="error">
+                                                </dd>
+                                            </dl>
+                                            <ul class="c-list-left list_sp5 mt10 w100p">
+                                                <li>
+                                                    <button onclick="setTermType('today')"
+                                                            id="targetDate_today_date_time" class="c-btn-small"
+                                                            type="button">今日
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button onclick="setTermType('yesterday')"
+                                                            id="targetDate_yesterday_date_time" class="c-btn-small"
+                                                            type="button">昨日
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button onclick="setTermType('thisMonth')"
+                                                            id="targetDate_crrentMonth_date_time" class="c-btn-small"
+                                                            type="button">今月
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button onclick="setTermType('lastMonth')"
+                                                            id="targetDate_prevMonth_date_time" class="c-btn-small"
+                                                            type="button">先月
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button onclick="setTermType('clear')"
+                                                            id="targetDate_clear_date_time" class="c-btn-txt"
+                                                            type="button"><i class="material-icons close"></i>クリア
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <dl class="search_close">
+                                                <dd class="wrap_flex_center">
+                                                    <div th:if="${#fields.hasErrors('dateFrom')}"
+                                                         th:errors="*{dateFrom}" class="c-error-txt mt5"></div>
+                                                    <div th:if="${#fields.hasErrors('timeFrom')}"
+                                                         th:errors="*{timeFrom}" class="c-error-txt mt5"></div>
+                                                    <div th:if="${#fields.hasErrors('dateTo')}" th:errors="*{dateTo}"
+                                                         class="c-error-txt mt5"></div>
+                                                    <div th:if="${#fields.hasErrors('timeTo')}" th:errors="*{timeTo}"
+                                                         class="c-error-txt mt5"></div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+
+                                    <!-- 詳細検索 -->
+                                    <div class="c-detail-warp search mt10">
+                                        <div class="c-btn_add"><i></i><span>詳細検索</span></div>
+                                        <div class="c-detail_inner" id="detailSearch">
+                                            <div class="l-article-un wrap_flex_wrap">
+                                                <div class="col wrap">
+                                                    <input type="hidden" name="orderPerson" value="1">
+                                                    <dl>
+                                                        <dt>注文者氏名</dt>
+                                                        <dd><input type="text" name="orderName" th:field="*{orderName}"
+                                                                   class="c-form-control" th:errorclass="error" maxlength="25"
+                                                                   placeholder="ここに入力してください">
+                                                            <div th:if="${#fields.hasErrors('orderName')}"
+                                                                 th:errors="*{orderName}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>注文者電話番号</dt>
+                                                        <dd><input type="text" name="orderTel" id="orderTel"
+                                                                   th:field="*{orderTel}" class="c-form-control" maxlength="11"
+                                                                   th:errorclass="error" placeholder="ここに入力してください">
+                                                            <div th:if="${#fields.hasErrors('orderTel')}"
+                                                                 th:errors="*{orderTel}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>注文者メールアドレス</dt>
+                                                        <dd><input type="text" name="orderMail" id="orderMail"
+                                                                   th:field="*{orderMail}" class="c-form-control" maxlength="160"
+                                                                   th:errorclass="error" placeholder="ここに入力してください">
+                                                            <div th:if="${#fields.hasErrors('orderMail')}"
+                                                                 th:errors="*{orderMail}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>商品管理番号</dt>
+                                                        <dd><input type="text" name="goodsGroupCode" id="goodsGroupCode"
+                                                                   th:field="*{goodsGroupCode}" class="c-form-control" maxlength="20"
+                                                                   th:errorclass="error" placeholder="ここに入力してください">
+                                                            <div th:if="${#fields.hasErrors('goodsGroupCode')}"
+                                                                 th:errors="*{goodsGroupCode}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>商品番号</dt>
+                                                        <dd><input type="text" name="goodsCode" id="goodsCode"
+                                                                   th:field="*{goodsCode}" class="c-form-control" maxlength="20"
+                                                                   th:errorclass="error" placeholder="ここに入力してください">
+                                                            <div th:if="${#fields.hasErrors('goodsCode')}"
+                                                                 th:errors="*{goodsCode}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>商品名</dt>
+                                                        <dd><input type="text" name="goodsGroupName" id="goodsGroupName"
+                                                                   th:field="*{goodsGroupName}" class="c-form-control" maxlength="120"
+                                                                   th:errorclass="error" placeholder="ここに入力してください">
+                                                            <div th:if="${#fields.hasErrors('goodsGroupName')}"
+                                                                 th:errors="*{goodsGroupName}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col wrap">
+                                                    <dl>
+                                                        <dt>JANコード</dt>
+                                                        <dd><input type="text" name="janCode" id="janCode"
+                                                                   th:field="*{janCode}" class="c-form-control"
+                                                                   th:errorclass="error" placeholder="ここに入力してください" maxlength="16">
+                                                            <div th:if="${#fields.hasErrors('janCode')}"
+                                                                 th:errors="*{janCode}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>カタログコード</dt>
+                                                        <dd><input type="text" name="catalogCode" id="catalogCode"
+                                                                   th:field="*{catalogCode}" class="c-form-control"
+                                                                   th:errorclass="error" placeholder="ここに入力してください" maxlength="16">
+                                                            <div th:if="${#fields.hasErrors('catalogCode')}"
+                                                                 th:errors="*{catalogCode}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>出荷状態</dt>
+                                                        <dd>
+                                                            <ul class="c-list-left list_sp20">
+                                                                <li th:each="item: *{shipmentStatusItems}">
+                                                                    <label class="c-form-control">
+                                                                        <input type="checkbox"
+                                                                               th:field="*{shipmentStatus}"
+                                                                               th:value="${item.key}"
+                                                                               th:checked="${item.key} == *{shipmentStatus}">
+                                                                        <i th:classappend="${#fields.hasErrors('shipmentStatus')}?'error':''"></i>
+                                                                        <span th:text="${item.value}"></span>
+                                                                    </label>
+                                                                </li>
+                                                            </ul>
+                                                            <div th:if="${#fields.hasErrors('shipmentStatus')}"
+                                                                 th:errors="*{shipmentStatus}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <div class="wrap_flex_wrap">
+                                                        <dl class="mr20">
+                                                            <dt>配送方法</dt>
+                                                            <dd>
+                                                                <select name="delivery" id="delivery"
+                                                                        th:classappend="${#fields.hasErrors('delivery')} ? 'error'"
+                                                                        class="c-form-control">
+                                                                    <option value="">選択してください</option>
+                                                                    <option th:each="item : *{deliveryItems}"
+                                                                            th:value="${item.key}"
+                                                                            th:text="${item.value}"
+                                                                            th:selected="${item.key} == *{delivery}">
+                                                                    </option>
+                                                                </select>
+                                                                <div th:if="${#fields.hasErrors('delivery')}"
+                                                                     th:errors="*{delivery}"
+                                                                     class="c-error-txt mt5"></div>
+                                                            </dd>
+                                                        </dl>
+                                                        <dl>
+                                                            <dt>配送伝票番号</dt>
+                                                            <dd><input type="text" th:field="*{deliveryCode}"
+                                                                       class="c-form-control w240px" maxlength="40"
+                                                                       th:errorclass="error" placeholder="ここに入力してください">
+                                                                <div th:if="${#fields.hasErrors('deliveryCode')}"
+                                                                     th:errors="*{deliveryCode}"
+                                                                     class="c-error-txt mt5"></div>
+                                                            </dd>
+                                                        </dl>
+                                                    </div>
+                                                    <dl>
+                                                        <dt>決済方法</dt>
+                                                        <dd>
+                                                            <select name="settlememnt" id="settlememnt"
+                                                                    class="c-form-control"
+                                                                    th:classappend="${#fields.hasErrors('settlememnt')} ? 'error'">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{settlememntItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{settlememnt}">
+                                                                </option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('settlememnt')}"
+                                                                 th:errors="*{settlememnt}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>受注番号 複数検索</dt>
+                                                        <dd>
+															<textarea id="conditionOrderCodeList"
+                                                                      th:field="*{conditionOrderCodeList}"
+                                                                      class="c-form-control" rows="5" name=""
+                                                                      placeholder="ここに入力してください"></textarea>
+                                                            <div class="c-annotation mt5">
+                                                                <p>※ ひとつずつ改行して入力してください。</p>
+                                                                <p>※ 各行で完全一致。入力番号と一致した番号のみ、検索結果に表示されます。</p>
+                                                            </div>
+                                                            <div th:if="${#fields.hasErrors('conditionOrderCodeList')}"
+                                                                 th:errors="*{conditionOrderCodeList}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt></dt>
+                                                        <dd>
+                                                            <label class="c-form-control"><input type="checkbox"
+                                                                                                 th:field="*{notIncludeCancelGoodsFlag}"
+                                                                                                 th:checked="*{notIncludeCancelGoodsFlag}"
+                                                                                                 id="notIncludeCancelGoodsFlag"
+                                                                                                 checked><i></i>キャンセルした商品を含まない</label>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="allItemsSearchKeywordsDiv" class="mb20" style="display: none">
+                                            <p class="as_end" id="allItemsSearchKeywords"></p>
+                                        </div>
+                                        <div class="c-contbtn_wrap_top ai_flex-start">
+                                            <button class="c-btn btn_regular" name="doOrderSearch" type="submit">検索する</button>
+                                            <button class="c-btn btn_regular ml15" name="doOrderGoodsSearch" type="submit">商品別を検索する</button>
+                                            <th:block sec:authorize="hasAnyAuthority('ORDER:8')">
+                                                <div class="col_left wrap_flex_center ai_flex-start">
+                                                    <span class="pt10">全件</span>
+                                                    <div>
+                                                        <select class="c-form-control ml10" th:field="*{orderOutData}"
+                                                                th:classappend="${#fields.hasErrors('orderOutData')} ? 'error'">
+                                                            <option value="">選択してください</option>
+                                                            <option th:each="item : *{orderOutDataItems}"
+                                                                    th:value="${item.key}" th:text="${item.value}"
+                                                                    th:selected="${item.key} == *{orderOutData}">
+                                                            </option>
+                                                        </select>
+                                                        <div th:if="${#fields.hasErrors('orderOutData')}"
+                                                             th:errors="*{orderOutData}"
+                                                             class="c-error-txt ml10 mt5"></div>
+                                                    </div>
+                                                    <button type="submit" class="c-btn btn_back icon ml10"
+                                                            name="doOutput"><i class="material-icons save_alt"></i>ダウンロード
+                                                    </button>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 検索結果 -->
+                        <th:block th:if="*{isResult()}">
+                            <article class="l-article">
+                                <input type="hidden" id="orderField" th:field="*{orderField}"/>
+                                <input type="hidden" id="orderAsc" th:field="*{orderAsc}"/>
+                                <input type="hidden" id="pageNumber" name="pageNumber"/>
+                                <input type="hidden" id="orderCode" name="orderCode"/>
+                                <input type="submit" id="doDisplayChange" name="doDisplayChange" style="display:none"
+                                       value="表示切替"/>
+
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap" th:if="*{resultItems.size() == 0}">
+                                        <div class="l-conttitle_wrap">
+                                            <h2 class="c-pagetitle_h2 mr10">検索結果</h2>
+                                            <span class="as_end">全0件が該当しました</span>
+                                        </div>
+                                    </div>
+                                    <div class="l-inner_wrap" th:if="*{resultItems.size() != 0}">
+                                        <!--/* 検索結果部分メッセージ表示 */-->
+                                        <div th:if="*{checkMessageItems}" id="checkMessageItems">
+                                            <ul th:each="mes : *{checkMessageItems}">
+                                                <li th:utext="${mes.message}"
+                                                    th:class="${mes.messageId == 'SOO001204' ?  'global-info-message' :'global-error-message'}"></li>
+                                            </ul>
+                                        </div>
+                                        <div class="l-conttitle_wrap">
+                                            <div th:replace="~{include/pager_new::pager2(totalCountDisplayFlag=true)}"></div>
+                                        </div>
+                                        <th:block sec:authorize="hasAnyAuthority('ORDER:8')" th:if="*{isOrderSearch()}">
+                                            <div class="c-contbtn_wrap_btm count_menu">
+                                                <!--                                                <div>-->
+                                                <!--                                                    <button class="c-btn btn_regular mr965"-->
+                                                <!--                                                            name="doSelectShipmentRegist" id="doSelectShipmentRegist"-->
+                                                <!--                                                            type="submit">出荷登録する-->
+                                                <!--                                                    </button>-->
+                                                <!--                                                </div>-->
+                                                <div class="col_left wrap_flex_center ai_flex-start">
+                                                    <span class="resultcount pt10"></span>
+                                                    <div class="col_left">
+                                                        <select class="c-form-control ml10" name="orderOutData1"
+                                                                th:classappend="${#fields.hasErrors('orderOutData1')} ? 'error'">
+                                                            <option value="">選択してください</option>
+                                                            <option th:each="item : *{orderOutData1Items}"
+                                                                    th:value="${item.key}" th:text="${item.value}"
+                                                                    th:selected="${item.key} == *{orderOutData1}">
+                                                            </option>
+                                                        </select>
+                                                        <div th:if="${#fields.hasErrors('orderOutData1')}"
+                                                             th:errors="*{orderOutData1}"
+                                                             class="c-error-txt ml10 mt5"></div>
+                                                    </div>
+                                                    <button type="submit" name="doSelectionOutput1"
+                                                            class="c-btn btn_back icon ml10"><i
+                                                            class="material-icons save_alt"></i>ダウンロード
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                        <th:block th:if="*{isOrderSearch()}">
+                                            <table id="search_result" class="c-tbl tbl_search_results">
+                                                <thead>
+                                                <tr th:with="sortStr=*{orderAsc}?'&nbsp;▲':'&nbsp;▼'">
+                                                    <th:block sec:authorize="hasAnyAuthority('ORDER:8')">
+                                                        <th class="check">
+                                                            <label class="c-form-control"><input id="selectAll"
+                                                                                                 type="checkbox" name=""
+                                                                                                 value=""><i></i></label>
+                                                        </th>
+                                                    </th:block>
+                                                    <th class="number">#</th>
+                                                    <th class="order_number"><a href="#"
+                                                                                onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                                id="headerOrderCode">
+                                                        受注番号
+                                                        <th:block th:if="*{orderField == 'orderCode'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th class="order_times"><a href="#"
+                                                                               onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                               id="headerOrderTime">
+                                                        受注日時
+                                                        <th:block th:if="*{orderField == 'orderTime'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th class="order_status"><a href="#"
+                                                                                onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                                id="headerOrderStatusForSearchResult">
+                                                        受注状態
+                                                        <th:block th:if="*{orderField == 'orderStatusForSearchResult'}">
+                                                            <span th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th class="customer"><a href="#"
+                                                                            onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                            id="headerOrderName">
+                                                        お客様
+                                                        <th:block th:if="*{orderField == 'orderName'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th class="order_amount"><a href="#"
+                                                                                onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                                id="headerOrderPrice">
+                                                        受注金額
+                                                        <th:block th:if="*{orderField == 'orderPrice'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th class="payment_methods"><a href="#"
+                                                                                   onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                                   id="headerSettlementMethod">
+                                                        支払い方法
+                                                        <th:block th:if="*{orderField == 'settlementMethod'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th class="payment_state"><a href="#"
+                                                                                 onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                                 id="headerPaymentStatus">
+                                                        入金状態
+                                                        <th:block th:if="*{orderField == 'paymentStatus'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th class="shipment_state"><a href="#"
+                                                                                  onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                                                  id="headerShipmentStatus">
+                                                        出荷状態
+                                                        <th:block th:if="*{orderField == 'shipmentStatus'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <!--                                                    <th class="shipping_date">出荷日</th>-->
+                                                    <!--                                                    <th class="delivery_slip_number">配送伝票番号</th>-->
+                                                </tr>
+                                                </thead>
+                                                <tbody id="resultItems">
+                                                <tr th:each="item,stat: *{resultItems}">
+                                                    <th:block sec:authorize="hasAnyAuthority('ORDER:8')">
+                                                        <td class="check">
+                                                            <label class="c-form-control"><input type="checkbox"
+                                                                                                 th:field="*{resultItems[__${stat.index}__].resultOrderCheck}"><i></i></label>
+                                                            <input type="hidden" th:value="${item.resultOrderSeq}"
+                                                                   name="resultOrderSeq"/>
+                                                        </td>
+                                                    </th:block>
+                                                    <td class="number">
+                                                        <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                            <span id="resultNo" th:text="${item.resultNo}"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="order_number">
+                                                        <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                            <span id="orderCode-2" th:text="${item.orderCode}"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="order_times">
+                                                        <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                        <span id="resultOrderTime"
+                                                              th:text="${#date.convert(item.resultOrderTime, 'yyyy/MM/dd HH:mm:ss')}"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="order_status">
+                                                        <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                        <span th:if="${item.resultOrderStatusForSearchResult} == '0'"
+                                                              th:text="${#enumtype.getLabel('HTypeSelectMapOrderStatus',item.resultOrderStatusForSearchResult)}"
+                                                              class="c-status01 ico_orange"></span>
+                                                            <span th:if="${item.resultOrderStatusForSearchResult} == '1'"
+                                                                  th:text="${#enumtype.getLabel('HTypeSelectMapOrderStatus',item.resultOrderStatusForSearchResult)}"
+                                                                  class="c-status01 ico_blue"></span>
+                                                            <span th:if="${item.resultOrderStatusForSearchResult} == '3'"
+                                                                  th:text="${#enumtype.getLabel('HTypeSelectMapOrderStatus',item.resultOrderStatusForSearchResult)}"
+                                                                  class="c-status01 ico_green"></span>
+                                                            <span th:if="${item.resultOrderStatusForSearchResult} == '5'"
+                                                                  th:text="${#enumtype.getLabel('HTypeSelectMapOrderStatus',item.resultOrderStatusForSearchResult)}"
+                                                                  class="c-status01 ico_gray"></span>
+                                                            <span th:if="${item.resultOrderStatusForSearchResult} == '6'"
+                                                                  th:text="${#enumtype.getLabel('HTypeSelectMapOrderStatus',item.resultOrderStatusForSearchResult)}"
+                                                                  class="c-status01 ico_gray"></span>
+                                                            <span th:if="${item.resultOrderStatusForSearchResult} == '7'"
+                                                                  th:text="${#enumtype.getLabel('HTypeSelectMapOrderStatus',item.resultOrderStatusForSearchResult)}"
+                                                                  class="c-status01 ico_red"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="customer">
+                                                        <div class="ellipsis">
+                                                            <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                            <span id="resultOrderName"
+                                                                  th:text="${item.resultOrderName}"></span>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="order_amount">
+                                                        <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                        <span id="resultOrderPrice"
+                                                              th:text="${#number.convert(item.resultOrderPrice)}"></span>
+                                                            円
+                                                        </a>
+                                                    </td>
+                                                    <td class="payment_methods">
+                                                        <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                        <span id="resultSettlementMethod"
+                                                              th:text="${item.resultSettlementMethod}"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="payment_state">
+													<span id="paymentStatusStyle">
+														<a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+															<span id="resultPaymentStatus"
+                                                                  th:text="${#enumtype.getLabel('HTypePaymentStatus',item.resultPaymentStatus)}"></span>
+														</a>
+													</span>
+                                                    </td>
+                                                    <td class="shipment_state">
+													<span id="shipmentStatusStyle">
+														<a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+															<span id="resultShipmentStatus"
+                                                                  th:text="${#enumtype.getLabel('HTypeShipmentStatus',item.resultShipmentStatus)}"></span>
+														</a>
+													</span>
+                                                    </td>
+                                                    <th:block th:if="${item.resultShipmentStatus} == '1'">
+                                                        <td>
+                                                            <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                                <span th:text="${item.shippedDate} == null ? 'ー' : ${#date.convert(item.shippedDate)}"></span>
+                                                            </a>
+                                                        </td>
+                                                        <td class="order_number">
+                                                            <a th:href="@{/order/details(orderCode=${item.orderCode},from=order)}">
+                                                                <span th:text="${item.registerDeliveryCode} == null ? 'ー' : ${item.registerDeliveryCode}"></span>
+                                                            </a>
+                                                        </td>
+                                                    </th:block>
+                                                    <!--                                                    <th:block th:if="${item.resultShipmentStatus} != '1'">-->
+                                                    <!--                                                        <td class="shipping_date">-->
+                                                    <!--                                                            <label class="c-datepicker sml">-->
+                                                    <!--                                                                <input type="text"-->
+                                                    <!--                                                                       th:field="*{resultItems[__${stat.index}__].registerShipmentDate}"-->
+                                                    <!--                                                                       class="c-form-control" placeholder="年/月/日"-->
+                                                    <!--                                                                       title="出荷日" maxlength="10" th:errorclass="error"/>-->
+                                                    <!--                                                            </label>-->
+                                                    <!--                                                            <div th:if="${#fields.hasErrors('resultItems[' + stat.index + '].registerShipmentDate')}"-->
+                                                    <!--                                                                 th:errors="*{resultItems[__${stat.index}__].registerShipmentDate}"-->
+                                                    <!--                                                                 class="c-error-txt mt5"></div>-->
+                                                    <!--                                                        </td>-->
+                                                    <!--                                                        <td class="delivery_slip_number">-->
+                                                    <!--                                                            <input type="text"-->
+                                                    <!--                                                                   th:field="*{resultItems[__${stat.index}__].registerDeliveryCode}"-->
+                                                    <!--                                                                   class="c-form-control" title="配送伝票番号" maxlength="40"-->
+                                                    <!--                                                                   th:errorclass="error"/>-->
+                                                    <!--                                                            <div th:if="${#fields.hasErrors('resultItems[' + stat.index + '].registerDeliveryCode')}"-->
+                                                    <!--                                                                 th:errors="*{resultItems[__${stat.index}__].registerDeliveryCode}"-->
+                                                    <!--                                                                 class="c-error-txt mt5"></div>-->
+                                                    <!--                                                        </td>-->
+                                                    <!--                                                    </th:block>-->
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </th:block>
+                                        <th:block th:if="*{isGoodsSearch()}">
+                                            <table id="search_result" class="c-tbl tbl_search_results">
+                                                <tr th:with="sortStr=*{orderAsc}?'&nbsp;▲':'&nbsp;▼'">
+                                                    <th class="number">#</th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');" id="headerGoodsGroupCode">
+                                                        商品管理番号
+                                                        <th:block th:if="*{orderField == 'goodsGroupCode'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                           id="headerGoodsCode">
+                                                        商品番号
+                                                        <th:block th:if="*{orderField == 'goodsCode'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                           id="headerJanCode">
+                                                        JANコード
+                                                        <th:block th:if="*{orderField == 'janCode'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                           id="headerCatalogCode">
+                                                        カタログコード
+                                                        <th:block th:if="*{orderField == 'catalogCode'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');" id="headerGoodsName">
+                                                        商品名
+                                                        <th:block th:if="*{orderField == 'goodsName'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');" id="headerUnitValue1">
+                                                        規格1
+                                                        <th:block th:if="*{orderField == 'unitValue1'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');" id="headerUnitValue2">
+                                                        規格2
+                                                        <th:block th:if="*{orderField == 'unitValue2'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');" id="headerIndividualDeliveryType">
+                                                        個別配送
+                                                        <th:block th:if="*{orderField == 'individualDeliveryType'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');" id="headerGoodsPrice">
+                                                        価格
+                                                        <th:block th:if="*{orderField == 'goodsPrice'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                    <th><a href="#"
+                                                           onClick="return sortActionExe(this, 'doDisplayChange');" id="headerGoodsCount">
+                                                        数量
+                                                        <th:block th:if="*{orderField == 'goodsCount'}"><span
+                                                                th:text="${sortStr}"></span></th:block>
+                                                    </a></th>
+                                                </tr>
+                                                <tbody id="resultItems">
+                                                <tr th:each="item,stat: *{resultItems}">
+                                                    <td class="number">
+                                                        <span id="resultNo" th:text="${item.resultNo}"></span>
+                                                    </td>
+                                                    <td class="goods_group_code">
+                                                        <span id="resultGoodsGroupCode" th:text="${item.resultGoodsGroupCode}"/>
+                                                    </td>
+                                                    <td class="goods_code">
+                                                        <span id="resultGoodsCode" th:text="${item.resultGoodsCode}"/>
+                                                    </td>
+                                                    <td class="jan_code">
+                                                        <span id="resultJanCode" th:text="${item.resultJanCode}"/>
+                                                    </td>
+                                                    <td class="catalog_code">
+                                                        <span id="resultCatalogCode" th:text="${item.resultCatalogCode}"/>
+                                                    </td>
+                                                    <td class="goods_name">
+                                                        <span id="resultGoodsName" th:text="${item.resultGoodsName}"/>
+                                                    </td>
+                                                    <td class="goods_unit_value">
+                                                        <span id="resultUnitValue1" th:text="${item.resultUnitValue1}"/>
+                                                    </td>
+                                                    <td class="goods_unit_value">
+                                                        <span id="resultUnitValue2" th:text="${item.resultUnitValue2}"/>
+                                                    </td>
+                                                    <td class="goods_unit_value">
+                                                        <span id="resultIndividualDeliveryType">
+                                                            <th:block th:if="${item.resultIndividualDeliveryType eq '0'}">－</th:block>
+                                                            <th:block th:if="${item.resultIndividualDeliveryType eq '1'}">○</th:block>
+                                                        </span>
+                                                    </td>
+                                                    <td class="price w110px">
+                                                        <span id="resultGoodsPrice" th:text="${#number.convert(item.resultGoodsPrice)}"/>&nbsp;円
+                                                    </td>
+                                                    <td class="goods_count">
+                                                        <span id="resultGoodsCount" th:text="${item.resultGoodsCount}"/>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </th:block>
+                                        <!--ページネーション-->
+                                        <div th:replace="~{include/pager_new::pager1}"></div>
+                                    </div>
+                                </div>
+                            </article>
+                        </th:block>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

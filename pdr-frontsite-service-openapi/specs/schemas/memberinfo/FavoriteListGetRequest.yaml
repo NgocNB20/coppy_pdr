@@ -1,0 +1,27 @@
+type: object
+description: お気に入り情報リスト取得リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ（必須）
+    example: 10000001
+  exclusionGoodsSeqList:
+    type: array
+    description: 除去対象商品SEQリスト
+    items:
+      type: integer
+      format: int32
+      example: 1000
+  siteType:
+    type: string
+    description: サイト区分
+    example: 1
+  goodsOpenStatus:
+    type: string
+    description: 公開状態
+    example: 1
+  memberRank:
+    type: string
+    description: 会員ランク
+    example: 1

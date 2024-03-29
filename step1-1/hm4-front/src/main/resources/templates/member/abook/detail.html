@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="mypage">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <!-- main -->
+    <main class="l-page l-head__pattern1">
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><a property="item"
+                                                                                                     typeof="WebPage"
+                                                                                                     title="TOP"
+                                                                                                     href="/"><span
+                            property="name">TOP</span></a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use th:attr="'xlink:href'=@{/hm4/assets/images/icon/arrow-right.svg#arrow-right}"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><a property="item"
+                                                                                                     typeof="WebPage"
+                                                                                                     title="マイページ"
+                                                                                                     href="/member/"><span
+                            property="name">マイページ</span></a>
+                        <meta property="position" content="2">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use th:attr="'xlink:href'=@{/hm4/assets/images/icon/arrow-right.svg#arrow-right}"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><span property="name">アドレス帳</span>
+                        <meta property="position" content="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-head__pattern1__content">
+            <h2 class="c-title--page mypage__title"><strong>アドレス帳</strong></h2>
+            <div class="l-container l-head__pattern1__content-main">
+                <div th:replace="~{includehm4/sidemenumember_new :: sidemenumember('abook')}"></div>
+                <div class="l-main">
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <p class="c-text--xs">
+                        <th:block id="isRegistMode-1" th:if="${memberAbookModel.isRegistMode()}">
+                            新しい住所を入力していただき「アドレス帳に登録する」ボタンをクリックしてください。
+                        </th:block>
+                        <th:block id="isUpdateMode-1" th:if="${memberAbookModel.isUpdateMode()}">
+                            新しい住所を入力していただき「アドレス帳を更新する」ボタンをクリックしてください。
+                        </th:block>
+                    </p>
+                    <form id="detailForm" method="post" th:action="@{/member/abook/detail.html}"
+                          th:object="${memberAbookModel}">
+                        <div class="l-form__area c-margin--s">
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>名称</dt>
+                                <dd class="ward-txt"><input type="text" autocomplete="name" id="addressBookName"
+                                                            th:field="*{addressBookName}" placeholder="アドレス帳"
+                                                            maxlength="100" class="c-input" th:errorclass="field-error">
+                                    <div th:if="${#fields.hasErrors('addressBookName')}" th:errors="*{addressBookName}"
+                                         class="field-error-message"></div>
+                                    <p class="c-text--xs">例）勤務先・実家</p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>氏名<span
+                                        class="c-text--s c-font-bold--nomal">（全角）</span></dt>
+                                <dd>
+                                    <div class="name-wrap">
+                                        <div class="last-name-wrap">
+                                            <span class="last-name c-text--m">姓</span> <input type="text"
+                                                                                              autocomplete="name"
+                                                                                              id="lastName"
+                                                                                              th:field="*{lastName}"
+                                                                                              placeholder="山田"
+                                                                                              maxlength="100"
+                                                                                              class="c-input"
+                                                                                              th:errorclass="field-error">
+                                            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                                 class="field-error-message"></div>
+                                        </div>
+                                        <div class="first-name-wrap">
+                                            <span class="first-name c-text--m">名</span> <input type="text"
+                                                                                               autocomplete="name"
+                                                                                               id="firstName"
+                                                                                               th:field="*{firstName}"
+                                                                                               placeholder="太郎"
+                                                                                               maxlength="100"
+                                                                                               class="c-input"
+                                                                                               th:errorclass="field-error">
+                                            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                                 class="field-error-message"></div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>フリガナ<span
+                                        class="c-text--s c-font-bold--nomal">（全角カナ）</span></dt>
+                                <dd>
+                                    <div class="name-wrap">
+                                        <div class="last-name-wrap">
+                                            <span class="last-name c-text--m">セイ</span> <input type="text"
+                                                                                               autocomplete="name"
+                                                                                               id="lastKana"
+                                                                                               th:field="*{lastKana}"
+                                                                                               placeholder="ヤマダ"
+                                                                                               maxlength="100"
+                                                                                               class="c-input"
+                                                                                               th:errorclass="field-error">
+                                            <div th:if="${#fields.hasErrors('lastKana')}" th:errors="*{lastKana}"
+                                                 class="field-error-message"></div>
+                                        </div>
+                                        <div class="first-name-wrap">
+                                            <span class="first-name c-text--m">メイ</span> <input type="text"
+                                                                                                autocomplete="name"
+                                                                                                id="firstKana"
+                                                                                                th:field="*{firstKana}"
+                                                                                                placeholder="タロウ"
+                                                                                                maxlength="100"
+                                                                                                class="c-input"
+                                                                                                th:errorclass="field-error">
+                                            <div th:if="${#fields.hasErrors('firstKana')}" th:errors="*{firstKana}"
+                                                 class="field-error-message"></div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>電話番号<span
+                                        class="c-text--s c-font-bold--nomal">（半角数字）</span></dt>
+                                <dd class="tel-txt">
+                                    <input type="tel" autocomplete="tel" id="tel" th:field="*{tel}"
+                                           placeholder="061111111" maxlength="11" class="c-input"
+                                           th:errorclass="field-error"> <span class="c-text--xs">※ハイフンなし</span>
+                                    <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"
+                                         class="field-error-message"></div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>郵便番号<span
+                                        class="c-text--s c-font-bold--nomal">（半角数字）</span></dt>
+                                <dd class="post-txt">
+                                    <input type="text" id="zipCode1" th:field="*{zipCode1}" autocomplete="postal-code"
+                                           placeholder="533" maxlength="3" class="c-input" th:errorclass="field-error">&nbsp;<span>ー</span>&nbsp;
+                                    <input type="text" id="zipCode2" th:field="*{zipCode2}" placeholder="0001"
+                                           maxlength="4" class="c-input" th:errorclass="field-error">
+                                    <a class="c-btn--address" title="郵便番号検索" onClick="callZipSearchFunc();">住所検索</a>
+                                    <span id="zipErrorMsg"></span>
+                                    <div th:if="${#fields.hasErrors('zipCode1')}" th:errors="*{zipCode1}"
+                                         class="field-error-message"></div>
+                                    <div th:if="${#fields.hasErrors('zipCode2')}" th:errors="*{zipCode2}"
+                                         class="field-error-message"></div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>都道府県</dt>
+                                <dd>
+                                    <div class="pref-wrap">
+                                        <div class="c-select__wrap">
+                                            <select id="prefecture" name="prefecture" title="都道府県"
+                                                    class="c-select--pref"
+                                                    th:classappend="${#fields.hasErrors('prefecture')} ? 'field-error'">
+                                                <option value="">選択</option>
+                                                <option th:each="prefectureItem : *{prefectureItems}"
+                                                        th:value="${prefectureItem.key}"
+                                                        th:text="${prefectureItem.value}"
+                                                        th:selected="${prefectureItem.key} == *{prefecture}">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('prefecture')}" th:errors="*{prefecture}"
+                                         class="field-error-message"></div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>市区郡</dt>
+                                <dd class="ward-txt"><input type="text" id="address1" th:field="*{address1}"
+                                                            placeholder="大阪市福島区" maxlength="100" class="c-input"
+                                                            th:errorclass="field-error">
+                                    <div th:if="${#fields.hasErrors('address1')}" th:errors="*{address1}"
+                                         class="field-error-message"></div>
+                                    <p class="c-text--xs">例）大阪市福島区</p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>町村・番地</dt>
+                                <dd class="ward-txt"><input type="text" id="address2" th:field="*{address2}"
+                                                            placeholder="海老江" maxlength="100" class="c-input"
+                                                            th:errorclass="field-error">
+                                    <div th:if="${#fields.hasErrors('address2')}" th:errors="*{address2}"
+                                         class="field-error-message"></div>
+                                    <p class="c-text--xs">例）海老江1-47</p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-not-require">任意</span>建物名</dt>
+                                <dd class="ward-txt"><input type="text" id="address3" th:field="*{address3}"
+                                                            placeholder="阪神野田ビル" maxlength="100" class="c-input"
+                                                            th:errorclass="field-error">
+                                    <div th:if="${#fields.hasErrors('address3')}" th:errors="*{address3}"
+                                         class="field-error-message"></div>
+                                    <p class="c-text--xs">例）HITMALL 77号室</p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <th:block id="isRegistMode-2" th:if="*{isRegistMode()}">
+                            <div class="c-btn-wrap--2btn lg-rev c-margin--xl">
+                                <button type="submit" id="doOnceAddressBookRegist" name="doOnceAddressBookRegist"
+                                        class="c-btn--blue">アドレス帳に登録する
+                                </button>
+                                <button type="button" class="c-btn--simple"><a th:href="@{/member/abook/index.html}"
+                                                                               id="goMemberAddressPage">キャンセル</a>
+                                </button>
+                            </div>
+                        </th:block>
+                        <th:block id="isUpdateMode-2" th:if="*{isUpdateMode()}">
+                            <div class="c-btn-wrap--2btn lg-rev c-margin--xl">
+                                <button type="submit" id="doOnceAddressBookUpdate" name="doOnceAddressBookUpdate"
+                                        class="c-btn--blue">アドレス帳を更新する
+                                </button>
+                                <button type="button" class="c-btn--simple"><a th:href="@{/member/abook/index.html}"
+                                                                               id="goMemberAddressPage">キャンセル</a>
+                                </button>
+                            </div>
+                        </th:block>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div th:replace="~{includehm4/footer_new}"></div>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+
+<script type="text/javascript">
+	<!--
+		var zipsearch = new Zipsearch();
+		function callZipSearchFunc() {
+			zipsearch.zipCodeSearchPrefectureNameReturn(true,document.getElementById('prefecture'),document.getElementById('address1'),document.getElementById('address2'),document.getElementById('address3'),document.getElementById('zipCode1'),document.getElementById('zipCode2'));
+		}
+	-->
+
+</script>
+
+</body>
+</html>

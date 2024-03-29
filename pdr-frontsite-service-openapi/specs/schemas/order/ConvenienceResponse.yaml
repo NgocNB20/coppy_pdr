@@ -1,0 +1,43 @@
+type: object
+description: コンビニレスポンス
+properties:
+  conveniSeq:
+    type: integer
+    format: int32
+    description: コンビニSEQ（必須）
+    example: 10001
+  payCode:
+    type: string
+    description:  支払コード（必須）
+    example: 999
+  conveniCode:
+    type: string
+    description: コンビニコード（必須）
+    example: 00007
+  payName:
+    type: string
+    description: 支払名称（必須）
+    example: セブン-イレブン決済
+  conveniName:
+    type: string
+    description: コンビニ名称（必須）
+    example: セブン-イレブン
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description:  更新日時（必須）
+    example: 2021/12/12 12:00:00
+  displayOrder:
+    type: integer
+    format: int32
+    description: displayOrder
+    example: 1
+  useFlag:
+    type: string
+    description: 利用するコンビニ
+    example: "1"

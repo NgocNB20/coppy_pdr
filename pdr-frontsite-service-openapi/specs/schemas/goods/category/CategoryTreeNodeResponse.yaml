@@ -1,0 +1,17 @@
+type: object
+description: カテゴリ木構造レスポンス
+properties:
+  categoryEntity:
+    $ref: '#/components/schemas/CategoryResponse'
+  categoryDisplayEntity:
+    $ref: '#/components/schemas/CategoryDisplayResponse'
+  categoryDtoList:
+    type: array
+    items:
+      $ref: ../category/CategoryTreeNodeResponse.yaml
+components:
+  schemas:
+    CategoryDisplayResponse:
+      $ref: ../category/CategoryDisplayEntityResponse.yaml
+    CategoryResponse:
+      $ref: ../category/CategoryEntityResponse.yaml

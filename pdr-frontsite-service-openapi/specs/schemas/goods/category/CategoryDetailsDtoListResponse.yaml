@@ -1,0 +1,9 @@
+type: array
+description: カテゴリ情報DtoListレスポンス
+items:
+  $ref: "#/components/schemas/CategoryDetailsDtoResponse"
+
+components:
+  schemas:
+    CategoryDetailsDtoResponse:
+      $ref: ./CategoryDetailsDtoResponse.yaml

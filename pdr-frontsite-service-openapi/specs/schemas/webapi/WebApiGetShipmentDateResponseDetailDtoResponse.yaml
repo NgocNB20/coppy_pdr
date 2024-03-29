@@ -1,0 +1,17 @@
+type: object
+description: WEB-API出荷予定日取得詳細情報DTOレスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品
+    example: 41-0203
+  deliveryDesignatedDay:
+    type: string
+    format: date-time
+    description: 配達指定日
+    example: 2022/01/01
+  shipmentDate:
+    type: string
+    format: date-time
+    description: 出荷予定日
+    example: 2022/01/01 12:00:00

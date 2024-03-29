@@ -1,0 +1,734 @@
+{
+	"info": {
+		"_postman_id": "fdf14585-0142-4685-b2b6-f692b77f2d65",
+		"name": "webapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "deleteDestinaltion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerNo\" : 7000081,\r\n    \"receiveCustomerNo\": 7000906\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/webapi/destinaltion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"destinaltion"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deleteDestinaltionResponse",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerNo\" : 7000081,\r\n    \"receiveCustomerNo\": 7000906\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/webapi/destinaltion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"destinaltion"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:38:33 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"0\",\n    \"message\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "getDestination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/destination?customerNo=7000081",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"destination"
+					],
+					"query": [
+						{
+							"key": "customerNo",
+							"value": "7000081"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getDestinationResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/webapi/destination?customerNo=7000081",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"destination"
+							],
+							"query": [
+								{
+									"key": "customerNo",
+									"value": "7000081"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:39:36 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": [\n        {\n            \"receiveCustomerNo\": 7000781,\n            \"officeName\": \"ＦＲ　二太郎\",\n            \"officeKana\": \"エフアールサンタロウ\",\n            \"representative\": \"アア\",\n            \"businessType\": 2,\n            \"tel\": \"08099999999\",\n            \"zipCode\": \"5320011\",\n            \"city\": \"大阪府大阪市淀川区\",\n            \"address\": \"西中島\",\n            \"building\": null,\n            \"other\": \"\",\n            \"approvalFlag\": \"1\"\n        },\n        {\n            \"receiveCustomerNo\": 7000836,\n            \"officeName\": \"ＦＲ　二太郎\",\n            \"officeKana\": \"エフアールサンタロウ\",\n            \"representative\": \"い１２３４５６７８９０１２３４\",\n            \"businessType\": 1,\n            \"tel\": \"08099999999\",\n            \"zipCode\": \"8500017\",\n            \"city\": \"長崎県長崎市\",\n            \"address\": \"新大工町\",\n            \"building\": null,\n            \"other\": \"\",\n            \"approvalFlag\": \"1\"\n        },\n        {\n            \"receiveCustomerNo\": 7000862,\n            \"officeName\": \"１１１１１１１１１１１１１\",\n            \"officeKana\": \"イチ\",\n            \"representative\": \"３３３３３３３３３３３\",\n            \"businessType\": 1,\n            \"tel\": \"444444444444\",\n            \"zipCode\": \"5320001\",\n            \"city\": \"大阪府大阪市淀川区\",\n            \"address\": \"十八条１１１１１１１１１１１１１１１\",\n            \"building\": \"２２２２２２２２２２２２\",\n            \"other\": \"３３３３３３３３３３３３３３\",\n            \"approvalFlag\": \"1\"\n        },\n        {\n            \"receiveCustomerNo\": 7000873,\n            \"officeName\": \"２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２２\",\n            \"officeKana\": \"カナ\",\n            \"representative\": \"４４４４４４４４４４４４４４４\",\n            \"businessType\": 1,\n            \"tel\": \"999999999999\",\n            \"zipCode\": \"5320002\",\n            \"city\": \"大阪府大阪市淀川区\",\n            \"address\": \"東三国９９９９９９９９９９９９９９９９９\",\n            \"building\": \"９９９８８８８８８８８８８８８８８８８８\",\n            \"other\": \"７７７７７７７７７７７７７７７\",\n            \"approvalFlag\": \"1\"\n        },\n        {\n            \"receiveCustomerNo\": 7000884,\n            \"officeName\": \"１１１１１１１１１１１１１\",\n            \"officeKana\": \"カナ\",\n            \"representative\": \"９９９９９９９９９９９９９９９\",\n            \"businessType\": 2,\n            \"tel\": \"999999999999\",\n            \"zipCode\": \"5320004\",\n            \"city\": \"大阪府大阪市淀川区\",\n            \"address\": \"西宮原９９９９９９９９９９９９９９９９９\",\n            \"building\": \"８８８８８８８８８８８８８８８８\",\n            \"other\": \"７７７７７７７７７７７７７７７\",\n            \"approvalFlag\": \"1\"\n        }\n    ],\n    \"result\": {\n        \"status\": \"0\",\n        \"message\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getDiscountResult",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/discount-result?goodsCode=85-7879&quantity=1&orderDisplay=1&customerNo=7000081",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"discount-result"
+					],
+					"query": [
+						{
+							"key": "goodsCode",
+							"value": "85-7879"
+						},
+						{
+							"key": "quantity",
+							"value": "1"
+						},
+						{
+							"key": "orderDisplay",
+							"value": "1"
+						},
+						{
+							"key": "customerNo",
+							"value": "7000081"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getDiscountResultResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/webapi/discount-result?goodsCode=85-7879&quantity=1&orderDisplay=1&customerNo=7000081",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"discount-result"
+							],
+							"query": [
+								{
+									"key": "goodsCode",
+									"value": "85-7879"
+								},
+								{
+									"key": "quantity",
+									"value": "1"
+								},
+								{
+									"key": "orderDisplay",
+									"value": "1"
+								},
+								{
+									"key": "customerNo",
+									"value": "7000081"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:40:17 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": [\n        {\n            \"goodsCode\": \"85-7879\",\n            \"saleType\": \"0\",\n            \"saleGroupCode\": \"1\",\n            \"salePrice\": 1300,\n            \"quantity\": \"1\",\n            \"saleCode\": null,\n            \"note\": null,\n            \"hints\": null,\n            \"orderDisplay\": \"1\"\n        }\n    ],\n    \"result\": {\n        \"status\": \"0\",\n        \"message\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getNotYetShipingOrderHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/not-yet-shipping-order-history?customerNo=7000814",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"not-yet-shipping-order-history"
+					],
+					"query": [
+						{
+							"key": "customerNo",
+							"value": "7000814"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getNotYetShippingOrderHistoryResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/webapi/not-yet-shipping-order-history?customerNo=7000814",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"not-yet-shipping-order-history"
+							],
+							"query": [
+								{
+									"key": "customerNo",
+									"value": "7000814"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:41:06 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": [\n        {\n            \"orderNo\": 6000749,\n            \"receptionTypeName\": \"5\",\n            \"orderDate\": \"2021-02-17T17:00:00.000+00:00\",\n            \"receiveOfficeName\": null,\n            \"receiveZipcode\": null,\n            \"receiveAddress1\": null,\n            \"receiveAddress2\": null,\n            \"receiveAddress3\": null,\n            \"receiveAddress4\": null,\n            \"receiveAddress5\": null,\n            \"receiveDate\": \"2020-03-29T17:00:00.000+00:00\",\n            \"paymentType\": \"クレジットカード\",\n            \"paymentTotalPrice\": null,\n            \"goodsList\": [\n                {\n                    \"goodsCode\": \"85-7879\",\n                    \"goodsName\": \"クランチチョコレート\",\n                    \"goodsCount\": 3,\n                    \"unitName\": \"個\",\n                    \"discountFlag\": \"0\"\n                }\n            ],\n            \"goodsDetailsMap\": {}\n        },\n        {\n            \"orderNo\": 6000750,\n            \"receptionTypeName\": \"5\",\n            \"orderDate\": \"2021-02-17T17:00:00.000+00:00\",\n            \"receiveOfficeName\": null,\n            \"receiveZipcode\": null,\n            \"receiveAddress1\": null,\n            \"receiveAddress2\": null,\n            \"receiveAddress3\": null,\n            \"receiveAddress4\": null,\n            \"receiveAddress5\": null,\n            \"receiveDate\": \"2020-03-29T17:00:00.000+00:00\",\n            \"paymentType\": \"コンビニ/郵便振込み\",\n            \"paymentTotalPrice\": null,\n            \"goodsList\": [\n                {\n                    \"goodsCode\": \"85-7879\",\n                    \"goodsName\": \"クランチチョコレート\",\n                    \"goodsCount\": 3,\n                    \"unitName\": \"個\",\n                    \"discountFlag\": \"0\"\n                }\n            ],\n            \"goodsDetailsMap\": {}\n        }\n    ],\n    \"result\": {\n        \"status\": \"0\",\n        \"message\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getPreShipmentOrderHistoryAeggregate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/get-pre-shipment-order-history-aeggregate?customerNo=7000814",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"get-pre-shipment-order-history-aeggregate"
+					],
+					"query": [
+						{
+							"key": "customerNo",
+							"value": "7000814"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getPreShipmentOrderHistoryAeggregateResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/webapi/get-pre-shipment-order-history-aeggregate?customerNo=7000814",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"get-pre-shipment-order-history-aeggregate"
+							],
+							"query": [
+								{
+									"key": "customerNo",
+									"value": "7000814"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:41:55 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": [\n        {\n            \"orderNo\": 6000749,\n            \"receptionTypeName\": \"5\",\n            \"orderDate\": \"2021-02-17T17:00:00.000+00:00\",\n            \"receiveOfficeName\": null,\n            \"receiveZipcode\": null,\n            \"receiveAddress1\": null,\n            \"receiveAddress2\": null,\n            \"receiveAddress3\": null,\n            \"receiveAddress4\": null,\n            \"receiveAddress5\": null,\n            \"receiveDate\": \"2020-03-29T17:00:00.000+00:00\",\n            \"paymentType\": \"クレジットカード\",\n            \"paymentTotalPrice\": \"3750\",\n            \"goodsList\": [\n                {\n                    \"goodsCode\": \"85-7879\",\n                    \"goodsName\": \"クランチチョコレート\",\n                    \"goodsCount\": 3,\n                    \"unitName\": \"個\",\n                    \"discountFlag\": null\n                }\n            ],\n            \"goodsDetailsMap\": {}\n        },\n        {\n            \"orderNo\": 6000750,\n            \"receptionTypeName\": \"5\",\n            \"orderDate\": \"2021-02-17T17:00:00.000+00:00\",\n            \"receiveOfficeName\": null,\n            \"receiveZipcode\": null,\n            \"receiveAddress1\": null,\n            \"receiveAddress2\": null,\n            \"receiveAddress3\": null,\n            \"receiveAddress4\": null,\n            \"receiveAddress5\": null,\n            \"receiveDate\": \"2020-03-29T17:00:00.000+00:00\",\n            \"paymentType\": \"コンビニ/郵便振込み\",\n            \"paymentTotalPrice\": \"3750\",\n            \"goodsList\": [\n                {\n                    \"goodsCode\": \"85-7879\",\n                    \"goodsName\": \"クランチチョコレート\",\n                    \"goodsCount\": 3,\n                    \"unitName\": \"個\",\n                    \"discountFlag\": null\n                }\n            ],\n            \"goodsDetailsMap\": {}\n        }\n    ],\n    \"result\": {\n        \"status\": \"0\",\n        \"message\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getPreShipmentOrderHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/pre-shipment-order-history?customerNo=7000814",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"pre-shipment-order-history"
+					],
+					"query": [
+						{
+							"key": "customerNo",
+							"value": "7000814"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getPreShipmentOrderHistoryResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/webapi/pre-shipment-order-history?customerNo=7000814",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"pre-shipment-order-history"
+							],
+							"query": [
+								{
+									"key": "customerNo",
+									"value": "7000814"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:47:14 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": [\n        {\n            \"orderNo\": 6000749,\n            \"receptionTypeName\": \"5\",\n            \"orderDate\": \"2021-02-17T17:00:00.000+00:00\",\n            \"receiveOfficeName\": null,\n            \"receiveZipcode\": null,\n            \"receiveAddress1\": null,\n            \"receiveAddress2\": null,\n            \"receiveAddress3\": null,\n            \"receiveAddress4\": null,\n            \"receiveAddress5\": null,\n            \"receiveDate\": \"2020-03-29T17:00:00.000+00:00\",\n            \"paymentType\": \"クレジットカード\",\n            \"paymentTotalPrice\": \"3750\",\n            \"goodsList\": [\n                {\n                    \"goodsCode\": \"85-7879\",\n                    \"goodsName\": \"クランチチョコレート\",\n                    \"goodsCount\": 3,\n                    \"unitName\": \"個\",\n                    \"discountFlag\": \"0\"\n                }\n            ],\n            \"goodsDetailsMap\": {}\n        },\n        {\n            \"orderNo\": 6000750,\n            \"receptionTypeName\": \"5\",\n            \"orderDate\": \"2021-02-17T17:00:00.000+00:00\",\n            \"receiveOfficeName\": null,\n            \"receiveZipcode\": null,\n            \"receiveAddress1\": null,\n            \"receiveAddress2\": null,\n            \"receiveAddress3\": null,\n            \"receiveAddress4\": null,\n            \"receiveAddress5\": null,\n            \"receiveDate\": \"2020-03-29T17:00:00.000+00:00\",\n            \"paymentType\": \"コンビニ/郵便振込み\",\n            \"paymentTotalPrice\": \"3750\",\n            \"goodsList\": [\n                {\n                    \"goodsCode\": \"85-7879\",\n                    \"goodsName\": \"クランチチョコレート\",\n                    \"goodsCount\": 3,\n                    \"unitName\": \"個\",\n                    \"discountFlag\": \"0\"\n                }\n            ],\n            \"goodsDetailsMap\": {}\n        }\n    ],\n    \"result\": {\n        \"status\": \"0\",\n        \"message\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getQuantityDiscount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/quantity-discount?customerNo=7000081&goodsCode=85-7879",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"quantity-discount"
+					],
+					"query": [
+						{
+							"key": "customerNo",
+							"value": "7000081"
+						},
+						{
+							"key": "goodsCode",
+							"value": "85-7879"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getQuantityDiscountResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/webapi/quantity-discount?customerNo=7000081&goodsCode=85-7879",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"quantity-discount"
+							],
+							"query": [
+								{
+									"key": "customerNo",
+									"value": "7000081"
+								},
+								{
+									"key": "goodsCode",
+									"value": "85-7879"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:44:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": [\n        {\n            \"goodsCode\": \"85-7879\",\n            \"priceList\": [\n                {\n                    \"price\": 1680,\n                    \"level\": \"999999999\"\n                }\n            ],\n            \"salePriceList\": [\n                {\n                    \"salePrice\": 1500,\n                    \"saleLevel\": null\n                }\n            ],\n            \"customerSalePriceList\": [],\n            \"saleFlag\": \"0\",\n            \"marketPriceFlag\": \"0\",\n            \"customerSaleFlag\": 0\n        },\n        {\n            \"goodsCode\": \"40-0532\",\n            \"priceList\": [\n                {\n                    \"price\": 1680,\n                    \"level\": \"999999999\"\n                }\n            ],\n            \"salePriceList\": [\n                {\n                    \"salePrice\": 1500,\n                    \"saleLevel\": null\n                }\n            ],\n            \"customerSalePriceList\": [],\n            \"saleFlag\": \"0\",\n            \"marketPriceFlag\": \"0\",\n            \"customerSaleFlag\": 0\n        }\n    ],\n    \"result\": {\n        \"status\": \"0\",\n        \"message\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getStockQuantity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/stock?quantity=1&goodsCode=55-2701&customerNo=7000081",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"stock"
+					],
+					"query": [
+						{
+							"key": "quantity",
+							"value": "1"
+						},
+						{
+							"key": "goodsCode",
+							"value": "55-2701"
+						},
+						{
+							"key": "customerNo",
+							"value": "7000081"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getStockQuantityResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/webapi/stock?quantity=1&goodsCode=55-2701&customerNo=7000081",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"webapi",
+								"stock"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "1"
+								},
+								{
+									"key": "goodsCode",
+									"value": "55-2701"
+								},
+								{
+									"key": "customerNo",
+									"value": "7000081"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:45:05 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": [\n        {\n            \"goodsCode\": \"55-2701\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"55-9039\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"55-9373\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"55-6498\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"02-123\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"02-124\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"02-125\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"01-234\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"39-8298\",\n            \"stockQuantity\": 1,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": \"2021-03-09T04:00:00.001+00:00\",\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"55-6411\",\n            \"stockQuantity\": 1,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"85-6311\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"253-080\",\n            \"stockQuantity\": 999999999,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": null,\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"55-8536\",\n            \"stockQuantity\": 0,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": \"2021-03-10T03:00:00.002+00:00\",\n            \"deliveryYesNo\": \"0\"\n        },\n        {\n            \"goodsCode\": \"40-0532\",\n            \"stockQuantity\": 2,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": null,\n            \"stockDate\": \"2022-10-08T17:00:00.000+00:00\",\n            \"deliveryYesNo\": \"1\"\n        },\n        {\n            \"goodsCode\": \"85-7879\",\n            \"stockQuantity\": 0,\n            \"saleYesNo\": 0,\n            \"saleNgMessage\": \"販売不可だよー\",\n            \"stockDate\": \"2022-10-09T17:00:00.000+00:00\",\n            \"deliveryYesNo\": \"1\"\n        }\n    ],\n    \"result\": {\n        \"status\": \"0\",\n        \"message\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "購入済み商品情報取得 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"getPurchasedCommodityInformation-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/webapi/purchased-commodity-information?customerNo=7000081",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"webapi",
+						"purchased-commodity-information"
+					],
+					"query": [
+						{
+							"key": "customerNo",
+							"value": "7000081"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

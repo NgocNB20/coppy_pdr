@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>アイコン一覧｜店舗管理</title>
+    <script>
+        function setResultIndex(index){
+            document.getElementById("resultIndex").value= index;
+        }
+
+    </script>
+</head>
+
+<body id="shop">
+<div id="iconListShop" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form id="indexForm" th:action="@{/icon/}" th:object="${iconModel}" method="post">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">アイコン一覧</h1>
+                        <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                            <ul>
+                                <li>
+                                    <button class="c-btn btn_move w150px" type="submit" name="doRegist">アイコン登録</button>
+                                </li>
+                            </ul>
+                        </th:block>
+                    </div>
+
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+
+                    <div th:if="${#fields.hasErrors('orderDisplay')}" class="global-error-message">
+                        <ul>
+                            <li th:errors="*{orderDisplay}"></li>
+                        </ul>
+                    </div>
+
+                    <input type="hidden" th:field="*{resultIndex}" id="resultIndex" value=""/>
+
+                    <!-- アイコン一覧 -->
+                    <div class="l-section">
+                        <article class="l-article">
+
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <table class="c-tbl tbl_icon_list large60">
+                                        <thead>
+                                        <tr>
+                                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                                <th class="check"></th>
+                                            </th:block>
+                                            <th class="number">#</th>
+                                            <th class="icon_id">アイコンID</th>
+                                            <th>アイコンイメージ</th>
+                                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                                <th class="btn_set"></th>
+                                            </th:block>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="item, stat: *{resultItems}">
+                                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                                <td class="check">
+                                                    <label class="c-form-control">
+                                                        <input type="radio" name="orderDisplay"
+                                                               th:value="${item.orderDisplayRadioValue}"
+                                                               th:checked="${item.orderDisplayRadioValue} == *{orderDisplay}"><i></i>
+                                                    </label>
+                                                </td>
+                                            </th:block>
+                                            <td class="number" th:text="${item.orderDisplayRadioLabel}"></td>
+                                            <td class="icon_id" th:text="${item.iconSeq}"></td>
+                                            <td>
+                                                <span class="c-item-icons js-icon-textcolor" th:text="${item.iconName}"
+                                                      th:style="'background-color: ' + ${item.colorCode}"></span>
+                                            </td>
+                                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                                <td class="btn_set">
+                                                    <div class="wrap_flex_center">
+                                                        <button class="c-btn-icon mr25" type="submit" name="doUpdate"
+                                                                th:resultIndex="${stat.index}"
+                                                                th:onclick="setResultIndex(this.getAttribute('resultIndex'));">
+                                                            <i class="edit"></i>
+                                                        </button>
+                                                        <button class="c-btn-icon" type="submit" name="doOnceIconDelete"
+                                                                th:resultIndex="${stat.index}"
+                                                                th:onclick="setResultIndex(this.getAttribute('resultIndex')); return simpleDeleteConfirm();">
+                                                            <i class="material-icons clear"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </th:block>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                        <div class="mt20 wrap_flex ai_start">
+                                            <ul class="c-list-left list_sp5 mb10">
+                                                <li>
+                                                    <button class="c-btn-small c-btn_sort" type="submit"
+                                                            name="doOrderDisplayUp"><i
+                                                            class="material-icons navigate_before"></i>UP
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="c-btn-small c-btn_sort" type="submit"
+                                                            name="doOrderDisplayDown"><i
+                                                            class="material-icons navigate_next"></i>DOWN
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="c-btn-small c-btn_sort" type="submit"
+                                                            name="doOrderDisplayTop"><i
+                                                            class="material-icons first_page"></i>TOP
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="c-btn-small c-btn_sort" type="submit"
+                                                            name="doOrderDisplayBottom"><i
+                                                            class="material-icons last_page"></i>BOTTOM
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <button class="c-btn btn_regular col_left" type="submit"
+                                                    name="doOnceOrderDisplayUpdate">表示順を登録
+                                            </button>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

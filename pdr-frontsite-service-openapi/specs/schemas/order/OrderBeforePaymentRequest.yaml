@@ -1,0 +1,13 @@
+type: object
+description: 前回支払方法取得リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 11111111
+  settlementMethodTypeList:
+    type: array
+    description: 決済タイプリスト（画面選択可能な決済のみを設定）
+    items:
+      type: string

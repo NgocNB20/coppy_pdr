@@ -1,0 +1,35 @@
+type: object
+description: カート商品チェックリクエスト
+properties:
+  cartDto:
+    $ref: '#/components/schemas/CartDtoRequest'
+  isLogin:
+    type: boolean
+    description: 会員ログインしているか否かの判定
+    example: true
+  businessType:
+    type: string
+    description: 顧客区分
+    example: 0
+  confDocumentType:
+    type: string
+    description: 確認書類
+    example: 0
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+  zipcode:
+    type: string
+    description: 郵便番号
+    example: 5530001
+
+components:
+  schemas:
+    CartDtoRequest:
+      $ref: ./CartDtoRequest.yaml

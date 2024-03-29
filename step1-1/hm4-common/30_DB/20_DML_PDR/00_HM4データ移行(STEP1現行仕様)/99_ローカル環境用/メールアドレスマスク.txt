@@ -1,0 +1,71 @@
+UPDATE
+    administrator
+SET
+    mail = REGEXP_REPLACE(mail, '@.+', '@itec.hankyu-hanshin.co.jp');
+
+UPDATE
+    memberinfo
+SET
+    memberinfomail = REGEXP_REPLACE(memberinfomail, '@.+', '@itec.hankyu-hanshin.co.jp');
+
+UPDATE
+    memberinfo
+SET
+    memberinfoid = REGEXP_REPLACE(memberinfoid, '@.+', '@itec.hankyu-hanshin.co.jp'),
+    memberinfouniqueid = REGEXP_REPLACE(memberinfouniqueid, '@.+', '@itec.hankyu-hanshin.co.jp');
+
+-- キー重複が出る場合は以下を実施
+UPDATE
+    memberinfo
+SET
+    memberinfoid = REPLACE(memberinfoid, '@pdr.co.jp', '@itec.hankyu-hanshin.co.jp'),
+    memberinfouniqueid = REPLACE(memberinfouniqueid, '@pdr.co.jp', '@itec.hankyu-hanshin.co.jp')
+WHERE
+    memberinfouniqueid LIKE '%@pdr.co.jp%'
+;
+
+UPDATE
+    memberinfo
+SET
+    memberinfoid = REPLACE(memberinfoid, '@njc.co.jp', '@itec.hankyu-hanshin.co.jp'),
+    memberinfouniqueid = REPLACE(memberinfouniqueid, '@njc.co.jp', '@itec.hankyu-hanshin.co.jp')
+WHERE
+    memberinfouniqueid LIKE '%@njc.co.jp%'
+;
+
+UPDATE
+    memberinfo
+SET
+    memberinfoid = REPLACE(memberinfoid, '@yahoo.com', '@itec.hankyu-hanshin.co.jp'),
+    memberinfouniqueid = REPLACE(memberinfouniqueid, '@yahoo.com', '@itec.hankyu-hanshin.co.jp')
+WHERE
+    memberinfouniqueid LIKE '%@yahoo.com%'
+;
+
+UPDATE
+    memberinfo
+SET
+    memberinfoid = REPLACE(memberinfoid, '@gmail.com', '@itec.hankyu-hanshin.co.jp'),
+    memberinfouniqueid = REPLACE(memberinfouniqueid, '@gmail.com', '@itec.hankyu-hanshin.co.jp')
+WHERE
+    memberinfouniqueid LIKE '%@gmail.com%'
+;
+
+UPDATE
+    memberinfo
+SET
+    memberinfoid = REPLACE(memberinfoid, '@gmail.com', '@itec.hankyu-hanshin.co.jp'),
+    memberinfouniqueid = REPLACE(memberinfouniqueid, '@gmail.com', '@itec.hankyu-hanshin.co.jp')
+WHERE
+    memberinfouniqueid LIKE '%@gmail.com%'
+;
+
+UPDATE
+    memberinfo
+SET
+    memberinfoid = REPLACE(memberinfoid, '@m-fahrer.net', '@itec.hankyu-hanshin.co.jp'),
+    memberinfouniqueid = REPLACE(memberinfouniqueid, '@m-fahrer.net', '@itec.hankyu-hanshin.co.jp')
+WHERE
+    memberinfouniqueid LIKE '%@m-fahrer.net%'
+;
+

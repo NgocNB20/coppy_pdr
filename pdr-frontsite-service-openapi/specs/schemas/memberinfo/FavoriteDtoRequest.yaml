@@ -1,0 +1,22 @@
+type: object
+description: お気に入りDtoクラスリクエスト
+properties:
+  favoriteEntityRequest:
+    $ref: '#/components/schemas/FavoriteEntityRequest'
+  goodsDetailsDtoRequest:
+    $ref: '#/components/schemas/GoodsDetailsDtoRequest'
+  goodsGroupImageEntityListRequest:
+    $ref: '#/components/schemas/GoodsGroupImageEntityListRequest'
+  stockStatus:
+    type: string
+    description: 在庫表示
+    example: 1
+
+components:
+  schemas:
+    FavoriteEntityRequest:
+      $ref: ./FavoriteEntityRequest.yaml
+    GoodsDetailsDtoRequest:
+      $ref: ../goods/GoodsDetailsDtoRequest.yaml
+    GoodsGroupImageEntityListRequest:
+      $ref: ../goods/GoodsGroupImageEntityListRequest.yaml

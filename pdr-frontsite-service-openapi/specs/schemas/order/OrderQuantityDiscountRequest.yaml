@@ -1,0 +1,23 @@
+type: object
+description: 数量割引取得結果連携リクエスト
+properties:
+  receiveOrderDto:
+    type: string
+    description: 受注DTO
+  taxRateMap:
+    type: object
+    description: 消費税率MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetConsumptionTaxRateResponseDetailDtoRequest'
+  checkMessageDtoList:
+    type: array
+    description: エラーメッセージ用List
+    items:
+      $ref: '#/components/schemas/CheckMessageDtoRequest'
+
+components:
+  schemas:
+    WebApiGetConsumptionTaxRateResponseDetailDtoRequest:
+      $ref: ../cart/WebApiGetConsumptionTaxRateResponseDetailDtoRequest.yaml
+    CheckMessageDtoRequest:
+      $ref: ./CheckMessageDtoRequest.yaml

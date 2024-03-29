@@ -1,0 +1,11 @@
+type: object
+description: 数量割引情報取得 価格情報レスポンス
+properties:
+  price:
+    type: number
+    description: 割引価格
+    example: 1000
+  level:
+    type: string
+    description: 割引数量閾値
+    example: 割引数量閾値

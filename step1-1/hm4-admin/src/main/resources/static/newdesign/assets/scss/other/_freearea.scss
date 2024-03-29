@@ -1,0 +1,122 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+// フリーエリア用CSS 
+
+.free-area-header1 {
+  $this: &;
+  background: $color-orange-lightGray;
+
+  a {
+    display: block;
+    border-top: solid 1px #E4E4E4;
+    padding: 8px;
+    @include font-style(16, 22, bold);
+    text-align: center;
+
+    @include media(sm) {
+      padding: vwset(8) vwset(5);
+      @include font-sp-style(13);
+    }
+
+    &:hover {
+      @include media(lg) {
+        opacity: .5;
+      }
+    }
+  }
+}
+
+.freeArea_banner {
+  $this: &;
+
+  @include media(lg) {
+
+    margin-top: 52px;
+
+    &__unit {
+
+      + #{$this}__unit {
+        margin-top: 45px;
+        padding-top: 45px;
+        border-top: solid 1px #ccc;
+      }
+    }
+
+    &__item + #{$this}__item {
+      margin-top: 26px;
+    }
+
+    &__title {
+      padding-bottom: 30px;
+      @include font-style(16,16,bold);
+      color: $color-000;
+    }
+
+    &__heading {
+      margin-top: 15px;
+      @include font-style(15,24,bold);
+      color: $color-000;
+    }
+
+    &__text {
+      margin-top: 10px;
+      @include font-style(15,24);
+      color: $color-000;
+    }
+
+    &__service a + a {
+      margin-top: 18px;
+    }
+
+  }
+
+  @include media(sm) {
+
+    &__unit {
+      padding: vwset(30) vwset(5) vwset(40);
+      border-bottom: solid 5px $color-orange-lightGray;
+    }
+
+    &__title {
+      padding: vwset(8) vwset(15) vwset(20);
+      @include font-sp-style(16,20,bold);
+      color: $color-000;
+    }
+
+    &__movie {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: vwset(5);
+    }
+
+    &__heading {
+      margin-top: vwset(19);
+      padding-inline: vwset(10);
+      @include font-sp-style(15,22,bold);
+      color: $color-000;
+    }
+
+    &__text {
+      margin-top: vwset(10);
+      padding-inline: vwset(10);
+      @include font-sp-style(15,25);
+      color: $color-333;
+    }
+
+    &__service {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: vwset(5);
+      row-gap: vwset(10);
+    }
+
+
+
+  }
+
+}
+

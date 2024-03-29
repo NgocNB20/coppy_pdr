@@ -1,0 +1,1 @@
+SELECT * FROM coopdatehistory c WHERE c.coopid = /*coopId*/''

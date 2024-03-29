@@ -1,0 +1,12 @@
+type: object
+description: 今すぐお届け分DTOリクエスト
+properties:
+  orderGoodsEntity:
+    type: object
+    description: 受注商品クラス
+    $ref: '#/components/schemas/OrderGoodsRequest'
+
+components:
+  schemas:
+    OrderGoodsRequest:
+      $ref: ./OrderGoodsRequest.yaml

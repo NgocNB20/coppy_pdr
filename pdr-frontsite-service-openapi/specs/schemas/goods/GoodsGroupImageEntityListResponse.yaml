@@ -1,0 +1,9 @@
+type: array
+description: 商品グループ画像エンティティリストレスポンス
+items:
+  $ref: "#/components/schemas/GoodsGroupImageEntityResponse"
+
+components:
+  schemas:
+    GoodsGroupImageEntityResponse:
+      $ref: ./GoodsGroupImageEntityResponse.yaml

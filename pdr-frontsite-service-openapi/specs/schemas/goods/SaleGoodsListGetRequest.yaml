@@ -1,0 +1,11 @@
+# 2023-renew No65 from here
+type: object
+description: セール商品Listクラスリクエスト
+properties:
+  saleGoodsSeqList:
+    type: array
+    description: セール商品SEQリスト
+    items:
+      type: integer
+      example: 1
+# 2023-renew No65 to here

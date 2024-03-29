@@ -1,0 +1,76 @@
+<!-- PDR Migrate Customization from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__current">メールアドレス</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember.html}"></div>
+                <div class="l-main">
+                    <h2 class="c-title-page"><strong>メールアドレスの変更完了</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form id="registForm" th:action="@{/mail/regist.html}" th:object="${mailModel}" method="post">
+                        <th:block th:if="*{!isErrorUrl()}">
+                            <div class="l-complete l-complete--gray">
+                                <div class="l-complete__inner">
+                                    <p class="l-complete__title">ご登録メールアドレスを変更いたしました。</p>
+                                    <div class="l-complete__result l-complete__result--white l-complete--margin-m">
+                                        <div class="l-complete__result-title">新しいメールアドレス</div>
+                                        <div class="l-complete__result-item">
+                                            <span id="memberInfoMail" th:text="*{memberInfoMail}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                        <div class="c-button-wrap">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here -->

@@ -1,0 +1,8 @@
+type: object
+description: ニュース詳細情報取得リクエスト
+properties:
+  newsSeq:
+    type: integer
+    format: int32
+    description: ニュースSEQ
+    example: 1

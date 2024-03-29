@@ -1,0 +1,35 @@
+type: object
+description: 運営者に紐付けられた権限グループレスポンス
+properties:
+  adminAuthGroupSeq:
+    type: integer
+    format: int32
+    description: 運営者権限グループSEQ
+    example: 1001
+  authGroupDisplayName:
+    type: string
+    description: グループ表示名
+    example: フルアクセス
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    sample: 2022/04/01 19:50:23.341
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    sample: 2022/04/01 19:50:23.341
+  unmodifiableGroup:
+    type: boolean
+    description: 権限グループが編集不能なグループかどうか
+    sample: 0
+  adminAuthGroupDetailList:
+    type: array
+    description: 運営者権限グループ詳細一覧
+    items:
+      $ref: "#/components/schemas/AdminAuthGroupDetailtResponse"
+components:
+  schemas:
+    AdminAuthGroupDetailtResponse:
+      $ref: ./AdminAuthGroupDetailtResponse.yaml

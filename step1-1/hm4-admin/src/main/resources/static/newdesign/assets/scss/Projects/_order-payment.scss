@@ -1,0 +1,247 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.p-order-payment {
+
+  &__select {
+
+    .l-section__inner {
+      border-top: solid 5px $color-orange-lightGray;
+    }
+
+    &-detail {
+      background: $color-orange-lightGray;
+      padding: 33px 40px 40px;
+    }
+
+    &-radio {
+      border-bottom: solid 5px $color-orange-lightGray;
+    }
+
+    @include media(lg) {
+      &-radio {
+        padding-block: 30px;
+
+        label {
+          display: block;
+          @include font-style(18,24,bold);
+          padding-left: 35px;
+
+          &::before {
+            width: 23px;
+            height: 23px;
+          }
+
+          &::after {
+            width: 15px;
+            height: 15px;
+          }
+
+        }
+
+      .c-radio:checked + label::after {
+        width: 15px;
+        height: 15px;
+      } 
+
+        small {
+          @include font-style(15,30,normal);
+        }
+      }
+
+      &-memolink {
+        margin-left: 20px;
+        @include font-style(16,30,normal);
+      }
+    }
+
+    @include media(sm) {
+
+      margin-inline: vwset(15);
+
+      &-detail {
+        padding: vwset(12) vwset(15) vwset(18);
+      }
+
+      &-radio {
+        padding-block: vwset(18);
+  
+        label {
+          display: block;
+          @include font-sp-style(16,28,bold);
+        }
+  
+        small {
+          @include font-sp-style(15,28,normal);
+        }
+      }
+
+      &-memolink {
+        display: block;
+        @include font-style(15,30,normal);
+      }
+
+
+
+    }
+  }
+
+  &__contents {
+
+    &-title {
+      @include font-style(18,32,bold);
+
+      small {
+        font-weight: normal;
+        margin-left: 10px;
+      }
+
+      &--bottom {
+        margin-bottom: 25px;
+      }
+    }
+
+    &-heading {
+      @include font-style(16,30);
+    }
+
+    &-text {
+      @include font-style(16,30,normal);
+    }
+
+    &-memo {
+      @include font-style(15,30,normal);
+    }
+
+    &-nest {
+      background: $color-fff;
+      margin-block: 15px;
+      padding: 30px;
+    }
+
+    em {
+      color: $color-primary;
+      font-style: normal;
+    }
+
+    .p-order-payment__select-radio {
+      padding-block: 12px;
+
+      label {
+        @include font-style(16,24,normal);
+      }
+
+      strong {
+        @include font-style(18,24,bold);
+      }
+    }
+
+    &--margin-m {
+      margin-top: 25px;
+    }
+
+    @include media(sm) {
+
+      &-title {
+        @include font-sp-style(16,32,bold);
+
+        small {
+          margin-left: 0;
+          display: block;
+          @include font-sp-style(15,28);
+        }
+  
+        &--bottom {
+          margin-bottom: vwset(15);
+        }
+      }
+  
+      &-heading {
+        @include font-sp-style(15,30);
+      }
+  
+      &-text {
+        @include font-sp-style(15,30,normal);
+      }
+  
+      &-memo {
+        @include font-sp-style(15,30,normal);
+      }
+  
+      &-nest {
+        margin-block: vwset(10);
+        padding: vwset(15);
+      }
+  
+      .p-order-payment__select-radio {
+        padding-block: vwset(12);
+  
+        label {
+          @include font-sp-style(15,24,normal);
+          padding-top: vwset(3);
+        }
+  
+        strong {
+          @include font-style(15,24,bold);
+        }
+      }
+  
+      &--margin-m {
+        margin-top: vwset(15);
+      }
+
+    }
+
+  }
+
+  &__new {
+
+    margin-left: 35px;
+
+    &-form {
+      margin-block: 20px 25px;
+      padding: 30px;
+      background: $color-fff;
+    }
+
+    @include media(sm) {
+
+      margin-left: 0;
+
+      &-form {
+        margin-block: vwset(10) vwset(15);
+        padding: vwset(15) 0 0;
+      }
+
+      .l-form__list-wrap::after {
+        display: none;
+      }
+
+
+    }
+
+  }
+
+  &__modal {
+
+    &-title {
+      @include font-style(18,32,bold);
+      margin-block: 35px;
+    }
+
+    @include media(sm) {
+
+      &-title {
+        @include font-sp-style(16,26,bold);
+        margin-block: vwset(25);
+      }
+
+    }
+
+  }
+
+}
+

@@ -1,0 +1,59 @@
+type: object
+description: 公開商品グループ情報検索リクエスト
+properties:
+  categoryId:
+    type: string
+    description: カテゴリID
+    example: "1000"
+  minPrice:
+    type: number
+    description: 下限金額
+    example: 0
+  maxPrice:
+    type: number
+    description: 上限金額
+    example: 1000
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 1
+  keywordLikeCondition1:
+    type: string
+    description: キーワード条件1
+    example: keyword
+  keywordLikeCondition2:
+    type: string
+    description: キーワード条件2
+    example: keyword
+  keywordLikeCondition3:
+    type: string
+    description: キーワード条件3
+    example: keyword
+  keywordLikeCondition4:
+    type: string
+    description: キーワード条件4
+    example: keyword
+  keywordLikeCondition5:
+    type: string
+    description: キーワード条件5
+    example: keyword
+  keywordLikeCondition6:
+    type: string
+    description: キーワード条件6
+    example: keyword
+  keywordLikeCondition7:
+    type: string
+    description: キーワード条件7
+    example: keyword
+  keywordLikeCondition8:
+    type: string
+    description: キーワード条件8
+    example: keyword
+  keywordLikeCondition9:
+    type: string
+    description: キーワード条件9
+    example: keyword
+  keywordLikeCondition10:
+    type: string
+    description: キーワード条件10
+    example: keyword

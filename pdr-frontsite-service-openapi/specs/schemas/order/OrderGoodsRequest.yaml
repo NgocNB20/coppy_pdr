@@ -1,0 +1,212 @@
+type: object
+description: 受注商品リクエスト
+properties:
+  orderSeq:
+    type: integer
+    format: int32
+    description: 受注SEQ（必須）
+    example: 0
+  orderGoodsVersionNo:
+    type: integer
+    format: int32
+    description: 受注商品連番（必須）
+    example: 1
+  orderConsecutiveNo:
+    type: integer
+    format: int32
+    description: 注文連番（必須）
+    default: 1
+    example: 1
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ（必須）
+    example: 1
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順（必須）
+    example: 1
+  totalingType:
+    type: string
+    description: 集計種別（必須）
+    example: 1
+  salesFlag:
+    type: string
+    description: 売上フラグ（必須）
+    default: 0
+    example: 1
+  processTime:
+    type: string
+    format: date-time
+    description: 処理日時（必須）
+    example: 2021/12/12 12:00:00
+  goodsGroupCode:
+    type: string
+    description: 商品グループコード（必須）
+    example: 1
+  goodsCode:
+    type: string
+    description: 商品コード（必須）
+    example: 1
+  janCode:
+    type: string
+    description: JANコード
+    example: 1
+  goodsGroupName:
+    type: string
+    description: 商品グループ名
+    example: 1
+  goodsTaxType:
+    type: string
+    description: 商品消費税種別（必須）
+    default: 1
+    example: 1
+  taxRate:
+    type: number
+    description: 税率（必須）
+    example: 10
+  goodsPrice:
+    type: number
+    description: 商品単価（必須）
+    default: 0
+    example: 10
+  preGoodsCount:
+    type: number
+    description: 前回商品数量
+    default: 0
+    example: 10
+  goodsCount:
+    type: number
+    description: 商品数量（必須）
+    default: 0
+    example: 10
+  freeDeliveryFlag:
+    type: string
+    description: 無料配送フラグ（必須）
+    default: 0
+    example: 10
+  unitValue1:
+    type: string
+    description: 規格値１
+    example: 10
+  unitValue2:
+    type: string
+    description: 規格値２
+    example: 10
+  individualDeliveryType:
+    type: string
+    description: 商品個別配送種別（必須）
+    default: 0
+    example: 10
+  deliveryType:
+    type: string
+    description: 商品納期
+    example: 10
+  orderSetting1:
+    type: string
+    description: 受注連携設定１
+    example: 10
+  orderSetting2:
+    type: string
+    description: 受注連携設定２
+    example: 10
+  orderSetting3:
+    type: string
+    description: 受注連携設定３
+    example: 10
+  orderSetting4:
+    type: string
+    description: 受注連携設定４
+    example: 10
+  orderSetting5:
+    type: string
+    description: 受注連携設定５
+    example: 10
+  orderSetting6:
+    type: string
+    description: 受注連携設定６
+    example: 10
+  orderSetting7:
+    type: string
+    description: 受注連携設定７
+    example: 10
+  orderSetting8:
+    type: string
+    description: 受注連携設定８
+    example: 10
+  orderSetting9:
+    type: string
+    description: 受注連携設定９
+    example: 10
+  orderSetting10:
+    type: string
+    description: 受注連携設定１０
+    example: 10
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00
+  groupCode:
+    type: string
+    description: グループコード
+    example: 1
+  saleCode:
+    type: string
+    description: セールコード
+    example: 1
+  note:
+    type: string
+    description: 備考
+    example: 1
+  hints:
+    type: string
+    description: 注意事項
+    example: 1
+  price:
+    type: number
+    description: 価格
+    example: 1
+  deliverySlipFlag:
+    type: string
+    description: 納品書印字フラグ
+    example: 1
+  bundleFlag:
+    type: boolean
+    description: 同梱商品フラグ
+    example: 1
+  orderSerial:
+    type: string
+    description: 明細番号(プロモーション 値引率情報リストで返却された受注連番)
+    example: 1
+  unitDiscountPrice:
+    type: number
+    description: 単価値引額(プロモーション 値引率情報リストで返却された単価値引額)
+    example: 1
+  discountsType:
+    type: string
+    description: 割引適用区分
+    example: 1
+  stockDate:
+    type: string
+    format: date-time
+    description: 入荷予定日
+    example: 1
+  deliveryYesNo:
+    type: string
+    description: 入荷次第お届け可否
+    example: 1
+  stockManagementFlag:
+    type: string
+    description: 在庫管理フラグ
+    example: 1
+  dipendingOnReceiptOrderCode:
+    type: string
+    description: 入荷次第お届け受注番号(注文完了メール用)
+    example: 1

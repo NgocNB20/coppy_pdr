@@ -1,0 +1,16 @@
+type: object
+description: お気に入り情報登録リクエスト
+properties:
+  gcd:
+    type: string
+    description: 商品コード
+    example: furniture-00101
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  siteType:
+    type: string
+    description: サイト区分
+    example: 1

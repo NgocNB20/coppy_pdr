@@ -1,0 +1,7 @@
+type: object
+description: WEB-API連携クーポン有効性チェックリクエスト
+properties:
+  couponCode:
+    type: string
+    description: クーポンコード
+    example: x7HChWJZaV|x9HChWJZaK

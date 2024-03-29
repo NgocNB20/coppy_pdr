@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jp.co.hankyuhanshin.itec.hitmall.pdr.frontsite-service</groupId>
+    <artifactId>pdr-frontsite-service</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
+    <name>pdr-frontsite-service-openapi</name>
+    <description>PDRフロントサイトサービスのOpenAPI定義</description>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>out/goods/service-server</module>
+        <module>out/goods/service-client</module>
+        
+        <module>out/shop/service-server</module>
+        <module>out/shop/service-client</module>
+
+        <module>out/webapi/service-server</module>
+        <module>out/webapi/service-client</module>
+
+        <module>out/ukapi/service-server</module>
+        <module>out/ukapi/service-client</module>
+
+        <module>out/memberinfo/service-server</module>
+        <module>out/memberinfo/service-client</module>
+
+        <module>out/cart/service-server</module>
+        <module>out/cart/service-client</module>
+
+        <module>out/order/service-server</module>
+        <module>out/order/service-client</module>
+
+        <module>out/user/service-server</module>
+        <module>out/user/service-client</module>
+
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <inherited>false</inherited>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

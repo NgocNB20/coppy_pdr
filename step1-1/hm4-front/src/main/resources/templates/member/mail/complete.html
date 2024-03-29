@@ -1,0 +1,64 @@
+<!-- PDR Migrate Customization from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-mypage">
+    <a id="top" name="top"></a>
+    <div class="l-mainwrap">
+
+        <div th:replace="~{newdesign/include/header}"></div>
+
+        <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">メールアドレス</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+
+                <div class="l-main">
+                    <h2 class="c-title-page"><strong>メールアドレスの確認</strong></h2>
+                    <form name="form1" id="form1" method="post" action="">
+
+                        <div class="l-complete l-complete--gray">
+                            <div class="l-complete__inner">
+                                <p class="l-complete__title">新しく登録されたメールアドレスに本登録用のURLを送信しました。</p>
+                                <div class="l-complete__text-unit l-complete--margin-m">
+                                    <p class="l-complete__text">メールに記載されたURLを押し、メールアドレスの本登録画面の「変更する」ボタンを押すと変更が完了します。<br>
+                                        メールに記載されているURLは24時間有効です。<br>
+                                        場合により、メールが届くまでに少々お時間がかかる場合がございますので、ご了承ください。<br>
+                                        メールが届かない場合は、ご登録いただいたメールアドレスが間違っている場合があります。<br>
+                                        マイページ「<a th:href="@{/member/index.html}" class="c-inlinelink">メールアドレスの変更</a>」より再度お試しください。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="c-button-wrap">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+</body>
+</html>
+<!-- PDR Migrate Customization to here -->

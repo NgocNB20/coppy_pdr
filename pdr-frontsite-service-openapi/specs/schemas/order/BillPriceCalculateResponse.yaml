@@ -1,0 +1,6 @@
+type: object
+description: 請求金額算出レスポンス
+properties:
+  receiveOrderDto:
+    type: string
+    description: 受注DTO

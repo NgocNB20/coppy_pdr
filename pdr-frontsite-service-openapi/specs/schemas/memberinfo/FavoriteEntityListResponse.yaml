@@ -1,0 +1,9 @@
+type: array
+description: お気に入りEntityListレスポンス
+items:
+  $ref: "#/components/schemas/FavoriteEntityResponse"
+
+components:
+  schemas:
+    FavoriteEntityResponse:
+      $ref: ./FavoriteEntityResponse.yaml

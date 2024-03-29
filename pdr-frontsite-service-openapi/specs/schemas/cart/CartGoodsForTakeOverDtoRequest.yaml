@@ -1,0 +1,30 @@
+type: object
+description: カート一括登録用引継DTOリクエスト
+properties:
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ
+    example: 1000
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ
+    example: 10000001
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: furniture-00201
+  goodsCount:
+    type: number
+    description: 商品数量
+    example: 1
+  reserveDeliveryDate:
+    type: string
+    description: 取りおきお届け希望日
+    format: date-time
+    example: 2022/01/01 12:00:00
+  reserveFlag:
+    type: string
+    description: 取りおきフラグ
+    example: 0

@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.p-questionnaire {
+
+  .l-form__list {
+
+    @include media(lg) {
+      grid-template-columns: 420px 1fr;
+    }
+  }
+
+
+
+}
+
+
+
+
+
+

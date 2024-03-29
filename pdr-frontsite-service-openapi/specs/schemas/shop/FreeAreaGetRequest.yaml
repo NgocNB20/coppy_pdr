@@ -1,0 +1,12 @@
+type: object
+description: フリーエリア情報取得リクエスト
+properties:
+  freeAreaKey:
+    type: string
+    description: フリーエリアキー
+    example: 1
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ (FK)
+    example: 10000000

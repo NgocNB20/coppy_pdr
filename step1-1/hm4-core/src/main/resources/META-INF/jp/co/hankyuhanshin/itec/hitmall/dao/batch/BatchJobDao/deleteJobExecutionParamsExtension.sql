@@ -1,0 +1,7 @@
+DELETE
+FROM BATCH_JOB_EXECUTION_PARAMS_EXTENSION
+WHERE REQUESTCODE IN (SELECT CAST(STRING_VAL AS INTEGER)
+                      FROM BATCH_JOB_EXECUTION_PARAMS
+                      WHERE JOB_EXECUTION_ID IN
+                            (SELECT JOB_EXECUTION_ID FROM BATCH_JOB_EXECUTION where LAST_UPDATED < /*expiredDateTime*/0)
+                        AND KEY_NAME IN ('jobParam', 'requestCode'))

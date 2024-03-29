@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="mypage">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <main class="l-page l-head__pattern1">
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" title="TOP" href="/"><span property="name">TOP</span></a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" title="マイページ" href="/member/"><span
+                                property="name">マイページ</span></a>
+                        <meta property="position" content="2">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><span property="name">退会手続き</span>
+                        <meta property="position" content="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-head__pattern1__content">
+            <h2 class="c-title--page mypage__title"><strong>退会手続き</strong></h2>
+            <div class="l-container mypage__container l-head__pattern1__content-main">
+                <div th:replace="~{includehm4/sidemenumember_new :: sidemenumember('delete')}"></div>
+                <div class="l-main">
+                    <p class="c-text--xs">HIT-MALL DEMO SHOPの会員から退会いたします。<br/>
+                        下の入力欄にご登録メールアドレスとパスワードを入力していただき、「退会する」ボタンをクリックしてください。<br/>
+                        退会すると、カード情報も削除されます。それでもよろしい方のみ、ご退会ください。
+                    </p>
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <form id="indexForm" th:action="@{/member/delete/index.html}" th:object="${memberDeleteModel}" method="post">
+                        <div class="l-form__area c-margin--s">
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>
+                                    <div>ご登録メールアドレス</div>
+                                </dt>
+                                <dd class="email-double">
+                                    <input id="memberInfoId" type="email" th:field="*{memberInfoId}"
+                                           th:errorclass="field-error" class="c-input" autocomplete="email"
+                                           placeholder="ここに入力してください" maxlength="160">
+                                    <div th:if="${#fields.hasErrors('memberInfoId')}" th:errors="*{memberInfoId}"
+                                         class="field-error-message"></div>
+                                </dd>
+
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt class="c-title--table c-font-bold"><span class="c-require">必須</span>
+                                    <div>パスワード</div>
+                                </dt>
+                                <dd>
+                                    <div class="password-wrap">
+                                        <div>
+                                            <input id="memberInfoPassWord" th:field="*{memberInfoPassWord}"
+                                                   th:errorclass="field-error" type="password"
+                                                   class="c-input js-password-input" autocomplete="off"
+                                                   placeholder="ここに入力してください" value="" maxlength="20">
+                                            <button name="" type="button" class="l-form__password js-password-btn">
+                                                <svg viewBox="0 0 576 512">
+                                                    <use xlink:href="/hm4/assets/images/icon/eye-open.svg#eye-open"></use>
+                                                </svg>
+                                                <svg viewBox="0 0 640 512">
+                                                    <use xlink:href="/hm4/assets/images/icon/eye-close.svg#eye-close"></use>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('memberInfoPassWord')}"
+                                             th:errors="*{memberInfoPassWord}" class="field-error-message"></div>
+                                    </div>
+                                </dd>
+
+                            </dl>
+                            <div class="c-btn-wrap--2btn c-margin--xl">
+                                <button name="doOnceMemberInfoDelete" type="submit" class="c-btn--blue">退会する</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{includehm4/footer_new}"></div>
+</div>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-orderflow {
+  margin-block: 85px 50px;
+  text-align: center;
+
+  &__step {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $color-ccc;
+
+    span {
+      display: block;
+      width: max-content;
+      @include font-style(15,18,bold);
+      color: $color-a1;
+      position: absolute;
+      bottom: 38px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &:not(:first-child) {
+      margin-left: 180px;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 188px;
+        height: 5px;
+        background: $color-orange-lightGray;
+        position: absolute;
+        bottom: 7px;
+        left: -185px;
+        z-index: -1;
+      }
+    }
+
+    &--current {
+      background: $color-primary;
+
+      span {
+        color: $color-primary;
+      }
+
+      &:not(:first-child) {
+  
+        &::before {
+          background: $color-primary;
+        }
+      }
+
+    }
+
+    &--already {
+      background: $color-primary;
+
+      &:not(:first-child) {
+  
+        &::before {
+          background: $color-primary;
+        }
+      }
+    }
+  }
+
+  @include media(sm) {
+    margin-block: vwset(50) vwset(33);
+  
+    &__step {
+      width: vwset(25);
+      height: vwset(25);
+  
+      span {
+        @include font-sp-style(12,16,bold);
+        bottom: vwset(35);
+      }
+  
+      &:not(:first-child) {
+        margin-left: vwset(90);
+  
+        &::before {
+          width: vwset(98);
+          height: vwset(5);
+          bottom: vwset(10);
+          left: vwset(-95);
+        }
+      }
+
+    }
+
+
+
+  }
+}
+

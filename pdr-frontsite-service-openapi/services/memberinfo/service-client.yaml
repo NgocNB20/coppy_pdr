@@ -1,0 +1,15 @@
+inputSpec: specs/openapi.memberinfo.yaml
+generatorName: java
+outputDir: out/memberinfo/service-client
+additionalProperties:
+  artifactId: pdr-frontsite-memberinfo-service-client
+  interfaceOnly: true
+  modelPackage: jp.co.hankyuhanshin.itec.hitmall.api.memberinfo.param
+  apiPackage: jp.co.hankyuhanshin.itec.hitmall.api.memberinfo
+  groupId: jp.co.hankyuhanshin.itec.hitmall.pdr.frontsite-service
+  dateLibrary: legacy
+  java8: true
+  library: resttemplate
+  parentGroupId: org.springframework.boot
+  parentArtifactId: spring-boot-starter-parent
+  parentVersion: 2.6.2

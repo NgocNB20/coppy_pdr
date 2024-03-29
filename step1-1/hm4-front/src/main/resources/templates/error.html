@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-error">
+<div class="l-mainwrap">
+    <div id="layoutHeader" th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-section">
+            <div class="l-section__inner">
+                <div class="p-error__main">
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h2 class="p-error__title">お探しのページが見つかりません。</h2>
+                    <div class="p-error__text-area">
+                        <p class="p-error__text">一時的にアクセスできない状態か、移動もしくは削除された可能性がございます。<br>
+                            お手数をおかけしますが、トップページからやりなおしてください。</p>
+                    </div>
+                </div>
+                <div class="c-button-wrap">
+                    <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                </div>
+            </div>
+            <div th:utext="${stackTrace}"/>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!--// PDR Migrate Customization from here-->
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>会員登録申請受付メール</title>
+</head>
+<body>
+<div>
+    <div>
+        <span>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+    <div>
+        <span>■　ピーディーアールオンラインショップ</span>
+    </div>
+    <div>
+        <span>■　オンラインショップ会員登録　お申し込み受付のお知らせ</span>
+    </div>
+    <div>
+        <span>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span>　</span><span th:text="${mailContentsMap.get('M_LAST_NAME')} + ' 様'"></span>
+    </div>
+    <br>
+    <div>
+        <span>　この度はピーディーアールオンラインショップの会員登録にお申し込みいただき、</span>
+    </div>
+    <div>
+        <span>　誠にありがとうございました。</span>
+    </div>
+    <br>
+    <div>
+        <span>　会員登録手続き完了後(通常2営業日以内）に、</span>
+    </div>
+    <div>
+        <span>　ログインに必要な会員IDと初回パスワードをメールにてご連絡いたします。</span>
+    </div>
+    <div>
+        <span>　お申し込み内容の確認のためご登録電話番号にお電話させていただく場合も</span>
+    </div>
+    <div>
+        <span>　ございますのでご了承ください。</span>
+    </div>
+</div>
+<br>
+<div>
+    <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+</div>
+<div>
+    <div>
+        <span>※本メールは送信専用メールアドレスから自動で配信しております。</span>
+    </div>
+    <div>
+        <span>　ご返信いただいてもお答えできませんのでご了承ください。</span>
+    </div>
+    <div>
+        <span>　このメールにお心当たりのない方・お問い合わせは、下記お問い合わせURLから</span>
+    </div>
+    <div>
+        <span>　入力いただくか、下記カスタマーサービスデスクまでご連絡ください。</span>
+    </div>
+</div>
+<div th:replace="~{common/signatureWithUrl}"></div>
+<br>
+</body>
+</html>
+<!--// PDR Migrate Customization to here-->

@@ -1,0 +1,327 @@
+@charset "utf-8";
+
+// ==========================================================================
+//  c-button
+// ==========================================================================
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.c-button {
+  display: inline-grid;
+  grid-auto-flow: column;
+  place-content: center;
+  place-items: center;
+  transition: opacity $comMS $comES;
+  cursor: pointer;
+
+  &:hover {
+    @include media(lg) {
+      opacity: .5;
+    }
+  }
+
+  // オレンジ 角なし
+  &--primary {
+    border-radius: 9999px;
+    background-color: $color-primary;
+    color: $color-fff;
+  }
+
+  // オレンジ 枠 角なし
+  &--primary-line {
+    border-radius: 9999px;
+    background-color: $color-fff;
+    color: $color-primary;
+    border: solid 1px $color-primary;
+  }
+
+  // グレー 角なし
+  &--ccc {
+    border-radius: 9999px;
+    background-color: $color-ccc;
+    color: $color-fff;
+  }
+
+  // グレー 枠 角なし
+  &--ccc-line {
+    border-radius: 9999px;
+    background-color: $color-fff;
+    color: $color-ccc;
+    border: solid 1px $color-ccc;
+  }
+
+  // グレーa1 枠 角なし
+  &--a1-line {
+    border-radius: 9999px;
+    background-color: $color-fff;
+    color: $color-333;
+    border: solid 1px $color-a1;
+  }
+
+
+  // 大
+  &--width-l {
+    height: 70px;
+    padding: 0 50px 2px; // 【メモ】bottomの2pxは微調整。ブラウザ差異が出るかも。
+    @include font-style(22, 28, bold);
+
+    @include media(sm) {
+      min-width: vwset(275);
+      height: vwset(65);
+      padding: 0 vwset(50); // 【メモ】bottomの値は実機で確認してから調整する m s も同じく。
+      @include font-sp-style(20);
+    }
+  }
+
+  // 中
+  &--width-m {
+    height: 60px;
+    min-width: 140px;
+    padding: 0 40px 2px;  // 【メモ】bottomの2pxは微調整。ブラウザ差異が出るかも。
+    @include font-style(20, 25, bold);
+
+    @include media(sm) {
+      min-width: vwset(125);
+      height: vwset(50);
+      padding: 0 vwset(40);
+      @include font-sp-style(16);
+    }
+  }
+
+  // 小
+  &--width-s {
+    height: 35px;
+    padding: 0 17px 2px;  // 【メモ】bottomの2pxは微調整。ブラウザ差異が出るかも。
+    @include font-style(15, 19, bold);
+
+    @include media(sm) {
+      height: vwset(35);
+      padding: 0 vwset(17);
+      @include font-sp-style(13,24);
+    }
+  }
+
+  // もっと見る
+  &--readmore {
+    padding: 17px 30px;
+    border: solid 1px #bbb;
+    border-radius: 4px;
+
+    p {
+      @include icon('arrow-down', 'a1a1a1');
+      background-position: right center;
+      background-size: 11px auto;
+      padding-right: 30px; 
+      @include font-style(16,25);
+      color: $color-000;
+    }
+
+    @include media(sm) {
+      padding: vwset(17) vwset(30);
+      background-position: right vwset(20) center;
+      background-size: vwset(6) auto;
+      padding-right: vwset(30); 
+      @include font-sp-style(15);
+    }
+  }
+
+  // もっと見る 黒
+  &--readmore2 {
+    padding: 17px 30px;
+    border-radius: 4px;
+    background: $color-333;
+
+    p {
+      @include icon('arrow-down', 'ffffff');
+      background-position: right center;
+      background-size: 11px auto;
+      padding-right: 30px; 
+      @include font-style(16,25);
+      color: $color-fff;
+    }
+
+    @include media(sm) {
+      padding: vwset(17) vwset(30);
+      background-position: right vwset(20) center;
+      background-size: vwset(6) auto;
+      padding-right: vwset(30); 
+      @include font-sp-style(15);
+    }
+  }
+
+  // 閉じる
+  &--close {
+    padding: 16px 31px;
+    border: solid 1px $color-primary;
+    border-radius: 4px;
+
+    p {
+      @include icon('close', 'f36b30');
+      background-position: left calc(50% + 1px);
+      background-size: 18px auto;
+      padding-left: 28px;
+      @include font-style(20,20,bold);
+      color: $color-primary;
+
+    }
+
+    @include media(sm) {
+      padding: vwset(14) vwset(20);
+
+      p {
+        background-position: left calc(50% + 2px);
+        background-size: vwset(14) auto;
+        padding-left: vwset(24);
+        @include font-sp-style(16,16,normal);
+      }
+    }
+  }
+
+  // セールde予約
+  &--sale-reserve {
+    position: relative;
+    padding-left: 40px;
+
+    &::after {
+      content: "";
+      width: 37px;
+      height: 37px;
+      background: $color-fff;
+      border-radius: 9999px;
+      position: absolute;
+      top: 50%;
+      left: -2px;
+      transform: translateY(-50%);
+    }
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: -2px;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+  }
+
+  // お気に入り（丸）
+  &--favorite {
+    align-items: center;
+    background-color: #f8f8f8;
+    border: solid 1px #e4e4e4;
+    border-radius: 50%;
+    display: inline-flex;
+    height: 45px;
+    justify-content: center;
+    width: 45px;
+
+    svg {
+      fill: transparent;
+      stroke: #a0a0a0;
+      stroke-width: 1;
+      transform-origin: center;
+      transition: fill $comMS $comES, stroke $comMS $comES, transform $comMS $comES;
+    }
+
+    &:hover {
+
+      svg {
+        transform: scale(1.2);
+      }
+    }
+
+    &:active,
+    &.is-active {
+
+      svg {
+        fill: #ed6161;
+        stroke: #ed6161;
+      }
+    }
+
+    p {
+      height: 17px;
+      width: 19px;
+    }
+
+    @include media(sm) {
+    }
+  }
+
+
+  // 変更ボタン
+  &--change {
+    min-width: 80px;
+    height: 35px;
+    border: solid 1px $color-666;
+    background: $color-fff;
+    border-radius: 9999px;
+    @include font-style(15,21,bold);
+    color: $color-666;
+
+    svg {
+      fill: $color-666;
+      width: 15px;
+      margin-right: 6px;
+    }
+
+    @include media(sm) {
+      width: vwset(80);
+      height: vwset(40);
+      @include font-style(15,24);
+    }
+
+    // &-large {
+    //   width: auto;
+    //   padding: 0 20px;
+
+    // }
+  }
+
+  // 削除 ※小さいボタン
+  &--delete {
+    min-width: 80px;
+    height: 35px;
+    @include font-style(15,21);
+
+    svg {
+      fill: $color-fff;
+      width: 11px;
+      margin: 2px 6px 0 0;
+    }
+
+    @include media(sm) {
+      width: vwset(80);
+      height: vwset(40);
+      @include font-style(15,24);
+
+      svg {
+        margin-top: 0;
+      }
+    }
+
+  }
+
+  // 住所検索
+  &--address {
+    min-width: 120px;
+    height: 50px;
+    padding-bottom: 2px;
+    @include font-style(18,34);
+    line-height: 50px;
+    border-radius: 9999px;
+    background: $color-a1;
+    color: $color-fff;
+
+    @include media(sm) {
+      width: vwset(90);
+      height: vwset(40);
+      @include font-sp-style(17,21);
+      padding-bottom: 0;
+    }
+
+  }
+
+}

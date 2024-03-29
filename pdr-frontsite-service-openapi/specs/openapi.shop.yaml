@@ -1,0 +1,784 @@
+openapi: 3.0.3
+info:
+  title: 【PDRフロントサイトサービス】ショップのAPI仕様
+  description: PDRフロントサイトサービスのOpenAPI定義：ショップ
+  version: 4.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /shop/questionnaire-key/{questionnaireKey}:
+    get:
+      tags:
+        - Shop
+      summary: アンケート情報取得
+      description: アンケート情報取得
+      operationId: getByQuestionnaireKey
+      parameters:
+        - name: questionnaireKey
+          in: path
+          description: アンケート回答キー
+          required: true
+          schema:
+            type: String
+            example: order
+      responses:
+        200:
+          description: アンケートEntityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionnaireEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/questionnaire-seq/{questionnaireSeq}:
+    get:
+      tags:
+        - Shop
+      summary: アンケート設問情報リスト取得
+      description: アンケート設問情報リスト取得
+      operationId: getByQuestionnaireSeq
+      parameters:
+        - name: questionnaireSeq
+          in: path
+          description: アンケートSEQ（PK）
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 1000008
+      responses:
+        200:
+          description: アンケート回答画面表示用DtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionnaireReplyDisplayDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/questionnaire/check:
+    post:
+      tags:
+        - Shop
+      summary: アンケートチェック
+      description: アンケートチェック
+      operationId: checkQuestionnaire
+      requestBody:
+        description: アンケートチェックリクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionnaireCheckRequest'
+        required: true
+      responses:
+        200:
+          description: 結果レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultFlagResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /shop/questionnaire:
+    post:
+      tags:
+        - Shop
+      summary: アンケート新規登録
+      description: アンケート新規登録
+      operationId: registQuestionnaire
+      requestBody:
+        description: アンケート新規登録クリクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionnaireRegistRequest'
+        required: true
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /shop/news/details:
+    get:
+      tags:
+        - Shop
+      summary: ニュース詳細情報取得
+      description: ニュース詳細情報取得
+      operationId: getNewsDetails
+      parameters:
+        - in: query
+          name: newsDetailsGetRequest
+          description: ニュース詳細情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/NewsDetailsGetRequest'
+      responses:
+        200:
+          description: ニュースEntityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/news/freearea:
+    get:
+      tags:
+        - Shop
+      summary: フリーエリア情報取得
+      description: フリーエリア情報取得
+      operationId: getNewsFreearea
+      parameters:
+        - in: query
+          name: freeAreaGetRequest
+          description: フリーエリア情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/FreeAreaGetRequest'
+      responses:
+        200:
+          description: フリーエリアEntityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreeAreaEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/news/open-news:
+    get:
+      tags:
+        - Shop
+      summary: 公開ニュースリスト情報取得
+      description: 公開ニュースリスト情報取得
+      operationId: getOpenNews
+      parameters:
+        - in: query
+          name: openNewsListGetRequest
+          description: 公開ニュースリスト情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/OpenNewsListGetRequest'
+        - in: query
+          name: pageInfoRequest
+          description: ページ情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageInfoRequest'
+      responses:
+        200:
+          description: ニュースEntityListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsEntityListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/delivery/delivery-method-details:
+    get:
+      tags:
+        - Shop
+      summary: 配送方法詳細取得
+      description: 配送方法詳細取得
+      operationId: getDeliveryMethodDetails
+      parameters:
+        - in: query
+          name: deliveryMethodDetailsGetRequest
+          description: 配送方法詳細取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/DeliveryMethodDetailsGetRequest'
+      responses:
+        200:
+          description: 配送方法詳細DtoMapレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryMethodDetailsDtoMapResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/order-questionnaire:
+    get:
+      tags:
+        - Shop
+      summary: アンケート情報取得
+      description: アンケート情報取得
+      operationId: getOrderQuestionnaire
+      responses:
+        200:
+          description: アンケートEntityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionnaireEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/zipcode/address:
+    get:
+      tags:
+        - Zipcode
+      summary: 郵便番号住所情報取得
+      description: 郵便番号住所情報取得
+      operationId: getAddress
+      parameters:
+        - in: query
+          name: zipCodeAddressGetRequest
+          description: 郵便番号住所情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/ZipCodeAddressGetRequest'
+      responses:
+        200:
+          description: 郵便番号住所Dtoレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZipCodeAddressDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/zipcode/check-zipcode-matching:
+    post:
+      tags:
+        - Zipcode
+      summary: 郵便番号整合性チェック
+      description: 郵便番号整合性チェック
+      operationId: registCheckZipcodeMatching
+      requestBody:
+        description: 郵便番号整合性チェックリクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZipCodeMatchingCheckRequest'
+      responses:
+        200:
+          description: 結果成否レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultFlagResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/access:
+    post:
+      tags:
+        - Access
+      summary: アクセス情報登録
+      description: アクセス情報登録
+      operationId: registAccess
+      requestBody:
+        description: アクセス情報登録リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessRegistRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/access/access-search-keyword:
+    post:
+      tags:
+        - Access
+      summary: アクセス検索キーワード情報登録
+      description: アクセス検索キーワード情報登録
+      operationId: registAccessSearchKeyword
+      requestBody:
+        description: アクセス検索キーワード情報登録リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessSearchKeywordRegistRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/multipayment:
+    get:
+      tags:
+        - MultiPayment
+      summary: マルチペイショップID取得
+      description: マルチペイショップID取得
+      operationId: getMultiPayment
+      responses:
+        200:
+          description: マルチペイショップレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MulPayShopResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/get:
+    get:
+      tags:
+        - Shop
+      summary: ショップ情報取得
+      description: ショップ情報取得
+      operationId: get
+      responses:
+        200:
+          description: ショップ情報レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /shop/settlement/{settlementMethodSeq}:
+    get:
+      tags:
+        - Shop
+      summary: 決済方法取得
+      description: 決済方法取得
+      operationId: getSettlementBySeq
+      parameters:
+        - name: settlementMethodSeq
+          in: path
+          description: 決済方法SEQ
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 10000001
+      responses:
+        200:
+          description: 決済方法レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementMethodResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /shop/effective-campaign-code:
+    get:
+      tags:
+        - Shop
+      summary: 有効なキャンペーンコード取得
+      description: 有効なキャンペーンコード取得
+      operationId: getEffectiveCampaignCode
+      parameters:
+        - in: query
+          name: effectiveCampaignCodeGetRequest
+          description: 有効なキャンペーンコード取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/EffectiveCampaignCodeGetRequest'
+      responses:
+        200:
+          description: 有効なキャンペーンコードレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EffectiveCampaignCodeResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/campaign:
+    get:
+      tags:
+        - Shop
+      summary: キャンペーン取得
+      description: キャンペーン取得
+      operationId: getCampaign
+      parameters:
+        - in: query
+          name: campaignGetRequest
+          description: キャンペーン取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/CampaignGetRequest'
+      responses:
+        200:
+          description: キャンペーンEntityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /shop/calendar-not-select-date:
+    get:
+      tags:
+        - Shop
+      summary: カレンダー選択不可日付取得
+      description: カレンダー選択不可日付取得
+      operationId: getCalendarNotSelectDate
+      responses:
+        200:
+          description: カレンダー選択不可日付Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarNotSelectDateEntityListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    ShopResponse:
+      $ref: ./schemas/shop/ShopResponse.yaml
+    MulPayShopResponse:
+      $ref: ./schemas/shop/multipayment/MulPayShopResponse.yaml
+    AccessRegistRequest:
+      $ref: ./schemas/shop/access/AccessRegistRequest.yaml
+    AccessSearchKeywordRegistRequest:
+      $ref: ./schemas/shop/access/AccessSearchKeywordRegistRequest.yaml
+    ZipCodeMatchingCheckRequest:
+      $ref: ./schemas/shop/zipcode/ZipCodeMatchingCheckRequest.yaml
+    ZipCodeAddressGetRequest:
+      $ref: ./schemas/shop/zipcode/ZipCodeAddressGetRequest.yaml
+    ZipCodeAddressDtoResponse:
+      $ref: ./schemas/shop/zipcode/ZipCodeAddressDtoResponse.yaml
+    QuestionnaireEntityResponse:
+      $ref: ./schemas/shop/QuestionnaireEntityResponse.yaml
+    QuestionnaireReplyDisplayDtoListResponse:
+      $ref: ./schemas/shop/QuestionnaireReplyDisplayDtoListResponse.yaml
+    QuestionnaireCheckRequest:
+      $ref: ./schemas/shop/QuestionnaireCheckRequest.yaml
+    QuestionnaireRegistRequest:
+      $ref: ./schemas/shop/QuestionnaireRegistRequest.yaml
+    NewsDetailsGetRequest:
+      $ref: ./schemas/shop/NewsDetailsGetRequest.yaml
+    NewsEntityResponse:
+      $ref: ./schemas/shop/NewsEntityResponse.yaml
+    FreeAreaGetRequest:
+      $ref: ./schemas/shop/FreeAreaGetRequest.yaml
+    FreeAreaEntityResponse:
+      $ref: ./schemas/shop/FreeAreaEntityResponse.yaml
+    OpenNewsListGetRequest:
+      $ref: ./schemas/shop/OpenNewsListGetRequest.yaml
+    NewsEntityListResponse:
+      $ref: ./schemas/shop/NewsEntityListResponse.yaml
+    DeliveryMethodDetailsGetRequest:
+      $ref: ./schemas/shop/DeliveryMethodDetailsGetRequest.yaml
+    DeliveryMethodDetailsDtoMapResponse:
+      $ref: ./schemas/shop/DeliveryMethodDetailsDtoMapResponse.yaml
+    SettlementMethodResponse:
+      $ref: ./schemas/shop/SettlementMethodResponse.yaml
+    EffectiveCampaignCodeGetRequest:
+      $ref: ./schemas/shop/EffectiveCampaignCodeGetRequest.yaml
+    EffectiveCampaignCodeResponse:
+      $ref: ./schemas/shop/EffectiveCampaignCodeResponse.yaml
+    CampaignGetRequest:
+      $ref: ./schemas/shop/CampaignGetRequest.yaml
+    CampaignEntityResponse:
+      $ref: ./schemas/shop/CampaignEntityResponse.yaml
+    CalendarNotSelectDateEntityListResponse:
+      $ref: ./schemas/shop/CalendarNotSelectDateEntityListResponse.yaml
+    PageInfoRequest:
+      $ref: ./schemas/PageInfoRequest.yaml
+    ResultFlagResponse:
+      $ref: ./schemas/ResultFlagResponse.yaml
+    ResultCountResponse:
+      $ref: ./schemas/ResultCountResponse.yaml
+    ErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ClientErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ServerErrorResponse:
+      $ref: ./schemas/Error.yaml

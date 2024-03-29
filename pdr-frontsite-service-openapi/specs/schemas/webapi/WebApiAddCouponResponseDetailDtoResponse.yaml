@@ -1,0 +1,7 @@
+type: object
+description: WEB-APIクーポン取得詳細情報DTOレスポンス
+properties:
+  couponName:
+    type: string
+    description: クーポン名
+    example: 300円OFFクーポン

@@ -1,0 +1,11 @@
+type: object
+description: カテゴリ情報取得リクエスト
+properties:
+  categoryId:
+    type: string
+    description: カテゴリID
+    example: "1000"
+  openStatus:
+    type: string
+    description: 公開状態
+    example: "1"

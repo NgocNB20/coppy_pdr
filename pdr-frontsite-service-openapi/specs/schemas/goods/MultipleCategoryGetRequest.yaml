@@ -1,0 +1,9 @@
+type: object
+description : 複数カテゴリ情報取得リクエスト
+properties:
+  categoryIdList:
+    type: array
+    description: カテゴリIDリスト
+    items:
+      type: string
+      example: "1000"

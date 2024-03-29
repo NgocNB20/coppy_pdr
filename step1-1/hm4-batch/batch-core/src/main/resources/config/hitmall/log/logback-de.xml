@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <file>/var/log/tomcat/pdr/batch/Batch.log</file>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/Batch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <logger name="ACCESS" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="LOGICAL" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="SQLEXCP" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hmbase" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="EXCEPT" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="ACTION" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="SESSION" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="FREE" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="org.seasar.doma.jdbc" additivity="false" level="WARN">
+        <appender-ref ref="APP"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="APP"/>
+    </root>
+</configuration>

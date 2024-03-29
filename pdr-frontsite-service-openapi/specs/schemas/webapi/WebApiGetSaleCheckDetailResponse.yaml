@@ -1,0 +1,14 @@
+# 2023-renew No11-33-75-112 from here
+type: object
+description: 販売可否判定 詳細情報レスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品
+    example: furniture-00201
+  goodsSaleYesNo:
+      type: integer
+      format: int32
+      description: 販売可否判定結果
+      example: 1
+# 2023-renew No11-33-75-112 to here

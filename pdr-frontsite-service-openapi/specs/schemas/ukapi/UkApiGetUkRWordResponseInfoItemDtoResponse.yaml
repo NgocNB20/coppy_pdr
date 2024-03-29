@@ -1,0 +1,7 @@
+type: object
+description: UK-API連携関連ワードレスポンス（item）
+properties:
+  word:
+    type: string
+    description: 関連ワード
+    example: 水

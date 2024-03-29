@@ -1,0 +1,26 @@
+type: object
+description: 商品Dtoリクエスト
+properties:
+  goodsEntity:
+    $ref: "#/components/schemas/GoodsEntityRequest"
+  stockDto:
+    $ref: "#/components/schemas/StockDtoRequest"
+  deleteFlg:
+    type: string
+    description: 削除フラグ
+    example: 0
+  stockStatus:
+    type: string
+    description: 在庫状態
+    example: 0
+  unitImage:
+    $ref: "#/components/schemas/GoodsImageEntityRequest"
+
+components:
+  schemas:
+    GoodsEntityRequest:
+      $ref: ./GoodsEntityRequest.yaml
+    StockDtoRequest:
+      $ref: ./StockDtoRequest.yaml
+    GoodsImageEntityRequest:
+      $ref: ../goods/GoodsImageEntityRequest.yaml

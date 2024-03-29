@@ -1,0 +1,262 @@
+<!-- PDR Migrate Customization from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <!--  2023-renew No2 from here-->
+    <link rel="stylesheet" th:href="@{/common/css/catalog.css}" type="text/css" media="all"/>
+    <link rel="stylesheet" th:href="@{/common/css/goods.css}" type="text/css" media="all"/>
+    <script th:inline="javascript">
+        function salableAjaxCall(val) {
+            $("#isAddCartGoods").val(val);
+        }
+    </script>
+    <!--  2023-renew No2 to here-->
+    <script type="text/javascript">
+
+        // デザインを変更する場合は当スクロール位置も合わせて変更すること
+        var scrollPotision = 780;
+
+        // スクロール位置を保持
+        function setScrollFlg() {
+            $("#position").val(scrollPotision);
+        }
+
+        // ↓新デザインではスクロール移動は不要なので、コメントアウト
+        // 画面描画時に保持しているスクロール位置へ移動
+        // window.onload = function OnLoadEvent() {
+        //     $(window).scrollTop($("#position").val());
+        // }
+
+        $(function(){
+            $("[id^='deleteBtn']").click(function(){
+                var bundleIndex = $(this).parent("div").parent("div").parent("td").children($("[id^='catalogIndex']")).val();
+                clearDisplay(bundleIndex);
+                return false;
+            });
+        });
+
+        function clearCatalog() {
+            // 確認メッセージ
+            if(confirm("本当にクリアしてよろしいですか？")){
+                $('table tbody td#goodsBtn').each(function(){
+                    var bundleIndex =$(this).children($("[id^='catalogIndex']")).val();
+                    clearDisplay(bundleIndex);
+                })
+                // 初回遷移以降は表先頭に移動する
+                $(window).scrollTop(scrollPotision);
+            }
+            return false;
+        }
+
+        function clearDisplay(bundleIndex) {
+            // 商品番号、数量、商品名をクリアする
+            $("#orderQuantity-" + bundleIndex).val("");
+            $("#goodsCode-" + bundleIndex).val("");
+            $("#namePc-" + bundleIndex).text("");
+            $("#namePc-" + bundleIndex).next("span").text("");
+            <!--  2023-renew No2 from here-->
+            $("#img-" + bundleIndex).empty();
+            $("#goodsInfoTD-" + bundleIndex).empty();
+            $("tr").removeClass("field-error");
+            <!--  2023-renew No2 to here-->
+
+            // エラー情報をクリアする
+            $("#orderQuantity-" + bundleIndex).removeClass("field-error");
+            $("#goodsCode-" + bundleIndex).removeClass("field-error");
+            $("#orderQuantity-" + bundleIndex + "-error").text("");
+            $("#goodsCode-" + bundleIndex + "-error").text("");
+        }
+
+    </script>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-catalog">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" id="goTopPage" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">クイックオーダー</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenu}"></div>
+
+                <div class="l-main">
+                    <h2 class="c-title-page"><strong>クイックオーダー</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hm:freearea key="quickorder01"/>
+
+                    <form id="catalogForm" th:action="@{/cart/catalog.html}" th:object="${catalogModel}" method="post">
+                        <input type="hidden" id="position" th:field="*{position}"/>
+                        <!--  2023-renew No2 from here-->
+                        <input type="hidden" id="isAddCartGoods" name="isAddCartGoods" value="">
+                        <!--  2023-renew No2 to here-->
+                        <div class="p-catalog__contorl p-catalog__contorl--header">
+                            <ul>
+                                <li class="p-catalog__contorl-select">
+                                    <button type="submit" class="c-button c-button--primary-line c-button--width-s" name="doGetGoodsInfo" onclick="setScrollFlg(); salableAjaxCall(0)">
+                                        <svg viewBox="0 0 14 11" width="13">
+                                            <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/select.svg#select}"></use>
+                                        </svg>
+                                        <p>商品名を一括確認</p>
+                                    </button>
+                                </li>
+                                <li class="p-catalog__contorl-delete">
+                                    <button type="submit" class="c-button c-button--ccc c-button--width-s" id="clear-1" name="Submit" onclick="return clearCatalog();">
+                                        <svg viewBox="0 0 10 10" width="11">
+                                            <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use>
+                                        </svg>
+                                        <p>一括削除</p>
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="p-catalog__contorl-cart">
+                                <button id="doAddCart-1" name="doAddCart" onclick="setScrollFlg(); salableAjaxCall(1)" type="submit" class="c-button c-button--primary c-button--width-s">カートに入れる</button>
+                            </div>
+                        </div>
+
+                        <div class="p-catalog__list">
+                            <table class="c-table c-table--pcspdevide">
+                                <tbody id="catalogItems">
+                                <th:block th:each="catalogItem, stat : *{catalogItems}">
+                                    <!--  2023-renew No2 from here-->
+                                    <tr class="c-table__tr" th:classappend="${errorMap != null && errorMap.containsKey(catalogItem.goodsCode)} ? 'field-error' : ''"  th:id="'goodsInfoTR' + ${stat.index}">
+                                        <!--  2023-renew No2 to here-->
+                                        <td class="p-catalog__list-search">
+                                            <div class="p-catalog__list-search-inner">
+                                                <div class="p-catalog__list-search-no" th:id="'rowNumber-' + ${stat.index}" th:text="${catalogItem.rowNumber}"></div>
+                                                <div class="p-catalog__list-search-input">
+                                                    <input th:id="'goodsCode-' + ${stat.index}" th:field="*{catalogItems[__${stat.index}__].goodsCode}" th:errorclass="c-input--error" type="text" placeholder="商品番号入力" class="c-input">
+                                                    <!--  2023-renew No2 from here-->
+                                                    <button type="submit" class="c-button c-button--primary-line c-button--width-s"
+                                                            alt="商品名を確認" th:id="'doGetGoodsInfo-' + ${stat.index}" name="doGetGoodsInfo" onclick="setScrollFlg(); salableAjaxCall(0)" th:isAddCartGoods="${stat.index}"
+                                                    >商品名を確認</button>
+                                                    <!--  2023-renew No2 to here-->
+                                                    <div>
+                                                        <span th:if="${#fields.hasErrors('catalogItems[' + stat.index +'].goodsCode')}" th:errors="*{catalogItems[__${stat.index}__].goodsCode}" th:id="'goodsCode-' + ${stat.index} + '-error'"
+                                                               class="c-field-error c-field-error--top"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td th:id="'goodsInfoTD-' + ${stat.index}" class="p-catalog__list-item">
+                                            <!--  2023-renew No2 from here-->
+                                            <div th:if="${errorMap != null && errorMap.containsKey(catalogItem.goodsCode)}">
+                                                <span class="c-field-error" th:text="${errorMap.get(catalogItem.goodsCode)}"></span>
+                                            </div>
+                                            <div th:unless="${errorMap != null && errorMap.containsKey(catalogItem.goodsCode)}">
+                                                <div class="p-catalog__list-item-inner">
+                                                    <div th:id="'img-' + ${stat.index}" class="p-catalog__list-item-image">
+                                                        <th:block th:if="${catalogItem.isGoodsImageItems()}">
+                                                            <a th:href="@{/goods/index.html(gcd=${catalogItem.goodsCode})}">
+                                                                <img th:src="@{${#image.convert(catalogItem.goodsImageItems, 0, 'p1')}}"
+                                                                     th:attr="srcset=${#image.convert(catalogItem.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                                     th:alt="${catalogItem.getGoodsGroupImageThumbnailAlt()}"  height="120" width="120" decoding="async" loading="lazy">
+                                                            </a>
+                                                        </th:block>
+                                                    </div>
+                                                    <div class="p-catalog__list-item-overview">
+                                                        <div class="p-catalog__list-item-text" th:id="'namePc-' + ${stat.index}" th:text="${catalogItem.namePc}"></div>
+                                                        <div class="p-catalog__list-item-spec">
+                                                            <th:block th:if="${catalogItem.isUnit1()}">
+                                                                <span th:id="'isUnit1-' + ${stat.index}">
+                                                                <br/>
+                                                                    <span th:id="'unitTitle1-' + ${stat.index}" th:text="${catalogItem.unitTitle1}"/>：<span th:id="'unitValue1-' + ${stat.index}" th:text="${catalogItem.unitValue1}"/>
+                                                                </span>
+                                                            </th:block>
+                                                            <th:block th:if="${catalogItem.isUnit2()}">
+                                                                <span th:id="'isUnit2-' + ${stat.index}">
+                                                                     / <span th:id="'unitTitle2-' + ${stat.index}" th:text="${catalogItem.unitTitle2}"/>：<span th:id="'unitValue2-' + ${stat.index}" th:text="${catalogItem.unitValue2}"/>
+                                                                </span>
+                                                            </th:block>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="goodsBtn" class="c-table__quantity p-catalog__list-quantity">
+                                            <input type="hidden" th:id="'catalogIndex-' + ${stat.index}" th:field="*{catalogItems[__${stat.index}__].catalogIndex}"/>
+                                            <div class="p-catalog__list-quantity-inner">
+                                                <div class="c-count-quantity--wrap">
+                                                    <div class="c-count-quantity js-count-quantity">
+                                                        <button type="button" class="c-count-quantity__minus minus_button" data-type="minus" th:data-field="'catalogItems['+ ${stat.index} + '].orderQuantity'" disabled="disabled"></button>
+                                                        <input type="number"
+                                                               th:id="'orderQuantity-' + ${stat.index}"
+                                                               th:value="${catalogItem.orderQuantity}"
+                                                               th:name="'catalogItems[' + ${stat.index} + '].orderQuantity'"
+                                                               class="c-input c-count-quantity__result input_result" min="1" max="999">
+                                                        <button type="button" class="c-count-quantity__plus plus_button" data-type="plus" th:data-field="'catalogItems['+ ${stat.index} + '].orderQuantity'"></button>
+                                                    </div>
+                                                    <div th:if="${#fields.hasErrors('catalogItems[' + stat.index +'].orderQuantity')}"
+                                                         th:errors="*{catalogItems[__${stat.index}__].orderQuantity}" th:id="'orderQuantity-' + ${stat.index} + '-error'"
+                                                         class="c-field-error"></div>
+                                                </div>
+                                                <div class="p-catalog__list-button">
+                                                    <button th:id="'deleteBtn-' + ${stat.index}" type="submit" class="c-textlink c-textlink--text c-textlink--large c-textlink--delete">
+                                                        <svg viewBox="0 0 10 10">
+                                                            <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use>
+                                                        </svg>削除
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="p-catalog__attention">一度に入力できる商品は10種類までとなっております。<br>それ以上は「カートに入れる」ボタンを押し、一旦ショッピングカートに入れてから再度入力をお願いします。 </p>
+
+                        <div class="p-catalog__contorl p-catalog__contorl--footer">
+                            <ul>
+                                <li class="p-catalog__contorl-select">
+                                    <button name="doGetGoodsInfo" onclick="setScrollFlg(); salableAjaxCall(0)" type="submit" class="c-button c-button--primary-line c-button--width-m" >
+                                        <svg viewBox="0 0 14 11" width="19">
+                                            <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/select.svg#select}"></use>
+                                        </svg><p>商品名を一括確認</p></button></li>
+                                <li class="p-catalog__contorl-delete">
+                                    <button type="submit" class="c-button c-button--ccc c-button--width-m"  id="clear-2" name="Submit" onclick="return clearCatalog();">
+                                        <svg viewBox="0 0 10 10" width="16">
+                                            <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use>
+                                        </svg><p>一括削除</p></button></li>
+                            </ul>
+                            <div class="p-catalog__contorl-cart">
+                                <!--  2023-renew No2 from here-->
+                                <button id="doAddCart" name="doAddCart" alt="カートに入れる" onclick="setScrollFlg(); salableAjaxCall(1)" type="submit" class="c-button c-button--primary c-button--width-m">カートに入れる</button>
+                                <!--  2023-renew No2 to here-->
+                            </div>
+                        </div>
+
+                        <hm:freearea key="quickorder02"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+
+</div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here -->

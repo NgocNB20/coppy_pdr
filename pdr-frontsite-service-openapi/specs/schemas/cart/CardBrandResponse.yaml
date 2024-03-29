@@ -1,0 +1,49 @@
+type: object
+description: クレジットカードブランドレスポンス
+properties:
+  cardBrandSeq:
+    type: integer
+    format: int32
+    description: カードブランドSEQ
+    example: 1
+  cardBrandCode:
+    type: string
+    description: カードブランドコード
+    example: 1
+  cardBrandName:
+    type: string
+    description: カードブランド名
+    example: 1
+  cardBrandDisplay:
+    type: string
+    description: カードブランド表示名
+    example: 1
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 1
+  installment:
+    type: string
+    description: 分割支払契約
+    example: 1
+  bounusSingle:
+    type: string
+    description: ボーナス一括契約
+    example: 1
+  bounusInstallment:
+    type: string
+    description: ボーナス分割契約
+    example: 1
+  revolving:
+    type: string
+    description: リボ契約
+    example: 1
+  installmentCounts:
+    type: string
+    description: 選択可能分割回数
+    example: 1
+  frontDisplayFlag:
+    type: string
+    description: Front表示フラグ
+    example: 1

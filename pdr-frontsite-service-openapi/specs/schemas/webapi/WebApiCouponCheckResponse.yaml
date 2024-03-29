@@ -1,0 +1,13 @@
+type: object
+description: 注文履歴（出荷済）取得Web-APIレスポンス
+properties:
+  info:
+    $ref: "#/components/schemas/WebApiCouponCheckResponseDetailDtoListResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+components:
+  schemas:
+    WebApiCouponCheckResponseDetailDtoListResponse:
+      $ref: ./WebApiCouponCheckResponseDetailDtoListResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

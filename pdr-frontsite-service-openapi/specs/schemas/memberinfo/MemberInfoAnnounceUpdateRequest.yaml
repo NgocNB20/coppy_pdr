@@ -1,0 +1,30 @@
+# 2023-renew No71 from here
+type: object
+description: セール通知および入荷通知の更新リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ（必須）
+    example: 10000001
+  topSaleAnnounceFlg:
+    type: string
+    default: null
+    description: トップセール通知フラグ
+    example: 1
+  saleAnnounceWatchFlg:
+    type: string
+    default: null
+    description: セール通知の既読状況
+    example: 1
+  topStockAnnounceFlg:
+    type: string
+    default: null
+    description: トップ入荷通知フラグ
+    example: 1
+  stockAnnounceWatchFlg:
+    type: string
+    default: null
+    description: 入荷通知既読フラグ
+    example: 1
+# 2023-renew No71 to here

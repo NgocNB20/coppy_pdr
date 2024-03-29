@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-login p-login--proxy">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                      <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">代理ログイン</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="l-section">
+            <div class="l-section__inner">
+                <h2 class="c-title-page"><strong>代理ログイン</strong></h2>
+
+                <div th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION} != null" class="global-error-message">
+                    <ul>
+                        <li th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION} != null"
+                            th:utext="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="l-section p-login__section">
+            <div class="l-section__inner">
+                <form id="memberForm" th:action="@{/login/proxy}" th:object="${loginModel}" method="post" novalidate>
+                    <input hidden="hidden" name="proxyMemberInfoSeq" id="proxyMemberInfoSeq" th:value="${param.memberInfoSeq}" />
+                    <div class="p-login__main">
+                        <div class="p-login__member">
+                            <div class="l-form p-login__input">
+                                <dl class="p-login__input-list">
+                                    <dt>管理者ID</dt>
+                                    <dd>
+                                        <input type="text" th:field="*{administratorId}" title="管理者ID" maxlength="160" th:errorclass="c-input--error" class="c-input" />
+                                    </dd>
+                                </dl>
+                                <dl class="p-login__input-list">
+                                    <dt>パスワード</dt>
+                                    <dd>
+                                        <div class="l-form__password l-form__password--not-memo">
+                                            <input type="password" th:field="*{administratorPassWord}" title="パスワード" maxlength="20" th:errorclass="field-error" class="c-input js-password-input" />
+                                            <button type="button" class="c-textlink c-textlink--text c-textlink--large c-textlink--password js-password-btn">
+                                                <span></span>
+                                                <p>パスワードを表示</p>
+                                            </button>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="p-login__button">
+                                <button name="doLogin" type="submit" class="c-button c-button--primary-line c-button--width-l">
+                                    ログイン
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>

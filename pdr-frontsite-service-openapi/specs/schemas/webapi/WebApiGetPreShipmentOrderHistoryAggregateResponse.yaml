@@ -1,0 +1,16 @@
+type: object
+description: WEB-API連携注文履歴（過去1年）取得レスポンス
+properties:
+  info:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiGetPreShipmentOrderHistoryResponseDetailDtoResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+
+components:
+  schemas:
+    WebApiGetPreShipmentOrderHistoryResponseDetailDtoResponse:
+      $ref: ./WebApiGetPreShipmentOrderHistoryResponseDetailDtoResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

@@ -1,0 +1,9 @@
+type: object
+description: エラー内容
+properties:
+  code:
+    type: string
+    description: エラーCD
+  message:
+    type: string
+    description: エラーメッセージ

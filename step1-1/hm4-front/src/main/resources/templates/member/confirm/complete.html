@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta th:replace="~{newdesign/include/head}"/>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+</head>
+<script>
+    function afterChange() {
+        $('#afterChangeTab').addClass('js-tab--active');
+        $('#changeBeforeTab').removeClass('js-tab--active');
+        $('#afterChangeContent').addClass('js-tab-contents--active');
+        $('#changeBeforeContent').removeClass('js-tab-contents--active');
+    }
+
+    function changeBefore() {
+        $('#afterChangeTab').removeClass('js-tab--active');
+        $('#changeBeforeTab').addClass('js-tab--active');
+        $('#afterChangeContent').removeClass('js-tab-contents--active');
+        $('#changeBeforeContent').addClass('js-tab-contents--active');
+    }
+</script>
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                        <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                        <a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">会員情報・メール配信設定変更確認</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+                <div class="l-main p-mypage-change">
+                    <h2 class="c-title-page"><strong>会員情報・メール配信設定変更確認</strong></h2>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo() ? 'global-info-message' : 'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="form1" method="post" th:object="${memberConfirmUpdateModel}">
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">下記より変更内容をご確認いただけます。<br>
+                                <em>※項目によっては反映に数日かかる場合がございます。お急ぎの場合はご注文デスク（TEL：0120-108648　受付時間：09:00-17:00
+                                    日祝休）までご連絡ください。<br>
+                                    ※テキストがオレンジ色の箇所は変更箇所となります。</em></p>
+                        </div>
+                        <div class="c-tab">
+                            <div id="afterChangeTab" class="c-tab__button js-tab js-tab--active" onclick="afterChange()">変更後</div>
+                            <div id="changeBeforeTab" class="c-tab__button js-tab" onclick="changeBefore()">変更前</div>
+                        </div>
+                        <div class="c-tab__contents-wrap">
+                            <div class="c-tab__contents js-tab-contents js-tab-contents--active">
+                                <h4 class="c-title-form-m"><p>会員情報</p></h4>
+                                <div class="l-form">
+                                    <div class="l-form__list-wrap">
+                                        <dl class="l-form__list">
+                                            <dt><p><span>お客様番号</span></p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.customerNo}" th:class="*{#style.diff(modifiedList,{'customerNo'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>事業所名</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoLastName}" th:class="*{#style.diff(modifiedList, {'memberInfoLastName'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>事業所名フリガナ</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoLastKana}" th:class="*{#style.diff(modifiedList, {'memberInfoLastKana'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>代表者名</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.representativeName}" th:class="*{#style.diff(modifiedList, {'representativeName'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>業種<br></span></p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.businessType != null} ? ${memberConfirmUpdateModel.businessType.label} : ''" th:class="*{#style.diff(modifiedList, {'businessType'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>電話番号</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoTel}" th:class="*{#style.diff(modifiedList, {'memberInfoTel'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>FAX番号</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoFax}" th:class="*{#style.diff(modifiedList, {'memberInfoFax'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>郵便番号</p></dt>
+                                            <dd><p th:class="*{#style.diff(modifiedList, {'memberInfoZipCode'}, 'l-form__list-changes')}"><span id="memberInfoZipCode" th:text="'〒' + ${memberConfirmUpdateModel.memberInfoZipCode1} + '-' + ${memberConfirmUpdateModel.memberInfoZipCode2}"/></p></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>住所</p></dt>
+                                            <dd>
+                                                <p th:class="*{#style.diff(modifiedList, {'memberInfoAddress1','memberInfoAddress2','memberInfoAddress3','memberInfoAddress4'}, 'l-form__list-changes')}">
+                                                    <span id="memberInfoAddress1" th:remove="tag" th:if="${memberConfirmUpdateModel.memberInfoAddress1 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress1}"/>&nbsp;
+                                                    <span id="memberInfoAddress2" th:remove="tag" th:if="${memberConfirmUpdateModel.memberInfoAddress2 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress2}"/>&nbsp;
+                                                    <span id="memberInfoAddress3" th:remove="tag" th:if="${memberConfirmUpdateModel.memberInfoAddress3 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress3}"/>&nbsp;
+                                                    <span id="memberInfoAddress4" th:remove="tag" th:if="${memberConfirmUpdateModel.memberInfoAddress4 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress4}"/>&nbsp;
+                                                </p>
+                                            </dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>メールアドレス</p></dt>
+                                            <dd>
+                                                <p id="memberInfoMail" th:text="${memberConfirmUpdateModel.memberInfoMail}" th:class="*{#style.diff(modifiedList, {'memberInfoMail'}, 'l-form__list-changes')}"/>
+                                            </dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>休診曜日</p></dt>
+                                            <dd><p id="nonConsultationDay" th:text="${memberConfirmUpdateModel.nonConsultationDayDisp}" th:class="*{#style.diff(modifiedList, {'nonConsultationDay'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>診療科目</span></p></dt>
+                                            <dd>
+                                                <table class="l-form__table p-regist__subject">
+                                                    <tr th:if="*{isMedicalTreatmentJudge1()}">
+                                                        <th><span id="medicalTreatment1Title" th:utext="*{medicalTreatment1Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment1" th:text="*{medicalTreatment1} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment1'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge2()}">
+                                                        <th><span id="medicalTreatment2Title" th:utext="*{medicalTreatment2Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment2" th:text="*{medicalTreatment2} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment2'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge3()}">
+                                                        <th><span id="medicalTreatment3Title" th:utext="*{medicalTreatment3Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment3" th:text="*{medicalTreatment3} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment3'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge4()}">
+                                                        <th><span id="medicalTreatment4Title" th:utext="*{medicalTreatment4Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment4" th:text="*{medicalTreatment4} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment4'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge5()}">
+                                                        <th><span id="medicalTreatment5Title" th:utext="*{medicalTreatment5Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment5" th:text="*{medicalTreatment5} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment5'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge6()}">
+                                                        <th><span id="medicalTreatment6Title" th:utext="*{medicalTreatment6Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment6" th:text="*{medicalTreatment6} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment6'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge7()}">
+                                                        <th><span id="medicalTreatment7Title" th:utext="*{medicalTreatment7Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment7" th:text="*{medicalTreatment7} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment7'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge8()}">
+                                                        <th><span id="medicalTreatment8Title" th:utext="*{medicalTreatment8Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment8" th:text="*{medicalTreatment8} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment8'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge9()}">
+                                                        <th><span id="medicalTreatment9Title" th:utext="*{medicalTreatment9Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment9" th:text="*{medicalTreatment9} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment9'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge10()}">
+                                                        <th><span id="medicalTreatment10Title" th:utext="*{medicalTreatment10Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment10" th:text="*{medicalTreatment10} ? '対象' : '対象外'" th:class="*{#style.diff(modifiedList, {'medicalTreatment10'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>その他</th>
+                                                        <td><span id="medicalTreatmentMemo" th:utext="*{medicalTreatmentMemo}" th:class="*{#style.diff(modifiedList, {'medicalTreatmentMemo'}, 'l-form__list-changes')}"/></td>
+                                                    </tr>
+                                                </table>
+                                            </dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>確認書類</span></p></dt>
+                                            <dd>
+                                                <div class="p-regist__drop">
+                                                    <div class="p-regist__drop-uploaded">
+                                                        <th:block th:each="image, stat : *{uploadFileModelList}" th:unless="*{#lists.isEmpty(uploadFileModelList)}">
+                                                            <div th:if="${image.extensionType.value != '2'}" class="p-regist__drop-uploaded-image" th:classappend="${image.isNewUploadImage} ? 'p-regist__drop-uploaded-image--changes' : ''">
+                                                                <img th:src="${image.filePath}" alt="">
+                                                            </div>
+                                                            <div th:if="${image.extensionType.value == '2'}" class="p-regist__drop-uploaded-image" th:classappend="${image.isNewUploadImage} ? 'p-regist__drop-uploaded-image--changes' : ''">
+                                                                <a target="_blank" th:href="@{(${image.filePath})}">
+                                                                    <div th:text="${image.originName}"></div>
+                                                                </a>
+                                                            </div>
+                                                        </th:block>
+                                                    </div>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>反社会的勢力ではないことの保証</span></p></dt>
+                                            <dd>
+                                                <div class="l-form__list-text l-form__list-text--bottom">
+                                                    暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。
+                                                </div>
+                                                <p id="isNoAntiSocialFlag" th:text="${memberConfirmUpdateModel.noAntiSocialFlag != null} ? ${memberConfirmUpdateModel.noAntiSocialFlag.label}: ''" th:class="*{#style.diff(modifiedList, {'noAntiSocialFlag'}, 'l-form__list-changes')}"/>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <h4 class="c-title-form-m c-title-form-m--line"><p>メール配信設定</p></h4>
+                                <div class="l-form">
+                                    <div class="l-form__list-wrap">
+                                        <dl class="l-form__list">
+                                            <dt><p>メールによるおトク情報</p></dt>
+                                            <dd><p th:class="*{#style.diff(modifiedList, {'sendMailPermitFlag'}, 'l-form__list-changes')}" th:text="${memberConfirmUpdateModel.sendMailPermitFlag != null} ? ${memberConfirmUpdateModel.sendMailPermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>金属商品価格お知らせメール</p></dt>
+                                            <dd><p th:class="*{#style.diff(modifiedList, {'metalPermitFlag'}, 'l-form__list-changes')}" th:text="${memberConfirmUpdateModel.metalPermitFlag != null} ? ${memberConfirmUpdateModel.metalPermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>ご注文受付完了メール</p></dt>
+                                            <dd><p th:class="*{#style.diff(modifiedList, {'orderCompletePermitFlag'}, 'l-form__list-changes')}" th:text="${memberConfirmUpdateModel.orderCompletePermitFlag != null} ? ${memberConfirmUpdateModel.orderCompletePermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>商品発送完了メール</p></dt>
+                                            <dd><p th:class="*{#style.diff(modifiedList, {'deliveryCompletePermitFlag'}, 'l-form__list-changes')}" th:text="${memberConfirmUpdateModel.deliveryCompletePermitFlag != null} ? ${memberConfirmUpdateModel.deliveryCompletePermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="c-tab__contents js-tab-contents">
+                                <h4 class="c-title-form-m"><p>会員情報</p></h4>
+                                <div class="l-form">
+                                    <div class="l-form__list-wrap">
+                                        <dl class="l-form__list">
+                                            <dt><p><span>お客様番号</span></p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.customerNo}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>事業所名</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.memberInfoLastName}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>事業所名フリガナ</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.memberInfoLastKana}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>代表者名</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.representativeName}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>業種<br></span></p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.businessType != null} ? ${memberConfirmUpdateModel.memberInfoDetail.businessType.label}: ''"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>電話番号</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.memberInfoTel}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>FAX番号</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.memberInfoFax}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>郵便番号</p></dt>
+                                            <dd><p th:text="'〒' + ${memberConfirmUpdateModel.memberInfoDetail.memberInfoZipCode1} + '-' + ${memberConfirmUpdateModel.memberInfoDetail.memberInfoZipCode2}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>住所</p></dt>
+                                            <dd>
+                                                <p th:class="*{#style.diff(modifiedList, {'memberInfoAddress1','memberInfoAddress2','memberInfoAddress3','memberInfoAddress4'}, 'l-form__list-changes')}">
+                                                    <span id="memberInfoAddress1" th:if="${memberConfirmUpdateModel.memberInfoAddress1 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress1}"/>&nbsp;
+                                                    <span id="memberInfoAddress2" th:if="${memberConfirmUpdateModel.memberInfoAddress2 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress2}"/>&nbsp;
+                                                    <span id="memberInfoAddress3" th:if="${memberConfirmUpdateModel.memberInfoAddress3 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress3}"/>&nbsp;
+                                                    <span id="memberInfoAddress4" th:if="${memberConfirmUpdateModel.memberInfoAddress4 != null}" th:text="${memberConfirmUpdateModel.memberInfoAddress4}"/>&nbsp;
+                                                </p>
+                                            </dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>メールアドレス</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.memberInfoMail}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>休診曜日</p></dt>
+                                            <dd><p th:text="${memberConfirmUpdateModel.memberInfoDetail.nonConsultationDayDisp}" th:class="*{#style.diff(modifiedList, {'nonConsultationDay'}, 'l-form__list-changes')}"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>診療科目</span></p></dt>
+                                            <dd>
+                                                <table class="l-form__table p-regist__subject">
+                                                    <tr th:if="*{isMedicalTreatmentJudge1()}">
+                                                        <th><span id="medicalTreatment1TitlePrevious" th:utext="*{medicalTreatment1Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment1Previous" th:text="*{memberInfoDetail.medicalTreatment1} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge2()}">
+                                                        <th><span id="medicalTreatment2TitlePrevious" th:utext="*{medicalTreatment2Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment2Previous" th:text="*{memberInfoDetail.medicalTreatment2} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge3()}">
+                                                        <th><span id="medicalTreatment3TitlePrevious" th:utext="*{medicalTreatment3Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment3Previous" th:text="*{memberInfoDetail.medicalTreatment3} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge4()}">
+                                                        <th><span id="medicalTreatment4TitlePrevious" th:utext="*{medicalTreatment4Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment4Previous" th:text="*{memberInfoDetail.medicalTreatment4} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge5()}">
+                                                        <th><span id="medicalTreatment5TitlePrevious" th:utext="*{medicalTreatment5Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment5Previous" th:text="*{memberInfoDetail.medicalTreatment5} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge6()}">
+                                                        <th><span id="medicalTreatment6TitlePrevious" th:utext="*{medicalTreatment6Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment6Previous" th:text="*{memberInfoDetail.medicalTreatment6} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge7()}">
+                                                        <th><span id="medicalTreatment7TitlePrevious" th:utext="*{medicalTreatment7Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment7Previous" th:text="*{memberInfoDetail.medicalTreatment7} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge8()}">
+                                                        <th><span id="medicalTreatment8TitlePrevious" th:utext="*{medicalTreatment8Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment8Previous" th:text="*{memberInfoDetail.medicalTreatment8} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge9()}">
+                                                        <th><span id="medicalTreatment9TitlePrevious" th:utext="*{medicalTreatment9Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment9Previous" th:text="*{memberInfoDetail.medicalTreatment9} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr th:if="*{isMedicalTreatmentJudge10()}">
+                                                        <th><span id="medicalTreatment10TitlePrevious" th:utext="*{medicalTreatment10Title}" th:remove="tag"></span></th>
+                                                        <td><span id="medicalTreatment10Previous" th:text="*{memberInfoDetail.medicalTreatment10} ? '対象' : '対象外'"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>その他</th>
+                                                        <td><span id="medicalTreatmentMemoPrevious" th:utext="*{memberInfoDetail.medicalTreatmentMemo}"/></td>
+                                                    </tr>
+                                                </table>
+                                            </dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>確認書類</span></p></dt>
+                                            <dd>
+                                                <div class="p-regist__drop">
+                                                    <div class="p-regist__drop-uploaded">
+                                                        <th:block th:each="image, stat : *{uploadFileModelList}" th:unless="*{#lists.isEmpty(uploadFileModelList)}">
+                                                            <div th:if="${image.extensionType.value != '2' && !image.isNewUploadImage}" class="p-regist__drop-uploaded-image">
+                                                                <img th:src="${image.filePath}" alt="">
+                                                            </div>
+                                                            <div th:if="${image.extensionType.value == '2' && !image.isNewUploadImage}" class="p-regist__drop-uploaded-image">
+                                                                <a target="_blank" th:href="@{(${image.filePath})}">
+                                                                    <div th:text="${image.originName}"></div>
+                                                                </a>
+                                                            </div>
+                                                        </th:block>
+                                                    </div>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p><span>反社会的勢力ではないことの保証</span></p></dt>
+                                            <dd>
+                                                <div class="l-form__list-text l-form__list-text--bottom">
+                                                    暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。
+                                                </div>
+                                                <p id="isNoAntiSocialFlagPrevious"
+                                                   th:text="${memberConfirmUpdateModel.memberInfoDetail.noAntiSocialFlag != null}
+                                                    ? ${memberConfirmUpdateModel.memberInfoDetail.noAntiSocialFlag.label}
+                                                    : ''">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <h4 class="c-title-form-m c-title-form-m--line"><p>メール配信設定</p></h4>
+                                <div class="l-form">
+                                    <div class="l-form__list-wrap">
+                                        <dl class="l-form__list">
+                                            <dt><p>メールによるおトク情報</p></dt>
+                                            <dd><p id="sendMailPermitFlagPrevious" th:text="${memberConfirmUpdateModel.memberInfoDetail.sendMailPermitFlag != null} ? ${memberConfirmUpdateModel.memberInfoDetail.sendMailPermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>金属商品価格お知らせメール</p></dt>
+                                            <dd><p id="metalPermitFlagPrevious" th:text="${memberConfirmUpdateModel.memberInfoDetail.metalPermitFlag != null} ? ${memberConfirmUpdateModel.memberInfoDetail.metalPermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>ご注文受付完了メール</p></dt>
+                                            <dd><p id="orderCompletePermitFlagPrevious" th:text="${memberConfirmUpdateModel.memberInfoDetail.orderCompletePermitFlag != null} ? ${memberConfirmUpdateModel.memberInfoDetail.orderCompletePermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                        <dl class="l-form__list">
+                                            <dt><p>商品発送完了メール</p></dt>
+                                            <dd><p id="deliveryCompletePermitFlagPrevious" th:text="${memberConfirmUpdateModel.memberInfoDetail.deliveryCompletePermitFlag != null} ? ${memberConfirmUpdateModel.memberInfoDetail.deliveryCompletePermitFlag.label}: ''"/></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="c-button-wrap">
+                            <button type="submit" class="c-button c-button--primary c-button--width-l" th:onclick="|window.location.href='@{/member/confirm/index.html}'|">会員情報・メルマガページ</button>
+                        </div>
+                        <div class="c-button-wrap c-button-wrap--line">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+</body>
+</html>

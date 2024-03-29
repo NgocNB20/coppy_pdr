@@ -1,0 +1,132 @@
+@charset "utf-8";
+
+// ==========================================================================
+//  _c-error
+// ==========================================================================
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+// c-global-error
+// -----------------------------------------------------------------
+.c-global-error {
+  padding: 22px 28px;
+  border: 1px solid $color-f00;
+  @include font-style(16, 25);
+  color: $color-f00;
+
+  li {
+    text-indent: -1.3rem;
+    padding-left: 1.6rem;
+
+    &::before {
+      content: "・";
+      margin-right: 5px;
+    }
+  }
+
+  @include media(sm) {
+    padding: vwset(15) vwset(15) vwset(15) vwset(12);
+    @include font-sp-style(15, 25);
+  }
+
+
+  // 上下マージンのみ
+  &--margin-m-block {
+    margin-bottom: 40px;
+
+    @include media(sm) {
+      margin-bottom: vwset(25);
+    }
+  }
+
+  // 上下左右マージン
+  &--margin-m {
+    margin-bottom: 40px;
+
+    @include media(sm) {
+      margin-bottom: vwset(25);
+      margin-inline: vwset(15);
+    }
+  }
+
+}
+
+
+
+
+// c-field-error  
+// -----------------------------------------------------------------
+
+.c-field-error {
+  @include font-style(15,19);
+  color: $color-f00;
+
+  &--top {
+    margin-top: 5px;
+  }
+
+  &--top-large {
+    margin-top: 15px;
+  }
+
+  &--bottom-large {
+    margin-bottom: 15px;
+  }
+
+  @include media(sm) {
+    @include font-sp-style(15,24);
+  }
+}
+
+
+
+// c-reception
+// -----------------------------------------------------------------
+
+.c-reception {
+  padding: 25px;
+  background: $color-orange-light;
+  text-align: center;
+  @include font-style(18,30,bold);
+  color: $color-f00;
+
+  strong {
+    @include font-style(24,30,bold);
+  }
+
+  @include media(sm) {
+
+    margin-inline: vwset(15);
+    padding: vwset(18) vwset(22);
+    @include font-sp-style(16,30);
+
+    strong {
+      @include font-sp-style(20,30);
+    }
+  }
+
+  &--line {
+    border: solid 1px rgba($color: $color-primary, $alpha: .5);
+  }
+
+  &--line-strong {
+    border: solid 4px $color-f00;
+  }
+
+  &--text-left {
+    text-align: left;
+  }
+
+  // 下マージンのみ
+  &--margin-m-block {
+    margin-bottom: 20px;
+
+    @include media(sm) {
+      margin-bottom: vwset(25);
+    }
+  }
+
+}
+

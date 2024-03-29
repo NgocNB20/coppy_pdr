@@ -1,0 +1,29 @@
+
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+// 注文ページ共通
+
+.l-order {
+
+  .l-footer__nav {
+    display: none;
+  }
+
+  .l-footer__contents {
+    margin-top: 0;
+  }
+
+  @include media(sm) {
+    .l-category-wrap {
+      display: none;
+    }
+
+    .l-footer {
+      margin-top: vwset(75);
+    }
+  }
+}

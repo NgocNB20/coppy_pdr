@@ -1,0 +1,14 @@
+# 2023-renew No22 from here
+type: object
+description: メンバー情報ファイルエンティティリストの応答
+properties:
+  memberInfoImageEntityResponse:
+    type: array
+    items:
+      $ref: "#/components/schemas/MemberInfoImageEntityResponse"
+
+components:
+  schemas:
+    MemberInfoImageEntityResponse:
+      $ref: ./MemberInfoImageEntityResponse.yaml
+# 2023-renew No22 to here

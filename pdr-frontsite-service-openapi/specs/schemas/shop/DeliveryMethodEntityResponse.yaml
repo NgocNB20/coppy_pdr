@@ -1,0 +1,121 @@
+type: object
+description: フリーエリアEntityレスポンス
+properties:
+  deliveryMethodSeq:
+    type: integer
+    format: int32
+    description: 配送方法SEQ（必須）
+    example: 2
+  deliveryMethodName:
+    type: string
+    description: 配送方法名（必須）
+    example: 2
+  deliveryMethodDisplayName:
+    type: string
+    description: 配送方法表示名
+    example: PDR配送
+  openStatus:
+    type: string
+    description: 公開状態（必須）
+    example: 2
+    default: 0
+  deliveryNote:
+    type: string
+    description: 配送方法説明文
+    example: 配送方法説
+  deliveryMethodType:
+    type: string
+    description: 配送方法種別（必須）
+    example: 2
+    default: 0
+  equalsCarriage:
+    type: number
+    description: 一律送料
+    example: 600
+  largeAmountDiscountPrice:
+    type: number
+    description: 高額割引下限金額
+    example: 10000
+  largeAmountDiscountCarriage:
+    type: number
+    description: 高額割引送料
+    example: 10000
+  shortfallDisplayFlag:
+    type: string
+    description: 不足金額表示フラグ（必須）
+    example: 2
+    default: 0
+  deliveryLeadTime:
+    type: integer
+    format: int32
+    description: リードタイム
+    example: 2
+  deliveryChaseURL:
+    type: string
+    description: 配送追跡URL
+    example: 配送追跡URL
+  deliveryChaseURLDisplayPeriod:
+    type: number
+    description: 配送追跡URL表示期間
+    example: 10000
+  possibleSelectDays:
+    type: integer
+    format: int32
+    description: 選択可能日数
+    example: 2
+    default: 0
+  receiverTimeZone1:
+    type: string
+    description: お届け時間帯1
+    example: Asia/Tokyo
+  receiverTimeZone2:
+    type: string
+    description: お届け時間帯2
+    example: Asia/Tokyo
+  receiverTimeZone3:
+    type: string
+    description: お届け時間帯3
+    example: Asia/Tokyo
+  receiverTimeZone4:
+    type: string
+    description: お届け時間帯4
+    example: Asia/Tokyo
+  receiverTimeZone5:
+    type: string
+    description: お届け時間帯5
+    example: Asia/Tokyo
+  receiverTimeZone6:
+    type: string
+    description: お届け時間帯6
+    example: Asia/Tokyo
+  receiverTimeZone7:
+    type: string
+    description: お届け時間帯7
+    example: Asia/Tokyo
+  receiverTimeZone8:
+    type: string
+    description: お届け時間帯8
+    example: Asia/Tokyo
+  receiverTimeZone9:
+    type: string
+    description: お届け時間帯9
+    example: Asia/Tokyo
+  receiverTimeZone10:
+    type: string
+    description: お届け時間帯10
+    example: Asia/Tokyo
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2021/12/12 12:00:00

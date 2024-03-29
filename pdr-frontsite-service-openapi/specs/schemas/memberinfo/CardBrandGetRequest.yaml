@@ -1,0 +1,7 @@
+type: object
+description: カードブランドリスト取得リクエスト
+properties:
+  frontDisplayFlag:
+    type: boolean
+    description: Front表示フラグ
+    example: true

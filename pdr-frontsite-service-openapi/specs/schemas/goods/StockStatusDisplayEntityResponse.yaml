@@ -1,0 +1,22 @@
+type: object
+description: 商品グループ在庫表示レスポンス<br/>こちらは非同期更新処理の完了にかかわらず設定されるため、最新データでないことに注意
+properties:
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ（必須）
+    example: 10000
+  stockStatus:
+    type: string
+    description: 在庫状態（必須）
+    example: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00

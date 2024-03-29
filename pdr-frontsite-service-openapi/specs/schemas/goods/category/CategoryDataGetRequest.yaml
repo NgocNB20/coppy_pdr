@@ -1,0 +1,23 @@
+type: object
+description: カテゴリーデータ取得リクエスト
+properties:
+  conditionDto:
+    $ref: "#/components/schemas/CategorySearchForDaoConditionDtoRequest"
+  startCategorylevel:
+    type: integer
+    format: int32
+    description: 開始カテゴリー階層
+    example: 1
+  endCategorylevel:
+    type: integer
+    format: int32
+    description: 終了カテゴリー階層
+    example: 3
+  categoryType:
+    type: string
+    description: カテゴリー種類
+    example: 1
+components:
+  schemas:
+    CategorySearchForDaoConditionDtoRequest:
+      $ref: ./CategorySearchForDaoConditionDtoRequest.yaml

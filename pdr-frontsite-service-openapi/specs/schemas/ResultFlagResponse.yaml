@@ -1,0 +1,7 @@
+type: object
+description: 結果成否レスポンス
+properties:
+  resultFlag:
+    type: boolean
+    description: 結果成否
+    example: true

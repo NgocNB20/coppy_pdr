@@ -1,0 +1,11 @@
+# 2023-renew AddNo5 from here
+type: object
+description: 商品グループコードリスト取得リクエスト
+properties:
+  goodsGroupCodesList:
+    type: array
+    description: 商品グループコードリスト
+    items:
+      type: string
+      example: 1
+# 2023-renew AddNo5 to here

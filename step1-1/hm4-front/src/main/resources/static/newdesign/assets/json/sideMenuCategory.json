@@ -1,0 +1,1526 @@
+[
+    {
+        "cid": "c-sika",
+        "hsn": "1",
+        "cidParent": "top",
+        "displayName": "歯科関連用品",
+        "hierarchicalSerialNumber": "1",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "c-sika-all",
+            "hsn": "1-0",
+            "cidParent": "c-sika",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "1-0",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-series-1",
+            "hsn": "1-1",
+            "cidParent": "c-sika",
+            "displayName": "オーラルケア",
+            "hierarchicalSerialNumber": "1-1",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-1-1",
+                "hsn": "1-1-1",
+                "cidParent": "c-series-1",
+                "displayName": "歯ブラシ",
+                "hierarchicalSerialNumber": "1-1-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-2",
+                "hsn": "1-1-2",
+                "cidParent": "c-series-1",
+                "displayName": "歯間ブラシ",
+                "hierarchicalSerialNumber": "1-1-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-9",
+                "hsn": "1-1-3",
+                "cidParent": "c-series-1",
+                "displayName": "歯みがき剤",
+                "hierarchicalSerialNumber": "1-1-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-3",
+                "hsn": "1-1-4",
+                "cidParent": "c-series-1",
+                "displayName": "フロス",
+                "hierarchicalSerialNumber": "1-1-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-4",
+                "hsn": "1-1-5",
+                "cidParent": "c-series-1",
+                "displayName": "舌ブラシ",
+                "hierarchicalSerialNumber": "1-1-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+
+            {
+                "cid": "c-series-1-5",
+                "hsn": "1-1-6",
+                "cidParent": "c-series-1",
+                "displayName": "義歯",
+                "hierarchicalSerialNumber": "1-1-6",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-6",
+                "hsn": "1-1-7",
+                "cidParent": "c-series-1",
+                "displayName": "介護用品",
+                "hierarchicalSerialNumber": "1-1-7",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-7",
+                "hsn": "1-1-8",
+                "cidParent": "c-series-1",
+                "displayName": "染め出し",
+                "hierarchicalSerialNumber": "1-1-8",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-11",
+                "hsn": "1-1-9",
+                "cidParent": "c-series-1",
+                "displayName": "洗口液",
+                "hierarchicalSerialNumber": "1-1-9",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-10",
+                "hsn": "1-1-10",
+                "cidParent": "c-series-1",
+                "displayName": "キシリトール配合食品",
+                "hierarchicalSerialNumber": "1-1-10",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+
+            {
+                "cid": "c-series-1-13",
+                "hsn": "1-1-11",
+                "cidParent": "c-series-1",
+                "displayName": "飲料",
+                "hierarchicalSerialNumber": "1-1-11",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-12",
+                "hsn": "1-1-12",
+                "cidParent": "c-series-1",
+                "displayName": "その他食品",
+                "hierarchicalSerialNumber": "1-1-12",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-1-8",
+                "hsn": "1-1-13",
+                "cidParent": "c-series-1",
+                "displayName": "その他",
+                "hierarchicalSerialNumber": "1-1-13",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-2",
+            "hsn": "1-2",
+            "cidParent": "c-sika",
+            "displayName": "グローブ",
+            "hierarchicalSerialNumber": "1-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-2-1",
+                "hsn": "1-2-1",
+                "cidParent": "c-series-2",
+                "displayName": "ニトリルグローブ",
+                "hierarchicalSerialNumber": "1-2-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-2-2",
+                "hsn": "1-2-2",
+                "cidParent": "c-series-2",
+                "displayName": "プラスチックグローブ",
+                "hierarchicalSerialNumber": "1-2-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-2-4",
+                "hsn": "1-2-3",
+                "cidParent": "c-series-2",
+                "displayName": "ラテックスグローブ",
+                "hierarchicalSerialNumber": "1-2-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-2-7",
+                "hsn": "1-2-4",
+                "cidParent": "c-series-2",
+                "displayName": "ポリクロロプレングローブ",
+                "hierarchicalSerialNumber": "1-2-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-2-5",
+                "hsn": "1-2-5",
+                "cidParent": "c-series-2",
+                "displayName": "手術用グローブ",
+                "hierarchicalSerialNumber": "1-2-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-3",
+            "hsn": "1-3",
+            "cidParent": "c-sika",
+            "displayName": "マスク",
+            "hierarchicalSerialNumber": "1-3",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-3-1",
+                "hsn": "1-3-1",
+                "cidParent": "c-series-3",
+                "displayName": "マスク",
+                "hierarchicalSerialNumber": "1-3-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-3-2",
+                "hsn": "1-3-2",
+                "cidParent": "c-series-3",
+                "displayName": "その他",
+                "hierarchicalSerialNumber": "1-3-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-4",
+            "hsn": "1-4",
+            "cidParent": "c-sika",
+            "displayName": "滅菌・感染予防",
+            "hierarchicalSerialNumber": "1-4",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-4-1",
+                "hsn": "1-4-1",
+                "cidParent": "c-series-4",
+                "displayName": "滅菌バッグ",
+                "hierarchicalSerialNumber": "1-4-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-4-2",
+                "hsn": "1-4-2",
+                "cidParent": "c-series-4",
+                "displayName": "感染予防用品",
+                "hierarchicalSerialNumber": "1-4-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-4-3",
+                "hsn": "1-4-3",
+                "cidParent": "c-series-4",
+                "displayName": "ドレープ",
+                "hierarchicalSerialNumber": "1-4-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-4-4",
+                "hsn": "1-4-4",
+                "cidParent": "c-series-4",
+                "displayName": "スリーブ",
+                "hierarchicalSerialNumber": "1-4-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-4-5",
+                "hsn": "1-4-5",
+                "cidParent": "c-series-4",
+                "displayName": "ゴーグル",
+                "hierarchicalSerialNumber": "1-4-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-5",
+            "hsn": "1-5",
+            "cidParent": "c-sika",
+            "displayName": "紙コップ",
+            "hierarchicalSerialNumber": "1-5",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-5-1",
+                "hsn": "1-5-1",
+                "cidParent": "c-series-5",
+                "displayName": "紙コップ",
+                "hierarchicalSerialNumber": "1-5-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-5-2",
+                "hsn": "1-5-2",
+                "cidParent": "c-series-5",
+                "displayName": "ホルダー",
+                "hierarchicalSerialNumber": "1-5-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-6",
+            "hsn": "1-6",
+            "cidParent": "c-sika",
+            "displayName": "チェアサイド",
+            "hierarchicalSerialNumber": "1-6",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-6-1",
+                "hsn": "1-6-1",
+                "cidParent": "c-series-6",
+                "displayName": "布タオル",
+                "hierarchicalSerialNumber": "1-6-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-2",
+                "hsn": "1-6-2",
+                "cidParent": "c-series-6",
+                "displayName": "ヘッドレストカバー",
+                "hierarchicalSerialNumber": "1-6-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-3",
+                "hsn": "1-6-3",
+                "cidParent": "c-series-6",
+                "displayName": "ディスポエプロン",
+                "hierarchicalSerialNumber": "1-6-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-4",
+                "hsn": "1-6-4",
+                "cidParent": "c-series-6",
+                "displayName": "紙布エプロンコップ",
+                "hierarchicalSerialNumber": "1-6-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-5",
+                "hsn": "1-6-5",
+                "cidParent": "c-series-6",
+                "displayName": "エプロンホルダー",
+                "hierarchicalSerialNumber": "1-6-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-6",
+                "hsn": "1-6-6",
+                "cidParent": "c-series-6",
+                "displayName": "チェアサイド用品",
+                "hierarchicalSerialNumber": "1-6-6",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-7",
+                "hsn": "1-6-7",
+                "cidParent": "c-series-6",
+                "displayName": "ペーパータオル",
+                "hierarchicalSerialNumber": "1-6-7",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-16",
+                "hsn": "1-6-8",
+                "cidParent": "c-series-6",
+                "displayName": "吸水マット",
+                "hierarchicalSerialNumber": "1-6-8",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-8",
+                "hsn": "1-6-9",
+                "cidParent": "c-series-6",
+                "displayName": "手洗い",
+                "hierarchicalSerialNumber": "1-6-9",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-9",
+                "hsn": "1-6-10",
+                "cidParent": "c-series-6",
+                "displayName": "手指消毒",
+                "hierarchicalSerialNumber": "1-6-10",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+
+
+            {
+                "cid": "c-series-6-10",
+                "hsn": "1-6-11",
+                "cidParent": "c-series-6",
+                "displayName": "クッション",
+                "hierarchicalSerialNumber": "1-6-11",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-11",
+                "hsn": "1-6-12",
+                "cidParent": "c-series-6",
+                "displayName": "ハンドケア",
+                "hierarchicalSerialNumber": "1-6-12",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-12",
+                "hsn": "1-6-13",
+                "cidParent": "c-series-6",
+                "displayName": "スリッパ",
+                "hierarchicalSerialNumber": "1-6-13",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-14",
+                "hsn": "1-6-14",
+                "cidParent": "c-series-6",
+                "displayName": "アロマテラピー",
+                "hierarchicalSerialNumber": "1-6-14",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-6-15",
+                "hsn": "1-6-15",
+                "cidParent": "c-series-6",
+                "displayName": "便座シート",
+                "hierarchicalSerialNumber": "1-6-15",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-7",
+            "hsn": "1-7",
+            "cidParent": "c-sika",
+            "displayName": "洗浄剤",
+            "hierarchicalSerialNumber": "1-7",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-7-2",
+                "hsn": "1-7-1",
+                "cidParent": "c-series-7",
+                "displayName": "洗浄剤",
+                "hierarchicalSerialNumber": "1-7-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-7-3",
+                "hsn": "1-7-2",
+                "cidParent": "c-series-7",
+                "displayName": "トラップ処理剤",
+                "hierarchicalSerialNumber": "1-7-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-7-4",
+                "hsn": "1-7-3",
+                "cidParent": "c-series-7",
+                "displayName": "たわし",
+                "hierarchicalSerialNumber": "1-7-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-7-5",
+                "hsn": "1-7-4",
+                "cidParent": "c-series-7",
+                "displayName": "バキュームクリーナー",
+                "hierarchicalSerialNumber": "1-7-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-7-7",
+                "hsn": "1-7-5",
+                "cidParent": "c-series-7",
+                "displayName": "消毒用医薬品など",
+                "hierarchicalSerialNumber": "1-7-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-8",
+            "hsn": "1-8",
+            "cidParent": "c-sika",
+            "displayName": "衛生材料",
+            "hierarchicalSerialNumber": "1-8",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-8-1",
+                "hsn": "1-8-1",
+                "cidParent": "c-series-8",
+                "displayName": "カット綿",
+                "hierarchicalSerialNumber": "1-8-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-8-1",
+                "hsn": "1-8-2",
+                "cidParent": "c-series-8",
+                "displayName": "綿ガーゼ",
+                "hierarchicalSerialNumber": "1-8-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-8-1",
+                "hsn": "1-8-3",
+                "cidParent": "c-series-8",
+                "displayName": "不織布ガーゼ",
+                "hierarchicalSerialNumber": "1-8-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-8-1",
+                "hsn": "1-8-4",
+                "cidParent": "c-series-8",
+                "displayName": "コットンロール",
+                "hierarchicalSerialNumber": "1-8-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-8-1",
+                "hsn": "1-8-5",
+                "cidParent": "c-series-8",
+                "displayName": "脱脂綿",
+                "hierarchicalSerialNumber": "1-8-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-23",
+            "hsn": "1-9",
+            "cidParent": "c-sika",
+            "displayName": "X線関連",
+            "hierarchicalSerialNumber": "1-9",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-23-1",
+                "hsn": "1-9-1",
+                "cidParent": "c-series-23",
+                "displayName": "フィルム",
+                "hierarchicalSerialNumber": "1-9-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-23-2",
+                "hsn": "1-9-2",
+                "cidParent": "c-series-23",
+                "displayName": "フィルムマウント",
+                "hierarchicalSerialNumber": "1-9-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-23-3",
+                "hsn": "1-9-3",
+                "cidParent": "c-series-23",
+                "displayName": "IPカバー",
+                "hierarchicalSerialNumber": "1-9-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-23-4",
+                "hsn": "1-9-4",
+                "cidParent": "c-series-23",
+                "displayName": "スリーブ",
+                "hierarchicalSerialNumber": "1-9-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-23-5",
+                "hsn": "1-9-5",
+                "cidParent": "c-series-23",
+                "displayName": "その他",
+                "hierarchicalSerialNumber": "1-9-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-9",
+            "hsn": "1-10",
+            "cidParent": "c-sika",
+            "displayName": "根管治療",
+            "hierarchicalSerialNumber": "1-10",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-9-1",
+                "hsn": "1-10-1",
+                "cidParent": "c-series-9",
+                "displayName": "ファイル・リーマー",
+                "hierarchicalSerialNumber": "1-10-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-15",
+            "hsn": "1-11",
+            "cidParent": "c-sika",
+            "displayName": "インスツルメント",
+            "hierarchicalSerialNumber": "1-11",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-15-1",
+                "hsn": "1-11-1",
+                "cidParent": "c-series-15",
+                "displayName": "ミラー",
+                "hierarchicalSerialNumber": "1-11-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-24",
+            "hsn": "1-12",
+            "cidParent": "c-sika",
+            "displayName": "歯科用研磨・研削",
+            "hierarchicalSerialNumber": "1-12",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-24-1",
+                "hsn": "1-12-1",
+                "cidParent": "c-series-24",
+                "displayName": "FG用ダイヤモンドバー",
+                "hierarchicalSerialNumber": "1-12-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-sika-01",
+            "hsn": "1-13",
+            "cidParent": "c-sika",
+            "displayName": "研削・研磨",
+            "hierarchicalSerialNumber": "1-13",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-sika-01-01",
+                "hsn": "1-13-1",
+                "cidParent": "c-sika-01",
+                "displayName": "FG用ダイヤモンドバー",
+                "hierarchicalSerialNumber": "1-13-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-10",
+            "hsn": "1-14",
+            "cidParent": "c-sika",
+            "displayName": "光重合関連・仮封材・ｾﾒﾝﾄ",
+            "hierarchicalSerialNumber": "1-14",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-10-15",
+                "hsn": "1-14-1",
+                "cidParent": "c-series-10",
+                "displayName": "CR",
+                "hierarchicalSerialNumber": "1-14-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-11",
+            "hsn": "1-15",
+            "cidParent": "c-sika",
+            "displayName": "印象材・咬合紙",
+            "hierarchicalSerialNumber": "1-15",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-11-1",
+                "hsn": "1-15-1",
+                "cidParent": "c-series-11",
+                "displayName": "アルジネート印象材",
+                "hierarchicalSerialNumber": "1-15-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-sika-02",
+            "hsn": "1-16",
+            "cidParent": "c-sika",
+            "displayName": "石こう・ワックス",
+            "hierarchicalSerialNumber": "1-16",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-sika-02-01",
+                "hsn": "1-16-1",
+                "cidParent": "c-sika-02",
+                "displayName": "石こう",
+                "hierarchicalSerialNumber": "1-16-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-sika-03",
+            "hsn": "1-17",
+            "cidParent": "c-sika",
+            "displayName": "義歯材料・適合試験材",
+            "hierarchicalSerialNumber": "1-17",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-sika-03-02",
+                "hsn": "1-17-1",
+                "cidParent": "c-sika-03",
+                "displayName": "適合試験材",
+                "hierarchicalSerialNumber": "1-17-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-16",
+            "hsn": "1-18",
+            "cidParent": "c-sika",
+            "displayName": "受付・待合室",
+            "hierarchicalSerialNumber": "1-18",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-16-1",
+                "hsn": "1-18-1",
+                "cidParent": "c-series-16",
+                "displayName": "受付用品",
+                "hierarchicalSerialNumber": "1-18-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-17",
+            "hsn": "1-19",
+            "cidParent": "c-sika",
+            "displayName": "白衣・サンダル",
+            "hierarchicalSerialNumber": "1-19",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-17-1",
+                "hsn": "1-19-1",
+                "cidParent": "c-series-17",
+                "displayName": "男女兼用ウェア",
+                "hierarchicalSerialNumber": "1-19-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-18",
+            "hsn": "1-20",
+            "cidParent": "c-sika",
+            "displayName": "薬袋・ごほうび・歯グッズ",
+            "hierarchicalSerialNumber": "1-20",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-18-1",
+                "hsn": "1-20-1",
+                "cidParent": "c-series-18",
+                "displayName": "薬袋（名入れ無し）",
+                "hierarchicalSerialNumber": "1-20-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-19",
+            "hsn": "1-21",
+            "cidParent": "c-sika",
+            "displayName": "医薬品・消毒剤",
+            "hierarchicalSerialNumber": "1-21",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-series-25",
+            "hsn": "1-23",
+            "cidParent": "c-sika",
+            "displayName": "食品・飲料",
+            "hierarchicalSerialNumber": "1-23",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-25-1",
+                "hsn": "1-23-1",
+                "cidParent": "c-series-25",
+                "displayName": "食品",
+                "hierarchicalSerialNumber": "1-23-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+    {
+        "cid": "c-giko",
+        "hsn": "2",
+        "cidParent": "top",
+        "displayName": "技工関連用品",
+        "hierarchicalSerialNumber": "2",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "c-giko-all",
+            "hsn": "2-0",
+            "cidParent": "c-giko",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "2-0",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-series-12",
+            "hsn": "2-1",
+            "cidParent": "c-giko",
+            "displayName": "石こう・ワックス",
+            "hierarchicalSerialNumber": "2-1",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-12-1",
+                "hsn": "2-1-1",
+                "cidParent": "c-series-12",
+                "displayName": "石こう",
+                "hierarchicalSerialNumber": "2-1-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-12-2",
+                "hsn": "2-1-2",
+                "cidParent": "c-series-12",
+                "displayName": "ベンディングワイヤー",
+                "hierarchicalSerialNumber": "2-1-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-12-3",
+                "hsn": "2-1-3",
+                "cidParent": "c-series-12",
+                "displayName": "石こう溶解剤",
+                "hierarchicalSerialNumber": "2-1-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-12-12",
+                "hsn": "2-1-4",
+                "cidParent": "c-series-12",
+                "displayName": "ダウエルピン",
+                "hierarchicalSerialNumber": "2-1-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-12-4",
+                "hsn": "2-1-5",
+                "cidParent": "c-series-12",
+                "displayName": "模型器材",
+                "hierarchicalSerialNumber": "2-1-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-giko-02",
+            "hsn": "2-2",
+            "cidParent": "c-giko",
+            "displayName": "光重合関連・仮封材・ｾﾒﾝﾄ",
+            "hierarchicalSerialNumber": "2-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-12-1",
+                "hsn": "2-2-1",
+                "cidParent": "c-giko-02",
+                "displayName": "ファイバーポスト",
+                "hierarchicalSerialNumber": "2-2-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-12-1",
+                "hsn": "2-2-2",
+                "cidParent": "c-giko-02",
+                "displayName": "レジン材料",
+                "hierarchicalSerialNumber": "2-2-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-12-1",
+                "hsn": "2-2-3",
+                "cidParent": "c-giko-02",
+                "displayName": "トレーレジン",
+                "hierarchicalSerialNumber": "2-2-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-12-1",
+                "hsn": "2-2-4",
+                "cidParent": "c-giko-02",
+                "displayName": "小筆",
+                "hierarchicalSerialNumber": "2-2-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-13",
+            "hsn": "2-3",
+            "cidParent": "c-giko",
+            "displayName": "研削・研磨",
+            "hierarchicalSerialNumber": "2-3",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-13-1",
+                "hsn": "2-3-1",
+                "cidParent": "c-series-13",
+                "displayName": "FG用ダイヤモンドバー",
+                "hierarchicalSerialNumber": "2-3-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-13-2",
+                "hsn": "2-3-2",
+                "cidParent": "c-series-13",
+                "displayName": "CA用シリコンバー",
+                "hierarchicalSerialNumber": "2-3-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-13-3",
+                "hsn": "2-3-3",
+                "cidParent": "c-series-13",
+                "displayName": "FG用カーバイドバー",
+                "hierarchicalSerialNumber": "2-3-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-13-4",
+                "hsn": "2-3-4",
+                "cidParent": "c-series-13",
+                "displayName": "FG用研磨ポイント",
+                "hierarchicalSerialNumber": "2-3-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-13-5",
+                "hsn": "2-3-5",
+                "cidParent": "c-series-13",
+                "displayName": "CA用研磨ポイント",
+                "hierarchicalSerialNumber": "2-3-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-giko-03",
+            "hsn": "2-4",
+            "cidParent": "c-giko",
+            "displayName": "印象材・咬合紙",
+            "hierarchicalSerialNumber": "2-4",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-giko-03-02",
+                "hsn": "2-4-1",
+                "cidParent": "c-giko-03",
+                "displayName": "咬合紙",
+                "hierarchicalSerialNumber": "2-4-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-giko-03-01",
+                "hsn": "2-4-2",
+                "cidParent": "c-giko-03",
+                "displayName": "技工用シリコン印象材",
+                "hierarchicalSerialNumber": "2-4-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-14",
+            "hsn": "2-5",
+            "cidParent": "c-giko",
+            "displayName": "義歯材料・適合試験材",
+            "hierarchicalSerialNumber": "2-5",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-14-1",
+                "hsn": "2-5-1",
+                "cidParent": "c-series-14",
+                "displayName": "粘膜調整材",
+                "hierarchicalSerialNumber": "2-5-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-14-2",
+                "hsn": "2-5-2",
+                "cidParent": "c-series-14",
+                "displayName": "適合試験材",
+                "hierarchicalSerialNumber": "2-5-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-14-3",
+                "hsn": "2-5-3",
+                "cidParent": "c-series-14",
+                "displayName": "歯冠用硬質レジン",
+                "hierarchicalSerialNumber": "2-5-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-14-4",
+                "hsn": "2-5-4",
+                "cidParent": "c-series-14",
+                "displayName": "マウスピース用シート",
+                "hierarchicalSerialNumber": "2-5-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-14-5",
+                "hsn": "2-5-5",
+                "cidParent": "c-series-14",
+                "displayName": "ケース",
+                "hierarchicalSerialNumber": "2-5-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-giko-01",
+            "hsn": "2-6",
+            "cidParent": "c-giko",
+            "displayName": "インスツルメント",
+            "hierarchicalSerialNumber": "2-6",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-giko-01-05",
+                "hsn": "2-6-1",
+                "cidParent": "c-giko-01",
+                "displayName": "ポーセレンインスツルメント",
+                "hierarchicalSerialNumber": "2-6-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-giko-01-04",
+                "hsn": "2-6-2",
+                "cidParent": "c-giko-01",
+                "displayName": "ワックスインスツルメント",
+                "hierarchicalSerialNumber": "2-6-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-giko-01-03",
+                "hsn": "2-6-3",
+                "cidParent": "c-giko-01",
+                "displayName": "ナイフ",
+                "hierarchicalSerialNumber": "2-6-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-giko-01-01",
+                "hsn": "2-6-4",
+                "cidParent": "c-giko-01",
+                "displayName": "プライヤー",
+                "hierarchicalSerialNumber": "2-6-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-giko-01-02",
+                "hsn": "2-6-5",
+                "cidParent": "c-giko-01",
+                "displayName": "研磨ホルダー",
+                "hierarchicalSerialNumber": "2-6-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-giko-01-06",
+                "hsn": "2-6-6",
+                "cidParent": "c-giko-01",
+                "displayName": "その他",
+                "hierarchicalSerialNumber": "2-6-6",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+        {
+            "cid": "c-series-20",
+            "hsn": "2-7",
+            "cidParent": "c-giko",
+            "displayName": "金属",
+            "hierarchicalSerialNumber": "2-7",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+            {
+                "cid": "c-series-20-1",
+                "hsn": "2-7-1",
+                "cidParent": "c-series-20",
+                "displayName": "陶材焼付用合金",
+                "hierarchicalSerialNumber": "2-7-1",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-20-2",
+                "hsn": "2-7-2",
+                "cidParent": "c-series-20",
+                "displayName": "金ろう",
+                "hierarchicalSerialNumber": "2-7-2",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-20-3",
+                "hsn": "2-7-3",
+                "cidParent": "c-series-20",
+                "displayName": "フラックス",
+                "hierarchicalSerialNumber": "2-7-3",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-20-4",
+                "hsn": "2-7-4",
+                "cidParent": "c-series-20",
+                "displayName": "歯科鋳造用金合金",
+                "hierarchicalSerialNumber": "2-7-4",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+            {
+                "cid": "c-series-20-5",
+                "hsn": "2-7-5",
+                "cidParent": "c-series-20",
+                "displayName": "金パラ",
+                "hierarchicalSerialNumber": "2-7-5",
+                "categoryLevel": 3,
+                "categoryFileName": null,
+                "selectedRootCategory": false
+            },
+    {
+        "cid": "c-sale",
+        "hsn": "3",
+        "cidParent": "top",
+        "displayName": "セール",
+        "hierarchicalSerialNumber": "3",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "c-sale-all",
+            "hsn": "3-0",
+            "cidParent": "c-sale",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "3-0",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-sale-1085",
+            "hsn": "3-1",
+            "cidParent": "c-sale",
+            "displayName": "2023年総合カタログ発刊号シーズンセール（2023年7月14日（金）まで）",
+            "hierarchicalSerialNumber": "3-1",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-sale-1085",
+            "hsn": "3-2",
+            "cidParent": "c-sale",
+            "displayName": "カサバラン紙コップしが新発売セール（2023年7月27日（木）まで）",
+            "hierarchicalSerialNumber": "3-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+    {
+        "cid": "outlet",
+        "hsn": "4",
+        "cidParent": "top",
+        "displayName": "アウトレット",
+        "hierarchicalSerialNumber": "4",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "outlet-all",
+            "hsn": "4-1",
+            "cidParent": "outlet",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "4-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+    {
+        "cid": "c-series-22",
+        "hsn": "5",
+        "cidParent": "top",
+        "displayName": "無料サンプル",
+        "hierarchicalSerialNumber": "5",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "c-series-22-all",
+            "hsn": "5-0",
+            "cidParent": "c-series-22",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "5-0",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-series-22-3",
+            "hsn": "5-1",
+            "cidParent": "c-series-22",
+            "displayName": "グローブ",
+            "hierarchicalSerialNumber": "5-1",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-series-22-4",
+            "hsn": "5-2",
+            "cidParent": "c-series-22",
+            "displayName": "マスク",
+            "hierarchicalSerialNumber": "5-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-series-22-5",
+            "hsn": "5-3",
+            "cidParent": "c-series-22",
+            "displayName": "滅菌バッグ",
+            "hierarchicalSerialNumber": "5-3",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+        {
+            "cid": "c-series-22-6",
+            "hsn": "5-4",
+            "cidParent": "c-series-22",
+            "displayName": "診察券・薬袋・リコールカードセット",
+            "hierarchicalSerialNumber": "5-4",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+    {
+        "cid": "catalog",
+        "hsn": "6",
+        "cidParent": "top",
+        "displayName": "カタログ請求",
+        "hierarchicalSerialNumber": "6",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "catalog-all",
+            "hsn": "6-1",
+            "cidParent": "catalog",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "6-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+    {
+        "cid": "kikurage",
+        "hsn": "8",
+        "cidParent": "top",
+        "displayName": "キクラゲ",
+        "hierarchicalSerialNumber": "8",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "kikurage-all",
+            "hsn": "8-1",
+            "cidParent": "kikurage",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "8-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        },
+    {
+        "cid": "Epithese",
+        "hsn": "9",
+        "cidParent": "top",
+        "displayName": "エピテーゼ",
+        "hierarchicalSerialNumber": "9",
+        "categoryLevel": 1,
+        "categoryFileName": null,
+        "selectedRootCategory": false
+    },
+        {
+            "cid": "Epithese-all",
+            "hsn": "9-1",
+            "cidParent": "Epithese",
+            "displayName": "すべて見る",
+            "hierarchicalSerialNumber": "9-2",
+            "categoryLevel": 2,
+            "categoryFileName": null,
+            "selectedRootCategory": false
+        }
+]

@@ -1,0 +1,8 @@
+type: array
+description: WEB-API連携取得結果DTOListレスポンス
+items:
+  $ref: "#/components/schemas/WebApiGetPurchasedCommodityInformationResponseDetailDtoResponse"
+components:
+  schemas:
+    WebApiGetPurchasedCommodityInformationResponseDetailDtoResponse:
+      $ref: ./WebApiGetPurchasedCommodityInformationResponseDetailDtoResponse.yaml

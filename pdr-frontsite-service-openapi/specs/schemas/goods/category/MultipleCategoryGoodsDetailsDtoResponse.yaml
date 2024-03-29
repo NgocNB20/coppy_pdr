@@ -1,0 +1,213 @@
+type: object
+description: マルチカテゴリマップレスポンス
+properties:
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ
+    example: 10000024
+  ggcd:
+    type: string
+    description: 商品グループコード
+    example: 商品グループコード
+  href:
+    type: string
+    description: 商品グループコード
+    example: 商品グループコード
+  goodsGroupName:
+    type: string
+    description: 商品名
+    example: ダイニングテーブル
+  goodsGroupImageThumbnail:
+    type: string
+    description: 商品グループサムネイル画像
+    example: 商品グループサムネイル画像
+  salableGoodsType:
+    type: string
+    description: 販売可能商品区分
+    example: 2
+    default: 1
+  goodsDisplayPrice:
+    type: string
+    description: 商品表示単価
+    example: 1
+  goodsDisplayPreDiscountPrice:
+    type: string
+    description: 商品表示値引き前単価
+    example: 1
+  goodsPreDiscountPrice:
+    type: string
+    description: 値引きコメント
+    example: 1
+  goodsImageItem:
+    type: string
+    description: 商品画像アイテム
+    example: 商品画像アイテム
+  goodsPrice:
+    type: number
+    description: 商品単価
+    example: 1
+  goodsPriceInTax:
+    type: number
+    description: 商品単価(税込)
+    example: 1
+  preDiscountPrice:
+    type: number
+    description: 値引き前単価＝値引前単価（税抜き）
+    example: 1
+  preDisCountPriceInTax:
+    type: number
+    description: 値引き前単価＝値引前単価（税込み）
+    example: 1
+  goodsNote1:
+    type: string
+    description: 商品説明1
+    example: 新しいカラーが発売となりました！
+  taxRate:
+    type: number
+    description: 税率
+    example: 8
+  goodsTaxType:
+    type: string
+    description: 商品消費税種別（必須）
+    example: 2
+    default: 1
+  whatsnewDate:
+    type: string
+    format: date-time
+    description: 新着日付
+    example: 2021/12/12 12:00:00
+  stockStatus:
+    type: string
+    description: 在庫状況表示
+    example: 4
+  goodsIconItems:
+    type: array
+    items:
+      $ref: ./MultipleCategoryGoodsDetailsDtoResponse.yaml
+  iconName:
+    type: string
+    description: 商品アイコン名
+    example: 定番商品
+  iconColorCode:
+    type: string
+    description: 商品アイコンカラーコード
+    example: 1h2C203
+  isNewDate:
+    type: boolean
+    default: false
+    description: 新着日付が現在の時刻を過ぎていないか判断
+    example: true
+  isGoodsPreDiscount:
+    type: boolean
+    default: false
+    description: 値引き前単価
+    example: true
+  isGoodsDisplayPriceRange:
+    type: boolean
+    default: false
+    description: 商品表示単価価格帯フラグ
+    example: true
+  isGoodsDisplayPreDiscountPriceRange:
+    type: boolean
+    default: false
+    description: 商品表示値引き前単価価格帯フラグ
+    example: true
+  isStockStatusDisplay:
+    type: boolean
+    default: false
+    description: 在庫状態
+    example: true
+  isStockNoSaleDisp:
+    type: boolean
+    default: false
+    description: 在庫状態:非販売
+    example: true
+  isStockSoldOutIconDisp:
+    type: boolean
+    default: false
+    description: 在庫状態:販売期間終了（アイコン表示用）
+    example: true
+  isStockBeforeSaleIconDisp:
+    type: boolean
+    default: false
+    description: 在庫状態:販売前（アイコン表示用）
+    example: true
+  isStockNoStockIconDisp:
+    type: boolean
+    default: false
+    description: 在庫状態:在庫なし（アイコン表示用）
+    example: true
+  isStockFewIconDisp:
+    type: boolean
+    default: false
+    description: 在庫状態:残りわずか（アイコン表示用）
+    example: true
+  isStockPossibleSalesIconDisp:
+    type: boolean
+    default: false
+    description: 在庫状態:在庫あり（アイコン表示用）
+    example: true
+  isGoodsGroupImage:
+    type: boolean
+    default: false
+    description: サムネイル画像有無チェック
+    example: true
+  groupSalePriceIntegrityFlag:
+    type: boolean
+    default: false
+    description: 画面表示用シリーズセール価格
+    example: true
+  necessaryLoginGoods:
+    type: boolean
+    default: false
+    description: 販売可能商品区分が閲覧不可（ログイン前）かどうか
+    example: true
+  priceHideGoods:
+    type: boolean
+    default: false
+    description: 販売可能商品区分が価格非表示（ログイン前）かどうか
+    example: true
+  noDispGoods:
+    type: boolean
+    default: false
+    description: 販売可能商品区分が閲覧不可（ログイン後）かどうか
+    example: true
+  saleIconFlag:
+    type: boolean
+    default: false
+    description: 画面表示用シリーズセール価格
+    example: true
+  reserveIconFlag:
+    type: boolean
+    default: false
+    description: お取りおきアイコンフラグ
+    example: true
+  newIconFlag:
+    type: boolean
+    default: false
+    description: NEWアイコンフラグ
+    example: true
+  sale:
+    type: boolean
+    default: false
+    description: セール価格（グループ）
+    example: true
+# 2023-renew AddNo5 from here
+  goodsGroupMaxPricePc:
+    type: number
+    description: 商品グループ最高値PC（必須）
+    example: 1000
+  goodsGroupMinPricePc:
+    type: number
+    description: 商品グループ最安値PC（必須）
+    example: 1000
+  goodsGroupMaxPriceMb:
+    type: number
+    description: 商品グループ最高値携帯
+    example: 1000
+  goodsGroupMinPriceMb:
+    type: number
+    description: 商品グループ最安値携帯
+    example: 1000
+# 2023-renew AddNo5 to here

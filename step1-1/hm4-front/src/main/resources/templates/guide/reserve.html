@@ -1,0 +1,176 @@
+<!-- PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+</head>
+
+<body id="d_guide">
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="order"><span><!--MAIN--></span>
+                    <div class="gSection mt0">
+                        <h3 class="mTitle">ご注文について</h3>
+                        <div id="d_gsn">
+                            <ul>
+                                <li><a th:href="@{/guide/order.html#o1}" id="go-Order-1">お買い物方法</a></li>
+                                <li><a th:href="@{/guide/order.html#o2}" id="go-Order2">返品・交換について</a></li>
+                                <li><a th:href="@{/guide/order.html#o4}" id="go-Order3">医薬品・医療機器のご注文について</a></li>
+                                <li><a th:href="@{/guide/reserve.html}" id="go-Reserve-1">予約の注文方法について</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="o1" class="gSection">
+                        <h4 class="subGTitle">予約の注文方法について</h4>
+                        <div class="subGsection">
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.1</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>予約したい商品をショッピングカートにいれて「配送方法」までお進みください。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/reserve/method_step_1.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.2</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>配送日時の指定に進むと「セールde予約」対象商品は下図のように表示されます。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/reserve/method_step_2.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.3</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>ご入力いただいた数量が「今すぐお届け分」として表示されます。</p>
+                                            <p class="must"><strong>※「今すぐお届け」を希望しない場合は、数量を『空欄』にしてください。<br/>※「今すぐお届け」の数量を変更したい場合は、ご希望の数量を入力してください。</strong>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/reserve/method_step_3.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.4</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>「セールde予約をする」ボタンを押すと改めて「今すぐお届け」を希望するかの確認メッセージが表示されます。「はい」または「いいえ」をクリックします。<br/>「いいえ」を押すと「今すぐお届け」の数量が自動で空欄になります。
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/reserve/method_step_4.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.5</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>予約入力欄が開くので、予約分のお届け時期と数量を入力します。</p>
+                                            <p>(例)右図のようにご入力いただくと、今すぐお届け×1、8月中旬×1の合計数量「2」でお届けいたします。</p>
+                                            <p class="must"><strong>予約分の「お届け希望日」及び「お届け時間帯」のご指定は承ることができません。</strong></p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/reserve/method_step_5.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.6</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>入力が終わったら、「お支払い方法を選択する」をクリックします。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/reserve/method_step_6.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.7</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>ご注文内容の確認まで進むと、最短発送分（今すぐお届け分）と予約分が表示されます。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/reserve/method_step_7.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.8</h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p><strong>「注文を確定する」ボタンをクリックすると予約完了です。</strong></p>
+                                            <ul>
+                                                <li>お届け時に、予約時のセール価格よりも安く販売することがあれば、安い方の価格でお届けします。</li>
+                                                <li>お支払いは先払いではなく、お届けの都度です。</li>
+                                                <li>お届け日の変更、キャンセルは、お届け日の1週間前まで可能です。<br/>(変更はお電話、もしくはFAXにてご連絡ください。オンラインショップではできません）
+                                                </li>
+                                                <li>予約内容の変更をご希望の場合は、ご注文デスク(TEL：0120-108648 / FAX：0120-108649)までご連絡ください。</li>
+                                                <li>お届け日が複数回に分かれてもご注文時に5,800円以上なら送料無料です。</li>
+                                                <li>予約商品につきましては、ご注文時にご案内した請求金額とお届け時の請求金額で、消費税計算の都合上数円の差が生じる場合がございます。</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

@@ -1,0 +1,300 @@
+@charset "UTF-8";
+
+.fa-my-child::after{
+	content: "   |-";
+	font-size:16px;
+	font-weight: normal;
+	font-style: normal;
+	color:#cecbbd;
+	white-space: pre;
+}
+
+#targetCategory table a
+{
+	text-decoration: none;
+}
+
+.beuti
+{
+	border: 1px solid #888888;
+	background-color: #f0efef;
+	padding: 4px;
+	text-align: center;
+	color: #004d4d;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius:2px;
+}
+
+.beuti_d
+{
+	background-color: #d5e7ed;
+	cursor: pointer  !important;
+}
+
+#targetCategory tr.isdraged td
+{
+	background-color: #ffcc88 !important;
+}
+
+.buttonOrder
+{
+	background-color: #ffe100;
+	padding: 6px 5px 4px 5px;
+	font-weight: bold;
+	font-size:12px;
+	border: 1px #cc9901 solid;
+	cursor:pointer;
+	vertical-align: middle;
+	box-shadow: 1px 1px #993300;
+	background-image: linear-gradient( #fff185, #ffe100);
+}
+
+
+.fa-plus-square-o {
+	vertical-align: middle;
+	display:inline-block;
+	width:22px;
+	height:22px;
+	background:
+	  linear-gradient(#333333,#333333),
+	  linear-gradient(#333333,#333333),
+	  transparent;
+	background-position:center;
+	background-size: 76% 3px,2.6px 76%; 
+	background-repeat:no-repeat;
+	border:2px #333333 solid;
+	border-radius:5px;
+	text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+	margin-top:1px;
+	cursor:pointer;
+}
+
+.fa-minus-square-o	 {
+	vertical-align: middle;
+	display:inline-block;
+	width:22px;
+	height:22px;
+	background:
+	  linear-gradient(#333333,#333333),
+	  linear-gradient(transparent,transparent),
+	  transparent;
+	background-position:center;
+	background-size: 76% 3px,3px 76%; 
+	background-repeat:no-repeat;
+	border:2px #333333 solid;
+	border-radius:5px;
+	text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+	margin-top:1px;
+	cursor:pointer;
+}
+
+.plus_all
+{	  
+	vertical-align: middle;
+	display:inline-block;
+	width:22px;
+	height:22px;
+	background:
+	  linear-gradient(#333333,#333333),
+	  linear-gradient(#333333,#333333),
+	  #ffffbb;
+	background-position:center;
+	background-size: 76% 3px,2.6px 76%; 
+	background-repeat:no-repeat;
+	border:2px #333333 solid;
+	border-radius:5px;
+	text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+	margin-top:1px;
+	cursor:pointer;
+}
+
+.minus_all
+{
+	vertical-align: middle;
+	display:inline-block;
+	width:22px;
+	height:22px;
+	background:
+	  linear-gradient(#333333,#333333),
+	  linear-gradient(transparent,transparent),
+	  #ffffbb;
+	background-position:center;
+	background-size: 76% 3px,3px 76%; 
+	background-repeat:no-repeat;
+	border:2px #333333 solid;
+	border-radius:5px;
+	text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+	margin-top:1px;
+	cursor:pointer;
+}
+
+.initial_f
+{
+	display:none;
+}
+
+/*PDR Migrate Customization from here*/
+/* 共通
+---------------------------------------------------- */
+.btn {
+	background-color: #EEEEEE;
+	border: 1px solid #999999;
+	border-radius: 4px;
+	color: #333333;
+	cursor: pointer;
+	font-size: 1.2em;
+	font-weight: bold;
+	min-width: 100px;
+	padding: 0.4em 1em;
+}
+
+.btn:hover {
+	background-color: #FFFFD9;
+	color: #333333;
+}
+.btn:active {
+	background-color: #FF3A00;
+	color: #FFFFD9;
+	cursor: wait;
+}
+
+.btn2 {
+	font-size: 1em;
+	min-width: 80px;
+}
+
+.btn3 {
+	font-size: 1em;
+	min-width: 60px;
+	padding: 0.2em 0.4em;
+}
+
+/* ログイン・ログアウト
+---------------------------------------------------- */
+.btnLogin {
+	background-color: #ff8c00;
+	color: #FFFFFF;
+	font-size: 1em;
+	min-width: 80px;
+}
+.btnLogout {
+	background-color: #ff8c00;
+	color: #FFFFFF;
+	font-size: 0.8em;
+	min-width: 80px;
+}
+
+/* 検索・一覧画面
+---------------------------------------------------- */
+.btnRegist2 {
+	background-color: #9acd32;
+	color: #FFFFFF;
+	font-size: 1em;
+}
+.btnSearch {
+	background-color: #ff8c00;
+	color: #FFFFFF;
+	font-size: 1em;
+}
+
+.btnOutputCsv {
+	font-size: 1em;
+}
+
+.btnKeepDisplay2 {
+	background-color: #ffff00;
+	font-size: 1em;
+}
+.btnArrowCateUp {
+	font-size: 1em;
+	min-width: 0;
+	padding: 0;
+}
+.btnArrowCateDown {
+	font-size: 1em;
+	min-width: 0;
+	padding: 0;
+}
+
+.btnLot2 {
+	background-color: #ffff00;
+	font-size: 1em;
+}
+
+/* 詳細画面
+---------------------------------------------------- */
+.btnRevision2 {
+	background-color: #4682b4;
+	color: #FFFFFF;
+	font-size: 1em;
+}
+.btnDelete2 {
+	background-color: #f0f8ff;
+	font-size: 1em;
+}
+.btnPrev {
+	background-color: #48d1cc;
+	color: #FFFFFF;
+}
+
+.btnPasswordReset {
+	font-size: 1em;
+}
+
+/* 入力・入力確認画面
+---------------------------------------------------- */
+.btnCancel {
+}
+.btnComfirm {
+	background-color: #4682b4;
+	color: #FFFFFF;
+}
+.btnRegist {
+	background-color: #ffff00;
+}
+.btnNext {
+	background-color: #48d1cc;
+	color: #FFFFFF;
+}
+.btnDelete3 {
+	background-color: #f0f8ff;
+	font-size: 1em;
+	min-width: 60px;
+	padding: 0.2em 0.4em;
+}
+
+/* セミナー申込抽選登録画面
+---------------------------------------------------- */
+.btnRadioSelect {
+	background: none #FFFFFF !important;
+	border: 1px solid #999999 !important;
+	border-radius: 1px !important;
+	color: #333333 !important;
+	cursor: pointer !important;
+	font-weight: bold !important;
+	font-size: 1em !important;
+	min-width: 60px !important;
+	padding: 0.2em 0.4em !important;
+}
+#radioSelect .ui-state-active {
+	background: none #FA8072 !important;.
+}
+
+#radioSelect .ui-button-text-only .ui-button-text {
+	padding: 0;
+}
+
+#radioSelect .ui-state-active .ui-button-text {
+	color: #FFFFFF !important;
+}
+
+/* アンケート回答検索画面
+---------------------------------------------------- */
+.btnAllClear {
+	font-size: 1em;
+	min-width: 60px;
+	padding: 0.2em 0.4em;
+	margin-left: 2em;
+}
+/*PDR Migrate Customization to here*/

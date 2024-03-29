@@ -1,0 +1,7 @@
+type: object
+description: UK-API連携ユニサーチ（コンテンツ）レスポンス
+properties:
+  response:
+    $ref: "./UkApiGetUkUniSearchContentsResponseInfoDtoResponse.yaml"
+  responseHeader:
+    $ref: "./AbstractUkApiResponseHeaderDtoResponse.yaml"

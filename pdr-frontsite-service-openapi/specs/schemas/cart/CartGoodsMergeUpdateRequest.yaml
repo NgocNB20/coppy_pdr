@@ -1,0 +1,12 @@
+type: object
+description: カート商品マージ更新リクエスト
+properties:
+  accessUid:
+    type: string
+    description: 端末識別番号
+    example: 2023101116559922
+  changeMemberInfoSeq:
+    type: integer
+    format: int32
+    description: 変更する会員SEQ(0許可)
+    example: 10000000

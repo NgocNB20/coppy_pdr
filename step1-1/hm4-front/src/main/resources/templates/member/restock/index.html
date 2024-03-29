@@ -1,0 +1,420 @@
+<!--2023-renew No71 from here-->
+<!--2023-renew No65 from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script type="text/javascript" th:src="@{/common/js/ajaxcartadd.js}"></script>
+    <script>
+        function setReStockAnnounceIndex(reStockAnnounceIndex) {
+            // Ajax処理等でhiddenがすでに作られていた場合に対する考慮
+            // 行インデックスhiddenがすでに存在する場合は要素削除
+            if ($("#reStockAnnounceIndex")[0]) {
+                $("#reStockAnnounceIndex").remove();
+            }
+            // 行インデックスhiddenを生成しformに追加
+            $("<input>", {
+                type: 'hidden',
+                id: 'reStockAnnounceIndex',
+                name: 'reStockAnnounceIndex',
+                value: reStockAnnounceIndex
+            }).appendTo('#restockAnnounceItems');
+        }
+    </script>
+</head>
+
+<body id="gotop" class="p-mypage">
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page" th:object="${memberRestockAnnounceModel}">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">入荷お知らせ一覧</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+
+                <div class="l-main p-mypage-favorite">
+                    <h2 class="c-title-page"><strong>入荷お知らせ一覧</strong></h2>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <th:block th:if="${#lists.isEmpty(memberRestockAnnounceModel.restockAnnounceItems)}">
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">商品が在庫切れの際に、商品ページから「入荷のお知らせ」を希望された商品の一覧です。<br>
+                                お知らせが不要になった場合は「削除」を押してください。</p>
+                            <p class="c-page-description__text c-page-description--margin-m">現在のご登録は０件です。</p>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${!#lists.isEmpty(memberRestockAnnounceModel.restockAnnounceItems)}">
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">商品が在庫切れの際に、商品ページから「入荷のお知らせ」を希望された商品の一覧です。<br>
+                                お知らせが不要になった場合は「削除」を押してください。</p>
+                        </div>
+
+                        <div class="p-mypage-favorite__list">
+                            <div class="p-mypage-favorite__list-inner">
+                                <table class="c-table c-table--pcspdevide" id="restockAnnounceItems">
+                                    <th:block th:each="restockAnnounceItem, stat : ${memberRestockAnnounceModel.restockAnnounceItems}">
+                                        <tr th:id="${'tbRow-' + stat.index}" th:item-attr="${restockAnnounceItem.goodsCode + '/' + restockAnnounceItem.price}" class="c-table__tr">
+                                            <th:block th:if="${restockAnnounceItem != null}">
+                                                <td class="c-table__item p-mypage-favorite__list-item">
+                                                    <a th:href="@{/goods/index.html(gcd=${restockAnnounceItem.goodsCode})}" class="p-mypage-favorite__list-item-inner">
+                                                        <div class="p-mypage-favorite__list-item-image">
+                                                            <th:block th:if="${restockAnnounceItem.goodsImageItems != null && !#lists.isEmpty(restockAnnounceItem.goodsImageItems)}">
+                                                                <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${restockAnnounceItem.goodsImageItems[0]}}"
+                                                                     th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${restockAnnounceItem.goodsImageItems[0]} + ' 2x'"
+                                                                     alt="" height="122" width="122" decoding="async" loading="lazy">
+                                                            </th:block>
+                                                        </div>
+                                                        <div class="p-mypage-favorite__list-item-overview">
+                                                            <div class="c-product__item-icon c-product__item-icon--list">
+                                                                <span class="c-product__item-icon--reserve" th:if="${restockAnnounceItem.isReserveIconFlag()}">セールde予約</span>
+                                                                <span class="c-product__item-icon--new" th:if="${restockAnnounceItem.isNewIconFlag()}">NEW</span>
+                                                                <span class="c-product__item-icon--sale" th:if="${restockAnnounceItem.isSaleIconFlag()}">SALE</span>
+                                                                <span class="c-product__item-icon--outlet" th:if="${restockAnnounceItem.isOutletIconFlag()}">アウトレット</span>
+                                                            </div>
+                                                            <div class="p-mypage-favorite__list-item-title"><span th:remove="tag" th:text="${restockAnnounceItem.goodsGroupName}"></span></div>
+                                                            <th:block th:if="${restockAnnounceItem.isUnit1()}">
+                                                                <div class="p-mypage-favorite__list-item-spec">
+                                                                    <span class="p-mypage-favorite__list-item-heading">
+                                                                        <span th:remove="tag" th:text="${restockAnnounceItem.unitTitle1}"></span>：</span><span th:remove="tag" th:text="${restockAnnounceItem.unitValue1}"></span>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${restockAnnounceItem.isUnit2()}">
+                                                                <div class="p-mypage-favorite__list-item-spec">
+                                                                    <span class="p-mypage-favorite__list-item-heading">
+                                                                        <span th:remove="tag" th:text="${restockAnnounceItem.unitTitle2}"></span>：</span><span th:remove="tag" th:text="${restockAnnounceItem.unitValue2}"></span>
+                                                                </div>
+                                                            </th:block>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            </th:block>
+                                            <td class="p-mypage-favorite__list-status"><p th:if="${restockAnnounceItem.isHasStockQuantity()}">入荷済</p></td>
+                                            <td class="c-table__price p-mypage-favorite__list-price">
+                                                <div class="c-product__item-price" th:id="${'cellPrice-' + stat.index}">
+                                                    <th:block th:if="${restockAnnounceItem.isNoGoodsStockItemSaleCheck()}">
+                                                        <div class="c-product__item-licence">ご購入には書類の提出が必要です</div>
+                                                        <a th:href="@{/goods/index.html(gcd=${restockAnnounceItem.goodsCode})}" class="c-textlink c-textlink--right c-textlink--large c-textlink--text"><p>商品詳細はこちら</p></a>
+                                                    </th:block>
+                                                    <th:block th:unless="${restockAnnounceItem.isNoGoodsStockItemSaleCheck()}">
+                                                        <th:block th:if="${restockAnnounceItem.isDisplayPrice()}">
+                                                            <th:block th:if="${restockAnnounceItem.isDisplayDiscountFlag()}">
+                                                                <div class="p-mypage-favorite__list-spirit-icon l-sm"><img th:src="@{/newdesign/assets/images/icon/spirit.svg}" width="40" alt="心意気価格"></div>
+                                                                <div class="p-mypage-favorite__list-spirit l-lg">
+                                                                    <div class="p-mypage-favorite__list-spirit-icon"><img th:src="@{/newdesign/assets/images/icon/spirit.svg}" width="40" alt="心意気価格"></div>
+                                                                    セール中１回限り<strong th:if="${restockAnnounceItem.saleEmotionPrice != null}"><span th:remove="tag" th:text="${#number.convert(restockAnnounceItem.saleEmotionPrice)}"></span></strong>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${restockAnnounceItem.customerSalePrice != null || restockAnnounceItem.salePrice != null}">
+                                                                <div th:id="${'cellPriceDetail-' + stat.index}" class="c-product__item-price">
+                                                                    <th:block th:if="${restockAnnounceItem.isDisplayDiscountFlag()}">
+                                                                        <div class="p-mypage-favorite__list-spiritSM l-sm">
+                                                                            セール中１回限り<strong th:if="${restockAnnounceItem.saleEmotionPrice != null}">
+                                                                            <span th:remove="tag" th:text="${#number.convert(restockAnnounceItem.saleEmotionPrice)}" ></span></strong>
+                                                                        </div>
+                                                                    </th:block>
+                                                                    <th:block th:if="${restockAnnounceItem.level != null && restockAnnounceItem.level != '1'}">
+                                                                        <small><span th:remove="tag" th:text="${restockAnnounceItem.level}"></span>&nbsp;:&nbsp;</small>
+                                                                    </th:block>
+                                                                    <th:block th:if="${restockAnnounceItem.level != null && restockAnnounceItem.level == '1' && restockAnnounceItem.multiLevelFlag}">
+                                                                        <small><span th:remove="tag" th:text="${restockAnnounceItem.level}"></span>&nbsp;:&nbsp;</small>
+                                                                    </th:block>
+                                                                    <div class="c-product__item-price-unit">
+                                                                        <span th:remove="tag" th:text="${#number.convert(restockAnnounceItem.price)}"></span>
+                                                                    </div>
+                                                                    <div class="c-product__item-price-unit c-product__item-price-unit--sale"
+                                                                         th:if="${restockAnnounceItem.customerSalePrice != null || restockAnnounceItem.salePrice != null}">
+                                                                        <small> → </small>
+                                                                        <th:block th:if="${restockAnnounceItem.customerSalePrice != null}"><span th:remove="tag" th:text="${#number.convert(restockAnnounceItem.customerSalePrice)}"></span></th:block>
+                                                                        <th:block th:if="${restockAnnounceItem.customerSalePrice == null && restockAnnounceItem.salePrice != null}"><span th:remove="tag" th:text="${#number.convert(restockAnnounceItem.salePrice)}"></span></th:block>
+                                                                    </div><br>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:unless="${restockAnnounceItem.customerSalePrice != null || restockAnnounceItem.salePrice != null}">
+                                                                <div th:id="${'cellPriceDetail-' + stat.index}" class="c-product__item-price">
+                                                                    <th:block th:if="${restockAnnounceItem.isDisplayDiscountFlag()}">
+                                                                        <div class="p-mypage-favorite__list-spiritSM l-sm">
+                                                                            セール中１回限り<strong th:if="${restockAnnounceItem.saleEmotionPrice != null}"><span th:remove="tag" th:text="${#number.convert(restockAnnounceItem.saleEmotionPrice)}"></span></strong></div>
+                                                                    </th:block>
+                                                                    <th:block th:if="${restockAnnounceItem.level != null && restockAnnounceItem.level != '1'}">
+                                                                        <small><span th:remove="tag" th:text="${restockAnnounceItem.level}"></span>&nbsp;:&nbsp;</small>
+                                                                    </th:block>
+                                                                    <th:block th:if="${restockAnnounceItem.level != null && restockAnnounceItem.level == '1' && restockAnnounceItem.multiLevelFlag}">
+                                                                        <small><span th:remove="tag" th:text="${restockAnnounceItem.level}"></span>&nbsp;:&nbsp;</small>
+                                                                    </th:block>
+                                                                    <div class="c-product__item-price-unit">
+                                                                        <span th:remove="tag" th:text="${#number.convert(restockAnnounceItem.price)}"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                        </th:block>
+                                                        <th:block th:if="${!restockAnnounceItem.isDisplayPrice()}">
+                                                            <div class="c-product__item-price c-product__item-price--null">ー</div>
+                                                        </th:block>
+                                                    </th:block>
+                                                </div>
+                                            </td>
+                                            <td class="c-table__quantity p-mypage-favorite__list-quantity">
+                                                <th:block th:if="${restockAnnounceItem.isDisplayAddCart()}">
+                                                    <div class="p-mypage-favorite__list-quantity-inner">
+                                                        <div class="c-count-quantity--wrap">
+                                                            <div class="c-count-quantity js-count-quantity">
+                                                                <button type="button" class="c-count-quantity__minus minus_button" data-type="minus" th:data-field="'restockAnnounceItems[' + ${stat.index} + '].gcnt'" disabled="disabled"></button>
+                                                                <input type="number" class="c-input c-count-quantity__result input_result" min="1" max="999"
+                                                                       th:id="'gcnt-' + ${stat.index}" th:field="*{restockAnnounceItems[__${stat.index}__].gcnt}" title="注文数" maxlength="3" th:errorclass="c-input--error">
+                                                                <button type="button" class="c-count-quantity__plus plus_button" data-type="plus" th:data-field="'restockAnnounceItems[' + ${stat.index} + '].gcnt'"></button>
+                                                            </div>
+                                                            <div class="c-field-error" th:id="'goodsCode-' + ${stat.index} + '-error'"></div>
+                                                        </div>
+                                                        <div class="p-mypage-favorite__list-button">
+
+                                                            <input type="hidden" id="goodsGroupSeq"/>
+                                                            <input type="hidden" id="goodsSeq"/>
+                                                            <input type="hidden" id="gcd" th:value="${restockAnnounceItem.gcd}"/>
+
+                                                            <div class="ajaxCartAddFavo" style="display: none;">
+                                                                <a th:id="'goAjaxCart-' + ${stat.index}" th:href="@{/cart/index.html(gcd=${restockAnnounceItem.gcd}, gcnt='')}" field-validate="true"
+                                                                   onclick="ajaxCartAddFavorite(this);return false;"
+                                                                   class="c-button c-button--primary c-button--width-s p-mypage-favorite__list-cart">カートに入れる
+                                                                </a>
+                                                            </div>
+                                                            <div class="normalCartAddFavo">
+                                                                <button th:onclick="'setReStockAnnounceIndex(' + ${stat.index} + ');'" name="doAddCart" type="submit" class="c-button c-button--primary c-button--width-s p-mypage-favorite__list-cart">カートに入れる</button>
+                                                            </div>
+
+                                                            <div class="l-sm">
+                                                                <a th:href="@{/member/favorite/index.html(gcd=${restockAnnounceItem.gcd},pnum=1,md='d')}" class="c-textlink c-textlink--text c-textlink--large c-textlink--delete">
+                                                                    <svg viewBox="0 0 10 10"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use></svg>削除
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                                <div class="c-table__stock p-product-detail__stock-stock" th:if="${restockAnnounceItem.iconDisplayGoodsUnit != null}">
+                                                    <span th:remove="tag" th:text="${restockAnnounceItem.iconDisplayGoodsUnit}"></span>
+                                                </div>
+                                            </td>
+                                            <td class="p-mypage-favorite__list-delete l-lg">
+                                                <a th:href="@{/member/restock/index.html(gcd=${restockAnnounceItem.gcd},pnum=1,md='d')}" class="c-textlink c-textlink--text c-textlink--delete"><svg viewBox="0 0 10 10">
+                                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use></svg>削除</a>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div th:replace="~{newdesign/include/pager::pager1(url='/member/restock/index.html')}"></div>
+                    </th:block>
+
+                    <div class="c-button-wrap">
+                        <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                        <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+
+</div>
+
+<!-- 【module modal-cart】/////////////////////////////////////////////////    -->
+<div id="modal-cart" class="c-modal p-product-detail__modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--normal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <p class="c-modal__hl">カートに以下の商品を追加しました。</p>
+            <div class="c-modal__detail">
+                <div class="c-modal__detail-inner">
+                    <p>
+                        商品番号：<span id="cartMessageGoodsCode"></span><br>
+                        商品名：<span id="cartMessageGoodsName"></span><br>
+                        <span id="isCartMessageUnitTitle1">
+                            <span id="cartMessageUnitTitle1"></span>：<span id="cartMessageUnitValue1"></span><br>
+                        </span>
+                        <span id="isCartMessageUnitTitle2">
+                            <span id="cartMessageUnitTitle2"></span>：<span id="cartMessageUnitValue2"></span><br>
+                        </span>
+                    </p>
+                    <p>
+                        数量：<span id="cartMessageGoodsCount"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="c-modal__button">
+                <a href="#" class="c-button c-button--primary-line c-button--width-m js-modal-close">お買い物を続ける</a>
+                <a class="c-button c-button--primary c-button--width-m" th:href="@{/cart/index.html}">ご購入手続きへ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- // 【module modal-cart】/////////////////////////////////////////////////    -->
+
+<!--ブラウザのJavascriptが有効かどうかによって、カート追加ボタンを出し分けるためのスクリプト（お気に入り用）-->
+<script>
+    $(".normalCartAddFavo").each(function() {
+        $(this).css('display','none');
+    });
+    $(".ajaxCartAddFavo").each(function() {
+        $(this).css('display','block');
+    });
+
+
+</script>
+</body>
+</html>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        groupingRowData();
+    });
+
+    function groupingRowData() {
+        let arrMap = [];
+        let ignoreIndexArr = [];
+
+        // detect grouping row data
+        $("tr[id^='tbRow-']").each(function(index) {
+            if (ignoreIndexArr.includes(index)) {
+                return;
+            }
+
+            let curVal = null;
+            let nextVal = null;
+            let curItemAttr = $("#tbRow-" + index).attr("item-attr");
+            if (curItemAttr) {
+                curVal = curItemAttr.split("/");
+            }
+
+            let nextIndex = 0;
+            let nextItemAttr = null;
+            let newMap = new Map();
+            newMap.set(index, [index]);
+            do {
+                nextItemAttr = $("#tbRow-" + (index + nextIndex + 1)).attr("item-attr");
+                if (nextItemAttr) {
+                    nextVal = nextItemAttr.split("/");
+                    // check same code
+                    if (curVal[0] === nextVal[0]) {
+                        // check same price
+                        // if (curVal[1] === nextVal[1]) {
+                        newMap.get(index).push(index + nextIndex + 1);
+                        ignoreIndexArr.push(index + nextIndex + 1);
+                        // } else {
+                        //     break;
+                        // }
+                    } else {
+                        break;
+                    }
+                }
+                nextIndex++;
+            } while (nextItemAttr);
+
+            if (newMap.get(index).length > 0) {
+                arrMap.push(newMap);
+            }
+        });
+
+        // update merge price data
+        arrMap.forEach(myMap => {
+            for (let [key, value] of myMap) {
+                value.forEach(addIndex => {
+                    $("#cellPrice-" + key).append($("#cellPriceDetail-" + addIndex));
+                });
+            }
+        });
+
+        // remove redundant rows
+        ignoreIndexArr.forEach((index) => {
+            $("#tbRow-" + index).remove();
+        });
+    }
+
+    function updateGoodsQuantity(obj, isIncrease) {
+        const min = 1;
+        const max = 9999;
+
+        const quantityStr = $(obj).parent().find('input[type=number]').val();
+        if (!Number.isNaN(quantityStr)) {
+            const quantity = Number(quantityStr);
+            if (isIncrease) {
+                if (quantity >= min && quantity < max) {
+                    $(obj).parent().find('input[type=number]').val(quantity + 1);
+                }
+            } else {
+                if (quantity > min && quantity <= max) {
+                    $(obj).parent().find('input[type=number]').val(quantity - 1);
+                }
+            }
+        }
+    }
+    function restockAnnounceRegistInline(obj) {
+        let gcdParam = $(obj).parent().attr('id');
+
+        toggleErrorMessage(false, null);
+        toggleAnnounceAjaxCall(gcdParam);
+    }
+
+    function toggleAnnounceAjaxCall(gcd) {
+        let def = $.Deferred(); // Ajax通信を行う
+        const urlPath = "/getRestockAnnounceRegisterResponse";
+        $.ajax({
+            type: "GET",
+            url: pkg_common.getAppComplementUrl() + urlPath,
+            dataType: "json",
+            data: {
+                "gcd": gcd
+            },
+            timeout: 30000
+        }).done(function (response) {
+            def.resolve(response);
+        }).fail(function (jqXHR, textStatus) {
+            def.reject(textStatus);
+        });
+        return def.promise();
+    }
+
+    function toggleErrorMessage(isDisplay, errorMsg) {
+        if (isDisplay) {
+            $("html,body").animate({scrollTop:0});
+            let errorFavoriteMsg = $("<div/>")
+                .attr("id", "errorFavoriteMsg")
+                .addClass("inputError");
+            errorFavoriteMsg.append("<li>" + errorMsg + "</li>");
+
+            $("#errorMessages")
+                .css("display","inherit")
+                .append(errorFavoriteMsg);
+        } else {
+            $("#errorMessages")
+                .css("display", "none")
+                .children().remove();
+        }
+    }
+</script>
+<!--2023-renew No65 to here-->
+<!--2023-renew No71 to here-->

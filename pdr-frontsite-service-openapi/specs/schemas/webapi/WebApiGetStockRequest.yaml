@@ -1,0 +1,16 @@
+type: object
+description: 商品在庫数取得リクエスト
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品 (複数パイプ区切り)
+    example: 1
+  quantity:
+    type: string
+    description: 数量
+    example: 5
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 1

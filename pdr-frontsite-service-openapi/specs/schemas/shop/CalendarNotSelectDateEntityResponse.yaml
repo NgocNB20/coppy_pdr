@@ -1,0 +1,8 @@
+type: object
+description: カレンダー選択不可日付Entityレスポンス
+properties:
+  notPossibleReserveDate:
+    type: string
+    description: 予約不可日
+    format: date-time
+    example: 2022/01/01 12:00:00

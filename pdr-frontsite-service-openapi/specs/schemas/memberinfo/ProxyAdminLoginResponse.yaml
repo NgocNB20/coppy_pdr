@@ -1,0 +1,106 @@
+type: object
+description: 代理のログインレスポンス
+properties:
+  administratorSeq:
+    type: integer
+    format: int32
+    description: 管理者SEQ
+    sample: 10001
+  administratorStatus:
+    type: string
+    description: 管理者状態（0:使用中/1:停止中）
+    sample: 0
+  administratorId:
+    type: string
+    description: 管理者ID
+    sample: demoadmin
+  administratorPassword:
+    type: string
+    description: パスワード
+    sample: $2a$11$MDYy5/Dn/a9mKXzfx8AdNuGriPBNpJ3NVNx7Vxtd0ChbLi9QtA7Qa
+  mail:
+    type: string
+    description: 管理者メールアドレス
+    sample: demoadmin@itec.hh.co.jp
+  administratorLastName:
+    type: string
+    description: 管理者氏名(性)
+    sample: 阪神
+  administratorFirstName:
+    type: string
+    description: 管理者氏名(名）
+    sample: 太郎
+  administratorLastKana:
+    type: string
+    description: 管理者フリガナ(性)
+    sample: ハンシン
+  administratorFirstKana:
+    type: string
+    description: 管理者フリガナ(名）
+    sample: タロウ
+  useStartDate:
+    type: string
+    format: date-time
+    description: 利用開始日
+    sample: 2022/04/01 19:50:23.341
+  useEndDate:
+    type: string
+    format: date-time
+    description: 利用終了日
+    sample: 2022/04/01 19:50:23.341
+  adminAuthGroupSeq:
+    type: integer
+    format: int32
+    description: 管理者権限グループSEQ
+    sample: 1001
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    sample: 2022/04/01 19:50:23.341
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    sample: 2022/04/01 19:50:23.341
+  passwordChangeTime:
+    type: string
+    format: date-time
+    description: パスワード変更日時
+    sample: 2022/04/01 19:50:23.341
+  passwordExpiryDate:
+    type: string
+    format: date-time
+    description: パスワード期限切れ日
+    sample: 2022/04/01 19:50:23.341
+  loginFailureCount:
+    type: integer
+    format: int32
+    description: ログイン失敗回数
+    sample: 3
+  accountLockTime:
+    type: string
+    format: date-time
+    description: アカウントロック日時
+    sample: 2022/04/01 19:50:23.341
+  passwordNeedChangeFlag:
+    type: string
+    description: パスワード変更要求フラグ（0:要求しない/1:要求する）
+    sample: 1
+  passwordSHA256EncryptedFlag:
+    type: string
+    description: スワードSHA256暗号化済みフラグ
+    sample: 1
+  adminAuthGroup:
+    $ref: "#/components/schemas/AdminAuthGroupResponse"  
+  authorityList:
+      type: array
+      items:
+        type: string
+      description: 権限リスト
+      example: ['MEMBER:4']
+components:
+  schemas:
+    AdminAuthGroupResponse:
+      $ref: ./AdminAuthGroupResponse.yaml
+

@@ -1,0 +1,179 @@
+.c-error-txt {
+    color: #D13328;
+    font-size: 12px;
+}
+.field-error {
+    background-color: #FFCCFF !important;
+}
+.field-error-message {
+    color: red;
+}
+/* 2023-renew No22 from here */
+
+.btn-upload-file {
+    border: 1px solid #f4673c;
+    border-radius: 16px;
+    min-width: 126px;
+    color: #f4673c;
+    font-weight: bold;
+}
+
+.btn-upload-file:hover {
+    opacity: 0.7;
+}
+
+.file-drop {
+    text-align: center;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.file-drop-txt {
+    margin: 10px 0;
+}
+
+.preview-image {
+    max-height: 150px;
+    max-width: 150px;
+}
+.preview-image-box {
+    max-height: 150px;
+    max-width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    position: relative;
+    margin-right: 3px;
+    margin-bottom: 10px;
+    background: #f1f1f1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-image {
+    padding: 0;
+    background: white;
+    border: 1px solid #f4673c;
+    color: #f4673c;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#preview-upload-file-container {
+    display: flex;
+}
+
+.error-upload-message {
+    color: red;
+}
+
+.preview-pdf {
+    border: 1px solid #f4673c;
+}
+
+.c-image-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0 -10px;
+}
+.c-image-list li {
+  width: 150px;
+  height: 150px;
+/*2023-renew No22 from here*/
+  margin: 0 10px 5px;
+/*2023-renew No22 to here*/
+  position: relative;
+}
+.c-image-list li .img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+  height: 150px;
+  background-color: #f1f1f1;
+}
+.c-image-list li .img img {
+  width: auto;
+  height: auto;
+  max-width: 150px;
+  max-height: 150px;
+}
+.c-image-list li .c-btn-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.file_drop {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.file_drop .txt {
+  margin: 10px 0 8px 0;
+}
+
+.imagePreviewer div {
+  word-break: break-word;
+}
+
+/* 2023-renew No22 to here */
+
+/* 2023-renew No60 from here */
+.btn-white-outline {
+    border: 1px solid #f4673c;
+    height: 50px;
+    border-radius: 50px;
+    min-width: 126px;
+    color: #f4673c;
+    font-weight: bold;
+}
+
+.btn-fill {
+    border: 1px solid #f4673c;
+    height: 50px;
+    border-radius: 50px;
+    min-width: 126px;
+    color: #ffffff;
+    background: #f4673c;
+    font-weight: bold;
+}
+
+.p-top__dialog-delete-credit {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    padding-top: 58px;
+    font-weight: 500;
+}
+
+.p-top__delete-credit-button {
+    display: grid;
+    grid-auto-flow: column;
+    place-content: center;
+    margin-bottom: 40px !important;
+}
+/* 2023-renew No60 to here */

@@ -1,0 +1,470 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>注文確認</title>
+</head>
+<body>
+<div>
+    <div>
+        <span>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+    <div>
+        <span th:text="'■　' + ${shopName}"></span>
+    </div>
+    <div>
+        <span>■　ご注文確認のご連絡</span>
+    </div>
+    <div>
+        <span>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span>　</span>
+        <span th:text="${mailContentsMap.get('O_ORDER_LAST_NAME')}"></span>
+        <span>　</span>
+        <span th:text="${mailContentsMap.get('O_ORDER_FIRST_NAME')}"></span>
+        <span> 様</span>
+    </div>
+    <div>
+        <span>　</span>
+    </div>
+    <div>
+        <span>　このたびは、HIT-MALL Ver.4 公式オンラインショップに</span>
+    </div>
+    <div>
+        <span>　ご注文いただきありがとうございます。</span>
+    </div>
+    <div>
+        <span>　ご注文内容は下記の通りとなりますので、どうぞご確認ください。</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+    </div>
+    <div>
+        <span>■ご注文内容</span>
+    </div>
+    <div>
+        <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+    </div>
+    <div>
+        <span>　ご注文番号：</span>
+        <span th:text="${mailContentsMap.get('O_ORDER_CODE')}"></span>
+        <span>　※お問い合わせの際に必要となります。</span>
+    </div>
+    <div>
+        <span>　ご注文日時：</span>
+        <span th:text="${mailContentsMap.get('O_ORDER_TIME')}"></span>
+    </div>
+    <div>
+        <span>　商品金額合計：</span>
+        <span th:text="${mailContentsMap.get('O_GOODS_PRICE_TOTAL')}"></span>
+        <span>円</span>
+    </div>
+    <div>
+        <span>　送料：</span>
+        <span th:text="${mailContentsMap.get('O_CARRIAGE')}"></span>
+        <span>円</span>
+    </div>
+    <th:block
+            th:if="${mailContentsMap.get('O_COUPON_DISCOUNT_PRICE') != '' and mailContentsMap.get('O_COUPON_DISCOUNT_PRICE') != '0'}">
+        <div>
+            <span>　</span>
+            <span th:text="${mailContentsMap.get('O_COUPON_DISPLAY_NAME_PC')}"></span>
+            <span>：-</span>
+            <span th:text="${mailContentsMap.get('O_COUPON_DISCOUNT_PRICE')}"></span>
+            <span>円</span>
+        </div>
+    </th:block>
+    <th:block th:if="${mailContentsMap.get('O_ADDITIONAL_DETAILS_TOTAL') != '0'}">
+        <div th:each="count: ${#numbers.sequence(1, mailContentsMap.get('O_ADDITIONAL_DETAILS_TOTAL'))}">
+            <span>　</span>
+            <span th:text="${mailContentsMap.get('O_ADDITIONAL_DETAILS_NAME_' + count)}"></span>
+            <span>：</span>
+            <span th:text="${mailContentsMap.get('O_ADDITIONAL_DETAILS_PRICE_' + count)}"></span>
+            <span>円</span>
+        </div>
+    </th:block>
+    <th:block th:if="${mailContentsMap.get('O_USE_POINT') != '' and mailContentsMap.get('O_USE_POINT') != '0'}">
+        <div>
+            <span>　ポイント割引額：-</span>
+            <span th:text="${mailContentsMap.get('O_USE_POINT_PRICE')}"></span>
+            <span>円　（</span>
+            <span th:text="${mailContentsMap.get('O_USE_POINT')}"></span>
+            <span>ポイント）</span>
+        </div>
+    </th:block>
+    <th:block th:if="${mailContentsMap.get('O_SETTLEMENT_COMMISSION') != '0'}">
+        <div>
+            <span>　手数料：</span>
+            <span th:text="${mailContentsMap.get('O_SETTLEMENT_COMMISSION')}"></span>
+            <span>円</span>
+        </div>
+    </th:block>
+</div>
+<br>
+<div>
+    <th:block th:if="${mailContentsMap.get('O_MEMBER_INFO_SEQ') != '0'}">
+        <div>
+            <span>━━━━━━━━━━━━━━━━━━━</span>
+        </div>
+        <div>
+            <span>◆ご注文内容の詳細は、以下のURLよりログイン後、ご確認ください。</span>
+        </div>
+        <div>
+            <span>※ご注文内容について変更やご要望などがございましたら、ご確認の画面よりお問い合わせください。</span>
+        </div>
+        <div>
+            <span><a th:href="${hostUrl} + 'member/history/detail/?ocd=' + ${mailContentsMap.get('O_ORDER_CODE')}"
+                     th:text="${hostUrl} + 'member/history/detail/?ocd=' + ${mailContentsMap.get('O_ORDER_CODE')}"></a></span>
+        </div>
+    </th:block>
+    <th:block th:if="${mailContentsMap.get('O_MEMBER_INFO_SEQ') == '0'}">
+        <div>
+            <span>━━━━━━━━━━━━━━━━━━━</span>
+        </div>
+        <div>
+            <span>◆ご注文内容の詳細は、以下のURLよりログイン後、ご確認ください。</span>
+        </div>
+        <div>
+            <span>※ご注文内容について変更やご要望などがございましたら、ご確認の画面よりお問い合わせください。</span>
+        </div>
+        <div>
+            <span><a th:href="${hostUrl} + 'guest/history/detail/?ocd=' + ${mailContentsMap.get('O_ORDER_CODE')}"
+                     th:text="${hostUrl} + 'guest/history/detail/?ocd=' + ${mailContentsMap.get('O_ORDER_CODE')}"></a></span>
+        </div>
+    </th:block>
+</div>
+<br>
+
+<div>
+    <div>
+        <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+    </div>
+    <div>
+        <span>■ご確認ください</span>
+    </div>
+    <div>
+        <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+    </div>
+    <div>
+        <span>【お届けについて】</span>
+    </div>
+    <div>
+        <span>・通常納期の商品はご注文確認後、3営業日以内の発送手配となります。</span>
+    </div>
+    <div>
+        <span>　コンビニ決済・ペイジー決済はご入金確認後の手配となります。</span>
+    </div>
+    <div>
+        <span>・異なる納期の商品を注文した場合は、</span>
+    </div>
+    <div>
+        <span>　全ての商品が揃ってからの配送手配となります。</span>
+    </div>
+    <div>
+        <span>・お支払期限までに入金が確認できない場合は、</span>
+    </div>
+    <div>
+        <span>　お届け希望日どおりにお届けできないことがあります。</span>
+    </div>
+</div>
+<br>
+
+<th:block th:if="${mailContentsMap.get('O_SETTLEMENTMETHOD_TYPE') == 'CREDIT'}">
+    <div>
+        <div>
+            <span>【お支払いについて】</span>
+        </div>
+        <div>
+            <span>《クレジットカード決済》</span>
+        </div>
+        <div>
+            <span>・商品出荷時にクレジットカード決済をさせていただきます。</span>
+        </div>
+    </div>
+</th:block>
+<br>
+<th:block th:if="${mailContentsMap.get('O_SETTLEMENTMETHOD_TYPE') == 'CONVENIENCE'}">
+    <div>
+        <div>
+            <span>【お支払いについて】</span>
+        </div>
+        <div>
+            <span>《コンビニ決済》</span>
+        </div>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00001'}">
+            <div>
+                <span>　お客様番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・お客様番号、確認番号をお控えのうえ、お近くのローソンで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00002'}">
+            <div>
+                <span>　お客様番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・お客様番号、確認番号をお控えのうえ、お近くのファミリーマートで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00003'}">
+            <div>
+                <span>　お客様番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・お客様番号、確認番号をお控えのうえ、お近くのサークルＫサンクスで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00005'}">
+            <div>
+                <span>　お客様番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・お客様番号、確認番号をお控えのうえ、お近くのミニストップで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00006'}">
+            <div>
+                <span>　オンライン決済番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>・オンライン決済番号をお控えのうえ、お近くのデイリーヤマザキで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00007'}">
+            <div>
+                <span>　払込票番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>・払込票番号をお控えのうえ、お近くのセブンイレブンで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00008'}">
+            <div>
+                <span>　オンライン決済番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>・オンライン決済番号をお控えのうえ、お近くのセイコーマートで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '00009'}">
+            <div>
+                <span>　オンライン決済番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>・オンライン決済番号をお控えのうえ、お近くのスリーエフで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '10001'}">
+            <div>
+                <span>　お客様番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・お客様番号、確認番号をお控えのうえ、お近くのローソンで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '10002'}">
+            <div>
+                <span>　企業コード：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>　注文番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>・企業コード、注文番号をお控えのうえ、お近くのファミリーマートで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '10003'}">
+            <div>
+                <span>　受付番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・受付番号、確認番号をお控えのうえ、お近くのサークルKサンクスで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '10005'}">
+            <div>
+                <span>　お客様番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・お客様番号、確認番号をお控えのうえ、お近くのミニストップで</span>
+            </div>
+        </th:block>
+        <th:block th:if="${mailContentsMap.get('O_CONVENIENCE') == '10008'}">
+            <div>
+                <span>　受付番号：</span>
+                <span th:text="${mailContentsMap.get('O_RECEIPT_NO')}"></span>
+            </div>
+            <div>
+                <span>　確認番号：</span>
+                <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+            </div>
+            <div>
+                <span>・受付番号、確認番号をお控えのうえ、お近くのセイコーマートで</span>
+            </div>
+        </th:block>
+        <div>
+            <span>　現金にて〔3日〕以内にお支払いください。</span>
+        </div>
+        <div>
+            <span>・ご注文より3日以内にご入金の確認がとれない場合は､自動的にキャンセルと</span>
+        </div>
+        <div>
+            <span>　させていただいております｡</span>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:if="${mailContentsMap.get('O_SETTLEMENTMETHOD_TYPE') == 'PAY_EASY'}">
+    <div>
+        <div>
+            <span>【お支払いについて】</span>
+        </div>
+        <div>
+            <span>《ペイジー決済》</span>
+        </div>
+        <div>
+            <span>　収納機関番号：</span>
+            <span th:text="${mailContentsMap.get('O_BKCODE')}"></span>
+        </div>
+        <div>
+            <span>　お客様番号：</span>
+            <span th:text="${mailContentsMap.get('O_CUST_ID')}"></span>
+        </div>
+        <div>
+            <span>　確認番号：</span>
+            <span th:text="${mailContentsMap.get('O_CONF_NO')}"></span>
+        </div>
+        <div>
+            <span>　お支払い金額：</span>
+            <span th:text="${mailContentsMap.get('O_ORDER_PRICE')}"></span>
+            <span>円</span>
+        </div>
+        <div>
+            <span>　お支払い期限：</span>
+            <span th:text="${mailContentsMap.get('O_PAYMENT_TIME_LIMIT_DATE')}"></span>
+        </div>
+        <div>
+            <span>【銀行ATMでのお支払い】</span>
+        </div>
+        <div>
+            <span>●以下の金融機関のATM でお支払いいただけます。</span>
+        </div>
+        <div>
+            <span>「みずほ銀行」、「りそな銀行」、「埼玉りそな銀行」、「三井住友銀行」、「ゆうちょ銀行」、「ちばぎん」</span>
+        </div>
+        <div>
+            <span>※一部時間外手数料が発生する金融機関がございます。詳しくはお取引の金融機関にお問合せください。</span>
+        </div>
+        <div>
+            <span>※法令改正のため、2007 年1 月4 日より、ATM から10 万円を超える現金の振込はできなくなりました。</span>
+        </div>
+        <div>
+            <span>●お支払いの際、収納機関番号、お客様番号、確認番号が必要です。</span>
+        </div>
+        <div>
+            <span>メモを取るか、このメールを印刷してお持ちください。</span>
+        </div>
+        <div>
+            <span>●ご利用明細票が領収書となりますので、お支払い後必ずお受け取りください。</span>
+        </div>
+        <br>
+        <div>
+            <span>【ネットバンキング】</span>
+        </div>
+        <div>
+            <span>●金融機関に予め口座をお持ちの場合のみご利用いただけます。</span>
+        </div>
+        <div>
+            <span>・ご注文より4日以内にご入金の確認がとれない場合は､自動的にキャンセルと</span>
+        </div>
+        <div>
+            <span>　させていただいております｡</span>
+        </div>
+    </div>
+</th:block>
+<div>
+    <div>
+        <span>【酒類の販売について】</span>
+    </div>
+    <div>
+        <span>・当ショップでは未成年者に対しては酒類は販売いたしません。</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+    </div>
+    <div>
+        <span>※ご注文の内容に訂正、変更がございます場合にはお手数ですが、</span>
+    </div>
+    <div>
+        <span>　下記までご連絡ください。</span>
+    </div>
+    <div>
+        <span>※商品はご注文番号ごとのお届けとなります。ご注文番号が異なる商品を</span>
+    </div>
+    <div>
+        <span>　同梱してお送りできません。予めご了承ください。</span>
+    </div>
+    <div>
+        <span>※このメールはご登録されたメールアドレスに自動送信しております｡</span>
+    </div>
+    <div>
+        <span>※お心当たりのない方は、誠に恐れ入りますが、</span>
+    </div>
+    <div>
+        <span><a href="mailto:info+stg-hm4@e4-granada.itechh.ne.jp">info+stg-hm4@e4-granada.itechh.ne.jp</a> までご連絡ください。</span>
+    </div>
+</div>
+<div th:replace="~{common/signature}"></div>
+</body>
+</html>

@@ -1,0 +1,919 @@
+{
+	"info": {
+		"_postman_id": "53989b9a-920f-4c86-ba4b-ad93fdeb9416",
+		"name": "shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15538775"
+	},
+	"item": [
+		{
+			"name": "getQuestionnaireKey",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/shop/questionnaire-key/goods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"questionnaire-key",
+						"goods"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getQuestionnaireKeyResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/shop/questionnaire-key/goods",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"questionnaire-key",
+								"goods"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:47:06 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"questionnaireSeq\": 10000003,\n    \"questionnaireKey\": \"goods\",\n    \"name\": \"ご使用アンケート\",\n    \"openStatus\": \"1\",\n    \"openStartTime\": \"2018-02-07T06:52:00.000+00:00\",\n    \"openEndTime\": \"2028-12-31T16:59:59.000+00:00\",\n    \"freeText\": \"必ず商品をお使いになってからご記入ください。具体的な内容も是非お願いいたします。\",\n    \"completeText\": \"ご協力ありがとうございました。\",\n    \"memo\": null,\n    \"versionNo\": 1,\n    \"registTime\": \"2018-02-07T06:51:04.000+00:00\",\n    \"updateTime\": \"2018-02-07T06:52:00.000+00:00\",\n    \"siteMapFlag\": \"1\"\n}"
+				}
+			]
+		},
+		{
+			"name": "getQuestionnaireSeq",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/shop/questionnaire-seq/10000003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"questionnaire-seq",
+						"10000003"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getQuestionnaireSeqResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/shop/questionnaire-seq/10000003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"questionnaire-seq",
+								"10000003"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:46:56 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"questionnaireReplyDisplayDtoResponse\": [\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 1,\n            \"question\": \"事業所のお名前\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": null,\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"1\",\n            \"replyType\": \"0\",\n            \"replyValidatePattern\": \"0\",\n            \"replyMaxLength\": 99\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 2,\n            \"question\": \"ご記入者のお名前\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": null,\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"0\",\n            \"replyValidatePattern\": \"0\",\n            \"replyMaxLength\": 99\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 3,\n            \"question\": \"電話番号\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": null,\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"1\",\n            \"replyType\": \"0\",\n            \"replyValidatePattern\": \"0\",\n            \"replyMaxLength\": 99\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 4,\n            \"question\": \"お客様番号\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": null,\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"0\",\n            \"replyValidatePattern\": \"0\",\n            \"replyMaxLength\": 99\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 5,\n            \"question\": \"該当するところにﾁｪｯｸをいれてください｡\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": {\n                \"男性\": \"男性\",\n                \"女性\": \"女性\"\n            },\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"2\",\n            \"replyValidatePattern\": null,\n            \"replyMaxLength\": null\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 6,\n            \"question\": \"該当するところにﾁｪｯｸをいれてください｡\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": {\n                \"20代\": \"20代\",\n                \"30代\": \"30代\",\n                \"40代\": \"40代\",\n                \"50代\": \"50代\",\n                \"60代\": \"60代\",\n                \"70代以上\": \"70代以上\"\n            },\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"2\",\n            \"replyValidatePattern\": null,\n            \"replyMaxLength\": null\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 7,\n            \"question\": \"該当するところにﾁｪｯｸをいれてください｡\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": {\n                \"歯科医師\": \"歯科医師\",\n                \"歯科技工士\": \"歯科技工士\",\n                \"歯科衛生士\": \"歯科衛生士\",\n                \"助手\": \"助手\",\n                \"その他\": \"その他\"\n            },\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"2\",\n            \"replyValidatePattern\": null,\n            \"replyMaxLength\": null\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 8,\n            \"question\": \"ご購入商品の商品名または商品番号\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": null,\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"0\",\n            \"replyValidatePattern\": \"0\",\n            \"replyMaxLength\": 99\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 9,\n            \"question\": \"本品の総合的な満足度は?\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": {\n                \"満足\": \"満足\",\n                \"ふつう\": \"ふつう\",\n                \"不満\": \"不満\"\n            },\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"2\",\n            \"replyValidatePattern\": null,\n            \"replyMaxLength\": null\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 10,\n            \"question\": \"品質･性能はいかがでしたか?\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": {\n                \"よかった\": \"よかった\",\n                \"ふつう\": \"ふつう\",\n                \"悪かった\": \"悪かった\"\n            },\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"2\",\n            \"replyValidatePattern\": null,\n            \"replyMaxLength\": null\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 11,\n            \"question\": \"価格はいかがですか?\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": {\n                \"安い\": \"安い\",\n                \"ふつう\": \"ふつう\",\n                \"高い\": \"高い\"\n            },\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"2\",\n            \"replyValidatePattern\": null,\n            \"replyMaxLength\": null\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 12,\n            \"question\": \"またご注文いただけますか?\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": {\n                \"はい\": \"はい\",\n                \"いいえ\": \"いいえ\",\n                \"わからない\": \"わからない\"\n            },\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"2\",\n            \"replyValidatePattern\": null,\n            \"replyMaxLength\": null\n        },\n        {\n            \"questionEntity\": null,\n            \"questionSeq\": null,\n            \"displayNumber\": 13,\n            \"question\": \"この商品の良かった点､お気づきの点やご要望がありましたらご記入ください｡\",\n            \"questionTextBox\": null,\n            \"questionTextArea\": null,\n            \"questionRadio\": null,\n            \"questionRadioItems\": null,\n            \"questionRadioDisp\": null,\n            \"questionPullDown\": null,\n            \"questionPullDownItems\": null,\n            \"questionPullDownDisp\": null,\n            \"questionCheckBoxItems\": null,\n            \"questionCheckBox\": null,\n            \"questionCheckBoxDispItems\": null,\n            \"questionCheckBoxDisp\": null,\n            \"replyRequiredFlag\": \"0\",\n            \"replyType\": \"0\",\n            \"replyValidatePattern\": \"0\",\n            \"replyMaxLength\": 999\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "PostQuestionnaireCheck",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questionnaireSeq\" : 10000003\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/shop/questionnaire/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"questionnaire",
+						"check"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "postQuestionaireCheckResponse",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"questionnaireSeq\" : 10000003\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/shop/questionnaire/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"questionnaire",
+								"check"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:47:50 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"resultFlag\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "postQuestionnaire",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questionnaireReplyEntityRequest\":{\r\n        \"questionnaireReplySeq\": 11111111,\r\n        \"questionnaireSeq\": 10004000,\r\n        \"siteType\": \"0\",\r\n        \"deviceType\": \"0\",\r\n        \"memberInfoSeq\": 10110177,\r\n        \"orderCode\": null,\r\n        \"registTime\": 1504270994,\r\n        \"questionnaireKey\": \"mail\"\r\n    },\r\n    \"questionReplyEntityRequest\":[\r\n        {\r\n            \"questionnaireReplySeq\": 11111111,\r\n            \"questionSeq\": 10005000,\r\n            \"reply\": \"セール情報\",\r\n            \"registTime\": 1504270994\r\n        },\r\n                {\r\n            \"questionnaireReplySeq\": 11111112,\r\n            \"questionSeq\": 10006000,\r\n            \"reply\": \"希望する\",\r\n            \"registTime\": 1504270994\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/shop/questionnaire",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"questionnaire"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "postQuestionnaireResponse",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"questionnaireReplyEntityRequest\":{\r\n        \"questionnaireReplySeq\": 11111111,\r\n        \"questionnaireSeq\": 10004000,\r\n        \"siteType\": \"0\",\r\n        \"deviceType\": \"0\",\r\n        \"memberInfoSeq\": 10110177,\r\n        \"orderCode\": null,\r\n        \"registTime\": 1504270994,\r\n        \"questionnaireKey\": \"mail\"\r\n    },\r\n    \"questionReplyEntityRequest\":[\r\n        {\r\n            \"questionnaireReplySeq\": 11111111,\r\n            \"questionSeq\": 10005000,\r\n            \"reply\": \"セール情報\",\r\n            \"registTime\": 1504270994\r\n        },\r\n                {\r\n            \"questionnaireReplySeq\": 11111112,\r\n            \"questionSeq\": 10006000,\r\n            \"reply\": \"希望する\",\r\n            \"registTime\": 1504270994\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/shop/questionnaire",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"questionnaire"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:50:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "getNewsDetail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/shop/news/details?newsSeq=10000028",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"news",
+						"details"
+					],
+					"query": [
+						{
+							"key": "newsSeq",
+							"value": "10000028"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getNewsDetailResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/shop/news/details?newsSeq=10000028",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"news",
+								"details"
+							],
+							"query": [
+								{
+									"key": "newsSeq",
+									"value": "10000028"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:51:17 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"newsSeq\": 10000028,\n    \"title\": \"オンラインショップ復旧のお知らせ\",\n    \"newsBody\": \"本日13日(火)15時05分～17時45分の間、回線トラブルが発生したためオンラインショップがご利用いただけませんでした。現在は復旧しております。ご迷惑をおかけして申し訳ありませんでした。<br />\\nご不明な点がございましたら、「<a href=\\\"/inquiry/index.html\\\" style=\\\"text-decoration: underline; color:#f36b30\\\">お問い合わせ</a>」ページ、\\nまたはカスタマーサービス(Tel：0120-108394　平日9：00～17:00  日・祝日休)までお問い合わせください。\",\n    \"newsUrl\": null,\n    \"newsOpenStatus\": \"1\",\n    \"newsOpenStartTime\": \"2018-03-12T17:00:00.000+00:00\",\n    \"newsOpenEndTime\": \"2018-03-14T16:59:59.000+00:00\",\n    \"newsTime\": \"2018-03-12T17:00:00.000+00:00\",\n    \"registTime\": \"2018-03-13T11:14:59.000+00:00\",\n    \"updateTime\": \"2018-03-13T11:19:04.000+00:00\",\n    \"newsNote\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "getNewsFreearea",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/shop/news/freearea?freeAreaKey=cartnotice&memberInfoSeq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"news",
+						"freearea"
+					],
+					"query": [
+						{
+							"key": "freeAreaKey",
+							"value": "cartnotice"
+						},
+						{
+							"key": "memberInfoSeq",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getNewsFreeareaResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/shop/news/freearea?freeAreaKey=cartnotice&memberInfoSeq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"news",
+								"freearea"
+							],
+							"query": [
+								{
+									"key": "freeAreaKey",
+									"value": "cartnotice"
+								},
+								{
+									"key": "memberInfoSeq",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:51:42 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"freeAreaSeq\": 10000009,\n    \"freeAreaKey\": \"cartnotice\",\n    \"openStartTime\": \"2005-12-31T17:00:00.000+00:00\",\n    \"freeAreaTitle\": \"cartnotice\",\n    \"freeAreaBody\": \"<p>※送料は全国一律580円（税込）です。<br />※合計金額には、送料は含まれておりません。<br />※代金引換を選択される場合は代金引換手数料が別途かかります。<br />※ご注文された商品がすべて入荷してからお届けいたします。</p>\",\n    \"targetGoods\": null,\n    \"registTime\": \"2017-01-23T07:51:53.000+00:00\",\n    \"updateTime\": \"2017-01-23T07:51:53.000+00:00\",\n    \"freeAreaOpenStatus\": \"0\",\n    \"siteMapFlag\": \"0\"\n}"
+				}
+			]
+		},
+		{
+			"name": "getNewsOpenNews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/shop/news/open-news?memberInfoSeq=10353252&siteType=1&openStatus=1&newsNote&limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"news",
+						"open-news"
+					],
+					"query": [
+						{
+							"key": "memberInfoSeq",
+							"value": "10353252"
+						},
+						{
+							"key": "siteType",
+							"value": "1"
+						},
+						{
+							"key": "openStatus",
+							"value": "1"
+						},
+						{
+							"key": "newsNote",
+							"value": null
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getNewsOpenNewsResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/shop/news/open-news?memberInfoSeq=10353252&siteType=1&openStatus=1&newsNote&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"news",
+								"open-news"
+							],
+							"query": [
+								{
+									"key": "memberInfoSeq",
+									"value": "10353252"
+								},
+								{
+									"key": "siteType",
+									"value": "1"
+								},
+								{
+									"key": "openStatus",
+									"value": "1"
+								},
+								{
+									"key": "newsNote",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:52:15 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"newsEntityResponse\": [\n        {\n            \"newsSeq\": 10000005,\n            \"title\": \"ログインできない方⇒新規会員登録ボタンを押してください\",\n            \"newsBody\": \"オンラインショップにログインするためには、新規会員登録ボタンを押して指示に従って「登録電話番号」と「顧客番号」を入力してください。\\n（現オンラインショップのPWを連携していないため、PWがない顧客とみなされているためです。）\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-03-05T17:00:00.000+00:00\",\n            \"registTime\": \"2017-03-06T08:00:33.000+00:00\",\n            \"updateTime\": \"2017-03-06T08:01:33.000+00:00\",\n            \"newsNote\": \"オンラインチームでは、この受け入れテスト期間中に「現オンラインでID・PWがある人」の状態でログインできるかどうかをテストします。\\n皆さまに試していただくことはできませんので、ご了承ください。\"\n        },\n        {\n            \"newsSeq\": 10000007,\n            \"title\": \"テスト中の画面について\",\n            \"newsBody\": \"3月17日（金）までのテスト期間中は、「商品画像（歯ブラシ・マスクの箱など）」「バナー」「ご利用方法」は本番情報が間に合いません。\\nそれ以外でおかしいところがあれば、棚橋までご連絡ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-03-12T17:00:00.000+00:00\",\n            \"registTime\": \"2017-03-13T06:33:58.000+00:00\",\n            \"updateTime\": \"2017-03-14T08:11:14.000+00:00\",\n            \"newsNote\": \"<p>青丸がついている場所の画像が未整備です。</p>\\n<div><img src=\\\"/d_images/parts/news1.jpg\\\" /></div>\\n<div><img src=\\\"/d_images/parts/news2.jpg\\\" /></div>\"\n        },\n        {\n            \"newsSeq\": 10000008,\n            \"title\": \"商品詳細画面の画像が縦並び⇒直ります\",\n            \"newsBody\": \"商品詳細の画面で、画像が一部縦並びになっている件については、原因が「設定」だと判明しています。3月15日（水）をめどに一括修正をする予定です。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-03-12T17:00:00.000+00:00\",\n            \"registTime\": \"2017-03-13T06:47:02.000+00:00\",\n            \"updateTime\": \"2017-03-28T08:43:23.000+00:00\",\n            \"newsNote\": \"<div><img src=\\\"/d_images/parts/news3.png\\\" /></div>\"\n        },\n        {\n            \"newsSeq\": 10000010,\n            \"title\": \"ゴールデンウィーク 休業のお知らせ\",\n            \"newsBody\": \"カレンダー通り日祝休業いたします。\\r\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2018-04-24T17:00:00.000+00:00\",\n            \"registTime\": \"2017-03-31T04:04:42.000+00:00\",\n            \"updateTime\": \"2023-07-21T10:57:23.000+00:00\",\n            \"newsNote\": \"<br />\\r\\nゴールデンウィークはカレンダー通り日祝休みです。よろしくお願いいたします。<br />\\r\\n<br />\\r\\n4月28日（土） 通常営業 <br />\\r\\n4月29日（日） <b>休業 </b><br />\\r\\n4月30日（月） <b>休業 </b><br />\\r\\n5月1日（火）　通常営業<br />\\r\\n5月2日（水）　通常営業<br />\\r\\n5月3日（木）　<b>休業 </b><br />\\r\\n5月4日（金）　<b>休業 </b><br />\\r\\n5月5日（土）　<b>休業 </b><br />\\r\\n5月6日（日）　<b>休業 </b><br />\\r\\n5月7日（月）　通常営業<br />\\r\\n\"\n        },\n        {\n            \"newsSeq\": 10000012,\n            \"title\": \"お支払い方法が選択できない方へ\",\n            \"newsBody\": \"IE（Internet Explorer）のバージョンを１０以上にしていただくことで正しく表示されます。\\n詳しくは<a href=\\\"https://shop.pdr.co.jp/news.html?nseq=10000002\\\" style=\\\"text-decoration: underline; color:#f36b30\\\">こちら</a>をご覧ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2017-04-20T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-04-20T17:00:00.000+00:00\",\n            \"registTime\": \"2017-04-21T04:39:05.000+00:00\",\n            \"updateTime\": \"2019-08-21T02:41:36.000+00:00\",\n            \"newsNote\": \"<br />\\n<font size=\\\"6\\\" color=\\\"#000000\\\">IEのバージョン確認方法と互換性設定の解除方法</font><br />\\n<p>お支払い方法が選択できない場合、画面表示がうまくされていない場合、下記の操作をしていただくことで多くの場合解決しています。お手数をおかけしますが、お試しください。</p>\\n<br />\\n<br />\\n<p style=\\\"background-color:#f1f1f1\\\">\\n<font size=\\\"5\\\" color=\\\"#000000\\\">１．IE（Internet Explorer）バージョンの確認</font><br />\\n<font color=\\\"#000000\\\">　　　IEのバージョンが１０以降であることを確認してください。</font>\\n</p><br />\\n<p>１-１．IEを立ち上げた状態で、画面上部のメニュー画面から「ヘルプ（H）」＞「バージョン情報（A)」をクリックしてください。</p>\\n<p>　　　※ヘルプが表示されていない場合は「Altキー」と「H」キーを同時に押すことで「ヘルプ」メニューが表示されます。</p>\\n<img src=\\\"/d_images/support/pc_s1_1.gif\\\">\\n<br />\\n<br />\\n<p>１-２．IEのバージョンが表示されます。バージョンが１０以降で無い場合は、IEのバージョンアップを行ってください。バージョンアップの方法はパソコンにより異なりますので、お客様自身でご確認をお願いします。</p>\\n<p>　　　※下の画面はバージョン１１です。</p>\\n<img src=\\\"/d_images/support/pc_s1_2.gif\\\">\\n<p>バージョンアップをしても解決しない場合は、２にお進みください。</p>\\n<br />\\n<br />\\n<br />\\n<p style=\\\"background-color:#f1f1f1\\\">\\n<font size=\\\"5\\\" color=\\\"#000000\\\">２．IE（Internet Explorer）のバージョンが１０以降の場合、「互換性表示設定」をご確認ください。</font><br />\\n<font color=\\\"#000000\\\">　　　互換性表示設定を解除していただきます。</font>\\n</p><br />\\n<p>２-１．IEを立ち上げた状態で、画面上部のメニュー画面から「ツール（T）」＞「互換性表示設定（B)」をクリックしてください。</p>\\n<p>　　　※「ツール（T)」が表示されていない場合は「Altキー」と「T」を同時に押すと、「ツール（T)」メニューが表示されます。</p>\\n<img src=\\\"/d_images/support/pc_s1_3.gif\\\">\\n<br /><br />\\n<p>２-２．「互換表示に追加したWebサイト」に「pdr.co.jp」があれば「削除」してください。</p>\\n<img src=\\\"/d_images/support/pc_s1_4.gif\\\">\\n<br />\\n<font color=\\\"#ff0000\\\">この操作をしても問題が解決されない場合は、ブラウザを「Google Chrome（グーグルクローム）」にしてオンラインショップを開いていただくか、お手数をおかけしますが下記DESKまでご連絡ください。</font>\\n<br /><br />\"\n        },\n        {\n            \"newsSeq\": 10000015,\n            \"title\": \"夏期休業のお知らせ\",\n            \"newsBody\": \"誠に勝手ながら、2017年8月11日（金）～ 8月16日(水)は休業させて頂きます。<br />\\n8月17日（木）より通常営業いたします。<br />\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-07-04T17:00:00.000+00:00\",\n            \"registTime\": \"2017-07-05T04:02:36.000+00:00\",\n            \"updateTime\": \"2017-07-05T07:10:19.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000016,\n            \"title\": \"福岡県・大分県を中心とする集中豪雨の影響によるお届けの遅延について\",\n            \"newsBody\": \"この度の九州地方における大雨及び台風により被災された皆様に謹んでお見舞い申し上げます。<br />\\n九州の一部エリアにおいてお届けに遅延が生じております。ご理解のほどよろしくお願い申し上げます。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-07-06T17:00:00.000+00:00\",\n            \"registTime\": \"2017-07-07T07:29:59.000+00:00\",\n            \"updateTime\": \"2017-07-07T07:37:49.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000018,\n            \"title\": \"1.2次結合テスト\",\n            \"newsBody\": \"1.2次結合テスト\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-07-19T07:25:00.000+00:00\",\n            \"registTime\": \"2017-07-19T07:21:34.000+00:00\",\n            \"updateTime\": \"2017-07-19T07:40:37.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000020,\n            \"title\": \"1.2次結合テスト3\",\n            \"newsBody\": \"1.2次結合テスト3\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-07-19T07:36:00.000+00:00\",\n            \"registTime\": \"2017-07-19T07:35:12.000+00:00\",\n            \"updateTime\": \"2017-07-19T07:48:17.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000021,\n            \"title\": \"台風１８号の影響によるお届けの遅延について\",\n            \"newsBody\": \"台風１８号により被災された皆様に謹んでお見舞い申し上げます。<br />\\n大分県の一部エリアにおいてお届けに遅延が生じております。ご理解のほどよろしくお願い申し上げます。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2017-09-22T02:00:00.000+00:00\",\n            \"registTime\": \"2017-09-22T10:09:50.000+00:00\",\n            \"updateTime\": \"2017-09-22T10:13:39.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000023,\n            \"title\": \"2019年3月20日(水)2:00～4:00の間、クレジットカード決済が利用できません。\",\n            \"newsBody\": \"クレジットカード決済代行会社のシステムメンテナンスのため、上記時間帯はクレジットカード決済が利用できません。\\n他のお支払方法を選択していただくか、上記時間帯を避けてクレジットカード決済をご利用ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2019-03-05T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2019-03-05T17:00:00.000+00:00\",\n            \"registTime\": \"2017-12-19T07:46:19.000+00:00\",\n            \"updateTime\": \"2019-03-06T11:49:21.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000024,\n            \"title\": \"1月18日（木）18:00～18:30　システムメンテナンスのお知らせ\",\n            \"newsBody\": \"システムメンテナンスのため、上記時間帯はオンラインショップはご利用いただけません。<br />\\n状況によりメンテナンス時間が延長となる可能性がございます。<br />\\nご迷惑をおかけしますが、あらかじめご了承ください。<br />\\nメンテナンス中にご注文されるお客様は、お手数をおかけしますがファクシミリをご利用ください。<br />\\nFAX番号:0120-108649(24時間受付) \",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2018-01-08T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2018-01-08T17:00:00.000+00:00\",\n            \"registTime\": \"2018-01-09T10:49:01.000+00:00\",\n            \"updateTime\": \"2018-01-09T10:56:27.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000025,\n            \"title\": \"沖縄地方へのお届け日短縮のお知らせ\",\n            \"newsBody\": \"2018年1月22日（月）より航空便でのお届けが再開となるため、最短お届け日が発送日より最短2日後となります。地域によって日にちがかかる場合がありますので、「配送日時の指定」画面にてご確認ください。<br />\\n※陸送商品が含まれるご注文、天候不順や船便の都合により、ご指定いただいた日時にお届けできない可能性もございますので、ご了承ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2018-01-17T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2018-01-17T17:00:00.000+00:00\",\n            \"registTime\": \"2018-01-18T08:31:21.000+00:00\",\n            \"updateTime\": \"2018-01-19T06:43:56.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000029,\n            \"title\": \"『送料改定』に関する重要なお知らせ\",\n            \"newsBody\": \"『送料改定』に関する重要なお知らせがございます。詳しくは<a href=\\\"/special.html?fkey=souryou\\\" style=\\\"text-decoration: underline; color:#f36b30\\\">こちら</a>をクリックください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2018-03-26T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2018-03-26T17:00:00.000+00:00\",\n            \"registTime\": \"2018-03-27T04:57:58.000+00:00\",\n            \"updateTime\": \"2018-03-27T05:03:21.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000033,\n            \"title\": \"大阪府を中心とする地震の影響について\",\n            \"newsBody\": \"6月18日(月)7時58分頃に発生した大阪府を中心とした地震の影響で、一部エリアにおいてお届けに遅延が生じております。お客様にはご迷惑をおかけしますが、ご理解のほどよろしくお願い申し上げます。<br/>また、弊社フリーダイヤルがつながりにくい時間帯がございました。お詫び申し上げます。何かございましたらカスタマーサービス（0120-108394）までご連絡ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2018-06-17T17:00:00.000+00:00\",\n            \"registTime\": \"2018-06-18T10:26:19.000+00:00\",\n            \"updateTime\": \"2018-06-18T11:13:15.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000036,\n            \"title\": \"商品の「セールde予約」注文が入力しやすくなりました。\",\n            \"newsBody\": \"詳しくはこちらをご覧ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2018-07-03T17:00:00.000+00:00\",\n            \"registTime\": \"2018-07-04T06:31:36.000+00:00\",\n            \"updateTime\": \"2018-11-07T06:53:24.000+00:00\",\n            \"newsNote\": \"<br />\\n<font size=\\\"6\\\" color=\\\"#000000\\\">予約のご注文方法</font><br />\\n<font color=\\\"#000000\\\">配送方法までは今まで通りにお進みください。</font><br />\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1811_01.gif\\\">\\n<br />\\n<br />\\n<font color=\\\"#000000\\\">①配送日時の指定に進むと「セールde予約」対象商品は下図のように表示されます。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1811_02.gif\\\"><br /><br /><br />\\n<font color=\\\"#000000\\\">②今すぐお届けを希望する場合は、最短発送分にご希望の数量を入力します。</font><br /><b><font color=\\\"#000000\\\">※今すぐお届けを希望しない場合は、『空欄』にして進んでください。</font></b>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1811_03.gif\\\"><br /><br />\\n<font color=\\\"#000000\\\">③予約分のお届け時期と数量を入力します。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1811_04.gif\\\"><br /><br /><br />\\n<font color=\\\"#000000\\\">④入力が終わったら、「お支払い方法を選択する」をクリックします。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1811_05.gif\\\"><br /><br />\\n<font color=\\\"#000000\\\">⑤ご注文内容の確認まで進むと、最短発送分と予約分が表示されます。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1811_06.gif\\\"><br /><br />\\n<b><font color=\\\"#000000\\\">「注文を確定する」ボタンをクリックすると予約完了です。</font></b>\\n<br /><br />\\n<font color=\\\"#000000\\\">･お届け時に予約した時の価格よりも安くセールをしている場合は、安い方の価格でお届けします。</font><br >\\n<font color=\\\"#000000\\\">･予約内容の変更をご希望の場合は、ご注文デスク(フリーダイヤル：0120-108648)までご連絡ください。</font><br />\\n<font color=\\\"#000000\\\">･お届け日が複数回に分かれてもご注文時に5,800円以上、まとめてご注文いただければ、送料無料です。</font><br />\\n<font color=\\\"#000000\\\">･お届け日の変更、キャンセルは、お届け日の1週間前まで可能です。<br />(変更の際は電話、もしくはFAXにてご連絡ください。オンラインではできません）</font>\\n\"\n        },\n        {\n            \"newsSeq\": 10000051,\n            \"title\": \"商品の「セールde予約」注文が入力しやすくなりました。\",\n            \"newsBody\": \"詳しくはこちらをご覧ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2019-03-11T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2019-03-11T17:00:00.000+00:00\",\n            \"registTime\": \"2019-03-12T11:27:34.000+00:00\",\n            \"updateTime\": \"2019-03-13T10:55:20.000+00:00\",\n            \"newsNote\": \"<br />\\n<font size=\\\"6\\\" color=\\\"#000000\\\">予約のご注文方法</font><br />\\n<font color=\\\"#000000\\\">配送方法までは今まで通りにお進みください。</font><br />\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1903_01.gif\\\">\\n<br />\\n<br />\\n<font color=\\\"#000000\\\">①配送日時の指定に進むと「セールde予約」対象商品は下図のように表示されます。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1903_02.gif\\\"><br /><br /><br />\\n<font color=\\\"#000000\\\">②今すぐお届けを希望する場合は、最短発送分にご希望の数量を入力します。</font><br /><b><font color=\\\"#000000\\\">※今すぐお届けを希望しない場合は、『空欄』にして進んでください。</font></b>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1903_03.gif\\\"><br /><br />\\n<font color=\\\"#000000\\\">③「セールde予約もする」ボタンを押すと予約入力欄が開くので、予約分のお届け時期と数量を入力します。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1903_04.gif\\\"><br /><br /><br />\\n<font color=\\\"#000000\\\">④入力が終わったら、「お支払い方法を選択する」をクリックします。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1903_05.gif\\\"><br /><br />\\n<font color=\\\"#000000\\\">⑤ご注文内容の確認まで進むと、最短発送分と予約分が表示されます。</font>\\n<img src=\\\"/d_images/parts/pc_cartkaisyu1903_06.gif\\\"><br /><br />\\n<b><font color=\\\"#000000\\\">「注文を確定する」ボタンをクリックすると予約完了です。</font></b>\\n<br /><br />\\n<font color=\\\"#000000\\\">･お届け時に予約した時の価格よりも安くセールをしている場合は、安い方の価格でお届けします。</font><br >\\n<font color=\\\"#000000\\\">･予約内容の変更をご希望の場合は、ご注文デスク(フリーダイヤル：0120-108648)までご連絡ください。</font><br />\\n<font color=\\\"#000000\\\">･お届け日が複数回に分かれてもご注文時に5,800円以上、まとめてご注文いただければ、送料無料です。</font><br />\\n<font color=\\\"#000000\\\">･お届け日の変更、キャンセルは、お届け日の1週間前まで可能です。<br />(変更の際は電話、もしくはFAXにてご連絡ください。オンラインではできません）</font>\\n\"\n        },\n        {\n            \"newsSeq\": 10000060,\n            \"title\": \"台風10号の影響によるお届けの遅れについて\",\n            \"newsBody\": \"いつもピーディーアールをご利用いただきまして、ありがとうございます。<br />\\n台風10号の影響により、一部地域で荷物のお届けに遅れが生じております。 <br />\\nお客さまにはご迷惑をお掛けいたしますが、何とぞご了承いただきますようお願い申し上げます。<br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2019-08-15T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2019-08-15T17:00:00.000+00:00\",\n            \"registTime\": \"2019-08-16T02:17:20.000+00:00\",\n            \"updateTime\": \"2019-08-16T02:17:20.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000063,\n            \"title\": \"10月1日(火) 8:45 システムメンテナンス終了いたしました。<br /> <span style=\\\"text-decoration: line-through;\\\">2019年9月30日(月)18:00～10月1日(火)9:00　システムメンテナンスのお知らせ</span>\",\n            \"newsBody\": \"システムメンテナンスのため、上記時間帯はオンラインショップはご利用いただけません。<br />\\n状況によりメンテナンス時間が前後する可能性がございます。<br />\\nご迷惑をおかけしますが、あらかじめご了承ください。<br />\\nメンテナンス中にご注文されるお客様は、お手数をおかけしますがファクシミリをご利用ください。<br />\\nFAX番号:0120-108649(24時間受付)\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2019-09-16T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2019-09-16T17:00:00.000+00:00\",\n            \"registTime\": \"2019-09-17T08:42:16.000+00:00\",\n            \"updateTime\": \"2019-10-01T01:31:54.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000064,\n            \"title\": \"増税前の注文集中によるお届け遅延について\",\n            \"newsBody\": \"注文が集中しているため、16:00までにご注文をいただいても、<br />\\n翌営業日以降の発送となる可能性がございます。<br />\\nまた、全国的に荷物の量が増え、宅配業者のお届け遅延が起きる可能性もございます。<br />\\nお早目のご注文をお願いいたします。<br />\\nお客さまにはご迷惑をお掛けいたしますが、何卒ご了承いただきますようお願い申し上げます。<br />\\n消費税率変更に伴うお知らせは<a href=\\\"https://shop.pdr.co.jp/special.html?fkey=zouzei_qa\\\" style=\\\"text-decoration: underline; color:#f36b30\\\">こちら</a>からご確認ください。<br />\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2019-09-16T17:00:00.000+00:00\",\n            \"registTime\": \"2019-09-17T08:50:54.000+00:00\",\n            \"updateTime\": \"2019-09-19T01:36:04.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000065,\n            \"title\": \"10月12日(土)臨時休業のお知らせ\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2021-09-08T17:00:00.000+00:00\",\n            \"registTime\": \"2019-10-10T10:09:16.000+00:00\",\n            \"updateTime\": \"2021-09-10T08:59:14.000+00:00\",\n            \"newsNote\": \"この度の台風19号の接近に伴い、誠に勝手ながら<br />\\n<b>明日10月12日(土)は、電話受付と発送業務の臨時休業を決定いたしました。</b><br />\\nお客様にはご迷惑をおかけいたしますが、何卒ご了承くださいますようお願い申しあげます。<br /><br />\\n今後の発送については下記の通りとなります。<br />\\n<img src=\\\"/d_images/special/20191015.jpg\\\"><br />\\n※10月12日(土)～10月14日(月)は電話受付・発送業務は行いませんが、<br />\\nオンラインショップとFAXでのご注文の受付は承っております。<br /><br />\\n\\n本日10月11日(金)16時までのご注文受付分は、通常通り本日発送の手配をいたしますので、<br />\\nお急ぎの場合は、16時までにご注文いただきますようお願いいたします。<br />\\nなお、本日発送をいたしましても、地域によっては天候・交通事情等により、<br />\\nお届けが遅れる場合がございますので、あらかじめご了承ください。<br >\\nご不明な点がございましたら、カスタマーサービスデスク(0120-108394)までご連絡ください。\"\n        },\n        {\n            \"newsSeq\": 10000066,\n            \"title\": \"台風19号の影響によるお届けの遅れについて\",\n            \"newsBody\": \"この度の台風19号により被災された皆様に謹んでお見舞い申し上げます。<br />\\n<br />\\n下記の一部地域で配達停止や遅れが生じております。<br />\\nお客様にはご迷惑をおかけいたしますが、ご理解のほどよろしくお願い申し上げます。<br />\\n<br />\\n岩手県、宮城県、福島県、新潟県、茨城県、栃木県、千葉県、埼玉県、東京都、神奈川県、山梨県、群馬県、長野県、静岡県、沖縄県\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2019-10-15T02:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2019-10-15T02:00:00.000+00:00\",\n            \"registTime\": \"2019-10-15T05:27:48.000+00:00\",\n            \"updateTime\": \"2019-10-16T03:08:38.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000067,\n            \"title\": \"「G20　愛知・名古屋外務大臣会合開催」に伴うお届けの遅れについて\",\n            \"newsBody\": \"11月21日(木)～11月24日(日)に開催される「G20愛知・名古屋外務大臣会合」に伴う交通規制により、下記地域ではお荷物のお届け日時が遅れる可能性がございます。<br />\\nお客さまにはご迷惑をお掛けいたしますが、何とぞご了承いただきますようお願い申し上げます。\\n<br /><br />\\n【遅延予想地域】<br />\\n・愛知県名古屋市中区<br />\\n・愛知県名古屋市中村区<br />\\n・愛知県名古屋市西区<br /><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2019-11-17T17:00:00.000+00:00\",\n            \"registTime\": \"2019-10-21T03:51:43.000+00:00\",\n            \"updateTime\": \"2019-11-18T08:29:29.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000068,\n            \"title\": \"マスクの販売数量制限及び発送遅延のお知らせ\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-01-27T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-01-27T17:00:00.000+00:00\",\n            \"registTime\": \"2020-01-28T02:59:28.000+00:00\",\n            \"updateTime\": \"2020-01-28T11:42:32.000+00:00\",\n            \"newsNote\": \"いつもピーディーアールをご利用いただきまして、ありがとうございます。<br />\\nメディア等による「新型肺炎」の報道に伴い、マスク等の商品が在庫品薄状態となっています。<br /><br />\\n\\n現在、より多くのお客様にご利用いただくために、<br />\\nマスクにつきましては勝手ながら、一度のご注文上限を設けさせていただいております。<br />\\n上限数量を超えてご注文をいただいた場合は、数量を調整してお届けいたしますのでご了承願います。<br />\\nまた、品切れ商品につきましては、次回入荷予定が未定のため、長期欠品が続きお届けに大変時間がかかることが予想されます。<br />\\nお急ぎの場合は在庫のあるマスクのご注文をご検討ください。<br /><br />\\n\\nなお、現在、ご注文が集中しているため、16:00までにご注文をいただいても、翌営業日以降の発送となる可能性がございます。その場合は個別でのご案内を致しかねます。<br /><br />\\nお客さまにはご迷惑をお掛けいたしますが、何卒ご理解いただきますようお願い申し上げます。\"\n        },\n        {\n            \"newsSeq\": 10000069,\n            \"title\": \"マスク完売と、ご注文品お届け遅延のお詫び\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-02-03T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-02-03T17:00:00.000+00:00\",\n            \"registTime\": \"2020-02-04T02:31:26.000+00:00\",\n            \"updateTime\": \"2020-02-04T02:51:24.000+00:00\",\n            \"newsNote\": \"いつもピーディーアールをご利用いただきまして、ありがとうございます。<br />\\n新型肺炎の発生に伴い、マスクのご注文が急増し、2月3日(月)で弊社取り扱いのマスクが全品在庫切れとなりました。<br /><br />\\n現在、中国・台湾からのマスクの輸出が制限されている状況で、今後の入荷の見込みは今のところたっておりません。<br />\\nそのため、現時点ではマスクのご注文は一切承ることができません。<br />\\n誠に勝手ながら<b><u>2月4日(火)以降にいただいたマスクのご注文は全てキャンセルとさせていただきます。</u></b><br />\\nキャンセルに伴い、ご注文金額5,800円(税抜)未満となった場合は、送料800円(税抜)をご負担いただくことになります。FAXにてご連絡いたしますが予めご了承ください。<br /><br />\\nマスクにつきましては、セールカタログでご案内しております“セールde予約”の受付も現在は停止しておりますが、1月23日(木)以前にご予約済のマスクの在庫は確保しておりますので、どうぞご安心ください。<br /><br />\\nなお、引き続きご注文・お問合せが集中しているため、お電話・ファクシミリが大変つながりにくい状況となっております。\\nマスク以外のご注文につきましても、<b><u>お届けまでに2週間かかっており、更に遅れが出ることも予想されます。</u></b>お届け遅延について、個別のご案内も致しかねる状況です。\\n<br /><br />お客様にはご不便をおかけし、誠に申し訳ございませんが、何卒ご理解くださいますようお願い申し上げます。\\n\"\n        },\n        {\n            \"newsSeq\": 10000070,\n            \"title\": \"お届け遅延解消のご案内\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-02-17T02:20:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-02-14T17:00:00.000+00:00\",\n            \"registTime\": \"2020-02-17T02:26:53.000+00:00\",\n            \"updateTime\": \"2020-02-17T02:28:56.000+00:00\",\n            \"newsNote\": \"いつもピーディーアールをご利用いただきまして、ありがとうございます。<br />\\n1月末より新型コロナウィルス感染症の発生に伴い、マスク等のご注文・お問合せが集中したため、ご注文品のお届けの遅延が発生しておりました。<br /><br />\\n\\n\\n長らくご不便をおかけしましたが2月15日（土）9：00以降のご注文受付分より、通常通りのお届けが可能になったため、ご案内いたしました。<br />\\n<b><u>16：00ご注文受付完了分まで当日発送が可能です</u></b>ので、どうぞご用命ください。<br /><br />\\n\\nなお、弊社取り扱いのマスク・消毒剤に関しては全品在庫切れとなりましたので、引き続きご注文は承ることができません。<br />\\n今後の入荷の見込みも今のところたっておらず、ご案内もできない状況です。<br />\\nお客様にはご不便をおかけし、誠に申し訳ございません。<br />\\n何卒ご理解くださいますようお願い申しあげます。<br />\\n\"\n        },\n        {\n            \"newsSeq\": 10000071,\n            \"title\": \"グローブ在庫切れと、ご注文商品お届け遅延のお詫び\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-04-05T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-04-05T17:00:00.000+00:00\",\n            \"registTime\": \"2020-04-06T05:55:45.000+00:00\",\n            \"updateTime\": \"2020-04-06T05:57:17.000+00:00\",\n            \"newsNote\": \"いつもピーディーアールをご利用いただきまして、ありがとうございます。<br /><br />\\n新型肺炎の発生に伴い、グローブのご注文が急増し、弊社取り扱いのグローブが全品在庫切れとなりました。<br />\\n現在、グローブ、マスク、消毒剤などは在庫切れとなっております。今後の入荷の見込みは今のところたっておりません。 そのため、グローブ、マスク、消毒剤などのご注文は承ることができません。<br /><br />\\nまた、ご注文が集中しているため、商品の発送に遅延が生じております。お届け予定日は「配送日時の指定」画面にてご確認いただけます。<br /><br />\\nお客様にはご不便をおかけし、誠に申し訳ございませんが、何卒ご理解くださいますようお願い申し上げます。 \"\n        },\n        {\n            \"newsSeq\": 10000072,\n            \"title\": \"2020年4月20日(月)1:00～5:00の間、クレジットカード決済が利用できません。\",\n            \"newsBody\": \"クレジットカード決済代行会社のシステムメンテナンスのため、上記時間帯はクレジットカード決済が利用できません。\\n他のお支払方法を選択していただくか、上記時間帯を避けてクレジットカード決済をご利用ください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-04-09T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-04-10T17:00:00.000+00:00\",\n            \"registTime\": \"2020-04-10T09:00:41.000+00:00\",\n            \"updateTime\": \"2020-04-10T10:12:45.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000073,\n            \"title\": \"愛知県の緊急事態宣言を受け、4月18日、4月25日、5月2日の土曜日は臨時休業いたします。\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-04-09T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-04-10T17:00:00.000+00:00\",\n            \"registTime\": \"2020-04-10T09:39:37.000+00:00\",\n            \"updateTime\": \"2020-04-10T10:37:19.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000074,\n            \"title\": \"営業時間短縮のお知らせ\",\n            \"newsBody\": \"愛知県の緊急事態宣言を受け、コールセンターの営業時間を10:00～16:00に短縮いたします。<br />\\nお客様にはご不便をおかけし、誠に申し訳ございませんが、何卒ご理解くださいますようお願い申し上げます。 \\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-04-13T17:00:00.000+00:00\",\n            \"registTime\": \"2020-04-13T10:24:53.000+00:00\",\n            \"updateTime\": \"2020-04-13T10:31:05.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000075,\n            \"title\": \"4月20日（月）8:00～　システムメンテナンスのお知らせ\",\n            \"newsBody\": \"予想を大幅に上回るアクセス集中のため、4月20日（月）午前8:00から半日程度オンラインショップのメンテナンスをいたします。状況によりメンテナンス時間が前後する場合がございます。お客様にはご不便をおかけして誠に申し訳ございませんが、ご理解のほどお願い申し上げます。\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-04-17T17:00:00.000+00:00\",\n            \"registTime\": \"2020-04-18T12:44:28.000+00:00\",\n            \"updateTime\": \"2020-04-18T12:44:28.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000076,\n            \"title\": \"ゴールデンウィーク休業のお知らせ\",\n            \"newsBody\": \"\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-04-20T17:00:00.000+00:00\",\n            \"registTime\": \"2020-04-21T03:14:45.000+00:00\",\n            \"updateTime\": \"2020-04-22T03:24:51.000+00:00\",\n            \"newsNote\": \"誠に勝手ながら4月29日(水)、5月2日(土)～5月6日(水)は休業いたします。<br />\\n5月7日(木)より営業いたします。<br />\\n休業期間中でもFAX、オンラインショップからのご注文は承れますので、ご利用ください。<br />なお、ご注文の商品は営業日に順次発送いたします。<br />\\nご不便をおかけいたしますが、何卒よろしくお願いいたします。\"\n        },\n        {\n            \"newsSeq\": 10000077,\n            \"title\": \"7月からの営業時間について\",\n            \"newsBody\": \"<b>7月1日(水)よりご注文デスク(0120-108648)のみ土曜日の営業を再開し、通常営業となります。<br />\\nご注文デスク営業時間：9：00-17:00（日祝休）</b><br />\\n※カスタマーサービスデスク(0120-108394)は引き続き土日祝休業となります。<br />\\nカスタマーサービスデスク営業時間：10:00-16：00（土日祝休）<br />\\nファクシミリ・オンラインショップは、24時間/年中無休でご注文を承れますのでご利用ください。<br />\\nまた、7月1日（水）より通常通り16時ご注文受付分までが当日発送可能となります(日祝除く)。<br /><br />\\nお客様には引き続きご不便をお掛けいたしますが、ご理解のほどお願い申し上げます。<br />\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-06-22T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-06-29T17:00:00.000+00:00\",\n            \"registTime\": \"2020-06-23T03:04:39.000+00:00\",\n            \"updateTime\": \"2020-06-29T09:29:51.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000078,\n            \"title\": \"大雨の影響によるお届けの遅れについて\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-07-05T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-07-09T17:00:00.000+00:00\",\n            \"registTime\": \"2020-07-06T02:55:19.000+00:00\",\n            \"updateTime\": \"2020-07-16T04:39:11.000+00:00\",\n            \"newsNote\": \"この度の大雨により被災された皆様に謹んでお見舞い申し上げます。<br />\\n一日も早い復旧復興を心よりお祈りいたします。<br /><br />\\n大雨の影響による宅配業者からの荷受け停止を受けまして、<br />\\n下記地域へのお荷物の発送を一時停止いたしました。<br />\\nご注文は承ることができますが、発送は宅配業者の荷受け再開後となります。<br />\\nまた、交通状況によっては、下記地域以外への配達にも影響が出る場合がございます。<br /> \\nご理解のほどよろしくお願い申し上げます。<br /><br />\\n\\n■商品の発送停止地域(7月16日更新)<br /><br />\\n岐阜県　高山市　上宝町、奥飛騨温泉郷<br />\\n　　　　下呂市　小坂町<br /><br />\\n島根県　江津市　桜江町<br /><br />\\n長野県　松本市　安曇上高地<br /><br />\\n大分県　日田市　中津江町合瀬<br /><br />\\n熊本県　人吉市　全域<br />\\n　　　　球磨郡　五木村、多良木町槻木、水上村江代、球磨村<br />\\n　　　　　　　　山江村万江乙、山江村万江丙<br />\\n　　　　葦北郡　津奈木町、芦北町<br />\\n　　　　八代市　坂本町<br />\"\n        },\n        {\n            \"newsSeq\": 10000079,\n            \"title\": \"一時的にクレジットカードでの決済がご利用いただけませんでした。\",\n            \"newsBody\": \"本日16日（木）15:00～16:30頃の間、クレジットカード決済代行会社での障害発生により、一時的にクレジットカードでの決済がご利用いただけませんでした。\\nお客様には大変ご迷惑をお掛けいたしましたが、現在は復旧しております。<br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-07-15T17:00:00.000+00:00\",\n            \"registTime\": \"2020-07-16T09:05:18.000+00:00\",\n            \"updateTime\": \"2020-07-16T09:37:54.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000081,\n            \"title\": \"営業時間短縮のお知らせ\",\n            \"newsBody\": \"当面の間、コールセンターの営業時間を10:00～16:00に短縮し、土曜日は休業いたします。<br />\\nご注文デスク（0120-108648）、カスタマーサービスデスク（0120-108394）ともに下記のようになります。<br/>\\n・営業時間：10：00～16：00（土日祝休）<br />\\n<br/>\\nファクシミリ・オンラインショップは24時間／年中無休でご注文を承りますので、ご利用ください。<br/>\\nお客様には引き続きご不便をおかけし、誠に申し訳ございませんが、何卒ご理解くださいますようお願い申し上げます。 \\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-07-26T17:00:00.000+00:00\",\n            \"registTime\": \"2020-07-27T02:56:54.000+00:00\",\n            \"updateTime\": \"2020-07-27T07:00:40.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000082,\n            \"title\": \"台風10号の影響によるお届けの遅れについて\",\n            \"newsBody\": null,\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2020-09-03T17:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-09-03T17:00:00.000+00:00\",\n            \"registTime\": \"2020-09-04T13:08:03.000+00:00\",\n            \"updateTime\": \"2020-09-04T13:14:26.000+00:00\",\n            \"newsNote\": \"いつもピーディーアールをご利用いただきまして、ありがとうございます。<br />\\n台風10号の接近に影響にともない、一部地域で荷物のお届けに遅れが生じております。 <br />\\nお客さまにはご迷惑をお掛けいたしますが、何とぞご了承いただきますようお願い申し上げます。<br /><br />\\n\\n■集荷・配達業務および営業所での窓口受付業務を停止する地域と期間<br /><br />\\n宮崎県・鹿児島県 全域　　　　　　　9月5日(土）16時～9月7日(月)終日<br />\\n佐賀県・大分県・熊本県 全域　　　　9月6日(日）13時～9月7日(月)終日<br />\\n福岡県・長崎県 全域　　　　　　　　9月6日(日）16時～9月7日(月)終日<br /><br /><br />　　\"\n        },\n        {\n            \"newsSeq\": 10000083,\n            \"title\": \"営業時間短縮のお知らせ\",\n            \"newsBody\": \"コールセンターの営業時間を下記の通り短縮いたします。<br />\\nご注文デスク（0120-108648）　10：00～16：00（日祝休）<br />\\nカスタマーサービスデスク（0120-108394）　10：00～16：00（土日祝休）<br/>\\n<br/>\\nファクシミリ・オンラインショップは24時間／年中無休でご注文を承りますので、ご利用ください。<br/>お客様には引き続きご不便をおかけし、誠に申し訳ございませんが、何卒ご理解くださいますようお願い申し上げます。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-11-30T03:00:00.000+00:00\",\n            \"registTime\": \"2020-10-07T03:47:47.000+00:00\",\n            \"updateTime\": \"2020-11-30T05:42:55.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000085,\n            \"title\": \"12月17日（木）20:00　システムメンテナス終了いたしました<br /><span style=\\\"text-decoration: line-through;\\\">12月17日（木）18:00～20:30　システムメンテナンスのお知らせ</span>\",\n            \"newsBody\": \"システムメンテナンスのため、上記時間帯はオンラインショップをご利用いただけません。<br />\\n状況によりメンテナンス時間が前後する可能性がございます。<br />\\nご迷惑をおかけしますが、あらかじめご了承ください。<br />\\nメンテナンス中にご注文されるお客様は、お手数をおかけしますがファクシミリをご利用ください。<br />\\nFAX番号:0120-108649(24時間受付) \\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-12-09T17:00:00.000+00:00\",\n            \"registTime\": \"2020-12-10T04:23:05.000+00:00\",\n            \"updateTime\": \"2020-12-17T04:53:56.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000086,\n            \"title\": \"大雪の影響による荷物のお届けの遅延について\",\n            \"newsBody\": \"大雪による高速道路等の交通規制の影響により、北海道、東北地域で荷物のお届けに遅れが生じております。<br />\\nご理解のほどよろしくお願い申し上げます。\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2020-12-27T17:00:00.000+00:00\",\n            \"registTime\": \"2020-12-28T03:54:41.000+00:00\",\n            \"updateTime\": \"2020-12-28T03:54:41.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000087,\n            \"title\": \"営業時間変更のお知らせ\",\n            \"newsBody\": \"現在のコールセンター営業時間は下記の通りです。<br />\\n<b>ご注文デスク（0120-108648）</b>　9：00～17：00（日祝休）<br />\\n※土曜日も営業しています。<br />\\n<b>カスタマーサービスデスク（0120-108394）</b>　10：00～16：00（土日祝休）<br/>\\nファクシミリ・オンラインショップは24時間／年中無休でご注文を承りますので、ご利用ください。<br/>\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2021-03-15T17:00:00.000+00:00\",\n            \"registTime\": \"2021-03-18T06:02:32.000+00:00\",\n            \"updateTime\": \"2021-03-18T06:02:32.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000088,\n            \"title\": \"オンラインショップ不具合についてのお詫びと復旧のお知らせ\",\n            \"newsBody\": \"12月21日(火)7時00分頃～9時00分頃の間、ご利用いただけない時間がございました。<br />現在は復旧しております。ご迷惑をおかけして申し訳ございませんでした。\\r\\n<br />ご不明な点がございましたら、カスタマーサービス(Tel：0120-108394　平日10：00～16:00  土日祝日休)まで<br />お問い合わせください。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2021-12-20T17:00:00.000+00:00\",\n            \"registTime\": \"2021-03-22T03:34:08.000+00:00\",\n            \"updateTime\": \"2021-12-21T03:43:02.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000097,\n            \"title\": \"10月20日（水）20:00　システムメンテナス終了いたしました<br /><span style=\\\"text-decoration: line-through;\\\">10月20日（水）15:45～20:00　システムメンテナンスのお知らせ</span>\",\n            \"newsBody\": \"システムメンテナンスのため、上記時間帯はオンラインショップをご利用いただけません。<br />\\n状況によりメンテナンス時間が前後する可能性がございます。<br />\\nご不便をおかけしますが、あらかじめご了承ください。<br />\\nメンテナンス中にご注文されるお客様は、お手数をおかけしますが、電話またはファクシミリをご利用ください。<br /><br />\\nご注文デスク　ＴＥＬ番号：0120-108648（月～土 9：00-17：00　日祝休）<br/>\\nご注文デスク　ＦＡＸ番号：0120-108649（24時間受付）\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2021-10-20T10:00:00.000+00:00\",\n            \"registTime\": \"2021-10-20T10:39:17.000+00:00\",\n            \"updateTime\": \"2021-10-20T10:39:17.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000098,\n            \"title\": \"2月17日（木）17:00～18:00　システムメンテナンスのお知らせ\",\n            \"newsBody\": \"システムメンテナンスのため、上記時間帯はオンラインショップをご利用いただけません。<br />\\r\\n状況によりメンテナンス時間が前後する可能性がございます。<br />\\r\\nご不便をおかけしますが、あらかじめご了承ください。<br />\\r\\nメンテナンス中にご注文されるお客様は、お手数をおかけしますが、ファクシミリをご利用ください。<br /><br />\\r\\nご注文デスク　ＦＡＸ番号：0120-108649（24時間受付）\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2022-02-07T10:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2022-02-07T10:00:00.000+00:00\",\n            \"registTime\": \"2022-02-07T12:33:18.000+00:00\",\n            \"updateTime\": \"2022-02-09T13:54:20.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000104,\n            \"title\": \"商品お届け日について\",\n            \"newsBody\": \"ご注文の集中に伴い、商品発送までに2～3日かかる場合がございます。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2022-06-10T13:00:00.000+00:00\",\n            \"registTime\": \"2022-06-10T13:24:34.000+00:00\",\n            \"updateTime\": \"2022-06-10T13:26:52.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000106,\n            \"title\": \"夏期休業のお知らせ\",\n            \"newsBody\": \"誠に勝手ながら8月11日（木）～8月15日（月）は休業いたします。<br />\\r\\n8月16日（火）より営業いたします。<br />\\r\\n休業期間中でもFAX、オンラインショップからのご注文は承りますので、ご利用ください。<br />なお、ご注文の商品は営業日に順次発送いたします。<br />\\r\\nご不便をおかけいたしますが、何卒ご理解くださいますようお願いいたします。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2022-07-06T10:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2022-07-06T10:00:00.000+00:00\",\n            \"registTime\": \"2022-07-06T10:33:38.000+00:00\",\n            \"updateTime\": \"2022-07-19T05:36:41.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000107,\n            \"title\": \"新規ご開業・分院ご開設を予定されているお客様へ\",\n            \"newsBody\": \"歯科医院様・歯科技工所様向けの無料サンプルをご用意しておりますので、カスタマーサービスデスクにぜひお電話ください。\\r\\n<br />\\r\\nまた、内覧会などで患者さまに配布する商品等についても、お気軽にご相談ください。\\r\\n<br />\\r\\nカスタマーサービスデスク（0120-108394）　10：00～16：00（土日祝休）\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2022-08-01T02:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2022-08-02T02:00:00.000+00:00\",\n            \"registTime\": \"2022-08-01T10:13:10.000+00:00\",\n            \"updateTime\": \"2022-08-01T10:18:04.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000119,\n            \"title\": \"大雪に伴う宅配遅延について\",\n            \"newsBody\": \"この度の大雪により被災された皆様に謹んでお見舞い申し上げます。<br />\\r\\n一日も早い復旧復興を心よりお祈りいたします。<br /><br />\\r\\n大雪や荒天による交通規制により、一部地域で荷物のお届けに遅れが発生しております。<br />\\r\\n該当地域は、お手数をおかけしますが、宅配業者のHPにてご確認をお願いいたします。<br /><br />\\r\\n・佐川急便　<a href=\\\"https://www2.sagawa-exp.co.jp/information/list/\\\"><font color=\\\"#0000ff\\\"><u>https://www2.sagawa-exp.co.jp/information/list/</u></font></a><br />\\r\\n・ヤマト運輸　<a href=\\\"https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html</u></font></a><br />\\r\\n・日本郵便　<a href=\\\"https://www.post.japanpost.jp/unkou.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.post.japanpost.jp/unkou.html</u></font></a><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-01-25T01:00:00.000+00:00\",\n            \"registTime\": \"2022-12-21T01:34:18.000+00:00\",\n            \"updateTime\": \"2023-01-25T11:37:26.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000122,\n            \"title\": \"オンラインショップメンテナンスのお知らせ\",\n            \"newsBody\": \"下記時間帯にて、オンラインショップの一部メンテナンスを行うため、\\r\\n該当時間内にアクセスされた場合、1分程度接続しにくくなる可能性がございます。<br />\\r\\n<b>\\r\\nメンテナンス日時：2023年3月23日(木) AM 3:00 ～ AM 4:00\\r\\n</b><br />\\r\\nお客様にはご迷惑をおかけしますが、よろしくお願いします。\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": \"2023-02-21T10:00:00.000+00:00\",\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-03-22T20:00:00.000+00:00\",\n            \"registTime\": \"2023-02-21T10:46:54.000+00:00\",\n            \"updateTime\": \"2023-02-21T10:48:16.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000126,\n            \"title\": \"G7首脳会議　広島サミット2023開催に伴うお届けの遅れについて\",\n            \"newsBody\": \"G7首脳会議　広島サミット2023開催に伴い、\\r\\n大規模な交通規制が実施されるため、お荷物のお届け日時が遅れる恐れがございます。<br />\\r\\n下記対象地域のお客様につきましては、ご入用の際はお早めにご注文ください。<br />\\r\\nお客様にはご不便をおかけいたしますが、何卒ご理解とご協力のほど、よろしくお願いいたします。<br />\\r\\n【遅延予想期間】<br />5月18日～5月22日<br />\\r\\n【遅延予想地域】<br />\\r\\n　≪広島県≫　<br />\\r\\n　広島市・呉市・江田島市・廿日市市・大竹市・山県郡・東広島市・安芸郡<br />\\r\\n　≪山口県≫　<br />\\r\\n　全域\\r\\n\\r\\n\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-05-15T02:00:00.000+00:00\",\n            \"registTime\": \"2023-05-15T07:31:53.000+00:00\",\n            \"updateTime\": \"2023-05-15T07:43:32.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000129,\n            \"title\": \"令和5年梅雨前線による大雨及び台風2号による被害についてのお見舞い\",\n            \"newsBody\": \"この度、令和5年梅雨前線による大雨及び台風2号による被害を受けられた皆様に、謹んでお見舞い申し上げます。<br>\\r\\n一日も早い復旧がなされ、皆様の安全と安心が確保されますことを心よりお祈り申し上げます。<br><br>\\r\\n《被害に遭われたお客様へ》<br>\\r\\n商品の破損等お困りのことがございましたら、下記までご連絡ください。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\n\\r\\n《商品のお届けへの影響について》<br>\\r\\n現在、大雨及び台風2号の影響により、商品のお届けにつきまして、配送の遅れやお届けができないエリアが発生しております。<br>\\r\\n日付・時間帯指定通りのお届けができない場合もございます。<br>\\r\\nお問い合わせにつきましては、下記までお願いいたします。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\nお客様には大変ご迷惑をおかけしますが、ご了承くださいますようお願いいたします。<br>\\r\\nお急ぎのお客様は、お手数をおかけしますが、宅配業者のHPにてご確認をお願いいたします。<br><br>\\r\\n\\r\\n・佐川急便　<a href=\\\"https://www2.sagawa-exp.co.jp/information/list/\\\"><font color=\\\"#0000ff\\\"><u>https://www2.sagawa-exp.co.jp/information/list/</u></font></a><br />\\r\\n・ヤマト運輸　<a href=\\\"https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html</u></font></a><br />\\r\\n・日本郵便　<a href=\\\"https://www.post.japanpost.jp/unkou.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.post.japanpost.jp/unkou.html</u></font></a><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-06-07T04:00:00.000+00:00\",\n            \"registTime\": \"2023-06-07T07:30:08.000+00:00\",\n            \"updateTime\": \"2023-06-08T04:05:04.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000130,\n            \"title\": \"天候不良に伴う配送遅延について\",\n            \"newsBody\": \"大雨の影響により、一部地域で荷物のお届けに遅れが発生しております。<br />\\r\\n該当地域は、お手数をおかけしますが、宅配業者のHPにてご確認をお願いいたします。<br /><br />\\r\\n・佐川急便　<a href=\\\"https://www2.sagawa-exp.co.jp/information/list/\\\"><font color=\\\"#0000ff\\\"><u>https://www2.sagawa-exp.co.jp/information/list/</u></font></a><br />\\r\\n・ヤマト運輸　<a href=\\\"https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html</u></font></a><br />\\r\\n・日本郵便　<a href=\\\"https://www.post.japanpost.jp/unkou.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.post.japanpost.jp/unkou.html</u></font></a><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-07-03T07:00:00.000+00:00\",\n            \"registTime\": \"2023-07-03T07:15:51.000+00:00\",\n            \"updateTime\": \"2023-07-03T07:15:51.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000131,\n            \"title\": \"九州地方の大雨による被害についてのお見舞い\",\n            \"newsBody\": \"この度、九州地方の大雨による被害を受けられた皆様に、謹んでお見舞い申し上げます。<br>\\r\\n一日も早い復旧がなされ、皆様の安全と安心が確保されますことを心よりお祈り申し上げます。<br><br>\\r\\n《被害に遭われたお客様へ》<br>\\r\\n商品の破損等お困りのことがございましたら、下記までご連絡ください。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\n\\r\\n《商品のお届けへの影響について》<br>\\r\\n現在、大雨の影響により、商品のお届けにつきまして、配送の遅れやお届けができないエリアが発生しております。<br>\\r\\n日付・時間帯指定通りのお届けができない場合もございます。<br>\\r\\nお問い合わせにつきましては、下記までお願いいたします。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\nお客様には大変ご迷惑をおかけしますが、ご了承くださいますようお願いいたします。<br>\\r\\nお急ぎのお客様は、お手数をおかけしますが、宅配業者のHPにてご確認をお願いいたします。<br><br>\\r\\n\\r\\n・佐川急便　<a href=\\\"https://www2.sagawa-exp.co.jp/information/list/\\\"><font color=\\\"#0000ff\\\"><u>https://www2.sagawa-exp.co.jp/information/list/</u></font></a><br />\\r\\n・ヤマト運輸　<a href=\\\"https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html</u></font></a><br />\\r\\n・日本郵便　<a href=\\\"https://www.post.japanpost.jp/unkou.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.post.japanpost.jp/unkou.html</u></font></a><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-07-10T02:00:00.000+00:00\",\n            \"registTime\": \"2023-07-10T03:49:47.000+00:00\",\n            \"updateTime\": \"2023-07-10T03:49:47.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000132,\n            \"title\": \"一部地域の宅配遅延について\",\n            \"newsBody\": \"現在、商品のお届けにつきまして、配送の遅れやお届けができないエリアが発生しております。<br />\\r\\n該当地域は、お手数をおかけしますが、宅配業者のHPにてご確認をお願いいたします。<br /><br />\\r\\n・佐川急便　<a href=\\\"https://www2.sagawa-exp.co.jp/information/list/\\\"><font color=\\\"#0000ff\\\"><u>https://www2.sagawa-exp.co.jp/information/list/</u></font></a><br />\\r\\n・ヤマト運輸　<a href=\\\"https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html</u></font></a><br />\\r\\n・日本郵便　<a href=\\\"https://www.post.japanpost.jp/unkou.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.post.japanpost.jp/unkou.html</u></font></a><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-07-26T04:00:00.000+00:00\",\n            \"registTime\": \"2023-07-26T05:00:05.000+00:00\",\n            \"updateTime\": \"2023-07-26T05:00:05.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000133,\n            \"title\": \"令和5年台風6号による被害を受けられた皆様に、 謹んでお見舞い申し上げます。\",\n            \"newsBody\": \"この度、令和5年台風6号による被害を受けられた皆様に、謹んでお見舞い申し上げます。<br>\\r\\n一日も早い復旧がなされ、皆様の安全と安心が確保されますことを心よりお祈り申し上げます。<br><br>\\r\\n《被害に遭われたお客様へ》<br>\\r\\n商品の破損等お困りのことがございましたら、下記までご連絡ください。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\n\\r\\n《商品のお届けへの影響について》<br>\\r\\n現在、台風の影響により、商品のお届けにつきまして、配送の遅れやお届けができないエリアが発生しております。<br>\\r\\n日付・時間帯指定通りのお届けができない場合もございます。<br>\\r\\nお問い合わせにつきましては、下記までお願いいたします。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\nお客様には大変ご迷惑をおかけしますが、ご了承くださいますようお願いいたします。<br>\\r\\nお急ぎのお客様は、お手数をおかけしますが、宅配業者のHPにてご確認をお願いいたします。<br><br>\\r\\n\\r\\n・佐川急便　<a href=\\\"https://www2.sagawa-exp.co.jp/information/list/\\\"><font color=\\\"#0000ff\\\"><u>https://www2.sagawa-exp.co.jp/information/list/</u></font></a><br />\\r\\n・ヤマト運輸　<a href=\\\"https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html</u></font></a><br />\\r\\n・日本郵便　<a href=\\\"https://www.post.japanpost.jp/unkou.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.post.japanpost.jp/unkou.html</u></font></a><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-08-07T03:00:00.000+00:00\",\n            \"registTime\": \"2023-08-07T02:28:30.000+00:00\",\n            \"updateTime\": \"2023-08-07T02:29:25.000+00:00\",\n            \"newsNote\": null\n        },\n        {\n            \"newsSeq\": 10000134,\n            \"title\": \"令和5年台風7号による被害を受けられた皆様に、 謹んでお見舞い申し上げます。\",\n            \"newsBody\": \"この度、令和5年台風7号による被害を受けられた皆様に、謹んでお見舞い申し上げます。<br>\\r\\n一日も早い復旧がなされ、皆様の安全と安心が確保されますことを心よりお祈り申し上げます。<br><br>\\r\\n《被害に遭われたお客様へ》<br>\\r\\n商品の破損等お困りのことがございましたら、下記までご連絡ください。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\n\\r\\n《商品のお届けへの影響について》<br>\\r\\n現在、台風の影響により、商品のお届けにつきまして、配送の遅れやお届けができないエリアが発生しております。<br>\\r\\n日付・時間帯指定通りのお届けができない場合もございます。<br>\\r\\nお問い合わせにつきましては、下記までお願いいたします。<br>\\r\\n【カスタマーサービスデスク】<br>\\r\\n TEL：0120-108394（月～金　10:00～16:00　土日祝休）<br><br>\\r\\nお客様には大変ご迷惑をおかけしますが、ご了承くださいますようお願いいたします。<br>\\r\\nお急ぎのお客様は、お手数をおかけしますが、宅配業者のHPにてご確認をお願いいたします。<br><br>\\r\\n\\r\\n・佐川急便　<a href=\\\"https://www2.sagawa-exp.co.jp/information/list/\\\"><font color=\\\"#0000ff\\\"><u>https://www2.sagawa-exp.co.jp/information/list/</u></font></a><br />\\r\\n・ヤマト運輸　<a href=\\\"https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.kuronekoyamato.co.jp/ytc/chien/chien_hp.html</u></font></a><br />\\r\\n・日本郵便　<a href=\\\"https://www.post.japanpost.jp/unkou.html\\\"><font color=\\\"#0000ff\\\"><u>https://www.post.japanpost.jp/unkou.html</u></font></a><br />\",\n            \"newsUrl\": null,\n            \"newsOpenStatus\": \"1\",\n            \"newsOpenStartTime\": null,\n            \"newsOpenEndTime\": null,\n            \"newsTime\": \"2023-08-16T02:00:00.000+00:00\",\n            \"registTime\": \"2023-08-16T02:23:39.000+00:00\",\n            \"updateTime\": \"2023-08-16T02:23:39.000+00:00\",\n            \"newsNote\": null\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "getDeliveryMethodDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/shop/delivery/delivery-method-details?deliveryMethodSeqList=1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"delivery",
+						"delivery-method-details"
+					],
+					"query": [
+						{
+							"key": "deliveryMethodSeqList",
+							"value": "1001"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getDeliveryMethodDetailsResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/shop/delivery/delivery-method-details?deliveryMethodSeqList=1001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"delivery",
+								"delivery-method-details"
+							],
+							"query": [
+								{
+									"key": "deliveryMethodSeqList",
+									"value": "1001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:52:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"deliveryMethodMaster\": {\n        \"1001\": {\n            \"deliveryMethodEntity\": {\n                \"deliveryMethodSeq\": 1001,\n                \"deliveryMethodName\": \"PDR配送\",\n                \"deliveryMethodDisplayName\": \"PDR配送\",\n                \"openStatus\": \"1\",\n                \"deliveryNote\": null,\n                \"deliveryMethodType\": \"0\",\n                \"equalsCarriage\": 600,\n                \"largeAmountDiscountPrice\": 0,\n                \"largeAmountDiscountCarriage\": 0,\n                \"shortfallDisplayFlag\": \"0\",\n                \"deliveryLeadTime\": 0,\n                \"deliveryChaseURL\": null,\n                \"deliveryChaseURLDisplayPeriod\": null,\n                \"possibleSelectDays\": 0,\n                \"receiverTimeZone1\": null,\n                \"receiverTimeZone2\": null,\n                \"receiverTimeZone3\": null,\n                \"receiverTimeZone4\": null,\n                \"receiverTimeZone5\": null,\n                \"receiverTimeZone6\": null,\n                \"receiverTimeZone7\": null,\n                \"receiverTimeZone8\": null,\n                \"receiverTimeZone9\": null,\n                \"receiverTimeZone10\": null,\n                \"orderDisplay\": 1,\n                \"registTime\": \"2017-03-02T08:44:39.000+00:00\",\n                \"updateTime\": \"2017-03-02T08:44:39.000+00:00\"\n            },\n            \"deliveryMethodTypeCarriageEntityList\": [],\n            \"deliverySpecialChargeAreaCount\": 0,\n            \"deliveryImpossibleAreaCount\": 0,\n            \"deliveryImpossibleAreaResultDtoList\": [],\n            \"deliverySpecialChargeAreaResultDtoList\": []\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getOrderQuestionnaire",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/shop/order-questionnaire",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"order-questionnaire"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OrderQuestionnaireResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/shop/order-questionnaire",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"order-questionnaire"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 07:53:35 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"questionnaireSeq\": 10000005,\n    \"questionnaireKey\": \"order\",\n    \"name\": \"平成最後のクイズ大会をご存知ですか？\",\n    \"openStatus\": \"1\",\n    \"openStartTime\": \"2019-04-23T08:15:00.000+00:00\",\n    \"openEndTime\": \"2024-04-24T10:00:00.000+00:00\",\n    \"freeText\": \"平成最後のクイズ大会をご存知ですか？\",\n    \"completeText\": \"アンケートのご協力ありがとうございました。\",\n    \"memo\": null,\n    \"versionNo\": 3,\n    \"registTime\": \"2023-10-28T07:06:14.000+00:00\",\n    \"updateTime\": \"2024-10-29T08:11:31.000+00:00\",\n    \"siteMapFlag\": \"1\"\n}"
+				}
+			]
+		},
+		{
+			"name": "postShopAccess",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accessType\": \"C001\",\r\n    \"goodsGroupSeq\": 10005889,\r\n    \"accessCount\": 1,\r\n    \"accessUid\": \"6057201212013834\",\r\n    \"campainCode\": \"bnr_goods02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/shop/access",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"access"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "postShopAccessResponse",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessType\": \"C001\",\r\n    \"goodsGroupSeq\": 10005889,\r\n    \"accessCount\": 1,\r\n    \"accessUid\": \"6057201212013834\",\r\n    \"campainCode\": \"bnr_goods02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/shop/access",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"access"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 09:44:15 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"resultCount\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "postAccessSearchKeyword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accessTime\": 1490372999,\r\n    \"accessUid\": 1006170323205340,\r\n    \"siteType\": 0,\r\n    \"searchkeyword\": \"Ｓｅｒｉｅｓ\",\r\n    \"searchResultCount\": 11,\r\n    \"searchCategorySeq\": 0,\r\n    \"searchPriceFrom\": null,\r\n    \"searchPriceTo\": null,\r\n    \"pageId\": \"/view/front/search/index.html\",\r\n    \"registTime\": 1490372999,\r\n    \"updateTime\": 1490372999\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/shop/access/access-search-keyword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"shop",
+						"access",
+						"access-search-keyword"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "postAccessSearchKeyword",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessTime\": 1490372999,\r\n    \"accessUid\": 1006170323205340,\r\n    \"siteType\": 0,\r\n    \"searchkeyword\": \"Ｓｅｒｉｅｓ\",\r\n    \"searchResultCount\": 11,\r\n    \"searchCategorySeq\": 0,\r\n    \"searchPriceFrom\": null,\r\n    \"searchPriceTo\": null,\r\n    \"pageId\": \"/view/front/search/index.html\",\r\n    \"registTime\": 1490372999,\r\n    \"updateTime\": 1490372999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/shop/access/access-search-keyword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"shop",
+								"access",
+								"access-search-keyword"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Oct 2023 10:03:45 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"resultCount\": 1\n}"
+				}
+			]
+		}
+	]
+}

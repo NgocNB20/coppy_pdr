@@ -1,0 +1,241 @@
+type: object
+description: 受注決済リクエスト
+properties:
+  orderSeq:
+    type: integer
+    format: int32
+    description: 受注SEQ（必須）
+    example: 1
+  orderSettlementVersionNo:
+    type: integer
+    format: int32
+    description: 受注決済連番（必須）
+    example: 1
+  orderCode:
+    type: integer
+    format: int32
+    description: 受注コード（必須）
+    example: 1
+  processTime:
+    type: string
+    format: date-time
+    description: 処理日時（必須）
+    example: 2022/01/01 12:00:00
+  processYmd:
+    type: string
+    description: 処理年月日（必須）
+    example: 2022/01/01
+  processYm:
+    type: string
+    description: 処理年月（必須）
+    example: 2022/01
+  orderDate:
+    type: string
+    format: date-time
+    description: 受注日（必須）
+    example: 2022/01/01 12:00:00
+  salesTime:
+    type: string
+    format: date-time
+    description: 売上日時
+    example: 2022/01/01 12:00:00
+  orderSiteType:
+    type: string
+    description: 受注サイト種別（必須）
+    example: 0
+  orderDeviceType:
+    type: string
+    description: 受注デバイス種別（必須）
+    example: 0
+  carrierType:
+    type: string
+    description: キャリア種別（必須）
+    example: 0
+  settlementMethodSeq:
+    type: integer
+    format: int32
+    description: 決済方法SEQ（必須）
+    example: 0
+  settlementMethodType:
+    type: string
+    description: 決済方法種別（必須）
+    example: 0
+  creditCompanyCode:
+    type: string
+    description: クレジットカード会社コード
+    example: 0
+  creditCompany:
+    type: string
+    description: クレジットカード会社
+    example: 0
+  totalingType:
+    type: string
+    description: 集計種別（必須）
+    example: 0
+  salesFlag:
+    type: string
+    description: 売上フラグ（必須）
+    default: 0
+    example: 0
+  billType:
+    type: string
+    description: 請求種別（必須）
+    example: 0
+  repeatPurchaseType:
+    type: string
+    description: リピート購入種別（必須）
+    default: 0
+    example: 0
+  prefectureType:
+    type: string
+    description: 都道府県種別
+    example: 0
+  orderSex:
+    type: string
+    description: ご注文主性別
+    default: 0
+    example: 0
+  orderAgeType:
+    type: string
+    description: ご注文主年代
+    example: 0
+  beforeDiscountOrderPrice:
+    type: number
+    description: 割引前受注金額（必須）
+    default: 0
+    example: 0
+  orderPrice:
+    type: number
+    description: 受注金額（必須）
+    default: 0
+    example: 0
+  taxPrice:
+    type: number
+    description: 消費税（必須）
+    default: 0
+    example: 0
+  standardTaxPrice:
+    type: number
+    description: 標準税率消費税（必須）
+    default: 0
+    example: 0
+  reducedTaxPrice:
+    type: number
+    description: 軽減税率消費税（必須）
+    default: 0
+    example: 0
+  standardTaxTargetPrice:
+    type: number
+    description: 標準税率対象金額（必須）
+    default: 0
+    example: 0
+  reducedTaxTargetPrice:
+    type: number
+    description: 軽減税率対象金額（必須）
+    default: 0
+    example: 0
+  goodsPriceTotal:
+    type: number
+    description: 商品金額合計(税抜き)（必須）
+    default: 0
+    example: 0
+  goodsCostTotal:
+    type: number
+    description: 商品原価合計（必須）
+    default: 0
+    example: 0
+  settlementCommission:
+    type: number
+    description: 決済手数料（必須）
+    default: 0
+    example: 0
+  carriage:
+    type: number
+    description: 送料
+    default: 0
+    example: 0
+  othersPriceTotal:
+    type: number
+    description: その他金額合計
+    default: 0
+    example: 0
+  couponDiscountPrice:
+    type: number
+    description: クーポン割引額
+    default: 0
+    example: 0
+  usePoint:
+    type: number
+    description: 利用ポイント
+    default: 0
+    example: 0
+  preBeforeDiscountOrderPrice:
+    type: number
+    description: 前回割引前受注金額（必須）
+    default: 0
+    example: 0
+  preOrderPrice:
+    type: number
+    description: 前回受注金額（必須）
+    default: 0
+    example: 0
+  preTaxPrice:
+    type: number
+    description: 前回消費税（必須）
+    default: 0
+    example: 0
+  preGoodsPriceTotal:
+    type: number
+    description: 前回商品金額合計
+    default: 0
+    example: 0
+  preGoodsCostTotal:
+    type: number
+    description: 前回商品原価合計
+    default: 0
+    example: 0
+  preSettlementCommission:
+    type: number
+    description: 前回決済手数料
+    default: 0
+    example: 0
+  preCarriage:
+    type: number
+    description: 前回送料
+    default: 0
+    example: 0
+  preOthersPriceTotal:
+    type: number
+    description: 前回その他金額合計
+    default: 0
+    example: 0
+  preCouponDiscountPrice:
+    type: number
+    description: 前回クーポン割引額
+    default: 0
+    example: 0
+  preUsePoint:
+    type: number
+    description: 前回利用ポイント
+    default: 0
+    example: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00
+  pointDiscountPrice:
+    type: number
+    description: ポイント割引額
+    default: 0
+    example: 0
+  prePointDiscountPrice:
+    type: number
+    description: 前回ポイント割引額
+    default: 0
+    example: 0

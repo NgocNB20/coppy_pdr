@@ -1,0 +1,19 @@
+type: object
+description: 注文可能チェックリクエスト
+properties:
+  receiveOrderDto:
+    type: string
+    description: 受注Dto
+  memberInfoId:
+    type: string
+    description: 会員ID
+    example: aa@example.com
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員情報SEQ
+    example: 10000000
+  adminId:
+    type: string
+    description: 管理者ID
+    example: administrator

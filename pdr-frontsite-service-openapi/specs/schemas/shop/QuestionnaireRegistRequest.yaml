@@ -1,0 +1,9 @@
+type: object
+description: アンケート新規登録クリクエスト
+properties:
+  questionnaireReplyEntityRequest:
+    $ref: ./QuestionnaireReplyEntityRequest.yaml
+  questionReplyEntityRequest:
+    type: array
+    items:
+      $ref: ./QuestionReplyEntityRequest.yaml

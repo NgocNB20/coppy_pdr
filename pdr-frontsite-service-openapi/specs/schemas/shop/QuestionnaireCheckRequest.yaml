@@ -1,0 +1,8 @@
+type: object
+description: アンケートチェックリクエスト
+properties:
+  questionnaireSeq:
+    type: integer
+    format: int32
+    description: アンケートSEQ
+    example: 1

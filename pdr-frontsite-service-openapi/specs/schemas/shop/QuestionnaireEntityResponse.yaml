@@ -1,0 +1,63 @@
+type: object
+description: アンケートEntityレスポンス
+properties:
+  questionnaireSeq:
+    type: integer
+    format: int32
+    description: アンケートSEQ（PK）
+    example: 10000001
+  questionnaireKey:
+    type: string
+    description: アンケートキー
+    example: mail
+  name:
+    type: string
+    description: アンケート名
+    example: メルマガ登録アンケート
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 2
+    default: 0
+  openStartTime:
+    type: string
+    format: date-time
+    description: 公開開始日時
+    example: 2021/12/12 12:00:00
+  openEndTime:
+    type: string
+    format: date-time
+    description: 公開終了日時
+    example: 2021/12/12 12:00:00
+  freeText:
+    type: string
+    description: 説明文
+    example: 今回のご注文担当者様について
+  completeText:
+    type: string
+    description: 説明文
+    example: ご協力ありがとうございました。
+  memo:
+    type: string
+    description: メモ
+    example: メルマガ不要客限定→ＴＯＰバナー設定→このページ→回答文でクーポン発行（ログインしているしすぐカートインできる）
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2021/12/12 12:00:00
+  siteMapFlag:
+    type: string
+    description: サイトマップ出力
+    example: 2
+    default: 0

@@ -1,0 +1,15 @@
+type: object
+description: 出荷予定日取得Web-APIレスポンス
+properties:
+  info:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiGetShipmentDateResponseDetailDtoResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+components:
+  schemas:
+    WebApiGetShipmentDateResponseDetailDtoResponse:
+      $ref: ./WebApiGetShipmentDateResponseDetailDtoResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

@@ -1,0 +1,9 @@
+type: object
+description: UK-API連携関連ワードレスポンス（response）
+properties:
+  numFound:
+    type: string
+    description: ヒット件数
+    example: 10
+  relatedWord:
+    $ref: "./UkApiGetUkRWordResponseInfoWordDtoResponse.yaml"

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	  xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+	<meta th:replace="~{include/head_new}"/>
+	<title>広告更新｜広告管理</title>
+	<script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="campaign">
+	<div id="searchCampaign" class="l-mainwrap">
+		<!-- side -->
+		<div th:replace="~{include/sidemenu_new}"></div>
+	<main class="l-page">
+		<div th:replace="~{include/header_new}"></div>
+		<div class="l-container">
+			<!-- contents -->
+			<div class="l-main">
+				<form id="modifyForm" th:action="@{/campaign/modify/}" th:object="${campaignModifyModel}" method="post">
+					<div class="l-pagetitle_wrap">
+						<h1 class="c-pagetitle_h1">広告検索：編集</h1>
+					</div>
+					<div th:if="${allMessages}"
+						 th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+						<ul th:each="message : ${allMessages}">
+							<li th:utext="${message}"></li>
+						</ul>
+					</div>
+
+					<div class="l-section" id="mainContainer">
+						<article class="l-article">
+							<div class="l-article_title no_slide">
+								<h2 class="c-pagetitle_h3">広告情報</h2>
+							</div>
+							<div class="l-article_inner">
+								<div class="l-inner_wrap">
+									<div class="l-article_inner">
+										<dl class="c-dl-base dt_fn13 dt_w160px mb20">
+											<div class="edit">
+												<dt>広告コード</dt>
+												<dd th:text="*{campaignCode}"></dd>
+											</div>
+											<div class="edit">
+												<dt>広告名<span class="ico_required">必須</span></dt>
+												<dd>
+													<input type="text" class="c-form-control w300px js-icon-text"
+														   placeholder="入力してください" th:field="*{campaignName}"
+														   maxlength="80"
+														   th:errorclass="error">
+													<ul>
+														<div th:id="campaignNameError"
+															 th:if="${#fields.hasErrors('campaignName')}"
+															 th:errors="*{campaignName}" class="c-error-txt mt5"></div>
+													</ul>
+												</dd>
+											</div>
+											<div class="edit">
+												<dt>広告メモ</dt>
+												<dd>
+													<input type="text" class="c-form-control w550px js-icon-text"
+														   placeholder="入力してください" th:field="*{note}"
+														   maxlength="200"
+														   th:errorclass="error">
+													<ul>
+														<div th:id="noteError"
+															 th:if="${#fields.hasErrors('note')}"
+															 th:errors="*{note}" class="c-error-txt mt5"></div>
+													</ul>
+												</dd>
+											</div>
+											<div class="edit">
+												<dt>広告コスト</dt>
+												<dd>
+													<input type="text" class="c-form-control w300px js-icon-text price"
+														   placeholder="1000" th:field="*{campaignCost}"
+														   maxlength="8"
+														   th:errorclass="error">&nbsp;円
+													<ul>
+														<div th:id="campaignCostError"
+															 th:if="${#fields.hasErrors('campaignCost')}"
+															 th:errors="*{campaignCost}" class="c-error-txt mt5"></div>
+													</ul>
+												</dd>
+											</div>
+											<div class="edit">
+												<dt>リダイレクトURL<span class="ico_required">必須</span></dt>
+												<dd>
+													<input type="text" class="c-form-control w550px js-icon-text"
+														   placeholder="入力してください" th:field="*{redirectUrl}"
+														   maxlength="200"
+														   th:errorclass="error">
+													<ul>
+														<div th:id="redirectUrlError"
+															 th:if="${#fields.hasErrors('redirectUrl')}"
+															 th:errors="*{redirectUrl}" class="c-error-txt mt5"></div>
+													</ul>
+												</dd>
+											</div>
+											<div class="edit">
+												<dt>広告URLPC</dt>
+												<dd th:text="*{campaignUrlPc}"></dd>
+											</div>
+										</dl>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+
+					<div class="l-pagebtn-nav">
+						<div class="l-pagebtn-nav_inner">
+							<div class="c-back">
+									<a class="c-btn btn_back icon_left" th:href="@{/campaign/(md=list)}">
+										<i class="material-icons navigate_before"></i>戻る
+									</a>
+							</div>
+							<div class="col_left">
+								<button class="c-btn btn_regular" type="submit" id="doNext" name="doNext">確認</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div th:replace="~{include/footer_new}"></div>
+	</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+type: object
+description: 配送方法詳細DTOレスポンス
+properties:
+  deliveryMethodSeq:
+    type: integer
+    format: int32
+    description: 配送方法SEQ（必須）
+  deliveryMethodName:
+    type: string
+    description: 配送方法名
+    example: 1000000
+  deliveryMethodDisplayName:
+    type: string
+    description: 配送方法表示名
+    example: 1000000
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 1000000
+  deliveryNote:
+    type: string
+    description: 配送方法説明文
+    example: 1000000
+  deliveryMethodType:
+    type: string
+    description: 配送方法区分
+    example: 1000000
+  equalsCarriage:
+    type: number
+    description: 一律送料
+    example: 1000000
+  largeAmountDiscountPrice:
+    type: number
+    description: 高額割引下限金額
+    example: 1000000
+  largeAmountDiscountCarriage:
+    type: number
+    description: 高額割引送料
+    example: 1000000
+  shortfallDisplayFlag:
+    type: string
+    description: 不足金額表示フラグ（必須）
+    example: 1000000
+  deliveryLeadTime:
+    type: integer
+    format: int32
+    description: リードタイム
+    example: 1000000
+  possibleSelectDays:
+    type: integer
+    format: int32
+    description: 選択可能日数
+    example: 1000000
+  receiverTimeZone1:
+    type: string
+    description: お届け時間帯1
+    example: 1000000
+  receiverTimeZone2:
+    type: string
+    description: お届け時間帯2
+    example: 1000000
+  receiverTimeZone3:
+    type: string
+    description: お届け時間帯3
+    example: 1000000
+  receiverTimeZone4:
+    type: string
+    description: お届け時間帯4
+    example: 1000000
+  receiverTimeZone5:
+    type: string
+    description: お届け時間帯5
+    example: 1000000
+  receiverTimeZone6:
+    type: string
+    description: お届け時間帯6
+    example: 1000000
+  receiverTimeZone7:
+    type: string
+    description: お届け時間帯7
+    example: 1000000
+  receiverTimeZone8:
+    type: string
+    description: お届け時間帯8
+    example: 1000000
+  receiverTimeZone9:
+    type: string
+    description: お届け時間帯9
+    example: 1000000
+  receiverTimeZone10:
+    type: string
+    description: お届け時間帯10
+    example: 1000000
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 1000000
+  prefectureType:
+    type: string
+    description: 都道府県種別
+    example: 1000000
+  maxPrice:
+    type: number
+    description: 上限金額
+    example: 1000000
+  carriage:
+    type: number
+    description: 送料
+    example: 1000000

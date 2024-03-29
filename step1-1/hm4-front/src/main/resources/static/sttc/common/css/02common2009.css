@@ -1,0 +1,51 @@
+@charset "Shift_JIS";
+
+
+/* Alignment style
+---------------------------------------------------- */
+.left {
+	text-align: left !important;
+}
+.center {
+	text-align: center !important;
+}
+.right {
+	text-align: right !important;
+}
+
+
+/* Headline Style
+---------------------------------------------------- */
+h1 {
+	height: 84px;
+	width: 402px;
+	position: absolute;
+	top: 11px;
+	left: 14px;
+}
+h2 {
+	float: left;
+	padding: 0 0 0 11px;
+}
+
+
+/* Text style
+---------------------------------------------------- */
+p.margin-none {
+	margin: 0 !important;
+}
+.red {
+	color: #FF0000;
+}
+.green {
+	color: #004400;
+}
+.f14 {
+	font-size: 14px;
+}
+.f16 {
+	font-size: 16px;
+}
+.f18 {
+	font-size: 18px;
+}

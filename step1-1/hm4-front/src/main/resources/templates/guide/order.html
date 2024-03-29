@@ -1,0 +1,298 @@
+<!-- PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+</head>
+
+<body id="d_guide">
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="order"><span><!--MAIN--></span>
+                    <div class="gSection mt0">
+                        <h3 class="mTitle">ご注文について</h3>
+                        <div id="d_gsn">
+                            <ul>
+                                <li><a th:href="@{/guide/order.html#o1}" id="go-Order-1">お買い物方法</a></li>
+                                <li><a th:href="@{/guide/order.html#o2}" id="go-Order2">返品・交換について</a></li>
+                                <li><a th:href="@{/guide/order.html#o4}" id="go-Order3">医薬品・医療機器のご注文について</a></li>
+                                <li><a th:href="@{/guide/reserve.html}" id="go-Reserve-1">予約の注文方法について</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="o1" class="gSection">
+                        <h4 class="subGTitle">お買い物方法</h4>
+                        <div class="subGsection">
+                            <div class="tBox">
+                                <div>
+                                    <p>すでにお電話やFAXでP.D.R.をご利用いただいているお客様も、P.D.R.のご利用が初めてのお客様も、P.D.R.オンラインショップでご注文いただく場合には、ご登録が必要です。</p>
+                                </div>
+                                <div>
+                                    <img src="/images/guide/order/join.gif" alt="会員登録(無料)はこちら"/>
+                                </div>
+                            </div>
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.1　<span>商品を探す</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>商品の検索方法は3種類あります。目的にあった検索方法をお選びいただけます。<br/>「商品画像」または、「商品名」をクリックして詳細ページをご覧ください。
+                                            </p>
+                                            <p>
+                                                <a th:href="@{/guide/commodity.html#c1}" id="go-Commodity-1">商品検索方法はこちら</a>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_1.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.2　<span>カートに入れる</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>商品詳細ページにて、種類、色、サイズ、在庫などをご確認の上、購入される数量を入力して、「カートに入れる」ボタンをクリックしてください。</p>
+                                            <p>※ログインされていない、もしくは会員登録がお済みでない場合は、ログインページが表示されます。</p>
+                                            <p>
+                                                <strong>【会員の方】</strong><br/>
+                                                ログインページよりお客様番号またはメールアドレス・パスワードを入力しログインしてください。
+                                            </p>
+                                            <p>
+                                                <strong>【会員登録がまだの方】</strong><br/>
+                                                ご購入には会員登録が必要です。「新規会員登録」ボタンより会員登録へお進みください。
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_2.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.3　<span>ショッピングカート</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>
+                                                ショッピングカートの中身をご確認のうえ、「会員の住所に送る」ボタンをクリックしてお進みください。（STEP.5「配送方法を選択」へ）<br/>
+                                                会員登録の住所以外に送る場合は、「会員以外の住所を指定する」をクリックしてください。（STEP.4「お届け先入力」へ）
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_3.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.4　<span>お届け先入力</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>お届け先の、事業所名・業種・住所・連絡先等をご入力ください。間違いがないか確認し、「このお届け先に送る」をクリックしてください。</p>
+                                            <p>※新しいお届け先を入力された場合、自動的にマイページのお届け先リストに登録されます。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_4.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.5　<span>配送方法を選択</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>
+                                                ご希望の配送日時を選択してください。<br/>
+                                                また、「セールde予約」対象商品につきましては、ご希望のお届け時期と数量を入力してください。
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_5.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.6　<span>お支払い方法を選択</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>お支払い方法をコンビニ・郵便振込、代金引換、クレジットカード、口座自動引落の4種類より選択してください。</p>
+                                            <p>
+                                                詳しくは<a th:href="@{/guide/payment.html}" id="go-Payment">お支払いについて</a>をご覧ください。
+                                            </p>
+                                            <p>
+                                                確認してよろしければ、「ご注文内容の確認」ボタンをクリックしてください。
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_6.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.7　<span>ご注文内容の確認</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>ご注文商品、送料、お支払い金額、お届け先、お支払方法など全てご確認ください。</p>
+                                            <p>※変更がある場合は各項目の「変更」ボタンをクリックし、修正してください。</p>
+                                            <p>よろしければ、「注文を確定する」ボタンをクリックしてください。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_7.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.8　<span>ご注文完了</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>ご注文が完了しました。</p>
+                                            <p>注文番号が表示されますので、プリントするなどして保管していただくことをお勧めします。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/order/method_step_8.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gSection">
+                        <h4 class="subGTitle">便利に注文する方法</h4>
+                        <div class="subGsection">
+                            <h5 class="subGGTitle">クイックオーダー</h5>
+                            <p>
+                                ページ上部オレンジ帯部分にあります「クイックオーダー」は商品番号を直接入力して簡単に注文していただけます。<br/>
+                                FAXでのご注文に慣れている方に便利な機能です。<br/>
+                                「クイックオーダー」をクリックすると、クイックオーダー入力画面が表示されます。<br/>
+                                総合カタログ及びセールカタログの商品番号を入力し、ご注文ください。
+                            </p>
+                            <p><a th:href="@{/cart/catalog.html}" id="go-Order-quick-g">クイックオーダーはこちら</a></p>
+                            <h5 class="subGGTitle">よく買う商品</h5>
+                            <p>
+                                ログイン中、TOPページにご購入頻度の高い商品が「よく買う商品」として表示されます。<br/>
+                                マイページの注文履歴をご確認いただかなくてもスムーズにご購入いただけます。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="o2" class="gSection">
+                        <h4 class="subGTitle">返品・交換について</h4>
+                        <div class="subGsection">
+                            <p>
+                                品質不良や初めてご購入いただいた商品でサイズが合わない、使い勝手が思ったものと違うなどの場合、ご購入から３ヶ月以内であれば、返品・交換を承ります。(返送料弊社負担)<br/>
+                                その際、ぜひ理由をお聞かせください。今後の商品、サービス改善のための貴重なご意見として参考にさせていただきます。<br/>
+                                お客様のご注文間違い・ご都合による場合は、ご購入から３ヶ月以内の未開封商品のみ返品・交換を承ります。<br/>
+                                この場合、返送料はお客様にご負担いただきます。返品前にカスタマーサービスデスク（TEL：0120-108394）までご連絡ください。<br/>
+                                （インターネットでの返品・交換の受付は承っておりません。）
+
+                            </p>
+                            <p>
+                                <strong class="gpText">●返品をお受けできない商品</strong><br/>
+                                ・在庫処分品<br/>
+                                ・アウトレット品<br/>
+                                ・名入れ印刷済商品<br/>
+                                ・使用期限を過ぎた商品<br/>
+                                ・経年劣化とみられる商品<br/>
+                                ・食品<br/>
+                                ・お試しの範囲を超えて消費された商品<br/>
+                                ・時価商品<br/>
+                                ・医薬品<br/>
+                                ・返品不可マークのついている商品<br/>
+                                ・その他　返品不可として販売した商品
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="o3" class="gSection">
+                        <h4 class="subGTitle">キャンセルについて </h4>
+                        <div class="subGsection">
+                            <p>
+                                弊社が発送準備を行うまでは、ご注文デスク（TEL：0120−108648）にてキャンセルを承ることが可能です。（ただし名入れ商品・直送商品は除く）
+                                また、ご注文受付完了後すぐに発送準備に入るため、その注文当日の連絡でも、一旦受け取って頂いてからの返品をお願いしています。 <br/>
+                                ※上記「返品・交換について」の「返品をお受けできない商品」に記載の通り、返品不可商品がございますのでご注意ください。 <br/>
+                                ※「セールde予約」のキャンセルは、お届けの1週間前まで可能です。 </p>
+
+                        </div>
+                    </div>
+
+                    <div id="o4" class="gSection">
+                        <h4 class="subGTitle">医薬品のご注文について</h4>
+                        <div class="subGsection">
+                            <p>書類マークのついた医薬品、注射針等は、請求先、お届け先ともに病院、診療所、歯科技工所に限定させていただきます。<br/>
+                                販売先が病院、診療所、歯科技工所であることを確認するため、初めて医薬品等をご注文いただく際に、<br/>
+                                下記のうちいずれかのコピーをＦＡＸまたは郵送にてご送付ください。
+                                お送りいただけない場合はご注文デスク（0120-108648）にお電話ください。<br/>
+                                ※劇薬、要処方せん医薬品、注射針の販売は歯科医院様に限らさせていただきます。 </p>
+                            <p>
+                                （A）診療所開設届<br/>
+                                （B）診療所開設届出済証<br/>
+                                （C）保険医療機関指定通知書<br/>
+                                （D）歯科技工所開設届</p>
+                            <p>
+                                一度ご提出いただきましたら、以後のご注文時に書類の再提出は不要です。<br/>
+                                ご提出後、住所や名称の変更がございましたら、お手数ですが、変更届のコピーをご提出ください。<br/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="o5" class="gSection">
+                        <h4 class="subGTitle">添付文書について</h4>
+                        <div class="subGsection">
+                            <p>医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律（薬機法）の改正により、2021年8月から、これまで医療機器などの製品と一緒に同梱されていた紙の添付文書は原則(※)として廃止され、電子的な方法で閲覧することが基本となります。<br/>
+                                (※)一般用医薬品等の消費者が直接購入する製品を除く<br/>
+                                電子化された添付文書の閲覧はPMDAのホームぺージで検索いただくか、アプリ「添文ナビ」をご利用ください。</p>
+
+                            <p>
+                                <a th:href="@{https://www.info.pmda.go.jp/ysearch/html/menu_tenpu_base.html}" target="_blnk">医療機器　添付文書検索</a><br/>
+                                <a th:href="@{https://www.dsri.jp/standard/healthcare/tenbunnavi/app/index.html}" target="_blank">アプリ「添文ナビ」</a>
+                            </p>
+
+                            <p>紙の添付文書が必要な場合はピーディーアール　カスタマーサービスデスク（0120-108394）までご連絡ください。<br/>
+                                なお、弊社では、初めて購入された医療機器に関しても電子的な方法による提供とさせていただきますのでご了承ください。</p>
+                        </div>
+                    </div>
+
+
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

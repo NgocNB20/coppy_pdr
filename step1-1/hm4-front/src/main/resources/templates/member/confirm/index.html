@@ -1,0 +1,359 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+</head>
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" id="goTopPage" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">会員情報・メール配信設定</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+                <div class="l-main">
+                    <h2 class="c-title-page"><strong>会員情報・メール配信設定</strong></h2>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <form id="indexForm" th:object="${memberConfirmModel}" method="post" th:action="@{/member/confirm/index.html}">
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">ご登録内容を変更される方は下記「変更する」ボタンを押して変更画面にお進みください。<br>
+                                <em>※項目によっては反映に数日かかる場合がございます。お急ぎの場合はご注文デスク（TEL：0120-108648　受付時間：09:00-17:00 日祝休）までご連絡ください。<br>
+                                    ※「お客様番号」「業種」は変更できません。</em></p>
+                        </div>
+                        <h4 class="c-title-form-m c-title-form-m--first"><p>会員情報</p></h4>
+                        <div class="l-form">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt>
+                                        <p><span>お客様番号<span class="l-form__list-title-memo">※変更できません</span></span></p>
+                                    </dt>
+                                    <dd><p id="customerNo" th:text="${memberConfirmModel.customerNo}"></p></dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>事業所名</p></dt>
+                                    <dd><p id="memberInfoLastName" th:text="${memberConfirmModel.memberInfoLastName}"></p></dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>事業所名フリガナ</p></dt>
+                                    <dd>
+                                        <!-- // 2023-renew AddNo2 from here -->
+                                        <p id="memberInfoLastKana" th:text="${memberConfirmModel.memberInfoLastKana}"></p>
+                                        <!-- // 2023-renew AddNo2 to here -->
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>代表者名</p></dt>
+                                    <dd>
+                                        <p id="representativeName" th:text="${memberConfirmModel.representativeName}"></p>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>業種<br><span class="l-form__list-title-memo">※変更できません</span></span></p></dt>
+                                    <dd>
+                                        <!-- // 2023-renew AddNo2 from here -->
+                                        <span id="businessType" th:text="${memberConfirmModel.businessType != null} ? ${memberConfirmModel.businessType.label} : ''"/>
+                                        <!-- // 2023-renew AddNo2 to here -->
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>電話番号</p></dt>
+                                    <dd><p id="memberInfoTel" th:text="${memberConfirmModel.memberInfoTel}"></p></dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>FAX番号</p></dt>
+                                    <dd><p id="memberInfoFax" th:text="${memberConfirmModel.memberInfoFax}"></p></dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>郵便番号</p></dt>
+                                    <dd>
+                                        <!-- // 2023-renew AddNo2 from here -->
+                                        <p id="memberInfoZipCode" th:text="'〒' + ${memberConfirmModel.memberInfoZipCode1} + '-' + ${memberConfirmModel.memberInfoZipCode2}"></p>
+                                        <!-- // 2023-renew AddNo2 to here -->
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>住所</p></dt>
+                                    <dd>
+                                        <p>
+                                            <!-- // 2023-renew AddNo2 from here -->
+                                            <span id="memberInfoAddress1" th:remove="tag" th:text="${memberConfirmModel.memberInfoAddress1}"/>&nbsp;
+                                            <span id="memberInfoAddress2" th:remove="tag" th:text="${memberConfirmModel.memberInfoAddress2}"/>&nbsp;
+                                            <span id="memberInfoAddress3" th:remove="tag" th:text="${memberConfirmModel.memberInfoAddress3}"/>&nbsp;
+                                            <span id="memberInfoAddress4" th:remove="tag" th:text="${memberConfirmModel.memberInfoAddress4}"/>&nbsp;
+                                            <!-- // 2023-renew AddNo2 to here -->
+                                        </p>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>メールアドレス</p></dt>
+                                    <dd>
+                                        <p>
+                                            <span id="memberInfoMail" th:text="${memberConfirmModel.memberInfoMail}"/>　<span class="l-form__list-memo">※メールアドレス変更の方は<a th:href="@{/member/mail/index.html}"class="c-inlinelink">こちら</a></span></p>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>休診曜日</p></dt>
+                                    <dd>
+                                        <!-- // 2023-renew AddNo2 from here -->
+                                        <p id="nonConsultationDay" th:text="${memberConfirmModel.nonConsultationDayDisp}"></p>
+                                        <!-- // 2023-renew AddNo2 to here -->
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>診療科目</span></p></dt>
+                                    <dd>
+                                        <table class="l-form__table p-regist__subject">
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge1()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment1Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment1Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment1) == 'ー'}">
+                                                            <span id="medicalTreatment1" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment1) == '〇'}">
+                                                            <span id="medicalTreatment1" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge2()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment2Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment2Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment2) == 'ー'}">
+                                                            <span id="medicalTreatment2" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment2) == '〇'}">
+                                                            <span id="medicalTreatment2" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge3()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment3Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment3Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment3) == 'ー'}">
+                                                            <span id="medicalTreatment3" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment3) == '〇'}">
+                                                            <span id="medicalTreatment3" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge4()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment4Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment4Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment4) == 'ー'}">
+                                                            <span id="medicalTreatment4" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment4) == '〇'}">
+                                                            <span id="medicalTreatment4" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge5()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment5Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment5Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment5) == 'ー'}">
+                                                            <span id="medicalTreatment5" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment5) == '〇'}">
+                                                            <span id="medicalTreatment5" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge6()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment6Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment6Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment6) == 'ー'}">
+                                                            <span id="medicalTreatment6" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment6) == '〇'}">
+                                                            <span id="medicalTreatment6" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge7()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment7Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment7Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment7) == 'ー'}">
+                                                            <span id="medicalTreatment7" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment7) == '〇'}">
+                                                            <span id="medicalTreatment7" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge8()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment8Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment8Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment8) == 'ー'}">
+                                                            <span id="medicalTreatment8" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment8) == '〇'}">
+                                                            <span id="medicalTreatment8" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge9()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment9Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment9Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment9) == 'ー'}">
+                                                            <span id="medicalTreatment9" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment9) == '〇'}">
+                                                            <span id="medicalTreatment9" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:if="${memberConfirmModel.isMedicalTreatmentJudge10()}">
+                                                <tr>
+                                                    <th><span id="medicalTreatment10Title" th:remove="tag" th:text="${memberConfirmModel.medicalTreatment10Title}"/></th>
+                                                    <td>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment10) == 'ー'}">
+                                                            <span id="medicalTreatment10" th:remove="tag">対象外</span>
+                                                        </th:block>
+                                                        <th:block th:if="*{#enumtype.getLabel('HTypeMedicalTreatmentFlag', medicalTreatment10) == '〇'}">
+                                                            <span id="medicalTreatment10" th:remove="tag">対象</span>
+                                                        </th:block>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                        </table>
+                                    </dd>
+                                </dl>
+                                <!-- // 2023-renew No22 from here -->
+                                <dl class="l-form__list">
+                                    <dt><p><span>確認書類</span></p></dt>
+                                    <dd>
+                                        <div class="p-regist__drop">
+                                            <div class="p-regist__drop-uploaded">
+                                                <th:block th:each="item, stat: *{uploadFiles}"
+                                                          th:unless="*{#lists.isEmpty(uploadFiles)}">
+                                                    <div th:if="${item.extensionType.value != '2'}" class="p-regist__drop-uploaded-image">
+                                                        <img th:id="'upload-image-' + '-' + ${stat.index}"
+                                                             th:src="${item.filePath}" alt=""></div>
+                                                    <div th:if="${item.extensionType.value == '2'}" class="p-regist__drop-uploaded-image">
+                                                        <a target="_blank" th:href="@{(${item.filePath})}">
+                                                            <div th:text="${item.originName}"></div>
+                                                        </a>
+                                                    </div>
+                                                    <input type="hidden" th:id="'imagePath' + '-' + ${stat.index}"
+                                                           th:name="'uploadFiles[' + ${stat.index} + '].imagePath'"
+                                                           th:value="${item.filePath}"/>
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <!-- // 2023-renew No22 to here -->
+                                <dl class="l-form__list">
+                                    <dt><p><span>反社会的勢力ではないことの保証</span></p></dt>
+                                    <dd>
+                                        <div class="l-form__list-text l-form__list-text--bottom">暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。</div>
+                                            <!-- // 2023-renew AddNo2 to here -->
+                                            <span id="noAntiSocialFlag" th:text="${memberConfirmModel.noAntiSocialFlag != null} ? ${memberConfirmModel.noAntiSocialFlag.label} : ''"/>
+                                            <!-- // 2023-renew AddNo2 to here -->
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <h4 class="c-title-form-m c-title-form-m--line"><p>メール配信設定</p></h4>
+                        <div class="l-form">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt><p>メールによるおトク情報</p></dt>
+                                    <dd>
+                                        <div th:if="${memberConfirmModel.sendMail}"><p>希望する</p></div>
+                                        <div th:if="${!memberConfirmModel.sendMail}"><p>希望しない</p></div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>金属商品価格お知らせメール</p></dt>
+                                    <dd>
+                                        <div th:if="${memberConfirmModel.metalPermitFlag}"><p>希望する</p></div>
+                                        <div th:if="${!memberConfirmModel.metalPermitFlag}"><p>希望しない</p></div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>ご注文受付完了メール</p></dt>
+                                    <dd>
+                                        <!-- 2023-renew No79 from here -->
+                                        <th:block th:if="${memberConfirmModel.orderCompletePermitFlag}"><p>希望する</p></th:block>
+                                        <th:block th:if="${!memberConfirmModel.orderCompletePermitFlag}"><p>希望しない</p></th:block>
+                                        <!-- 2023-renew No79 to here -->
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>商品発送完了メール</p></dt>
+                                    <dd>
+                                        <!-- 2023-renew No79 from here -->
+                                        <th:block th:if="${memberConfirmModel.deliveryCompletePermitFlag}"><p>希望する</p></th:block>
+                                        <th:block th:if="${!memberConfirmModel.deliveryCompletePermitFlag}"><p>希望しない</p></th:block>
+                                        <!-- 2023-renew No79 to here -->
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="c-button-wrap">
+                            <button type="button" th:onclick="|window.location.href='@{/member/confirm/update.html}'|" class="c-button c-button--primary c-button--width-l">変更する</button>
+                        </div>
+                        <div class="c-button-wrap c-button-wrap--lower">
+                            <p class="c-button-wrap__text-m">お困りの場合は「<a th:href="@{/inquiry/index.html}" class="c-inlinelink">お問い合わせ・よくある質問</a>」よりお問い合わせください。</p>
+                        </div>
+                        <div class="c-button-wrap c-button-wrap--line">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

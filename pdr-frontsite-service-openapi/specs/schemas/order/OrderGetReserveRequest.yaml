@@ -1,0 +1,16 @@
+type: object
+description: 取りおきリクエスト
+properties:
+  orderDeliveryDto:
+    description: 受注配送DTO
+    $ref: '#/components/schemas/OrderDeliveryDtoRequest'
+  customerNo:
+    type: integer
+    format: int32
+    description: 注文者顧客番号
+    example: 1
+
+components:
+  schemas:
+    OrderDeliveryDtoRequest:
+      $ref: ./OrderDeliveryDtoRequest.yaml

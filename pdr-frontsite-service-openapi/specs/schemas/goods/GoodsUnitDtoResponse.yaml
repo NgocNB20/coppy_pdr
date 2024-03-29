@@ -1,0 +1,41 @@
+type: object
+description: 商品規格値DTOクラス
+properties:
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: GC1000
+  saleStatus:
+    type: string
+    description: 販売状態
+    example: 1
+  saleStartTime:
+    type: string
+    format: date-time
+    description: 販売開始日時
+    example: 2022/01/01
+  saleEndTime:
+    type: string
+    format: date-time
+    description: 販売終了日時
+    example: 2022/01/02
+  stockManagementFlag:
+    type: string
+    description: 販売開始日時
+    example: 在庫管理
+  unitValue1:
+    type: string
+    description: 規格値1
+    example: value1
+  unitValue2:
+    type: string
+    description: 規格値2
+    example: value2
+  salesPossibleStock:
+    type: number
+    description: 販売可能在庫数
+    example: 1000
+  remainderFewStock:
+    type: number
+    description: 残少表示在庫数
+    example: 2000

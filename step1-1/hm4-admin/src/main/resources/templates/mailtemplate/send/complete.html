@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall" lang="ja">
+<head>
+    <title>メール送信完了｜会員管理</title>
+    <meta th:replace="~{include/head_new}"/>
+</head>
+<!-- 2023-renew general-mail from here -->
+<body id="member">
+<div id="mailTemplate">
+<!-- 2023-renew general-to from here -->
+    <div id="page" class="l-mainwrap">
+        <!-- side -->
+        <div th:replace="~{include/sidemenu_new}"></div>
+        <main class="l-page">
+            <!-- header -->
+            <div th:replace="~{include/header_new}"></div>
+            <div class="l-container">
+                <!-- contents -->
+                <div class="l-main">
+                    <form th:action="@{/mailtemplate/send/complete}"
+                          th:object="${mailtemplateSendModel}" method="post">
+                        <!--エラーメッセージ-->
+                        <div th:if="${allMessages}"
+                             th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+
+                        <div class="l-pagetitle_wrap">
+                            <h1 th:text="${mailtemplateSendModel.mailSendDto.displayName}" class="c-pagetitle_h1"></h1>
+                            <h1 class="c-pagetitle_h1">メール送信完了</h1>
+                        </div>
+
+                        <div class="l-section">
+                            <div class="l-article">
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <div class="c-complete">
+                                            <th:block th:if="*{mailSendDto.asyncRequest}">
+                                                <th:block th:if="*{!anyFailure}">
+                                                    <div class="async-success">メール送信処理の受付が完了しました。</div>
+                                                </th:block>
+                                                <th:block th:if="*{anyFailure}">
+                                                    <div class="async-err">エラーが発生したため、メール送信処理は行われませんでした。</div>
+                                                </th:block>
+                                            </th:block>
+                                            <th:block th:if="*{!mailSendDto.asyncRequest && anySuccesser}">
+                                                <div class="message">メール送信処理の受付が完了しました。</div>
+                                                <div class="txt">確認してください。</div>
+                                                <p>宛先にメールが届かなかった場合、送信先の元のメールアドレスにメールが送信される場合があります。</p>
+                                            </th:block>
+                                            <th:block th:if="*{!mailSendDto.asyncRequest && anyFailure}">
+                                                <div class="sync-err">メール送信処理は完了しましたが、エラーが発生したため、次の宛先にはメール送信できませんでした。
+                                                </div>
+                                                <div class="txt">送信先アドレス</div>
+                                                <p>
+                                                    <th:block th:each="item, stat: *{failureList}">
+                                                        <th:block th:if="${stat.index == 0}">
+                                                            <span th:text="${item}" th:remove="tag"></span>
+                                                        </th:block>
+                                                        <th:block th:if="${stat.index != 0}">
+                                                            <span th:text="',' + ${item}" th:remove="tag"></span>
+                                                        </th:block>
+                                                    </th:block>
+                                                </p>
+                                            </th:block>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 追尾ボタン -->
+                        <div class="l-pagebtn-nav">
+                            <div class="l-pagebtn-nav_inner">
+                                <div class="c-back">
+                                    <button type="submit" name="doPreviousPage"
+                                            class="c-btn btn_back icon_left"><i
+                                            class="material-icons navigate_before"></i>戻る
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- footer -->
+            <div th:replace="~{include/footer_new}"></div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

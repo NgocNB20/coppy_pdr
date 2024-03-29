@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="mypage">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <!-- main -->
+    <main class="l-page l-head__pattern1">
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><a property="item"
+                                                                                                     typeof="WebPage"
+                                                                                                     title="TOP"
+                                                                                                     href="/"><span
+                            property="name">TOP</span></a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use th:attr="'xlink:href'=@{/hm4/assets/images/icon/arrow-right.svg#arrow-right}"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><a property="item"
+                                                                                                     typeof="WebPage"
+                                                                                                     title="マイページ"
+                                                                                                     href="/member/"><span
+                            property="name">マイページ</span></a>
+                        <meta property="position" content="2">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use th:attr="'xlink:href'=@{/hm4/assets/images/icon/arrow-right.svg#arrow-right}"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><span property="name">注文履歴</span>
+                        <meta property="position" content="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-head__pattern1__content">
+            <h2 class="c-title--page mypage__title"><strong>注文履歴</strong></h2>
+            <div class="l-container l-head__pattern1__content-main">
+                <div th:replace="~{includehm4/sidemenumember_new :: sidemenumember('history')}"></div>
+                <div class="l-main" th:object="${memberHistoryModel}">
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <div class="c-history-info c-history-info-2col">
+                        <div class="c-history-info-item">
+                            <h3 class="c-history-info-item__title c-title--section">注文情報</h3>
+                            <div class="c-history-info-list">
+                                <dl>
+                                    <dt class="c-history-info-list__title c-text--s">ご注文日</dt>
+                                    <dd class="c-history-info-list__detail c-text--s c-font-bold"
+                                        th:text="*{#date.convert(orderTime, 'yyyy/MM/dd HH:mm')}"></dd>
+                                </dl>
+                                <dl>
+                                    <dt class="c-history-info-list__title c-text--s">ご注文状況</dt>
+                                    <dd class="c-history-info-list__detail c-text--m">
+                                        <!--/* TODO-HM4-DESIGN-302:デザイン確認待ち　*/-->
+                                        <th:block th:switch="*{statusValue}">
+                                            <div th:case="0" class="c-label-status c-label-status--blue"><p
+                                                    class="c-text--m c-font-bold" th:text="*{status}"></p></div>
+                                            <div th:case="1" class="c-label-status c-label-status--orange"><p
+                                                    class="c-text--m c-font-bold" th:text="*{status}"></p></div>
+                                            <div th:case="2" class="c-label-status c-label-status--green"><p
+                                                    class="c-text--m c-font-bold" th:text="*{status}"></p></div>
+                                            <div th:case="3" class="c-label-status c-label-status--red"><p
+                                                    class="c-text--m c-font-bold" th:text="*{status}"></p></div>
+                                        </th:block>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt class="c-history-info-list__title c-text--s">お支払い方法</dt>
+                                    <dd class="c-history-info-list__detail c-text--s c-font-bold">
+                                        [[*{settlementMethodName}]]
+                                        <th:block id="isCredit" th:if="*{isCredit()}">[[*{paymentTypeDisplay}]]
+                                            <th:block id="isInstallment" th:if="*{isInstallment()}">[[' ' + *{paytimes}
+                                                + '回']]
+                                            </th:block>
+                                        </th:block>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt class="c-history-info-list__title c-text--s">ご注文番号</dt>
+                                    <dd class="c-history-info-list__detail c-text--s c-font-bold"
+                                        th:text="*{orderCode}"></dd>
+                                </dl>
+                                <dl>
+                                    <dt class="c-history-info-list__title c-text--s">お支払い合計（税込）</dt>
+                                    <dd class="c-history-info-list__detail c-text--s c-font-bold"
+                                        th:text="'¥' + *{#number.convert(orderPrice)}"></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="c-history-info-item">
+                            <h3 class="c-history-info-item__title c-title--section">ご請求額の内訳</h3>
+                            <div class="c-history-info-list price-list c-text--m">
+                                <dl class="price-list__item">
+                                    <dt class="c-text--s">商品合計（税抜）</dt>
+                                    <dd class="c-font-bold" th:text="'¥' + *{#number.convert(goodsPriceTotal)}"></dd>
+                                </dl>
+                                <dl class="price-list__item">
+                                    <dt class="c-text--s">送料（税抜）</dt>
+                                    <dd class="c-font-bold" th:text="'¥' + *{#number.convert(carriage)}"></dd>
+                                </dl>
+                                <dl class="price-list__item">
+                                    <dt class="c-text--s">手数料（税抜）</dt>
+                                    <dd class="c-font-bold"
+                                        th:text="'¥' + *{#number.convert(settlementCommission)}"></dd>
+                                </dl>
+                                <th:block th:each="item : *{orderAdditionalChargeItems}">
+                                    <dl>
+                                        <dt class="c-text--s" th:text="${item.additionalDetailsName} + '（税抜）'"></dt>
+                                        <dd class="c-font-bold"
+                                            th:text="'¥' + ${#number.convert(item.additionalDetailsPrice)}"></dd>
+                                    </dl>
+                                </th:block>
+                                <dl class="price-list__item price-list__wrap">
+                                    <dt class="c-text--s">消費税（消費税内訳）</dt>
+                                    <div class="price-list__inner-wrap">
+                                        <dd class="c-font-bold" th:text="'¥' + *{#number.convert(taxPrice)}"></dd>
+                                        <dd class="c-text--xs c-font-bold--nomal"><span
+                                                class="price-list__inner-item price-list__inner-item--left">10%対象金額</span><span
+                                                class="price-list__inner-item price-list__inner-item--right"
+                                                th:text="'¥' + *{#number.convert(standardTaxTargetPrice)}"></span></dd>
+                                        <dd class="c-text--xs c-font-bold--nomal"><span
+                                                class="price-list__inner-item price-list__inner-item--left">（消費税</span><span
+                                                class="price-list__inner-item price-list__inner-item--right"
+                                                th:text="'¥' + *{#number.convert(standardTaxPrice)} + '）'"></span></dd>
+                                        <dd class="c-text--xs c-font-bold--nomal"><span
+                                                class="price-list__inner-item price-list__inner-item--left">8%対象金額</span><span
+                                                class="price-list__inner-item price-list__inner-item--right"
+                                                th:text="'¥' + *{#number.convert(reducedTaxTargetPrice)}"></span></dd>
+                                        <dd class="c-text--xs c-font-bold--nomal"><span
+                                                class="price-list__inner-item price-list__inner-item--left">（消費税</span><span
+                                                class="price-list__inner-item price-list__inner-item--right"
+                                                th:text="'¥' + *{#number.convert(reducedTaxPrice)} + '）'"></span></dd>
+                                    </div>
+                                </dl>
+                                <th:block
+                                　id="isUseCoupon" th:if="*{isUseCoupon()}">
+                                <dl class="price-list__item">
+                                    <dt class="c-text--s" th:text="*{couponName}"></dt>
+                                    <dd class="c-font-bold"
+                                        th:text="'¥' + *{#number.convert(couponDiscountPrice)}"></dd>
+                                </dl>
+                                </th:block>
+                                <dl class="price-list__item">
+                                    <dt class="c-text--s">お支払い合計（税込）</dt>
+                                    <dd class="c-text--l"><span class="price-list__total c-font-bold"
+                                                                th:text="'¥' + *{#number.convert(orderPrice)}"></span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--/* コンビニ決済 start */-->
+                    <th:block id="isConveni" th:if="*{isConveni()}">
+                        <section class="c-margin--xl">
+                            <div class="c-heading-area--cart-list">
+                                <h3 class="c-title--section c-font-bold">決済方法詳細</h3>
+                            </div>
+                            <div class="c-confirm-list c-margin--s">
+                                <dl>
+                                    <dt class="c-confirm-list__title">コンビニ名</dt>
+                                    <dd class="c-confirm-list__detail" th:text="*{convenienceName}"></dd>
+                                </dl>
+                                <th:block id="isConveni1" th:if="*{isConveni1()}">
+                                    <dl>
+                                        <dt class="c-confirm-list__title">お客様番号</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{receiptNo}"></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt class="c-confirm-list__title">確認番号</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{confNo}"></dd>
+                                    </dl>
+                                </th:block>
+                                <th:block id="isConveni2" th:if="*{isConveni2()}">
+                                    <dl>
+                                        <dt class="c-confirm-list__title">オンライン決済番号</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{receiptNoWithHyphen}"></dd>
+                                    </dl>
+                                </th:block>
+                                <th:block id="isConveni3" th:if="*{isConveni3()}">
+                                    <dl>
+                                        <dt class="c-confirm-list__title">払込票番号</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{receiptNo}"></dd>
+                                    </dl>
+                                </th:block>
+                                <th:block id="isConveni4" th:if="*{isConveni4()}">
+                                    <dl>
+                                        <dt class="c-confirm-list__title">企業コード</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{confNo}"></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt class="c-confirm-list__title">注文番号</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{receiptNo}"></dd>
+                                    </dl>
+                                </th:block>
+                                <th:block id="isConveni5" th:if="*{isConveni5()}">
+                                    <dl>
+                                        <dt class="c-confirm-list__title">受付番号</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{receiptNo}"></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt class="c-confirm-list__title">確認番号</dt>
+                                        <dd class="c-confirm-list__detail" th:text="*{confNo}"></dd>
+                                    </dl>
+                                </th:block>
+                                <dl>
+                                    <dt class="c-confirm-list__title">お支払い期限</dt>
+                                    <dd class="c-confirm-list__detail"
+                                        th:text="*{#date.convert(paymentTimeLimitDate, 'yyyy年MM月dd日')}"></dd>
+                                </dl>
+                            </div>
+                        </section>
+                    </th:block>
+                    <!--/* コンビニ決済 end */-->
+                    <!--/* ペイジー決済 start */-->
+                    <th:block id="isPayeasy" th:if="*{isPayeasy()}">
+                        <section class="c-margin--xl">
+                            <div class="c-heading-area--cart-list">
+                                <h3 class="c-title--section c-font-bold">決済方法詳細</h3>
+                            </div>
+                            <div class="c-text--caution c-margin--xxs">
+                                <p class="u-mt0">インターネットバンキングでペイジー決済サービスをご利用できます。<br/>ご利用の金融機関にインターネットバンキングのIDをお持ちの方は、「金融機関選択」ボタンをクリックして、金融機関選択画面を表示してください。
+                                </p>
+                            </div>
+                            <div class="c-confirm-list c-margin--s">
+                                <dl>
+                                    <dt class="c-confirm-list__title">収納機関番号</dt>
+                                    <dd class="c-confirm-list__detail" th:text="*{bkCode}"></dd>
+                                </dl>
+                                <dl>
+                                    <dt class="c-confirm-list__title">お客様番号</dt>
+                                    <dd class="c-confirm-list__detail" th:text="*{custId}"></dd>
+                                </dl>
+                                <dl>
+                                    <dt class="c-confirm-list__title">確認番号</dt>
+                                    <dd class="c-confirm-list__detail" th:text="*{confNo}"></dd>
+                                </dl>
+                                <dl>
+                                    <dt class="c-confirm-list__title">お支払い期限</dt>
+                                    <dd class="c-confirm-list__detail"
+                                        th:text="*{#date.convert(paymentTimeLimitDate, 'yyyy年MM月dd日')}"></dd>
+                                </dl>
+                            </div>
+                            <th:block id="isViewJlpbnkSelectButton" th:if="*{isViewJlpbnkSelectButton()}">
+                                <div class="c-before-info c-margin--s">
+                                    <h3 class="c-title--line">お支払いの前にお読みください</h3>
+                                    <ul class="list_note c-text--xs c-font-bold--nomal">
+                                        <li class="item">・金融機関にあらかじめ口座をお持ちの場合のみご利用いただけます。</li>
+                                    </ul>
+                                    <h3 class="step-title c-title--jpen"><strong>お支払い方法</strong></h3>
+                                    <div class="step c-text--s">
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 01</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">
+                                                ご利用の金融機関の案内に従って、ペイジーでのお支払いにお進みください。</p>
+                                        </div>
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 02</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">収納機関番号、お客様番号、確認番号を入力してください。</p>
+                                        </div>
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 03</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">お支払い内容を確認のうえ、料金をお支払いください。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="c-before-info c-margin--xs">
+                                    <h3 class="c-title--line">金融機関ATMでのお支払いの前にお読みください</h3>
+                                    <ul class="list c-text--s c-font-bold--nomal">
+                                        <li class="item">・お支払いの際、収納機関番号、お客様番号、確認番号が必要です。 メモを取るか、このページを印刷してお持ちください。</li>
+                                        <li class="item">・ご利用明細票が領収書となりますので、お支払い後必ずお受け取りください。</li>
+                                    </ul>
+                                    <ul class="list_note c-text--xs c-font-bold--nomal">
+                                        <li class="item">※一部時間外手数料が発生する金融機関がございます。詳しくはお取引の金融機関にお問合せください。</li>
+                                        <li class="item">※法令改正のため、2007 年1 月4 日より、ATM から10 万円を超える現金の振込はできなくなりました。</li>
+                                    </ul>
+                                    <h3 class="step-title c-title--jpen"><strong>お支払い方法</strong></h3>
+                                    <div class="step c-text--s">
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 01</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">金融機関のATM で、「税金・料金払込み」を選択してください。</p>
+                                        </div>
+                                        <div class="step__inner step__02">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 02</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">収納機関番号 を入力し、「確認」を選択してください。</p>
+                                        </div>
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 03</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">お客様番号 を入力し、「確認」を選択してください。</p>
+                                        </div>
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 04</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">確認番号 を入力し、「確認」を選択してください。</p>
+                                        </div>
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 05</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">表示される内容を確認のうえ、「確認」を選択してください。</p>
+                                        </div>
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 06</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">「現金」または「キャッシュカード」を選択し、お支払いください。</p>
+                                        </div>
+                                        <div class="step__inner">
+                                            <p class="step__title c-title--small-blue c-font-bold"><span>STEP 07</span>
+                                            </p>
+                                            <p class="step__text c-font-bold--nomal">ご利用明細票を必ずお受け取りください。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <div class="c-btn-wrap c-margin--xl">
+                                <a class="c-btn--blue c-btn--blue-w" th:href="@{*{paymentUrl}}"><p>金融機関の選択</p></a>
+                            </div>
+                        </section>
+                    </th:block>
+                    <!--/* ペイジー決済 end */-->
+                    <section class="c-margin--xl">
+                        <div class="c-heading-area--cart-list">
+                            <h3 class="c-title--section c-font-bold">購入商品情報</h3>
+                        </div>
+                        <div class="c-product-info__pc c-product-info__pc--order c-margin--xxs">
+                            <table>
+                                <tbody>
+                                <tr class="c-text--m">
+                                    <th class="c-product-info__pc--order__info c-product-info__pc--order__info--name">
+                                        商品名
+                                    </th>
+                                    <th class="c-product-info__pc--order__info c-product-info__pc--order__info--price-2col">
+                                        価格
+                                    </th>
+                                    <th class="c-product-info__pc--order__info c-product-info__pc--order__info--number-2col">
+                                        数量
+                                    </th>
+                                    <th class="c-product-info__pc--order__info c-product-info__pc--orde__infor--subtotal-2col">
+                                        小計
+                                    </th>
+                                </tr>
+                                <tr class="c-font-bold--nomal" th:each="item : *{orderDeliveryItem.goodsListItems}">
+                                    <td class="c-product-info__pc--order__list">
+                                        <div class="c-product-info__pc--order__desc">
+                                            <div>
+                                                <a th:href="@{/goods/detail(gcd=${item.gcd})}">
+                                                    <img th:src="@{${#image.convert(item.goodsImageItems, 0, 'p1')}}"
+                                                         th:attr="srcset=${#image.convert(item.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                         height="219" width="219" decoding="async" loading="lazy">
+                                                </a>
+                                            </div>
+                                            <ul class="c-text--m">
+                                                <li class="c-product-info__pc--order__item c-font-bold"
+                                                    th:text="${item.goodsGroupName}"></li>
+                                                <th:block id="isUnit1" th:if="${item.isUnit1()}">
+                                                    <li class="c-product-info__pc--order__item c-text--xs"
+                                                        th:text="${item.unitTitle1} + '：' + ${item.unitValue1}"></li>
+                                                </th:block>
+                                                <th:block id="isUnit2" th:if="${item.isUnit2()}">
+                                                    <li class="c-product-info__pc--order__item c-text--xs"
+                                                        th:text="${item.unitTitle2} + '：' + ${item.unitValue2}"></li>
+                                                </th:block>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td class="c-product-info__pc--order__list c-product-info__pc--order__list--right c-text--m">
+                                        <span class="c-font-bold"
+                                              th:text="'¥' + ${#number.convert(item.goodsPrice)}"></span><br>
+                                        <span class="c-font-bold"
+                                              th:text="'(¥' + ${#number.convert(item.goodsPriceInTax) + ' 税込)'}"></span>
+                                    </td>
+                                    <td class="c-product-info__pc--order__list c-product-info__pc--order__list--center c-text--m c-font-bold"
+                                        th:text="${#number.convert(item.goodsCount)}"></td>
+                                    <td class="c-product-info__pc--order__list c-product-info__pc--order__list--right c-text--m">
+                                        <span class="c-font-bold"
+                                              th:text="'¥' + ${#number.convert(item.subTotalGoodsPrice)}"></span><br>
+                                        <span class="c-font-bold"
+                                              th:text="'(¥' + ${#number.convert(item.subTotalGoodsPriceInTax) + ' 税込)'}"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="c-product-info__sp c-product-info__sp--order c-margin--xxs"
+                            th:each="item : *{orderDeliveryItem.goodsListItems}">
+                            <li>
+                                <a th:href="@{/goods/detail(gcd=${item.gcd})}" class="image">
+                                    <img th:src="@{${#image.convert(item.goodsImageItems, 0, 'p1')}}"
+                                         th:attr="srcset=${#image.convert(item.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                         height="219" width="219" decoding="async" loading="lazy">
+                                </a>
+                                <div class="detail"><strong th:text="${item.goodsGroupName}"></strong>
+                                    <p>
+                                        <th:block id="isUnit1-1" th:if="${item.isUnit1()}">[[${item.unitTitle1} + '：' +
+                                            ${item.unitValue1}]]
+                                        </th:block>
+                                        　
+                                        <th:block id="isUnit2" th:if="${item.isUnit2()}">[[${item.unitTitle2} + '：' +
+                                            ${item.unitValue2}]]
+                                        </th:block>
+                                    </p>
+                                    <div class="total">
+                                        <div class="price">
+                                           <span class="c-font-bold"
+                                                 th:text="'¥' + ${#number.convert(item.goodsPrice)}" th:remove="tag"></span><br>
+                                            <span class="c-font-bold"
+                                                  th:text="'(¥' + ${#number.convert(item.goodsPriceInTax) + ' 税込)'}"  th:remove="tag"></span>
+                                        </div>
+                                        <div class="count" th:text="'数量：' + ${#number.convert(item.goodsCount)}"></div>
+                                    </div>
+                                </div>
+                                <div class="total_price">
+                                    <p>小計</p>
+                                    <div class="price">[['¥' + ${#number.convert(item.subTotalGoodsPriceInTax)}]]<span>税込</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="c-price-list c-text--m c-font-bold">
+                            <dl>
+                                <dt>商品金額合計（税込）</dt>
+                                <dd class="c-text--l c-font-bold"
+                                    th:with="sum=*{#aggregates.sum(orderDeliveryItem.goodsListItems.![subTotalGoodsPriceInTax])}"
+                                    th:text="'¥' + ${#number.convert(sum)}"></dd>
+                            </dl>
+                        </div>
+                    </section>
+                    <section class="c-margin--xl">
+                        <h3 class="c-title--section c-font-bold">お客様情報</h3>
+                        <div class="c-confirm-list c-text--m c-margin--xxs">
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">氏名</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:text="*{orderPersonLastName} + ' ' + *{orderPersonFirstName}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">フリガナ</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:text="*{orderPersonLastKana} + ' ' + *{orderPersonFirstKana}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">メールアドレス</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal" th:text="*{orderMail}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">電話番号</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal" th:text="*{orderTel}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">連絡先電話番号</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal" th:text="*{orderContactTel}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">住所</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:with="address3=*{orderAddress3} ?: ''">[['〒' + *{orderZipCode1} +
+                                    *{orderZipCode2}]]<br>[[*{orderPrefecture} + ' ' + *{orderAddress1} + ' ' +
+                                    *{orderAddress2} + ' ' + ${address3}]]
+                                </dd>
+                            </dl>
+                        </div>
+                    </section>
+                    <section class="c-margin--xl">
+                        <h3 class="c-title--section c-font-bold">お届け先<span
+                                class="c-title--section--gray">※配送伝票のお届け先</span></h3>
+                        <div class="c-confirm-list c-text--m c-margin--xxs">
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">氏名</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:text="*{orderDeliveryItem.receiverLastName} + ' ' + *{orderDeliveryItem.receiverFirstName}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">フリガナ</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:text="*{orderPersonLastKana} + ' ' + *{orderPersonFirstKana}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">電話番号</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:text="*{orderDeliveryItem.receiverTel}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">住所</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:with="address3=*{orderDeliveryItem.receiverAddress3} ?: ''">[['〒' +
+                                    *{orderDeliveryItem.receiverZipCode1} + *{orderDeliveryItem.receiverZipCode2}]]<br>[[*{orderDeliveryItem.receiverPrefecture}
+                                    + ' ' + *{orderDeliveryItem.receiverAddress1} + ' ' +
+                                    *{orderDeliveryItem.receiverAddress2} + ' ' + ${address3}]]
+                                </dd>
+                            </dl>
+                            <dl>
+                                <!--/* TODO-HM4-DESIGN-300:デザイン調整依頼待ち　aタグ　*/-->
+                                <dt class="c-confirm-list__title c-font-bold">配送方法</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:with="code=*{orderDeliveryItem.deliveryCode} ?: ''">
+                                    <div>
+                                        [[*{orderDeliveryItem.deliveryMethodName}]]
+                                        <th:block th:if="*{orderDeliveryItem.isExistsReceiverDate()}"><br>お届け希望日:
+                                            [[*{orderDeliveryItem.receiverDate}]]
+                                        </th:block>
+                                        <th:block th:if="*{orderDeliveryItem.isExistsReceiverTimeZone()}"><br>お届け希望時間帯:
+                                            [[*{orderDeliveryItem.receiverTimeZone}]]
+                                        </th:block>
+                                        <br>伝票番号: [[${code}]]
+                                        <th:block th:if="*{orderDeliveryItem.isDeliveryChaseURLOpen()}"><br>※詳しい配送状況は
+                                            <a th:href="@{*{orderDeliveryItem.deliveryChaseURL}}"
+                                               target="_blank">こちら</a>
+                                        </th:block>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">配送メモ</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:utext="*{#pre.convert(orderDeliveryItem.deliveryNote)}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">配送状況</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:text="${orderDeliveryItem.shipmentStatus != null} ? ${orderDeliveryItem.shipmentStatus.label} : ''"></dd>
+                            </dl>
+                        </div>
+                    </section>
+                    <section class="c-margin--xl">
+                        <h3 class="c-title--section c-font-bold">お支払い方法</h3>
+                        <div class="c-confirm-list c-text--m c-margin--xxs">
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">お支払い方法</dt>
+                                <dd class="c-confirm-list__detail c-font-bold--nomal"
+                                    th:text="*{settlementMethodName}"></dd>
+                            </dl>
+                        </div>
+                    </section>
+                    <div class="c-btn-wrap c-margin--xl"><a th:href="@{/member/history/}"
+                                                            class="c-btn--blue c-btn--blue-w">
+                        <p>注文履歴一覧へ戻る</p>
+                    </a></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{includehm4/footer_new}"></div>
+</div>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+
+
+</body>
+</html>

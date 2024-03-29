@@ -1,0 +1,2 @@
+ALTER TABLE MEMBERINFO ADD COLUMN noAntisocialFlag VARCHAR(1);
+COMMENT ON COLUMN MEMBERINFO.noAntisocialFlag IS '反社会的勢力ではないことの保証フラグ';

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <title>受注検索｜受注管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="order">
+<div id="searchOrder">
+    <div id="layout">
+        <div th:replace="~{include/header}"></div>
+        <div id="layoutGlobalnav" th:replace="~{include/globalnav}"></div>
+
+        <div id="container">
+            <table id="col2Frame">
+                <tr>
+                    <td id="sideBar">
+                        <div id="layoutLocalnavorder" th:replace="~{include/localnavorder}"></div>
+                    </td>
+                    <td id="mainContents">
+                        <h2>受注検索：受注番号「<span id="orderCode" th:text="${orderAdditionalChargeModel.orderCode}"></span>」の詳細修正：その他追加料金
+                        </h2>
+                        <form id="additionalchargeForm" th:action="@{/order/details/additionalcharge/}"
+                              th:object="${orderAdditionalChargeModel}" method="post">
+                            <div th:if="${allMessages}" class="inputError">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+
+                            <input type="submit" id="doLoad" name="doLoad" style="display:none" value="F5対策"/>
+                            <div class="editInner2">
+                                <h4>追加料金入力</h4>
+                                <div class="discount">※税抜金額を登録してください。</div>
+                                <table border="0" cellpadding="0" cellspacing="0" class="dataListTable2">
+                                    <tr>
+                                        <th>追加項目名</th>
+                                        <th>追加金額</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="options">
+                                            <input type="text" id="inputAdditionalDetailsName"
+                                                   th:field="*{inputAdditionalDetailsName}" class="textField w200"
+                                                   title="追加項目名" maxlength="60" th:errorclass="error"/>
+                                            <div th:if="${#fields.hasErrors('inputAdditionalDetailsName')}"
+                                                 th:errors="*{inputAdditionalDetailsName}"
+                                                 class="c-error-txt mt5"></div>
+                                        </td>
+                                        <td class="options">
+                                            <input type="text" id="inputAdditionalDetailsPrice"
+                                                   th:field="*{inputAdditionalDetailsPrice}" class="textField w120"
+                                                   title="追加金額" style="text-align: right;" maxlength="9"
+                                                   th:errorclass="error"/>&nbsp;円
+                                            <div th:if="${#fields.hasErrors('inputAdditionalDetailsPrice')}"
+                                                 th:errors="*{inputAdditionalDetailsPrice}"
+                                                 class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="output center"><input type="image"
+                                                                                     th:src="@{/images/button/input_add_fee.gif}"
+                                                                                     id="doAdd" name="doAdd"
+                                                                                     value="追加料金を入力する" alt="追加料金を入力する"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <h4>追加後の金額内訳</h4>
+                                <table border="0" cellpadding="0" cellspacing="0" class="dataListTable4">
+                                    <tr class="total">
+                                        <th class="detail right">商品金額合計</th>
+                                        <td class="price"><span id="goodsPriceTotal"
+                                                                th:text="*{#number.convert(goodsPriceTotal)}"></span> 円
+                                        </td>
+                                    </tr>
+                                    <tr class="total">
+                                        <th class="detail right">送料合計金額</th>
+                                        <td class="price"><span id="carriage"
+                                                                th:text="*{#number.convert(carriage)}"></span> 円
+                                        </td>
+                                    </tr>
+                                    <tr class="total">
+                                        <th class="detail right">手数料</th>
+                                        <td class="price"><span id="settlementCommission"
+                                                                th:text="*{#number.convert(settlementCommission)}"></span>
+                                            円
+                                        </td>
+                                    </tr>
+                                    <tbody id="orderAdditionalChargeItems">
+                                    <tr class="total" th:each="item,stat : *{orderAdditionalChargeItems}">
+                                        <th class="detail right"><span th:id="'additionalDetailsName-'+${stat.index}"
+                                                                       th:text="${item.additionalDetailsName}"></span>
+                                        </th>
+                                        <td class="price"><span th:id="'additionalDetailsPrice-'+${stat.index}"
+                                                                th:text="${#number.convert(item.additionalDetailsPrice)}"></span>
+                                            円
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tr class="total">
+                                        <th class="right">消費税</th>
+                                        <td class="tax-table-container">
+                                            <table class="tax-table">
+                                                <tr>
+                                                    <td colspan="4" class="tax-table-td right">
+                                                        <div id="diffTaxPrice" class=""><span id="taxPrice"
+                                                                                              th:text="*{#number.convert(taxPrice)}"></span>&nbsp;円
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="tax-table-td">
+                                                        <hr></hr>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tax-table-td">10%</td>
+                                                    <td class="tax-table-td right"><span id="diffStandardTaxTargetPrice"
+                                                                                         class=""><span
+                                                            id="standardTaxTargetPrice"
+                                                            th:text="*{#number.convert(standardTaxTargetPrice)}"></span>&nbsp;円</span>
+                                                    </td>
+                                                    <td class="tax-table-td">消費税</td>
+                                                    <td class="tax-table-td right"><span id="diffStandardTaxPrice"
+                                                                                         class=""><span
+                                                            id="standardTaxPrice"
+                                                            th:text="*{#number.convert(standardTaxPrice)}"></span>&nbsp;円</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tax-table-td">&nbsp;8%</td>
+                                                    <td class="tax-table-td right"><span id="diffReducedTaxTargetPrice"
+                                                                                         class=""><span
+                                                            id="reducedTaxTargetPrice"
+                                                            th:text="*{#number.convert(reducedTaxTargetPrice)}"></span>&nbsp;円</span>
+                                                    </td>
+                                                    <td class="tax-table-td">消費税</td>
+                                                    <td class="tax-table-td right"><span id="diffReducedTaxPrice"
+                                                                                         class=""><span
+                                                            id="reducedTaxPrice"
+                                                            th:text="*{#number.convert(reducedTaxPrice)}"></span>&nbsp;円</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <span id="isDisplayCouponDiscount" th:if="*{isDisplayCouponDiscount}">
+			<tr>
+				<th class="detail right"><span id="couponName" th:text="*{couponName}"></span></th>
+				<td class="price">
+					<span class="discount"><span id="couponDiscountPrice"
+                                                 th:text="*{#number.convert(couponDiscountPrice)}"></span></span> 円
+				</td>
+			</tr>
+		</span>
+                                    <tr class="totalPrice">
+                                        <th>受注金額</th>
+                                        <td class="price"><span id="billPrice"
+                                                                th:text="*{#number.convert(billPrice)}"></span> 円
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="buttons3">
+                                <input type="image" th:src="@{/images/button/cancel_1.gif}" id="doCancel"
+                                       name="doCancel" value="キャンセル" alt="キャンセル"/>
+                                <input type="image" th:src="@{/images/button/comfirm.gif}" id="doUpdate" name="doUpdate"
+                                       value="確認" alt="確認"/>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div th:replace="~{include/footer}"></div>
+    </div>
+</div>
+</body>
+</html>

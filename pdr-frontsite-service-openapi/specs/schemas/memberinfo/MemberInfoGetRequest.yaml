@@ -1,0 +1,8 @@
+type: object
+description: アドレス帳情報取得リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000000

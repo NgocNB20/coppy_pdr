@@ -1,0 +1,12 @@
+type: object
+description: WEB-API連携取得結果DTOクラスリクエスト
+properties:
+  receiveDate:
+    type: string
+    format: date-time
+    description: お届け可能日
+    example: 2022/01/01 12:00:00
+  dispTimeZoneCode:
+    type: string
+    description: 時間帯コード (複数の場合はパイプ(|)区切り)
+    example: 1

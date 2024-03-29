@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+    <script type="text/javascript" th:src="@{/common/js/ajaxcartadd.js}"></script>
+    <script>
+
+        function setFavoriteIndex(favoriteIndex) {
+            // Ajax処理等でhiddenがすでに作られていた場合に対する考慮
+            // 行インデックスhiddenがすでに存在する場合は要素削除
+            if ($("#favoriteIndex")[0]) {
+                $("#favoriteIndex").remove();
+            }
+            // 行インデックスhiddenを生成しformに追加
+            $("<input>", {
+                type: 'hidden',
+                id: 'favoriteIndex',
+                name: 'favoriteIndex',
+                value: favoriteIndex
+            }).appendTo('#favoriteItems');
+        }
+
+        // for IE's cache read
+        $(function () {
+            if ("true" == $("#goneCartFlg").val()) {
+                location.href = location.href;
+            }
+            $("input[name$='doAddCart']").click(function () {
+                $("#goneCartFlg").val("true");
+            });
+            $("input[id^='doAddCartAll']").click(function () {
+                $("#goneCartFlg").val("true");
+            });
+        });
+
+
+    </script>
+</head>
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">お気に入り商品一覧</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+
+                <div class="l-main p-mypage-favorite">
+                    <h2 class="c-title-page"><strong>お気に入り商品一覧</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo() ? 'global-info-message' : 'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form id="indexForm" th:object="${memberFavoriteModel}" method="post" th:action="@{/member/favorite/index.html}">
+                        <th:block th:if="${#lists.isEmpty(memberFavoriteModel.favoriteItems)}">
+                            <div class="c-page-description">
+                                <p class="c-page-description__text">現在、お気に入り商品の登録は０件です。<br>
+                                    お気に入り商品を登録するといつでも簡単に一覧でチェックでき、ここから注文できます。<br>
+                                    お気に入りの登録方法は<a th:href="@{/guide/member.html#m6}" class="c-inlinelink">こちら</a></p>
+                            </div>
+                        </th:block>
+
+                        <th:block th:if="${!#lists.isEmpty(memberFavoriteModel.favoriteItems)}">
+                            <div class="c-page-description">
+                                <p class="c-page-description__text">お気に入りに登録いただいた商品の一覧です。お気に入りの登録方法は<a th:href="@{/guide/member.html#m6}" class="c-inlinelink">こちら</a></p>
+                            </div>
+                            <div class="p-mypage-favorite__list">
+                                <div class="p-mypage-favorite__list-inner">
+                                    <div th:replace="~{include/selectfavoritegoodsunit}"></div>
+                                </div>
+                            </div>
+
+                            <div th:replace="~{newdesign/include/pager::pager1(url='/member/favorite/index.html',displayCount='商品')}"></div>
+                        </th:block>
+
+                        <div class="c-button-wrap">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+<div id="modal-cart" class="c-modal p-product-detail__modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--normal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <p class="c-modal__hl">カートに以下の商品を追加しました。</p>
+            <div class="c-modal__detail">
+                <div class="c-modal__detail-inner">
+                    <p>
+                        商品番号：<span id="cartMessageGoodsCode"></span> <br>
+                        商品名：<span id="cartMessageGoodsName"></span> <br>
+                    <div id="isCartMessageUnitTitle1">
+                        <span id="cartMessageUnitTitle1"></span> : <span id="cartMessageUnitValue1"></span> <br>
+                    </div>
+                    <div id="isCartMessageUnitTitle2">
+                        <span id="cartMessageUnitTitle2"></span> : <span id="cartMessageUnitValue2"></span> <br>
+                    </div>
+
+                    </p>
+                    <p>
+                        数量：<span id="cartMessageGoodsCount"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="c-modal__button">
+                <a href="" class="c-button c-button--primary-line c-button--width-m js-modal-close">お買い物を続ける</a>
+                <a th:href="@{/cart/index.html}" class="c-button c-button--primary c-button--width-m">ご購入手続きへ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--ブラウザのJavascriptが有効かどうかによって、カート追加ボタンを出し分けるためのスクリプト（お気に入り用）-->
+<script>
+    $(".normalCartAddFavo").each(function () {
+        $(this).css('display', 'none');
+    });
+    $(".ajaxCartAddFavo").each(function () {
+        $(this).css('display', 'block');
+    });
+</script>
+</body>
+</html>

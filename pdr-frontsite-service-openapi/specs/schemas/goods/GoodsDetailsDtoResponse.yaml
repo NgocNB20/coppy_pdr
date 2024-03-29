@@ -1,0 +1,425 @@
+type: object
+description: 商品詳細Dtoクラスレスポンス
+properties:
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ
+    example: 1000
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ
+    example: 1000
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ（必須）
+    example: 2
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: GC0001
+  goodsGroupMaxPrice:
+    type: number
+    description: 商品グループ最高値
+    example: 1000
+  goodsGroupMinPrice:
+    type: number
+    description: 商品グループ最安値
+    example: 1000
+  preDiscountMinPrice:
+    type: number
+    description: 値引き前単価最安値
+    example: 1000
+  preDiscountMaxPrice:
+    type: number
+    description: 値引き前単価最高値
+    example: 1000
+  goodsTaxType:
+    type: string
+    description: 商品消費税種別
+    example: 1
+  taxRate:
+    type: number
+    description: 税率
+    example: 1000
+  alcoholFlag:
+    type: string
+    description: 酒類フラグ
+    example: 酒類フラグ
+  goodsPriceInTax:
+    type: number
+    description: 商品単価（税込）
+    example: 1000
+  goodsPrice:
+    type: number
+    description: 商品単価（税抜）
+    example: 1000
+  deliveryType:
+    type: string
+    description: 商品納期
+    example: 注文から1週間程度でお届けします
+  saleStatus:
+    type: string
+    description: 販売状態
+    example: 1
+  saleStartTime:
+    type: string
+    format: date-time
+    description: 販売開始日時
+    example: 2022/01/01 12:00:00
+  saleEndTime:
+    type: string
+    format: date-time
+    description: 販売終了日時
+    example: 2022/01/01 12:00:00
+  unitManagementFlag:
+    type: string
+    description: 規格管理
+    example: OFF
+  stockManagementFlag:
+    type: string
+    description: 在庫管理
+    example: 在庫管理
+  individualDeliveryType:
+    type: string
+    description: 商品個別配送
+    example: 個別配送しない
+  purchasedMax:
+    type: number
+    description: 商品最大購入可能数
+    example: 1000
+  freeDeliveryFlag:
+    type: string
+    description: 無料配送フラグ
+    example: 個別配送しない
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 2
+  unitValue1:
+    type: string
+    description: 規格値１
+    example: 規格値１
+  unitValue2:
+    type: string
+    description: 規格値２
+    example: 規格値２
+  preDiscountPrice:
+    type: number
+    description: 値引き前単価＝値引前単価（税抜き）
+    example: 1000
+  preDisCountPriceInTax:
+    type: number
+    description: 値引き前単価＝値引前単価（税込み）
+    example: 1000
+  janCode:
+    type: string
+    description: JANコード
+    example: JANコード
+  catalogCode:
+    type: string
+    description: カタログコード
+    example: カタログコード
+  salesPossibleStock:
+    type: number
+    description: 販売可能在庫数
+    example: 1000
+  realStock:
+    type: number
+    description: 実在庫数
+    example: 1000
+  orderReserveStock:
+    type: number
+    description: 注文確保在庫数
+    example: 1000
+  remainderFewStock:
+    type: number
+    description: 残少表示在庫数
+    example: 1000
+  orderPointStock:
+    type: number
+    description: 発注点在庫数
+    example: 1000
+  safetyStock:
+    type: number
+    description: 安全在庫数
+    example: 1000
+  goodsGroupCode:
+    type: string
+    description: 商品グループコード
+    example: 商品グループコード
+  whatsnewDate:
+    type: string
+    format: date-time
+    description: 新着日付
+    example: 2022/01/01 12:00:00
+  goodsOpenStatus:
+    type: string
+    description: 商品公開状態
+    example: 0
+  openStartTime:
+    type: string
+    format: date-time
+    description: 商品公開開始日時
+    example: 2022/01/01 12:00:00
+  openEndTime:
+    type: string
+    format: date-time
+    description: 商品公開終了日時
+    example: 2022/01/01 12:00:00
+  goodsGroupName:
+    type: string
+    description: 商品グループ名
+    example: ダイニングテーブル
+  unitTitle1:
+    type: string
+    description: 規格タイトル1
+    example: 規格タイトル1
+  unitTitle2:
+    type: string
+    description: 規格タイトル2
+    example: 規格タイトル2
+  goodsPreDiscountPrice:
+    type: string
+    description: 値引きコメント
+    example:
+  goodsGroupImageEntityList:
+    $ref: "#/components/schemas/GoodsGroupImageEntityListResponse"
+  snsLinkFlag:
+    type: string
+    description: SNS連携フラグ
+    example: 1
+  metaDescription:
+    type: string
+    description: meta-description
+    example: meta-description
+  stockStatus:
+    type: string
+    description: 在庫状況表示
+    example: 4
+  goodsNote1:
+    type: string
+    description: 商品説明１
+    example: 商品説明１
+  goodsNote2:
+    type: string
+    description: 商品説明２
+    example: 商品説明２
+  goodsNote3:
+    type: string
+    description: 商品説明３
+    example: 商品説明３
+  goodsNote4:
+    type: string
+    description: 商品説明４
+    example: 商品説明４
+  goodsNote5:
+    type: string
+    description: 商品説明５
+    example: 商品説明５
+  goodsNote6:
+    type: string
+    description: 商品説明６
+    example: 商品説明６
+  goodsNote7:
+    type: string
+    description: 商品説明７
+    example: 商品説明７
+  goodsNote8:
+    type: string
+    description: 商品説明８
+    example: 商品説明８
+  goodsNote9:
+    type: string
+    description: 商品説明９
+    example: 商品説明９
+  goodsNote10:
+    type: string
+    description: 商品説明１０
+    example: 商品説明１０
+  orderSetting1:
+    type: string
+    description: 受注連携設定１
+    example: 受注連携設定１
+  orderSetting2:
+    type: string
+    description: 受注連携設定２
+    example: 受注連携設定２
+  orderSetting3:
+    type: string
+    description: 受注連携設定３
+    example: 受注連携設定３
+  orderSetting4:
+    type: string
+    description: 受注連携設定４
+    example: 受注連携設定４
+  orderSetting5:
+    type: string
+    description: 受注連携設定５
+    example: 受注連携設定５
+  orderSetting6:
+    type: string
+    description: 受注連携設定６
+    example: 受注連携設定６
+  orderSetting7:
+    type: string
+    description: 受注連携設定７
+    example: 受注連携設定７
+  orderSetting8:
+    type: string
+    description: 受注連携設定８
+    example: 受注連携設定８
+  orderSetting9:
+    type: string
+    description: 受注連携設定９
+    example: 受注連携設定９
+  orderSetting10:
+    type: string
+    description: 受注連携設定１０
+    example: 受注連携設定１０
+  unitImage:
+    $ref: "#/components/schemas/GoodsImageEntityResponse"
+  goodsOptionDisplayName:
+    type: string
+    description: 商品オプション表示名
+    example:
+  goodsClassType:
+    type: string
+    description: 商品区分
+    example: 0
+  dentalMonopolySalesFlg:
+    type: string
+    description: 歯科専売可否フラグ
+    example: 0
+  saleIconFlag:
+    type: string
+    description: SALEアイコンフラグ
+    example: 0
+  reserveIconFlag:
+    type: string
+    description: お取りおきアイコンフラグ
+    example: 0
+  newIconFlag:
+    type: string
+    description: NEWアイコンフラグ
+    example: 0
+# 2023-renew No92 from here
+  outletIconFlag:
+    type: string
+    description: アウトレットアイコンフラグ
+    example: 0
+# 2023-renew No92 to here
+  landSendFlag:
+    type: string
+    description: 陸送商品フラグ
+    example: 0
+  coolSendFlag:
+    type: string
+    description: クール便フラグ
+    example: 0
+  coolSendFrom:
+    type: string
+    description: クール便適用期間FROM
+    example: 0
+  coolSendTo:
+    type: string
+    description: クール便適用期間TO
+    example: 0
+  tax:
+    type: number
+    description: 消費税
+    example: 1000
+  unit:
+    type: string
+    description: 単位
+    example:
+  goodsManagementCode:
+    type: string
+    description: 管理商品コード
+    example:
+  goodsDivisionCode:
+    type: string
+    description: 商品分類コード
+    example:
+  goodsCategory1:
+    type: string
+    description: カテゴリー1
+    example:
+  goodsCategory2:
+    type: string
+    description: カテゴリー2
+    example:
+  goodsCategory3:
+    type: string
+    description: カテゴリー3
+    example:
+  reserveFlag:
+    type: string
+    description: 保留フラグ
+    example: 0
+  priceMarkDispFlag:
+    type: string
+    description: 価格記号表示フラグ
+    example: 0
+  salePriceMarkDispFlag:
+    type: string
+    description: セール価格記号表示フラグ
+    example: 0
+  salePriceIntegrityFlag:
+    type: string
+    description: セール価格整合性フラグ
+    example: 0
+  saleYesNo:
+    type: integer
+    format: int32
+    description: 販売可否判定結果
+    example: 1
+  saleNgMessage:
+    type: string
+    description: 販売不可メッセージ
+    example:
+  deliveryYesNo:
+    type: string
+    description: 入荷次第お届け可否
+    example:
+  emotionPriceType:
+    type: string
+    description: 心意気価格保持区分
+    example: 0
+# 2023-renew AddNo5 from here
+  goodsPriceInTaxLow:
+    type: number
+    description: 価格(最低)
+    example: 1000
+  goodsPriceInTaxHight:
+    type: number
+    description: 価格（最高）
+    example: 1000
+  preDiscountPriceLow:
+    type: number
+    description: セール価格（最低）
+    example: 1000
+  preDiscountPriceHight:
+    type: number
+    description: セール価格（最高）
+    example: 1000
+# 2023-renew AddNo5 to here
+components:
+  schemas:
+    GoodsGroupImageEntityListResponse:
+      $ref: ./GoodsGroupImageEntityListResponse.yaml
+    GoodsImageEntityResponse:
+      $ref: ./GoodsImageEntityResponse.yaml

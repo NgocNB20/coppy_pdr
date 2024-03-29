@@ -1,0 +1,109 @@
+<!-- PDR Migrate Customization from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-inquiry">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__link">
+                            <a th:href="@{/index.html}"class="c-textlink c-textlink--hover">TOP</a>
+                        </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__current">お問い合わせ・よくある質問</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-section">
+            <div class="l-section__inner">
+                <h2 class="c-title-page"><strong>お問い合わせ・よくある質問</strong></h2>
+            </div>
+        </div>
+        <div class="l-section">
+            <div class="l-section__inner">
+                <div class="c-page-description">
+                    <hm:freearea key="inquiry_info"/>
+                </div>
+
+                <div class="p-inquiry__contents">
+                    <dl class="p-inquiry__item p-inquiry__item-qa">
+                        <dt>
+                            <span>
+                                <svg viewBox="0 0 37.6 25.2" width="37">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/qa.svg#qa}"></use>
+                                </svg>
+                            </span>
+                            <p>よくある質問</p></dt>
+                        <dd>
+                            <p>よくあるご質問をQ&amp;A方式でまとめております。</p>
+                            <p class="p-inquiry__button"><a th:href="@{/guide/faq.html}" class="c-button c-button--primary c-button--width-m">詳しくはこちら</a>
+                            </p>
+                        </dd>
+                    </dl>
+
+                    <dl class="p-inquiry__item p-inquiry__item-call">
+                        <dt>
+                            <span>
+                                <svg viewBox="0 0 17.9 27" width="17">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/tel_2.svg#tel}"></use>
+                                </svg>
+                            </span>
+                            <p>お電話でのお問い合わせ</p></dt>
+                        <dd>
+                            <p class="p-inquiry__item-callcenter">
+                                <span>
+                                    <svg viewBox="0 0 35.9 31.6" width="20">
+                                        <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/callcenter_2.svg#callcenter}"></use>
+                                    </svg>
+                                </span>
+                                <small>カスタマーサービスデスク</small>
+                            </p>
+                            <p><strong>0120-108394</strong></p>
+                            <p>受付時間：10:00～16:00（土日祝休）</p>
+                        </dd>
+                    </dl>
+
+                    <dl class="p-inquiry__item p-inquiry__item-mail">
+                        <dt>
+                            <span>
+                                <svg viewBox="0 0 28 21" width="28">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/mail.svg#mail}"></use>
+                                </svg>
+                            </span>
+                            <p>メールでのお問い合わせ</p></dt>
+                        <dd>
+                            <p>24時間受付しております。</p>
+                            <p class="p-inquiry__button">
+                                <a class="c-button c-button--primary c-button--width-m"
+                                   th:href="'mailto:' + ${@environment.getProperty('inquiry.mail.to')} + '?subject=%E3%80%90PDR%E5%95%8F%E5%90%88%E3%81%9B%E6%8B%85%E5%BD%93%E5%AE%9B%E3%80%91&amp;body=%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E3%80%80%E3%81%94%E8%A8%98%E5%85%A5%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%80%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%0A%E3%81%8A%E5%AE%A2%E6%A7%98%E7%95%AA%E5%8F%B7%EF%BC%9A%0A%E4%BA%8B%E6%A5%AD%E6%89%80%E6%A7%98%E5%90%8D%EF%BC%9A%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E6%A7%98%EF%BC%88%E5%BF%85%E9%A0%88%EF%BC%89%EF%BC%9A%0A%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%EF%BC%88%E5%BF%85%E9%A0%88%EF%BC%89%EF%BC%9A%0A%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%EF%BC%88%E5%BF%85%E9%A0%88%EF%BC%89%EF%BC%9A%0A%0A%E3%80%90%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B%E5%86%85%E5%AE%B9%E3%80%91%0A%E9%A0%85%E7%9B%AE%EF%BC%9A%E7%99%BB%E9%8C%B2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%EF%BC%8F%E5%95%86%E5%93%81%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%EF%BC%8F%E8%BF%94%E5%93%81%E4%BA%A4%E6%8F%9B%EF%BC%8F%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%BB%E3%80%80%E3%80%80%E3%80%80%EF%BC%BD%0A%E8%A9%B3%E7%B4%B0%EF%BC%9A%0A%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%E2%88%92%0A%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%0A%0A%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%83%94%E3%83%BC%E3%83%87%E3%82%A3%E3%83%BC%E3%82%A2%E3%83%BC%E3%83%AB%0A%E3%80%92468-0015%20%E6%84%9B%E7%9F%A5%E7%9C%8C%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E5%A4%A9%E7%99%BD%E5%8C%BA%E5%8E%9F%EF%BC%94%EF%BC%8D%EF%BC%91%EF%BC%90%EF%BC%96%0ATEL:%200120%E2%88%92108394%EF%BC%8810:00-16:00%E5%9C%9F%E6%97%A5%E7%A5%9D%E9%99%A4%E3%81%8F%EF%BC%89'">
+                                    お問い合わせはこちら</a>
+                            </p>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+</body>
+</html>
+<!-- PDR Migrate Customization to here -->

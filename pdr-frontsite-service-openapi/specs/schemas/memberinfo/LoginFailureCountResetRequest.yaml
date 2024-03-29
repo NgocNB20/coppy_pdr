@@ -1,0 +1,8 @@
+type: object
+description: 会員ログイン失敗回数リセットリクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001

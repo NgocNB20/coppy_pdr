@@ -1,0 +1,76 @@
+type: object
+description: カートDtoクラスレスポンス
+properties:
+  goodsTotalCount:
+    type: number
+    description: 商品合計点数
+    example: 1
+  goodsTotalPrice:
+    type: number
+    description: 商品合計金額（税抜）
+    example: 1
+  goodsTotalPriceInTax:
+    type: number
+    description: 商品合計金額（税込）
+    example: 1
+  cartGoodsDtoListResponse:
+    description: カート商品リスト
+    $ref: '#/components/schemas/CartGoodsDtoListResponse'
+  settlementMethodType:
+    type: string
+    description: 決済種別
+    example: 1
+  discountsResponseDetailMap:
+    type: object
+    description: 割引適用結果MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetDiscountsResponseDetailDtoResponse'
+  consumptionTaxRateMap:
+    type: object
+    description: 消費税率MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetConsumptionTaxRateResponseDetailDtoResponse'
+  beforeTransferEmotionGoodsCodeMap:
+    type: object
+    description: 振替前心意気商品コードMAP(公開中の商品のみ)
+    additionalProperties:
+      type: string
+      example:
+  totalPriceTax:
+    type: number
+    description: 商品合計消費税額
+    example: 1
+  couponCode:
+    type: string
+    description: クーポン番号
+    example: x7HChWJZaV
+  quantityDiscountsResponseDetailMap:
+    type: object
+    description: 数量割引適用結果MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetQuantityDiscountResultResponseDetailDtoResponse'
+  reserveMap:
+    type: object
+    description: 取りおき情報MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetReserveResponseDetailDtoResponse'
+  saleCheckMap:
+    type: object
+    description: 販売可否判定MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetSaleCheckDetailResponse'
+
+components:
+  schemas:
+    CartGoodsDtoListResponse:
+      $ref: ./CartGoodsDtoListResponse.yaml
+    WebApiGetDiscountsResponseDetailDtoResponse:
+      $ref: ./WebApiGetDiscountsResponseDetailDtoResponse.yaml
+    WebApiGetConsumptionTaxRateResponseDetailDtoResponse:
+      $ref: ./WebApiGetConsumptionTaxRateResponseDetailDtoResponse.yaml
+    WebApiGetQuantityDiscountResultResponseDetailDtoResponse:
+      $ref: ./WebApiGetQuantityDiscountResultResponseDetailDtoResponse.yaml
+    WebApiGetReserveResponseDetailDtoResponse:
+      $ref: ./WebApiGetReserveResponseDetailDtoResponse.yaml
+    WebApiGetSaleCheckDetailResponse:
+      $ref: ../webapi/WebApiGetSaleCheckDetailResponse.yaml

@@ -1,0 +1,88 @@
+type: object
+description: UK-API連携ユニサーチ（商品）レスポンス（docs）
+properties:
+  group_id:
+    type: string
+    description: 商品グループコード
+    example: series-10313
+  new_flg:
+    type: integer
+    format: int32
+    description: NEWアイコンフラグ
+    example: 1
+  sale_flg:
+    type: integer
+    format: int32
+    description: SALEアイコンフラグ
+    example: 1
+  reserve_flg:
+    type: integer
+    format: int32
+    description: セールde予約アイコンフラグ
+    example: 1
+  outlet_flg:
+    type: integer
+    format: int32
+    description: アウトレットアイコンフラグ
+    example: 1
+  item_name:
+    type: string
+    description: 商品名
+    example: 3層イヤーループマスク　ヒヤシンス
+  sale_comment:
+    type: string
+    description: セールコメント
+    example: 心意気対象品あります
+  min_price:
+    type: integer
+    format: int32
+    description: 値引前最小価格
+    example: 690
+  max_price:
+    type: integer
+    format: int32
+    description: 値引前最大価格
+    example: 6490
+  sale_min_price:
+    type: integer
+    format: int32
+    description: 値引後最小価格
+    example: 390
+  sale_max_price:
+    type: integer
+    format: int32
+    description: 値引後最大価格
+    example: 4990
+  category_id_list:
+    type: array
+    items:
+      type: string
+      discription: カテゴリIDリスト
+      example: c-sika^Ec-series-3^Ec-series-3-1
+  item_status:
+    type: integer
+    format: int32
+    description: 商品状態
+    example: 1
+  drug_flg:
+    type: integer
+    format: int32
+    description: 医薬品フラグ
+    example: 0
+  item_overview:
+    type: string
+    description: 商品概要説明
+    example: ひんやり・さらり・つるり　気持ちのいいマスクです。
+  new_date:
+    type: string
+    format: date-time
+    description: 新着日付
+    example: 2023-04-17 T09:00:00Z
+  catalog_id:
+    type: string
+    description: カタログ番号
+    example: 40
+  goods_image_name:
+    type: string
+    description: 商品画像パス
+    example: series-1095/series-1095_01.jpg

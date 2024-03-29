@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "e5937970-5d84-4e61-a5dd-e7d6e9fca776",
+		"name": "GOODS/CATEGORY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16235168"
+	},
+	"item": [
+		{
+			"name": "goods/category/multiple-category-map",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/category/multiple-category-map?category=top&seq=new&limit=20&priceFrom=null&priceTo=null&stock=0&viewType=thumbnail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"category",
+						"multiple-category-map"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "top"
+						},
+						{
+							"key": "seq",
+							"value": "new"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "priceFrom",
+							"value": "null"
+						},
+						{
+							"key": "priceTo",
+							"value": "null"
+						},
+						{
+							"key": "stock",
+							"value": "0"
+						},
+						{
+							"key": "viewType",
+							"value": "thumbnail"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/goods/category/category-tree-node",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/footprint/open-list?limit=20&exceptGoodsGroupSeq=10001410&accessUid=5764230920170059&siteType",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"footprint",
+						"open-list"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "exceptGoodsGroupSeq",
+							"value": "10001410"
+						},
+						{
+							"key": "accessUid",
+							"value": "5764230920170059"
+						},
+						{
+							"key": "siteType",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

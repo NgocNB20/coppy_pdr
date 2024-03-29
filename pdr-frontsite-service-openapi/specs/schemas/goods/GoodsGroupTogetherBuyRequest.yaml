@@ -1,0 +1,15 @@
+# 2023-renew No21 from here
+type: object
+description: よく一緒に購入される商品クラスリクエスト
+properties:
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ (FK)（必須）
+    example: 1000
+  limit:
+    type: integer
+    format: int32
+    description: 商品グループSEQ（必須）
+    example: 6
+# 2023-renew No21 to here

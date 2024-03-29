@@ -1,0 +1,11 @@
+type: object
+description: カード情報取得リクエスト
+properties:
+  sessionId:
+    type: string
+    description: sessionId
+    example: sessionId
+  accessUid:
+    type: string
+    description: AccessUid
+    example: AccessUid

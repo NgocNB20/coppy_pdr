@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: 【PDRフロントサイトサービス】UK-APIのAPI仕様
+  description: PDRフロントサイトサービスのOpenAPI定義：UK-API
+  version: 4.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /ukapi/rword:
+    get:
+      tags:
+        - Ukapi
+      summary: UK-API連携関連ワード
+      description: UK-API連携関連ワード
+      operationId: getUkRWord
+      parameters:
+        - in: query
+          name: ukApiGetUkRWordRequest
+          description: UK-API連携関連ワードリクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/UkApiGetUkRWordRequest'
+      responses:
+        200:
+          description: UK-API連携関連ワードレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UkApiGetUkRWordResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /ukapi/unisearch:
+    get:
+      tags:
+        - Ukapi
+      summary: UK-API連携ユニサーチ（商品）
+      description: UK-API連携ユニサーチ（商品）
+      operationId: getUkUniSearchGoods
+      parameters:
+        - in: query
+          name: ukApiGetUkUniSearchGoodsRequest
+          description: UK-API連携ユニサーチ（商品）リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/UkApiGetUkUniSearchGoodsRequest'
+        - in: query
+          name: pageInfoRequest
+          description: ページ情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageInfoRequest'
+      responses:
+        200:
+          description: UK-APIユニサーチ（商品）レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UkApiGetUkUniSearchGoodsResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /ukapi/unisearch-contents:
+    get:
+      tags:
+        - Ukapi
+      summary: UK-API連携ユニサーチ（コンテンツ）
+      description: UK-API連携ユニサーチ（コンテンツ）
+      operationId: getUkUniSearchContents
+      parameters:
+        - in: query
+          name: ukApiGetUkUniSearchContentsRequest
+          description: UK-API連携ユニサーチ（コンテンツ）リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/UkApiGetUkUniSearchContentsRequest'
+      responses:
+        200:
+          description: UK-APIユニサーチ（コンテンツ）レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UkApiGetUkUniSearchContentsResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    UkApiGetUkRWordRequest:
+      $ref: ./schemas/ukapi/UkApiGetUkRWordRequest.yaml
+    UkApiGetUkRWordResponse:
+      $ref: ./schemas/ukapi/UkApiGetUkRWordResponse.yaml
+    UkApiGetUkUniSearchGoodsRequest:
+      $ref: ./schemas/ukapi/UkApiGetUkUniSearchGoodsRequest.yaml
+    UkApiGetUkUniSearchGoodsResponse:
+      $ref: ./schemas/ukapi/UkApiGetUkUniSearchGoodsResponse.yaml
+    UkApiGetUkUniSearchContentsRequest:
+      $ref: ./schemas/ukapi/UkApiGetUkUniSearchContentsRequest.yaml
+    UkApiGetUkUniSearchContentsResponse:
+      $ref: ./schemas/ukapi/UkApiGetUkUniSearchContentsResponse.yaml
+    PageInfoRequest:
+      $ref: ./schemas/PageInfoRequest.yaml
+    ErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ClientErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ServerErrorResponse:
+      $ref: ./schemas/Error.yaml

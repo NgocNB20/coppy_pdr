@@ -1,0 +1,106 @@
+<!-- PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+    <script type="text/javascript" src="/common/js/jquery.matchHeight.js"></script>
+    <script type="text/javascript">
+		$(function() {
+			$('.unit').matchHeight();
+		});
+
+    </script>
+</head>
+
+<body id="d_guide" class="guide_top">
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="ctop"><span><!--MAIN--></span>
+                    <div class="clearfix">
+                        <div class="unit f_left">
+                            <h3><a th:href="@{/guide/shop.html}" id="go-Shop">ショップについて</a></h3>
+                            <ul>
+                                <li><a th:href="@{/guide/shop.html#s1}" id="go-Shop-1">初めての方へ</a></li>
+                                <li><a th:href="@{/guide/agreement.html}" id="go-Agreement">ご利用規約</a></li>
+                                <li><a th:href="@{/guide/shop.html#s2}" id="go-Shop-2">動作環境について</a></li>
+                            </ul>
+                        </div>
+                        <div class="unit f_right">
+                            <h3><a th:href="@{/guide/order.html}" id="go-Order">ご注文について</a></h3>
+                            <ul>
+                                <li><a th:href="@{/guide/order.html#o1}" id="go-Order-1">お買い物方法</a></li>
+                                <li><a th:href="@{/guide/order.html#o2}" id="go-Order-2">返品・交換について</a></li>
+                                <li><a th:href="@{/guide/order.html#o3}" id="go-Order-3">医薬品・医療機器のご注文について</a></li>
+                                <li><a th:href="@{/guide/reserve.html}" id="go-Reserve-1">予約の注文方法について</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="unit f_left">
+                            <h3><a th:href="@{/guide/commodity.html}" id="go-Commodity">商品について</a></h3>
+                            <ul>
+                                <li><a th:href="@{/guide/commodity.html#c1}" id="go-Commodity-1">商品検索</a></li>
+                                <li><a th:href="@{/guide/commodity.html#c2}" id="go-Commodity-2">アイコンについて</a></li>
+                                <li><a th:href="@{/guide/commodity.html#c3}" id="go-Commodity-3">商品ページの画像</a></li>
+                            </ul>
+                        </div>
+                        <div class="unit f_right">
+                            <h3><a th:href="@{/guide/payment.html}" id="go-Payment">お支払い・配送について</a></h3>
+                            <ul>
+                                <li><a th:href="@{/guide/payment.html#p1}" id="go-Payment-1">お支払い金額</a></li>
+                                <li><a th:href="@{/guide/payment.html#p2}" id="go-Payment-2">お支払い方法</a></li>
+                                <li><a th:href="@{/guide/payment.html#p8}" id="go-Payment-8">領収書について</a></li>
+                                <li><a th:href="@{/guide/payment.html#p3}" id="go-Payment-3">送料について</a></li>
+                                <li><a th:href="@{/guide/payment.html#p4}" id="go-Payment-4">配送について</a></li>
+                                <li><a th:href="@{/guide/payment.html#p5}" id="go-Payment-5">商品のお届け時期について</a></li>
+                                <li><a th:href="@{/guide/payment.html#p6}" id="go-Payment-6">海外へのお届けについて</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="unit f_left">
+                            <h3><a th:href="@{/guide/member.html}" id="go-Member">会員について</a></h3>
+                            <ul>
+                                <li><a th:href="@{/guide/member.html#m1}" id="go-Member-1">会員登録方法</a></li>
+                                <li><a th:href="@{/guide/member.html#m2}" id="go-Member-2">会員情報の変更</a></li>
+                                <li><a th:href="@{/guide/member.html#m3}" id="go-Member-3">メールアドレスの変更</a></li>
+                                <li><a th:href="@{/guide/member.html#m4}" id="go-Member-4">パスワードの変更</a></li>
+                                <li><a th:href="@{/guide/member.html#m5}" id="go-Member-5">パスワードをお忘れの方</a></li>
+                                <li><a th:href="@{/guide/member.html#m6}" id="go-Member-6">お気に入りリスト</a></li>
+                                <li><a th:href="@{/guide/member.html#m7}" id="go-Member-7">お届け先リスト</a></li>
+                            </ul>
+                        </div>
+                        <div class="unit f_right solo">
+                            <h3><a th:href="@{/guide/faq.html}" id="go-Faq">よくある質問Q&amp;A</a></h3>
+                            <h3><a th:href="@{/inquiry/index.html}" id="go-Inquiry">お問い合わせ</a></h3>
+                            <h3><a th:href="@{/guide/privacy.html#p1}" id="go-Privacy-1">セキュリティーポリシー</a></h3>
+                            <h3><a th:href="@{/guide/privacy.html#p2}" id="go-Privacy-2">プライバシーポリシー</a></h3>
+                            <h3><a th:href="@{/guide/law.html}" id="go-Law">特定商取引法に基づく表記</a></h3>
+                        </div>
+                    </div>
+
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

@@ -1,0 +1,15 @@
+type: object
+description: 決済方法選択可能リストレスポンス
+properties:
+  settlementDtoList:
+    type: array
+    description: 決済Dtoリストレスポンス
+    items:
+      $ref: "#/components/schemas/SettlementDtoResponse"
+  receiveOrderDto:
+    type: string
+    description: 受注Dto
+components:
+  schemas:
+    SettlementDtoResponse:
+      $ref: ../order/SettlementDtoResponse.yaml

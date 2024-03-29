@@ -1,0 +1,43 @@
+type: object
+description: 商品詳細レスポンス
+properties:
+  goodsGroupEntity:
+    $ref: "#/components/schemas/GoodsGroupEntityResponse"
+  batchUpdateStockStatus:
+    $ref: "#/components/schemas/StockStatusDisplayEntityResponse"
+  realTimeStockStatus:
+    $ref: "#/components/schemas/StockStatusDisplayEntityResponse"
+  goodsGroupDisplayEntity:
+    description: 商品グループ表示エンティティ
+    $ref: "#/components/schemas/GoodsGroupDisplayEntityResponse"
+  goodsGroupImageEntityList:
+    $ref: "#/components/schemas/GoodsGroupImageEntityListResponse"
+  goodsDtoList:
+    $ref: "#/components/schemas/GoodsDtoListResponse"
+  categoryGoodsEntityList:
+      $ref: "#/components/schemas/CategoryGoodsEntityListResponse"
+  taxRate:
+    type: number
+    description: 税率
+    example: 10
+# 2023-renew No21 from here
+  excludingFlag:
+    type: string
+    description: 除外フラグ
+    example: 0
+# 2023-renew No21 to here
+
+components:
+  schemas:
+    GoodsGroupEntityResponse:
+      $ref: ./GoodsGroupEntityResponse.yaml
+    StockStatusDisplayEntityResponse:
+      $ref: ./StockStatusDisplayEntityResponse.yaml
+    GoodsGroupDisplayEntityResponse:
+      $ref: ./GoodsGroupDisplayEntityResponse.yaml
+    GoodsGroupImageEntityListResponse:
+      $ref: ./GoodsGroupImageEntityListResponse.yaml
+    GoodsDtoListResponse:
+      $ref: ./GoodsDtoListResponse.yaml
+    CategoryGoodsEntityListResponse:
+      $ref: ../goods/category/CategoryGoodsEntityListResponse.yaml

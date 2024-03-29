@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="inquiry">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <!-- main -->
+    <main class="l-page l-head__pattern1">
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" title="TOP" href="/">
+                            <span property="name">TOP</span>
+                        </a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use th:attr="'xlink:href'=@{/hm4/assets/images/icon/arrow-right.svg#arrow-right}"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" title="マイページ" href="/member/">
+                            <span property="name">マイページ</span>
+                        </a>
+                        <meta property="position" content="2">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use th:attr="'xlink:href'=@{/hm4/assets/images/icon/arrow-right.svg#arrow-right}"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <span property="name">お問い合わせ履歴</span>
+                        <meta property="position" content="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-head__pattern1__content">
+            <h2 class="c-title--page mypage__title">
+                <strong>お問い合わせ履歴</strong>
+            </h2>
+            <div class="l-container l-head__pattern1__content-main">
+                <div th:replace="~{includehm4/sidemenumember_new :: sidemenumember('inquiry')}"></div>
+                <div class="l-main">
+                    <form id="indexForm" th:action="@{/member/inquiry/index.html}" th:object="${memberInquiryModel}"
+                          method="post">
+                        <div class="c-heading-area__wrap--result">
+                            <p class="c-text--xs"> お問い合わせいただいた履歴を表示します。<br>
+                                「詳細を見る」を押すとお問い合わせの詳細情報をご確認いただけます。また該当するお問い合わせ情報が見つからない場合は窓口までお問い合わせください。 </p>
+                            <div th:if="${allMessages}"
+                                 th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+                            <th:block id="isNotEmptyMemberInquiryModelItems-1"
+                                      th:if="*{!isEmptyMemberInquiryModelItems()}">
+                                <div>
+                                    <p class="c-text--m c-font-bold c-margin--s">
+                                        <th:block
+                                                th:replace="~{includehm4/pager_new::pager3(displayCount='件')}"></th:block>
+                                    </p>
+                                </div>
+                            </th:block>
+                        </div>
+                        <th:block id="isEmptyMemberInquiryModelItems" th:if="*{isEmptyMemberInquiryModelItems()}">
+                            <!--/* TODO-DESIGN-182: issue-59 表示件数0件時のstyle調整 */-->
+                            <p class="noitem">現在、お問い合わせはございません。</p>
+                        </th:block>
+                        <th:block id="isNotEmptyMemberInquiryModelItems-2" th:if="*{!isEmptyMemberInquiryModelItems()}">
+						<span id="memberInquiryModelItems">
+						<th:block th:each="item, stat : *{memberInquiryModelItems}">
+						<div class="history-list">
+							<div class="history-list__block c-margin--xs">
+								<div class="status">
+									<th:block th:switch="${item.inquiryStatusValue}">
+									<div th:case="0" class="c-label-status c-label-status--blue"><p
+                                            class="c-text--m c-font-bold" th:id="'inquiryStatus-'+${stat.index}"
+                                            th:text="${item.inquiryStatus}"></p></div>
+									<div th:case="1" class="c-label-status c-label-status--orange"><p
+                                            class="c-text--m c-font-bold" th:id="'inquiryStatus-'+${stat.index}"
+                                            th:text="${item.inquiryStatus}"></p></div>
+									<div th:case="2" class="c-label-status c-label-status--black"><p
+                                            class="c-text--m c-font-bold" th:id="'inquiryStatus-'+${stat.index}"
+                                            th:text="${item.inquiryStatus}"></p></div>
+									</th:block>
+									<div class="status__btn"><a th:href="@{/member/inquiry/detail.html(icd=${item.icd})}"
+                                                                id="goMemberInquiryDetail"
+                                                                class="c-btn--blue c-text--s c-font-bold--nomal">詳細を見る</a></div>
+								</div>
+								<div class="desc">
+									<dl class="desc__list">
+										<dt class="desc__title c-text--s">お問い合わせ日</dt>
+										<dd class="desc__text c-text--m c-font-bold"
+                                            th:id="'firstInquiryTime-'+${stat.index}"
+                                            th:text="${#date.convert(item.firstInquiryTime)} + ' ' + ${#date.convert(item.firstInquiryTime,'HH:mm')}"></dd>
+									</dl>
+									<dl class="desc__list">
+										<dt class="desc__title c-text--s">お問い合わせ番号</dt>
+										<dd class="desc__text c-text--m c-font-bold"
+                                            th:id="'inquiryCode-'+${stat.index}" th:text="${item.inquiryCode}"></dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+						</th:block>
+						</span>
+                        </th:block>
+                        <th:block id="isNotEmptyMemberInquiryModelItems" th:if="*{!isEmptyMemberInquiryModelItems()}">
+                            <span class="c-pagination--page is-current"
+                                  th:replace="~{includehm4/pager_new::pager1(url='/member/inquiry/')}"></span>
+                        </th:block>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{includehm4/footer_new}"></div>
+</div>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+
+
+</body>
+</html>

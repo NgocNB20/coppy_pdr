@@ -1,0 +1,11 @@
+type: object
+description: 消費税率
+properties:
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: furniture-00201
+  taxRate:
+    type: number
+    description: 消費税率
+    example: 0.1

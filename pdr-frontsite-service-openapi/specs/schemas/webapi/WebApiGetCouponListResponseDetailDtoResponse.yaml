@@ -1,0 +1,19 @@
+type: object
+description: WEB-API利用可能クーポン一覧取得詳細情報DTOレスポンス
+properties:
+  couponNo:
+    type: string
+    description: クーポン番号
+    example: A123456
+  couponName:
+    type: string
+    description: クーポン名
+    example: 300円OFFクーポン
+  couponConditions:
+    type: string
+    description: 適用条件
+    example: 商品を5点以上のお買い上げで適用
+  couponExplain:
+    type: string
+    description: 詳細説明
+    example: 有効期限　2023/10/1まで

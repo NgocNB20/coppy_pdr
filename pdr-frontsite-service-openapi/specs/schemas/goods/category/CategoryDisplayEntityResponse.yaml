@@ -1,0 +1,42 @@
+type: object
+description: カテゴリ表示レスポンス
+properties:
+  categorySeq:
+    type: integer
+    format: int32
+    description: カテゴリSEQ (FK)（必須）
+    example: 10000000
+  categoryName:
+    type: string
+    description: カテゴリ表示名PC
+    example: TOP
+  categoryNote:
+    type: string
+    description: カテゴリについての説明文携帯
+    example: カテゴリについての説明
+  freeText:
+    type: string
+    description: フリーテキストPC
+    example: バナーなどを挿入できるフリーエリア
+  metaDescription:
+    type: string
+    description: meta-description
+    example: 概要１
+  metaKeyword:
+    type: string
+    description: meta-keyword
+    example: キーワード１
+  categoryImage:
+    type: string
+    description: カテゴリ画像PC
+    example:
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>会員詳細｜会員管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="memberinfo">
+<div id="searchMember" class="l-mainwrap">
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <div class="l-main">
+                <form th:action="@{/memberinfo/update/confirm}" th:object="${memberInfoUpdateModel}" method="post">
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" id="pageNumber" name="pageNumber"/>
+                    <input type="submit" id="doDisplayChange" name="doDisplayChange" style="display:none" value="表示切替"/>
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">会員詳細</h1>
+                        <h2 class="c-pagetitle_h2" th:text="*{memberInfoName + ' 様'}"></h2>
+
+                    </div>
+
+                    <div class="l-section_column">
+                        <div class="l-section_inner">
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">お客様情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-base dt_w120px c-btm_line">
+                                            <div>
+                                                <dt>会員SEQ</dt>
+                                                <dd th:text="*{memberInfoSeq}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>会員ID</dt>
+                                                <dd th:class="*{#style.diff(modifiedList, {'memberInfoId'})}"
+                                                    th:text="*{memberInfoId}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>顧客番号</dt>
+                                                <dd th:text="*{customerNo}"></dd>
+                                            </div>
+                                        </dl>
+                                            <div class="wrap_flex_equivalent">
+                                                <div class="col mr25">
+                                                    <dl class="c-dl-base dt_w120px">
+                                                        <div>
+                                                            <dt>事業所名</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'memberInfoLastName'})}"
+                                                                th:text="*{memberInfoName}"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>事業所名(フリガナ)</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'memberInfoLastKana'})}"
+                                                                th:text="*{memberInfoKana}"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>郵便番号</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'memberInfoZipCode'})}"
+                                                                th:text="*{memberInfoZipCode}"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>住所</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'memberInfoPrefecture', 'memberInfoAddress1', 'memberInfoAddress2', 'memberInfoAddress3', 'memberInfoAddress4', 'memberInfoAddress5'})}"
+                                                                th:text="*{memberInfoAddress}"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>代表者名</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'representativeName'})}"
+                                                                th:text="*{representativeName == null ? '&nbsp;' : representativeName}"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>顧客区分</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'businessType'})}"
+                                                                th:text="*{#enumtype.getLabel('HTypeBusinessType', businessType)}"></dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+
+                                                <div class="col">
+                                                    <dl class="c-dl-base dt_w120px">
+                                                        <div>
+                                                            <dt>電話番号</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'memberInfoTel'})}"
+                                                                th:text="*{memberInfoTel}"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>FAX番号</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'memberInfoFax'})}"
+                                                                th:text="*{memberInfoFax == null ? '&nbsp;' : memberInfoFax}"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>確認書類</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'confDocumentType'})}"
+                                                                th:text="*{#enumtype.getLabel('HTypeConfDocumentType', confDocumentType)}"></dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            <div class="wrap_flex_equivalent mt25">
+                                                <div class="col">
+                                                    <dl class="c-dl-base dt_w120px c-btm_line">
+                                                        <div>
+                                                            <dt>休診曜日</dt>
+                                                            <dd th:class="*{#style.diff(modifiedList, {'nonConsultationDay'})}"
+                                                                th:text="*{#date.convert(nonConsultationDay, 'yyyy/MM/dd')}"></dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        <input type="hidden" th:value="*{medicalTreatment}" name="medicalTreatment" id="medicalTreatment" />
+                                        <input type="hidden" th:value="*{medicalTreatment1Disp}" name="medicalTreatment1Disp" id="medicalTreatment1Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment2Disp}" name="medicalTreatment2Disp" id="medicalTreatment2Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment3Disp}" name="medicalTreatment3Disp" id="medicalTreatment3Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment4Disp}" name="medicalTreatment4Disp" id="medicalTreatment4Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment5Disp}" name="medicalTreatment5Disp" id="medicalTreatment5Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment6Disp}" name="medicalTreatment6Disp" id="medicalTreatment6Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment7Disp}" name="medicalTreatment7Disp" id="medicalTreatment7Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment8Disp}" name="medicalTreatment8Disp" id="medicalTreatment8Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment9Disp}" name="medicalTreatment9Disp" id="medicalTreatment9Disp" />
+                                        <input type="hidden" th:value="*{medicalTreatment10Disp}" name="medicalTreatment10Disp" id="medicalTreatment10Disp" />
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt><span id="medicalTreatment1Title" th:utext="*{medicalTreatment1Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment1Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge1}">
+                                                                <span th:text="*{medicalTreatment1 ? '〇' : 'ー'}" th:remove="tag"></span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge1}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment1}" id="medicalTreatment1" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment3Title" th:utext="*{medicalTreatment3Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment3Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge3}">
+                                                                <span th:text="*{medicalTreatment3 ? '〇' : 'ー'}" th:remove="tag"> </span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge3}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment3}" id="medicalTreatment3"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment5Title" th:utext="*{medicalTreatment5Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment5Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge5}">
+                                                                <span th:text="*{medicalTreatment5 ? '〇' : 'ー'}" th:remove="tag"> </span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge5}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment5}" id="medicalTreatment5"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment7Title" th:utext="*{medicalTreatment7Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment7Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge7}">
+                                                                <span th:text="*{medicalTreatment7 ? '〇' : 'ー'}" th:remove="tag"> </span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge7}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment7}" id="medicalTreatment7"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment9Title" th:utext="*{medicalTreatment9Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment9Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge9}">
+                                                                <span th:text="*{medicalTreatment9 ? '〇' : 'ー'}" th:remove="tag"></span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge9}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment9}" id="medicalTreatment9"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt><span id="medicalTreatment2Title" th:utext="*{medicalTreatment2Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment2Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge2}">
+                                                                <span th:text="*{medicalTreatment2 ? '〇' : 'ー'}" th:remove="tag"> </span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge2}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment2}" id="medicalTreatment2"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment4Title" th:utext="*{medicalTreatment4Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment4Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge4}">
+                                                                <span th:text="*{medicalTreatment4 ? '〇' : 'ー'}" th:remove="tag"> </span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge4}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment4}" id="medicalTreatment4"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment6Title" th:utext="*{medicalTreatment6Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment6Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge6}">
+                                                                <span th:text="*{medicalTreatment6 ? '〇' : 'ー'}" th:remove="tag"> </span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge6}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment6}" id="medicalTreatment6"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment8Title" th:utext="*{medicalTreatment8Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment8Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge8}">
+                                                                <span th:text="*{medicalTreatment8 ? '〇' : 'ー'}" th:remove="tag"> </span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge8}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment8}" id="medicalTreatment8"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt><span id="medicalTreatment10Title" th:utext="*{medicalTreatment10Title}"></span></dt>
+                                                        <dd th:class="*{diffMedicalTreatment10Class}">
+                                                            <th:block th:if="*{isMedicalTreatmentJudge10}">
+                                                                <span th:text="*{medicalTreatment10 ? '〇' : 'ー'}" th:remove="tag"></span>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge10}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment10}" id="medicalTreatment10"/>
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w160px c-btm_line">
+                                                    <div>
+                                                        <dt>その他</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'medicalTreatmentMemo'})}"
+                                                            th:text="*{medicalTreatmentMemo == null ? '&nbsp;' : medicalTreatmentMemo}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>医薬品・注射針販売区分</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'drugSalesType'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeDrugSalesType', drugSalesType)}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px" >
+                                                    <div>
+                                                        <dt>医療機器販売区分</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'medicalEquipmentSalesType'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeMedicalEquipmentSalesType', medicalEquipmentSalesType)}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>歯科専用品販売区分</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'dentalMonopolySalesType'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeDentalMonopolySalesType', dentalMonopolySalesType)}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div>
+                                                        <dt>クレジット決済使用可否</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'creditPaymentUseFlag'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeCreditPaymentUseFlag', creditPaymentUseFlag)}"></dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt>代金引換使用可否</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'cashDeliveryUseFlag'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeCashDeliveryUseFlag', cashDeliveryUseFlag)}"></dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt>月締請求使用可否</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'monthlyPayUseFlag'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeMonthlyPayUseFlag', monthlyPayUseFlag)}"></dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt>経理区分</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'accountingType'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeAccountingType', accountingType)}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div>
+                                                        <dt>コンビニ・郵便振込使用可否</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'transferPaymentUseFlag'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeTransferPaymentUseFlag', transferPaymentUseFlag)}"></dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt>口座自動引落使用可否</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'directDebitUseFlag'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeDirectDebitUseFlag', directDebitUseFlag)}"></dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt>名簿区分</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'memberListType'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeMemberListType', memberListType)}"></dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt>オンラインログイン可否</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'onlineLoginAdvisability'})}"
+                                                            th:text="*{#enumtype.getLabel('HTypeOnlineLoginAdvisability', onlineLoginAdvisability)}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </article>
+
+                        <!--// 2023-renew No22 from here-->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">確認書類画像</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <ul class="c-image-list">
+                                        <th:block th:each="item, stat: *{uploadFileModelList}"
+                                        th:unless="*{#lists.isEmpty(uploadFileModelList)}">
+                                            <li th:if="${!item.isDeleted}">
+                                                <div th:if="${item.extensionType.value != '2'}" class="img imagePreviewer">
+                                                    <img
+                                                    class="c-pointer"
+                                                    th:onclick="previewImageClick([[${stat.index}]], [[${memberInfoUpdateModel.uploadFileModelList}]])"
+                                                    th:id="'upload-image-' + '-' + ${stat.index}"
+                                                    th:src="${item.filePath}" alt="">
+                                                </div>
+                                                <div th:if="${item.extensionType.value == '2'}" class="img imagePreviewer">
+                                                    <a class="pdf-preview" target="_blank" th:href="${item.filePath}">
+                                                        <img th:src="@{/assets/images/pdf-icon.png}">
+                                                        <div th:text="${item.originName}"></div>
+                                                    </a>
+                                                </div>
+                                                <input type="hidden" th:id="'imagePath' + '-' + ${stat.index}"
+                                                    th:name="'uploadFileModelList[' + ${stat.index} + '].imagePath'"
+                                                    th:value="${item.filePath}"/>
+                                            </li>
+                                        </th:block>
+                                    <th:block th:if="*{#lists.isEmpty(uploadFileModelList)}">
+                                    確認書類はありません
+                                    </th:block>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        <!--// 2023-renew No22 to here-->
+
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">管理用メモ</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <!--2023-renew No85-2 from here-->
+                                    <th:block th:if="*{#strings.isEmpty(memo)}">管理メモはありません</th:block>
+                                    <th:block th:if="*{!#strings.isEmpty(memo)}" th:utext="*{#pre.convert(memo)}"></th:block>
+                                    <!--2023-renew No85-2 to here-->
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">反社会的勢力でないことの保証</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base">
+                                        <div class="edit-radio">
+                                            <dt class="w700px">暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。</dt>
+                                            <dd th:class="*{#style.diff(modifiedList, {'noAntiSocialFlag'})}">
+                                                <label class="c-form-control">
+                                                    <span th:if="*{noAntiSocialFlag}">保証する</span>
+                                                </label>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+
+
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">情報提供</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_w160px">
+                                        <div class="wrap_flex_equivalent">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div>
+                                                        <dt class="w200px">メールによるおトク情報</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'sendMailPermitFlag'})}"
+                                                            th:text="*{sendMailPermitFlag eq null ? 'ー' : sendMailPermitFlag.label}"></dd>
+                                                    </div>
+                                                    <div class="wrap_flex_equivalent">
+                                                        <div class="col mr25">
+                                                            <dl class="c-dl-base dt_w180px">
+                                                                <div>
+                                                                    <dt class="w200px">FAXによるおトク情報</dt>
+                                                                    <dd th:class="*{#style.diff(modifiedList, {'sendFaxPermitFlag'})}"
+                                                                        th:text="*{sendFaxPermitFlag eq null ? 'ー' : sendFaxPermitFlag.label}"></dd>
+                                                                </div>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col">
+                                                            <dl class="c-dl-base dt_w180px">
+                                                                <div>
+                                                                    <dt class="w200px">DMによるおトク情報</dt>
+                                                                    <dd th:class="*{#style.diff(modifiedList, {'sendDirectMailFlag'})}"
+                                                                        th:text="*{sendDirectMailFlag eq null ? 'ー' : sendDirectMailFlag.label}"></dd>
+                                                                </div>
+                                                            </dl>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <dt class="w200px">金属商品価格お知らせメール</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'metalPermitFlag'})}"
+                                                            th:text="*{metalPermitFlag eq null ? 'ー' : metalPermitFlag.label}"></dd>
+                                                    </div>
+                                                    <!-- 2023-renew No79 from here -->
+                                                    <div>
+                                                        <dt class="w200px">ご注文受付完了メール</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'orderCompletePermitFlag'})}"
+                                                            th:text="*{orderCompletePermitFlag eq null ? 'ー' : orderCompletePermitFlag.label}"></dd>
+                                                    </div>
+                                                    <div>
+                                                        <dt class="w200px">商品発送完了メール</dt>
+                                                        <dd th:class="*{#style.diff(modifiedList, {'deliveryCompletePermitFlag'})}"
+                                                            th:text="*{deliveryCompletePermitFlag eq null ? 'ー' : deliveryCompletePermitFlag.label}"></dd>
+                                                    </div>
+                                                    <!-- 2023-renew No79 to here -->
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        </div>
+
+                        <div class="l-section_side">
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">会員状態情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-base dt_w120px">
+                                            <div>
+                                                <dt>状態</dt>
+                                                <dd th:class="*{#style.diff(modifiedList, {'memberInfoStatus'})}"
+                                                    th:text="*{#enumtype.getLabel('HTypeMemberInfoStatus', memberInfoStatus)}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>入会日</dt>
+                                                <dd class="c-times_inner"
+                                                    th:class="*{#style.diff(modifiedList, {'admissionYmd'})}"
+                                                    th:text="*{admissionYmd}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>退会日</dt>
+                                                <dd class="c-times_inner"
+                                                    th:class="*{#style.diff(modifiedList, {'secessionYmd'})}"
+                                                    th:text="*{secessionYmd}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>登録日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(registTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>更新日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(updateTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>アカウントロック状態</dt>
+                                                <dd th:class="*{#style.diff(modifiedList, {'accountLock'})}">
+                                                    <span th:if="*{accountLock}" th:text="ロック" th:remove="tag"></span>
+                                                    <span th:if="*{!accountLock}" th:text="正常" th:remove="tag"></span>
+                                                </dd>
+
+                                            </div>
+                                            <div>
+                                                <dt>アカウントロック日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(accountLockTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>ログイン失敗回数</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{loginFailureCount}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>オンライン登録状態</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#enumtype.getLabel('HTypeOnlineRegistFlag', onlineRegistFlag)}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>承認状態</dt>
+                                                <dd class="c-times_inner" id="approveStatus"
+                                                    th:class="*{#style.diff(modifiedList, {'approveStatus'})}"
+                                                    th:text="*{#enumtype.getLabel('HTypeApproveStatus', approveStatus)}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>顧客番号・パスワード通知メール送信</dt>
+                                                <dd>
+                                                    <label class="c-form-control">
+                                                        <input id="sendNoticeMailFlag" type="checkbox"
+                                                               disabled
+                                                               th:value="*{sendNoticeMailFlag}"
+                                                               th:field="*{sendNoticeMailFlag}"
+                                                               th:checked="*{sendNoticeMailFlag eq true}"
+                                                        ><i></i>送信する</label>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">最終ログイン情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-nobase">
+                                            <div>
+                                                <dt>日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(lastLoginTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>デバイス</dt>
+                                                <dd th:text="*{lastLoginDeviceType eq null ? 'ー' : lastLoginDeviceType.label}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>ユーザーエージェント</dt>
+                                                <dd th:text="*{lastLoginUserAgent}"></dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">パスワード</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-nobase">
+                                            <div>
+                                                <dt>ログイン時パスワード変更</dt>
+                                                <dd th:class="*{#style.diff(modifiedList, {'passwordNeedChangeFlag'})}">
+                                                    <label class="c-form-control disabled-checkbox">
+                                                        <input type="checkbox"
+                                                               disabled value="1"
+                                                               th:field="*{passwordNeedChange}"
+                                                               th:checked="*{passwordNeedChange eq true}"
+                                                        ><i></i>要求する</label>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button name="doCancel" type="submit" class="c-btn btn_back icon_left"><i
+                                        class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                            <div class="col_left">
+                                <button class="c-btn btn_regular" type="submit" name="doOnceMemberUpdate">登録</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+<!--2023-renew No22 from here-->
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content-container">
+        <div class="modal-content">
+            <iframe id="pdf-viewer" title="webviewer" frameborder="0" width="800" height="900"></iframe>
+            <img class="" id="modal-img">
+            <div class="modal-footer">
+                <div class="modal-paging"></div>
+                <div class="modal-paging">
+                    <span onclick="closeModel()" class="c-pointer t_underline">Close</span> of <b>Esc Key</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    const modal = document.getElementById("modal-overlay");
+    const modalImg = document.getElementById("modal-img");
+    const pdfViewer = document.getElementById('pdf-viewer')
+
+    document.addEventListener('keydown', keyDownHandler)
+    document.addEventListener('click', handleClickOutsideBox)
+
+    function handleClickOutsideBox(event) {
+        const target = event.target
+        if (target.classList.contains('modal-content-container')) {
+           closeModel()
+        }
+    }
+
+    function previewImageClick(index, list) {
+        const ext = list[index].fileName.split('.').pop().toLowerCase();
+        const path = list[index].filePath
+        if (ext.includes('pdf')) {
+            pdfViewer.src = path
+            pdfViewer.style.display = 'block'
+            modalImg.style.display = 'none'
+        } else {
+            modalImg.src = path;
+            pdfViewer.style.display = 'none'
+            modalImg.style.display = 'block'
+        }
+
+        modal.style.display = "block";
+
+    }
+
+    function closeModel() {
+        modal.style.display = "none";
+    }
+
+    function keyDownHandler(event) {
+        if (modal.style.display === 'block' && event.key === 'Escape') {
+            closeModel()
+        }
+    }
+
+</script>
+<!--2023-renew No22 to here-->
+</body>
+</html>

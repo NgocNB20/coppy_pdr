@@ -1,0 +1,16 @@
+type: object
+description: 注文キャンセルリクエスト
+properties:
+  orderNo:
+    type: integer
+    format: int32
+    description: 受注番号
+    example: 6000000
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  cancelOrderHistoryOrderItem:
+    description: キャンセル対象受注Item
+    $ref: ../memberinfo/CancelOrderHistoryOrderItemRequest.yaml

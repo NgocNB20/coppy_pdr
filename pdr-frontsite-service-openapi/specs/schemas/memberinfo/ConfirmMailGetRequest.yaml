@@ -1,0 +1,12 @@
+type: object
+description: 確認メール情報取得リクエスト
+properties:
+  password:
+    type: string
+    description: メールパスワード
+    example: 012345678999
+  confirmMailType:
+    type: string
+    description: 確認メール種別
+    example: 0
+    default: 0

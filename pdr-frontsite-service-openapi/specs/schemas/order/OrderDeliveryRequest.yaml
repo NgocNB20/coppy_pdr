@@ -1,0 +1,151 @@
+type: object
+description: 受注配送リクエスト
+properties:
+  orderSeq:
+    type: integer
+    format: int32
+    description: 受注SEQ（必須）
+    example: 1
+  orderDeliveryVersionNo:
+    type: integer
+    format: int32
+    description: 受注配送連番（必須）
+    example: 1
+  orderConsecutiveNo:
+    type: integer
+    format: int32
+    description: 注文連番（必須）
+    example: 1
+  shipmentStatus:
+    type: string
+    description: 出荷状態（必須）
+    default: 0
+    example: 1
+  reservationDeliveryFlag:
+    type: string
+    description: 予約配送フラグ
+    default: 0
+    example: 1
+  planDate:
+    type: string
+    format: date-time
+    description: 出荷予定日
+    example: 2022/01/01 12:00:00
+  shipmentDate:
+    type: string
+    format: date-time
+    description: 出荷日
+    example: 2022/01/01 12:00:00
+  deliveryCode:
+    type: string
+    description: 伝票番号
+    example: 2
+  invoiceAttachmentFlag:
+    type: string
+    description: 納品書添付フラグ（必須）
+    default: 0
+    example: 2
+  deliveryMethodSeq:
+    type: integer
+    format: int32
+    description: 配送方法SEQ（必須）
+    example: 2
+  receiverLastName:
+    type: string
+    description: お届け先氏名(姓)（必須）
+    example: 2
+  receiverFirstName:
+    type: string
+    description: お届け先氏名(名)
+    example: 2
+  receiverLastKana:
+    type: string
+    description: お届け先フリガナ(姓)（必須）
+    example: 2
+  receiverFirstKana:
+    type: string
+    description: お届け先フリガナ(名)
+    example: 2
+  receiverTel:
+    type: string
+    description: お届け先電話番号（必須）
+    example: 2
+  receiverZipCode:
+    type: string
+    description: お届け先住所-郵便番号（必須）
+    example: 2
+  receiverPrefecture:
+    type: string
+    description: お届け先住所-都道府県（必須）
+    example: 2
+  receiverAddress1:
+    type: string
+    description: お届け先住所-市区郡（必須）
+    example: 2
+  receiverAddress2:
+    type: string
+    description: お届け先住所-町村・番地（必須）
+    example: 2
+  receiverAddress3:
+    type: string
+    description: お届け先住所-それ以降の住所
+    example: 2
+  receiverAddress4:
+    type: string
+    description: お届け先住所-方書1
+    example: 2
+  receiverDateDesignationFlag:
+    type: string
+    description: お届け希望日指定フラグ（必須）
+    default: 0
+    example: 2
+  receiverDate:
+    type: string
+    format: date-time
+    description: お届け希望日
+    example: 2022/01/01 12:00:00
+  receiverTimeZone:
+    type: string
+    description: お届け時間帯
+    example: JPT
+  deliveryNote:
+    type: string
+    description: 配送方法備考
+    example: 配送方法備考
+  othersNote:
+    type: string
+    description: その他備考
+    example: その他備考
+  message:
+    type: string
+    description: お客様へのメッセージ
+    example: お客様へのメッセージ
+  carriage:
+    type: number
+    description: お客様へのメッセージ
+    default: 0
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00
+  shortestDeliveryDateToRegist:
+    type: string
+    format: date-time
+    description: 最短お届け日_日付登録用
+    example: 2022/01/01 12:00:00
+  deliveryCycle:
+    type: string
+    description: お届けサイクル
+    example: 2
+  deliveryDay:
+    type: integer
+    format: int32
+    description: 定期商品 お届け日
+    example: 2

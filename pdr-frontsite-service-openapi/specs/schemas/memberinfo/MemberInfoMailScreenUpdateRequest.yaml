@@ -1,0 +1,22 @@
+type: object
+description: メールアドレス変更画面用会員メールアドレス変更リクエスト
+properties:
+  memberInfoEntity:
+    $ref: "#/components/schemas/MemberInfoEntityRequest"
+  mid:
+    type: string
+    description: メールURLパラメータ
+    example: メールURLパラメータ
+  memberInfoMail:
+    type: string
+    description: 変更後メールアドレス
+    example: 変更後メールアドレス
+  mailTemplateType:
+    type: string
+    description: メールテンプレートタイプ(会員登録完了/会員退会完了/会員メールアドレス変更)
+    example: 01
+
+components:
+  schemas:
+    MemberInfoEntityRequest:
+      $ref: ./MemberInfoEntityRequest.yaml

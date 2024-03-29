@@ -1,0 +1,13 @@
+type: object
+description: 取りおきMapレスポンス
+properties:
+  reserveDtoMap:
+    type: object
+    description: 取りおき情報MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetReserveResponseDetailDtoResponse'
+
+components:
+  schemas:
+    WebApiGetReserveResponseDetailDtoResponse:
+      $ref: ./WebApiGetReserveResponseDetailDtoResponse.yaml

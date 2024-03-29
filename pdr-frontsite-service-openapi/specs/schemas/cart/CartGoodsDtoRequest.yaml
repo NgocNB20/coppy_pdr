@@ -1,0 +1,22 @@
+type: object
+description: カート商品Dtoリクエスト
+properties:
+  cartGoodsEntity:
+    $ref: "#/components/schemas/CartGoodsEntityRequest"
+  goodsDetailsDto:
+    $ref: "#/components/schemas/GoodsDetailsDtoRequest"
+  goodsPriceSubtotal:
+    type: number
+    description: 金額(税抜き）
+    example: 1000
+  goodsPriceInTaxSubtotal:
+    type: number
+    description: 金額（税込み）
+    example: 1000
+
+components:
+  schemas:
+    CartGoodsEntityRequest:
+      $ref: ./CartGoodsEntityRequest.yaml
+    GoodsDetailsDtoRequest:
+      $ref: ../goods/GoodsDetailsDtoRequest.yaml

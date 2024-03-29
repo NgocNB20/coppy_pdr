@@ -1,0 +1,33 @@
+type: object
+description: カート再構築リクエスト
+properties:
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: 2023101116559922
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  siteType:
+    type: string
+    description: サイト区分
+    example: 1
+  orderField:
+    type: string
+    description: 並替項目
+    example: registTime
+  orderAsc:
+    type: boolean
+    description: 並替昇順フラグ
+    example: false
+    default: false
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+  zipcode:
+    type: string
+    description: 郵便番号
+    example: 5530001

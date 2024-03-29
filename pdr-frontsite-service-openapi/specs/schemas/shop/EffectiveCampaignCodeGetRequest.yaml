@@ -1,0 +1,17 @@
+type: object
+description: 有効なキャンペーンコード取得リクエスト
+properties:
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: 'abc'
+  startDate:
+    type: string
+    description: 端末識別情報
+    format: date-time
+    example: 2022/01/01 12:00:00
+  endDate:
+    type: string
+    description: 端末識別情報
+    format: date-time
+    example: 2022/01/01 12:00:00

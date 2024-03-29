@@ -1,0 +1,121 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-pagination {
+  $this: &;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  margin-top: 45px;
+
+  // 中間
+  &--abb {
+    display: grid;
+    place-content: center;
+    width: 16px;
+    margin: 2px 10px 0;
+
+    svg {
+      width: 100%;
+      fill: $color-ccc;
+    }
+  }
+
+  // 前へ / 次へ
+  &--prev,
+  &--next {
+    display: grid;
+    place-content: center;
+    width: 40px;
+    height: 40px;
+    background: $color-ccc;
+
+    svg {
+      width: 13px;
+      fill: $color-fff;
+    }
+  }
+
+  a#{$this}--prev,
+  a#{$this}--next {
+    background: $color-primary;
+    transition: opacity $comMS $comES;
+
+    &:hover {
+      @include media(lg) {
+        opacity: .5;
+      }
+    }
+  }
+
+  &--prev {
+    margin-right: 35px;
+  }
+
+  &--next {
+    margin-left: 35px;
+  }
+
+  // ページ
+  &--page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 18px;
+    transition: opacity $comMS $comES;
+    @include font-style(25, 26, bold);
+    color: $color-ccc;
+
+    &.is-current {
+      color: $color-primary;
+    }
+  }
+
+  a#{$this}--page:hover {
+    @include media(lg) {
+      opacity: .5;
+      text-decoration: underline;
+      text-underline-offset: 8px;
+    }
+  }
+
+  @include media(sm) {
+
+    margin-top: vwset(30);
+  
+    // 中間
+    &--abb {
+      width: vwset(12);
+      margin: 2px vwset(5) 0;  
+    }
+  
+    // 前へ / 次へ
+    &--prev,
+    &--next {
+      width: vwset(34);
+      height: vwset(34);
+  
+      svg {
+        width: vwset(9);
+      }
+    }
+  
+    &--prev {
+      margin-right: vwset(12);
+    }
+  
+    &--next {
+      margin-left: vwset(12);
+    }
+  
+    // ページ
+    &--page {
+      margin: 0 vwset(14);
+      @include font-sp-style(20, 20);
+    }
+  }
+}

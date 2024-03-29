@@ -1,0 +1,22 @@
+type: object
+description: 公開ニュースリスト情報取得リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 1
+  siteType:
+    type: string
+    description: サイト区分
+    example: 2
+    default: 0
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 2
+    default: 0
+  newsNote:
+    type: string
+    description: ニュース詳細
+    example:

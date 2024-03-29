@@ -1,0 +1,9 @@
+type: array
+description: 商品DTOリストリクエスト
+items:
+  $ref: "#/components/schemas/GoodsDtoRequest"
+
+components:
+  schemas:
+    GoodsDtoRequest:
+      $ref: ./GoodsDtoRequest.yaml

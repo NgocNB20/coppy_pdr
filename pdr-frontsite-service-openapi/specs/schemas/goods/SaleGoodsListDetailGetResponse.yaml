@@ -1,0 +1,31 @@
+# 2023-renew No65 from here
+type: object
+description: セール商品詳細レスポンス
+properties:
+  goodsSeq:
+    type: integer
+    description: 商品SEQ（必須）
+    example: 1
+  saleStatus:
+    type: string
+    description: 販売状態
+    example: 1
+  preSaleCd:
+    type: string
+    description: 前回セールコード
+    example: 1
+  saleCd:
+    type: string
+    description: セールコード
+    example: 1
+  saleFrom:
+    type: string
+    format: date-time
+    description: セール期間From
+    example: 2022/01
+  saleTo:
+    type: string
+    format: date-time
+    description: セール期間To
+    example: 2022/01/01 12:00:00
+# 2023-renew No65 to here

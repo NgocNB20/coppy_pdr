@@ -1,0 +1,24 @@
+type: object
+description: WEB-API連携取得結果DTOクラスレスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品
+    example: 申込商品
+  goodsName:
+    type: string
+    description: 商品名
+    example: 商品名
+  goodsCount:
+    type: integer
+    format: int32
+    description: 数量
+    example: 数量
+  unitName:
+    type: string
+    description: 単位
+    example: 単位
+  discountFlag:
+    type: string
+    description: 適用割引
+    example: 1

@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-count-quantity {
+  display: inline-flex;
+  align-items: center;
+  border: solid 1px $color-e6;
+  border-radius: 4px;
+  overflow: hidden;
+
+  button {
+    background-color: #f6f5f4;
+    width: 40px;
+    height: 50px;
+
+    // 非活性の時のデザイン
+    // &:disabled {
+    //   background: #fff;
+
+    //   &::before,
+    //   &::after {
+    //     opacity: .4;
+    //   }
+    // }
+  }
+
+  &__plus,
+  &__minus {
+    position: relative;
+
+    &::before,
+    &::after {
+      background-color: $color-a1;
+      width: 12px;
+
+      border-radius: 2px;
+      content: '';
+      height: 2px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform-origin: center;
+      transition: transform $comMS $comES;
+    }
+
+    &:before {
+      transform: translate(-50%, -50%);
+    }
+
+    &:after {
+      transform: translate(-50%, -50%) rotate(270deg);
+    }
+  }
+
+  &__minus {
+    &:after {
+      display: none;
+    }
+  }
+
+  input {
+    width: 60px;
+    height: 50px;
+    padding: 0 10px;
+    text-align: center;
+    border: none;
+    border-left: solid 1px $color-e6;
+    border-right: solid 1px $color-e6;
+    border-radius: 0;
+    -moz-appearance: textfield;
+    @include font-style(20);
+
+    &[type="number"]::-webkit-outer-spin-button,
+    &[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+  }
+
+  &--error {
+    color: $color-f00;
+  }
+
+  @include media(sm) {
+
+    button {
+      width: vwset(30);
+      height: vwset(38);
+    }
+
+    &__plus,
+    &__minus {
+
+      &::before,
+      &::after {
+        width: vwset(10);
+      }
+    }
+
+    input {
+      width: vwset(53);
+      height: vwset(38);
+      @include font-sp-style(15);
+    }
+
+  }
+}

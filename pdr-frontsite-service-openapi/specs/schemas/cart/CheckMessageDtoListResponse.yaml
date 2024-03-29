@@ -1,0 +1,9 @@
+type: array
+description: エラー商品リストレスポンス
+items:
+  $ref: "#/components/schemas/CheckMessageDtoResponse"
+
+components:
+  schemas:
+    CheckMessageDtoResponse:
+      $ref: ./CheckMessageDtoResponse.yaml

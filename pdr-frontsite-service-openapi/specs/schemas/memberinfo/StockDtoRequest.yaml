@@ -1,0 +1,47 @@
+type: object
+description: 在庫Dtoクラスリクエスト
+properties:
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ
+    example: 1000
+  salesPossibleStock:
+    type: number
+    description: 販売可能在庫数
+    example: 1
+  realStock:
+    type: number
+    description: 実在庫数
+    example: 1
+  orderReserveStock:
+    type: number
+    description: 注文確保在庫数
+    example: 1
+  remainderFewStock:
+    type: number
+    description: 残少表示在庫数
+    example: 1
+  supplementCount:
+    type: number
+    description: 入庫数
+    example: 1
+    default: 0
+  orderPointStock:
+    type: number
+    description: 発注点在庫数
+    example: 1
+  safetyStock:
+    type: number
+    description: 安全在庫数
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2022/01/01 12:00:00

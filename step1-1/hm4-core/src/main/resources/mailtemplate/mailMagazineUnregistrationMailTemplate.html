@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>メールマガジン登録解除完了</title>
+</head>
+<body>
+<div>
+    <div>
+        <div>
+            <span>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+        </div>
+        <div>
+            <span th:text="'■　' + ${shopName}"></span>
+        </div>
+        <div>
+            <span>■　メールマガジン登録解除完了のお知らせ</span>
+        </div>
+        <div>
+            <span>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+        </div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <span>　HIT-MALL Ver.4 公式オンラインショップメールマガジンの</span>
+        </div>
+        <div>
+            <span>　登録解除が完了しましたのでお知らせいたします。</span>
+        </div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+        </div>
+        <div>
+            <span>　【登録解除アドレス】</span>
+            <span th:text="${MA_MAIL}"></span>
+        </div>
+    </div>
+    <div>
+        <div>
+            <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+        </div>
+        <div>
+            <span>※このメールはご登録解除されたメールアドレスに自動送信しております｡</span>
+        </div>
+        <div>
+            <span>※お心当たりのない方は、誠に恐れ入りますが、</span>
+        </div>
+        <div>
+            <span><a href="mailto:info+stg-hm4@e4-granada.itechh.ne.jp">info+stg-hm4@e4-granada.itechh.ne.jp</a> までご連絡ください。</span>
+        </div>
+    </div>
+</div>
+<div th:replace="~{common/signature}"></div>
+</body>
+</html>

@@ -1,0 +1,1029 @@
+
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.p-order-confirm {
+  $this: &;
+
+  .c-title-page {
+    
+    @include media(lg) {
+      strong {
+        margin-right: 15px;
+      }
+    }
+
+    @include media(sm) {
+      strong {
+        display: block;
+        margin-bottom: vwset(10);
+      }
+    }
+
+  }
+
+  &__coupon-apply {
+    $this: &;
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    background: $color-orange-lightGray;
+
+    &__coupon {
+      margin-block: 6px;
+      @include font-style(16,26,bold);
+      color: $color-f00;
+      display: inline-grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+
+      svg {
+        width: 26px;
+        margin: 2px 10px 0 0;
+        fill: $color-f00;
+      }
+    }
+
+    &__button {
+      margin-top: 18px;
+    }
+
+    &--notapply {
+      border: solid 1px $color-f00;
+      background: #fff2f2;
+
+      #{$this}__coupon {
+        color: $color-f00;
+      }
+
+      svg {
+        fill: $color-f00;
+      }
+
+      .c-textlink {
+        color: $color-f00;
+        @include icon('arrow-right', 'ff0000');
+      }
+
+      .c-button {
+        border-radius: 9999px;
+        background-color: $color-fff;
+        color: $color-f00;
+        border: solid 1px $color-f00;
+        margin-right: 10px;
+
+        svg {
+          margin-top: 1px;
+          margin-right: 8px;
+        }
+
+        span {
+          display: grid;
+          place-content: center;
+        }
+      }
+
+    }
+
+    @include media(sm) {
+      margin: 0 vwset(15) vwset(25);
+      padding: vwset(15) vwset(20);
+  
+      &__coupon {
+        margin-block: vwset(5) vwset(10);
+        @include font-sp-style(16,26,bold);
+        align-items: flex-start;
+  
+        svg {
+          width: vwset(33);
+          margin: vwset(6) vwset(10) 0 0;
+        }
+      }
+
+      &__button {
+        margin-top: vwset(5);
+      }
+  
+      &--notapply {
+
+        .c-button {
+          width: 100%;
+          margin-right: 0;
+          margin-top: vwset(15);
+  
+          svg {
+            margin: 3px 8px 3px 0;
+          }
+        }
+  
+      }
+
+    }
+  }
+
+  &__container {
+
+    @include width(1600px, 20px, 0px);
+    margin-top: 60px;
+
+    &-inner {
+      display: grid;
+      gap: 4.5%;
+      grid-template-columns: minmax(700px, 1150px) minmax(250px, 380px);
+      justify-content: space-between;
+    }
+
+    @include media(sm) {
+      margin-top: vwset(45);
+
+      &-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &__side {
+
+    .p-order-confirm__nextstep {
+      border-radius: 10px;
+      margin-bottom: 52vh;
+      position: sticky;
+      top: 30px;
+      right: 0;
+    }
+
+  }
+
+  &__nextstep {
+    background: $color-orange-light;
+    text-align: center;
+    padding: 50px 10% 45px;
+
+    .c-checkbox p {
+      @include font-style(18,30,normal);
+      font-size: clamp(1.4rem, 1.2vw, 1.8rem);
+    }
+
+    .c-button {
+      margin-block: 35px;
+      font-size: clamp(1.8rem, 1.3vw, 2.2rem);
+      word-break: keep-all;
+      padding-block: 0;
+      width: 100%;
+      max-width: 310px
+    }
+
+    p {
+      @include font-style(16,30,bold);
+    }
+
+    &-linktext {
+      margin-top: 25px;
+      text-align: right;
+    }
+
+    &-error {
+
+      p {
+        @include font-style(22,34,bold);
+      }
+
+      .c-field-error {
+        margin: 10px 30px 25px;
+        @include font-style(16,26);
+      }
+    }
+
+    &-inner {
+      &--error {
+        .c-checkbox {
+          color: $color-a1;
+        }
+        .c-button {
+          color: rgba($color: $color-fff, $alpha: .8);
+          background: $color-ccc;
+        }
+        p {
+          color: $color-a1;
+        }
+      }
+    }
+
+
+    @include media(sm) {
+
+      padding: vwset(40) vwset(30) vwset(30);
+
+      &--upper {
+        margin-bottom: vwset(24);
+      }
+  
+      .c-checkbox p {
+        @include font-sp-style(17,26,normal);
+      }
+  
+      .c-button {
+        margin-block: vwset(20);
+        @include font-sp-style(20,26,bold);
+        width: vwset(272);
+      }
+  
+      p {
+        @include font-sp-style(15,26,bold);
+      }
+  
+      &-linktext {
+        margin: vwset(20) vwset(15) 0;
+      }
+
+      &-error {
+
+        p {
+          @include font-sp-style(20,32,bold);
+        }
+  
+        .c-field-error {
+          margin: vwset(10) vwset(45) vwset(25);
+          @include font-sp-style(15,26);
+        }
+      }
+  
+      &-inner {
+        &--error {
+          .c-checkbox {
+            color: $color-a1;
+          }
+          .c-button {
+            color: rgba($color: $color-fff, $alpha: .8);
+            background: $color-ccc;
+          }
+          p {
+            color: $color-a1;
+          }
+        }
+      }
+
+
+
+
+    }
+  }
+
+  &__order {
+    $this: &;
+    border-top: solid 5px $color-orange-lightGray;
+    padding: 40px 0 45px;
+    display: flex;
+    flex-wrap: nowrap;
+
+    &-title {
+      width: 200px;
+      @include font-style(20,30,bold);
+    }
+
+    &-text {
+      @include font-style(16,30);
+    }
+
+    &-memo {
+      margin-top: 20px;
+      @include font-style(15,22);
+    }
+
+
+    &-payment-type {
+      @include font-style(18,30,bold);
+
+      &--unselected {
+        color: $color-primary;
+      }
+    }
+
+    &-payment-card {
+      margin: 15px 0 0 40px;
+      @include font-style(16,30);
+    }
+
+    &-button {
+      margin-left: auto;
+
+      &--select .c-button {
+        height: 60px;
+        min-width: 140px;
+        padding: 0 40px 2px;
+        @include font-style(20, 25, bold);
+      }
+
+    }
+
+    @include media(sm) {
+      border-top: none;
+      padding: 40px 0 45px;
+      padding: 0;
+      display: block;
+      position: relative;
+  
+      &-title {
+        width: 100%;
+        background: $color-orange-lightGray;
+        padding: vwset(20) vwset(15);
+        @include font-style(20,30,bold);
+      }
+
+      &-contents {
+        padding: vwset(25) vwset(15) vwset(30);
+      }
+  
+      &-text {
+        @include font-sp-style(15,27);
+      }
+  
+      &-memo {
+        margin-top: vwset(20);
+        @include font-style(15,22);
+      }
+  
+      &-payment-type {
+        @include font-sp-style(16,27,bold);
+      }
+  
+      &-payment-card {
+        margin: vwset(15) 0 0 vwset(15);
+        @include font-style(15,30);
+      }
+  
+      &-button {
+        position: absolute;
+        top: vwset(15);
+        right: vwset(20);
+
+        &--select .c-button {
+          width: vwset(80);
+          min-width: vwset(80);
+          padding: 0;
+          height: vwset(40);
+          @include font-style(15,24);
+        }
+      }
+
+      &--goods {
+        background: $color-orange-lightGray;
+
+        #{$this}-title {
+          padding-bottom: 0;
+        }
+
+        #{$this}-contents {
+          padding-block: vwset(5) vwset(20);
+        }
+
+      }
+
+
+    }
+  }
+
+  &__title-normal {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: dashed 1px $color-a1;
+    @include font-style(20,25,bold);
+
+    small {
+      @include font-style(16,25,normal);
+      margin-left: 8px;
+    }
+
+    .c-button {
+      position: absolute;
+      top: -5px;
+      right: 0;
+    }
+
+    @include media(sm) {
+      //display: block;
+      margin: vwset(35) vwset(15) vwset(30);
+      padding-bottom: 0;
+      border-bottom: none;
+      @include font-sp-style(18,28,bold);
+
+      small {
+        display: block;
+        margin-left: 0;
+      }
+
+      .c-button {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+    }
+  }
+
+  &__delivery {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block: 30px 30px;
+
+    &-date {
+      display: inline-flex;
+      flex-wrap: wrap;
+
+      p {
+        display: inline-block;
+        margin: 5px 20px 5px 0;
+        @include font-style(20,24,bold);
+        color: $color-primary;
+      }
+
+      svg {
+        fill: $color-primary;
+        margin-right: 6px;
+      }
+    }
+
+    &-heading {
+      @include font-style(20,24,normal);
+    }
+
+    &-memo {
+      margin-left: 10px;
+      @include font-style(16,24,normal);
+    }
+
+    @include media(sm) {
+
+      margin: 0 vwset(15);
+      padding: vwset(20) vwset(15);
+      background: $color-yellow-light;
+      flex-direction: column;
+      align-items: flex-start;
+  
+      &-date {
+
+        p {
+          margin: 5px 0;
+          @include font-sp-style(17,20,bold);
+        }
+  
+        svg {
+          width: vwset(20);
+        }
+      }
+  
+      &-heading {
+        @include font-sp-style(17,20,normal);
+      }
+  
+      &-memo {
+        display: block;
+        margin: 5px 0 0 0;
+        @include font-style(16,24,normal);
+      }
+
+      .c-button {
+        margin-left: auto;
+      }
+
+    }
+  }
+
+  &__goods {
+    margin-left: 30px;
+    margin-bottom: 100px;
+
+    &-unit {
+      margin-bottom: 70px;
+    }
+
+    @include media(sm) {
+      margin: 0;
+
+      &-unit {
+        margin-bottom: vwset(50);
+
+        &:not(:first-child) {
+          border-top: solid 5px $color-orange-lightGray;
+        }
+
+      }
+    }
+  }
+
+  &__list {
+    $this: &;
+
+    tr:not(:last-child) td {
+      @include media(lg) {
+        border-bottom: solid 1px $color-table;
+      }
+    }
+
+    th,td {
+      vertical-align: middle;
+
+      @include media(lg) {
+        &:not(:last-child) {
+          border-right: solid 1px $color-table;
+        }
+      }
+    }
+
+    &-item {
+      vertical-align: top;
+      padding-left: 0 !important;
+
+      &-inner {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 5%;
+
+        @media screen and (max-width: 1200px) {
+          grid-template-columns: 1fr;
+          row-gap: 15px;
+        }
+      }
+
+      &-title {
+        @include font-style(16,30,bold);
+        margin-bottom: 5px;
+      }
+  
+      &-spec {
+        @include font-style(15, 24);
+      }
+
+      &-text {
+        @include font-style(15, 24);
+      }
+
+      &-memo {
+        margin-top: 10px;
+        @include font-style(15, 24);
+      }
+    }
+
+    &-price {
+
+      .c-product__item-icon {
+        justify-content: right;
+
+        span {
+          margin: 0;
+        }
+      }
+
+    }
+
+    &-quantity {
+
+      &-static {
+        @include font-style(20);
+      }
+    }
+
+
+    // 今すぐお届け
+    &--normal {
+
+      @include media(lg) {
+
+        #{$this}-item {
+          max-width: 710px;
+          width: 63%;
+        }
+
+        #{$this}-price {
+          max-width: 150px;
+          width: 13%;
+          min-width: 110px;
+        }
+
+        #{$this}-quantity {
+
+          width: 9%;
+          padding-block: 30px !important;
+
+          &-inner {
+            display: grid;
+            gap: 0.9vw;
+            place-content: center;
+            place-items: center;
+            grid-template-columns: 142px 80px;
+          }
+
+          &-delete {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: dashed 1px $color-e6;
+          }
+        }
+    
+        #{$this}-delivery {
+          max-width: 160px;
+          width: 13%;
+          min-width: 155px;
+          @include font-style(18);
+          text-align: center;
+        }
+      }
+
+      #{$this}-quantity {
+        &-inner {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+      }
+
+    }
+
+    // セールde予約
+    &--reserve {
+      position: relative;
+
+      &::after {
+        content:"";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: $color-333;
+        position: absolute;
+        bottom: 0;
+      }
+
+      .c-table {
+        border-bottom: none;
+      }
+
+      @include media(lg) {
+
+        #{$this}-delivery {
+          vertical-align: middle;
+          text-align: center;
+          @include font-style(20);
+        }
+
+        #{$this}-quantity {
+          width: 6%;
+          min-width: 100px;
+          border-right: solid 1px $color-table;
+        }
+
+        #{$this}-button {
+          width: 9%;
+          min-width: 120px;
+          vertical-align: middle;
+          text-align: center;
+        }
+
+        #{$this}-rowspan {
+          .p-order-confirm__list-delivery,
+          .p-order-confirm__list-quantity {
+            border-bottom: dashed 1px $color-table;
+          }
+        }
+      }
+    }
+
+
+    @include media(sm) {
+
+      .c-table {
+        width: vwset(345);
+        margin: 0 vwset(15);
+      }
+      
+      .c-table__tr:not(:last-child) {
+        border-bottom: solid 2px $color-333;
+      }
+
+      .c-table__tr > td:not(:last-child) {
+        border-bottom: solid 1px $color-table;
+      }
+
+      .c-table__tr {
+        padding-inline: 0;
+      }
+
+      &-item {
+        width: 100%;
+  
+        &-inner {
+          display: grid;
+          grid-template-columns: vwset(130) 1fr;
+          column-gap: vwset(15);
+        }
+    
+        &-text {
+          @include font-sp-style(15, 25);
+        }
+
+        &-spec {
+          @include font-sp-style(14,25);
+          color: $color-000;
+        }
+
+        &-heading {
+          display: block;
+          margin-right: vwset(5);
+          @include font-sp-style(12,20,normal);
+          word-break: keep-all;
+        }
+      }
+
+      &-price {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .c-product__item-price {
+        display: flex;
+        align-items: center;
+      }
+
+      &-quantity {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        &-inner {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: center;
+          gap: vwset(5);
+        }
+
+        
+        &-static {
+          @include font-sp-style(15);
+          display: flex;
+        }
+
+      }
+
+      &-delivery {
+        display: flex;
+        align-items: center;
+        @include font-sp-style(17,22,bold);
+      }
+
+      &-button {
+        margin-left: auto;
+      }
+
+
+
+    }
+
+  }
+
+  &__nest {
+    padding: 0 !important;
+    width: 100%;
+
+    table {
+      width: 100%;
+    }
+
+    tr {
+      padding-inline: 0;
+      display: table-row;
+
+      &:not(:last-child) td {
+        border-bottom: solid 1px $color-table;
+      }
+    }
+
+    th:not(:last-child) {
+      border-right: solid 1px $color-table;
+      text-align: center;
+    }
+
+    td {
+      width: 50%;
+      text-align: center;
+      vertical-align: middle;
+      padding: vwset(10) !important;
+
+      &:not(:last-child) {
+        border-right: solid 1px $color-table;
+      }
+    }
+
+    &-delivery {
+      @include font-style(15,30);
+
+      img {
+        width: vwset(30);
+        margin-right: vwset(5);
+      }
+    }
+
+    &-quantity {
+      @include font-style(15,30);
+    }
+
+    &-price {
+      .c-product__item-price {
+        display: block;
+      }
+    }
+
+  }
+
+  &__total-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 45px;
+
+    @include media(sm) {
+      flex-direction: column;
+      margin: 0 vwset(15) vwset(35);
+    }
+  }
+
+  &__total-memo {
+    margin-top: 25px;
+    width: 38%;
+    @include font-style(16,30,normal);
+
+    @include media(sm) {
+      order: 2;
+      margin-top: vwset(20);
+      padding-inline: vwset(10);
+      width: 100%;
+      @include font-sp-style(15,28,normal);
+    }
+  }
+
+  &__total {
+    width: 55%;
+    max-width: 520px;
+    margin: 25px 0 0 auto;
+
+    &-unit {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: solid 1px $color-ccc;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      dt {
+        @include font-style(18,24,normal);
+        color: $color-000;
+  
+        small {
+          @include font-style(16,24);
+        }
+      }
+  
+      dd {
+        @include font-style(22,24,500);
+        color: $color-000;
+  
+        span {
+          @include font-style(18,24);
+        }
+      }
+
+    }
+
+    &--sum {
+      color: $color-primary;
+      border-bottom: solid 1px $color-primary;
+
+      dt {
+        @include font-style(22,24,bold);
+        color: $color-primary;
+  
+        small {
+          @include font-style(16,24);
+        }
+      }
+
+      dd {
+        @include font-style(28,24,bold);
+        color: $color-primary;
+  
+        span {
+          @include font-style(18,24);
+        }
+      }
+
+    }
+
+    &-caution {
+      text-align: center;
+      color: $color-f00;
+    }
+
+    &-lead {
+      margin-top: 30px;
+      text-align: center;
+      @include font-style(18,24,bold);
+    }
+
+    &-button {
+      margin: 45px auto;
+      display: grid;
+      justify-content: center;
+      row-gap: 30px;
+
+      .c-button {
+        max-width: 330px;
+        width: 330px;
+      }
+    }
+
+    @include media(sm) {
+
+      width: 100%;
+      max-width: inherit;
+      margin: vwset(15) 0 0;
+  
+      &-unit {
+        margin-bottom: vwset(15);
+        padding: 0 0 vwset(15);
+
+        dt {
+          @include font-sp-style(15,24,normal);
+    
+          small {
+            @include font-style(12,24);
+          }
+        }
+    
+        dd {
+          @include font-sp-style(17,24,500);
+    
+          span {
+            @include font-style(14,24);
+          }
+        }  
+      }
+  
+      &--sum {
+        dt {
+          font-weight: bold
+        }
+
+        dd {
+          @include font-sp-style(20,24,bold);
+        }
+  
+      }
+  
+      &-caution {
+        margin: vwset(20) vwset(20) 0;
+        @include font-sp-style(14,22);
+      }
+  
+      &-lead {
+        margin: vwset(23) vwset(20) 0;
+        @include font-sp-style(15,30,bold);
+      }
+  
+      &-button {
+        margin: vwset(25) auto;
+        row-gap: vwset(20);
+  
+        .c-button {
+          max-width: vwset(275);
+          width: vwset(275);
+          padding: 0 vwset(20);
+        }
+      }
+    }
+
+  }
+
+  &__modal-coupon-title {
+    @include font-style(22,30,bold);
+
+    small {
+      @include font-style(18,30,normal);
+      color: $color-333;
+    }
+  }
+
+}
+

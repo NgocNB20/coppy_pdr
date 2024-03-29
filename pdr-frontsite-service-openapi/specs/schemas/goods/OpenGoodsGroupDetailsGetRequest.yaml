@@ -1,0 +1,11 @@
+type: object
+description: 公開商品グループ詳細情報取得リクエスト
+properties:
+  goodsGroupCode:
+    type: string
+    description: 商品グループコード
+    example: "1000"
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: "1000"

@@ -1,0 +1,22 @@
+type: object
+description: ページ情報リクエスト
+properties:
+  page:
+    type: integer
+    format: int32
+    description: ページ番号
+    example: 1
+  limit:
+    type: integer
+    format: int32
+    description: ページサイズ
+    example: 100
+  orderBy:
+    type: string
+    description: どの項目をソートするか
+    example: Seq
+  sort:
+    type: boolean
+    default: true
+    description: true (Asc ソート順が昇順)・false (Desc ソート順が降順)
+    example: true 

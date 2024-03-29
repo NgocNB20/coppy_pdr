@@ -1,0 +1,322 @@
+<!--	2023-renew No11 from here	-->
+<table class="c-table c-table--pcspdevide">
+    <tbody>
+    <th:block th:each="favoriteItem, stat : ${memberFavoriteModel.favoriteItems}">
+        <tr th:id="${'tbRow-' + stat.index}" th:item-attr="${favoriteItem.goodsCode + '/' + favoriteItem.price}" class="c-table__tr">
+            <td class="c-table__item p-mypage-favorite__list-item">
+                <a th:classappend="${!favoriteItem.isGoodsOpen()} ? 'a-disable' : ''"
+                   th:href="@{/goods/index.html(gcd=${favoriteItem.gcd})}" class="p-mypage-favorite__list-item-inner">
+                    <div class="p-mypage-favorite__list-item-image">
+                        <th:block th:if="${#lists.isEmpty(favoriteItem.goodsImageItems)}">
+                            <img th:src="@{ __${@environment.getProperty('images.path.goods')}__/noimg.jpg}" alt="" height="122" width="122" decoding="async" loading="lazy">
+                        </th:block>
+                        <th:block th:if="${!#lists.isEmpty(favoriteItem.goodsImageItems)}">
+                            <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${favoriteItem.goodsImageItems[0]}}"
+                                 th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${favoriteItem.goodsImageItems[0]} + ' 2x'"
+                                 alt="" height="122" width="122" decoding="async" loading="lazy">
+                        </th:block>
+                    </div>
+                    <div class="p-mypage-favorite__list-item-overview">
+                        <div class="c-product__item-icon c-product__item-icon--list">
+                            <span class="c-product__item-icon--reserve" th:if="${favoriteItem.isSaleIconFlag()}">セールde予約</span>
+                            <span class="c-product__item-icon--new" th:if="${favoriteItem.isNewIconFlag()}">NEW</span>
+                            <span class="c-product__item-icon--sale" th:if="${favoriteItem.isReserveIconFlag()}">SALE</span>
+                            <span class="c-product__item-icon--outlet" th:if="${favoriteItem.isOutletIconFlag()}">アウトレット</span>
+                        </div>
+                        <div class="p-mypage-favorite__list-item-title">
+                            <span th:remove="tag" th:text="${favoriteItem.goodsGroupName}"><</span>
+                        </div>
+                        <th:block th:if="${favoriteItem.isUnit1()}">
+                            <div class="p-mypage-favorite__list-item-spec">
+                                <span class="p-mypage-favorite__list-item-heading">
+                                    <span id="unitTitle1" th:remove="tag" th:text="${favoriteItem.unitTitle1}"></span>：</span><span id="unitValue1" th:remove="tag" th:text="${favoriteItem.unitValue1}"></span>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${favoriteItem.isUnit2()}">
+                            <div class="p-mypage-favorite__list-item-spec">
+                                <span class="p-mypage-favorite__list-item-heading">
+                                    <span id="unitTitle2" th:remove="tag" th:text="${favoriteItem.unitTitle2}"></span>：</span><span id="unitValue2" th:remove="tag" th:text="${favoriteItem.unitValue2}"></span>
+                            </div>
+                        </th:block>
+                    </div>
+                </a>
+            </td>
+            <td class="c-table__price p-mypage-favorite__list-price" th:id="${'cellPrice-' + stat.index}">
+                <!--    2023-renew No2 from here-->
+                <th:block th:if="${favoriteItem.isNoGoodsStockItemSaleCheck()}">
+                    <div class="c-product__item-price">
+                        <div class="c-product__item-licence">ご購入には書類の提出が必要です</div>
+                        <a th:href="@{/goods/index.html(gcd=${favoriteItem.goodsCode})}" class="c-textlink c-textlink--right c-textlink--large c-textlink--text"><p>商品詳細はこちら</p></a>
+                    </div>
+                </th:block>
+                <th:block th:unless="${favoriteItem.isNoGoodsStockItemSaleCheck()}">
+                    <!--    2023-renew No10 from here-->
+                    <th:block th:if="${favoriteItem.isDisplayPrice()}">
+                        <th:block th:if="${favoriteItem.isDisplayDiscountFlag()}">
+                            <div class="p-mypage-favorite__list-spirit-icon l-sm"><img th:src="@{/newdesign/assets/images/icon/spirit.svg}" width="40" alt="心意気価格"></div>
+                            <div class="p-mypage-favorite__list-spirit l-lg">
+                                <div class="p-mypage-favorite__list-spirit-icon"><img th:src="@{/newdesign/assets/images/icon/spirit.svg}" width="40" alt="心意気価格"></div>
+                                セール中１回限り<strong th:if="${favoriteItem.saleEmotionPrice != null}"><span th:remove="tag" th:text="${#number.convert(favoriteItem.saleEmotionPrice)}"></span></strong>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${favoriteItem.customerSalePrice != null || favoriteItem.salePrice != null}">
+                            <div th:id="${'cellPriceDetail-' + stat.index}" class="c-product__item-price">
+                                <th:block th:if="${favoriteItem.isDisplayDiscountFlag()}">
+                                    <div class="p-mypage-favorite__list-spiritSM l-sm">
+                                        セール中１回限り<strong th:if="${favoriteItem.saleEmotionPrice != null}">
+                                        <span th:remove="tag" th:text="${#number.convert(favoriteItem.saleEmotionPrice)}" ></span></strong>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${favoriteItem.level != null && favoriteItem.level != '1'}">
+                                    <small><span th:remove="tag" th:text="${favoriteItem.level}"></span>&nbsp;:&nbsp;</small>
+                                </th:block>
+                                <th:block th:if="${favoriteItem.level != null && favoriteItem.level == '1' && favoriteItem.multiLevelFlag}">
+                                    <small><span th:remove="tag" th:text="${favoriteItem.level}"></span>&nbsp;:&nbsp;</small>
+                                </th:block>
+                                <div class="c-product__item-price-unit">
+                                    <span th:remove="tag" th:text="${#number.convert(favoriteItem.price)}"></span>
+                                </div>
+                                <div class="c-product__item-price-unit c-product__item-price-unit--sale"
+                                     th:if="${favoriteItem.customerSalePrice != null || favoriteItem.salePrice != null}">
+                                    <small> → </small>
+                                    <th:block th:if="${favoriteItem.customerSalePrice != null}"><span th:remove="tag" th:text="${#number.convert(favoriteItem.customerSalePrice)}"></span></th:block>
+                                    <th:block th:if="${favoriteItem.customerSalePrice == null && favoriteItem.salePrice != null}"><span th:remove="tag" th:text="${#number.convert(favoriteItem.salePrice)}"></span></th:block>
+                                </div><br>
+                            </div>
+                        </th:block>
+                        <th:block th:unless="${favoriteItem.customerSalePrice != null || favoriteItem.salePrice != null}">
+                            <div th:id="${'cellPriceDetail-' + stat.index}" class="c-product__item-price">
+                                <th:block th:if="${favoriteItem.isDisplayDiscountFlag()}">
+                                    <div class="p-mypage-favorite__list-spiritSM l-sm">
+                                        セール中１回限り<strong th:if="${favoriteItem.saleEmotionPrice != null}"><span th:remove="tag" th:text="${#number.convert(favoriteItem.saleEmotionPrice)}"></span></strong></div>
+                                </th:block>
+                                <th:block th:if="${favoriteItem.level != null && favoriteItem.level != '1'}">
+                                    <small><span th:remove="tag" th:text="${favoriteItem.level}"></span>&nbsp;:&nbsp;</small>
+                                </th:block>
+                                <th:block th:if="${favoriteItem.level != null && favoriteItem.level == '1' && favoriteItem.multiLevelFlag}">
+                                    <small><span th:remove="tag" th:text="${favoriteItem.level}"></span>&nbsp;:&nbsp;</small>
+                                </th:block>
+                                <div class="c-product__item-price-unit">
+                                    <span th:remove="tag" th:text="${#number.convert(favoriteItem.price)}"></span>
+                                </div>
+                            </div>
+                        </th:block>
+                    </th:block>
+
+                    <th:block th:if="${!favoriteItem.isDisplayPrice()}">
+                        <div class="c-product__item-price c-product__item-price--null">ー</div>
+                    </th:block>
+                    <!--    2023-renew No10 to here-->
+                </th:block>
+                <!--    2023-renew No2 to here-->
+            </td>
+            <td class="c-table__quantity p-mypage-favorite__list-quantity">
+                <th:block th:if="${favoriteItem.isDisplayAddCart()}">
+                    <div class="p-mypage-favorite__list-quantity-inner">
+                        <div class="c-count-quantity--wrap">
+                            <div class="c-count-quantity js-count-quantity">
+                                <button type="button" class="c-count-quantity__minus minus_button" data-type="minus" th:data-field="'favoriteItems[' + ${stat.index} + '].gcnt'" disabled="disabled"></button>
+                                <input type="number" class="c-input c-count-quantity__result input_result" min="1" max="999"
+                                       th:id="'gcnt-' + ${stat.index}" th:field="*{favoriteItems[__${stat.index}__].gcnt}" title="注文数" maxlength="3" th:errorclass="c-input--error">
+                                <button type="button" class="c-count-quantity__plus plus_button" data-type="plus" th:data-field="'favoriteItems[' + ${stat.index} + '].gcnt'"></button>
+                            </div>
+                            <div class="c-field-error" th:id="'goodsCode-' + ${stat.index} + '-error'"></div>
+                        </div>
+                        <div class="p-mypage-favorite__list-button">
+
+                            <input type="hidden" id="goodsGroupSeq"/>
+                            <input type="hidden" id="goodsSeq"/>
+                            <input type="hidden" id="gcd" th:value="${favoriteItem.gcd}"/>
+
+                            <div class="ajaxCartAddFavo" style="display: none;">
+                                <a th:id="'goAjaxCart-' + ${stat.index}" th:href="@{/cart/index.html(gcd=${favoriteItem.gcd}, gcnt='')}" field-validate="true"
+                                   onclick="ajaxCartAddFavorite(this);return false;"
+                                   class="c-button c-button--primary c-button--width-s p-mypage-favorite__list-cart">カートに入れる
+                                </a>
+                            </div>
+                            <div class="normalCartAddFavo">
+                                <button th:onclick="'setFavoriteIndex(' + ${stat.index} + ');'" name="doAddCart" type="submit" class="c-button c-button--primary c-button--width-s p-mypage-favorite__list-cart">カートに入れる</button>
+                            </div>
+
+                            <div class="l-sm">
+                                <a th:href="@{/member/favorite/index.html(gcd=${favoriteItem.gcd},pnum=1,md='d')}" class="c-textlink c-textlink--text c-textlink--large c-textlink--delete">
+                                    <svg viewBox="0 0 10 10"><use xlink:href="/assets/images/icon/delete.svg#delete"></use></svg>削除
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                <div class="c-table__stock p-product-detail__stock-stock" th:if="${favoriteItem.iconDisplayGoodsUnit != null}">
+                    <span th:remove="tag" th:text="${favoriteItem.iconDisplayGoodsUnit}"></span>
+                </div>
+                <th:block th:if="${favoriteItem.isDisplayArrivalNotification()}">
+                    <!--	2023-renew No65 from here	-->
+                    <button type="submit" class="c-textlink c-textlink--right c-textlink--large c-textlink--text c-textlink--arrival"
+                            th:onclick="'preventOnClick(event);restockAnnounceRegistInline(this);'" th:id="'restockAnnounceAddBtn-' + ${stat.index}">
+                        <svg viewBox="0 0 17 20"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/new-arrival.svg#new-arrival}"></use></svg>
+                        </span><p>入荷お知らせを設定する</p>
+                    </button>
+                    <!--	2023-renew No65 to here	-->
+                </th:block>
+            </td>
+            <td class="p-mypage-favorite__list-delete l-lg">
+                <a th:href="@{/member/favorite/index.html(gcd=${favoriteItem.gcd},pnum=1,md='d')}" class="c-textlink c-textlink--text c-textlink--delete"><svg viewBox="0 0 10 10"><use xlink:href="/assets/images/icon/delete.svg#delete"></use></svg>削除</a>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        groupingRowData();
+    });
+
+    function groupingRowData() {
+        let arrMap = [];
+        let ignoreIndexArr = [];
+
+        // detect grouping row data
+        $("tr[id^=tbRow-]").each(function (index) {
+            if (ignoreIndexArr.includes(index)) {
+                return;
+            }
+
+            let curVal = null;
+            let nextVal = null;
+            let curItemAttr = $("#tbRow-" + index).attr("item-attr");
+            if (curItemAttr) {
+                curVal = curItemAttr.split("/");
+            }
+
+            let nextIndex = 0;
+            let nextItemAttr = null;
+            let newMap = new Map();
+            newMap.set(index, [index]);
+            do {
+                nextItemAttr = $("#tbRow-" + (index + nextIndex + 1)).attr("item-attr");
+                if (nextItemAttr) {
+                    nextVal = nextItemAttr.split("/");
+                    // check same code
+                    if (curVal[0] === nextVal[0]) {
+                        newMap.get(index).push(index + nextIndex + 1);
+                        ignoreIndexArr.push(index + nextIndex + 1);
+                    } else {
+                        break;
+                    }
+                }
+                nextIndex++;
+            } while (nextItemAttr);
+
+            if (newMap.get(index).length > 0) {
+                arrMap.push(newMap);
+            }
+        });
+
+        // update merge price data
+        arrMap.forEach(myMap => {
+            for (let [key, value] of myMap) {
+                value.forEach(addIndex => {
+                    $("#cellPrice-" + key).append($("#cellPriceDetail-" + addIndex));
+                });
+            }
+        });
+
+        // remove redundant rows
+        ignoreIndexArr.forEach((index) => {
+            $("#tbRow-" + index).remove();
+        });
+    }
+
+    function updateGoodsQuantity(obj, isIncrease) {
+        const min = 1;
+        const max = 999;
+        const quantityStr = $(obj).parent().find('input[type=text]').val();
+        if (!Number.isNaN(quantityStr)) {
+            const quantity = Number(quantityStr);
+            if (isIncrease) {
+                if (quantity >= min && quantity < max) {
+                    $(obj).parent().find('input[type=text]').val(quantity + 1);
+                }
+            } else {
+                if (quantity > min && quantity <= max) {
+                    $(obj).parent().find('input[type=text]').val(quantity - 1);
+                }
+            }
+        }
+    }
+
+    <!--	2023-renew No65 from here	-->
+    function restockAnnounceRegistInline(obj) {
+        let restockAnnounceId = $(obj).attr('id').split('-')[1];
+        let gcdParam = $('#goodGcd-' + restockAnnounceId).text();
+        toggleErrorMessage(false, null);
+        toggleAnnounceAjaxCall(gcdParam, true).done(function (data){
+            handleToggleRestockAnnounceAjaxResponse(data);
+        });
+
+        setTimeout(function() {
+            window.location.href = "/member/restockannounce/index.html";
+        }, 2000);
+    }
+
+    function toggleAnnounceAjaxCall(gcd) {
+        let def = $.Deferred(); // Ajax通信を行う
+        const urlPath = "/getRestockAnnounceRegisterResponse";
+        $.ajax({
+            type: "GET",
+            url: pkg_common.getAppComplementUrl() + urlPath,
+            dataType: "json",
+            data: {
+                "gcd": gcd
+            },
+            timeout: 30000
+        }).done(function (response) {
+            def.resolve(response);
+        }).fail(function (jqXHR, textStatus) {
+            def.reject(textStatus);
+        });
+        return def.promise();
+    }
+
+    function handleToggleRestockAnnounceAjaxResponse(data) {
+        if (data || (data && data.length > 0)) {
+            const status = data[0].restockAnnounceRegistSuccess;
+            if (status === "false") {
+                const errorMsg = data[0].errorRestockAnnounceMsg
+                    ?? data.errorRestockAnnounceMsg;
+                if (errorMsg) {
+                    toggleErrorMessage(true, errorMsg);
+                }
+            }
+        }
+    }
+
+    function toggleErrorMessage(isDisplay, errorMsg) {
+        if (isDisplay) {
+            $("html,body").animate({scrollTop: 0});
+            let errorFavoriteMsg = $("<div/>")
+                .attr("id", "errorFavoriteMsg")
+                .addClass("global-error-message");
+            errorFavoriteMsg.append("<li>" + errorMsg + "</li>");
+
+            $("#errorMessages")
+                .css("display", "inherit")
+                .append(errorFavoriteMsg);
+        } else {
+            $("#errorMessages")
+                .css("display", "none")
+                .children().remove();
+        }
+    }
+
+    <!--	2023-renew No65 to here	-->
+</script>
+<!--	2023-renew No11 to here	-->
+
+<style>
+    .a-disable {
+        pointer-events: none;
+    }
+</style>
+

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div>
+        <span>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+    <div>
+        <span>■　ピーディーアールオンラインショップ</span>
+    </div>
+    <div>
+        <span>■　会員情報変更についてお知らせ</span>
+    </div>
+    <div>
+        <span>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <div><span th:text="'　' + ${mailContentsMap.get('M_LAST_NAME')} + ' 様'"></span></div>
+        <br>
+        <div><span>　ピーディーアールオンラインショップをご利用いただき</span></div>
+        <div><span>　誠にありがとうございます。</span></div>
+    </div>
+    <br>
+    <div><span>　下記の内容でお客様の会員情報変更依頼を受付いたしました。</span></div>
+    <br>
+    <div><span th:text="'　【お客様番号】' + ${mailContentsMap.get('M_CUSTOMERNO')}"></span></div>
+    <div><span th:text="'　【事業所名】' + ${mailContentsMap.get('M_LAST_NAME')} + ' 様'"></span></div>
+    <br>
+    <div><span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span></div>
+    <div><span>　変更リクエスト内容</span></div>
+    <div th:if="${mailContentsMap.get('BUSINESS_NAME_HAS_CHANGE') != null && mailContentsMap.get('BUSINESS_NAME_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【事業所名】：'+ ${!#strings.isEmpty(mailContentsMap.get('BUSINESS_NAME_AFTER_CHANGE'))
+            ? mailContentsMap.get('BUSINESS_NAME_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('OFFICE_NAME_HAS_CHANGE') != null && mailContentsMap.get('OFFICE_NAME_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【事業所名フリガナ】：'+ ${!#strings.isEmpty(mailContentsMap.get('OFFICE_NAME_AFTER_CHANGE'))
+            ? mailContentsMap.get('OFFICE_NAME_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('REPRESENTATIVE_NAME_HAS_CHANGE') != null && mailContentsMap.get('REPRESENTATIVE_NAME_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【代表者名】：'+ ${!#strings.isEmpty(mailContentsMap.get('REPRESENTATIVE_NAME_AFTER_CHANGE'))
+            ? mailContentsMap.get('REPRESENTATIVE_NAME_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('TEL_HAS_CHANGE') != null && mailContentsMap.get('TEL_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【電話番号】：'+ ${!#strings.isEmpty(mailContentsMap.get('TEL_AFTER_CHANGE'))
+            ? mailContentsMap.get('TEL_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('FAX_HAS_CHANGE') != null && mailContentsMap.get('FAX_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【FAX番号】：'+ ${!#strings.isEmpty(mailContentsMap.get('FAX_AFTER_CHANGE'))
+            ? mailContentsMap.get('FAX_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ZIP_CODE_HAS_CHANGE') != null && mailContentsMap.get('ZIP_CODE_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【郵便番号】：'+ ${!#strings.isEmpty(mailContentsMap.get('ZIP_CODE_AFTER_CHANGE'))
+            ? mailContentsMap.get('ZIP_CODE_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ADDRESS1_HAS_CHANGE') != null && mailContentsMap.get('ADDRESS1_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【都道府県・市区郡】：'+ ${!#strings.isEmpty(mailContentsMap.get('ADDRESS1_AFTER_CHANGE'))
+            ? mailContentsMap.get('ADDRESS1_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ADDRESS2_HAS_CHANGE') != null && mailContentsMap.get('ADDRESS2_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【町村・番地】：'+ ${!#strings.isEmpty(mailContentsMap.get('ADDRESS2_AFTER_CHANGE'))
+            ? mailContentsMap.get('ADDRESS2_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ADDRESS3_HAS_CHANGE') != null && mailContentsMap.get('ADDRESS3_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【マンション・建物名】：'+ ${!#strings.isEmpty(mailContentsMap.get('ADDRESS3_AFTER_CHANGE'))
+            ? mailContentsMap.get('ADDRESS3_AFTER_CHANGE')
+            : ''}"></span>
+    </div>
+    <div>
+        <div th:if="${mailContentsMap.get('NON_CONSULTATION_DAY_HAS_CHANGE') != null && mailContentsMap.get('NON_CONSULTATION_DAY_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【休診曜日】：'+ ${!#strings.isEmpty(mailContentsMap.get('NON_CONSULTATION_DAY_AFTER_CHANGE'))
+                ? mailContentsMap.get('NON_CONSULTATION_DAY_AFTER_CHANGE')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('MEDICAL_DEPARTMENT_HAS_CHANGE') != null && mailContentsMap.get('MEDICAL_DEPARTMENT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【診療科目】：'+ ${!#strings.isEmpty(mailContentsMap.get('MEDICAL_DEPARTMENT_AFTER_CHANGE'))
+                ? mailContentsMap.get('MEDICAL_DEPARTMENT_AFTER_CHANGE')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('OTHER_MEDICAL_DEPARTMENT_HAS_CHANGE') != null && mailContentsMap.get('OTHER_MEDICAL_DEPARTMENT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【その他診療科目】：'+ ${!#strings.isEmpty(mailContentsMap.get('OTHER_MEDICAL_DEPARTMENT_AFTER_CHANGE'))
+                ? mailContentsMap.get('OTHER_MEDICAL_DEPARTMENT_AFTER_CHANGE')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('CONFIRMATION_DOCUMENT_IMAGE_ADD_COUNT') != null}">
+            <span th:text="'　【確認書類画像】：'+ ${mailContentsMap.get('CONFIRMATION_DOCUMENT_IMAGE_ADD_COUNT')} + '枚追加'"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('SPECIAL_OFFERS_VIA_EMAIL_HAS_CHANGE') != null && mailContentsMap.get('SPECIAL_OFFERS_VIA_EMAIL_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【メールによるお得情報】：'+ ${!#strings.isEmpty(mailContentsMap.get('SPECIAL_OFFERS_VIA_EMAIL_AFTER_CHANGE'))
+                ? mailContentsMap.get('SPECIAL_OFFERS_VIA_EMAIL_AFTER_CHANGE')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL_HAS_CHANGE') != null && mailContentsMap.get('METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【金属商品価格お知らせメール】：'+ ${!#strings.isEmpty(mailContentsMap.get('METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL_AFTER_CHANGE'))
+                ? mailContentsMap.get('METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL_AFTER_CHANGE')
+                : ''}"></span>
+        </div>
+        <!-- 2023-renew No79 from here -->
+        <div th:if="${mailContentsMap.get('ORDER_COMPLETE_PERMIT_HAS_CHANGE') != null && mailContentsMap.get('ORDER_COMPLETE_PERMIT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【ご注文受付完了メール】：'+ ${!#strings.isEmpty(mailContentsMap.get('ORDER_COMPLETE_PERMIT_AFTER_CHANGE'))
+                ? mailContentsMap.get('ORDER_COMPLETE_PERMIT_AFTER_CHANGE')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('DELIVERY_COMPLETE_PERMIT_HAS_CHANGE') != null && mailContentsMap.get('DELIVERY_COMPLETE_PERMIT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【商品発送完了メール】：'+ ${!#strings.isEmpty(mailContentsMap.get('DELIVERY_COMPLETE_PERMIT_AFTER_CHANGE'))
+                ? mailContentsMap.get('DELIVERY_COMPLETE_PERMIT_AFTER_CHANGE')
+                : ''}"></span>
+        </div>
+        <!-- 2023-renew No79 to here -->
+    </div>
+    <div><span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span></div>
+    <div><span>　変更前</span></div>
+    <div th:if="${mailContentsMap.get('BUSINESS_NAME_HAS_CHANGE') != null && mailContentsMap.get('BUSINESS_NAME_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【事業所名】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_BUSINESS_NAME'))
+            ? mailContentsMap.get('M_BUSINESS_NAME')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('OFFICE_NAME_HAS_CHANGE') != null && mailContentsMap.get('OFFICE_NAME_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【事業所名フリガナ】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_OFFICE_NAME'))
+            ? mailContentsMap.get('M_OFFICE_NAME')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('REPRESENTATIVE_NAME_HAS_CHANGE') != null && mailContentsMap.get('REPRESENTATIVE_NAME_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【代表者名】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_REPRESENTATIVE_NAME'))
+            ? mailContentsMap.get('M_REPRESENTATIVE_NAME')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('TEL_HAS_CHANGE') != null && mailContentsMap.get('TEL_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【電話番号】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_TEL'))
+            ? mailContentsMap.get('M_TEL')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('FAX_HAS_CHANGE') != null && mailContentsMap.get('FAX_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【FAX番号】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_FAX'))
+            ? mailContentsMap.get('M_FAX')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ZIP_CODE_HAS_CHANGE') != null && mailContentsMap.get('ZIP_CODE_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【郵便番号】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_ZIP_CODE'))
+            ? mailContentsMap.get('M_ZIP_CODE')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ADDRESS1_HAS_CHANGE') != null && mailContentsMap.get('ADDRESS1_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【都道府県・市区郡】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_ADDRESS1'))
+            ? mailContentsMap.get('M_ADDRESS1')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ADDRESS2_HAS_CHANGE') != null && mailContentsMap.get('ADDRESS2_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【町村・番地】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_ADDRESS2'))
+            ? mailContentsMap.get('M_ADDRESS2')
+            : ''}"></span>
+    </div>
+    <div th:if="${mailContentsMap.get('ADDRESS3_HAS_CHANGE') != null && mailContentsMap.get('ADDRESS3_HAS_CHANGE') == 'true'}">
+        <span th:text="'　【マンション・建物名】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_ADDRESS3'))
+            ? mailContentsMap.get('M_ADDRESS3')
+            : ''}"></span>
+    </div>
+    <div>
+        <div th:if="${mailContentsMap.get('NON_CONSULTATION_DAY_HAS_CHANGE') != null && mailContentsMap.get('NON_CONSULTATION_DAY_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【休診曜日】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_NON_CONSULTATION_DAY'))
+                ? mailContentsMap.get('M_NON_CONSULTATION_DAY')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('MEDICAL_DEPARTMENT_HAS_CHANGE') != null && mailContentsMap.get('MEDICAL_DEPARTMENT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【診療科目】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_MEDICAL_DEPARTMENT'))
+                ? mailContentsMap.get('M_MEDICAL_DEPARTMENT')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('OTHER_MEDICAL_DEPARTMENT_HAS_CHANGE') != null && mailContentsMap.get('OTHER_MEDICAL_DEPARTMENT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【その他診療科目】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_OTHER_MEDICAL_DEPARTMENT'))
+                ? mailContentsMap.get('M_OTHER_MEDICAL_DEPARTMENT')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('SPECIAL_OFFERS_VIA_EMAIL_HAS_CHANGE') != null && mailContentsMap.get('SPECIAL_OFFERS_VIA_EMAIL_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【メールによるお得情報】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_SPECIAL_OFFERS_VIA_EMAIL'))
+                ? mailContentsMap.get('M_SPECIAL_OFFERS_VIA_EMAIL')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL_HAS_CHANGE') != null && mailContentsMap.get('METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【金属商品価格お知らせメール】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL'))
+                ? mailContentsMap.get('M_METAL_PRODUCT_PRICE_NOTIFICATION_EMAIL')
+                : ''}"></span>
+        </div>
+        <!-- 2023-renew No79 from here -->
+        <div th:if="${mailContentsMap.get('ORDER_COMPLETE_PERMIT_HAS_CHANGE') != null && mailContentsMap.get('ORDER_COMPLETE_PERMIT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【ご注文受付完了メール】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_ORDER_COMPLETE_PERMIT'))
+                ? mailContentsMap.get('M_ORDER_COMPLETE_PERMIT')
+                : ''}"></span>
+        </div>
+        <div th:if="${mailContentsMap.get('DELIVERY_COMPLETE_PERMIT_HAS_CHANGE') != null && mailContentsMap.get('DELIVERY_COMPLETE_PERMIT_HAS_CHANGE') == 'true'}">
+            <span th:text="'　【商品発送完了メール】：'+ ${!#strings.isEmpty(mailContentsMap.get('M_DELIVERY_COMPLETE_PERMIT'))
+                ? mailContentsMap.get('M_DELIVERY_COMPLETE_PERMIT')
+                : ''}"></span>
+        </div>
+        <!-- 2023-renew No79 to here -->
+    </div>
+    <div><span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span></div>
+    <div><span>※本メールは送信専用メールアドレスから自動で配信しております。</span></div>
+    <div><span>ご返信いただいてもお答えできませんのでご了承ください。</span></div>
+    <div><span>入力いただくか、下記カスタマーサービスデスクまでご連絡ください。</span></div>
+</div>
+<div th:replace="~{common/signature}"></div>
+</body>
+</html>

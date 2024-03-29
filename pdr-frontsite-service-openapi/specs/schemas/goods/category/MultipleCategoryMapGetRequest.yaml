@@ -1,0 +1,43 @@
+type: object
+description: 複数カテゴリ取得リクエスト
+properties:
+  category:
+    type: string
+    description: カテゴリコード
+    example: top
+  seq:
+    type: string
+    description: ソート条件 normal=標準  new=新着順  price=価格順  salableness=売れ筋順
+    example: 標準
+  limit:
+    type: string
+    description: 取得件数
+    example: 50
+  priceFrom:
+    type: string
+    description: 価格from
+    example: 500
+  priceTo:
+    type: string
+    description: 価格to
+    example: 10000
+  stock:
+    type: string
+    description: 在庫指定 有りのみ=true 指定なし=false
+    example: 有りのみ
+  viewType:
+    type: string
+    description: 取得画像 リスト=list サムネイル=thumbnail
+    example: リスト
+  isLogin:
+    type: boolean
+    description: 会員ログインしているか否かの判定
+    example: true
+  businessType:
+    type: string
+    description: 顧客区分
+    example: 0
+  confDocumentType:
+    type: string
+    description: 確認書類
+    example: 0

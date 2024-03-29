@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>フリーエリア登録更新｜店舗管理</title>
+    <!-- Summernote (Thymeleaf Rich Text Editor - WYSIWYG) -->
+    <link th:rel="stylesheet" th:href="@{/assets/summernote/summernote-lite.css}"/>
+    <!--    <script th:src="@{/assets/summernote/summernote-lite.js}"></script>-->
+    <!--    <script>-->
+    <!--        $(document).ready(function() {-->
+    <!--            initSummernote('freeAreaBodyPc');-->
+    <!--        });-->
+    <!--    </script>-->
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/jquery-confirm.min.js}"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/css/jquery-confirm.min.css}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function checkContentsImageUrl() {
+            var url = $('#ukContentImageUrl').val();
+            if(url == null || url == ''){
+                $('#doConfirm').click();
+            } else {
+                var img = new Image();
+                var src = /*[[${freeareaRegistUpdateModel.getContentsImageSrc()}]]*/
+                img.src = src + url;
+                img.onload = function() {
+                    $('#doConfirm').click();
+                }
+                img.onerror = function() {
+                    document.getElementById('contentsImageUrlError').innerText = "コンテンツ画像が取得できませんでした。入力したURLをご確認ください。"
+                    document.getElementById('contentsImageUrlError').style.visibility = 'visible'
+                }
+            }
+        }
+        /*]]>*/
+    </script>
+</head>
+
+<body id="shop">
+<div id="freeRegistShop" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form enctype="multipart/form-data" th:action="@{/freearea/registupdate/}" th:object="${freeareaRegistUpdateModel}" method="post"
+                      onsubmit="return errorCheckOnclickConfirmButton();">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">フリーエリア登録更新</h1>
+                    </div>
+                    <!-- フリーエリア内容登録 -->
+                    <div class="l-section" id="mainContainer">
+                        <article class="l-article">
+                            <div class="l-article_title no_slide">
+                                <h2 class="c-pagetitle_h3">基本設定</h2>
+                            </div>
+                            <div th:if="${allMessages}"
+                                   th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+                            <div class="l-article_inner">
+                                <input type="hidden" id="md"/>
+                                <input type="hidden" id="scFreeAreaSeq"/>
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div class="edit">
+                                            <dt>キー<span class="ico_required">必須</span></dt>
+                                            <dd>
+                                                <input type="text" th:field="*{freeAreaKey}" maxlength="50"
+                                                       class="c-form-control w300px" placeholder="入力してください"
+                                                       th:classappend="${#fields.hasErrors('freeAreaKey')}?'error':''"/>
+                                                <div th:id="freeAreaKeyError"
+                                                     th:if="${#fields.hasErrors('freeAreaKey')}"
+                                                     th:errors="*{freeAreaKey}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>公開開始日時<span class="ico_required">必須</span></dt>
+                                            <dd>
+                                                <label class="c-datepicker w150px"><input type="text"
+                                                                                          th:field="*{openStartDate}"
+                                                                                          maxlength="10"
+                                                                                          autocomplete="off"
+                                                                                          class="c-form-control"
+                                                                                          placeholder="年/月/日"
+                                                                                          th:classappend="${#fields.hasErrors('openStartDate')}?'error':''"/></label>
+                                                <input type="text" th:field="*{openStartTime}"
+                                                       class="c-form-control w100px ml10" placeholder="00:00:00"
+                                                       th:classappend="${#fields.hasErrors('openStartTime')}?'error':''"/>
+                                                <div class="mt5">
+                                                    <div th:id="openStartDateError"
+                                                         th:if="${#fields.hasErrors('openStartDate')}"
+                                                         th:errors="*{openStartDate}" class="c-error-txt"></div>
+                                                    <div th:id="openStartTimeError"
+                                                         th:if="${#fields.hasErrors('openStartTime')}"
+                                                         th:errors="*{openStartTime}" class="c-error-txt"></div>
+                                                </div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>表示対象顧客番号</dt>
+                                            <dd><span th:text="*{viewableMemberCount}"/>&nbsp;件&nbsp;&nbsp;（0件の場合は表示制限しません）
+                                                <div class="wrap_flex_center fileinputs">
+                                                    <input type="file" accept=".csv" id="uploadFile"
+                                                           name="uploadFile" th:value="*{uploadFile}"
+                                                           class="c-form-control w625px mr10 file" title="表示対象会員データ"
+                                                           onchange="uploadfileViewPath(this.id, this.value);"/>
+                                                    <div class="fakefile">
+                                                        <input type="text" name="uploadFile_path"
+                                                               class="c-input-file"
+                                                               th:classappend="${#fields.hasErrors('uploadFile')} ? 'error'"/>&nbsp;&nbsp;&nbsp;<button
+                                                            class="c-btn-small_over mr20" type="button">参照
+                                                    </button>
+                                                    </div>
+                                                    <button class="c-btn btn_back icon ml10" id="doUpload" name="doUpload"
+                                                            type="submit"><i class="material-icons upload"></i>アップロード
+                                                    </button>
+                                                    <button class="c-btn btn_back icon ml10" id="doDownload" name="doDownload"
+                                                            type="submit"><i class="material-icons save_alt"></i>CSV全件出力
+                                                    </button>
+                                                </div>
+                                                <div id="uploadFileError"
+                                                     th:if="${#fields.hasErrors('uploadFile')}"
+                                                     th:errors="*{uploadFile}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>タイトル</dt>
+                                            <dd><input type="text" th:field="*{freeAreaTitle}" maxlength="100"
+                                                       class="c-form-control w100p" placeholder="入力してください"
+                                                       th:classappend="${#fields.hasErrors('freeAreaTitle')}?'error':''"/>
+                                                <div th:id="freeAreaTitleError"
+                                                     th:if="${#fields.hasErrors('freeAreaTitle')}"
+                                                     th:errors="*{freeAreaTitle}" class="c-error-txt mt5"></div>
+                                            </dd>
+
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>本文（HTML可）</dt>
+                                            <dd>
+                                                <!--2023-renew No19 from here-->
+                                                <textarea class="c-form-control w100p" rows="5"
+                                                          th:field="*{freeAreaBodyPc}" maxlength="200000" placeholder="入力してください"
+                                                          th:classappend="${#fields.hasErrors('freeAreaBodyPc')}?'error':''"></textarea>
+                                                <!--2023-renew No19 to here-->
+                                                <div th:id="freeAreaBodyPcError"
+                                                     th:if="${#fields.hasErrors('freeAreaBodyPc')}"
+                                                     th:errors="*{freeAreaBodyPc}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>サイトマップ出力<span class="ico_required">必須</span></dt>
+                                            <dd>
+                                                <select id="siteMapFlag" name="siteMapFlag" class="c-form-control"
+                                                        th:classappend="${#fields.hasErrors('siteMapFlag')}?'error':''">
+                                                    <option value="">選択してください</option>
+                                                    <option th:each="item : *{siteMapFlagItems}" th:value="${item.key}"
+                                                            th:text="${item.value}"
+                                                            th:selected="${item.key} == *{siteMapFlag}">
+                                                    </option>
+                                                </select>
+                                                <div th:id="siteMapFlagError"
+                                                     th:if="${#fields.hasErrors('siteMapFlag')}"
+                                                     th:errors="*{siteMapFlag}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit" th:if="*{isUpdatePage}">
+                                            <dt>特集ページ用URL</dt>
+                                            <dd>
+                                                <table cellpadding="0" cellspacing="0" width="100%">
+                                                    <tr>
+                                                        <td><span th:text="*{specialPageUrlPc}"></span></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span th:text="*{contentsPageUrlPc}"></span></td>
+                                                        <td>※サイドメニューなし</td>
+                                                    </tr>
+                                                    <!--PDR Migrate Customization from here-->
+                                                    <!--<tr>
+                                                        <td><span th:text="*{topicPageUrlPc}"></span></td>
+                                                        <td>※ヘッダー、フッター、サイドメニューなし</td>
+                                                    </tr>-->
+                                                    <!--PDR Migrate Customization to here-->
+                                                </table>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="l-article">
+                            <div class="l-article_title no_slide">
+                                <h2 class="c-pagetitle_h3">ユニサーチ設定</h2>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div class="edit">
+                                            <dt>ユニサーチ連携<span class="ico_required">必須</span></dt>
+                                            <dd>
+                                                <select id="ukFeedInfoSendFlag" name="ukFeedInfoSendFlag" class="c-form-control"
+                                                        th:classappend="${#fields.hasErrors('ukFeedInfoSendFlag')}?'error':''">
+                                                    <option value="">選択してください</option>
+                                                    <option th:each="item : *{ukFeedInfoSendFlagItems}" th:value="${item.key}"
+                                                            th:text="${item.value}"
+                                                            th:selected="${item.key} == *{ukFeedInfoSendFlag}">
+                                                    </option>
+                                                </select>
+                                                <div th:id="ukFeedInfoSendFlagError"
+                                                     th:if="${#fields.hasErrors('ukFeedInfoSendFlag')}"
+                                                     th:errors="*{ukFeedInfoSendFlag}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>遷移先URL</dt>
+                                            <dd>
+                                                <dl>
+                                                    <dt class="w100p">
+                                                        <span style="word-break: normal" th:text="*{transitionUrl}"></span>&nbsp;
+                                                        <input type="text" th:field="*{ukTransitionUrl}" maxlength="100"
+                                                               class="c-form-control w100p" placeholder="入力してください"
+                                                               th:classappend="${#fields.hasErrors('ukTransitionUrl')}?'error':''"/>
+                                                    </dt>
+                                                    <dd>
+                                                        <th:block th:text="'記入例）special.html?fkey=123_present'"></th:block>
+                                                        <div th:id="ukTransitionUrlError"
+                                                         th:if="${#fields.hasErrors('ukTransitionUrl')}"
+                                                         th:errors="*{ukTransitionUrl}" class="c-error-txt mt5"></div>
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        </div>
+                                        <div class="edit">
+                                            <dt>コンテンツ画像URL</dt>
+                                            <dd>
+                                                <dl>
+                                                    <dt class="w100p">
+                                                        <span style="word-break: normal" th:text="*{contentsImageUrl}"></span>&nbsp;
+                                                        <input type="text" th:field="*{ukContentImageUrl}" maxlength="100"
+                                                               id="ukContentImageUrl"
+                                                               class="c-form-control w100p" placeholder="入力してください"
+                                                               th:classappend="${#fields.hasErrors('ukContentImageUrl')}?'error':''"/>
+                                                    </dt>
+                                                    <dd>
+                                                        <th:block th:text="'記入例）contents/123.png'"></th:block>
+                                                        <div id="contentsImageUrlError" class="c-error-txt mt5">
+                                                        <div th:id="ukContentImageUrlError"
+                                                             th:if="${#fields.hasErrors('ukContentImageUrl')}"
+                                                             th:errors="*{ukContentImageUrl}" class="c-error-txt mt5"></div>
+                                                        </div>
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>検索キーワード</dt>
+                                            <dd><input type="text" th:field="*{ukSearchKeyword}" maxlength="1000"
+                                                       class="c-form-control w100p" placeholder="入力してください"
+                                                       th:classappend="${#fields.hasErrors('ukSearchKeyword')}?'error':''"/>
+                                                <div th:id="ukSearchKeywordError"
+                                                     th:if="${#fields.hasErrors('ukSearchKeyword')}"
+                                                     th:errors="*{ukSearchKeyword}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <th:block th:if="*{freeAreaSeq != null}"><a class="c-btn btn_back icon_left"
+                                                                            th:href="@{/freearea/(md=list)}"><i
+                                        class="material-icons navigate_before"></i>戻る</a></th:block>
+                                <th:block th:if="*{freeAreaSeq == null}"><a class="c-btn btn_back icon_left"
+                                                                            th:href="@{/freearea/}"><i
+                                        class="material-icons navigate_before"></i>戻る</a></th:block>
+                            </div>
+                            <div class="col_left">
+                                <input type="hidden" id="isConfirmBtnClicked" value="false"/>
+                                <button class="c-btn btn_regular" type="button" id="preConfirm" name="preConfirm" onClick="checkContentsImageUrl()">確認
+                                </button>
+                                <input type="submit" style="display:none" id="doConfirm" name="doConfirm"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--/* footer */-->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

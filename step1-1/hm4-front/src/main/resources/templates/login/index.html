@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-login">
+<a id="top" name="top"></a>
+
+    <div class="l-mainwrap">
+        <div th:replace="~{newdesign/include/header}"></div>
+        <main class="l-page">
+            <div class="l-breadcrumbs">
+                <div class="l-breadcrumbs__inner">
+                    <div class="l-breadcrumbs__list">
+                        <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" id="goTopPage" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                        <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">ログイン</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="l-container">
+                <div class="l-container__inner">
+                    <div th:replace="~{newdesign/include/sidemenu}"></div>
+                    <div class="l-main">
+                        <h2 class="c-title-page"><strong>ログイン</strong></h2>
+                        <form id="memberForm" th:action="@{'/signin'}" th:object="${loginModel}" method="post">
+                            <div th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION} != null" class="global-error-message">
+                                <ul>
+                                    <li th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION} != null"
+                                        th:utext="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></li>
+                                </ul>
+                            </div>
+                            <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                                <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                    <ul th:each="message : ${allMessages}">
+                                        <li th:utext="${message}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="p-login__main">
+                                <div class="p-login__member">
+                                    <h2 class="p-login__title-contents"><strong>すでに会員の方</strong></h2>
+                                    <p class="p-login__text">会員ID（お客様番号またはご登録メールアドレス）とパスワードを入力し、「ログイン」ボタンを押してください。<br>
+                                        <th:block th:if="*{isAvailableAccountLock()}">
+                                            ※<span th:remove="tag" th:text="*{accountLockCount}"></span>回連続でログインが失敗になりますと、パスワードの再設定が必要となります。
+                                        </th:block>
+                                    </p>
+                                    <div class="l-form p-login__input">
+                                        <dl class="p-login__input-list">
+                                            <dt>会員ID</dt>
+                                            <dd>
+                                                <!--2023-renew No85-1 from here-->
+                                                <input th:field="*{memberInfoIdOrCustomerNo}" id="memberInfoId" th:errorclass="c-input--error" type="text" maxlength="256" placeholder="お客様番号またはご登録メールアドレス" class="c-input" />
+                                                <!--2023-renew No85-1 to here-->
+                                                <div class="l-form__input-memo">
+                                                    <a th:href="@{/guide/faq.html#memberId}" id="goFaqPage" class="c-textlink c-textlink--right c-textlink--large c-textlink--text"><p>会員IDを忘れた場合</p></a>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                        <dl class="p-login__input-list">
+                                            <dt>パスワード</dt>
+                                            <dd>
+                                                <div class="l-form__password">
+                                                    <input th:field="*{memberInfoPassWord}" id="memberInfoPassWord" th:errorclass="c-input--error" type="password" maxlength="20" class="c-input js-password-input" />
+                                                    <button name="" type="button" class="c-textlink c-textlink--text c-textlink--large c-textlink--password js-password-btn">
+                                                        <span></span><p>パスワードを表示</p>
+                                                    </button>
+                                                </div>
+                                                <div class="l-form__input-memo">
+                                                    <a th:href="@{/reset/index.html}" id="goPassWordResetMailPage" class="c-textlink c-textlink--right c-textlink--large c-textlink--text"><p>パスワードを忘れた場合</p></a>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="p-login__check">
+                                        <label class="c-checkbox"><span class="c-checkbox__box"><input name="" type="checkbox" value=""> <span></span></span><p>次回からメールアドレスの入力を省略する</p></label>
+                                        <p class="p-login__check-memo">※第三者が使用する可能性があるパソコンをご利用の場合はチェックを外してください</p>
+                                    </div>
+                                    <div class="p-login__button">
+                                        <button id="doLogin" type="submit" class="c-button c-button--primary-line c-button--width-l">ログイン</button>
+                                    </div>
+                                </div>
+                                <div class="p-login__first">
+                                    <h2 class="p-login__title-contents"><strong>はじめての方</strong></h2>
+                                    <p class="p-login__text">P.D.R.オンラインショップをご利用いただくには会員登録が必要です。はじめての方は下記、「新規会員登録」ボタンを押してください。</p>
+                                    <div class="p-login__button">
+                                        <a th:href="@{/regist/inputtel.html}" id="goRegistInputTelPage" class="c-button c-button--primary c-button--width-l">新規会員登録</a>
+                                    </div>
+                                    <div class="p-login__service c-service">
+                                        <div class="c-service__unit c-service--unit01">
+                                            <div class="c-service__icon"><img th:src="@{/newdesign/assets/images/icon/track.png}" alt="16：00までのご注文は当日発送" width="85"></div>
+                                            <p class="c-service__text">16：00までのご注文は<strong>当日発送</strong><br><small>まれに対応できない場合があります</small></p>
+                                        </div>
+                                        <div class="c-service__unit c-service--unit02">
+                                            <div class="c-service__icon"><img th:src="@{/newdesign/assets/images/icon/free-shipping.png}" alt="5,800円(税抜)以上で送料無料" width="50"></div>
+                                            <p class="c-service__text">5,800円<small>(税抜)</small>以上で<strong>送料無料</strong></p>
+                                        </div>
+                                        <div class="c-service__unit c-service--unit03">
+                                            <div class="c-service__icon"><img th:src="@{/newdesign/assets/images/icon/commission.png}" alt="どの支払い方法でも手数料0円" width="44"></div>
+                                            <p class="c-service__text">どの支払い方法でも<strong>手数料<span>0</span>円</strong></p>
+                                        </div>
+                                        <div class="c-service__unit c-service--unit04">
+                                            <div class="c-service__icon"><img th:src="@{/newdesign/assets/images/icon/sale-reserve.svg}" alt="セールが終わってもセール価格で届く" width="54"></div>
+                                            <p class="c-service__text"><span>セールが終わってもセール価格で届く</span><br><strong>セールde予約</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div th:replace="~{newdesign/include/footer}"></div>
+    </div>
+
+</body>
+</html>

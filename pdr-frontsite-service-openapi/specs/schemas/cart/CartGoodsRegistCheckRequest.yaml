@@ -1,0 +1,19 @@
+type: object
+description: カート投入チェック（一括登録用の簡易版）リクエスト
+properties:
+  cartGoodsForTakeOverDtoListRequest:
+    $ref: '#/components/schemas/CartGoodsForTakeOverDtoListRequest'
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 1000001
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: 2023101116559922
+
+components:
+  schemas:
+    CartGoodsForTakeOverDtoListRequest:
+      $ref: ./CartGoodsForTakeOverDtoListRequest.yaml

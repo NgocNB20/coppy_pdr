@@ -1,0 +1,16 @@
+type: object
+description: 取りおき情報取得レスポンス
+properties:
+  info:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiGetReserveResponseDetailDtoResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+
+components:
+  schemas:
+    WebApiGetReserveResponseDetailDtoResponse:
+      $ref: ./WebApiGetReserveResponseDetailDtoResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

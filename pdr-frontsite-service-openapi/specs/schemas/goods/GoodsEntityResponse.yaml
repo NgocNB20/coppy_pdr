@@ -1,0 +1,180 @@
+type: object
+description: 商品レスポンス
+properties:
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ（必須）
+    example: 1000
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ (FK)（必須）
+    example: 1000
+  goodsCode:
+    type: string
+    description: 商品コード（必須）
+    example: furniture-00101
+  janCode:
+    type: string
+    description: JANコード
+    example: 12
+  catalogCode:
+    type: string
+    description: カタログコード
+    example: 12
+  saleStatus:
+    type: string
+    description: 販売状態PC（必須）
+    example: 1
+  saleStartTime:
+    type: string
+    format: date-time
+    description: 販売開始日時
+    example: 2022/01/01 12:00:00
+  saleEndTime:
+    type: string
+    format: date-time
+    description: 販売終了日時
+    example: 2022/01/01 12:00:00
+  goodsPrice:
+    type: number
+    description: 商品単価（必須）
+    example: 1000
+    default: 0
+  preDiscountPrice:
+    type: number
+    description: 値引前単価
+    example: 1000
+  individualDeliveryType:
+    type: string
+    description: 商品個別配送種別
+    example: 0
+  freeDeliveryFlag:
+    type: string
+    description: 無料配送フラグ
+    example: 0
+  unitManagementFlag:
+    type: string
+    description: 規格管理フラグ
+    example: 0
+  unitValue1:
+    type: string
+    description: 規格値１
+    example: 規格値１
+  unitValue2:
+    type: string
+    description: 規格値２
+    example: 規格値２
+  stockManagementFlag:
+    type: string
+    description: 在庫管理フラグ（必須）
+    example: OFF
+  purchasedMax:
+    type: number
+    description: 商品最大購入可能数（必須）
+    example: 1
+    default: 0
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 1000
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ
+    default: 0
+    example: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00
+  reserveFlag:
+    type: string
+    description: 保留フラグ
+    example: 0
+  unit:
+    type: string
+    description: 単位
+    example: 0
+  priceMarkDispFlag:
+    type: string
+    description: 価格記号表示フラグ
+    example: 0
+  salePriceMarkDispFlag:
+    type: string
+    description: セール価格記号表示フラグ
+    example: 0
+  goodsManagementCode:
+    type: string
+    description: 管理商品コード
+    example: 0
+  goodsDivisionCode:
+    type: integer
+    format: int32
+    description: 商品分類コード
+    example: 0
+  goodsCategory1:
+    type: integer
+    format: int32
+    description: カテゴリー1
+    example: 0
+  goodsCategory2:
+    type: integer
+    format: int32
+    description: カテゴリー2
+    example: 0
+  goodsCategory3:
+    type: integer
+    format: int32
+    description: カテゴリー3
+    example: 0
+  landSendFlag:
+    type: string
+    description: 陸送商品フラグ
+    example: 0
+  coolSendFlag:
+    type: string
+    description: クール便フラグ
+    example: 0
+  coolSendFrom:
+    type: string
+    description: クール便適用期間From
+    example: 0
+  coolSendTo:
+    type: string
+    description: クール便適用期間To
+    example: 0
+  salePriceIntegrityFlag:
+    type: string
+    description: セール価格整合性フラグ
+    example: 0
+  emotionPriceType:
+    type: string
+    description: 心意気価格保持区分
+    example: 0
+  # 2023-renew No92 from here
+  goodsPriceInTaxLow:
+    type: number
+    description: 価格(最低)
+    example: 0
+  goodsPriceInTaxHight:
+    type: number
+    description: 価格（最高）
+    example: 0
+  preDiscountPriceLow:
+    type: number
+    description: セール価格（最低）
+    example: 0
+  preDiscountPriceHight:
+    type: number
+    description: セール価格（最高）
+    example: 0
+  # 2023-renew No92 to here

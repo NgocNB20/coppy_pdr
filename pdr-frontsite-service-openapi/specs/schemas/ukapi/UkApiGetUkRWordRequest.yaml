@@ -1,0 +1,12 @@
+type: object
+description: UK-API連携関連ワードリクエスト
+properties:
+  kw:
+    type: string
+    description: 検索キーワード
+    example: 水
+  rows:
+    type: integer
+    format: int32
+    description: 検索結果数
+    example: 10

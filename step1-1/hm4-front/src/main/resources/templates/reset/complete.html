@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-reset">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__current">パスワードを忘れた場合</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="indexForm" th:action="@{/reset/complete.html}" th:object="${resetModel}" method="get">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>パスワードを忘れた場合</strong></h2>
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">送信完了</h3>
+                </div>
+            </div>
+
+            <div class="l-complete">
+                <div class="l-complete__inner">
+                    <p class="l-complete__title">下記メールアドレスに送信しました。</p>
+                    <div class="l-complete__result l-complete--margin-m">
+                        <div class="l-complete__result-item">
+                            <span id="memberInfoMail" th:text="*{memberInfoMail}"/>
+                        </div>
+                    </div>
+                    <div class="l-complete__text-unit l-complete--margin-m">
+                        <p class="l-complete__text">２４時間以内に、パスワード再設定用URLをクリックし、新しいパスワードを設定してください。<br>
+                            （メールが届くまでに少し時間がかかる場合があります。）</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-trouble">
+                <div class="l-trouble-inner">
+                    <p class="l-trouble-lead">メールが1時間以内に届かない場合、以下の可能性が考えられます。お使いの端末の設定をご確認いただきますようお願い致します。</p>
+                    <div class="l-trouble-contents">
+                        <div class="l-trouble-unit">
+                            <div class="c-title-bubble l-trouble-title">メールアドレスが誤っている</div>
+                            <p class="l-trouble-text">ご入力いただいたメールアドレスが誤っている場合は、<a th:href="@{/regist/inputtel.html}" class="c-inlinelink">会員登録フォーム</a>より、もう一度お申し込みください。
+                            </p>
+                        </div>
+                        <div class="l-trouble-unit">
+                            <div class="c-title-bubble l-trouble-title">迷惑メールに振り分けられている</div>
+                            <p class="l-trouble-text">
+                                お使いのメール機能により迷惑メールに振り分けられている場合がありますので、迷惑メールフォルダ・削除フォルダ等をご確認ください。</p>
+                        </div>
+                        <div class="l-trouble-unit">
+                            <div class="c-title-bubble l-trouble-title">受信拒否を含めた制限を設けている</div>
+                            <p class="l-trouble-text">メールに受信拒否を含めた制限を設けている場合は、「@pdr.co.jp」を受信できるよう、設定を変更してください。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-button-wrap">
+                <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+            </div>
+
+        </form>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+type: object
+description: 配送DTOレスポンス
+properties:
+  deliveryDetailsDto:
+    type: object
+    description: 配送方法詳細DTO
+    $ref: '#/components/schemas/DeliveryDetailsDtoResponse'
+  carriage:
+    type: number
+    description: 送料
+    example: 0
+  selectClass:
+    type: boolean
+    description: 選択区分
+    example: true
+  receiverDateDto:
+    type: object
+    description: お届け日Dto
+    $ref: '#/components/schemas/ReceiverDateDtoResponse'
+  specialChargeAreaFlag:
+    type: boolean
+    description: 特別配送エリア対象フラグ
+    example: true
+
+components:
+  schemas:
+    DeliveryDetailsDtoResponse:
+      $ref: ./DeliveryDetailsDtoResponse.yaml
+    ReceiverDateDtoResponse:
+      $ref: ./ReceiverDateDtoResponse.yaml

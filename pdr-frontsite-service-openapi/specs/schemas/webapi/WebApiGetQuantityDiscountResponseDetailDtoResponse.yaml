@@ -1,0 +1,51 @@
+type: object
+description: 数量割引情報取得 詳細情報レスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品
+    example: furniture-00201
+  priceList:
+    type: array
+    description: 価格リスト
+    items:
+       $ref: "#/components/schemas/WebApiGetQuantityDiscountResponsePriceDtoResponse"
+  salePriceList:
+    type: array
+    description: 割引価格リスト
+    items:
+       $ref: "#/components/schemas/WebApiGetQuantityDiscountResponseSalePriceDtoResponse"
+  customerSalePriceList:
+    type: array
+    description: 顧客セール価格リスト
+    items:
+       $ref: "#/components/schemas/WebApiGetQuantityDiscountResponseCustomerSalePriceDtoResponse"
+  saleFlag:
+    type: string
+    description: 数量割引適用有無
+    example: 1
+  marketPriceFlag:
+    type: string
+    description: 時価フラグ
+    example: 1
+  customerSaleFlag:
+    type: integer
+    format: int32
+    description: 顧客セール割引適用有無
+    example: 1
+# 2023-renew No5 from here
+  saleEndDay:
+    type: string
+    format: date-time
+    description: セール終了日
+    example: 2022/01/01 12:00:00
+# 2023-renew No5 to here
+
+components:
+  schemas:
+    WebApiGetQuantityDiscountResponsePriceDtoResponse:
+      $ref: ./WebApiGetQuantityDiscountResponsePriceDtoResponse.yaml
+    WebApiGetQuantityDiscountResponseSalePriceDtoResponse:
+      $ref: ./WebApiGetQuantityDiscountResponseSalePriceDtoResponse.yaml
+    WebApiGetQuantityDiscountResponseCustomerSalePriceDtoResponse:
+      $ref: ./WebApiGetQuantityDiscountResponseCustomerSalePriceDtoResponse.yaml

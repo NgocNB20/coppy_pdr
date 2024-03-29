@@ -1,0 +1,16 @@
+type: object
+description: 数量割引情報取得レスポンス
+properties:
+  info:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiGetQuantityDiscountResponseDetailDtoResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+
+components:
+  schemas:
+    WebApiGetQuantityDiscountResponseDetailDtoResponse:
+      $ref: ./WebApiGetQuantityDiscountResponseDetailDtoResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

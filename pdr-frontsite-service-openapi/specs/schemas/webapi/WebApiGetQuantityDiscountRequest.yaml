@@ -1,0 +1,12 @@
+type: object
+description: 数量割引情報取得リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 2
+  goodsCode:
+    type: string
+    description: 申込商品 (複数パイプ区切り)
+    example: 1

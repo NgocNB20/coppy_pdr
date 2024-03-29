@@ -1,0 +1,223 @@
+@charset "Shift_JIS";
+
+/* CSS Reset Style
+---------------------------------------------------- */
+body, div,
+dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+form, label, fieldset, input, textarea, button,
+p, blockquote, pre, address,
+table, th, td {
+	padding: 0;
+	margin: 0;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	color: #333333;
+	line-height: 1;
+	text-decoration: none;
+}
+fieldset {
+	border: 0;
+}
+caption {
+	text-align: left;
+}
+button {
+	border: 0;
+	background: none;
+}
+
+
+/* HyperText Style
+---------------------------------------------------- */
+a:link {
+	color: #006666;
+	text-decoration: none;
+}
+a:visited {
+	color: #006666;
+	text-decoration: none;
+}
+a:hover {
+	color: #006666;
+	text-decoration: underline;
+}
+a:focus {
+	color: #006666;
+	text-decoration: underline;
+}
+a:active {
+	color: #006666;
+	text-decoration: underline;
+}
+
+/*���p������ �t�b�^��*/
+#topic-path p a:link,
+#footer #foot-menu li a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+#topic-path p a:visited,
+#footer #foot-menu li a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+#topic-path p a:hover,
+#footer #foot-menu li a:hover {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+#topic-path p a:focus,
+#footer #foot-menu li a:focus {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+#topic-path p a:active,
+#footer #foot-menu li a:active {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+/*���V�[�Y�����Ő��с�*/
+#yearly #yearly-table th a:link,
+#yearly #yearly-table th a:visited,
+#yearly #yearly-table th a:hover,
+#yearly #yearly-table th a:focus,
+#yearly #yearly-table th a:active {
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+/*���{�[�h���[����*/
+#bbs a:link {
+	color: #006666;
+	text-decoration: none;
+}
+#bbs a:visited {
+	color: #3399CC;
+	text-decoration: none;
+}
+#bbs a:active {
+	color: #3399CC;
+	text-decoration: underline;
+}
+#bbs a:hover {
+	color: #006666;
+	text-decoration: underline;
+}
+#bbs a:focus {
+	color: #006666;
+	text-decoration: underline;
+}
+
+/*���{�[�h���[�� �e�L�X�g�o�i�[��*/
+#bbs #ad-text-box a:link {
+	color: #CC0033;
+	text-decoration: none;
+}
+#bbs #ad-text-box a:active {
+	color: #CC0033;
+	text-decoration: none;
+}
+#bbs #ad-text-box a:visited {
+	color: #CC0033;
+	text-decoration: none;
+}
+#bbs #ad-text-box a:focus {
+	color: #CC0033;
+	text-decoration: none;
+}
+#bbs #ad-text-box a:hover {
+	color: #CC0033;
+	text-decoration: underline;
+}
+
+
+/* Base Font Style
+---------------------------------------------------- */
+body {
+	font-size: 12px;
+}
+h1, h2, h3, h4, h5, h6, table {
+	font-size: 100%;
+}
+h6 {
+	font-weight: bold;
+}
+p, li, dt, dd, th, td, blockquote, address {
+	font-size: 100%;
+	line-height: 1.8;
+}
+label {
+	font-size: 100%;
+	line-height: 1.1;
+}
+
+
+/* Text Style
+---------------------------------------------------- */
+p {
+	margin: 20px 0;
+}
+blockquote {
+	padding: 1.5em;
+	margin: 30px 0;
+}
+
+
+/* List Style
+---------------------------------------------------- */
+ul, ol {
+	margin: 1em 0;
+}
+ul li, ol li {
+	margin: 0.1em 0 0.1em 2em;
+}
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+	margin: 0;
+}
+ul ul li,
+ol ul li,
+ul ol li,
+ol ol li {
+	margin: 0.1em 0 0.1em 1.5em;
+}
+ul li,
+ol ul li {
+	list-style-type: disc;
+}
+ol li {
+	list-style-type: decimal;
+}
+ol ol li {
+	list-style-type: lower-roman;
+}
+dl {
+	margin: 1em 0;
+}
+dd {
+	margin: 1em 0 0 2em;
+}
+
+
+/* Image Style
+---------------------------------------------------- */
+img {
+	border: 0;
+	vertical-align: bottom;
+}
+img.imgover {
+}
+
+
+/* Form Style
+---------------------------------------------------- */
+select, input, textarea {
+	font-family: Osaka, "MS P Gothic", Arial, sans-serif;
+	font-size: 99%;
+	line-height: 1.1;
+}

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <meta name="robots" content="noindex"/>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script th:inline="javascript">
+        if (typeof(_ukwq) !== 'undefined') {
+            // コンテンツ用taglog
+            _ukwq = [];
+
+            // 共通部
+            _ukwq.push(['_setClient', _contentsClient]);
+            if (_cryptoLoginId != null) { _ukwq.push(['_setLoginID', _cryptoLoginId]); }
+            _ukwq.push(['_setReqURL', _reqUrl]);
+            _ukwq.push(['_setRefURL', _refUrl]);
+            _ukwq.push(['_setDisplay', _display]);
+            // 検索
+            _ukwq.push(['_setNumHit', String(/*[[${searchModel.contentsSearchTotalCount}]]*/)]);
+            _ukwq.push(['_setNumDisp', '20']);
+            if (/*[[${searchModel.isNoContents}]]*/) {
+                _ukwq.push(['_setNumPage', '0']);
+            } else {
+                _ukwq.push(['_setNumPage', '1']);
+            }
+            var contentsSearchResult = /*[[${searchModel.ukContentsSearchResult}]]*/;
+            if (contentsSearchResult != null) {
+                _ukwq.push(['_setSearchResult', contentsSearchResult]);
+            } else {
+                _ukwq.push(['_setSearchResult', '']);
+            }
+            if (/*[[${searchModel.isUkSortTypeRecommend}]]*/) {
+                _ukwq.push(['_setSort', '']);
+            } else if (/*[[${searchModel.isUkSortTypeCatalogId}]]*/) {
+                _ukwq.push(['_setSort', 'catalog_id']);
+            } else if (/*[[${searchModel.isUkSortTypeNewDate}]]*/) {
+                _ukwq.push(['_setSort', 'new_date']);
+            } else {
+                _ukwq.push(['_setSort', 'price']);
+            }
+            var word = /*[[${searchModel.keyword}]]*/;
+            if (word != null) {
+                _ukwq.push(['_setWord', word]);
+            } else {
+                _ukwq.push(['_setWord', '']);
+            }
+            _ukwq.push(['_setP1ReqID', String(/*[[${searchModel.reqIdOfContents}]]*/)]);
+            var fallbackWord = /*[[${searchModel.contentsFallbackKeyword}]]*/;
+            if (fallbackWord != null) {
+                _ukwq.push(['_setFallbackType', 'word_delete']);
+                _ukwq.push(['_setFallbackWord', String(/*[[${searchModel.contentsFallbackKeyword}]]*/)]);
+            }
+            _ukwq.push(['_sendSearchLog']);
+
+            // 商品用taglog
+            _ukwq = [];
+            _ukt = document.createElement('script'); _ukt.type = 'text/javascript'; _ukt.async = true;
+            _ukt.src = '//' + _ukwhost + '/taglog/ukwlg.js';
+            _uks = document.getElementsByTagName('script')[0]; _uks.parentNode.insertBefore(_ukt, _uks);
+            // 共通部
+            _ukwq.push(['_setClient', _goodsClient]);
+            if (_cryptoLoginId != null) { _ukwq.push(['_setLoginID', _cryptoLoginId]); }
+            _ukwq.push(['_setReqURL', _reqUrl]);
+            _ukwq.push(['_setRefURL', _refUrl]);
+            _ukwq.push(['_setDisplay', _display]);
+            // 検索
+            _ukwq.push(['_setNumHit', String(/*[[${searchModel.totalCount}]]*/)]);
+            _ukwq.push(['_setNumDisp', '50']);
+            if (/*[[${searchModel.isNoGoods}]]*/) {
+                _ukwq.push(['_setNumPage', '0']);
+            } else {
+                _ukwq.push(['_setNumPage', String(/*[[${searchModel.pnum}]]*/)]);
+            }
+            var goodsSearchResult = /*[[${searchModel.ukGoodsSearchResult}]]*/;
+            if (goodsSearchResult != null) {
+                _ukwq.push(['_setSearchResult', goodsSearchResult]);
+            } else {
+                _ukwq.push(['_setSearchResult', '']);
+            }
+            if (/*[[${searchModel.isUkSortTypeRecommend}]]*/) {
+                _ukwq.push(['_setSort', '']);
+            } else if (/*[[${searchModel.isUkSortTypeCatalogId}]]*/) {
+                _ukwq.push(['_setSort', 'catalog_id']);
+            } else if (/*[[${searchModel.isUkSortTypeNewDate}]]*/) {
+                _ukwq.push(['_setSort', 'new_date']);
+            } else {
+                _ukwq.push(['_setSort', 'price']);
+            }
+            var word = /*[[${searchModel.keyword}]]*/;
+            if (word != null) {
+                _ukwq.push(['_setWord', word]);
+            } else {
+                _ukwq.push(['_setWord', '']);
+            }
+            _ukwq.push(['_setP1ReqID', String(/*[[${searchModel.reqIdOfGoods}]]*/)]);
+            var fallbackWord = /*[[${searchModel.fallbackKeyword}]]*/;
+            if (fallbackWord != null) {
+                _ukwq.push(['_setFallbackType', 'word_delete']);
+                _ukwq.push(['_setFallbackWord', String(/*[[${searchModel.fallbackKeyword}]]*/)]);
+            }
+            _ukwq.push(['_sendSearchLog']);
+        }
+
+        function setNoImage(){
+            return $('#goodsImageSrc').val() + `/noimg.jpg`;
+        }
+    </script>
+</head>
+
+<body id="gotop" class="p-search p-product-list" th:object="${searchModel}">
+    <a id="top" name="top"></a>
+
+    <div class="l-mainwrap">
+        <div th:replace="~{newdesign/include/header}"></div>
+
+        <main class="l-page">
+            <div class="l-breadcrumbs">
+                <div class="l-breadcrumbs__inner">
+                    <div class="l-breadcrumbs__list">
+                        <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" id="goTopPage" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                        <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">検索結果</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-container">
+                <div class="l-container__inner">
+                    <div th:replace="~{newdesign/include/sidemenu}"></div>
+
+                    <div class="l-main">
+
+                        <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                            <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 検索結果 -->
+
+
+                        <!-- 関連ワード -->
+                        <th:block th:if="*{!isNoGoods()} or *{!isNoContents()}">
+                            <div th:if="*{!#lists.isEmpty(relatedWordList)}" class="p-search__unisearch-word">
+                                <dl>
+                                    <dt>関連ワード：</dt>
+                                    <dd>
+                                        <th:block th:each="item, stat : *{relatedWordList}">
+                                            <a th:id="'goImageGoodsPage-' + ${stat.index}" th:href="@{/search/index.html(keyword=${item})}" class="c-textlink c-textlink--text">
+                                                <th:block th:text="${item}"></th:block>
+                                            </a>
+                                        </th:block>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </th:block>
+
+                        <!-- コンテンツ -->
+                        <th:block th:if="*{!isNoContents()}">
+                            <div class="p-search__unisearch-title">
+                                <th:block th:if="*{isContentsFallbackKeyword()}">
+                                    <p th:utext="|「<strong><span><em>*{contentsFallbackKeyword}</em></span> <span><del>*{contentsTrimKeyword}</del></span></strong>」のコンテンツ検索結果|"></p>
+                                </th:block>
+                                <th:block th:unless="*{isContentsFallbackKeyword()}">
+                                    <th:block th:if="*{isKeyword()}">
+                                        <p th:utext="|「<strong>*{keyword}</strong>」のコンテンツ検索結果|"></p>
+                                    </th:block>
+                                    <th:block th:unless="*{isKeyword()}">
+                                        <p th:text="コンテンツ検索結果"></p>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                        </th:block>
+
+                        <th:block th:if="*{!isNoContents()}">
+                            <div class="p-search__unisearch-list">
+                                <div class="p-search__unisearch-list-inner">
+                                    <div class="p-search__unisearch-swiper">
+                                        <div class="swiper-wrapper">
+                                            <th:block th:each="item, stat : *{contentsListItems}">
+                                                <div class="swiper-slide p-search__unisearch-item">
+                                                    <a th:id="'goImageContentsPage-' + ${stat.index}"  th:href="|/${item.transitionUrl}|">
+                                                        <div class="p-search__unisearch-item-image">
+                                                            <img th:src="@{${@environment.getProperty('images.path.contents.resize.p1')} + ${item.contentImageUrl}|}"
+                                                                 th:attr="srcset=${@environment.getProperty('images.path.contents.resize.p1x2')} + ${item.contentImageUrl} + ' 2x'"
+                                                                 onerror="this.src=setNoImage(); this.srcset=setNoImage() + ' 2x'; this.removeAttribute('onerror');"
+                                                                 alt="" height="200" width="200" decoding="async" loading="lazy">
+                                                        </div>
+                                                        <div class="p-search__unisearch-item-title">
+                                                            <span th:remove="tag" th:text="${item.contentName}"></span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                        <div class="swiper-button-prev js-search-swiper-prev"></div>
+                                        <div class="swiper-button-next js-search-swiper-next"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+
+                        <div class="p-search__unisearch-title p-search__unisearch-title--line" th:if="*{!isNoGoods()}">
+                            <th:block th:if="*{isFallbackKeyword()}">
+                                <p th:utext="|「<strong><span><em>*{fallbackKeyword}</em></span> <span><del>*{trimKeyword}</del></span></strong>」の商品検索結果（全<span class='p-search__unisearch-title-sum'>*{totalCount}</span>件）|"></p>
+                            </th:block>
+                            <th:block th:unless="*{isFallbackKeyword()}">
+                                <th:block th:if="*{isKeyword()}">
+                                    <p th:utext="|「<strong>*{keyword}</strong>」の商品検索結果（全<span class='p-search__unisearch-title-sum'>*{totalCount}</span>件）|"></p>
+                                </th:block>
+                                <th:block th:unless="*{isKeyword()}">
+                                    <p th:utext="|商品検索結果（全<span class='p-search__unisearch-title-sum'>*{totalCount}</span>件）|"></p>
+                                </th:block>
+                            </th:block>
+                        </div>
+
+                        <!-- ここから検索結果一覧 -->
+                        <th:block th:if="*{!isNoGoods()}" th:with="additionalParam=@{keyword=*{keyword}}">
+                            <div th:replace="~{newdesign/include/pager::pager2(url='/search/index.html')}"></div>
+
+                            <div class="p-search__list">
+                                <div class="c-product c-product--thumb" th:if="*{isViewTypeThumbnail()}">
+                                    <th:block th:each="item, stat : *{goodsGroupListItems}">
+                                        <div class="c-product__item">
+                                            <a th:id="'goImageGoodsPage-' + ${stat.index}" th:href="${item.cid} ? @{/goods/index.html(ggcd=${item.ggcd},cid=${item.cid})} : @{/goods/index.html(ggcd=${item.ggcd})}">
+                                                <div class="c-product__item-image">
+                                                    <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${item.goodsImageItems[0]}}"
+                                                         th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${item.goodsImageItems[0]} + ' 2x'"
+                                                         onerror="this.src=setNoImage(); this.srcset=setNoImage() + ' 2x'; this.removeAttribute('onerror');"
+                                                         alt="" width="200" height="200"/>
+                                                </div>
+                                                <div class="c-product__item-icon" sec:authorize="!isAuthenticated()">
+                                                    <span class="c-product__item-icon--reserve" th:if="${item.isReserveIconFlag}">セールde予約</span>
+                                                    <span class="c-product__item-icon--new" th:if="${item.isNewIconFlag}">NEW</span>
+                                                    <span class="c-product__item-icon--sale" th:if="${item.isSaleIconFlag}">SALE</span>
+                                                    <span class="c-product__item-icon--outlet" th:if="${item.isOutletIconFlag}">アウトレット</span>
+                                                </div>
+                                                <div class="c-product__item-icon" sec:authorize="isAuthenticated()">
+                                                    <th:block th:unless="${item.isNoSaleUni()}">
+                                                        <span class="c-product__item-icon--reserve" th:if="${item.isReserveIconFlag}">セールde予約</span>
+                                                        <span class="c-product__item-icon--new" th:if="${item.isNewIconFlag}">NEW</span>
+                                                        <span class="c-product__item-icon--sale" th:if="${item.isSaleIconFlag}">SALE</span>
+                                                        <span class="c-product__item-icon--outlet" th:if="${item.isOutletIconFlag}">アウトレット</span>
+                                                    </th:block>
+                                                </div>
+                                                <div class="c-product__item-title">
+                                                    <span th:text="${item.goodsGroupName}"></span>
+                                                </div>
+                                                <th:block sec:authorize="isAuthenticated()">
+                                                    <th:block th:if="${item.isNoSaleUni()}">
+                                                        <!--/* 販売期間終了 */-->
+                                                        <div class="c-product__item-stock">販売終了しました</div>
+                                                    </th:block>
+                                                    <th:block th:unless="${item.isNoSaleUni()}">
+                                                        <th:block th:if="${item.isSaleUni()}">
+                                                            <div class="c-product__item-sale-comment" th:unless="${#strings.isEmpty(item.goodsPreDiscountPrice)}">
+                                                                <span th:text="${item.goodsPreDiscountPrice}"></span>
+                                                            </div>
+                                                            <th:block th:if="${item.isGroupSalePriceIntegrityFlag}">
+                                                                <div class="c-product__item-price c-product__item-price--sale">
+                                                                    <small>セール：</small>
+                                                                    <div class="c-product__item-price-unit">
+                                                                        <th:block th:text="|${#number.convert(item.saleMinPrice)}|"></th:block><span>円</span>
+                                                                    </div>
+                                                                    <div class="c-product__item-price-unit" th:if="${item.isSalePriceMarkDispFlag()}"><span>～</span>
+                                                                        <th:block th:text="|${#number.convert(item.saleMaxPrice)}円|"></th:block><span>円</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="c-product__item-regular-price">
+                                                                    <small>通常価格：</small>
+                                                                    <th:block th:text="|${#number.convert(item.minPrice)}円|"></th:block>
+                                                                    <th:block th:if="${item.isPriceMarkDispFlag()}">～
+                                                                        <th:block th:text="|${#number.convert(item.maxPrice)}円|"></th:block>
+                                                                    </th:block>
+                                                                </div>
+                                                            </th:block>
+                                                            <div th:unless="${item.isGroupSalePriceIntegrityFlag}" class="c-product__item-price">
+                                                                <div class="c-product__item-price-unit">
+                                                                    <th:block th:text="|${#number.convert(item.minPrice)}|"></th:block><span>円</span>
+                                                                </div>
+                                                                <div class="c-product__item-price-unit" th:if="${item.isPriceMarkDispFlag()}"><span>～</span>
+                                                                    <th:block th:text="|${#number.convert(item.maxPrice)}|"></th:block><span>円</span>
+                                                                </div>
+                                                            </div>
+                                                        </th:block>
+                                                        <div th:if="${!item.isSaleUni()}" class="c-product__item-price">
+                                                            <div class="c-product__item-price-unit">
+                                                                <th:block th:text="|${#number.convert(item.minPrice)}|"></th:block><span>円</span>
+                                                            </div>
+                                                            <div class="c-product__item-price-unit" th:if="${item.isPriceMarkDispFlag()}"><span>～</span>
+                                                                <th:block th:text="|${#number.convert(item.maxPrice)}|"></th:block><span>円</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="c-product__item-stock" th:if="${item.isNoStockUni()}">
+                                                            <!--/* 非販売 */-->
+                                                            在庫切れ
+                                                        </div>
+                                                    </th:block>
+                                                </th:block>
+                                                <!-- 2023-renew No16-2 from here -->
+                                                <div class="c-product__item-notlogin" sec:authorize="!isAuthenticated()">
+                                                    価格はログイン後表示
+                                                </div>
+                                                <!-- 2023-renew No16-2 to here -->
+                                            </a>
+                                        </div>
+                                    </th:block>
+                                </div>
+
+                                <div class="c-product c-product--list" th:if="*{isViewTypeList()}">
+                                    <div th:each="item, stat : *{goodsGroupListItems}">
+                                        <div class="c-product__item">
+                                            <a th:id="'goImageGoodsPage-' + ${stat.index}" th:href="${item.cid} ? @{/goods/index.html(ggcd=${item.ggcd},cid=${item.cid})} : @{/goods/index.html(ggcd=${item.ggcd})}">
+                                                <div class="c-product__item-image">
+                                                    <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${item.goodsImageItems[0]}}"
+                                                         th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${item.goodsImageItems[0]} + ' 2x'"
+                                                         onerror="this.src=setNoImage(); this.srcset=setNoImage() + ' 2x'; this.removeAttribute('onerror');"
+                                                         alt="" width="200" height="200"/>
+                                                </div>
+                                                <div class="c-product__item-overview">
+                                                    <div class="c-product__item-icon c-product__item-icon--list" sec:authorize="!isAuthenticated()">
+                                                        <span class="c-product__item-icon--reserve" th:if="${item.isReserveIconFlag}">セールde予約</span>
+                                                        <span class="c-product__item-icon--new" th:if="${item.isNewIconFlag}">NEW</span>
+                                                        <span class="c-product__item-icon--sale" th:if="${item.isSaleIconFlag}">SALE</span>
+                                                        <span class="c-product__item-icon--outlet" th:if="${item.isOutletIconFlag}">アウトレット</span>
+                                                    </div>
+                                                    <div class="c-product__item-icon c-product__item-icon--list" sec:authorize="isAuthenticated()">
+                                                        <th:block th:unless="${item.isNoSaleUni()}">
+                                                            <span class="c-product__item-icon--reserve" th:if="${item.isReserveIconFlag}">セールde予約</span>
+                                                            <span class="c-product__item-icon--new" th:if="${item.isNewIconFlag}">NEW</span>
+                                                            <span class="c-product__item-icon--sale" th:if="${item.isSaleIconFlag}">SALE</span>
+                                                            <span class="c-product__item-icon--outlet" th:if="${item.isOutletIconFlag}">アウトレット</span>
+                                                        </th:block>
+                                                    </div>
+                                                    <div class="c-product__item-title">
+                                                        <th:block th:text="${item.goodsGroupName}"></th:block>
+                                                    </div>
+                                                    <div class="c-product__item-text">
+                                                        <th:block th:utext="${#pre.convert(item.goodsNote1, false)}"></th:block>
+                                                    </div>
+                                                </div>
+                                                <div class="c-product__item-state">
+                                                    <th:block sec:authorize="isAuthenticated()">
+                                                        <th:block th:if="${item.isNoSaleUni()}">
+                                                            <!--/* 販売期間終了 */-->
+                                                            <div class="c-product__item-stock">販売終了しました</div>
+                                                        </th:block>
+                                                        <th:block th:unless="${item.isNoSaleUni()}">
+                                                            <th:block th:if="${item.isSaleUni()}">
+                                                                <div class="c-product__item-sale-comment" th:unless="${#strings.isEmpty(item.goodsPreDiscountPrice)}">
+                                                                    <span th:text="${item.goodsPreDiscountPrice}"></span>
+                                                                </div>
+                                                                <th:block th:if="${item.isGroupSalePriceIntegrityFlag}">
+                                                                    <div class="c-product__item-price c-product__item-price--sale">
+                                                                        <small>セール：</small>
+                                                                        <div class="c-product__item-price-unit">
+                                                                            <th:block th:text="|${#number.convert(item.saleMinPrice)}|"></th:block><span>円</span>
+                                                                        </div>
+                                                                        <div class="c-product__item-price-unit" th:if="${item.isSalePriceMarkDispFlag()}"><span>～</span>
+                                                                            <th:block th:text="|${#number.convert(item.saleMaxPrice)}円|"></th:block><span>円</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="c-product__item-regular-price">
+                                                                        <small>通常価格：</small>
+                                                                        <th:block th:text="|${#number.convert(item.minPrice)}円|"></th:block>
+                                                                        <th:block th:if="${item.isPriceMarkDispFlag()}">～
+                                                                            <th:block th:text="|${#number.convert(item.maxPrice)}円|"></th:block>
+                                                                        </th:block>
+                                                                    </div>
+                                                                </th:block>
+                                                                <th:block th:unless="${item.isGroupSalePriceIntegrityFlag}">
+                                                                    <div class="c-product__item-price">
+                                                                        <div class="c-product__item-price-unit">
+                                                                            <th:block th:text="|${#number.convert(item.minPrice)}円|"></th:block>
+                                                                            <th:block th:if="${item.isPriceMarkDispFlag()}">～
+                                                                                <th:block th:text="|${#number.convert(item.maxPrice)}円|"></th:block>
+                                                                            </th:block>
+                                                                        </div>
+                                                                    </div>
+                                                                </th:block>
+                                                            </th:block>
+                                                            <th:block th:if="${!item.isSaleUni()}">
+                                                                <div class="c-product__item-price">
+                                                                    <div class="c-product__item-price-unit">
+                                                                        <th:block th:text="|${#number.convert(item.minPrice)}円|"></th:block>
+                                                                        <th:block th:if="${item.isPriceMarkDispFlag()}">～
+                                                                            <th:block th:text="|${#number.convert(item.maxPrice)}円|"></th:block>
+                                                                        </th:block>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                        </th:block>
+                                                        <div class="c-product__item-stock" th:if="${item.isNoStockUni()}">
+                                                            <!--/* 非販売 */-->
+                                                            在庫切れ
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- 2023-renew No16-2 from here -->
+                                                    <div class="c-product__item-notlogin" sec:authorize="!isAuthenticated()">
+                                                        価格はログイン後表示
+                                                    </div>
+                                                    <!-- 2023-renew No16-2 to here -->
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div th:replace="~{newdesign/include/pager::pager1(url='/search/index.html')}"></div>
+                        </th:block>
+                                                <div class="p-search__unisearch-hit p-search__unisearch-hit--nodata" th:if="*{isNoGoods()}">
+                                                    <div class="p-search__unisearch-title">
+                                                        <th:block th:if="*{#strings.isEmpty(keyword)}">
+                                                            <p th:utext="|検索結果（全<span class='p-search__unisearch-title-sum'>0</span>件）|"></p>
+                                                        </th:block>
+                                                        <th:block th:unless="*{#strings.isEmpty(keyword)}">
+                                                            <p th:utext="|「<strong>*{keyword}</strong>」の検索結果（全<span class='p-search__unisearch-title-sum'>0</span>件）|"></p>
+                                                        </th:block>
+                                                    </div>
+                                                    <h2>お探しのキーワードに一致する商品が見つかりませんでした。</h2>
+                                                    <div class="p-search__unisearch-information"><p>別のキーワードをお試しください。</p></div>
+                             </div>
+                        <th:block th:if="*{isNoGoods()}">
+                            <hm:freearea key="search_keyword"/>
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div th:replace="~{newdesign/include/footer}"></div>
+    </div>
+</body>
+</html>

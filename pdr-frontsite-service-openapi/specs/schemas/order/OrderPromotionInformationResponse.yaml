@@ -1,0 +1,17 @@
+type: object
+description: プロモーション連携レスポンス
+properties:
+  checkMessageDtoList:
+    type: array
+    description: エラーメッセージ用List
+    items:
+      $ref: '#/components/schemas/CheckMessageDtoResponse'
+  receiveOrderDtoList:
+    type: array
+    description: 受注DTOリスト
+    items:
+      type: string
+components:
+  schemas:
+    CheckMessageDtoResponse:
+      $ref: ./CheckMessageDtoResponse.yaml

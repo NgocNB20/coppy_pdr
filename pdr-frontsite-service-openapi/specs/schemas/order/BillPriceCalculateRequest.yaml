@@ -1,0 +1,14 @@
+type: object
+description: 請求金額算出リクエスト
+properties:
+  receiveOrderDto:
+    type: string
+    description: 注文DTOリクエスト
+  carriageCalcFlag:
+    type: boolean
+    description: 送料適用フラグ。true..計算前の送料を適用する
+    example: true
+  adminId:
+    type: string
+    description: 管理者ID
+    example: administrator

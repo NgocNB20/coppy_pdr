@@ -1,0 +1,25 @@
+type: object
+description: WEB-API連携 取りおき情報取得結果DTOレスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: 1
+  reserveFlag:
+    type: string
+    description: 取りおき可否
+    example: 1
+  discountFlag:
+    type: string
+    description: 適用割引
+    example: 1
+  possibleReserveFromDay:
+    type: string
+    format: date-time
+    description: 予約可能開始日
+    example: 2021/12/12 12:00:00
+  possibleReserveToDay:
+    type: string
+    format: date-time
+    description: 予約可能終了日
+    example: 2021/12/12 12:00:00

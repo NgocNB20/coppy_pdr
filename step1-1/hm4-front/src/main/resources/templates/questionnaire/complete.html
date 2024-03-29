@@ -1,0 +1,61 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-questionnaire">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div id="layoutHeader" th:replace="~{newdesign/include/header}"></div>
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                        <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">アンケート</span></div>
+                </div>
+            </div>
+        </div>
+
+        <form name="form1" id="form1" method="post" action="">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong th:text="*{questionnaireModel.namePc}"></strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo() ? 'global-info-message' : 'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="l-complete l-complete--gray">
+                <div class="l-complete__inner">
+                    <p class="l-complete__title">アンケートは以上です。</p>
+                    <div class="l-complete__text-unit l-complete--margin-m">
+                        <p class="l-complete__text"
+                           th:utext="*{#pre.convert(questionnaireModel.completeTextPc, false)}"></p>
+                    </div>
+                    <div class="c-button-wrap c-button-wrap--complete">
+                        <a th:href="@{/index.html}" id="goTopPage"
+                           class="c-button c-button--primary-line c-button--width-l">
+                            トップページ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+    <div id="layoutFooter" th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

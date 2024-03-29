@@ -1,0 +1,14 @@
+type: object
+description: エラーマップ
+properties:
+  messages:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        $ref: "#/components/schemas/ErrorContent"
+
+components:
+  schemas:
+    ErrorContent:
+      $ref: ./ErrorContent.yaml

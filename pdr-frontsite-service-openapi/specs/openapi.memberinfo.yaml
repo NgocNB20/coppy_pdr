@@ -1,0 +1,2077 @@
+openapi: 3.0.3
+info:
+  title: 【PDRフロントサイトサービス】会員のAPI仕様
+  description: PDRフロントサイトサービスのOpenAPI定義：会員
+  version: 4.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /memberinfo/{memberInfoSeq}:
+    get:
+      tags:
+        - MemberInfo
+      summary: 会員取得取得
+      description: 会員取得取得
+      operationId: getByMemberInfoSeq
+      parameters:
+        - name: memberInfoSeq
+          in: path
+          description: 会員情報SEQ
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 10000001
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/by-tel:
+    get:
+      tags:
+        - MemberInfo
+      summary: 電話番号より会員情報取得
+      description: 電話番号より会員情報取得
+      operationId: getByTel
+      parameters:
+        - in: query
+          name: memberInfoByTelGetRequest
+          description: 電話番号より会員情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/MemberInfoByTelGetRequest'
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/by-tel-customerno:
+    get:
+      tags:
+        - MemberInfo
+      summary: 電話番号と顧客番号から会員情報取得
+      description: 電話番号と顧客番号から会員情報取得
+      operationId: getByTelCustomerNo
+      parameters:
+        - in: query
+          name: memberInfoByTelAndCustomerNoGetRequest
+          description: 電話番号と顧客番号から会員情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/MemberInfoByTelAndCustomerNoGetRequest'
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/loginadvisability:
+    get:
+      tags:
+        - MemberInfo
+      summary: ログイン可否判定取得
+      description: ログイン可否判定取得
+      operationId: getByLoginAdvisability
+      parameters:
+        - in: query
+          name: loginAdvisabilityGetRequest
+          description: ログイン可否判定取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/LoginAdvisabilityGetRequest'
+      responses:
+        200:
+          description: ログイン可否判定Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginAdvisabilityEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/confirmmail:
+    get:
+      tags:
+        - MemberInfo
+      summary: 確認メール情報取得
+      description: 確認メール情報取得
+      operationId: getByConfirmMail
+      parameters:
+        - in: query
+          name: confirmMailGetRequest
+          description: 確認メール情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/ConfirmMailGetRequest'
+      responses:
+        200:
+          description: 確認メールEntityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfirmMailEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/memberinfo-unregist-inquiry-mail:
+    post:
+      tags:
+        - MemberInfo
+      summary: 未登録会員照会発生メール送信
+      description: 未登録会員照会発生メール送信
+      operationId: registMemberInfoUnregistInquiryMail
+      requestBody:
+        required: true
+        description: 未登録会員照会発生メール送信リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoUnregistInquirySendMailRequest"
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/addressbook/{addressBookSeq}:
+    get:
+      tags:
+        - MemberInfo
+      summary: アドレス帳情報取得
+      description: アドレス帳情報取得
+      operationId: getAddressbook
+      parameters:
+        - name: addressBookSeq
+          in: path
+          description: アドレス帳SEQ
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 100000
+        - in: query
+          name: memberInfoGetRequest
+          description: アドレス帳情報取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/MemberInfoGetRequest'
+      responses:
+        200:
+          description: アドレス帳Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressBookEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/addressbook:
+    post:
+      tags:
+        - MemberInfo
+      summary: アドレス帳情報登録
+      description: アドレス帳情報登録
+      operationId: registAddressbook
+      requestBody:
+        description: アドレス帳情報登録リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressBookRegistRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      tags:
+        - MemberInfo
+      summary: アドレス帳情報更新
+      description: アドレス帳情報更新
+      operationId: updateAddressbook
+      requestBody:
+        description: アドレス帳情報更新リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressBookUpdateRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/favorite:
+    post:
+      tags:
+        - MemberInfo
+      summary: お気に入り情報登録
+      description: お気に入り情報登録
+      operationId: registFavorite
+      requestBody:
+        required: true
+        description: お気に入り情報登録リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FavoriteRegistRequest"
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/favorite/list:
+    get:
+      tags:
+        - MemberInfo
+      summary: お気に入り情報リスト取得
+      description: お気に入り情報リスト取得
+      operationId: getFavoriteList
+      parameters:
+        - in: query
+          name: favoriteListGetRequest
+          description: お気に入り情報リスト取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/FavoriteListGetRequest'
+        - in: query
+          name: pageInfoRequest
+          description: ページ情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageInfoRequest'
+      responses:
+        200:
+          description: お気に入りDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavoriteDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - MemberInfo
+      summary: お気に入り情報リスト削除
+      description: お気に入り情報リスト削除
+      operationId: deleteFavoriteList
+      requestBody:
+        required: true
+        description: お気に入り情報リスト削除リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FavoriteListDeleteRequest"
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/favorite/goods-stock-status/get:
+    post:
+      tags:
+        - MemberInfo
+      summary: お気に入り情報リスト削除
+      description: お気に入り情報リスト削除
+      operationId: getFavoriteByFavoriteGoodsStockStatus
+      requestBody:
+        required: true
+        description: お気に入り商品在庫状況取得リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteGoodsStockStatusGetRequest'
+      responses:
+        200:
+          description: お気に入りDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavoriteDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/favorite/for-cart-check/get:
+    post:
+      tags:
+        - MemberInfo
+      summary: カートチェック用お気に入り情報リスト取得
+      description: カートチェック用お気に入り情報リスト取得
+      operationId: getFavoriteForCartCheck
+      requestBody:
+        required: true
+        description: カートチェック用お気に入り情報リスト取得リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteForCartCheckRequest'
+      responses:
+        200:
+          description: お気に入りEntityListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavoriteEntityListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/memberinfo-screen:
+    post:
+      tags:
+        - MemberInfo
+      summary: 本会員登録画面用会員登録
+      description: 本会員登録画面用会員登録
+      operationId: registMemberInfoScreen
+      requestBody:
+        required: true
+        description: 本会員登録画面用会員登録リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoScreenRegistRequest"
+      responses:
+        200:
+          # 2023-renew No22 from here
+          description: 会員情報EntityListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+          # 2023-renew No22 to here
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      tags:
+        - MemberInfo
+      summary: 本会員登録画面用会員情報更新
+      description: 本会員登録画面用会員情報更新
+      operationId: updateMemberInfoScreen
+      requestBody:
+        required: true
+        description: 本会員登録画面用会員情報更新リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoScreenUpdateRequest"
+      responses:
+        200:
+          # 2023-renew No22 from here
+          description: 会員情報EntityListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+          # 2023-renew No22 to here
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/confirm-screen:
+    # 2023-renew AddNo2 from here
+    put:
+      tags:
+        - MemberInfo
+      summary: 会員情報確認画面用会員更新
+      description: 会員情報確認画面用会員更新
+      operationId: updateConfirmScreen
+      requestBody:
+        required: true
+        description: 会員情報確認画面用会員更新リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoConfirmScreenUpdateRequest"
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    # 2023-renew AddNo2 to here
+  /memberinfo/mail:
+    put:
+      tags:
+        - MemberInfo
+      summary: メールアドレス変更
+      description: メールアドレス変更
+      operationId: updateMail
+      requestBody:
+        required: true
+        description: メールアドレス変更リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoMailUpdateSendMailRequest"
+      responses:
+        200:
+          description: 結果成否レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultFlagResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/update-mail:
+    get:
+      tags:
+        - MemberInfo
+      summary: 会員変更メールアドレス取得
+      description: 会員変更メールアドレス取得
+      operationId: getByUpdateMail
+      parameters:
+        - in: query
+          name: memberInfoUpdateMailGetRequest
+          description: 会員変更メールアドレス取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/MemberInfoUpdateMailGetRequest'
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/pasword/reset:
+    get:
+      tags:
+        - MemberInfo
+      summary: パスワード再設定会員情報取得
+      description: パスワード再設定会員情報取得
+      operationId: getByPasswordReset
+      parameters:
+        - in: query
+          name: memberInfoUpdateMailGetRequest
+          description: パスワード再設定会員情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PasswordResetMemberInfoGetRequest'
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/password:
+    put:
+      tags:
+        - MemberInfo
+      summary: 会員情報パスワード変更
+      description: 会員情報パスワード変更
+      operationId: updatePassword
+      requestBody:
+        description: 会員情報パスワード変更リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberInfoPasswordUpdateRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/password/password-reset-send-mail:
+    put:
+      tags:
+        - MemberInfo
+      summary: パスワード再設定メール送信
+      description: パスワード再設定メール送信
+      operationId: updatePasswordResetSendMail
+      requestBody:
+        description: パスワード再設定メール送信リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetSendMailRequest'
+      responses:
+        200:
+          description: 結果成否レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultFlagResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/password/memberinfo-password-update:
+    put:
+      tags:
+        - MemberInfo
+      summary: 会員パスワード変更
+      description: 会員パスワード変更
+      operationId: updateMemberInfoPassword
+      requestBody:
+        description: パスワード再設定会員情報取得リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberInfoPasswordResetUpdateRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/cardinfo:
+    delete:
+      tags:
+        - MemberInfo
+      summary: 指定カード情報削除
+      description: 指定カード情報削除
+      operationId: updateCardInfo
+      requestBody:
+        description: 指定カード情報削除リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardInfoDeleteRequest'
+      responses:
+        200:
+          description: カード情報削除レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardInfoDeleteResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/orderhistory/detail:
+    get:
+      tags:
+        - MemberInfo
+      summary: 注文履歴詳細情報取得
+      description: 注文履歴詳細情報取得
+      operationId: getOrderHistoryDetail
+      parameters:
+        - in: query
+          name: orderHistoryDetailsGetRequest
+          description: 注文履歴詳細情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/OrderHistoryDetailsGetRequest'
+      responses:
+        200:
+          description: 注文履歴詳細Dto取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceiveOrderForHistoryDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/orderhistory/list:
+    get:
+      tags:
+        - MemberInfo
+      summary: 注文履歴情報リスト取得
+      description: 注文履歴情報リスト取得
+      operationId: getOrderHistoryList
+      parameters:
+        - in: query
+          name: orderHistoryListGetRequest
+          description: 注文履歴情報リスト取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/OrderHistoryListGetRequest'
+        - in: query
+          name: pageInfoRequest
+          description: ページ情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageInfoRequest'
+      responses:
+        200:
+          description: 注文履歴DtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderHistoryDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/orderhistory/cancel-order:
+    post:
+      tags:
+        - MemberInfo
+      summary: 注文キャンセル
+      description: 注文キャンセル
+      operationId: cancelOrder
+      requestBody:
+        description: 注文キャンセルリクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderHistoryCancelOrderRequest'
+      responses:
+        200:
+          description: 注文キャンセルレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderHistoryCancelOrderResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/favorite/for-goods-check/get:
+    post:
+      tags:
+        - MemberInfo
+      summary: 商品チェック用お気に入り情報リスト取得
+      description: 商品チェック用お気に入り情報リスト取得
+      operationId: getFavoriteForGoodsCheck
+      requestBody:
+        required: true
+        description: 商品チェック用お気に入り情報リスト取得リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteForGoodsCheckRequest'
+      responses:
+        200:
+          description: お気に入りEntityListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavoriteEntityListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/mail-screen:
+    put:
+      tags:
+        - MemberInfo
+      summary: メールアドレス変更画面用会員メールアドレス変更
+      description: メールアドレス変更画面用会員メールアドレス変更
+      operationId: updateMailScreen
+      requestBody:
+        description: メールアドレス変更画面用会員メールアドレス変更リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberInfoMailScreenUpdateRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/by-memberinfoid-or-customerno:
+    get:
+      tags:
+        - MemberInfo
+      summary: 会員情報取得
+      description: 会員情報取得
+      operationId: getByMemberInfoOrCustomerNo
+      parameters:
+        - in: query
+          name: memberInfoByMemberInfoIdOrCustumerNoGetRequest
+          description: 会員情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/MemberInfoByMemberInfoIdOrCustumerNoGetRequest'
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/by-shop-unique-id:
+    get:
+      tags:
+        - MemberInfo
+      summary: 会員情報取得
+      description: 会員情報取得
+      operationId: getByShopUniqueId
+      parameters:
+        - in: query
+          name: memberInfoByShopUniqueIdGetRequest
+          description: ショップユニークId取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/MemberInfoByShopUniqueIdGetRequest'
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/login-info:
+    put:
+      tags:
+        - MemberInfo
+      summary: 会員ログイン情報更新
+      description: 会員ログイン情報更新
+      operationId: updateLoginInfo
+      requestBody:
+        description: 取得した会員のログイン情報を更新リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInfoUpdateRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/login-failure-with-locktime:
+    put:
+      tags:
+        - MemberInfo
+      summary: 会員ログイン失敗情報更新
+      description: 会員ログイン失敗情報更新
+      operationId: updateLoginFailureWithLocktime
+      requestBody:
+        description: 取得した会員のログイン情報を更新リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginFailureWithLockTimeUpdateRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/login-failure:
+    put:
+      tags:
+        - MemberInfo
+      summary: 会員ログイン失敗情報更新
+      description: 会員ログイン失敗情報更新
+      operationId: updateLoginFailure
+      requestBody:
+        description: ログイン失敗回数をインクリメントリクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLoginFailureUpdateRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/reset-login-failure-count:
+    put:
+      tags:
+        - MemberInfo
+      summary: 会員ログイン失敗回数リセット
+      description: 会員ログイン失敗回数リセット
+      operationId: updateResetLoginFailureCount
+      requestBody:
+        description: 会員ログイン失敗回数リセットリクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginFailureCountResetRequest'
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/cardinfo/{memberInfoSeq}:
+    get:
+      tags:
+        - MemberInfo
+      summary: カード情報取得
+      description: カード情報取得
+      operationId: getCardInfoByMemberInfoSeq
+      parameters:
+        - name: memberInfoSeq
+          in: path
+          description: 会員情報SEQ
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 10000001
+        - name: cardInfoRequest
+          in: query
+          description: 会員情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/CardInfoRequest'
+      responses:
+        200:
+          description: カード情報取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardInfoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/customer-no/next-val:
+    get:
+      tags:
+        - MemberInfo
+      summary: 顧客番号取得
+      description: 顧客番号取得
+      operationId: getCustomerNoNextVal
+      responses:
+        200:
+          description: 顧客番号取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerNoNextValResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/by-seq-status:
+    get:
+      tags:
+        - MemberInfo
+      summary: 会員情報を取得
+      description: 会員情報を取得
+      operationId: getByMemberInfoSeqAndStatus
+      parameters:
+        - in: query
+          name: memberinfoBySeqAndStatusGetRequest
+          description: 会員情報取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/MemberinfoBySeqAndStatusGetRequest'
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/authentication/proxy-admin-login:
+    get:
+      tags:
+        - MemberInfo
+      summary: 代理ログイン
+      description: 代理ログイン
+      operationId: getProxyAdmin
+      parameters:
+        - in: query
+          name: proxyAdminLoginRequest
+          description: 代理のログインリクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/ProxyAdminLoginRequest'
+      responses:
+        200:
+          description: 代理のログインレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyAdminLoginResponse"
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /memberinfo/get-card-brand-list:
+    get:
+      tags:
+        - MemberInfo
+      summary: カードブランドリスト取得
+      description: カードブランドリスト取得
+      operationId: getCardBrandList
+      parameters:
+        - in: query
+          name: cardBrandGetRequest
+          description: カードブランドリスト取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/CardBrandGetRequest'
+      responses:
+        200:
+          description: カードブランドリスト取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardBrandGetResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /memberinfo/regist-card-info:
+    post:
+      tags:
+        - MemberInfo
+      summary: カード情報登録
+      description: カード情報登録
+      operationId: registCardInfo
+      requestBody:
+        required: true
+        description: カード情報登録リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardInfoRegistRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /memberinfo/send-mail-for-lock-account-by-regist-credit-error:
+    post:
+      tags:
+        - MemberInfo
+      summary: アカウントロック通知（クレジット登録エラー）メール送信
+      description: アカウントロック通知（クレジット登録エラー）メール送信
+      operationId: sendMailForLockAccountByRegistCreditError
+      requestBody:
+        required: true
+        description: アカウントロック通知（クレジット登録エラー）メール送信リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMailForLockAccountByRegistCreditErrorRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  # 2023-renew No22 from here
+  /memberinfo/image:
+    post:
+      tags:
+        - MemberInfo
+      summary: アップロードした画像をデータベースに保存
+      description: アップロードした画像をデータベースに保存
+      operationId: createMemberImage
+      requestBody:
+        required: true
+        description: メンバー情報画像リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoImageRequest"
+      responses:
+        200:
+          description: アップロードした画像情報をデータベースに正常に保存しました
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - MemberInfo
+      summary: 会員情報アップロードファイルを削除
+      description: 会員情報アップロードファイルを削除
+      operationId: deleteMemberImage
+      requestBody:
+        required: true
+        description: 会員情報画像削除依頼
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoImageDeleteRequest"
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /memberinfo/image/{memberInfoSeq}:
+    get:
+      tags:
+        - MemberInfo
+      summary: アップロードされたファイルをデータベースから取得する
+      description: アップロードされたファイルをデータベースから取得する
+      operationId: getListMemberImage
+      parameters:
+        - name: memberInfoSeq
+          in: path
+          description: 会員情報SEQ
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 10000001
+      responses:
+        200:
+          description: 会員Entityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberInfoImageListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  # 2023-renew No22 to here
+  # 2023-renew No71 from here
+  /memberinfo/announce:
+    put:
+      tags:
+        - MemberInfo
+      summary: セール通知および入荷通知を更新します
+      description: セール通知および入荷通知を更新します
+      operationId: updateAnnounce
+      requestBody:
+        required: true
+        description: セール通知および入荷通知更新リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberInfoAnnounceUpdateRequest"
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  # 2023-renew No71 to here
+  # 2023-renew No65 from here
+  /memberinfo/restockannounce:
+    post:
+      tags:
+        - MemberInfo
+      summary: 入荷お知らせ登録
+      description: 入荷お知らせ登録
+      operationId: registRestockAnnounce
+      requestBody:
+        required: true
+        description: 入荷お知らせリクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestockAnnounceRegistRequest"
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /memberinfo/restockannounce/list:
+    get:
+      tags:
+        - MemberInfo
+      summary: 入荷お知らせリスト取得
+      description: 入荷お知らせリスト取得
+      operationId: getRestockAnnounceList
+      parameters:
+        - in: query
+          name: restockAnnounceListGetRequest
+          description: 入荷お知らせリスト取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/RestockAnnounceListGetRequest'
+        - in: query
+          name: pageInfoRequest
+          description: ページ情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageInfoRequest'
+      responses:
+        200:
+          description: 入荷お知らせDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestockAnnounceDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - MemberInfo
+      summary: ストック コントローり情報リスト削除
+      description: ストック コントローり情報リスト削除
+      operationId: deleteRestockAnnounceList
+      requestBody:
+        required: true
+        description: ストック コントローり情報リスト削除リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestockAnnounceListDeleteRequest"
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  # 2023-renew No65 to here
+components:
+  schemas:
+    MemberInfoByMemberInfoIdOrCustumerNoGetRequest:
+      $ref: ./schemas/memberinfo/MemberInfoByMemberInfoIdOrCustumerNoGetRequest.yaml
+    MemberInfoByShopUniqueIdGetRequest:
+      $ref: ./schemas/memberinfo/MemberInfoByShopUniqueIdGetRequest.yaml
+    LoginFailureCountResetRequest:
+      $ref: ./schemas/memberinfo/LoginFailureCountResetRequest.yaml
+    UpdateLoginFailureUpdateRequest:
+      $ref: ./schemas/memberinfo/UpdateLoginFailureUpdateRequest.yaml
+    LoginFailureWithLockTimeUpdateRequest:
+      $ref: ./schemas/memberinfo/LoginFailureWithLockTimeUpdateRequest.yaml
+    LoginInfoUpdateRequest:
+      $ref: ./schemas/memberinfo/LoginInfoUpdateRequest.yaml
+    CardInfoRequest:
+      $ref: ./schemas/memberinfo/CardInfoRequest.yaml
+    MemberInfoMailScreenUpdateRequest:
+      $ref: ./schemas/memberinfo/MemberInfoMailScreenUpdateRequest.yaml
+    OrderHistoryDtoListResponse:
+      $ref: ./schemas/memberinfo/OrderHistoryDtoListResponse.yaml
+    OrderHistoryListGetRequest:
+      $ref: ./schemas/memberinfo/OrderHistoryListGetRequest.yaml
+    ReceiveOrderForHistoryDtoResponse:
+      $ref: ./schemas/memberinfo/ReceiveOrderForHistoryDtoResponse.yaml
+    OrderHistoryDetailsGetRequest:
+      $ref: ./schemas/memberinfo/OrderHistoryDetailsGetRequest.yaml
+    OrderHistoryCancelOrderRequest:
+      $ref: ./schemas/memberinfo/OrderHistoryCancelOrderRequest.yaml
+    OrderHistoryCancelOrderResponse:
+      $ref: ./schemas/memberinfo/OrderHistoryCancelOrderResponse.yaml
+    CardInfoDeleteRequest:
+      $ref: ./schemas/memberinfo/CardInfoDeleteRequest.yaml
+    CardInfoDeleteResponse:
+      $ref: ./schemas/memberinfo/CardInfoDeleteResponse.yaml
+    MemberInfoPasswordUpdateRequest:
+      $ref: ./schemas/memberinfo/MemberInfoPasswordUpdateRequest.yaml
+    MemberInfoPasswordResetUpdateRequest:
+      $ref: ./schemas/memberinfo/MemberInfoPasswordResetUpdateRequest.yaml
+    PasswordResetMemberInfoGetRequest:
+      $ref: ./schemas/memberinfo/PasswordResetMemberInfoGetRequest.yaml
+    PasswordResetSendMailRequest:
+      $ref: ./schemas/memberinfo/PasswordResetSendMailRequest.yaml
+    MemberInfoUpdateMailGetRequest:
+      $ref: ./schemas/memberinfo/MemberInfoUpdateMailGetRequest.yaml
+    MemberInfoMailUpdateSendMailRequest:
+      $ref: ./schemas/memberinfo/MemberInfoMailUpdateSendMailRequest.yaml
+    AddressBookRegistRequest:
+      $ref: ./schemas/memberinfo/AddressBookRegistRequest.yaml
+    AddressBookEntityResponse:
+      $ref: ./schemas/memberinfo/AddressBookEntityResponse.yaml
+    AddressBookUpdateRequest:
+      $ref: ./schemas/memberinfo/AddressBookUpdateRequest.yaml
+    FavoriteForCartCheckRequest:
+      $ref: ./schemas/memberinfo/FavoriteForCartCheckRequest.yaml
+    FavoriteForGoodsCheckRequest:
+      $ref: ./schemas/memberinfo/FavoriteForGoodsCheckRequest.yaml
+    FavoriteEntityListResponse:
+      $ref: ./schemas/memberinfo/FavoriteEntityListResponse.yaml
+    FavoriteGoodsStockStatusGetRequest:
+      $ref: ./schemas/memberinfo/FavoriteGoodsStockStatusGetRequest.yaml
+    FavoriteListDeleteRequest:
+      $ref: ./schemas/memberinfo/FavoriteListDeleteRequest.yaml
+    FavoriteListGetRequest:
+      $ref: ./schemas/memberinfo/FavoriteListGetRequest.yaml
+    FavoriteDtoListResponse:
+      $ref: ./schemas/memberinfo/FavoriteDtoListResponse.yaml
+    FavoriteRegistRequest:
+      $ref: ./schemas/memberinfo/FavoriteRegistRequest.yaml
+    ResultFlagResponse:
+      $ref: ./schemas/ResultFlagResponse.yaml
+    ResultCountResponse:
+      $ref: ./schemas/ResultCountResponse.yaml
+    MemberInfoConfirmScreenUpdateRequest:
+      $ref: ./schemas/memberinfo/MemberInfoConfirmScreenUpdateRequest.yaml
+    MemberInfoScreenRegistRequest:
+      $ref: ./schemas/memberinfo/MemberInfoScreenRegistRequest.yaml
+    MemberInfoScreenUpdateRequest:
+      $ref: ./schemas/memberinfo/MemberInfoScreenUpdateRequest.yaml
+    # 2023-renew No71 from here
+    MemberInfoAnnounceUpdateRequest:
+      $ref: ./schemas/memberinfo/MemberInfoAnnounceUpdateRequest.yaml
+    # 2023-renew No71 to here
+    ConfirmMailGetRequest:
+      $ref: ./schemas/memberinfo/ConfirmMailGetRequest.yaml
+    ConfirmMailEntityResponse:
+      $ref: ./schemas/memberinfo/ConfirmMailEntityResponse.yaml
+    MemberInfoUnregistInquirySendMailRequest:
+      $ref: ./schemas/memberinfo/MemberInfoUnregistInquirySendMailRequest.yaml
+    LoginAdvisabilityGetRequest:
+      $ref: ./schemas/memberinfo/LoginAdvisabilityGetRequest.yaml
+    LoginAdvisabilityEntityResponse:
+      $ref: ./schemas/memberinfo/LoginAdvisabilityEntityResponse.yaml
+    MemberInfoByTelGetRequest:
+      $ref: ./schemas/memberinfo/MemberInfoByTelGetRequest.yaml
+    MemberInfoByTelAndCustomerNoGetRequest:
+      $ref: ./schemas/memberinfo/MemberInfoByTelAndCustomerNoGetRequest.yaml
+    MemberInfoEntityResponse:
+      $ref: ./schemas/memberinfo/MemberInfoEntityResponse.yaml
+    MemberInfoGetRequest:
+      $ref: ./schemas/memberinfo/MemberInfoGetRequest.yaml
+    CardInfoResponse:
+      $ref: ./schemas/memberinfo/CardInfoResponse.yaml
+    CustomerNoNextValResponse:
+      $ref: ./schemas/memberinfo/CustomerNoNextValResponse.yaml
+    MemberinfoBySeqAndStatusGetRequest:
+      $ref: ./schemas/memberinfo/MemberinfoBySeqAndStatusGetRequest.yaml
+    ProxyAdminLoginRequest:
+      $ref: ./schemas/memberinfo/ProxyAdminLoginRequest.yaml
+    ProxyAdminLoginResponse:
+      $ref: ./schemas/memberinfo/ProxyAdminLoginResponse.yaml
+    CardBrandGetRequest:
+      $ref: ./schemas/memberinfo/CardBrandGetRequest.yaml
+    CardBrandGetResponse:
+      $ref: ./schemas/memberinfo/CardBrandGetResponse.yaml
+    CardInfoRegistRequest:
+      $ref: ./schemas/memberinfo/CardInfoRegistRequest.yaml
+    SendMailForLockAccountByRegistCreditErrorRequest:
+      $ref: ./schemas/memberinfo/SendMailForLockAccountByRegistCreditErrorRequest.yaml
+    # 2023-renew No22 from here
+    MemberInfoImageRequest:
+      $ref: ./schemas/memberinfo/MemberInfoImageRequest.yaml
+    MemberInfoImageListResponse:
+      $ref: ./schemas/memberinfo/MemberInfoImageListResponse.yaml
+    MemberInfoImageDeleteRequest:
+      $ref: ./schemas/memberinfo/MemberInfoImageDeleteRequest.yaml
+    # 2023-renew No22 to here
+    # 2023-renew No65 from here
+    RestockAnnounceRegistRequest:
+      $ref: ./schemas/memberinfo/RestockAnnounceRegistRequest.yaml
+    RestockAnnounceDtoListResponse:
+      $ref: ./schemas/memberinfo/RestockAnnounceDtoListResponse.yaml
+    RestockAnnounceListGetRequest:
+      $ref: ./schemas/memberinfo/RestockAnnounceListGetRequest.yaml
+    RestockAnnounceListDeleteRequest:
+      $ref: ./schemas/memberinfo/RestockAnnounceListDeleteRequest.yaml
+    # 2023-renew No65 to here
+    PageInfoRequest:
+      $ref: ./schemas/PageInfoRequest.yaml
+    ErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ClientErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ServerErrorResponse:
+      $ref: ./schemas/Error.yaml

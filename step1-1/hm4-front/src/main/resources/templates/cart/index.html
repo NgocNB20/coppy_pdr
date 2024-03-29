@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+
+    <script src="/newdesign/assets/js/lib/swiper-bundle.min.js" defer="defer"></script>
+    <link rel="stylesheet" th:href="@{/newdesign/assets/css/lib/swiper-bundle.min.css}">
+    <link rel="stylesheet" th:href="@{/newdesign/assets/css/style.css}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script type="text/javascript" th:src="@{/common/js/goodsunitsearch.js}"></script>
+    <script type="text/javascript" th:src="@{/common/js/wrappinggoodslist.js}"></script>
+    <script type="text/javascript" th:src="@{/common/js/coupon.js}"></script>
+
+    <!-- Google Tag Manager ecコンシェルタグ start-->
+    <script>
+        dataLayer.push({'cartTotalPrice': '[[${cartModel.eccCartTotalPrice}]]'})
+    </script>
+    <!-- Google Tag Manager ecコンシェルタグ end-->
+
+    <script>
+        // 履歴削除
+        function onClickDoClearAccessGoods(){
+            $.ajax({
+                type     : "GET"
+                ,url      : pkg_common.getAppComplementUrl() + "/cart/doClearAccessGoods"
+                ,timeout  : 30000
+            })
+                .done($("#footPrintGoodsItems").remove())
+            ;
+        }
+
+        // 削除（今すぐお届け）
+        function setCartGoodsIndex(index){
+            // Ajax処理等でhiddenがすでに作られていた場合に対する考慮
+            // 行インデックスhiddenがすでに存在する場合は要素削除
+            if ($("#cartGoodsIndex")[0]) {
+                $("#cartGoodsIndex").remove();
+            }
+            // 行インデックスhiddenを生成しformに追加
+            $("<input>", {
+                type: 'hidden',
+                id: 'cartGoodsIndex',
+                name: 'cartGoodsIndex',
+                value: index
+            }).appendTo('#cartGoodsItems');
+        }
+    </script>
+
+    <!-- 2023-renew No14 from here -->
+    <script>
+
+        // 同一商品番号チェック 確認ダイアログ 表示
+        jQuery(function ($) {
+            setTimeout(function () {
+                if (document.getElementById('displayDialogDuplicationGoods').value) {
+                    $("#modal-duplication-goods").fadeIn();
+                    $('body').addClass('is-modal-opened');
+                }
+            }, 100)
+        });
+
+        // 同一商品番号チェック 確認ダイアログ 選択
+        function doCartConfirm(flg) {
+            $("#modal-duplication-goods").fadeOut();
+            $('body').removeClass('is-modal-opened');
+            if (flg) {
+                $("#doOrderConfirm").click();
+            }
+        }
+
+        // 削除（セールde予約）
+        function setCartGoodsReserveGoodsCode(goodsCode){
+            // Ajax処理等でhiddenがすでに作られていた場合に対する考慮
+            // 行インデックスhiddenがすでに存在する場合は要素削除
+            if ($("#cartGoodsReserveGoodsCode")[0]) {
+                $("#cartGoodsReserveGoodsCode").remove();
+            }
+            // 行インデックスhiddenを生成しformに追加
+            $("<input>", {
+                type: 'hidden',
+                id: 'cartGoodsReserveGoodsCode',
+                name: 'cartGoodsReserveGoodsCode',
+                value: goodsCode
+            }).appendTo('#cartGoodsReserveItems');
+        }
+    </script>
+    <!-- 2023-renew No14 to here -->
+
+    <!-- 2023-renew No24 from here -->
+    <script>
+        jQuery(function ($) {
+            var couponName = document.getElementById("couponNameAdd").value;
+            if (couponName) {
+                $("#couponNameDialog").html(couponName);
+                $("#modal-coupon").fadeIn();
+                $('body').addClass('is-modal-opened');
+            }
+        });
+    </script>
+    <!-- 2023-renew No24 to here -->
+
+    <meta name="robots" content="noindex"/>
+    <script th:inline="javascript">
+        var catalogCartInString = /*[[${cartModel.catalogCartInString}]]*/;
+        if (typeof(_ukwq) !== 'undefined' && catalogCartInString != '') {
+            _ukwq = [];
+
+            // 共通部
+            _ukwq.push(['_setClient', _goodsClient]);
+            if (_cryptoLoginId != null) { _ukwq.push(['_setLoginID', _cryptoLoginId]); }
+            _ukwq.push(['_setReqURL', _reqUrl]);
+            _ukwq.push(['_setRefURL', _refUrl]);
+            _ukwq.push(['_setDisplay', _display]);
+            // カートイン
+            _ukwq.push(['_setCartIn', catalogCartInString]);
+            _ukwq.push(['_sendCartLog']);
+        }
+        function sendUkCartIn(item) {
+            if (typeof (_ukwq) !== 'undefined') {
+                _ukwq = [];
+                _ukt = document.createElement('script'); _ukt.type = 'text/javascript'; _ukt.async = true;
+                _ukt.src = '//' + _ukwhost + '/taglog/ukwlg.js';
+                _uks = document.getElementsByTagName('script')[0]; _uks.parentNode.insertBefore(_ukt, _uks);
+                // 共通部
+                _ukwq.push(['_setClient', _goodsClient]);
+                if (_cryptoLoginId != null) { _ukwq.push(['_setLoginID', _cryptoLoginId]); }
+                _ukwq.push(['_setReqURL', _reqUrl]);
+                _ukwq.push(['_setRefURL', _refUrl]);
+                _ukwq.push(['_setDisplay', _display]);
+                // カートイン
+                _ukwq.push(['_setCartIn', item.ggcd + ":" + item.gcnt + ":" + item.goodsPrice]);
+                _ukwq.push(['_sendCartLog']);
+            }
+        }
+    </script>
+</head>
+
+<body id="gotop" class="p-product-detail p-cart">
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+
+        <div class="c-orderflow">
+            <ul>
+                <li class="c-orderflow__step c-orderflow__step--current"><span>ショッピングカート</span></li>
+                <li class="c-orderflow__step"><span>注文内容確認</span></li>
+                <li class="c-orderflow__step"><span>注文完了</span></li>
+            </ul>
+        </div>
+
+        <div class="l-section">
+            <div class="l-section__inner">
+                <h2 class="c-title-page"><strong>ショッピングカート</strong></h2>
+                <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                    <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="c-page-description">
+                    <p class="p-cart__caution"><strong>こちらの商品はまだ確保されておりません。</strong></p>
+                    <p class="c-page-description__text c-page-description--margin-m">在庫状況によっては品切れとなる場合がございますので、お早めにご注文手続きを完了してください。</p>
+                </div>
+            </div>
+        </div>
+
+        <form id="indexForm" th:object="${cartModel}" method="post" th:action="@{/cart/index.html}">
+            <input type="hidden" id="loginUserId" th:field="*{loginUserId}"/>
+            <input type="hidden" name="optionValue" id="optionValue"/>
+            <!-- 2023-renew No14 from here -->
+            <input type="hidden" name="displayDialogDuplicationGoods" id="displayDialogDuplicationGoods" th:value="${displayDialogDuplicationGoods}"/>
+            <!-- 2023-renew No14 to here -->
+            <!-- 2023-renew No24 from here -->
+            <input type="hidden" name="couponNameAdd" id="couponNameAdd" th:value="${couponNameAdd}"/>
+            <!-- 2023-renew No24 to here -->
+
+            <th:block th:if="${!cartModel.isCartIn()}">
+                <div class="l-complete l-complete--gray">
+                    <div class="l-complete__inner">
+                        <p class="l-complete__title">ショッピングカートの中に商品はありません。</p>
+                        <div class="c-button-wrap c-button-wrap--complete">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">お買い物を続ける</a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            <th:block th:if="${cartModel.isCartIn()}">
+                <div class="l-section">
+                    <div class="l-section__inner">
+                        <th:block th:if="${cartModel.isCartGoodsIn()}">
+                            <h3 class="p-cart__title-normal">今すぐお届け</h3>
+                            <div class="p-cart__list p-cart__list--normal">
+                                <table class="c-table c-table--pcspdevide">
+                                    <thead>
+                                    <tr class="c-table__tr l-lg">
+                                        <th class="c-table__th">商品情報</th>
+                                        <th class="c-table__th">単価<small>（税抜）</small></th>
+                                        <th class="c-table__th">数量</th>
+                                        <th class="c-table__th">小計<small>（税抜）</small></th>
+                                        <th class="c-table__th">備考</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="cartGoodsItem, cartGoodsItemStat : *{cartGoodsItems}">
+                                        <tr th:id="'cartRow-' + ${cartGoodsItemStat.index}" class="c-table__tr">
+                                            <td class="c-table__item p-cart__list-item">
+                                                <div class="p-cart__list-item-inner">
+                                                    <div class="p-cart__list-item-image">
+                                                        <a th:classappend="${!cartGoodsItem.isGoodsOpen()} ? 'a-disable' : ''"
+                                                           th:id="'goImageGoodsPageCartItems-' + ${cartGoodsItemStat.index}" th:href="@{/goods/index.html(gcd=${cartGoodsItem.gcdForHref})}">
+                                                            <img th:id="'goodsGroupImageList-' + ${cartGoodsItemStat.index}" th:src="@{${#image.convert(cartGoodsItem.goodsImageItems, 0, 'p1')}}"
+                                                                 th:attr="srcset=${#image.convert(cartGoodsItem.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                                 th:alt="${cartGoodsItem.getGoodsGroupImageThumbnailAlt()}" height="150" width="150" decoding="async" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="p-cart__list-item-overview">
+                                                        <a th:classappend="${!cartGoodsItem.isGoodsOpen()} ? 'a-disable' : ''"
+                                                                th:id="'goNameGoodsPageCartItems-' + ${cartGoodsItemStat.index}" th:href="@{/goods/index.html(gcd=${cartGoodsItem.gcdForHref})}">
+                                                            <div class="p-cart__list-item-text">
+                                                                <span th:id="'goodGcd-' + ${cartGoodsItemStat.index}" th:text="${cartGoodsItem.gcd}"/>
+                                                            </div>
+                                                            <div class="p-cart__list-item-title">
+                                                                <span th:id="'goodsName-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${cartGoodsItem.goodsGroupName}"/>
+                                                            </div>
+                                                            <th:block th:if="${cartGoodsItem.isUnit1()}">
+                                                                <div class="p-cart__list-item-spec"><span class="p-cart__list-item-heading"><span th:id="'unitTitle1-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${cartGoodsItem.unitTitle1}"/>：</span><span th:id="'unitValue1-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${cartGoodsItem.unitValue1}"/></div>
+                                                            </th:block>
+                                                            <th:block th:if="${cartGoodsItem.isUnit2()}">
+                                                                <div class="p-cart__list-item-spec"><span class="p-cart__list-item-heading"><span th:id="'unitTitle1-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${cartGoodsItem.unitTitle2}"/>：</span><span th:id="'unitValue2-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${cartGoodsItem.unitValue2}"/></div>
+                                                            </th:block>
+                                                        </a>
+
+                                                        <th:block th:if="${cartGoodsItem.isDispFavoriteButton()}">
+                                                            <button type="button" class="c-textlink c-textlink--text c-textlink--add-fav js-btn-favorite p-cart__list-favorite"
+                                                                    th:id="'favoriteAddBtn-' + ${cartGoodsItemStat.index}"
+                                                                    th:gcdParam="${cartGoodsItem.gcd}"
+                                                                    th:add-fav-status="!${cartModel.favoriteGoodsCodeList != null && #lists.contains(cartModel.favoriteGoodsCodeList, cartGoodsItem.gcd)}"
+                                                                    th:classappend="${cartModel.favoriteGoodsCodeList != null && #lists.contains(cartModel.favoriteGoodsCodeList, cartGoodsItem.gcd)} ? 'is-active' : ''"
+                                                                    onclick="favoriteRegistInline(this, $(this).attr('gcdParam'));">
+                                                                <span>
+                                                                    <svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg>
+                                                                </span>
+                                                                <p>お気に入り</p></button>
+                                                        </th:block>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="c-table__price p-cart__list-price">
+                                                <div class="p-cart__list-item-heading l-sm">単価<small>（税抜）</small>：</div>
+                                                <div class="c-product__item-price">
+                                                    <th:block th:if="${cartGoodsItem.isSaleIconFlag()}">
+                                                        <div class="c-product__item-icon c-product__item-icon--list">
+                                                            <span class="c-product__item-icon--sale">SALE</span>
+                                                        </div>
+                                                        <div class="c-product__item-sale-comment">
+                                                            <span th:remove="tag" th:id="'goodsPreDiscountPrice-' + ${cartGoodsItemStat.index}" th:text="${cartGoodsItem.goodsPreDiscountPrice}"></span>
+                                                        </div>
+                                                    </th:block>
+                                                    <div class="c-product__item-price-unit"><span th:id="'goodsPrice-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${#number.convert(cartGoodsItem.goodsPrice)}"/><span>円</span></div>
+                                                </div>
+                                            </td>
+                                            <td class="c-table__quantity p-cart__list-quantity">
+
+                                                <th:block th:if="${cartGoodsItem.isEmotionPriceGoods()}">
+                                                    <div class="p-cart__list-quantity-static">
+                                                        <div class="p-cart__list-item-heading l-sm">数量：</div>
+                                                        <span th:id="'gcnt-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${#number.convert(cartGoodsItem.gcnt)}"/>
+                                                    </div>
+                                                </th:block>
+                                                <th:block th:if="${!cartGoodsItem.isEmotionPriceGoods()}">
+                                                    <div class="p-cart__list-quantity-inner">
+                                                        <div class="p-cart__list-item-heading l-sm">数量：</div>
+
+                                                        <div class="c-count-quantity--wrap">
+                                                            <div class="c-count-quantity js-count-quantity">
+                                                                <button type="button" class="c-count-quantity__minus minus_button" data-type="minus"
+                                                                        th:data-field="'cartGoodsItems[' + ${cartGoodsItemStat.index} + '].gcnt'"></button>
+                                                                <input th:id="'gcnt-' + ${cartGoodsItemStat.index}" th:field="*{cartGoodsItems[__${cartGoodsItemStat.index}__].gcnt}"
+                                                                       type="number" class="c-input c-count-quantity__result input_result" name="unit" min="1" max="999">
+                                                                <button type="button" class="c-count-quantity__plus plus_button" data-type="plus" th:data-field="'cartGoodsItems[' + ${cartGoodsItemStat.index} + '].gcnt'"></button>
+                                                            </div>
+                                                        </div>
+                                                        <button name="doCalculate" type="submit" class="c-button c-button--change"><svg viewBox="0 0 14 15"><use xlink:href="/newdesign/assets/images/icon/change.svg#change"></use></svg><p>変更</p></button>
+                                                    </div>
+                                                    <div th:if="${#fields.hasErrors('cartGoodsItems[' + cartGoodsItemStat.index + '].gcnt')}" th:errors="*{cartGoodsItems[__${cartGoodsItemStat.index}__].gcnt}" class="c-field-error c-field-error--top"></div>
+                                                </th:block>
+
+                                                <div class="p-cart__list-quantity-delete">
+                                                    <button th:onclick="'setCartGoodsIndex(' +${cartGoodsItemStat.index} + ');'"
+                                                            th:id="'doDeleteGoods-' + ${cartGoodsItemStat.index}" name="doDeleteGoods"
+                                                            type="submit" class="c-textlink c-textlink--text c-textlink--large c-textlink--delete">
+                                                        <svg viewBox="0 0 10 10"><use xlink:href="/newdesign/assets/images/icon/delete.svg#delete"></use></svg>削除
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="c-table__price p-cart__list-price">
+                                                <div class="p-cart__list-item-heading l-sm">小計<small>（税抜）</small>：</div>
+                                                <div class="c-product__item-price">
+                                                    <div class="c-product__item-price-unit">
+                                                        <span th:id="'goodsTotalPriceNoTax-' + ${cartGoodsItemStat.index}" th:remove="tag" th:text="${#number.convert(cartGoodsItem.goodsTotalPrice)}"/><span>円</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-cart__list-note">
+                                                <div class="p-cart__list-item-heading l-sm">備考：</div>
+                                                <div class="p-cart__list-note-inner">
+                                                    <div class="p-cart__list-note-reserve" th:if="${cartGoodsItem.isReserveFlag()}">
+                                                        セールde予約ができます
+                                                        <a th:href="@{/goods/reserve.html(gcd=${cartGoodsItem.gcd}, ggcd=${cartGoodsItem.ggcd})}" class="c-button c-button--primary-line c-button--width-s c-button--sale-reserve">
+                                                            <span><img src="/newdesign/assets/images/icon/sale-reserve.svg" width="38" alt="セールde予約"></span>
+                                                            <p>セールde予約する</p>
+                                                        </a>
+                                                    </div>
+                                                    <p th:if="${cartGoodsItem.isQuantityDiscount()}">数量割引が適用されました</p>
+                                                    <p th:if="${cartGoodsItem.isEmotionPriceGoods()}">心意気価格適用しました</p>
+                                                    <!-- 2023-renew No14 to here -->
+                                                    <p th:id="'goodsInformation-' + ${cartGoodsItemStat.index}" th:utext="${#pre.convert(cartGoodsItem.goodsInformation, false)}"></p>
+                                                    <p th:if="${cartGoodsItem.isLandSendFlag()}" th:id="'landSendFlagDisp-' + ${cartGoodsItemStat.index}" th:text="${cartGoodsItem.landSendFlagDisp}"></p>
+                                                    <p th:if="${cartGoodsItem.isCoolSendFlag()}" th:id="'coolSendFlagDisp-' + ${cartGoodsItemStat.index}" th:text="${cartGoodsItem.coolSendFlagDisp}"></p>
+
+                                                    <input type="hidden" th:id="'goodsSeq-' + ${cartGoodsItemStat.index}" th:value="${cartGoodsItem.goodsSeq}"/>
+                                                    <input type="hidden" th:id="'cartSeq-' + ${cartGoodsItemStat.index}" th:value="${cartGoodsItem.cartSeq}"/>
+                                                    <input type="hidden" th:id="'gcd-' + ${cartGoodsItemStat.index}" th:value="${cartGoodsItem.gcd}"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </th:block>
+
+                        <!-- 2023-renew No14 from here -->
+                        <th:block th:if="${cartModel.isCartGoodsReserveIn()}">
+                            <h3 class="p-cart__title-reserve">
+                                <span><img src="/newdesign/assets/images/icon/sale-reserve.svg" width="44" alt="セールde予約"></span><span>セールde予約注文</span>
+                            </h3>
+                            <div class="p-cart__list p-cart__list--reserve">
+                                <table class="c-table c-table--pcspdevide">
+                                    <thead>
+                                        <tr class="c-table__tr l-lg">
+                                            <th class="c-table__th">商品情報</th>
+                                            <th class="c-table__th">単価<small>（税抜）</small></th>
+                                            <th class="c-table__th">配送希望日</th>
+                                            <th class="c-table__th">数量</th>
+                                            <th class="c-table__th">小計<small>（税抜）</small></th>
+                                            <th class="c-table__th">備考</th>
+                                            <th class="c-table__th"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cartGoodsReserveItems">
+                                        <th:block th:each="itemMap, itemMapStat : *{cartGoodsReserveItemMap}">
+                                            <th:block th:if="${itemMap.value.size} == 1">
+                                                <tr class="c-table__tr">
+                                                    <td class="c-table__item p-cart__list-item">
+                                                        <div class="p-cart__list-item-inner">
+                                                            <div class="p-cart__list-item-image">
+                                                                <a th:classappend="${!itemMap.value[0].isGoodsOpen()} ? 'a-disable' : ''"
+                                                                   th:id="'goImageGoodsPageCartItems-' + ${itemMapStat.index} + '-0'" th:href="@{/goods/index.html(gcd=${itemMap.value[0].gcdForHref})}">
+                                                                    <img th:id="'goodsGroupImageList-' + ${itemMapStat.index} + '-0'"
+                                                                         th:src="@{${#image.convert(itemMap.value[0].goodsImageItems, 0, 'p1')}}"
+                                                                         th:attr="srcset=${#image.convert(itemMap.value[0].goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                                         th:alt="${itemMap.value[0].getGoodsGroupImageThumbnailAlt()}" height="150" width="150" decoding="async" loading="lazy">
+                                                                </a>
+                                                            </div>
+                                                            <div class="p-cart__list-item-overview">
+                                                                <a th:classappend="${!itemMap.value[0].isGoodsOpen()} ? 'a-disable' : ''"
+                                                                        th:id="'goImageGoodsPageCartItems-' + ${itemMapStat.index} + '-0'" th:href="@{/goods/index.html(gcd=${itemMap.value[0].gcdForHref})}">
+                                                                    <div class="p-cart__list-item-text">
+                                                                        <span th:id="'goodReserveGcd-' + ${itemMapStat.index}" th:text="${itemMap.value[0].gcd}"/>
+                                                                    </div>
+                                                                    <div class="p-cart__list-item-title"><span th:id="'goodsName-' + ${itemMapStat.index} + '-0'" th:remove="tag" th:text="${itemMap.value[0].goodsGroupName}"/></div>
+                                                                    <th:block th:if="${itemMap.value[0].isUnit1()}">
+                                                                        <div class="p-cart__list-item-spec"><span class="p-cart__list-item-heading"><span th:id="'unitTitle1-' + ${itemMapStat.index} + '-0'" th:remove="tag" th:text="${itemMap.value[0].unitTitle1}"/>：</span><span th:id="'unitValue1-' + ${itemMapStat.index} + '-0'" th:remove="tag" th:text="${itemMap.value[0].unitValue1}"/></div>
+                                                                    </th:block>
+                                                                    <th:block th:if="${itemMap.value[0].isUnit2()}">
+                                                                        <div class="p-cart__list-item-spec"><span class="p-cart__list-item-heading"><span th:id="'unitTitle1-' + ${itemMapStat.index} + '-0'" th:remove="tag" th:text="${itemMap.value[0].unitTitle2}"/>：</span><span th:id="'unitValue2-' + ${itemMapStat.index} + '-0'" th:remove="tag" th:text="${itemMap.value[0].unitValue2}"/></div>
+                                                                    </th:block>
+                                                                </a>
+
+                                                                <th:block th:if="${itemMap.value[0].isDispFavoriteButton()}">
+                                                                    <button type="button" class="c-textlink c-textlink--text c-textlink--add-fav js-btn-favorite p-cart__list-favorite"
+                                                                            th:id="'favoriteAddBtn-' + ${itemMapStat.index} + '-0'"
+                                                                            th:gcdParam="${itemMap.value[0].gcd}"
+                                                                            th:add-fav-status="!${cartModel.favoriteGoodsCodeList != null && #lists.contains(cartModel.favoriteGoodsCodeList, itemMap.value[0].gcd)}"
+                                                                            th:classappend="${cartModel.favoriteGoodsCodeList != null && #lists.contains(cartModel.favoriteGoodsCodeList, itemMap.value[0].gcd)} ? 'is-active' : ''"
+                                                                            onclick="favoriteRegistInline(this, $(this).attr('gcdParam'));">
+                                                                        <span>
+                                                                            <svg viewBox="0 0 24.9 21.5" class="favorite"><use xlink:href="/newdesign/assets/images/icon/favorite.svg#favorite"></use></svg>
+                                                                        </span>
+                                                                        <p>お気に入り</p>
+                                                                    </button>
+                                                                </th:block>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="c-table__price p-cart__list-price">
+                                                        <div class="p-cart__list-item-heading l-sm">単価<small>（税抜）</small>：</div>
+                                                        <div class="c-product__item-price">
+                                                            <th:block th:if="${itemMap.value[0].isSaleIconFlag()}">
+                                                                <div class="c-product__item-icon c-product__item-icon--list">
+                                                                    <span class="c-product__item-icon--sale">SALE</span>
+                                                                </div>
+                                                                <div class="c-product__item-sale-comment">
+                                                                    <span th:remove="tag" th:id="'goodsPreDiscountPrice-' + ${itemMapStat.index} + '-0'" th:text="${itemMap.value[0].goodsPreDiscountPrice}"></span>
+                                                                </div>
+                                                            </th:block>
+                                                            <div class="c-product__item-price-unit"><span th:id="'goodsPrice-' + ${itemMapStat.index} + '-0'" th:remove="tag" th:text="${#number.convert(itemMap.value[0].goodsPrice)}"/><span>円</span></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="p-cart__list-delivery l-lg">
+                                                        <span th:remove="tag" th:text="${#date.convert(itemMap.value[0].reserveDeliveryDate, 'yyyy/MM/dd')}"></span>
+                                                    </td>
+                                                    <td class="c-table__quantity p-cart__list-quantity l-lg">
+                                                        <div class="p-cart__list-quantity-static">
+                                                            <div class="p-cart__list-item-heading l-sm">数量：</div><span th:text="${#number.convert(itemMap.value[0].gcnt)}" th:remove="tag" />
+                                                        </div>
+                                                    </td>
+                                                    <td class="c-table__price p-cart__list-price l-lg">
+                                                        <div class="c-product__item-price"><div class="c-product__item-price-unit"><span th:text="${#number.convert(itemMap.value[0].goodsTotalPrice)}" th:remove="tag" /><span>円</span></div></div>
+                                                    </td>
+                                                    <td class="p-cart__nest l-sm">
+                                                        <table class="p-cart__nest-table">
+                                                            <tr>
+                                                                <th class="c-table__th">配送希望日</th>
+                                                                <th class="c-table__th">数量</th>
+                                                                <th class="c-table__th">小計（税抜）</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="p-cart__nest-delivery">
+                                                                    <span><img src="/newdesign/assets/images/icon/sale-reserve.svg" width="30" alt="セールde予約"></span>
+                                                                    <span th:text="${#date.convert(itemMap.value[0].reserveDeliveryDate, 'yyyy/MM/dd')}"></span>
+                                                                </td>
+                                                                <td class="p-cart__nest-quantity"><span th:text="${#number.convert(itemMap.value[0].gcnt)}"</td>
+                                                                <td class="p-cart__nest-price">
+                                                                    <div class="c-product__item-price"><div class="c-product__item-price-unit"><span th:text="${#number.convert(itemMap.value[0].goodsTotalPrice)}" th:remove="tag" /><span>円</span></div></div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="p-cart__list-note">
+                                                        <div class="p-cart__list-item-heading l-sm">備考：</div>
+                                                        <div class="p-cart__list-note-inner">
+                                                            <p th:if="${itemMap.value[0].isQuantityDiscount()}">数量割引が適用されました</p>
+                                                            <p th:if="${itemMap.value[0].isEmotionPriceGoods()}">心意気価格適用しました</p>
+                                                            <p th:id="'goodsInformation-' + ${itemMapStat.index} + '-0'" th:utext="${#pre.convert(itemMap.value[0].goodsInformation, false)}"></p>
+                                                            <p th:if="${itemMap.value[0].isLandSendFlag()}" th:id="'landSendFlagDisp-' + ${itemMapStat.index} + '-0'" th:text="${itemMap.value[0].landSendFlagDisp}"></p>
+                                                            <p th:if="${itemMap.value[0].isCoolSendFlag()}" th:id="'coolSendFlagDisp-' + ${itemMapStat.index} + '-0'" th:text="${itemMap.value[0].coolSendFlagDisp}"></p>
+
+                                                            <input type="hidden" th:id="'goodsSeq-' + ${itemMapStat.index} + '-0'" th:value="${itemMap.value[0].goodsSeq}"/>
+                                                            <input type="hidden" th:id="'cartSeq-' + ${itemMapStat.index} + '-0'" th:value="${itemMap.value[0].cartSeq}"/>
+                                                            <input type="hidden" th:id="'gcd-' + ${itemMapStat.index} + '-0'" th:value="${itemMap.value[0].gcd}"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="p-cart__list-button">
+                                                        <th:block th:if="${itemMap.value[0].isReserveEditFlag()}">
+                                                            <a th:href="@{/goods/reserve.html(gcd=${itemMap.value[0].gcd}, ggcd=${itemMap.value[0].ggcd})}" class="c-button c-button--change"><svg viewBox="0 0 14 15"><use xlink:href="/newdesign/assets/images/icon/change.svg#change"></use></svg><p>変更</p></a>
+                                                        </th:block>
+                                                        <button onclick="setCartGoodsReserveGoodsCode($(this).attr('gcdDelete'));" th:gcdDelete="${itemMap.key}"
+                                                                th:id="'doDeleteGoodsReserve-' + ${itemMapStat.index} + '-0'"
+                                                                name="doDeleteGoodsReserve" type="submit" class="c-textlink c-textlink--text c-textlink--delete"><svg viewBox="0 0 10 10"><use xlink:href="/newdesign/assets/images/icon/delete.svg#delete"></use></svg>削除</button>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+
+                                            <th:block th:if="${itemMap.value.size} > 1">
+                                                <th:block th:each="cartGoodsReserveItem, cartGoodsReserveItemStat : ${itemMap.value}">
+                                                    <th:block th:if="${cartGoodsReserveItemStat.index == 0}">
+                                                        <tr class="c-table__tr p-cart__list-rowspan">
+                                                            <td class="c-table__item p-cart__list-item" th:rowspan="${itemMap.value.size}">
+                                                                <div class="p-cart__list-item-inner">
+                                                                    <div class="p-cart__list-item-image">
+                                                                        <a th:id="'goImageGoodsPageCartItems-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}"
+                                                                           th:href="@{/goods/index.html(gcd=${cartGoodsReserveItem.gcdForHref})}"
+                                                                           th:classappend="${!itemMap.value[0].isGoodsOpen()} ? 'a-disable' : ''">
+                                                                            <img th:id="'goodsGroupImageList-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}"
+                                                                                 th:src="@{${#image.convert(cartGoodsReserveItem.goodsImageItems, 0, 'p1')}}"
+                                                                                 th:attr="srcset=${#image.convert(cartGoodsReserveItem.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                                                 th:alt="${cartGoodsReserveItem.getGoodsGroupImageThumbnailAlt()}"
+                                                                                 height="150" width="150" decoding="async" loading="lazy">
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="p-cart__list-item-overview">
+                                                                        <a th:id="'goNameGoodsPageCartItems-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:href="@{/goods/index.html(gcd=${cartGoodsReserveItem.gcdForHref})}"
+                                                                           th:classappend="${!itemMap.value[0].isGoodsOpen()} ? 'a-disable' : ''">
+                                                                            <div class="p-cart__list-item-text"><span id="'gcd-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:remove="tag" th:text="${cartGoodsReserveItem.gcd}"/></div>
+                                                                            <div class="p-cart__list-item-title"><span th:id="'goodsName-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:remove="tag" th:text="${cartGoodsReserveItem.goodsGroupName}"/></div>
+                                                                            <th:block th:if="${cartGoodsReserveItem.isUnit1()}">
+                                                                                <div class="p-cart__list-item-spec"><span class="p-cart__list-item-heading">
+                                                                                    <span th:id="'unitTitle1-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:remove="tag" th:text="${cartGoodsReserveItem.unitTitle1}"/>：</span>
+                                                                                    <span th:id="'unitValue1-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:remove="tag" th:text="${cartGoodsReserveItem.unitValue1}"/>
+                                                                                </div>
+                                                                            </th:block>
+                                                                            <th:block th:if="${cartGoodsReserveItem.isUnit2()}">
+                                                                                <div class="p-cart__list-item-spec"><span class="p-cart__list-item-heading">
+                                                                                    <span th:id="'unitTitle2-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:remove="tag" th:text="${cartGoodsReserveItem.unitTitle2}"/>：</span>
+                                                                                    <span th:id="'unitValue2-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:remove="tag" th:text="${cartGoodsReserveItem.unitValue2}"/>
+                                                                                </div>
+                                                                            </th:block>
+                                                                        </a>
+                                                                        <th:block th:if="${cartGoodsReserveItem.isDispFavoriteButton()}">
+                                                                            <button type="button" class="c-textlink c-textlink--text c-textlink--add-fav js-btn-favorite p-cart__list-favorite"
+                                                                                    th:id="'favoriteAddBtn-' + ${itemMapStat.index} + ${cartGoodsReserveItemStat.index}"
+                                                                                    th:gcdParam="${cartGoodsReserveItem.gcd}"
+                                                                                    th:add-fav-status="!${cartModel.favoriteGoodsCodeList != null && #lists.contains(cartModel.favoriteGoodsCodeList, cartGoodsReserveItem.gcd)}"
+                                                                                    th:classappend="${cartModel.favoriteGoodsCodeList != null && #lists.contains(cartModel.favoriteGoodsCodeList, cartGoodsReserveItem.gcd)} ? 'is-active' : ''"
+                                                                                    onclick="favoriteRegistInline(this, $(this).attr('gcdParam'));">
+                                                                            <span>
+                                                                                <svg viewBox="0 0 24.9 21.5" class="favorite"><use xlink:href="/newdesign/assets/images/icon/favorite.svg#favorite"></use></svg>
+                                                                            </span>
+                                                                                <p>お気に入り</p>
+                                                                            </button>
+                                                                        </th:block>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="c-table__price p-cart__list-price">
+                                                                <div class="p-cart__list-item-heading l-sm">単価<small>（税抜）</small>：</div>
+                                                                <div class="c-product__item-price">
+                                                                    <th:block th:if="${cartGoodsReserveItem.isSaleIconFlag()}">
+                                                                        <div class="c-product__item-icon c-product__item-icon--list">
+                                                                            <span class="c-product__item-icon--sale">SALE</span>
+                                                                        </div>
+                                                                        <div class="c-product__item-sale-comment">
+                                                                            <span th:remove="tag" th:id="'goodsPreDiscountPrice-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:text="${cartGoodsReserveItem.goodsPreDiscountPrice}"></span>
+                                                                        </div>
+                                                                    </th:block>
+                                                                    <div class="c-product__item-price-unit"><span th:text="${#number.convert(cartGoodsReserveItem.goodsPrice)}" th:remove="tag" /><span>円</span></div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="p-cart__list-delivery l-lg"><span th:remove="tag" th:text="${#date.convert(cartGoodsReserveItem.reserveDeliveryDate, 'yyyy/MM/dd')}"></span></td>
+                                                            <td class="c-table__quantity p-cart__list-quantity l-lg">
+                                                                <div class="p-cart__list-quantity-static">
+                                                                    <div class="p-cart__list-item-heading l-sm">数量：</div><span th:text="${#number.convert(cartGoodsReserveItem.gcnt)}" th:remove="tag" />
+                                                                </div>
+                                                            </td>
+                                                            <td class="c-table__price p-cart__list-price l-lg">
+                                                                <div class="c-product__item-price"><div class="c-product__item-price-unit"><span th:text="${#number.convert(cartGoodsReserveItem.goodsTotalPrice)}" th:remove="tag" /><span>円</span></div></div>
+                                                            </td>
+
+                                                            <td class="p-cart__nest l-sm">
+                                                                <table class="p-cart__nest-table">
+                                                                    <tr>
+                                                                        <th class="c-table__th">配送希望日</th>
+                                                                        <th class="c-table__th">数量</th>
+                                                                        <th class="c-table__th">小計（税抜）</th>
+                                                                    </tr>
+                                                                    <th:block th:each="cartGoodsReserveItemSmMode, cartGoodsReserveItemSmModeStat : ${itemMap.value}">
+                                                                        <tr>
+                                                                            <td class="p-cart__nest-delivery">
+                                                                                <span><img src="/newdesign/assets/images/icon/sale-reserve.svg" width="30" alt="セールde予約"></span>
+                                                                                <span th:text="${#date.convert(cartGoodsReserveItemSmMode.reserveDeliveryDate, 'yyyy/MM/dd')}"></span>
+                                                                            </td>
+                                                                            <td class="p-cart__nest-quantity"><span th:text="${#number.convert(cartGoodsReserveItemSmMode.gcnt)}" th:remove="tag" /></td>
+                                                                            <td class="p-cart__nest-price">
+                                                                                <div class="c-product__item-price"><div class="c-product__item-price-unit"><span th:text="${#number.convert(cartGoodsReserveItemSmMode.goodsTotalPrice)}" th:remove="tag" /><span>円</span></div></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </th:block>
+                                                                </table>
+                                                            </td>
+                                                            <td class="p-cart__list-note" th:rowspan="${itemMap.value.size}">
+                                                                <div class="p-cart__list-item-heading l-sm">備考：</div>
+                                                                <div class="p-cart__list-note-inner">
+                                                                    <p th:if="${cartGoodsReserveItem.isQuantityDiscount()}">数量割引が適用されました</p>
+                                                                    <p th:if="${cartGoodsReserveItem.isEmotionPriceGoods()}">心意気価格適用しました</p>
+                                                                    <p th:id="'goodsInformation-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:utext="${#pre.convert(cartGoodsReserveItem.goodsInformation, false)}"></p>
+                                                                    <p th:if="${cartGoodsReserveItem.isLandSendFlag()}" th:id="'landSendFlagDisp-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:text="${cartGoodsReserveItem.landSendFlagDisp}"></p>
+                                                                    <p th:if="${cartGoodsReserveItem.isCoolSendFlag()}" th:id="'coolSendFlagDisp-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:text="${cartGoodsReserveItem.coolSendFlagDisp}"></p>
+
+                                                                    <input type="hidden" th:id="'goodsSeq-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:value="${cartGoodsReserveItem.goodsSeq}"/>
+                                                                    <input type="hidden" th:id="'cartSeq-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:value="${cartGoodsReserveItem.cartSeq}"/>
+                                                                    <input type="hidden" th:id="'gcd-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:value="${cartGoodsReserveItem.gcd}"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="p-cart__list-button" th:rowspan="${itemMap.value.size}">
+                                                                <th:block th:if="${cartGoodsReserveItem.isReserveEditFlag()}">
+                                                                    <a th:href="@{/goods/reserve.html(gcd=${cartGoodsReserveItem.gcd}, ggcd=${cartGoodsReserveItem.ggcd})}" class="c-button c-button--change"><svg viewBox="0 0 14 15"><use xlink:href="/newdesign/assets/images/icon/change.svg#change"></use></svg><p>変更</p></a>
+                                                                </th:block>
+                                                                <button onclick="setCartGoodsReserveGoodsCode($(this).attr('gcdDelete'));" th:gcdDelete="${itemMap.key}"
+                                                                        th:id="'doDeleteGoodsReserve-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}"
+                                                                        name="doDeleteGoodsReserve" type="submit" class="c-textlink c-textlink--text c-textlink--delete">
+                                                                    <svg viewBox="0 0 10 10"><use xlink:href="/newdesign/assets/images/icon/delete.svg#delete"></use></svg>削除
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </th:block>
+
+                                                    <th:block th:if="${cartGoodsReserveItemStat.index >0 && cartGoodsReserveItemStat.index < itemMap.value.size - 1}">
+                                                        <tr class="c-table__tr p-cart__list-rowspan l-lg">
+                                                            <td class="c-table__price p-cart__list-price">
+                                                                <div class="p-cart__list-item-heading l-sm">単価<small>（税抜）</small>：</div>
+                                                                <div class="c-product__item-price">
+                                                                    <th:block th:if="${cartGoodsReserveItem.isSaleIconFlag()}">
+                                                                        <div class="c-product__item-icon c-product__item-icon--list">
+                                                                            <span class="c-product__item-icon--sale">SALE</span>
+                                                                        </div>
+                                                                        <div class="c-product__item-sale-comment">
+                                                                            <span th:remove="tag" th:id="'goodsPreDiscountPrice-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:text="${cartGoodsReserveItem.goodsPreDiscountPrice}"></span>
+                                                                        </div>
+                                                                    </th:block>
+                                                                    <div class="c-product__item-price-unit"><span th:text="${#number.convert(cartGoodsReserveItem.goodsPrice)}" th:remove="tag" /><span>円</span></div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="p-cart__list-delivery"><span th:remove="tag" th:text="${#date.convert(cartGoodsReserveItem.reserveDeliveryDate, 'yyyy/MM/dd')}"></span></td>
+                                                            <td class="c-table__quantity p-cart__list-quantity">
+                                                                <div class="p-cart__list-quantity-static">
+                                                                    <div class="p-cart__list-item-heading l-sm">数量：</div><span th:text="${#number.convert(cartGoodsReserveItem.gcnt)}" th:remove="tag" />
+                                                                </div>
+                                                            </td>
+                                                            <td class="c-table__price p-cart__list-price">
+                                                                <div class="p-cart__list-item-heading l-sm">単価<small>（税抜）</small>：</div>
+                                                                <div class="c-product__item-price"><div class="c-product__item-price-unit"><span th:text="${#number.convert(cartGoodsReserveItem.goodsTotalPrice)}" th:remove="tag" /><span>円</span></div></div>
+                                                            </td>
+                                                        </tr>
+                                                    </th:block>
+
+                                                    <th:block th:if="${cartGoodsReserveItemStat.index > 0 && cartGoodsReserveItemStat.index == itemMap.value.size - 1}">
+                                                        <tr class="c-table__tr l-lg">
+                                                            <td class="c-table__price p-cart__list-price">
+                                                                <div class="p-cart__list-item-heading l-sm">単価<small>（税抜）</small>：</div>
+                                                                <div class="c-product__item-price">
+                                                                    <th:block th:if="${cartGoodsReserveItem.isSaleIconFlag()}">
+                                                                        <div class="c-product__item-icon c-product__item-icon--list">
+                                                                            <span class="c-product__item-icon--sale">SALE</span>
+                                                                        </div>
+                                                                        <div class="c-product__item-sale-comment">
+                                                                            <span th:remove="tag" th:id="'goodsPreDiscountPrice-' + ${itemMapStat.index} + '-' + ${cartGoodsReserveItemStat.index}" th:text="${cartGoodsReserveItem.goodsPreDiscountPrice}"></span>
+                                                                        </div>
+                                                                    </th:block>
+                                                                    <div class="c-product__item-price-unit"><span th:text="${#number.convert(cartGoodsReserveItem.goodsPrice)}" th:remove="tag" /><span>円</span></div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="p-cart__list-delivery"><span th:remove="tag" th:text="${#date.convert(cartGoodsReserveItem.reserveDeliveryDate, 'yyyy/MM/dd')}"></span></td>
+                                                            <td class="c-table__quantity p-cart__list-quantity">
+                                                                <div class="p-cart__list-quantity-static">
+                                                                    <div class="p-cart__list-item-heading l-sm">数量：</div><span th:text="${#number.convert(cartGoodsReserveItem.gcnt)}" th:remove="tag" />
+                                                                </div>
+                                                            </td>
+                                                            <td class="c-table__price p-cart__list-price">
+                                                                <div class="p-cart__list-item-heading l-sm">単価<small>（税抜）</small>：</div>
+                                                                <div class="c-product__item-price"><div class="c-product__item-price-unit"><span th:text="${#number.convert(cartGoodsReserveItem.goodsTotalPrice)}" th:remove="tag" /><span>円</span></div></div>
+                                                            </td>
+                                                        </tr>
+                                                    </th:block>
+                                                </th:block>
+                                            </th:block>
+                                        </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </th:block>
+                        <!-- 2023-renew No14 to here -->
+                    </div>
+                </div>
+            </th:block>
+
+            <!-- 2023-renew No24 from here -->
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <div class="p-cart__nextstep">
+                        <div class="p-cart__coupon">
+                            <div class="p-cart__coupon-title"><svg viewBox="0 0 31.75 22.344" style="width: 33px;"><use xlink:href="/newdesign/assets/images/icon/coupon.svg#coupon"></use></svg><p>クーポン</p></div>
+
+                            <div id="couponMessage">
+                                <div id="couponMessageDiv" th:if="${couponMessages}" class="p-cart__coupon-reception c-reception c-reception--line">
+                                    <ul th:each="message : ${couponMessages}">
+                                        <li th:utext="${message}"></li>
+                                    </ul>
+                                </div>
+                                <div id="couponMessageErrorDiv" th:if="${couponErrorMessages}" class="global-error-message">
+                                    <ul th:each="message : ${couponErrorMessages}">
+                                        <li th:utext="${message}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="p-cart__coupon-lead">
+                                <p>下記よりご利用クーポンをお選びください。<br>詳しい利用条件はクーポン一覧ページでご確認ください。</p>
+                                <a th:href="@{/member/coupon/index.html}" class="c-button c-button--a1-line c-button--width-s"><svg viewBox="0 0 31.75 22.344" style="width: 26px;"><use xlink:href="/newdesign/assets/images/icon/coupon.svg#coupon"></use></svg><p>クーポン一覧</p></a>
+                            </div>
+                            <th:block th:if="${#lists.isEmpty(cartModel.couponList)}">
+                                <div class="p-cart__coupon-area">
+                                    <dl>
+                                        <dt>ご利用可能クーポン</dt>
+                                        <dd class="p-cart__coupon-area-nodata">
+                                            <p>現在ご利用いただけるクーポンはございません。</p>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${!#lists.isEmpty(cartModel.couponList)}">
+                                <div class="p-cart__coupon-area">
+                                    <dl>
+                                        <dt>ご利用可能クーポン</dt>
+                                        <dd class="p-cart__coupon-area-contents">
+                                            <div class="p-cart__coupon-area-notuse">
+                                                <div class="p-cart__radio-wrap">
+                                                    <input type="radio" id="defaultCouponRadio" name="couponCode" th:value="${cartModel.DEFAULT_UNSELECTED_COUPON_VALUE}"
+                                                           th:checked="${cartModel.couponCode == null}" onclick="selectCouponRadio(this.value);" class="c-radio">
+                                                    <label for="defaultCouponRadio">利用しない</label>
+                                                </div>
+                                            </div>
+                                            <div class="p-cart__coupon-area-use">
+                                                <th:block th:each="coupon, couponIndex: ${cartModel.couponList}">
+                                                    <div class="p-cart__radio-wrap">
+                                                        <input type="radio" th:id="'couponCode-' + ${couponIndex.index}" name="couponCode" th:value="${coupon.couponNo}"
+                                                               th:checked="${cartModel.couponCode} == ${coupon.couponNo}" onclick="selectCouponRadio(this.value);" class="c-radio">
+                                                        <label th:for="'couponCode-' + ${couponIndex.index}">
+                                                            <span th:id="'couponConditions-' + ${couponIndex.index}" th:text="${coupon.couponConditions}"></span><br>
+                                                            <span th:remove="tag" th:text="${coupon.couponName}"></span>
+                                                        </label>
+                                                    </div>
+                                                </th:block>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </th:block>
+
+                            <div class="p-cart__coupon-get">
+                                <p>クーポン番号をお持ちの場合は、クーポン番号を下欄に入力後、取得ボタンを押してください。</p>
+                                <div class="p-cart__coupon-get-input">
+                                    <input type="text" th:field="*{couponCodeAdd}" th:errorclass="c-input--error" id="couponCodeAdd" autocomplete="text01" placeholder="" class="c-input">
+                                    <button name="doAddCoupon" type="submit" class="c-button c-button--primary">クーポンを取得</button>
+                                </div>
+                                <div th:if="${#fields.hasErrors('couponCodeAdd')}" th:errors="*{couponCodeAdd}" class="c-field-error c-field-error--top"></div>
+                            </div>
+                        </div>
+
+                        <th:block th:if="${cartModel.isCartIn()}">
+                            <div class="p-cart__total">
+                                <dl class="p-cart__total-unit">
+                                    <dt>合計金額<small>（税抜）</small></dt>
+                                    <dd><span id="goodsTotalPriceNoTax" th:text="${#number.convert(cartModel.goodsTotalPriceNoTax)}" th:remove="tag"/><span>円</span></dd>
+                                </dl>
+                                <dl class="p-cart__total-unit">
+                                    <dt>消費税</dt>
+                                    <dd><span id="goodsTotalTax" th:text="${#number.convert(cartModel.goodsTotalTax)}" th:remove="tag"/><span>円</span></dd>
+                                </dl>
+                                <dl class="p-cart__total-unit p-cart__total--sum">
+                                    <dt>合計金額<small>（税込）</small></dt>
+                                    <dd><span id="priceTotal" th:text="${#number.convert(cartModel.priceTotalInTax)}" th:remove="tag"/><span>円</span></dd>
+                                </dl>
+                                <p class="p-cart__total-caution">送料とクーポンの適用は次の画面でご確認ください。</p>
+                                <p class="p-cart__total-lead">ご注文手続きは「ご注文内容を確認する」よりお進みください。</p>
+                                <th:block th:if="${cartModel.isLogin()}">
+                                    <div class="p-cart__total-button">
+                                        <th:block th:if="${displayDialogDuplicationGoods} == true">
+                                            <button id="doCartConfirmButton-0" type="submit" name="doCartConfirm" class="c-button c-button--primary c-button--width-l js-modal" data-target="modal-duplication-goods"
+                                            >ご注文内容を確認する</button>
+                                        </th:block>
+                                        <th:block th:if="${displayDialogDuplicationGoods == null || displayDialogDuplicationGoods == ''}">
+                                            <button id="doCartConfirmButton-1" type="submit" name="doCartConfirm" class="c-button c-button--primary c-button--width-l"
+                                            >ご注文内容を確認する</button>
+                                        </th:block>
+                                        <input type="submit" id="doOrderConfirm" name="doOrderConfirm" style="display: none" />
+                                        <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">お買い物を続ける</a>
+                                    </div>
+                                </th:block>
+
+                                <th:block th:if="${cartModel.isFreeAreCampaign()}">
+                                    <div class="price2">
+                                        <th:block th:if="${cartModel.isShippingTotalPrice()}">
+                                            <span id="standardAmount" th:text="${#number.convert(cartModel.standardAmount)}"/>円(税抜)以上で送料無料<br/>
+                                            サンプルやカタログのみの場合も送料無料
+                                        </th:block>
+                                        <th:block th:if="${!cartModel.isShippingTotalPrice()}">
+                                            <th:block th:if="${!cartModel.isFreeShippingStandardAmount()}">
+                                                <span>あと<span id="freeShippingDifference" th:text="${#number.convert(cartModel.freeShippingDifference)}"/>円(税抜)で</span>送料無料
+                                            </th:block>
+                                            <th:block th:if="${cartModel.isFreeShippingStandardAmount()}">
+                                                送料無料
+                                            </th:block>
+                                        </th:block>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${!cartModel.isFreeAreCampaign()}">
+                                    <hm:freearea key="cart_promotion1"/>
+                                </th:block>
+                                <hm:freearea key="cart_promotion2"/>
+
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+            <!-- 2023-renew No24 to here -->
+
+            <div class="l-section"><div class="l-section__inner"><hm:freearea key="cart_member1"/></div></div>
+            <div class="l-section"><div class="l-section__inner"><hm:freearea key="cart_member2"/></div></div>
+
+            <!-- 2023-renew No21 from here -->
+            <th:block th:if="${cartModel.isViewTogetherBuyGoods()}">
+                <div class="l-section l-section--hr p-product-detail__sellswell p-product-detail__common-swiper">
+                    <div class="l-section__inner p-product-detail__sellswell-inner">
+                        <h3 class="c-title-contents">よく一緒に購入されている商品</h3>
+                        <div class="c-product c-product--slider">
+                            <div class="swiper c-product-swiper js-product-swiper">
+                                <div class="swiper-wrapper">
+                                    <th:block th:each="togetherBuyGoodsItem, togetherBuyGoodsItemStat : *{togetherBuyGoodsItems}">
+                                        <div class="swiper-slide c-product__item">
+                                            <a th:classappend="${togetherBuyGoodsItem.isNoDispGoods() || !togetherBuyGoodsItem.isGoodsOpen()} ? 'a-disable' : ''"
+                                               id="goTogetherBuyImageGoodsPage" th:href="@{/goods/index.html(ggcd=${togetherBuyGoodsItem.ggcd})}">
+                                                <div class="c-product__item-image">
+                                                    <th:block th:if="${togetherBuyGoodsItem.isNoDispGoods()}">
+                                                        <img th:src="@{ __${@environment.getProperty('images.path.goods')}__/noimg.jpg}"
+                                                             height="200" width="200" decoding="async" loading="lazy">
+                                                    </th:block>
+                                                    <th:block th:if="${!togetherBuyGoodsItem.isNoDispGoods()}">
+                                                        <img th:id="'goodsGroupImageThumbnail-' + ${togetherBuyGoodsItemStat.index}"
+                                                             th:src="@{${#image.convert(togetherBuyGoodsItem.goodsImageItems, 0, 'p1')}}"
+                                                             th:attr="srcset=${#image.convert(togetherBuyGoodsItem.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                             th:alt="${togetherBuyGoodsItem.getGoodsGroupImageThumbnailAlt()}"
+                                                             height="200" width="200" decoding="async" loading="lazy">
+                                                    </th:block>
+                                                </div>
+                                                <div class="c-product__item-icon">
+                                                    <span class="c-product__item-icon--reserve" th:if="${togetherBuyGoodsItem.isReserveIconFlag()}">セールde予約</span>
+                                                    <span class="c-product__item-icon--sale" th:if="${togetherBuyGoodsItem.isSaleIconFlag()}">SALE</span>
+                                                    <span class="c-product__item-icon--new" th:if="${togetherBuyGoodsItem.isNewIconFlag()}">NEW</span>
+                                                    <!-- 2023-renew No92 from here -->
+                                                    <span class="c-product__item-icon--outlet" th:if="${togetherBuyGoodsItem.isOutletIconFlag()}">アウトレット</span>
+                                                    <!-- 2023-renew No92 to here -->
+                                                </div>
+                                                <div class="c-product__item-title"><span th:id="'goodsGroupName-' + ${togetherBuyGoodsItemStat.index}" th:text="${togetherBuyGoodsItem.goodsGroupName}" th:remove="tag"/></div>
+                                                <!--  2023-renew No10 from here-->
+                                                <th:block th:unless="${togetherBuyGoodsItem.isSellOutIconDisp()}">
+                                                    <div class="c-product__item-sale-comment" th:unless="${#strings.isEmpty(togetherBuyGoodsItem.goodsPreDiscountPrice)}">
+                                                        <span th:text="${togetherBuyGoodsItem.goodsPreDiscountPrice}"></span>
+                                                    </div>
+                                                    <th:block th:if="${togetherBuyGoodsItem.isSale()}">
+                                                        <!-- 2023-renew AddNo5 from here -->
+                                                        <div class="c-product__item-price c-product__item-price--sale">
+                                                            <small>セール：</small>
+                                                            <th:block th:if="${togetherBuyGoodsItem.isSameSalePrice()}">
+                                                                <div class="c-product__item-price-unit">
+                                                                    <th:block th:text="|${#number.convert(togetherBuyGoodsItem.goodsSalePriceLow)}|"></th:block><span>円</span>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:unless="${togetherBuyGoodsItem.isSameSalePrice()}">
+                                                                <div class="c-product__item-price-unit">
+                                                                    <th:block th:text="|${#number.convert(togetherBuyGoodsItem.goodsSalePriceLow)}|"></th:block><span>円</span>
+                                                                </div>
+                                                                <div class="c-product__item-price-unit">～
+                                                                    <th:block th:text="|${#number.convert(togetherBuyGoodsItem.goodsSalePriceHigh)}|"></th:block><span>円</span>
+                                                                </div>
+                                                            </th:block>
+                                                        </div>
+                                                        <div class="c-product__item-regular-price">
+                                                            <small>通常価格：</small>
+                                                            <th:block th:if="${togetherBuyGoodsItem.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(togetherBuyGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                            </th:block>
+                                                            <th:block th:unless="${togetherBuyGoodsItem.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(togetherBuyGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                                <th:block>～
+                                                                    <th:block th:if="${togetherBuyGoodsItem.goodsPriceHigh != null}" th:text="|${#number.convert(togetherBuyGoodsItem.goodsPriceHigh)}円|"></th:block>
+                                                                </th:block>
+                                                            </th:block>
+                                                        </div>
+                                                        <!-- 2023-renew AddNo5 to here -->
+                                                    </th:block>
+                                                    <th:block th:if="${!togetherBuyGoodsItem.isSale()}">
+                                                        <div class="c-product__item-price">
+                                                            <div class="c-product__item-price-unit">
+                                                                <!-- 2023-renew AddNo5 from here -->
+                                                                <th:block th:if="${togetherBuyGoodsItem.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(togetherBuyGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                                </th:block>
+                                                                <th:block th:unless="${togetherBuyGoodsItem.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(togetherBuyGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                                    <th:block>～
+                                                                        <th:block th:if="${togetherBuyGoodsItem.goodsPriceHigh != null}" th:text="|${#number.convert(togetherBuyGoodsItem.goodsPriceHigh)}円|"></th:block>
+                                                                    </th:block>
+                                                                </th:block>
+                                                                <!-- 2023-renew AddNo5 to here -->
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                </th:block>
+                                                <!--  2023-renew No10 to here-->
+                                                <div class="c-product__item-stock">
+                                                    <span th:remove="tag" th:if="${togetherBuyGoodsItem.isNoSaleIconDisp()}">在庫切れ</span>
+                                                    <span th:remove="tag" th:if="${togetherBuyGoodsItem.isSellOutIconDisp()}">販売終了</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </th:block>
+                                </div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            <!-- 2023-renew No21 to here -->
+
+            <div class="l-section p-product-detail__viewed">
+                <div class="l-section__inner p-product-detail__viewed-inner">
+                    <h3 class="c-title-contents">最近チェックした商品</h3>
+                    <div class="c-product c-product--slider" id="footPrintGoodsItems">
+                        <div class="swiper c-product-swiper js-product-swiper">
+                            <div class="swiper-wrapper">
+                                <th:block th:each="footPrintGoodsItem, footPrintGoodsItemStat : ${cartModel.footPrintGoodsItems}">
+                                    <div class="swiper-slide c-product__item">
+                                        <a th:classappend="${footPrintGoodsItem.isNoDispGoods() || !footPrintGoodsItem.isGoodsOpen()} ? 'a-disable' : ''"
+                                           id="goFootPrintImageGoodsPage" th:href="@{/goods/index.html(ggcd=${footPrintGoodsItem.ggcd})}">
+                                            <div class="c-product__item-image">
+                                                <th:block th:if="${footPrintGoodsItem.isNoDispGoods()}">
+                                                    <img th:src="@{ __${@environment.getProperty('images.path.goods')}__/noimg.jpg}"
+                                                         height="200" width="200" decoding="async" loading="lazy">
+                                                </th:block>
+                                                <th:block th:if="${!footPrintGoodsItem.isNoDispGoods()}">
+                                                    <img th:id="'goodsGroupImageThumbnail-' + ${footPrintGoodsItemStat.index}"
+                                                         th:src="@{${#image.convert(footPrintGoodsItem.goodsImageItems, 0, 'p1')}}"
+                                                         th:attr="srcset=${#image.convert(footPrintGoodsItem.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                         th:alt="${footPrintGoodsItem.getGoodsGroupImageThumbnailAlt()}"
+                                                         height="200" width="200" decoding="async" loading="lazy">
+                                                </th:block>
+                                            </div>
+                                            <div class="c-product__item-icon">
+                                                <span class="c-product__item-icon--reserve" th:if="${footPrintGoodsItem.isReserveIconFlag()}">セールde予約</span>
+                                                <span class="c-product__item-icon--sale" th:if="${footPrintGoodsItem.isSaleIconFlag()}">SALE</span>
+                                                <span class="c-product__item-icon--new" th:if="${footPrintGoodsItem.isNewIconFlag()}">NEW</span>
+                                                <!-- 2023-renew No92 from here -->
+                                                <span class="c-product__item-icon--outlet" th:if="${footPrintGoodsItem.isOutletIconFlag}">アウトレット</span>
+                                                <!-- 2023-renew No92 to here -->
+                                            </div>
+                                            <div class="c-product__item-title"><span th:id="'goodsGroupName-' + ${footPrintGoodsItemStat.index}" th:text="${footPrintGoodsItem.goodsGroupName}" th:remove="tag"/></div>
+                                            <!--  2023-renew No10 from here-->
+                                            <th:block th:unless="${footPrintGoodsItem.isSellOutIconDisp()}">
+                                                <div class="c-product__item-sale-comment" th:unless="${#strings.isEmpty(footPrintGoodsItem.goodsPreDiscountPrice)}">
+                                                    <span th:text="${footPrintGoodsItem.goodsPreDiscountPrice}"></span>
+                                                </div>
+                                                <th:block th:if="${footPrintGoodsItem.isSale()}">
+                                                    <!-- 2023-renew AddNo5 from here -->
+                                                    <div class="c-product__item-price c-product__item-price--sale">
+                                                        <small>セール：</small>
+                                                        <th:block th:if="${footPrintGoodsItem.isSameSalePrice()}">
+                                                            <div class="c-product__item-price-unit">
+                                                                <th:block th:text="|${#number.convert(footPrintGoodsItem.goodsSalePriceLow)}|"></th:block><span>円</span>
+                                                            </div>
+                                                        </th:block>
+                                                        <th:block th:unless="${footPrintGoodsItem.isSameSalePrice()}">
+                                                            <div class="c-product__item-price-unit">
+                                                                <th:block th:text="|${#number.convert(footPrintGoodsItem.goodsSalePriceLow)}|"></th:block><span>円</span>
+                                                            </div>
+                                                            <div class="c-product__item-price-unit">～
+                                                                <th:block th:text="|${#number.convert(footPrintGoodsItem.goodsSalePriceHigh)}|"></th:block><span>円</span>
+                                                            </div>
+                                                        </th:block>
+                                                    </div>
+                                                    <div class="c-product__item-regular-price">
+                                                        <small>通常価格：</small>
+                                                        <th:block th:if="${footPrintGoodsItem.isSamePrice()}">
+                                                            <th:block th:text="|${#number.convert(footPrintGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                        </th:block>
+                                                        <th:block th:unless="${footPrintGoodsItem.isSamePrice()}">
+                                                            <th:block th:text="|${#number.convert(footPrintGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                            <th:block>～
+                                                                <th:block th:if="${footPrintGoodsItem.goodsPriceHigh != null}" th:text="|${#number.convert(footPrintGoodsItem.goodsPriceHigh)}円|"></th:block>
+                                                            </th:block>
+                                                        </th:block>
+                                                    </div>
+                                                    <!-- 2023-renew AddNo5 to here -->
+                                                </th:block>
+                                                <th:block th:if="${!footPrintGoodsItem.isSale()}">
+                                                    <div class="c-product__item-price">
+                                                        <div class="c-product__item-price-unit">
+                                                            <!-- 2023-renew AddNo5 from here -->
+                                                            <th:block th:if="${footPrintGoodsItem.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(footPrintGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                            </th:block>
+                                                            <th:block th:unless="${footPrintGoodsItem.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(footPrintGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                                <th:block>～
+                                                                    <th:block th:if="${footPrintGoodsItem.goodsPriceHigh != null}" th:text="|${#number.convert(footPrintGoodsItem.goodsPriceHigh)}円|"></th:block>
+                                                                </th:block>
+                                                            </th:block>
+                                                            <!-- 2023-renew AddNo5 to here -->
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                            </th:block>
+                                            <!--  2023-renew No10 to here-->
+                                            <div class="c-product__item-stock">
+                                                <span th:remove="tag" th:if="${footPrintGoodsItem.isNoSaleIconDisp()}">在庫切れ</span>
+                                                <span th:remove="tag" th:if="${footPrintGoodsItem.isSellOutIconDisp()}">販売終了</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev js-product-swiper-prev"></div>
+                        <div class="swiper-button-next js-product-swiper-next"></div>
+                    </div>
+                    <div class="p-product-detail__viewed-delete">
+                        <button onclick="onClickDoClearAccessGoods();return false;" type="button" class="c-button c-button--ccc c-button--delete" name="">
+                            <svg viewBox="0 0 10 10" width="11"><use xlink:href="/newdesign/assets/images/icon/delete.svg#delete"></use></svg>
+                            <p>履歴削除</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--お気に入りリスト-->
+            <th:block th:if="${cartModel.isViewFavoriteGoods()}">
+                <div class="l-section p-product-detail__favorite p-product-detail__common-swiper">
+                    <div class="l-section__inner p-product-detail__favorite-inner">
+                        <h3 class="c-title-contents">お気に入り商品</h3>
+                        <div class="c-product c-product--slider">
+                            <div class="swiper c-product-swiper js-product-swiper">
+                                <div class="swiper-wrapper">
+                                    <th:block th:each="favoriteGoodsItem, favoriteGoodsItemStat : ${cartModel.favoriteGoodsItems}">
+                                        <div class="swiper-slide c-product__item">
+                                            <a th:classappend="${favoriteGoodsItem.isNoDispGoods() || !favoriteGoodsItem.isGoodsOpen()} ? 'a-disable' : ''"
+                                               id="goFavoriteImageGoodsPage" th:href="@{/goods/index.html(gcd=${favoriteGoodsItem.gcd})}">
+                                                <div class="c-product__item-image">
+                                                    <th:block th:if="${favoriteGoodsItem.isNoDispGoods()}">
+                                                        <img th:src="@{ __${@environment.getProperty('images.path.goods')}__/noimg.jpg}"
+                                                             height="200" width="200" decoding="async" loading="lazy">
+                                                    </th:block>
+                                                    <th:block th:if="${!favoriteGoodsItem.isNoDispGoods()}">
+                                                        <img th:id="'goodsGroupImageThumbnail-' + ${favoriteGoodsItemStat.index}"
+                                                             th:src="@{${#image.convert(favoriteGoodsItem.goodsImageItems, 0, 'p1')}}"
+                                                             th:attr="srcset=${#image.convert(favoriteGoodsItem.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                             th:alt="${favoriteGoodsItem.getGoodsGroupImageThumbnailAlt()}"
+                                                             height="200" width="200" decoding="async" loading="lazy">
+                                                    </th:block>
+                                                </div>
+                                                <div class="c-product__item-icon">
+                                                    <span class="c-product__item-icon--reserve" th:if="${favoriteGoodsItem.isReserveIconFlag()}">セールde予約</span>
+                                                    <span class="c-product__item-icon--sale" th:if="${favoriteGoodsItem.isSaleIconFlag()}">SALE</span>
+                                                    <span class="c-product__item-icon--new" th:if="${favoriteGoodsItem.isNewIconFlag()}">NEW</span>
+                                                    <!-- 2023-renew No92 from here -->
+                                                    <span class="c-product__item-icon--outlet" th:if="${favoriteGoodsItem.isOutletIconFlag}">アウトレット</span>
+                                                    <!-- 2023-renew No92 to here -->
+                                                </div>
+                                                <div class="c-product__item-title"><span th:id="'goodsGroupName-' + ${favoriteGoodsItemStat.index}" th:text="${favoriteGoodsItem.goodsGroupName}" th:remove="tag"/></div>
+                                                <th:block th:if="${favoriteGoodsItem.isUnit1()}">
+                                                    <div class="c-product__item-spec"><span th:id="'unitTitle1-' + ${favoriteGoodsItemStat.index}" th:remove="tag" th:text="${favoriteGoodsItem.unitTitle1}"/>：<span th:id="'unitValue1-' + ${favoriteGoodsItemStat.index}" th:remove="tag" th:text="${favoriteGoodsItem.unitValue1}"/></div>
+                                                </th:block>
+                                                <th:block th:if="${favoriteGoodsItem.isUnit2()}">
+                                                    <div class="c-product__item-spec"><span th:id="'unitTitle2-' + ${favoriteGoodsItemStat.index}" th:remove="tag" th:text="${favoriteGoodsItem.unitTitle2}"/>：<span th:id="'unitValue2-' + ${favoriteGoodsItemStat.index}" th:remove="tag" th:text="${favoriteGoodsItem.unitValue2}"/></div>
+                                                </th:block>
+
+                                                <!--  2023-renew No10 from here-->
+                                                <th:block th:unless="${favoriteGoodsItem.isSellOutIconDisp()}">
+                                                    <div class="c-product__item-sale-comment" th:unless="${#strings.isEmpty(favoriteGoodsItem.goodsPreDiscountPrice)}">
+                                                        <span th:text="${favoriteGoodsItem.goodsPreDiscountPrice}"></span>
+                                                    </div>
+                                                    <th:block th:if="${favoriteGoodsItem.isSale()}">
+                                                        <!-- 2023-renew AddNo5 from here -->
+                                                        <div class="c-product__item-price c-product__item-price--sale">
+                                                            <small>セール：</small>
+                                                            <th:block th:if="${favoriteGoodsItem.isSameSalePrice()}">
+                                                                <div class="c-product__item-price-unit">
+                                                                    <th:block th:text="|${#number.convert(favoriteGoodsItem.goodsSalePriceLow)}|"></th:block><span>円</span>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:unless="${favoriteGoodsItem.isSameSalePrice()}">
+                                                                <div class="c-product__item-price-unit">
+                                                                    <th:block th:text="|${#number.convert(favoriteGoodsItem.goodsSalePriceLow)}|"></th:block><span>円</span>
+                                                                </div>
+                                                                <div class="c-product__item-price-unit">～
+                                                                    <th:block th:text="|${#number.convert(favoriteGoodsItem.goodsSalePriceHigh)}|"></th:block><span>円</span>
+                                                                </div>
+                                                            </th:block>
+                                                        </div>
+                                                        <div class="c-product__item-regular-price">
+                                                            <small>通常価格：</small>
+                                                            <th:block th:if="${favoriteGoodsItem.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(favoriteGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                            </th:block>
+                                                            <th:block th:unless="${favoriteGoodsItem.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(favoriteGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                                <th:block>～
+                                                                    <th:block th:if="${favoriteGoodsItem.goodsPriceHigh != null}" th:text="|${#number.convert(favoriteGoodsItem.goodsPriceHigh)}円|"></th:block>
+                                                                </th:block>
+                                                            </th:block>
+                                                        </div>
+                                                        <!-- 2023-renew AddNo5 to here -->
+                                                    </th:block>
+                                                    <th:block th:if="${!favoriteGoodsItem.isSale()}">
+                                                        <div class="c-product__item-price">
+                                                            <div class="c-product__item-price-unit">
+                                                                <!-- 2023-renew AddNo5 from here -->
+                                                                <th:block th:if="${favoriteGoodsItem.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(favoriteGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                                </th:block>
+                                                                <th:block th:unless="${favoriteGoodsItem.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(favoriteGoodsItem.goodsPriceLow)}円|"></th:block>
+                                                                    <th:block>～
+                                                                        <th:block th:if="${favoriteGoodsItem.goodsPriceHigh != null}" th:text="|${#number.convert(favoriteGoodsItem.goodsPriceHigh)}円|"></th:block>
+                                                                    </th:block>
+                                                                </th:block>
+                                                                <!-- 2023-renew AddNo5 to here -->
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                </th:block>
+                                                <div class="c-product__item-stock">
+                                                    <span th:remove="tag" th:if="${favoriteGoodsItem.isStockNoOpenIconDisp()}">販売終了</span>
+                                                    <span th:remove="tag" th:if="${favoriteGoodsItem.isStockOpenEndIconDisp()}">販売終了</span>
+                                                    <span th:remove="tag" th:if="${favoriteGoodsItem.isNoSaleIconDisp()}">在庫切れ</span>
+                                                    <span th:remove="tag" th:if="${favoriteGoodsItem.isSellOutIconDisp()}">販売終了</span>
+                                                </div>
+                                            </a>
+                                            <th:block th:if="${favoriteGoodsItem.isDisplayAddCart()}">
+                                                <div class="c-product__item-button">
+                                                    <a th:href="@{/cart/index.html(gcd=${favoriteGoodsItem.gcd}, gcnt=${favoriteGoodsItem.gcnt})}" th:onclick="sendUkCartIn(/*[[${favoriteGoodsItem}]]*/);">
+                                                        <button type="button" class="c-button c-button--primary c-button--width-s">カートに入れる</button>
+                                                    </a>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                    </th:block>
+                                </div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="p-product-detail__favorite-more">
+                            <a th:href="@{/member/favorite/index.html}" class="c-button c-button--primary-line c-button--width-s">
+                                <svg viewBox="0 0 24.9 21.5" class="favorite"><use xlink:href="/newdesign/assets/images/icon/favorite.svg#favorite"></use></svg>
+                                <p>お気に入り商品一覧</p>
+                            </a></div>
+                    </div>
+                </div>
+            </th:block>
+        </form>
+    </main>
+
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+<!-- 【module modal-coupon】/////////////////////////////////////////////////  -->
+<div id="modal-coupon" class="c-modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents p-mypage-coupon__modal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <p>クーポンを取得しました !</p>
+            <div class="p-mypage-coupon__modal-title">
+                <strong><span id="couponNameDialog"></span></strong>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // 【module modal-coupon】/////////////////////////////////////////////////  -->
+
+<!-- 【module modal-duplication-goods】/////////////////////////////////////////////////  -->
+<div id="modal-duplication-goods" class="c-modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--normal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <p class="c-modal__lead">以下の商品は「今すぐお届け」と「セールde予約」の両方がカートに入っています。<br>
+                このままご注文される場合は「はい」、修正する場合は「いいえ」ボタンを押してください。</p>
+            <div class="c-modal__detail">
+                <div class="c-modal__detail-scroll c-scroll" data-simplebar data-simplebar-auto-hide="false">
+                    <div class="c-modal__detail-inner">
+                        <th:block th:each="duplicationGoodsItem, duplicationGoodsItemStat : ${cartModel.duplicationGoodsItems}">
+                            <div class="c-modal__detail-unit" th:id="'cartInfo-' + ${duplicationGoodsItemStat.index}">
+                                <p>
+                                    商品番号：<span id="'gcd-' + ${duplicationGoodsItemStat.index}" th:remove="tag" th:text="${duplicationGoodsItem.gcd}"/><br>
+                                    商品名：<span th:id="'goodsName-' + ${duplicationGoodsItemStat.index}" th:remove="tag" th:text="${duplicationGoodsItem.goodsGroupName}"/><br>
+                                    <th:block th:if="${duplicationGoodsItem.isUnit1()}">
+                                        <span th:id="'unitTitle1-' + ${duplicationGoodsItemStat.index}" th:remove="tag" th:text="${duplicationGoodsItem.unitTitle1}"/>：<span th:id="'unitValue1-' + ${duplicationGoodsItemStat.index}" th:remove="tag" th:text="${duplicationGoodsItem.unitValue1}"/><br>
+                                    </th:block>
+                                    <th:block th:if="${duplicationGoodsItem.isUnit2()}">
+                                        <span th:id="'unitTitle2-' + ${duplicationGoodsItemStat.index}" th:remove="tag" th:text="${duplicationGoodsItem.unitTitle2}"/>：<span th:id="'unitValue2-' + ${duplicationGoodsItemStat.index}" th:remove="tag" th:text="${duplicationGoodsItem.unitValue2}"/><br>
+                                    </th:block>
+                                </p>
+                                <p>
+                                    <strong>
+                                        今すぐお届け　合計数量：<span th:text="${#number.convert(duplicationGoodsItem.countQuantityDeliveryNow)}"/><br>
+                                        セールde予約　合計数量：<span th:text="${#number.convert(duplicationGoodsItem.countQuantityReserve)}"/>
+                                    </strong>
+                                </p>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+            <div class="c-modal__button c-modal__button--small">
+                <button onclick="doCartConfirm(false);" class="c-button c-button--primary-line c-button--width-m js-modal-close">いいえ</button>
+                <button type="button" onclick="doCartConfirm(true);" class="c-button c-button--primary c-button--width-m">はい</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // 【module modal-duplication-goods】/////////////////////////////////////////////////  -->
+
+<script th:inline="javascript">
+    function favoriteRegistInline(obj, gcdParam) {
+        let isRegisterNew = $(obj).attr('add-fav-status') === 'true';
+        let favoriteId = $(obj).attr('id').split('-')[1];
+        toggleErrorMessage(false, null);
+        toggleFavoriteAjaxCall(gcdParam, isRegisterNew).done(function (data) {
+            handleToggleFavoriteAjaxResponse(obj, data, favoriteId, isRegisterNew);
+        }).fail(function (error) {
+            console.log("Request failed: ", error);
+        });
+    }
+
+    function toggleFavoriteAjaxCall(gcd, isRegisterNew) {
+        let def = $.Deferred(); // Ajax通信を行う
+        const urlPath = isRegisterNew ? "/getFavoriteRegisterResponse" : "/getFavoriteUnregisterResponse";
+        $.ajax({
+            type: "GET",
+            url: pkg_common.getAppComplementUrl() + urlPath,
+            dataType: "json",
+            data: {
+                "gcd": gcd
+            },
+            timeout: 30000
+        }).done(function (response) {
+            def.resolve(response);
+        }).fail(function (jqXHR, textStatus) {
+            def.reject(textStatus);
+        });
+        return def.promise();
+    }
+
+    function handleToggleFavoriteAjaxResponse(obj, data, index, isRegisterNew) {
+        if ((!isRegisterNew && data) || (isRegisterNew && data && data.length > 0)) {
+            const status = isRegisterNew ? data[0].favoriteRegistSuccess : data.favoriteUnregistStatus;
+            if (status === "true") {
+                $(obj).attr('add-fav-status', !isRegisterNew + '');
+                var responseSuccessGcd = isRegisterNew ? data[0].gcd : data.gcd
+                $('button[id^="favoriteAddBtn"]').each(function() {
+                    var thisGcd = $(this).attr('gcdParam');
+                    if (responseSuccessGcd === thisGcd) {
+                        if (isRegisterNew) {
+                            $(this).addClass('is-active');
+                        } else {
+                            $(this).removeClass('is-active');
+                        }
+                    }
+                });
+
+            } else {
+                const errorMsg = isRegisterNew
+                    ? data[0].errorFavoriteMsg
+                    : data.errorFavoriteMsg;
+                if (errorMsg) {
+                    toggleErrorMessage(true, errorMsg);
+                }
+            }
+        }
+    }
+
+    function toggleErrorMessage(isDisplay, errorMsg) {
+        if (isDisplay) {
+            $("html,body").animate({scrollTop:0});
+            let errorFavoriteMsg = $("<ul/>")
+                .attr("id", "errorFavoriteMsg")
+                .addClass("c-global-error c-global-error--margin-m inputError");
+            errorFavoriteMsg.append("<li>" + errorMsg + "</li>");
+
+            $("#errorMessages")
+                .css("display","inherit")
+                .append(errorFavoriteMsg);
+        } else {
+            $("#errorMessages")
+                .css("display", "none")
+                .children().remove();
+        }
+    }
+
+</script>
+</body>
+
+</html>

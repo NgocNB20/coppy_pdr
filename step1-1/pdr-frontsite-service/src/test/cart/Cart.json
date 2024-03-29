@@ -1,0 +1,706 @@
+{
+	"info": {
+		"_postman_id": "d3e14c1b-335b-4ab4-824d-9a4dcbab1e11",
+		"name": "Cart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "カート商品チェック- NOTOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"checkCartGoods-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"checkCartGoods-NOTOK\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.messages).to.have.greaterThan(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartDto\": {\r\n        \"goodsTotalCount\": 2,\r\n        \"goodsTotalPrice\": 1000,\r\n        \"goodsTotalPriceInTax\": null,\r\n        \"cartGoodsDtoList\": [\r\n            {\r\n                \"cartGoodsEntity\": {\r\n                    \"cartSeq\": 10000004,\r\n                    \"accessUid\": \"5749231016092703\",\r\n                    \"memberInfoSeq\": 10149571,\r\n                    \"goodsSeq\": 10000175,\r\n                    \"cartGoodsCount\": 1,\r\n                    \"registTime\": 1698392121000,\r\n                    \"updateTime\": 1698392121000,\r\n                    \"shopSeq\": 1001\r\n                },\r\n                \"goodsDetailsDto\": {\r\n                    \"goodsSeq\": 10000175,\r\n                    \"goodsGroupSeq\": 10000030,\r\n                    \"shopSeq\": 1001,\r\n                    \"versionNo\": 1,\r\n                    \"registTime\": 1697711382000,\r\n                    \"updateTime\": 1697713868000,\r\n                    \"goodsCode\": \"55-9026\",\r\n                    \"goodsGroupMaxPrice\": null,\r\n                    \"goodsGroupMinPrice\": null,\r\n                    \"preDiscountMinPrice\": null,\r\n                    \"preDiscountMaxPrice\": null,\r\n                    \"goodsTaxType\": \"1\",\r\n                    \"taxRate\": 10,\r\n                    \"alcoholFlag\": \"0\",\r\n                    \"goodsPriceInTax\": null,\r\n                    \"goodsPrice\": 290,\r\n                    \"deliveryType\": null,\r\n                    \"saleStatus\": \"1\",\r\n                    \"saleStartTime\": null,\r\n                    \"saleEndTime\": null,\r\n                    \"unitManagementFlag\": \"1\",\r\n                    \"stockManagementFlag\": \"1\",\r\n                    \"individualDeliveryType\": \"0\",\r\n                    \"purchasedMax\": 9999,\r\n                    \"freeDeliveryFlag\": \"1\",\r\n                    \"orderDisplay\": 1,\r\n                    \"unitValue1\": \"１箱\",\r\n                    \"unitValue2\": null,\r\n                    \"preDiscountPrice\": null,\r\n                    \"preDisCountPriceInTax\": null,\r\n                    \"janCode\": null,\r\n                    \"catalogCode\": \"34_1004\",\r\n                    \"salesPossibleStock\": 0,\r\n                    \"realStock\": 0,\r\n                    \"orderReserveStock\": 0,\r\n                    \"remainderFewStock\": 0,\r\n                    \"orderPointStock\": 0,\r\n                    \"safetyStock\": 0,\r\n                    \"goodsGroupCode\": \"series-1004\",\r\n                    \"whatsnewDate\": 631126800000,\r\n                    \"goodsOpenStatus\": \"1\",\r\n                    \"openStartTime\": 1443373200000,\r\n                    \"openEndTime\": null,\r\n                    \"goodsGroupName\": \"歯ブラシギフトボックス\",\r\n                    \"unitTitle1\": \"内容量\",\r\n                    \"unitTitle2\": null,\r\n                    \"goodsPreDiscountPrice\": null,\r\n                    \"goodsGroupImageEntityList\": [\r\n                        {\r\n                            \"goodsGroupSeq\": 10000030,\r\n                            \"imageTypeVersionNo\": 1,\r\n                            \"imageFileName\": \"series-1004/series-1004_01.jpg\",\r\n                            \"registTime\": 1697022895000,\r\n                            \"updateTime\": 1697713868000\r\n                        },\r\n                        {\r\n                            \"goodsGroupSeq\": 10000030,\r\n                            \"imageTypeVersionNo\": 2,\r\n                            \"imageFileName\": \"series-1004/series-1004_02.jpg\",\r\n                            \"registTime\": 1697022895000,\r\n                            \"updateTime\": 1697713868000\r\n                        },\r\n                        {\r\n                            \"goodsGroupSeq\": 10000030,\r\n                            \"imageTypeVersionNo\": 3,\r\n                            \"imageFileName\": \"series-1004/series-1004_03.jpg\",\r\n                            \"registTime\": 1697022895000,\r\n                            \"updateTime\": 1697713868000\r\n                        }\r\n                    ],\r\n                    \"snsLinkFlag\": \"0\",\r\n                    \"metaDescription\": null,\r\n                    \"stockStatus\": null,\r\n                    \"goodsIconList\": [],\r\n                    \"goodsNote1\": \"P.D.R.オリジナル歯ブラシにぴったりサイズのギフトボックスです。\",\r\n                    \"goodsNote2\": \"<div Class=\\\"gdBox\\\"><h4>特長</h4><p>●お誕生日、クリスマスなどちょっと特別なプレゼントに！<br clear = \\\"none\\\"/></p></div>\",\r\n                    \"goodsNote3\": null,\r\n                    \"goodsNote4\": \"<div class=\\\"gdBox\\\"><h4>注意事項</h4><p Class=\\\"must\\\"> ※歯ブラシは別売りです。<br clear = \\\"none\\\"/>※組み立てた状態でお届けします。</p></div>\",\r\n                    \"goodsNote5\": \"<div class=\\\"gdBox\\\"><h4>その他</h4><p>●日本製<br clear = \\\"none\\\"/>●材質／紙</p></div>\",\r\n                    \"goodsNote6\": null,\r\n                    \"goodsNote7\": null,\r\n                    \"goodsNote8\": null,\r\n                    \"goodsNote9\": null,\r\n                    \"goodsNote10\": null,\r\n                    \"orderSetting1\": null,\r\n                    \"orderSetting2\": null,\r\n                    \"orderSetting3\": null,\r\n                    \"orderSetting4\": null,\r\n                    \"orderSetting5\": null,\r\n                    \"orderSetting6\": null,\r\n                    \"orderSetting7\": null,\r\n                    \"orderSetting8\": null,\r\n                    \"orderSetting9\": null,\r\n                    \"orderSetting10\": null,\r\n                    \"unitImage\": null,\r\n                    \"goodsOptionDisplayName\": null,\r\n                    \"goodsClassType\": \"94\",\r\n                    \"dentalMonopolySalesFlg\": \"1S_0\",\r\n                    \"saleIconFlag\": \"0\",\r\n                    \"reserveIconFlag\": \"0\",\r\n                    \"newIconFlag\": \"0\",\r\n                    \"landSendFlag\": \"0\",\r\n                    \"coolSendFlag\": \"0\",\r\n                    \"coolSendFrom\": null,\r\n                    \"coolSendTo\": null,\r\n                    \"tax\": null,\r\n                    \"unit\": \"箱\",\r\n                    \"goodsManagementCode\": \"55-9026\",\r\n                    \"goodsDivisionCode\": \"0\",\r\n                    \"goodsCategory1\": \"0\",\r\n                    \"goodsCategory2\": \"0\",\r\n                    \"goodsCategory3\": \"0\",\r\n                    \"reserveFlag\": \"0\",\r\n                    \"priceMarkDispFlag\": \"0\",\r\n                    \"salePriceMarkDispFlag\": \"0\",\r\n                    \"salePriceIntegrityFlag\": \"0\",\r\n                    \"saleYesNo\": 0,\r\n                    \"saleNgMessage\": null,\r\n                    \"deliveryYesNo\": null,\r\n                    \"emotionPriceType\": \"1\"\r\n                },\r\n                \"goodsInformationIconDetailsDtoList\": [],\r\n                \"goodsPriceSubtotal\": null,\r\n                \"goodsPriceInTaxSubtotal\": null,\r\n                \"goodsPriceChanged\": null\r\n            },\r\n            {\r\n                \"cartGoodsEntity\": {\r\n                    \"cartSeq\": 10000003,\r\n                    \"accessUid\": \"5750231027142442\",\r\n                    \"memberInfoSeq\": 10149571,\r\n                    \"goodsSeq\": 10014478,\r\n                    \"cartGoodsCount\": 1,\r\n                    \"registTime\": 1698391594000,\r\n                    \"updateTime\": 1698391594000,\r\n                    \"shopSeq\": 1001\r\n                },\r\n                \"goodsDetailsDto\": {\r\n                    \"goodsSeq\": 10014478,\r\n                    \"goodsGroupSeq\": 10002034,\r\n                    \"shopSeq\": 1001,\r\n                    \"versionNo\": 15,\r\n                    \"registTime\": 1697712239000,\r\n                    \"updateTime\": 1697714922000,\r\n                    \"goodsCode\": \"43-1886\",\r\n                    \"goodsGroupMaxPrice\": null,\r\n                    \"goodsGroupMinPrice\": null,\r\n                    \"preDiscountMinPrice\": null,\r\n                    \"preDiscountMaxPrice\": null,\r\n                    \"goodsTaxType\": \"1\",\r\n                    \"taxRate\": 10,\r\n                    \"alcoholFlag\": \"0\",\r\n                    \"goodsPriceInTax\": null,\r\n                    \"goodsPrice\": 820,\r\n                    \"deliveryType\": null,\r\n                    \"saleStatus\": \"1\",\r\n                    \"saleStartTime\": null,\r\n                    \"saleEndTime\": null,\r\n                    \"unitManagementFlag\": \"1\",\r\n                    \"stockManagementFlag\": \"1\",\r\n                    \"individualDeliveryType\": \"0\",\r\n                    \"purchasedMax\": 9999,\r\n                    \"freeDeliveryFlag\": \"1\",\r\n                    \"orderDisplay\": 1,\r\n                    \"unitValue1\": \"１箱（１００枚入）\",\r\n                    \"unitValue2\": \"ＳＳサイズ\",\r\n                    \"preDiscountPrice\": null,\r\n                    \"preDisCountPriceInTax\": null,\r\n                    \"janCode\": null,\r\n                    \"catalogCode\": \"36_905\",\r\n                    \"salesPossibleStock\": 0,\r\n                    \"realStock\": 0,\r\n                    \"orderReserveStock\": 0,\r\n                    \"remainderFewStock\": 0,\r\n                    \"orderPointStock\": 0,\r\n                    \"safetyStock\": 0,\r\n                    \"goodsGroupCode\": \"series-905\",\r\n                    \"whatsnewDate\": 631126800000,\r\n                    \"goodsOpenStatus\": \"1\",\r\n                    \"openStartTime\": 1341075600000,\r\n                    \"openEndTime\": null,\r\n                    \"goodsGroupName\": \"リンガ　ポリマーコート\",\r\n                    \"unitTitle1\": \"内容量\",\r\n                    \"unitTitle2\": \"サイズ\",\r\n                    \"goodsPreDiscountPrice\": null,\r\n                    \"goodsGroupImageEntityList\": [\r\n                        {\r\n                            \"goodsGroupSeq\": 10002034,\r\n                            \"imageTypeVersionNo\": 1,\r\n                            \"imageFileName\": \"series-905/series-905_01.jpg\",\r\n                            \"registTime\": 1697022895000,\r\n                            \"updateTime\": 1697714922000\r\n                        },\r\n                        {\r\n                            \"goodsGroupSeq\": 10002034,\r\n                            \"imageTypeVersionNo\": 2,\r\n                            \"imageFileName\": \"series-905/series-905_02.jpg\",\r\n                            \"registTime\": 1697022895000,\r\n                            \"updateTime\": 1697714922000\r\n                        },\r\n                        {\r\n                            \"goodsGroupSeq\": 10002034,\r\n                            \"imageTypeVersionNo\": 3,\r\n                            \"imageFileName\": \"series-905/series-905_03.jpg\",\r\n                            \"registTime\": 1697022895000,\r\n                            \"updateTime\": 1697714922000\r\n                        }\r\n                    ],\r\n                    \"snsLinkFlag\": \"0\",\r\n                    \"metaDescription\": null,\r\n                    \"stockStatus\": null,\r\n                    \"goodsIconList\": [],\r\n                    \"goodsNote1\": \"一般的なグローブより厚手にしつつ、リーズナブルな価格を目指しました。\",\r\n                    \"goodsNote2\": \"<div Class=\\\"gdBox\\\"><h4>特長</h4><p>●伸縮性に優れ、フィット感が良好です。●天然ラテックスアレルギーのリスクはありますが、作業性を優先して選ばれる方も多いグローブです。<br clear = \\\"none\\\"/></p></div>\",\r\n                    \"goodsNote3\": \"<div Class=\\\"gdSubBox\\\"><h5 class=\\\"icon-customer\\\">お客様の声</h5><p>いろんなグローブを使いましたが、フィット感と指先感覚が今までで一番good。仕事しやすさNo.1です。秋田県A歯科医院様</p></div><div Class=\\\"gdSubBox\\\"><h5 class=\\\"icon-customer\\\">お客様の声</h5><p>フィット感がよく使いやすいのにリーズナブルなのでとても気に入っています。広島県O歯科医院様</p></div>\",\r\n                    \"goodsNote4\": \"<div class=\\\"gdBox\\\"><h4>注意事項</h4><p Class=\\\"must\\\"> </p></div>\",\r\n                    \"goodsNote5\": \"<div class=\\\"gdBox\\\"><h4>その他</h4><p>●マレーシア製<br clear = \\\"none\\\"/>●材質／ラテックス<br clear = \\\"none\\\"/>●パウダーフリー●未滅菌●大容量ケースサイズ／縦25.5×横31.2×高さ24.2cm●小箱サイズ／縦12.3×横23.0×高さ5.8cm<br clear = \\\"none\\\"/>ポリマーコート</p></div>\",\r\n                    \"goodsNote6\": \"<div class=\\\"camBanner\\\">\\n<a href=\\\"/ad.html?ccd=bnr_goods06\\\" target=\\\"_blank\\\"><img src=\\\"/d_images/parts/glove_yesno.gif\\\"></a><br />\\n</div>\",\r\n                    \"goodsNote7\": null,\r\n                    \"goodsNote8\": null,\r\n                    \"goodsNote9\": null,\r\n                    \"goodsNote10\": null,\r\n                    \"orderSetting1\": null,\r\n                    \"orderSetting2\": null,\r\n                    \"orderSetting3\": null,\r\n                    \"orderSetting4\": null,\r\n                    \"orderSetting5\": null,\r\n                    \"orderSetting6\": null,\r\n                    \"orderSetting7\": null,\r\n                    \"orderSetting8\": null,\r\n                    \"orderSetting9\": null,\r\n                    \"orderSetting10\": null,\r\n                    \"unitImage\": null,\r\n                    \"goodsOptionDisplayName\": null,\r\n                    \"goodsClassType\": \"94\",\r\n                    \"dentalMonopolySalesFlg\": \"1S_0\",\r\n                    \"saleIconFlag\": \"0\",\r\n                    \"reserveIconFlag\": \"0\",\r\n                    \"newIconFlag\": \"0\",\r\n                    \"landSendFlag\": \"0\",\r\n                    \"coolSendFlag\": \"0\",\r\n                    \"coolSendFrom\": null,\r\n                    \"coolSendTo\": null,\r\n                    \"tax\": null,\r\n                    \"unit\": \"箱\",\r\n                    \"goodsManagementCode\": \"43-1886\",\r\n                    \"goodsDivisionCode\": \"0\",\r\n                    \"goodsCategory1\": \"0\",\r\n                    \"goodsCategory2\": \"0\",\r\n                    \"goodsCategory3\": \"0\",\r\n                    \"reserveFlag\": \"0\",\r\n                    \"priceMarkDispFlag\": \"1\",\r\n                    \"salePriceMarkDispFlag\": \"0\",\r\n                    \"salePriceIntegrityFlag\": \"0\",\r\n                    \"saleYesNo\": 0,\r\n                    \"saleNgMessage\": null,\r\n                    \"deliveryYesNo\": null,\r\n                    \"emotionPriceType\": \"1\"\r\n                },\r\n                \"goodsInformationIconDetailsDtoList\": [],\r\n                \"goodsPriceSubtotal\": null,\r\n                \"goodsPriceInTaxSubtotal\": null,\r\n                \"goodsPriceChanged\": null\r\n            }\r\n        ],\r\n        \"settlementMethodType\": null,\r\n        \"discountsResponseDetailMap\": null,\r\n        \"consumptionTaxRateMap\": null,\r\n        \"beforeTransferEmotionGoodsCodeMap\": null,\r\n        \"totalPriceTax\": null,\r\n        \"couponCode\": null\r\n    },\r\n    \"islogin\" : true,\r\n    \"businessType\" : \"18\",\r\n    \"confDocumentType\" : \"1\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/cart/cart-goods-check",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods-check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート商品チェック- OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"checkCartGoods-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"checkCartGoods-NOTOK\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).equals(null);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartGoodsCheckRequest\": {\r\n        \"cartDto\": {\r\n            \"goodsTotalCount\": 1,\r\n            \"goodsTotalPrice\": 500,\r\n            \"goodsTotalPriceInTax\": null,\r\n            \"cartGoodsDtoList\": [\r\n                {\r\n                    \"cartGoodsEntity\": {\r\n                        \"cartSeq\": 10000005,\r\n                        \"accessUid\": \"5749231016092703\",\r\n                        \"memberInfoSeq\": 10149571,\r\n                        \"goodsSeq\": 10000378,\r\n                        \"cartGoodsCount\": 1,\r\n                        \"registTime\": 1698392131000,\r\n                        \"updateTime\": 1698392131000,\r\n                        \"shopSeq\": 1001\r\n                    },\r\n                    \"goodsDetailsDto\": {\r\n                        \"goodsSeq\": 10000378,\r\n                        \"goodsGroupSeq\": 10000056,\r\n                        \"shopSeq\": 1001,\r\n                        \"versionNo\": 3,\r\n                        \"registTime\": 1697711393000,\r\n                        \"updateTime\": 1697713881000,\r\n                        \"goodsCode\": \"55-9720\",\r\n                        \"goodsGroupMaxPrice\": null,\r\n                        \"goodsGroupMinPrice\": null,\r\n                        \"preDiscountMinPrice\": null,\r\n                        \"preDiscountMaxPrice\": null,\r\n                        \"goodsTaxType\": \"1\",\r\n                        \"taxRate\": 10,\r\n                        \"alcoholFlag\": \"0\",\r\n                        \"goodsPriceInTax\": null,\r\n                        \"goodsPrice\": 450,\r\n                        \"deliveryType\": null,\r\n                        \"saleStatus\": \"1\",\r\n                        \"saleStartTime\": null,\r\n                        \"saleEndTime\": null,\r\n                        \"unitManagementFlag\": \"1\",\r\n                        \"stockManagementFlag\": \"0\",\r\n                        \"individualDeliveryType\": \"0\",\r\n                        \"purchasedMax\": 9999,\r\n                        \"freeDeliveryFlag\": \"1\",\r\n                        \"orderDisplay\": 1,\r\n                        \"unitValue1\": \"名前欄あり（１００枚入）\",\r\n                        \"unitValue2\": null,\r\n                        \"preDiscountPrice\": null,\r\n                        \"preDisCountPriceInTax\": null,\r\n                        \"janCode\": null,\r\n                        \"catalogCode\": \"36_1008\",\r\n                        \"salesPossibleStock\": 0,\r\n                        \"realStock\": 0,\r\n                        \"orderReserveStock\": 0,\r\n                        \"remainderFewStock\": 0,\r\n                        \"orderPointStock\": 0,\r\n                        \"safetyStock\": 0,\r\n                        \"goodsGroupCode\": \"series-1008\",\r\n                        \"whatsnewDate\": 631126800000,\r\n                        \"goodsOpenStatus\": \"1\",\r\n                        \"openStartTime\": 1212253200000,\r\n                        \"openEndTime\": null,\r\n                        \"goodsGroupName\": \"裏面シール\",\r\n                        \"unitTitle1\": \"種類\",\r\n                        \"unitTitle2\": null,\r\n                        \"goodsPreDiscountPrice\": null,\r\n                        \"goodsGroupImageEntityList\": [\r\n                            {\r\n                                \"goodsGroupSeq\": 10000056,\r\n                                \"imageTypeVersionNo\": 1,\r\n                                \"imageFileName\": \"series-1008/series-1008_01.jpg\",\r\n                                \"registTime\": 1697022895000,\r\n                                \"updateTime\": 1697713881000\r\n                            },\r\n                            {\r\n                                \"goodsGroupSeq\": 10000056,\r\n                                \"imageTypeVersionNo\": 2,\r\n                                \"imageFileName\": \"series-1008/series-1008_02.jpg\",\r\n                                \"registTime\": 1697022895000,\r\n                                \"updateTime\": 1697713881000\r\n                            }\r\n                        ],\r\n                        \"snsLinkFlag\": \"0\",\r\n                        \"metaDescription\": null,\r\n                        \"stockStatus\": null,\r\n                        \"goodsIconList\": [],\r\n                        \"goodsNote1\": \"診察券に裏面シールをご利用いただくとアポイントが書き込めて便利です。\",\r\n                        \"goodsNote2\": \"<div Class=\\\"gdBox\\\"><h4>特長</h4><p><br clear = \\\"none\\\"/></p></div>\",\r\n                        \"goodsNote3\": null,\r\n                        \"goodsNote4\": \"<div class=\\\"gdBox\\\"><h4>注意事項</h4><p Class=\\\"must\\\"> </p></div>\",\r\n                        \"goodsNote5\": \"<div class=\\\"gdBox\\\"><h4>その他</h4><p>●日本製<br clear = \\\"none\\\"/>●サイズ／縦50×横82mm</p></div>\",\r\n                        \"goodsNote6\": null,\r\n                        \"goodsNote7\": null,\r\n                        \"goodsNote8\": null,\r\n                        \"goodsNote9\": null,\r\n                        \"goodsNote10\": null,\r\n                        \"orderSetting1\": null,\r\n                        \"orderSetting2\": null,\r\n                        \"orderSetting3\": null,\r\n                        \"orderSetting4\": null,\r\n                        \"orderSetting5\": null,\r\n                        \"orderSetting6\": null,\r\n                        \"orderSetting7\": null,\r\n                        \"orderSetting8\": null,\r\n                        \"orderSetting9\": null,\r\n                        \"orderSetting10\": null,\r\n                        \"unitImage\": null,\r\n                        \"goodsOptionDisplayName\": null,\r\n                        \"goodsClassType\": \"94\",\r\n                        \"dentalMonopolySalesFlg\": \"0\",\r\n                        \"saleIconFlag\": \"0\",\r\n                        \"reserveIconFlag\": \"0\",\r\n                        \"newIconFlag\": \"0\",\r\n                        \"landSendFlag\": \"0\",\r\n                        \"coolSendFlag\": \"0\",\r\n                        \"coolSendFrom\": null,\r\n                        \"coolSendTo\": null,\r\n                        \"tax\": null,\r\n                        \"unit\": \"袋\",\r\n                        \"goodsManagementCode\": \"55-9720\",\r\n                        \"goodsDivisionCode\": \"0\",\r\n                        \"goodsCategory1\": \"0\",\r\n                        \"goodsCategory2\": \"0\",\r\n                        \"goodsCategory3\": \"0\",\r\n                        \"reserveFlag\": \"0\",\r\n                        \"priceMarkDispFlag\": \"0\",\r\n                        \"salePriceMarkDispFlag\": \"0\",\r\n                        \"salePriceIntegrityFlag\": \"0\",\r\n                        \"saleYesNo\": null,\r\n                        \"saleNgMessage\": null,\r\n                        \"deliveryYesNo\": null,\r\n                        \"emotionPriceType\": \"1\"\r\n                    },\r\n                    \"goodsInformationIconDetailsDtoList\": [],\r\n                    \"goodsPriceSubtotal\": null,\r\n                    \"goodsPriceInTaxSubtotal\": null,\r\n                    \"goodsPriceChanged\": null\r\n                }\r\n                \r\n            ],\r\n            \"settlementMethodType\": null,\r\n            \"discountsResponseDetailMap\": null,\r\n            \"consumptionTaxRateMap\": null,\r\n            \"beforeTransferEmotionGoodsCodeMap\": null,\r\n            \"totalPriceTax\": null,\r\n            \"couponCode\": null\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/cart/cart-goods-check",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods-check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート投入チェック - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"checkCartGoodsRegist-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartGoodsForTakeOverDtoListRequest\": [\r\n        {\r\n            \"goodsGroupSeq\": 10000056,\r\n            \"goodsSeq\": 10000378,\r\n            \"goodsCode\": \"55-9720\",\r\n            \"goodsCount\": 1\r\n        }\r\n    ],\r\n    \"memberInfoSeq\" : 10149571,\r\n    \"accessUid\" : \"5749231016092703\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/cart/cart-goods-regist-check",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods-regist-check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート商品削除 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"deleteCartGoods-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods?cartGoodsSeqList=10000005&memberInfoSeq=10149571&accessUid=5749231016092703",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods"
+					],
+					"query": [
+						{
+							"key": "cartGoodsSeqList",
+							"value": "10000005"
+						},
+						{
+							"key": "memberInfoSeq",
+							"value": "10149571"
+						},
+						{
+							"key": "accessUid",
+							"value": "5749231016092703"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート商品削除 - NOTOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"deleteCartGoods-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods?cartGoodsSeqList=10000005&memberInfoSeq=10149571",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods"
+					],
+					"query": [
+						{
+							"key": "cartGoodsSeqList",
+							"value": "10000005"
+						},
+						{
+							"key": "memberInfoSeq",
+							"value": "10149571"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート商品リスト削除 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"deleteCartGoods-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartGoodsSeqList\" : [\r\n        10000003,\r\n        10000004\r\n    ],\r\n    \"accessUid\" : 5749231016092703,\r\n    \"memberInfoSeq\" : 10149571\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート商品リスト削除 - NOTOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"deleteCartGoods-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accessUid\" : 5749231016092703,\r\n    \"memberInfoSeq\" : 10149571\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート情報取得 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"getCartGoods-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods?accessUid=5749231016092703&memberInfoSeq=10149571&orderField=registTime&orderAsc=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods"
+					],
+					"query": [
+						{
+							"key": "accessUid",
+							"value": "5749231016092703"
+						},
+						{
+							"key": "memberInfoSeq",
+							"value": "10149571"
+						},
+						{
+							"key": "orderField",
+							"value": "registTime"
+						},
+						{
+							"key": "orderAsc",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート商品追加 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"registCartGoodsAdd-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"goodsCode\": \"85-7879\",\r\n    \"count\": 1,\r\n    \"memberInfoSeq\": 10149571,\r\n    \"accessUid\":5749231016092703\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods-add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods-add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート商品追加 - NOTOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"registCartGoodsAdd-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\": 10149571,\r\n    \"accessUid\":5749231016092703\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods-add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods-add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート画面商品追加 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"registCartGoodsAdd-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"registCartGoodsList\": [\r\n        {\r\n            \"goodsGroupSeq\": 10000056,\r\n            \"goodsSeq\": 10000378,\r\n            \"goodsCode\": \"55-9720\",\r\n            \"goodsCount\": 1\r\n        }\r\n    ],\r\n    \"memberInfoSeq\" : 10149571,\r\n    \"accessUid\" : \"5749231016092703\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-screen",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-screen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート画面商品追加 - NOTOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"registCartGoodsAdd-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"registCartGoodsList\": [\r\n       {\r\n            \"goodsGroupSeq\": 10000056,\r\n            \"goodsSeq\": 10000376,\r\n            \"goodsCode\": \"55-2896\"\r\n        }\r\n    ],\r\n    \"memberInfoSeq\" : 10149571,\r\n    \"accessUid\" : \"5749231016092703\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-screen",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-screen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WEB-API取得情報よりカート再計算 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"updateCartDtoCorrectionScreen-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accessUid\" : \"5749231016092703\",\r\n    \"memberInfoSeq\" : 10149571,\r\n    \"orderField\" : \"registTime\",\r\n    \"orderAsc\" : true,\r\n    \"customerNo\": 9001860\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/cart/cart-dto-correction-screen",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-dto-correction-screen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WEB-API取得情報よりカート再計算 - NOTOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"updateCartDtoCorrectionScreen-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\" : 10149571,\r\n    \"orderField\" : \"registTime\",\r\n    \"orderAsc\" : true,\r\n    \"customerNo\": 9001860\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/cart/cart-dto-correction-screen",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-dto-correction-screen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート情報変更 - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"updateCartGoods-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartGoodsDtoList\": [\r\n        {\r\n            \"cartGoodsEntity\": {\r\n                \"cartSeq\": 10000030,\r\n                \"accessUid\": null,\r\n                \"memberInfoSeq\": 0,\r\n                \"goodsSeq\": null,\r\n                \"cartGoodsCount\": 1,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"shopSeq\": null\r\n            },\r\n            \"goodsDetailsDto\": {\r\n                \"goodsSeq\": null,\r\n                \"goodsGroupSeq\": null,\r\n                \"shopSeq\": null,\r\n                \"versionNo\": null,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"goodsCode\": null,\r\n                \"goodsGroupMaxPrice\": null,\r\n                \"goodsGroupMinPrice\": null,\r\n                \"preDiscountMinPrice\": null,\r\n                \"preDiscountMaxPrice\": null,\r\n                \"goodsTaxType\": null,\r\n                \"taxRate\": null,\r\n                \"alcoholFlag\": null,\r\n                \"goodsPriceInTax\": null,\r\n                \"goodsPrice\": null,\r\n                \"deliveryType\": null,\r\n                \"saleStatusPC\": null,\r\n                \"saleStartTimePC\": null,\r\n                \"saleEndTimePC\": null,\r\n                \"unitManagementFlag\": null,\r\n                \"stockManagementFlag\": null,\r\n                \"individualDeliveryType\": null,\r\n                \"purchasedMax\": null,\r\n                \"freeDeliveryFlag\": null,\r\n                \"orderDisplay\": null,\r\n                \"unitValue1\": null,\r\n                \"unitValue2\": null,\r\n                \"preDiscountPrice\": null,\r\n                \"preDisCountPriceInTax\": null,\r\n                \"janCode\": null,\r\n                \"catalogCode\": null,\r\n                \"salesPossibleStock\": null,\r\n                \"realStock\": null,\r\n                \"orderReserveStock\": null,\r\n                \"remainderFewStock\": null,\r\n                \"orderPointStock\": null,\r\n                \"safetyStock\": null,\r\n                \"goodsGroupCode\": null,\r\n                \"whatsnewDate\": null,\r\n                \"goodsOpenStatusPC\": null,\r\n                \"openStartTimePC\": null,\r\n                \"openEndTimePC\": null,\r\n                \"goodsGroupName\": null,\r\n                \"unitTitle1\": null,\r\n                \"unitTitle2\": null,\r\n                \"goodsPreDiscountPrice\": null,\r\n                \"goodsGroupImageEntityList\": [],\r\n                \"snsLinkFlag\": null,\r\n                \"metaDescription\": null,\r\n                \"stockStatusPc\": null,\r\n                \"goodsIconList\": [],\r\n                \"goodsNote1\": null,\r\n                \"goodsNote2\": null,\r\n                \"goodsNote3\": null,\r\n                \"goodsNote4\": null,\r\n                \"goodsNote5\": null,\r\n                \"goodsNote6\": null,\r\n                \"goodsNote7\": null,\r\n                \"goodsNote8\": null,\r\n                \"goodsNote9\": null,\r\n                \"goodsNote10\": null,\r\n                \"orderSetting1\": null,\r\n                \"orderSetting2\": null,\r\n                \"orderSetting3\": null,\r\n                \"orderSetting4\": null,\r\n                \"orderSetting5\": null,\r\n                \"orderSetting6\": null,\r\n                \"orderSetting7\": null,\r\n                \"orderSetting8\": null,\r\n                \"orderSetting9\": null,\r\n                \"orderSetting10\": null,\r\n                \"unitImage\": null,\r\n                \"goodsOptionDisplayName\": null,\r\n                \"goodsClassType\": null,\r\n                \"dentalMonopolySalesFlg\": null,\r\n                \"saleIconFlag\": null,\r\n                \"reserveIconFlag\": null,\r\n                \"newIconFlag\": null,\r\n                \"landSendFlag\": null,\r\n                \"coolSendFlag\": null,\r\n                \"coolSendFrom\": null,\r\n                \"coolSendTo\": null,\r\n                \"tax\": null,\r\n                \"unit\": null,\r\n                \"goodsManagementCode\": null,\r\n                \"goodsDivisionCode\": null,\r\n                \"goodsCategory1\": null,\r\n                \"goodsCategory2\": null,\r\n                \"goodsCategory3\": null,\r\n                \"reserveFlag\": null,\r\n                \"priceMarkDispFlag\": null,\r\n                \"salePriceMarkDispFlag\": null,\r\n                \"salePriceIntegrityFlag\": null,\r\n                \"saleYesNo\": null,\r\n                \"saleNgMessage\": null,\r\n                \"deliveryYesNo\": null,\r\n                \"emotionPriceType\": null\r\n            },\r\n            \"goodsInformationIconDetailsDtoList\": null,\r\n            \"goodsPriceSubtotal\": null,\r\n            \"goodsPriceInTaxSubtotal\": null,\r\n            \"goodsPriceChanged\": null\r\n        },\r\n        {\r\n            \"cartGoodsEntity\": {\r\n                \"cartSeq\": 10000029,\r\n                \"accessUid\": null,\r\n                \"memberInfoSeq\": 0,\r\n                \"goodsSeq\": null,\r\n                \"cartGoodsCount\": 1,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"shopSeq\": null\r\n            },\r\n            \"goodsDetailsDto\": {\r\n                \"goodsSeq\": null,\r\n                \"goodsGroupSeq\": null,\r\n                \"shopSeq\": null,\r\n                \"versionNo\": null,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"goodsCode\": null,\r\n                \"goodsGroupMaxPrice\": null,\r\n                \"goodsGroupMinPrice\": null,\r\n                \"preDiscountMinPrice\": null,\r\n                \"preDiscountMaxPrice\": null,\r\n                \"goodsTaxType\": null,\r\n                \"taxRate\": null,\r\n                \"alcoholFlag\": null,\r\n                \"goodsPriceInTax\": null,\r\n                \"goodsPrice\": null,\r\n                \"deliveryType\": null,\r\n                \"saleStatusPC\": null,\r\n                \"saleStartTimePC\": null,\r\n                \"saleEndTimePC\": null,\r\n                \"unitManagementFlag\": null,\r\n                \"stockManagementFlag\": null,\r\n                \"individualDeliveryType\": null,\r\n                \"purchasedMax\": null,\r\n                \"freeDeliveryFlag\": null,\r\n                \"orderDisplay\": null,\r\n                \"unitValue1\": null,\r\n                \"unitValue2\": null,\r\n                \"preDiscountPrice\": null,\r\n                \"preDisCountPriceInTax\": null,\r\n                \"janCode\": null,\r\n                \"catalogCode\": null,\r\n                \"salesPossibleStock\": null,\r\n                \"realStock\": null,\r\n                \"orderReserveStock\": null,\r\n                \"remainderFewStock\": null,\r\n                \"orderPointStock\": null,\r\n                \"safetyStock\": null,\r\n                \"goodsGroupCode\": null,\r\n                \"whatsnewDate\": null,\r\n                \"goodsOpenStatusPC\": null,\r\n                \"openStartTimePC\": null,\r\n                \"openEndTimePC\": null,\r\n                \"goodsGroupName\": null,\r\n                \"unitTitle1\": null,\r\n                \"unitTitle2\": null,\r\n                \"goodsPreDiscountPrice\": null,\r\n                \"goodsGroupImageEntityList\": [],\r\n                \"snsLinkFlag\": null,\r\n                \"metaDescription\": null,\r\n                \"stockStatusPc\": null,\r\n                \"goodsIconList\": [],\r\n                \"goodsNote1\": null,\r\n                \"goodsNote2\": null,\r\n                \"goodsNote3\": null,\r\n                \"goodsNote4\": null,\r\n                \"goodsNote5\": null,\r\n                \"goodsNote6\": null,\r\n                \"goodsNote7\": null,\r\n                \"goodsNote8\": null,\r\n                \"goodsNote9\": null,\r\n                \"goodsNote10\": null,\r\n                \"orderSetting1\": null,\r\n                \"orderSetting2\": null,\r\n                \"orderSetting3\": null,\r\n                \"orderSetting4\": null,\r\n                \"orderSetting5\": null,\r\n                \"orderSetting6\": null,\r\n                \"orderSetting7\": null,\r\n                \"orderSetting8\": null,\r\n                \"orderSetting9\": null,\r\n                \"orderSetting10\": null,\r\n                \"unitImage\": null,\r\n                \"goodsOptionDisplayName\": null,\r\n                \"goodsClassType\": null,\r\n                \"dentalMonopolySalesFlg\": null,\r\n                \"saleIconFlag\": null,\r\n                \"reserveIconFlag\": null,\r\n                \"newIconFlag\": null,\r\n                \"landSendFlag\": null,\r\n                \"coolSendFlag\": null,\r\n                \"coolSendFrom\": null,\r\n                \"coolSendTo\": null,\r\n                \"tax\": null,\r\n                \"unit\": null,\r\n                \"goodsManagementCode\": null,\r\n                \"goodsDivisionCode\": null,\r\n                \"goodsCategory1\": null,\r\n                \"goodsCategory2\": null,\r\n                \"goodsCategory3\": null,\r\n                \"reserveFlag\": null,\r\n                \"priceMarkDispFlag\": null,\r\n                \"salePriceMarkDispFlag\": null,\r\n                \"salePriceIntegrityFlag\": null,\r\n                \"saleYesNo\": null,\r\n                \"saleNgMessage\": null,\r\n                \"deliveryYesNo\": null,\r\n                \"emotionPriceType\": null\r\n            },\r\n            \"goodsInformationIconDetailsDtoList\": null,\r\n            \"goodsPriceSubtotal\": null,\r\n            \"goodsPriceInTaxSubtotal\": null,\r\n            \"goodsPriceChanged\": null\r\n        }\r\n    ],\r\n    \"memberInfoSeq\": 10149571,\r\n    \"accessUid\": \"1188220627101156\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カート情報変更 - NOTOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"updateCartGoods-NOTOK\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartGoodsDtoList\": [\r\n        {\r\n            \"cartGoodsEntity\": {\r\n                \"cartSeq\": 10000030,\r\n                \"accessUid\": null,\r\n                \"memberInfoSeq\": 0,\r\n                \"goodsSeq\": null,\r\n                \"cartGoodsCount\": 1,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"shopSeq\": null\r\n            },\r\n            \"goodsDetailsDto\": {\r\n                \"goodsSeq\": null,\r\n                \"goodsGroupSeq\": null,\r\n                \"shopSeq\": null,\r\n                \"versionNo\": null,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"goodsCode\": null,\r\n                \"goodsGroupMaxPrice\": null,\r\n                \"goodsGroupMinPrice\": null,\r\n                \"preDiscountMinPrice\": null,\r\n                \"preDiscountMaxPrice\": null,\r\n                \"goodsTaxType\": null,\r\n                \"taxRate\": null,\r\n                \"alcoholFlag\": null,\r\n                \"goodsPriceInTax\": null,\r\n                \"goodsPrice\": null,\r\n                \"deliveryType\": null,\r\n                \"saleStatusPC\": null,\r\n                \"saleStartTimePC\": null,\r\n                \"saleEndTimePC\": null,\r\n                \"unitManagementFlag\": null,\r\n                \"stockManagementFlag\": null,\r\n                \"individualDeliveryType\": null,\r\n                \"purchasedMax\": null,\r\n                \"freeDeliveryFlag\": null,\r\n                \"orderDisplay\": null,\r\n                \"unitValue1\": null,\r\n                \"unitValue2\": null,\r\n                \"preDiscountPrice\": null,\r\n                \"preDisCountPriceInTax\": null,\r\n                \"janCode\": null,\r\n                \"catalogCode\": null,\r\n                \"salesPossibleStock\": null,\r\n                \"realStock\": null,\r\n                \"orderReserveStock\": null,\r\n                \"remainderFewStock\": null,\r\n                \"orderPointStock\": null,\r\n                \"safetyStock\": null,\r\n                \"goodsGroupCode\": null,\r\n                \"whatsnewDate\": null,\r\n                \"goodsOpenStatusPC\": null,\r\n                \"openStartTimePC\": null,\r\n                \"openEndTimePC\": null,\r\n                \"goodsGroupName\": null,\r\n                \"unitTitle1\": null,\r\n                \"unitTitle2\": null,\r\n                \"goodsPreDiscountPrice\": null,\r\n                \"goodsGroupImageEntityList\": [],\r\n                \"snsLinkFlag\": null,\r\n                \"metaDescription\": null,\r\n                \"stockStatusPc\": null,\r\n                \"goodsIconList\": [],\r\n                \"goodsNote1\": null,\r\n                \"goodsNote2\": null,\r\n                \"goodsNote3\": null,\r\n                \"goodsNote4\": null,\r\n                \"goodsNote5\": null,\r\n                \"goodsNote6\": null,\r\n                \"goodsNote7\": null,\r\n                \"goodsNote8\": null,\r\n                \"goodsNote9\": null,\r\n                \"goodsNote10\": null,\r\n                \"orderSetting1\": null,\r\n                \"orderSetting2\": null,\r\n                \"orderSetting3\": null,\r\n                \"orderSetting4\": null,\r\n                \"orderSetting5\": null,\r\n                \"orderSetting6\": null,\r\n                \"orderSetting7\": null,\r\n                \"orderSetting8\": null,\r\n                \"orderSetting9\": null,\r\n                \"orderSetting10\": null,\r\n                \"unitImage\": null,\r\n                \"goodsOptionDisplayName\": null,\r\n                \"goodsClassType\": null,\r\n                \"dentalMonopolySalesFlg\": null,\r\n                \"saleIconFlag\": null,\r\n                \"reserveIconFlag\": null,\r\n                \"newIconFlag\": null,\r\n                \"landSendFlag\": null,\r\n                \"coolSendFlag\": null,\r\n                \"coolSendFrom\": null,\r\n                \"coolSendTo\": null,\r\n                \"tax\": null,\r\n                \"unit\": null,\r\n                \"goodsManagementCode\": null,\r\n                \"goodsDivisionCode\": null,\r\n                \"goodsCategory1\": null,\r\n                \"goodsCategory2\": null,\r\n                \"goodsCategory3\": null,\r\n                \"reserveFlag\": null,\r\n                \"priceMarkDispFlag\": null,\r\n                \"salePriceMarkDispFlag\": null,\r\n                \"salePriceIntegrityFlag\": null,\r\n                \"saleYesNo\": null,\r\n                \"saleNgMessage\": null,\r\n                \"deliveryYesNo\": null,\r\n                \"emotionPriceType\": null\r\n            },\r\n            \"goodsInformationIconDetailsDtoList\": null,\r\n            \"goodsPriceSubtotal\": null,\r\n            \"goodsPriceInTaxSubtotal\": null,\r\n            \"goodsPriceChanged\": null\r\n        },\r\n        {\r\n            \"cartGoodsEntity\": {\r\n                \"cartSeq\": 10000029,\r\n                \"accessUid\": null,\r\n                \"memberInfoSeq\": 0,\r\n                \"goodsSeq\": null,\r\n                \"cartGoodsCount\": 1,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"shopSeq\": null\r\n            },\r\n            \"goodsDetailsDto\": {\r\n                \"goodsSeq\": null,\r\n                \"goodsGroupSeq\": null,\r\n                \"shopSeq\": null,\r\n                \"versionNo\": null,\r\n                \"registTime\": null,\r\n                \"updateTime\": null,\r\n                \"goodsCode\": null,\r\n                \"goodsGroupMaxPrice\": null,\r\n                \"goodsGroupMinPrice\": null,\r\n                \"preDiscountMinPrice\": null,\r\n                \"preDiscountMaxPrice\": null,\r\n                \"goodsTaxType\": null,\r\n                \"taxRate\": null,\r\n                \"alcoholFlag\": null,\r\n                \"goodsPriceInTax\": null,\r\n                \"goodsPrice\": null,\r\n                \"deliveryType\": null,\r\n                \"saleStatusPC\": null,\r\n                \"saleStartTimePC\": null,\r\n                \"saleEndTimePC\": null,\r\n                \"unitManagementFlag\": null,\r\n                \"stockManagementFlag\": null,\r\n                \"individualDeliveryType\": null,\r\n                \"purchasedMax\": null,\r\n                \"freeDeliveryFlag\": null,\r\n                \"orderDisplay\": null,\r\n                \"unitValue1\": null,\r\n                \"unitValue2\": null,\r\n                \"preDiscountPrice\": null,\r\n                \"preDisCountPriceInTax\": null,\r\n                \"janCode\": null,\r\n                \"catalogCode\": null,\r\n                \"salesPossibleStock\": null,\r\n                \"realStock\": null,\r\n                \"orderReserveStock\": null,\r\n                \"remainderFewStock\": null,\r\n                \"orderPointStock\": null,\r\n                \"safetyStock\": null,\r\n                \"goodsGroupCode\": null,\r\n                \"whatsnewDate\": null,\r\n                \"goodsOpenStatusPC\": null,\r\n                \"openStartTimePC\": null,\r\n                \"openEndTimePC\": null,\r\n                \"goodsGroupName\": null,\r\n                \"unitTitle1\": null,\r\n                \"unitTitle2\": null,\r\n                \"goodsPreDiscountPrice\": null,\r\n                \"goodsGroupImageEntityList\": [],\r\n                \"snsLinkFlag\": null,\r\n                \"metaDescription\": null,\r\n                \"stockStatusPc\": null,\r\n                \"goodsIconList\": [],\r\n                \"goodsNote1\": null,\r\n                \"goodsNote2\": null,\r\n                \"goodsNote3\": null,\r\n                \"goodsNote4\": null,\r\n                \"goodsNote5\": null,\r\n                \"goodsNote6\": null,\r\n                \"goodsNote7\": null,\r\n                \"goodsNote8\": null,\r\n                \"goodsNote9\": null,\r\n                \"goodsNote10\": null,\r\n                \"orderSetting1\": null,\r\n                \"orderSetting2\": null,\r\n                \"orderSetting3\": null,\r\n                \"orderSetting4\": null,\r\n                \"orderSetting5\": null,\r\n                \"orderSetting6\": null,\r\n                \"orderSetting7\": null,\r\n                \"orderSetting8\": null,\r\n                \"orderSetting9\": null,\r\n                \"orderSetting10\": null,\r\n                \"unitImage\": null,\r\n                \"goodsOptionDisplayName\": null,\r\n                \"goodsClassType\": null,\r\n                \"dentalMonopolySalesFlg\": null,\r\n                \"saleIconFlag\": null,\r\n                \"reserveIconFlag\": null,\r\n                \"newIconFlag\": null,\r\n                \"landSendFlag\": null,\r\n                \"coolSendFlag\": null,\r\n                \"coolSendFrom\": null,\r\n                \"coolSendTo\": null,\r\n                \"tax\": null,\r\n                \"unit\": null,\r\n                \"goodsManagementCode\": null,\r\n                \"goodsDivisionCode\": null,\r\n                \"goodsCategory1\": null,\r\n                \"goodsCategory2\": null,\r\n                \"goodsCategory3\": null,\r\n                \"reserveFlag\": null,\r\n                \"priceMarkDispFlag\": null,\r\n                \"salePriceMarkDispFlag\": null,\r\n                \"salePriceIntegrityFlag\": null,\r\n                \"saleYesNo\": null,\r\n                \"saleNgMessage\": null,\r\n                \"deliveryYesNo\": null,\r\n                \"emotionPriceType\": null\r\n            },\r\n            \"goodsInformationIconDetailsDtoList\": null,\r\n            \"goodsPriceSubtotal\": null,\r\n            \"goodsPriceInTaxSubtotal\": null,\r\n            \"goodsPriceChanged\": null\r\n        }\r\n    ],\r\n    \"memberInfoSeq\": 10149571\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/cart/cart-goods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"cart-goods"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

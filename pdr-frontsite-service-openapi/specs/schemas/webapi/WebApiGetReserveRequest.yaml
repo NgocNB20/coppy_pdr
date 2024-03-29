@@ -1,0 +1,23 @@
+# 2023-renew No11 from here
+type: object
+description: 取りおき情報取得リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 11111111
+  deliveryCustomerNo:
+    type: integer
+    format: int32
+    description: 配送先顧客番号
+    example: 11111111
+  deliveryZipcode:
+    type: string
+    description: 配送先郵便番号
+    example: 5530001
+  goodsCode:
+    type: string
+    description: 申込商品 (複数パイプ区切り)
+    example: furniture-00201
+# 2023-renew No11 to here

@@ -1,0 +1,9 @@
+type: array
+description: カート商品Dtoレスポンス
+items:
+  $ref: '#/components/schemas/CartGoodsDtoResponse'
+
+components:
+  schemas:
+    CartGoodsDtoResponse:
+      $ref: ./CartGoodsDtoResponse.yaml

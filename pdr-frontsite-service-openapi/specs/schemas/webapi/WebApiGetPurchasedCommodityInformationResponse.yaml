@@ -1,0 +1,13 @@
+type: object
+description: WEB-API連携 購入済み商品情報レスポンス
+properties:
+  info:
+    $ref: "#/components/schemas/WebApiGetPurchasedCommodityInformationResponseDetailDtoListResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+components:
+  schemas:
+    WebApiGetPurchasedCommodityInformationResponseDetailDtoListResponse:
+      $ref: ./WebApiGetPurchasedCommodityInformationResponseDetailDtoListResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

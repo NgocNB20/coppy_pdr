@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="mypage">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <main class="l-page l-head__pattern1">
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><a property="item"
+                                                                                                     typeof="WebPage"
+                                                                                                     title="TOP"
+                                                                                                     href="/"><span
+                            property="name">TOP</span></a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><a property="item"
+                                                                                                     typeof="WebPage"
+                                                                                                     title="マイページ"
+                                                                                                     href="/member/"><span
+                            property="name">マイページ</span></a>
+                        <meta property="position" content="2">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem"><span property="name">退会手続き</span>
+                        <meta property="position" content="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-head__pattern1__content">
+            <h2 class="c-title--page mypage__title"><strong>退会手続き</strong></h2>
+            <div class="l-container mypage__container l-head__pattern1__content-main">
+                <div class="l-main full">
+                    <div class="regist__complete">
+                        <p class="c-text--m-center">退会手続きを完了しました。</p>
+                    </div>
+                    <div class="c-btn-wrap--2btn lg-rev c-margin--xl"><a th:href="@{/index.html}" class="c-btn--blue">トップページへ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{includehm4/footer_new}"></div>
+</div>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+
+</body>
+</html>

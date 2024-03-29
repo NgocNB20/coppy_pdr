@@ -1,0 +1,19 @@
+type: object
+description: カート商品リスト削除リクエスト
+properties:
+  cartGoodsSeqList:
+    type: array
+    description: カート商品SEQリスト
+    items:
+      type: integer
+      format: int32
+      example: "[10000000,10000001]"
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: 2023101116559922
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000000

@@ -1,0 +1,7 @@
+type: object
+description: 電話番号より会員情報取得リクエスト
+properties:
+  memberInfoTel:
+    type: string
+    description: 電話番号
+    example: 012345678999

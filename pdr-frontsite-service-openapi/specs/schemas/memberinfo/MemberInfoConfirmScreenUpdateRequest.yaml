@@ -1,0 +1,93 @@
+# 2023-renew AddNo2 from here
+type: object
+description: 会員情報確認画面用会員更新リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ（必須）
+    example: 10000001
+  memberInfoLastName:
+    type: string
+    description: 会員氏名(姓)（必須）
+    example: アイテック
+  memberInfoLastKana:
+    type: string
+    description: 会員フリガナ(姓)（必須）
+    example: アイテック
+  representativeName:
+    type: string
+    description: 代表者名
+    example:
+  memberInfoTel:
+    type: string
+    description: 会員TEL
+    example: 0123456789
+  memberInfoFax:
+    type: string
+    description: 会員FAX
+    example:
+  memberInfoZipCode:
+    type: string
+    description: 会員住所-郵便番号（必須）
+    example:
+  memberInfoAddress1:
+    type: string
+    description: 会員住所-市区郡（必須）
+    example:
+  memberInfoAddress2:
+    type: string
+    description: 会員住所-町村・番地
+    example:
+  memberInfoAddress3:
+    type: string
+    description: 会員住所-それ以降の住所
+    example:
+  nonConsultationDay:
+    type: string
+    description: 休診曜日
+    example:
+  medicalTreatmentFlag:
+    type: string
+    description: 診療内容
+    example:
+  medicalTreatmentMemo:
+    type: string
+    description: その他診療内容
+    example:
+  sendMailPermitFlag:
+    type: string
+    description: メールによるおトク情報
+    example: 0
+    default: 0
+  metalPermitFlag:
+    type: string
+    description: 金属商品価格お知らせメール
+    example: 0
+    default: 0
+  imageAddCount:
+    type: integer
+    format: int32
+    description: 確認書類画像
+    example: 0
+  modifiedList:
+    type: array
+    description: 変更箇所リスト
+    items:
+      type: string
+  medicalTreatmentTitleList:
+    type: array
+    description: 診療項目タイトルリスト
+    items:
+      type: string
+  orderCompletePermitFlag:
+      type: string
+      description: 注文完了メール
+      example: 0
+      default: 1
+  deliveryCompletePermitFlag:
+      type: string
+      description: 発送完了メール
+      example: 0
+      default: 1
+# 2023-renew AddNo2 to here

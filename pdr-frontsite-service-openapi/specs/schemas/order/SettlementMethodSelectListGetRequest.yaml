@@ -1,0 +1,18 @@
+type: object
+description: 決済方法選択可能リスト取得リクエスト
+properties:
+  receiveOrderDto:
+    type: string
+    description: 受注決済エンティティ
+  available:
+    type: boolean
+    description: 利用可能、不可能どちらかを指定。null..全部 / true..利用可能のみ / false..利用不可能のみ
+    example: true
+  allowCreditFlag:
+    type: boolean
+    description: クレジット決済許可フラグ　true:クレジット決済許可 false:クレジット決済禁止
+    example: true
+  memberInfoId:
+    type: string
+    description: 会員ID
+    example: aa@example.com

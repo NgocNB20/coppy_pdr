@@ -1,0 +1,12 @@
+type: object
+description: 取りおき情報DTOリクエスト
+properties:
+  orderGoodsEntity:
+    type: object
+    description: 取りおき商品用 受注商品クラス
+    $ref: '#/components/schemas/OrderGoodsRequest'
+
+components:
+  schemas:
+    OrderGoodsRequest:
+      $ref: ./OrderGoodsRequest.yaml

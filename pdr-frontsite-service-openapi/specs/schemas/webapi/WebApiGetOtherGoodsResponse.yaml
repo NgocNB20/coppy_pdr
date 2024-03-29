@@ -1,0 +1,18 @@
+# 2023-renew No92 from here
+type: object
+description: WEB-API後継品代替品情報取得レスポンス
+properties:
+  info:
+    type: array
+    items:
+      $ref: "#/components/schemas/WebApiGetOtherGoodsDetailResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+
+components:
+  schemas:
+    WebApiGetOtherGoodsDetailResponse:
+      $ref: ./WebApiGetOtherGoodsDetailResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml
+# 2023-renew No92 to here

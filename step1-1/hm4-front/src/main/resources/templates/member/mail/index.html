@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}"/>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-mypage">
+    <a id="top" name="top"></a>
+
+    <div class="l-mainwrap">
+        <div th:replace="~{newdesign/include/header}"></div>
+
+        <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" id="goTopPage" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">メールアドレス</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+                <div class="l-main">
+                    <h2 class="c-title-page"><strong>メールアドレス</strong></h2>
+
+                    <form id="indexForm" th:action="@{/member/mail/index.html}" th:object="${memberMailModel}" method="post">
+
+                        <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                            <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">新しいメールアドレスを入力し、「変更する」ボタンを押してください。</p>
+                            <p class="c-page-description__text c-page-description--margin-m"><span class="c-require">必須</span>は、必須項目です。</p>
+                        </div>
+
+                        <div class="l-form">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt><p><span>現在のメールアドレス</span></p></dt>
+                                    <dd><p><span id="memberInfoMail" title="現在のメールアドレス" th:text="*{memberInfoMail}"/></p></dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt>
+                                        <div class="l-form__list-title-wrap">
+                                            <p><span>新しいメールアドレス</span><span class="c-require">必須</span></p>
+                                        </div>
+                                    </dt>
+                                    <dd>
+                                        <!--2023-renew No85-1 from here-->
+                                        <p>
+                                            <input type="email" id="memberInfoNewMail" th:field="*{memberInfoNewMail}" title="新しいメールアドレス"
+                                                   th:errorclass="c-input--error" autocomplete="email" maxlength="256" class="c-input c-input--width-l">
+                                            <span class="l-form__list-memo">（半角）</span>
+                                        </p>
+                                        <div th:if="${#fields.hasErrors('memberInfoNewMail')}" th:errors="*{memberInfoNewMail}" class="c-field-error c-field-error--top"></div>
+                                        <div class="l-form__list-text l-form__list-text--margin"><strong>▼  確認のためメールアドレスを再入力してください。</strong></div>
+                                        <p>
+                                            <input type="email" id="memberInfoNewMailConfirm" th:field="*{memberInfoNewMailConfirm}" title="新しいメールアドレス（確認）"
+                                                   th:errorclass="c-input--error" autocomplete="email" maxlength="256" class="c-input c-input--width-l" >
+                                            <span class="l-form__list-memo">（半角）</span>
+                                        </p>
+                                        <div th:if="${#fields.hasErrors('memberInfoNewMailConfirm')}" th:errors="*{memberInfoNewMailConfirm}" class="c-field-error c-field-error--top"></div>
+                                        <!--2023-renew No85-1 to here-->
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="c-button-wrap">
+                            <button id="doOnceMailAddressSendConfirm" name="doOnceMailAddressSendConfirm" type="submit" class="c-button c-button--primary c-button--width-l">変更する</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        <div th:replace="~{newdesign/include/footer}"></div>
+    </div>
+
+</body>
+</html>

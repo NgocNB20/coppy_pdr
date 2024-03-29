@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <!-- ログ出力の重複を避けるため、「additivity="false"」は親Logger子Logger両方に付与すること -->
+    <logger name="jp.co.hankyuhanshin.itec.hmbase" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall" level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.listener.OfficeZipCodeJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.tasklet.GoodsAsynchronousBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.settlement" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.tasklet.MultipaymentPaymentBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.questionnaire.tasklet.QuestionnaireTotalingBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.listener.MultipaymentConfirmationJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockreport" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.taskclean" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.tasklet.GoodsImageUpdateBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.tasklet.ZipCodeUpdateBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.jobmonitoring.tasklet.JobMonitoringBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.tasklet.MultipaymentConfirmationBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.memberinfoupdate.listener.MemberInfoUpdateJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goods.tasklet.GoodsPriceUpdateBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stock" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.delvinfo.listener.DelvInfoImportJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.clear" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.settlement" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.mail" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdisplay" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.memberinfoupdate.tasklet.MemberInfoUpdateBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.listener.ZipCodeUpdateJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.order" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.jobmonitoring.listener.JobMonitoringJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goods.listener.GoodsPriceUpdateJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.shop.top" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.creditline" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.tasklet.OrderCsvAsyncBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.tasklet.OfficeZipCodeUpdateBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.delvinfo.tasklet.DelvInfoImportBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.questionnaire.listener.QuestionnaireTotalingJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.listener.GoodsAsyncJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.listener.OrderCsvAsyncJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.listener.ShipmentRegistJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.tasklet.ShipmentRegistBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.listener.MultipaymentPaymentJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.shop.sitemap" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.listener.GoodsImageUpdateBatchJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- 2023-renew No3 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goodsfeedoutput.tasklet.GoodsFeedOutputBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goodsfeedoutput.listener.GoodsFeedOutputJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- 2023-renew No3 to here -->
+    <!-- 2023-renew No36-1, No61,67,95 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.contentsfeedoutput.tasklet.ContentsFeedOutputBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.contentsfeedoutput.listener.ContentsFeedOutputJobListener" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- 2023-renew No36-1, No61,67,95 to here -->
+    <!-- 2023-renew No65 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.tasklet.StockDataImportBatch" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.listener.StockDataImportJobListener" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- 2023-renew No65 to here -->
+    <!-- 2023-renew No41 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemail.tasklet.CuenotefcSaleMailBatch" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemail.listener.CuenotefcSaleMailJobListener" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemailconfirm.tasklet.CuenotefcSaleMailConfirmBatch" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemailconfirm.listener.CuenotefcSaleMailConfirmJobListener" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.tasklet.SaleDataImportBatch" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.listener.SaleDataImportJobListener" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.seasar.doma.jdbc" additivity="false" level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <!-- 2023-renew No41 to here -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

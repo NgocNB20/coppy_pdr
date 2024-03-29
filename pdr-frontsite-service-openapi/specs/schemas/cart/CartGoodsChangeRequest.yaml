@@ -1,0 +1,20 @@
+type: object
+description: カート情報変更リクエスト
+properties:
+  cartGoodsDtoList:
+    type: array
+    items:
+      $ref: "#/components/schemas/CartGoodsDtoRequest"
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 1000001
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: 2023101116559922
+components:
+  schemas:
+    CartGoodsDtoRequest:
+      $ref: ./CartGoodsDtoRequest.yaml

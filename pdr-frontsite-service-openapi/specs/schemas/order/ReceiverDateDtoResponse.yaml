@@ -1,0 +1,17 @@
+type: object
+description: お届け希望日Dtoレスポンス
+properties:
+  dateMap:
+    type: object
+    description: 日付Map(key=YYYYMMDD,value=YYYY/MM/DD)
+    additionalProperties:
+      type: string
+  receiverDateDesignationFlag:
+    type: string
+    description: お届け希望日指定フラグ
+    example: 0
+  shortestDeliveryDateToRegist:
+    type: string
+    format: date-time
+    description: 最短お届け日_日付登録用
+    example: 2022/01/01 12:00:00

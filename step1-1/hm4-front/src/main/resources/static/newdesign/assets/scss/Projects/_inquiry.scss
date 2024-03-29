@@ -1,0 +1,151 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.p-inquiry {
+
+  &__contents {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+    @include media(sm) {
+      grid-template-columns: 1fr;
+      gap: vwset(20);
+    }
+  }
+
+  &__item {
+    max-width: 500px;
+    width: 30vw;
+    border: solid 4px $color-orange-lightGray;
+    padding: 30px 10px 35px;
+    text-align: center;
+
+    dt {
+      @include font-style(22,30,bold);
+      font-size: clamp(1.8rem, 1.3vw, 2.2rem);
+      color: $color-000;
+      margin-bottom: 18px;
+      display: inline-grid;
+      grid-auto-flow: column;
+      place-items: center;
+      gap: 10px;
+
+      svg {
+        fill: $color-a1;
+      }
+
+      span {
+        display: grid;
+        place-content: center;
+      }
+    }
+
+    dd {
+
+      p {
+        @include font-style(16,30);
+        color: $color-000;
+      }
+  
+    }
+
+    &-call {
+      strong {
+        display: block;
+        @include font-style(36,50,bold);
+        color: $color-primary;
+        margin-bottom: 8px;
+      }
+    }
+
+    &-callcenter {
+      display: inline-grid;
+      grid-auto-flow: column;
+      place-items: center;
+      gap: 5px;
+
+      small {
+        @include font-style(16,20);
+      }
+
+      svg {
+        fill: $color-a1;
+      }
+
+      span {
+        display: grid;
+        place-content: center;
+      }
+
+    }
+
+    &-mail svg {
+      margin-block: 5px 3px;
+    }
+
+    @include media(sm) {
+      width: auto;
+      margin: 0 vwset(20);
+      padding: vwset(20) vwset(15) vwset(25);
+  
+      dt {
+        @include font-sp-style(17,30);
+        margin-bottom: vwset(10);
+      }
+  
+      dd {
+  
+        p {
+          @include font-sp-style(14,28);
+        }
+    
+      }
+  
+      &-call {
+        strong {
+          @include font-sp-style(22,19,bold);
+          margin-block: vwset(8);
+        }
+      }
+  
+      &-callcenter {
+        margin-top: vwset(5);
+
+        small {
+          @include font-sp-style(14,20);
+        }  
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 30px;
+
+    .c-button {
+      height: 50px;
+      min-width: 250px;
+      padding: 0 40px 2px;
+      @include font-style(18, 25, bold);
+    }
+
+    @include media(sm) {
+
+      margin-top: vwset(18);
+
+      .c-button {
+        min-width: vwset(200);
+        height: vwset(40);
+        padding: 0 vwset(40);
+        @include font-sp-style(15);
+      }
+    }
+  }
+}
+
+
+
+
+

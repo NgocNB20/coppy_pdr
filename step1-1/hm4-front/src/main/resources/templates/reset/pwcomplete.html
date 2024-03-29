@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-reset">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">パスワードを忘れた場合</span></div>
+                </div>
+            </div>
+        </div>
+
+        <form id="pwcompleteForm" th:action="@{/reset/pwcomplete.html}" th:object="${resetPwregistModel}" method="get">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>パスワードを忘れた場合</strong></h2>
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">パスワードの変更完了</h3>
+                </div>
+            </div>
+
+            <div class="l-complete">
+                <div class="l-complete__inner">
+                    <p class="l-complete__title">パスワードの変更が完了しました。</p>
+                    <div class="c-button-wrap c-button-wrap--complete">
+                        <a th:href="@{/login/member.html}" class="c-button c-button--primary-line c-button--width-l">ログインページ</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+</body>
+</html>

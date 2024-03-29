@@ -1,0 +1,9 @@
+type: array
+description: カート一括登録用の商品情報リクエスト
+items:
+  $ref: '#/components/schemas/CartGoodsForTakeOverDtoRequest'
+
+components:
+  schemas:
+    CartGoodsForTakeOverDtoRequest:
+      $ref: ./CartGoodsForTakeOverDtoRequest.yaml

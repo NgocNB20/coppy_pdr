@@ -1,0 +1,8 @@
+type: object
+description: お気に入り商品在庫状況取得リクエスト
+properties:
+  favoriteDtoListRequest:
+    type: array
+    description: お気に入り商品DTOリストリクエスト
+    items:
+      $ref: ../memberinfo/FavoriteDtoRequest.yaml

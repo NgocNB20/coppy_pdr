@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall">
+<head>
+    <head>
+        <meta th:replace="~{include/head_new}"/>
+        <title>広告削除確認｜広告管理</title>
+        <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    </head>
+
+<body id="campaign">
+<div id="searchCampaign" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form th:action="@{/campaign/delete}" th:object="${campaignDeleteModel}" method="post">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">広告検索：削除</h1>
+                    </div>
+
+                    <!--/* エラーメッセージ */-->
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+
+                    <!-- 広告削除 -->
+                    <div class="l-section">
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">広告情報</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div>
+                                            <dt>広告コード</dt>
+                                            <dd th:text="*{campaignCode}"></dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>広告名</dt>
+                                            <dd th:text="*{campaignName}"></dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>広告メモ</dt>
+                                            <dd th:text="*{note}"></dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>広告コスト</dt>
+                                            <dd class="c-input-label">
+                                                <span th:text="*{#number.convert(campaignCost)}"
+                                                      th:remove="tag"></span><label>円</label>
+                                            </dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>リダイレクトURL</dt>
+                                            <dd th:text="*{redirectUrl}"></dd>
+                                        </div>
+
+                                        <div>
+                                            <dt>広告URLPC</dt>
+                                            <dd th:text="*{campaignUrlPc}"></dd>
+                                        </div>
+
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button class="c-btn btn_back icon_left" name="doCancel" type="submit"><i
+                                    class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                            <div class="col_left">
+                                <button class="c-btn btn_regular" name="doOnceDelete" type="submit">削除</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

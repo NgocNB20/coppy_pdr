@@ -1,0 +1,70 @@
+type: object
+description: アンケート回答画面表示用レスポンス
+properties:
+  questionSeq:
+    type: integer
+    format: int32
+    description: アンケート設問SEQ
+    example: 10000001
+  questionnaireSeq:
+    type: integer
+    format: int32
+    description: アンケートSEQ
+    example: 10000002
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 1
+  question:
+    type: string
+    description: 質問内容
+    example:
+  openStatus:
+    type: integer
+    format: int32
+    description: 公開状態
+    example: 2
+    default: 0
+  replyRequiredFlag:
+    type: integer
+    format: int32
+    description: 回答必須フラグ
+    example: 2
+    default: 0
+  replyType:
+    type: integer
+    format: int32
+    description: 回答形式種別
+    example: 2
+    default: 0
+  replyValidatePattern:
+    type: integer
+    format: int32
+    description: 回答文字種別
+    example: 2
+    default: 0
+  replyMaxLength:
+    type: integer
+    format: int32
+    description: 回答桁数
+    example: 1
+  choices:
+    type: string
+    description: 選択肢
+    example: 1
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ
+    example: 1
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2021/12/12 12:00:00

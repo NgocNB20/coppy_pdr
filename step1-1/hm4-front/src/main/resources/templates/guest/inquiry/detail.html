@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{includehm4/head_new}"/>
+</head>
+
+<body id="gotop" class="guest-inquiry" th:object="${guestInquiryModel}">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+
+    <main class="l-page l-head__pattern1">
+        <div class="l-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" title="TOP" href="/">
+                            <span property="name">TOP</span>
+                        </a>
+                        <meta property="position" content="1">
+                    </div>
+                    <svg viewBox="0 0 10.1 18.2" style="fill:#a0a0a0;">
+                        <use xlink:href="/hm4/assets/images/icon/arrow-right.svg#arrow-right"></use>
+                    </svg>
+                    <div class="l-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+                        <span property="name">お問い合わせ履歴詳細</span>
+                        <meta property="position" content="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="l-container l-head__pattern1__content">
+            <div class="l-main full">
+                <h2 class="c-title--page"><strong>お問い合わせ履歴詳細</strong></h2>
+                <div th:if="${allMessages}"
+                     th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                    <ul th:each="message : ${allMessages}">
+                        <li th:utext="${message}"></li>
+                    </ul>
+                </div>
+                <!--/* QUAD_DESIGN-286 送信成功時のstyle */-->
+                <th:block id="isReceived" th:if="*{isReceived()}">
+                    <div id="d_complete_unit" class="mb20"><p class="thanks_1">お問い合わせを受付けました。</p></div>
+                </th:block>
+                <div class="c-history-info-2col c-margin--l">
+                    <div class="c-history-info-item">
+                        <h3 class="c-history-info-item__title c-title--section">お問い合わせ情報</h3>
+                        <div class="c-history-info-list">
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">お問い合わせ日</dt>
+                                <dd class="c-history-info-list__detail c-text--s c-font-bold" id="firstInquiryTime"
+                                    th:text="*{#date.convert(firstInquiryTime)} + ' ' + *{#date.convert(firstInquiryTime,'HH:mm')}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">お問い合わせ状況</dt>
+                                <dd class="c-history-info-list__detail c-text--m">
+                                    <th:block th:switch="*{inquiryStatusValue}">
+                                        <div th:case="0" class="c-history-info-list__btn c-label-status--blue"><p
+                                                class="c-label-status c-text--m c-font-bold" id="inquiryStatus"
+                                                th:text="*{inquiryStatus}"></p></div>
+                                        <div th:case="1" class="c-history-info-list__btn c-label-status--orange"><p
+                                                class="c-label-status c-text--m c-font-bold" id="inquiryStatus"
+                                                th:text="*{inquiryStatus}"></p></div>
+                                        <div th:case="2" class="c-history-info-list__btn c-label-status--black"><p
+                                                class="c-label-status c-text--m c-font-bold" id="inquiryStatus"
+                                                th:text="*{inquiryStatus}"></p></div>
+                                    </th:block>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">お問い合わせ番号</dt>
+                                <dd class="c-history-info-list__detail c-text--s c-font-bold" id="inquiryCode"
+                                    th:text="*{inquiryCode}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">分類</dt>
+                                <dd class="c-history-info-list__detail c-text--s c-font-bold" id="inquiryGroupName-1"
+                                    th:text="*{inquiryGroupName}"></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="c-history-info-item">
+                        <h3 class="c-history-info-item__title c-title--section">お客様情報</h3>
+                        <div class="c-history-info-list">
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">氏名</dt>
+                                <dd class="c-history-info-list__detail c-text--s c-font-bold" id="inquiryName"
+                                    th:text="*{inquiryName}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">フリガナ</dt>
+                                <dd class="c-history-info-list__detail c-text--s c-font-bold" id="inquiryKana"
+                                    th:text="*{inquiryKana}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">電話番号</dt>
+                                <dd class="c-history-info-list__detail c-text--s c-font-bold" id="inquiryTel"
+                                    th:text="*{inquiryTel}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-history-info-list__title c-text--s">メールアドレス</dt>
+                                <dd class="c-history-info-list__detail c-text--s c-font-bold" id="inquiryMail"
+                                    th:text="*{inquiryMail}"></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <section class="c-margin--xl">
+                    <h3 class="c-title--line c-font-bold">お問い合わせ内容</h3>
+                    <th:block id="inquiryPageItems" th:each="item, stat : *{inquiryModelItems}">
+                        <th:block id="isConsumer" th:if="${item.isConsumer()}">
+                            <div class="c-history-chat"
+                                 th:classappend="${stat.first} ? 'contact-title question' : 'question'">
+                                <div class="c-history-chat__inner"
+                                     th:classappend="${stat.last} ? 'c-history-chat__inner--last'">
+                                    <th:block th:if="${stat.first}">
+                                        <h4 class="post-title" th:id="'inquiryGroupName-'+${stat.index}"
+                                            th:text="*{inquiryGroupName}"></h4>
+                                    </th:block>
+                                    <div class="post-info">
+                                        <span class="icon-question c-text--m c-font-bold"
+                                              th:text="*{inquiryName} + ' 様'"></span>
+                                        <span class="post-time c-text--s" th:id="'inquiryTime-'+${stat.index}"
+                                              th:text="${#date.convert(item.inquiryTime)} + ' ' + ${#date.convert(item.inquiryTime,'HH:mm')}"></span>
+                                    </div>
+                                    <div class="post-txt">
+                                        <p th:id="'inquiryBody-'+${stat.index}" th:utext="${#pre.convert(item.inquiryBody)}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block id="isNotConsumer" th:if="${!item.isConsumer()}">
+                            <div class="c-history-chat answer">
+                                <div class="c-history-chat__inner"
+                                     th:classappend="${stat.last} ? 'c-history-chat__inner--last'">
+                                    <div class="post-info">
+                                        <span class="icon-question c-text--m c-font-bold"
+                                              th:id="'representative-'+${stat.index}" th:text="${item.operator}"></span>
+                                        <span class="post-time c-text--s" th:id="'inquiryTime-'+${stat.index}"
+                                              th:text="${#date.convert(item.inquiryTime)} + ' ' + ${#date.convert(item.inquiryTime,'HH:mm')}"></span>
+                                    </div>
+                                    <div class="post-txt">
+                                        <p th:id="'inquiryBody-'+${stat.index}" th:utext="${#pre.convert(item.inquiryBody, false)}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                    </th:block>
+                </section>
+                <!--/*  お問い合わせが完了していない場合は入力フォームを表示  */-->
+                <th:block id="isNotCompletion" th:if="*{!isCompletion()}">
+                    <form id="inquiryForm" th:action="@{/guest/inquiry/detail.html}" method="post">
+                        <div class="c-margin--xl">
+                            <div class="guest-inquiry__area">
+                                <dl class="guest-inquiry__list">
+                                    <dt class="c-title--table c-font-bold">お客様入力欄</dt>
+                                    <dd><textarea id="inputInquiryBody" th:field="*{inputInquiryBody}"
+                                                  th:errorclass="field-error" class="c-text-area"
+                                                  placeholder="ここに入力してください"></textarea></dd>
+                                    <div th:if="${#fields.hasErrors('inputInquiryBody')}"
+                                         th:errors="*{inputInquiryBody}" class="field-error-message"></div>
+                                </dl>
+                                <div class="c-btn-wrap--2btn c-margin--s">
+                                    <button id="doOnceInquiryUpdate" name="doOnceInquiryUpdate" type="submit"
+                                            class="c-btn--blue">お問い合わせを送信する
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </th:block>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{includehm4/footer_new}"></div>
+</div>
+<script src="/hm4/assets/js/bundle.js" defer="defer"></script>
+
+</body>
+</html>

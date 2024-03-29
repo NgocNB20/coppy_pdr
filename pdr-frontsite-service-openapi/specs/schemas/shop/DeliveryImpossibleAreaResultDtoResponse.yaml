@@ -1,0 +1,32 @@
+type: object
+description: 配送不可能エリア詳細Dtoクラスレスポンス
+properties:
+  deliveryMethodSeq:
+    type: integer
+    format: int32
+    description: 配送方法SEQ
+    example: 10000001
+  zipcode:
+    type: string
+    description: 郵便番号
+    example: "5530001"
+  prefecture:
+    type: string
+    description: 都道府県名
+    example: 大阪府
+  city:
+    type: string
+    description: 市区町村名
+    example: 大阪市
+  town:
+    type: string
+    description: 町域名
+    example: 福島区海老江
+  numbers:
+    type: string
+    description: 丁目
+    example: 1丁目-1-31
+  addressList:
+    type: string
+    description: 住所一覧
+    example: 大阪府大阪市福島区海老江1-1-31

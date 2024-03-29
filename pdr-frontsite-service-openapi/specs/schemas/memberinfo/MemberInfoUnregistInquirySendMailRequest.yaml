@@ -1,0 +1,11 @@
+type: object
+description: 未登録会員照会発生メール送信リクエスト
+properties:
+  customerNo:
+    type: string
+    description: 顧客番号
+    example: 012345678
+  memberInfoTel:
+    type: string
+    description: 会員TEL
+    example: 012345678999

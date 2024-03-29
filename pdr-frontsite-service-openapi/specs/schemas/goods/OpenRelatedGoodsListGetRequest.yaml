@@ -1,0 +1,20 @@
+type: object
+description: 公開あしあと商品情報取得リクエスト
+properties:
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ
+    example: 1000
+  siteType:
+    type: string
+    description: サイト区分
+    example: 1
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 1
+  memberRank:
+    type: string
+    description: 会員ランク
+    example: 1

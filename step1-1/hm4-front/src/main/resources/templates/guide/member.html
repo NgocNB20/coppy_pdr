@@ -1,0 +1,188 @@
+<!-- PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+</head>
+
+<body id="d_guide">
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="member"><span><!--MAIN--></span>
+                    <div class="gSection mt0">
+                        <h3 class="mTitle">会員について</h3>
+                        <div id="d_gsn">
+                            <ul>
+                                <li><a th:href="@{/guide/member.html#m1}" id="go-Member-1">会員登録方法</a></li>
+                                <li><a th:href="@{/guide/member.html#m2}" id="go-Member-2">会員情報の変更</a></li>
+                                <li><a th:href="@{/guide/member.html#m3}" id="go-Member-3">メールアドレスの変更</a></li>
+                                <li><a th:href="@{/guide/member.html#m4}" id="go-Member-4">パスワードの変更</a></li>
+                                <li><a th:href="@{/guide/member.html#m5}" id="go-Member-5">パスワードをお忘れの方</a></li>
+                                <li><a th:href="@{/guide/member.html#m6}" id="go-Member-6">お気に入りリスト</a></li>
+                                <li><a th:href="@{/guide/member.html#m7}" id="go-Member-7">お届け先リスト</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="m1" class="gSection">
+                        <h4 class="subGTitle">会員登録方法</h4>
+                        <div class="subGsection">
+                            <p>
+                                P.D.R.オンラインショップでのご注文には、会員登録が必要です。<br/>
+                                ご登録は日本国内の歯科医療機関様、歯科技工所様、医療機関様に限らせていただきます。
+                            </p>
+                            <ul>
+                                <li>P.D.R.に注文したことがある方は、ご登録お電話番号とお客様番号にて簡単にご登録いただけます。</li>
+                                <li>初めてP.D.R.をご利用の方は、ご登録に必要な会員情報を入力してお申し込みください。</li>
+                                <li>これから開業される方は、お手数ですがご注文デスク（TEL：0120-108648）へお問い合わせください。</li>
+                            </ul>
+                            <div class="pointBox">
+                                <h5 class="pointTitle">Step.1　<span>ご登録お電話番号を入力</span></h5>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>「新規会員登録」ボタンをクリックし、初めてP.D.R.オンラインショップをご利用の方は、ご登録いただく電話番号を入力してください。</p>
+                                            <p>※固定電話番号を入力してください。携帯電話番号では登録できません。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/member/method_step_1.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tBox cPdr mt30">
+                                <div>
+                                    <h4 class="cpTitle">P.D.R.に注文したことがある方</h4>
+                                    <div class="pointBox">
+                                        <h5 class="pointTitle">Step.2　<span>お客様番号を入力</span></h5>
+                                        <div class="pointSubBox">
+                                            <p>お客様番号を入力してください。</p>
+                                            <p>※お客様番号がわからない場合は、ご注文デスク（TEL：0120-108648）にお問い合わせいただくか、「お客様番号がわからない方はこちら」ボタンをクリックして、お客様情報を入力の上、改めてお申し込みください。</p>
+                                            <p><img src="/images/guide/member/method_step_2_1.jpg" alt=""/></p>
+                                        </div>
+                                    </div>
+                                    <div class="pointBox">
+                                        <h5 class="pointTitle">Step.3　<span>会員情報の確認</span></h5>
+                                        <div class="pointSubBox">
+                                            <p>
+                                                ご登録メールアドレスを入力いただき、ご利用規約に同意の上、「送信する」ボタンをクリックしてください。<br/>
+                                                ご登録メールアドレスに会員IDと初回パスワードを送信いたします。<br/>
+                                                メールに記載されたＵＲＬから届いた初回パスワードでログインしていただき、お客様ご自身でパスワードを設定後、ご利用いただけます。
+                                            </p>
+                                            <p><img src="/images/guide/member/method_step_3_1.jpg" alt=""/></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="cpTitle">初めてP.D.R.をご利用の方</h4>
+                                    <div class="pointBox">
+                                        <h5 class="pointTitle">Step.2　<span>会員情報の入力</span></h5>
+                                        <div class="pointSubBox">
+                                            <p>会員情報入力ページに必要事項を入力し、ご利用規約をご確認の上、「ご利用規約に同意してお申し込みをする」ボタンをクリックしてください。</p>
+                                            <p><img src="/images/guide/member/method_step_2_2.jpg" alt=""/></p>
+                                        </div>
+                                    </div>
+                                    <div class="pointBox">
+                                        <h5 class="pointTitle">Step.3　<span>お申し込み内容確認</span></h5>
+                                        <div class="pointSubBox">
+                                            <p>お申し込み内容に間違いがなければ「送信する」ボタンをクリックしてください。</p>
+                                            <p><img src="/images/guide/member/method_step_3_2.jpg" alt=""/></p>
+                                        </div>
+                                    </div>
+                                    <div class="pointBox">
+                                        <h5 class="pointTitle">Step.4　<span>お申込み完了</span></h5>
+                                        <div class="pointSubBox">
+                                            <p>
+                                                お申し込み内容をもとに審査の後、ご登録メールアドレスにIDと初回パスワードを送信いたします。<br/>
+                                                メールに記載されたＵＲＬから届いた初回パスワードでログインしていただき、お客様ご自身でパスワードを設定後、ご利用いただけます。<br/>
+                                                ※お申し込み内容の確認のためお電話させていただく場合もございますので、ご了承ください。
+                                            </p>
+                                            <p><img src="/images/guide/member/method_step_4_2.jpg" alt=""/></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="m2" class="gSection">
+                        <h4 class="subGTitle">会員情報の変更</h4>
+                        <div class="subGsection">
+                            <p>ご登録内容を変更される方は「<a th:href="@{/inquiry/index.html}" id="go-Inquiry-g">お問い合わせ</a>」ページよりお問い合わせいただくか、ご注文デスク（TEL：0120-108648）へお電話ください。<br/>
+                                または「登録内容変更用紙」をダウンロードし、必要事項を記入の上、下記ファクシミリ番号まで送信ください。<br/>「登録内容変更用紙」のダウンロードは<a style="color:#0000ff" th:href="@{/d_images/cp-news07/download/henkou.pdf}" target="_blank" class="imgover"><u><b>こちら</b></u></a>から。<br/>FAX送信先：0120-108649（24時間受付/年中無休）
+                            </p>
+                        </div>
+                    </div>
+                    <div id="m3" class="gSection">
+                        <h4 class="subGTitle">メールアドレスの変更</h4>
+                        <div class="subGsection">
+                            <p>
+                                マイページの「<a th:href="@{/member/mail/index.html}" id="go-Member-Mail-g-0">メールアドレス変更</a>」ページから、新しいメールアドレスを入力していただき「変更する」ボタンをクリックしてください。<br/>
+                                ※この時点では変更が完了していません。
+                            </p>
+                            <p>
+                                新しいメールアドレスに変更用URLを送信いたします。そちらをクリックしていただければ、変更が完了します。<br/>
+                                <a th:href="@{/member/mail/index.html}" id="go-Member-Mail-g-1">メールアドレス変更はこちら</a>
+                            </p>
+                            <p>※当サイトではお客様番号の他、メールアドレスも会員IDとしてご利用いただけます。</p>
+                        </div>
+                    </div>
+                    <div id="m4" class="gSection">
+                        <h4 class="subGTitle">パスワードの変更</h4>
+                        <div class="subGsection">
+                            <p>マイページの「<a th:href="@{/member/pass/index.html}" id="go-Member-Password-g">パスワードの変更</a>」ページからパスワードの変更を行ってください。
+                            </p>
+                        </div>
+                    </div>
+                    <div id="m5" class="gSection">
+                        <h4 class="subGTitle">パスワードをお忘れの方</h4>
+                        <div class="subGsection">
+                            <p>
+                                <a th:href="@{/reset/index.html}" id="go-PassWord-ResetMailPage-g">パスワードをお忘れの場合</a>、からご登録いただいたメールアドレスとご登録電話番号を入力していただき「送信する」ボタンをクリックしてください。<br/>
+                                登録メールアドレスにパスワード再設定用URLを送信いたします。
+                            </p>
+                        </div>
+                    </div>
+                    <div id="m6" class="gSection">
+                        <h4 class="subGTitle">お気に入りリスト</h4>
+                        <div class="subGsection">
+                            <p>
+                                商品詳細ページで、「カートに入れる」ボタン下部にある「お気に入りリストに追加」ボタンをクリックすることで、会員様独自のリストとして登録することができます。<br/>
+                                お気に入りリストからのご注文もできるため、リピート注文に大変便利です。<br/>
+                                お気に入りリストに追加された商品は商品詳細ページ下部、あるいはマイページのお気に入りリストよりアクセスでき、直接ショッピングカートに入れることができます。
+                            </p>
+                        </div>
+                    </div>
+                    <div id="m7" class="gSection">
+                        <h4 class="subGTitle">お届け先リスト</h4>
+                        <div class="subGsection">
+                            <p>
+                                会員情報で登録した住所以外にお届けした場合は、その住所が自動でお届け先リストに追加されます。<br/>
+                                次回以降はお届け先リストから簡単に選択できます。
+                            </p>
+                        </div>
+                    </div>
+
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

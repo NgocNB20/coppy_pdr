@@ -1,0 +1,1 @@
+SELECT * FROM zipcode LIMIT 1;

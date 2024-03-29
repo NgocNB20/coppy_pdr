@@ -1,0 +1,586 @@
+{
+	"info": {
+		"_postman_id": "aaba923a-1835-4844-8a80-b07e26b08508",
+		"name": "GOODS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13427214"
+	},
+	"item": [
+		{
+			"name": "goods/footprint/open-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/footprint/open-list?limit=20&exceptGoodsGroupSeq=10001410&accessUid=5764230920170059&siteType",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"footprint",
+						"open-list"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "exceptGoodsGroupSeq",
+							"value": "10001410"
+						},
+						{
+							"key": "accessUid",
+							"value": "5764230920170059"
+						},
+						{
+							"key": "siteType",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goods/goods/unit-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/goods/unit-list?ggcd=series-592&gcd=85-2283",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"goods",
+						"unit-list"
+					],
+					"query": [
+						{
+							"key": "ggcd",
+							"value": "series-592"
+						},
+						{
+							"key": "gcd",
+							"value": "85-2283"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goods/category/open-category-pass-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/category/open-category-pass-list?categorySeqPath=100000001000026910000627",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"category",
+						"open-category-pass-list"
+					],
+					"query": [
+						{
+							"key": "categorySeqPath",
+							"value": "100000001000026910000627"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goods/group/open-goods-group-details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/group/open-goods-group-details?goodsGroupCode=series-100&goodsCode=40-8145",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"group",
+						"open-goods-group-details"
+					],
+					"query": [
+						{
+							"key": "goodsGroupCode",
+							"value": "series-100"
+						},
+						{
+							"key": "goodsCode",
+							"value": "40-8145"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goods/group/open-goods-group-details-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/group/open-goods-group-details-list?categoryId=c-series-20&minPrice=100&maxPrice=99999&openStatus=1&limit=24&orderBy=whatsnewdate&sort=1&page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"group",
+						"open-goods-group-details-list"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "c-series-20"
+						},
+						{
+							"key": "minPrice",
+							"value": "100"
+						},
+						{
+							"key": "maxPrice",
+							"value": "99999"
+						},
+						{
+							"key": "openStatus",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "24"
+						},
+						{
+							"key": "orderBy",
+							"value": "whatsnewdate"
+						},
+						{
+							"key": "sort",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goods/relation/open-related-goods-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/goods/relation/open-related-goods-list?goodsGroupSeq=10000010&siteType=0&openStatus=1&memberRank=1&limit=24&orderBy=registtime&sort=1&page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"relation",
+						"open-related-goods-list"
+					],
+					"query": [
+						{
+							"key": "goodsGroupSeq",
+							"value": "10000010"
+						},
+						{
+							"key": "siteType",
+							"value": "0"
+						},
+						{
+							"key": "openStatus",
+							"value": "1"
+						},
+						{
+							"key": "memberRank",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "24"
+						},
+						{
+							"key": "orderBy",
+							"value": "registtime"
+						},
+						{
+							"key": "sort",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "goods/footprint/goods",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accessUid\": \"端末識別情報（必須）\",\r\n    \"goodsGroupSeq\": 1000,\r\n    \"registTime\": \"2023-10-29\",\r\n    \"updateTime\": \"2023-10-29\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/footprint/goods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"footprint",
+						"goods"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "あしあと商品クリアクラスOK",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accessUid\": \"1000230801163924\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/footprint/goods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"footprint",
+						"goods"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カテゴリ取得OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/category/:categoryId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"category",
+						":categoryId"
+					],
+					"variable": [
+						{
+							"key": "categoryId",
+							"value": "c-sale-1076"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カテゴリ情報取得OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/category/details?categoryId=c-series-1-3&openStatus=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"category",
+						"details"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "c-series-1-3"
+						},
+						{
+							"key": "openStatus",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "カテゴリ情報DTO取得OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/category/details-list?categoryIdList=c-series-1-3,c-series-6-3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"category",
+						"details-list"
+					],
+					"query": [
+						{
+							"key": "categoryIdList",
+							"value": "c-series-1-3,c-series-6-3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "商品詳細情報取得(商品コード)OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/details/by-code?code=253-164&goodsOpenStatus=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"details",
+						"by-code"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "253-164"
+						},
+						{
+							"key": "goodsOpenStatus",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "商品詳細情報リスト取得OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/details-list?goodsSeqList=253-164,211201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"details-list"
+					],
+					"query": [
+						{
+							"key": "goodsSeqList",
+							"value": "253-164,211201"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "商品詳細情報リスト取得NotOK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/details-list?goodsSeqList=253-164,211201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"details-list"
+					],
+					"query": [
+						{
+							"key": "goodsSeqList",
+							"value": "253-164,211201"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "商品詳細情報MAP取得OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/goods/details-map?goodsCodeList=253-166,211201kp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"goods",
+						"details-map"
+					],
+					"query": [
+						{
+							"key": "goodsCodeList",
+							"value": "253-166,211201kp"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

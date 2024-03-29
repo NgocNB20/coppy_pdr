@@ -1,0 +1,11 @@
+type: object
+description: 電話番号と顧客番号から会員情報取得リクエスト
+properties:
+  memberInfoTel:
+    type: string
+    description: 電話番号
+    example: 012345678999
+  customerNo:
+    type: string
+    description: 顧客番号(お客様番号)
+    example: 012345678

@@ -1,0 +1,331 @@
+/*2023-renew No16-1 from here*/
+.c-modal {
+    z-index: 600;
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.c-modal__overlay {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.c-modal__overlay.js-open {
+    display: block;
+}
+
+.c-modal__contents {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+}
+
+.c-modal__contents.js-open {
+    display: block;
+}
+
+.c-modal__contents--normal {
+    max-width: 840px;
+    width: 100%;
+    text-align: center;
+    padding-block: 60px;
+}
+
+.c-modal__contents--alert {
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+}
+
+.c-modal__contents--wide {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    padding-block: 60px;
+}
+
+.c-modal__hl {
+    margin-block: 0 30px;
+    font-size: 2rem;
+    line-height: 2;
+    font-weight: bold;
+    color: #000;
+}
+
+.c-modal__hl-wide {
+    margin-block: 0 50px;
+    font-size: 2.6rem;
+    line-height: 1.3846153846;
+    font-weight: normal;
+    color: #000;
+}
+
+.c-modal__lead {
+    margin-block: 0 30px;
+    font-size: 1.6rem;
+    line-height: 2;
+    font-weight: bold;
+    color: #000;
+}
+
+.c-modal__detail {
+    background: #f5f3f2;
+    padding-block: 30px;
+}
+
+.c-modal__detail--wide {
+    background: #fff;
+    padding: 0 50px;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 1.875;
+}
+
+.c-modal__detail-scroll {
+    max-height: 40vh;
+}
+
+.c-modal__detail-scroll--wide {
+    max-height: 55vh;
+}
+
+.c-modal__detail-inner {
+    width: fit-content;
+    max-width: 680px;
+    margin-inline: auto;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 1.875;
+}
+
+.c-modal__detail-inner--wide {
+    max-width: 1050px;
+    width: 100%;
+    margin-inline: inherit;
+}
+
+.c-modal__detail-unit:not(:first-child) {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: solid 1px #d6d3d1;
+}
+
+.c-modal__detail p + p {
+    margin-top: 12px;
+}
+
+.c-modal__detail--margin-m {
+    margin-top: 12px;
+}
+
+.c-modal__detail--complete {
+    padding-block: 40px 50px;
+}
+
+.c-modal__detail-complete-title {
+    margin-block: 5px;
+    text-align: center;
+    font-size: 2.2rem;
+    line-height: 2.2727272727;
+    font-weight: bold;
+    color: #000;
+}
+
+.c-modal__detail-complete-text {
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 1.875;
+}
+
+.c-modal__button {
+    display: grid;
+    grid-auto-flow: column;
+    place-content: center;
+    margin-block: 50px 0;
+    gap: 30px;
+}
+
+.c-modal__bullet-point li {
+    text-indent: -11px;
+    padding-left: 11px;
+}
+
+.c-modal__bullet-point li::before {
+    content: "? ";
+}
+
+.c-modal__bullet-point--strong {
+    color: #f36b30;
+}
+
+@media screen and (max-width: 599.9px) {
+    .c-modal__contents {
+        width: 94%;
+    }
+
+    .c-modal__contents--normal {
+        width: 94%;
+        padding-block: 9.3333333333vw;
+    }
+
+    .c-modal__contents--alert {
+        width: 94%;
+    }
+
+    .c-modal__contents--wide {
+        width: 94%;
+        padding-block: 9.3333333333vw;
+    }
+
+    .c-modal__hl {
+        margin: 0 5.3333333333vw 5.3333333333vw;
+        font-size: min(4.2666666667vw, 1.9rem);
+        line-height: 1.8125;
+    }
+
+    .c-modal__hl-wide {
+        margin: 0 6.6666666667vw 8vw;
+        font-size: 2rem;
+        line-height: 1.6;
+        font-weight: normal;
+        text-align: left;
+    }
+
+    .c-modal__lead {
+        margin: 0 5.3333333333vw 5.3333333333vw;
+        font-size: min(3.7333333333vw, 1.7rem);
+        line-height: 1.7857142857;
+        text-align: left;
+    }
+
+    .c-modal__detail {
+        padding-block: 5.3333333333vw;
+    }
+
+    .c-modal__detail--wide {
+        padding: 0 2.6666666667vw 0 6.6666666667vw;
+        font-size: min(4.2666666667vw, 1.9rem);
+        line-height: 1.875;
+    }
+
+    .c-modal__detail-scroll {
+        max-height: 30vh;
+    }
+
+    .c-modal__detail-scroll--wide {
+        max-height: 50vh;
+    }
+
+    .c-modal__detail-inner {
+        max-width: 76vw;
+        font-size: min(3.7333333333vw, 1.7rem);
+        line-height: 1.7857142857;
+    }
+
+    .c-modal__detail-inner--wide {
+        max-width: 76vw;
+    }
+
+    .c-modal__detail p + p {
+        margin-top: 2.6666666667vw;
+    }
+
+    .c-modal__detail--complete {
+        padding-block: 5.3333333333vw 6.6666666667vw;
+    }
+
+    .c-modal__detail-complete-title {
+        margin-block: 1.3333333333vw;
+        font-size: min(4vw, 1.8rem);
+        line-height: 1.6666666667;
+        font-weight: bold;
+    }
+
+    .c-modal__detail-complete-text {
+        font-size: min(3.7333333333vw, 1.7rem);
+        line-height: 1.7857142857;
+    }
+
+    .c-modal__button {
+        grid-auto-flow: row;
+        gap: 4vw;
+        margin-block: 9.3333333333vw 0;
+    }
+
+    .c-modal__button a:first-child,
+    .c-modal__button button:first-child {
+        order: 2;
+    }
+
+    .c-modal__button--small {
+        grid-auto-flow: column;
+    }
+
+    .c-modal__button--small a:first-child,
+    .c-modal__button--small button:first-child {
+        order: inherit;
+    }
+}
+
+.c-modal-close {
+    position: absolute;
+    right: 0;
+    top: -65px;
+    z-index: 950;
+    background-color: #f36b30;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    transition: opacity 400ms ease;
+}
+
+@media screen and (min-width: 600px), print {
+    .c-modal-close:hover {
+        opacity: 0.5;
+    }
+}
+
+.c-modal-close span {
+    background-color: #fff;
+    position: absolute;
+    top: 46%;
+    left: 23%;
+    width: 28px;
+    height: 3px;
+    border-radius: 9999px;
+}
+
+.c-modal-close span:nth-of-type(1) {
+    transform: rotate(-315deg);
+}
+
+.c-modal-close span:nth-of-type(2) {
+    transform: rotate(315deg);
+}
+
+@media screen and (max-width: 599.9px) {
+    .c-modal-close {
+        top: -13.3333333333vw;
+        width: 10.6666666667vw;
+        height: 10.6666666667vw;
+    }
+
+    .c-modal-close span {
+        top: 48%;
+        left: 24%;
+        width: 5.8666666667vw;
+        height: 0.5333333333vw;
+    }
+}
+/*2023-renew No16-1 to here*/

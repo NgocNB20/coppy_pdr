@@ -1,0 +1,54 @@
+type: object
+description: ニュースEntityレスポンス
+properties:
+  newsSeq:
+    type: integer
+    format: int32
+    description: ニュースSEQ（必須）
+    example: 10000001
+  title:
+    type: string
+    description: ニュースタイトル
+    example: オンラインショップ復旧のお知らせ
+  newsBody:
+    type: string
+    description: ニュース本文
+    example: 本日13日(火)15時05分～17時45分の間、回線トラブルが発生したためオンラインショップがご利用いただけませんでした。現在は復旧しております。<br />
+  newsUrl:
+    type: string
+    description: ニュースURL
+    example: https://test.pdr.co.jp/news.html?nseq=10000123
+  newsOpenStatus:
+    type: string
+    description: ニュース公開状態（必須）
+    example: 2
+    default: 0
+  newsOpenStartTime:
+    type: string
+    format: date-time
+    description: ニュース公開開始日時
+    example: 2021/12/12 12:00:00
+  newsOpenEndTime:
+    type: string
+    format: date-time
+    description: ニュース公開終了日時
+    example: 2021/12/12 12:00:00
+  newsTime:
+    type: string
+    format: date-time
+    description: ニュース日時（必須）
+    example: 2021/12/12 12:00:00
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2021/12/12 12:00:00
+  newsNote:
+    type: string
+    description: ニュース詳細
+    example: 毎日１７時までにいただいた質問は、当日中にアイテックさんに連絡をします。

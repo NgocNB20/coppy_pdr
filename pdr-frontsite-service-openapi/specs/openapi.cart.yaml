@@ -1,0 +1,462 @@
+openapi: 3.0.3
+info:
+  title: 【PDRフロントサイトサービス】カートのAPI仕様
+  description: PDRフロントサイトサービスのOpenAPI定義：カート
+  version: 4.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /cart/cart-goods-regist-check:
+    post:
+      tags:
+        - Cart
+      summary: カート投入チェック（一括登録用の簡易版）
+      description: カート投入チェック（一括登録用の簡易版）
+      operationId: checkCartGoodsRegist
+      requestBody:
+        description: カート投入チェック（一括登録用の簡易版）リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartGoodsRegistCheckRequest'
+        required: true
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cart/cart-goods:
+    get:
+      tags:
+        - Cart
+      summary: カート情報取得
+      description: カート情報取得
+      operationId: getCartGoods
+      parameters:
+        - in: query
+          name: cartGoodsGetRequest
+          description: カート情報取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/CartGoodsGetRequest'
+      responses:
+        200:
+          description: カートDtoレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      tags:
+        - Cart
+      summary: カート情報変更
+      description: カート情報変更
+      operationId: updateCartGoods
+      requestBody:
+        description: カート情報変更リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartGoodsChangeRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Cart
+      summary: カート商品削除
+      description: カート商品削除
+      operationId: deleteCartGoods
+      parameters:
+        - in: query
+          name: cartGoodsDeleteRequest
+          description: カート商品削除リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/CartGoodsDeleteRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+          description: Bad Request（業務ルールエラー）
+        500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: その他エラー
+  /cart/cart-screen:
+    post:
+      tags:
+        - Cart
+      summary: カート一括登録（クイックオーダー／セールde予約用）
+      description: カート一括登録（クイックオーダー／セールde予約用）
+      operationId: registCartScreen
+      requestBody:
+        description: カート一括登録リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartScreenRegistRequest'
+        required: true
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cart/cart-goods-add:
+    post:
+      tags:
+        - Cart
+      summary: カート商品追加
+      description: カート商品追加
+      operationId: registCartGoodsAdd
+      requestBody:
+        description: カート商品追加リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartGoodsAddRequest'
+        required: true
+      responses:
+        200:
+          description: チェックメッセージDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckMessageDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cart/cart-goods-check:
+    post:
+      tags:
+        - Cart
+      summary: カート商品チェック
+      description: カート商品チェック
+      operationId: checkCartGoods
+      requestBody:
+        description: カート商品チェックリクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartGoodsCheckRequest'
+        required: true
+      responses:
+        200:
+          description: カート商品チェックMapレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartGoodsCheckMapResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cart/cart-goods-list:
+    delete:
+      tags:
+        - Cart
+      summary: カート商品リスト削除
+      description: カート商品リスト削除
+      operationId: deleteCartGoodsList
+      requestBody:
+        description: カート商品リスト削除リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartGoodsListDeleteRequest'
+        required: true
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cart/cart-dto-correction-screen:
+    put:
+      tags:
+        - Cart
+      summary: カート再構築
+      description: カート再構築
+      operationId: updateCartDtoCorrectionScreen
+      requestBody:
+        description: カート再構築リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartDtoCorrectionScreenUpdateRequest'
+      responses:
+        200:
+          description: カート再構築レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDtoCorrectionScreenUpdateResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: その他エラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cart/cart-common-info:
+    get:
+      tags:
+        - Cart
+      summary: カート共通情報取得
+      description: カート共通情報取得
+      operationId: getCartCommonInfo
+      parameters:
+        - in: query
+          name: commonInfoCartGetRequest
+          description: カート共通情報リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/CommonInfoCartGetRequest'
+      responses:
+        200:
+          description: カート共通情報レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonInfoCartResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /cart/merge:
+    put:
+      tags:
+        - Cart
+      summary: カート商品マージ
+      description: カート商品マージ
+      operationId: merge
+      requestBody:
+        description: カート商品マージ更新リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartGoodsMergeUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: 結果カウントレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultCountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    CartGoodsGetRequest:
+      $ref: ./schemas/cart/CartGoodsGetRequest.yaml
+    CartGoodsRegistCheckRequest:
+      $ref: ./schemas/cart/CartGoodsRegistCheckRequest.yaml
+    CartDtoResponse:
+      $ref: ./schemas/cart/CartDtoResponse.yaml
+    CartDtoCorrectionScreenUpdateResponse:
+      $ref: ./schemas/cart/CartDtoCorrectionScreenUpdateResponse.yaml
+    CartScreenRegistRequest:
+      $ref: ./schemas/cart/CartScreenRegistRequest.yaml
+    CheckMessageDtoListResponse:
+      $ref: ./schemas/cart/CheckMessageDtoListResponse.yaml
+    CartGoodsCheckRequest:
+      $ref: ./schemas/cart/CartGoodsCheckRequest.yaml
+    CartGoodsListDeleteRequest:
+      $ref: ./schemas/cart/CartGoodsListDeleteRequest.yaml
+    CartGoodsCheckMapResponse:
+      $ref: ./schemas/cart/CartGoodsCheckMapResponse.yaml
+    CartGoodsChangeRequest:
+      $ref: ./schemas/cart/CartGoodsChangeRequest.yaml
+    CartGoodsAddRequest:
+      $ref: ./schemas/cart/CartGoodsAddRequest.yaml
+    CartGoodsDeleteRequest:
+      $ref: ./schemas/cart/CartGoodsDeleteRequest.yaml
+    CartDtoCorrectionScreenUpdateRequest:
+      $ref: ./schemas/cart/CartDtoCorrectionScreenUpdateRequest.yaml
+    CommonInfoCartGetRequest:
+      $ref: ./schemas/cart/CommonInfoCartGetRequest.yaml
+    CommonInfoCartResponse:
+      $ref: ./schemas/cart/CommonInfoCartResponse.yaml
+    CartGoodsMergeUpdateRequest:
+      $ref: ./schemas/cart/CartGoodsMergeUpdateRequest.yaml
+    ResultCountResponse:
+      $ref: ./schemas/ResultCountResponse.yaml
+    ErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ClientErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ServerErrorResponse:
+      $ref: ./schemas/Error.yaml

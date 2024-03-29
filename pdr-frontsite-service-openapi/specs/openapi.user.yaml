@@ -1,0 +1,52 @@
+openapi: 3.0.3
+info:
+  title: 【PDRフロントサイトサービス】ユーザーのAPI仕様
+  description: PDRフロントサイトサービスのOpenAPI定義：ユーザー
+  version: 4.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /users/accessUid:
+    get:
+      tags:
+        - Users
+      summary: 端末識別番号作成
+      description: 端末識別番号作成
+      operationId: getAccessUid
+      responses:
+        200:
+          description: 端末識別情報レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessUidResponse"
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    AccessUidResponse:
+      $ref: ./schemas/user/AccessUidResponse.yaml
+    ErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ClientErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ServerErrorResponse:
+      $ref: ./schemas/Error.yaml
+    PageInfoRequest:
+      $ref: ./schemas/PageInfoRequest.yaml

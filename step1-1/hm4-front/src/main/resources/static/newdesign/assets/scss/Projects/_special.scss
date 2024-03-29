@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.p-special {
+
+  .l-main,
+  .l-section {
+    @include font-style(16,30);
+
+    @include media(sm) {
+
+      @include font-sp-style(15,25);
+      margin-inline: vwset(15);
+
+    }
+  }
+
+  // 【メモ】使わないかも
+  &.noheader {
+    min-width: auto;
+  }
+}

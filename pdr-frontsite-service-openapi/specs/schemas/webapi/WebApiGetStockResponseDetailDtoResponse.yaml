@@ -1,0 +1,35 @@
+type: object
+description: 商品在庫数取得 詳細情報
+properties:
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: furniture-00201
+  stockQuantity:
+    type: number
+    description: 在庫数
+    example: 3
+  saleYesNo:
+    type: integer
+    format: int32
+    description: 販売可否判定結果
+    example: 3
+  saleNgMessage:
+    type: string
+    description: 販売不可メッセージ
+    example: 3
+  stockDate:
+    type: string
+    format: date-time
+    description: 入荷予定日
+    example: 1
+  deliveryYesNo:
+    type: string
+    description: 入荷次第お届け可否
+    example: 3
+# 2023-renew No11-33-75-112 from here
+  saleControl:
+    type: string
+    description: 販売制御区分
+    example: 1
+# 2023-renew No11-33-75-112 to here

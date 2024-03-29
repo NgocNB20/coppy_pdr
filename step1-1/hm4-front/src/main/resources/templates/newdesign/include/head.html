@@ -1,0 +1,160 @@
+<th:block
+        th:with="shopInfo=${session.commonInfo.commonInfoShop}, canonical=${canonical} ?: '', query=${query} ?: '', addTitle=${#escape.escapeQuote(addTitle)} ?: '', addDescription=${addDescription} ?: '', addKeywords=${addKeywords} ?: '', addImage=${addImage} ?: '', addType=${addType} ?: '', addRobots=${addRobots} ?: '', addPnum=${addPnum} ?: '', addLastPnum=${addLastPnum} ?: ''">
+    <th:block th:with="shopName=${#escape.escapeQuote(shopInfo.shopNamePC)}">
+        <!--2023-renew issue145 from here-->
+        <meta name="viewport" content="width=device-width,viewport-fit=cover">
+        <meta name="format-detection" content="telephone=no">
+        <meta property="og:locale" content="ja_JP">
+        <link rel="shortcut icon" th:href="@{/newdesign/assets/images/favicon.ico}">
+        <link rel="shortcut" type="image/png" sizes="180x180" th:href="@{/newdesign/assets/images/apple-touch-icon.png}" />
+        <link rel="apple-touch-icon" sizes="180x180" th:href="@{/newdesign/assets/images/apple-touch-icon.png}" />
+        <link rel="stylesheet" th:href="@{/newdesign/assets/css/lib/simplebar.min.css}"/>
+        <script th:src="@{/newdesign/assets/js/lib/jquery-3.6.0.min.js}"></script>
+        <script th:src="@{/newdesign/assets/js/lib/swiper-bundle.min.js}"></script>
+        <script th:src="@{/newdesign/assets/js/lib/sweet-scroll.min.js}"></script>
+        <script th:src="@{/newdesign/assets/js/lib/hogan-3.0.2.min.js}"></script>
+        <script th:src="@{/newdesign/assets/js/lib/ua-parser.min.js}"></script>
+        <script th:src="@{/newdesign/assets/js/lib/simplebar.min.js}"></script>
+        <link rel="preload" as="style" th:href="@{/newdesign/assets/css/style.css}">
+        <link rel="preload" as="script" th:href="@{/newdesign/assets/js/main_custum.js}">
+        <link rel="stylesheet" th:href="@{/newdesign/assets/css/lib/swiper-bundle.min.css}">
+        <!--2023-renew issue145 to here-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Style-Type" content="text/css"/>
+        <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+        <meta http-equiv="imagetoolbar" content="no"/>
+        <meta name="robots" th:content="${addRobots} != '' ? ${addRobots} : 'index,follow'"/>
+        <meta name="description" th:content="${addDescription} != '' ? '__${addDescription}__' : '__${shopInfo.shopMetaDescription}__'"/>
+        <meta name="keywords" th:content="${addKeywords} != '' ? '__${addKeywords}__' : '__${shopInfo.shopMetaKeyword}__'"/>
+        <meta property="og:url" th:content="|__${#httpServletRequest.requestURL}__${query != '' ? '?__${query}__' : ''}|"/>
+        <meta property="og:title" th:content="${addTitle} != '' ? '__${addTitle}__ - __${shopName}__' : '__${shopName}__'"/>
+        <meta property="og:description" th:content="${addDescription} != '' ? '__${addDescription}__' : '__${shopInfo.shopMetaDescription}__'"/>
+        <meta property="og:image" th:content="${addImage} != '' ? '__${addImage}__' : '__${@environment.getProperty('ogp.image.content')}__'"/>
+        <meta property="og:site_name" th:content="${shopName}"/>
+        <meta property="og:type" th:content="${addType} != '' ? '__${addType}__' : 'article'"/>
+        <meta property="fb:app_id" th:content="${@environment.getProperty('facebook.app.id')}"/>
+        <th:block th:if="${addTitle} != ''">
+            <title th:text="${addTitle} + ' - ' + ${shopName}"></title>
+        </th:block>
+        <th:block th:unless="${addTitle} != ''">
+            <title th:text="${shopName}"></title>
+        </th:block>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/lib/jquery-1.8.3.min.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/lib/jquery-ui.min.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/lib/jquery.easing.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/common.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/kumu.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/event.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/h.event.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/ajax.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/smartphone.js}"></script>
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/hitmall.js}"></script>
+        <script type="text/javascript" th:src="@{/common/js/uk.js}"></script>
+        <!--        // PDR Migrate Customization from here-->
+        <script type="text/javascript" th:src="@{/newdesign/assets/js/zipsearch.js}"></script>
+        <!--        // PDR Migrate Customization to here-->
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/newdesign/assets/css/lib/jquery-ui.css}"/>
+        <!-- Jquery Datepicker - Start -->
+        <link rel="stylesheet" th:href="@{/newdesign/assets/css/lib/jquery-ui.min.css}">
+        <script src="/newdesign/assets/js/lib/jquery-ui.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/osamutake/japanese-holidays-js@v1.0.10/lib/japanese-holidays.min.js"></script>
+        <script src="https://cdn.rawgit.com/osamutake/japanese-holidays-js/v1.0.10/lib/japanese-holidays.min.js"></script>
+        <link rel="stylesheet" th:href="@{/newdesign/assets/css/style.css}">
+        <!-- Jquery Datepicker - End -->
+        <th:block th:if="${canonical}!=''">
+            <link rel="canonical" th:href="|__${#httpServletRequest.requestURL}__${query!=''?'?__${query}__':''}|" id="canonical"/>
+        </th:block>
+        <!-- Google Tag Manager START -->
+        <script>
+            var gtmId = "[[${@environment.getProperty('google.tagmanager.id')}]]";
+
+            //<![CDATA[
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', gtmId);
+            //]]>
+
+        </script>
+        <!-- Google Tag Manager end -->
+        <!-- リマーケティング タグの Google コード start -->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 848019204;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+
+        </script>
+        <script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <!-- リマーケティング タグの Google コード end -->
+        <!-- Yahoo Code for your Target List start-->
+        <script type="text/javascript" language="javascript">
+            /* <![CDATA[ */
+            var yahoo_retargeting_id = 'EGVBR9I20K';
+            var yahoo_retargeting_label = '';
+            var yahoo_retargeting_page_type = '';
+            var yahoo_retargeting_items = [{item_id: '', category_id: '', price: '', quantity: ''}];
+            /* ]]> */
+
+        </script>
+        <script type="text/javascript" language="javascript" src="https://b92.yahoo.co.jp/js/s_retargeting.js"></script>
+
+    </th:block>
+</th:block>
+<!--2023-renew No16-1 from here-->
+<div class="c-modal p-top__authentication" style="display: none;">
+    <div class="c-modal__overlay">
+        <div class="c-modal__contents p-top__authentication-contents">
+            <div class="p-top__authentication-logo">
+                <strong>歯科材料の通販　</strong><img th:src="@{/newdesign/assets/images/common/logo.svg}" width="140" alt="P.D.R.">
+            </div>
+            <p class="p-top__authentication-lead">P.D.R.オンラインショップは、歯科医院様・歯科技工所様向けの通信販売です。<br>一般の方への情報提供および販売はしておりませんので、ご了承ください。
+            </p>
+            <p class="p-top__authentication-query">あなたは歯科医療関係者ですか？</p>
+            <div class="c-modal__button p-top__authentication-button">
+                <button class="c-button c-button--primary p-top__authentication-button-yes js-modal-close">
+                    <div>はい</div>
+                </button>
+                <a th:href="${@environment.getProperty('pdr.company.url')}">
+                    <button class="c-button c-button--primary-line p-top__authentication-button-no">
+                        <div>いいえ<small>コーポレートサイトへ遷移します</small></div>
+                    </button>
+                </a>
+            </div>
+            <p class="p-top__authentication-memo">※ <strong>価格</strong>と<strong>在庫状況</strong>はログイン後にご確認いただけます。
+            </p>
+        </div>
+    </div>
+</div>
+<script th:src="@{/newdesign/assets/js/confirmMedicalStaff.js}"></script>
+<!--2023-renew No16-1 to here-->
+<!--2023-renew No3-taglog from here-->
+<script th:inline="javascript">
+    var _ukwhost = /*[[${@environment.getProperty('uk.taglog.server.fqdn')}]]*/;
+    if (_ukwhost != '') {
+        var _ukwq = [];
+        var _goodsClient = 'pdr';
+        var _contentsClient = 'pdrcontents';
+        var _cryptoLoginId = /*[[${session.commonInfo.commonInfoUser.cryptUserId}]]*/;
+        var _reqUrl = location.href;
+        var _refUrl = document.referrer;
+        var _display = window.matchMedia('(max-device-width: 599.99px)').matches ? "sp" : "pc";
+        (function () {
+            _ukt = document.createElement('script'); _ukt.type = 'text/javascript'; _ukt.async = true;
+            _ukt.src = '//' + _ukwhost + '/taglog/ukwlg.js';
+            var _uks = document.getElementsByTagName('script')[0]; _uks.parentNode.insertBefore(_ukt, _uks);
+        })();
+    }
+</script>
+<!--2023-renew No3-taglog from here-->

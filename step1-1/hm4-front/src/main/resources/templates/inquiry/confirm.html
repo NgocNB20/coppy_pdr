@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<meta th:replace="~{includehm4/head_new}"/>
+<head>
+</head>
+
+<body id="gotop" class="regist">
+<div class="l-mainwrap">
+    <div th:replace="~{includehm4/header_new}"></div>
+    <main class="l-page l-form l-head__pattern2">
+        <div class="l-container">
+            <div class="l-main full">
+                <h2 class="c-title--page"><strong>お問い合わせ</strong></h2>
+                <div th:replace="~{includehm4/headerinquiry_new :: headerinquiry('confirm')}"></div>
+                <form th:action="@{/inquiry/confirm.html}" th:object="${inquiryModel}" method="POST"
+                      class="c-form c-text--m">
+                    <div class="l-head__pattern2__content">
+                        <div class="c-text--caution">
+                            <p>お問い合わせ内容をご確認いただき、問題なければ「送信する」ボタンをクリックしてください。</p>
+                        </div>
+                        <h3 class="c-title--line c-font-bold c-margin--m">お問い合わせ内容の確認</h3>
+                        <div class="c-confirm-list c-margin--xs">
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">お問い合わせ分類</dt>
+                                <dd class="c-confirm-list__detail" th:text="*{inquiryGroupName}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">氏名</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:text="*{inquiryLastName + ' ' + inquiryFirstName}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">フリガナ</dt>
+                                <dd class="c-confirm-list__detail"
+                                    th:text="*{inquiryLastKana + ' ' + inquiryFirstKana}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">メールアドレス</dt>
+                                <dd class="c-confirm-list__detail" th:text="*{inquiryMail}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">電話番号</dt>
+                                <dd class="c-confirm-list__detail" th:text="*{inquiryTel}"></dd>
+                            </dl>
+                            <dl>
+                                <dt class="c-confirm-list__title c-font-bold">お問い合わせ内容</dt>
+                                <dd class="c-confirm-list__detail" th:utext="*{#pre.convert(inquiryBody)}"></dd>
+                            </dl>
+                        </div>
+                        <div class="c-btn-wrap--2btn lg-rev c-margin--xl">
+                            <button type="submit" class="c-btn--blue" name="doOnceRegist">送信する</button>
+                            <button type="submit" class="c-btn--simple" name="doIndex">修正する</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+<div th:replace="~{includehm4/footer_new}"></div>
+<script th:src="@{/hm4/assets/js/bundle.js}" defer="defer"></script>
+
+</body>
+</html>

@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>会員詳細｜会員管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/adminmemberupdate.js}"></script>
+</head>
+
+<body id="memberinfo" onload="selectDisabled();">
+<div id="searchMember" class="l-mainwrap">
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <div class="l-main">
+                <!--// 2023-renew No22 from here-->
+                <form th:action="@{/memberinfo/update/}" th:object="${memberInfoUpdateModel}" method="post" enctype="multipart/form-data"
+                      onsubmit="return errorCheckOnclickConfirmButton();">
+                <!--// 2023-renew No22 to here-->
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" id="pageNumber" name="pageNumber"/>
+<!--                    <input type="submit" id="doConfirm" name="doConfirm" style="display:none" value="表示切替"/>-->
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">会員詳細</h1>
+                        <h2 class="c-pagetitle_h2" th:text="*{memberInfoName + ' 様'}"></h2>
+                    </div>
+
+                    <div class="l-section_column" id="mainContainer">
+                        <div class="l-section_inner" >
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">お客様情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-base dt_w180px c-btm_line">
+                                            <div>
+                                                <dt>会員SEQ</dt>
+                                                <dd th:text="*{memberInfoSeq}"></dd>
+                                            </div>
+                                            <div class="edit">
+                                                <dt>会員ID<span class="ico_required">必須</span></dt>
+                                                <dd>
+                                                    <!--2023-renew No85-1 from here-->
+                                                    <input type="text" class="readOnlyField c-form-control w100p"
+                                                           th:field="*{memberInfoId}"
+                                                           maxlength="256" th:errorclass="error">
+                                                    <!--2023-renew No85-1 to here-->
+                                                    <div th:if="${#fields.hasErrors('memberInfoId')}"
+                                                         th:errors="*{memberInfoId}"
+                                                         class="c-error-txt mt5"></div>
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>顧客番号</dt>
+                                                <dd th:text="*{customerNo}"></dd>
+                                            </div>
+                                        </dl>
+                                        <div class="wrap_flex_equivalent">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt>事業所名<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="text" th:field="*{memberInfoLastName}"
+                                                                   autocomplete="name" class="readOnlyField c-form-control w80p"
+                                                                   maxlength="40" th:errorclass="error">
+                                                            <div th:if="${#fields.hasErrors('memberInfoLastName')}"
+                                                                 th:errors="*{memberInfoLastName}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt>事業所名(フリガナ)&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <!--2023-renew No85-1 from here-->
+                                                            <input type="text" th:field="*{memberInfoLastKana}"
+                                                                   autocomplete="name" class="readOnlyField c-form-control w80p"
+                                                                   maxlength="30" th:errorclass="error">
+                                                            <!--2023-renew No85-1 to here-->
+                                                            <div th:if="${#fields.hasErrors('memberInfoLastKana')}"
+                                                                 th:errors="*{memberInfoLastKana}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt>郵便番号<span class="ico_required">必須</span></dt>
+                                                        <dd class="wrap_flex_center">
+                                                            <input type="text" id="memberInfoZipCode" th:field="*{memberInfoZipCode}"
+                                                                   maxlength="7" class="readOnlyField zip_02 c-form-control w120px mr10"
+                                                                   th:errorclass="error">
+                                                        </dd>
+                                                    </div>
+                                                    <div class="mt-25">
+                                                        <dt></dt>
+                                                        <dd>
+                                                            <div id="memberInfoZipCodeError"
+                                                                 th:if="${#fields.hasErrors('memberInfoZipCode')}"
+                                                                 th:errors="*{memberInfoZipCode}"
+                                                                 class="c-error-txt mt5"></div>
+                                                            <div id="memberInfoZipErrorMsg"
+                                                                 th:text="*{memberInfoZipErrorMsg}"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="delivery_target edit">
+                                                        <dt>住所<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <dl class="address">
+                                                                <div>
+                                                                    <dt>都道府県・市区郡</dt>
+                                                                    <dd>
+                                                                        <!--2023-renew No85-1 from here-->
+                                                                        <input type="text" id="memberInfoAddress1"
+                                                                               th:field="*{memberInfoAddress1}"
+                                                                               class="readOnlyField addr1 c-form-control w240px"
+                                                                               maxlength="40" th:errorclass="error">
+                                                                        <!--2023-renew No85-1 to here-->
+                                                                        <div id="memberInfoAddress1Error"
+                                                                             th:if="${#fields.hasErrors('memberInfoAddress1')}"
+                                                                             th:errors="*{memberInfoAddress1}"
+                                                                             class="c-error-txt mt5"></div>
+                                                                    </dd>
+                                                                </div>
+                                                                <div>
+                                                                    <dt>町村・番地</dt>
+                                                                    <dd>
+                                                                        <!--2023-renew No85-1 from here-->
+                                                                        <input type="text" id="memberInfoAddress2"
+                                                                               th:field="*{memberInfoAddress2}"
+                                                                               class="readOnlyField addr2 c-form-control w240px"
+                                                                               maxlength="40" th:errorclass="error">
+                                                                        <!--2023-renew No85-1 to here-->
+                                                                        <div id="memberInfoAddress2Error"
+                                                                             th:if="${#fields.hasErrors('memberInfoAddress2')}"
+                                                                             th:errors="*{memberInfoAddress2}"
+                                                                             class="c-error-txt mt5"></div>
+                                                                    </dd>
+                                                                </div>
+                                                                <div>
+                                                                    <dt>マンション・建物名 </dt>
+                                                                    <dd>
+                                                                        <!--2023-renew No85-1 from here-->
+                                                                        <input type="text" id="memberInfoAddress3"
+                                                                               th:field="*{memberInfoAddress3}"
+                                                                               class="readOnlyField addr3 c-form-control w240px"
+                                                                               maxlength="40" th:errorclass="error">
+                                                                        <!--2023-renew No85-1 to here-->
+                                                                        <div id="memberInfoAddress3Error"
+                                                                             th:if="${#fields.hasErrors('memberInfoAddress3')}"
+                                                                             th:errors="*{memberInfoAddress3}"
+                                                                             class="c-error-txt mt5"></div>
+                                                                    </dd>
+                                                                </div>
+                                                                <div>
+                                                                    <dt>方書</dt>
+                                                                    <dd>
+                                                                        <input type="text" id="memberInfoAddress4"
+                                                                               th:field="*{memberInfoAddress4}"
+                                                                               class="readOnlyField addr3 c-form-control w240px"
+                                                                               maxlength="15" th:errorclass="error">
+                                                                        <div id="memberInfoAddress4Error"
+                                                                             th:if="${#fields.hasErrors('memberInfoAddress4')}"
+                                                                             th:errors="*{memberInfoAddress4}"
+                                                                             class="c-error-txt mt5"></div>
+                                                                    </dd>
+                                                                </div>
+                                                            </dl>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt>代表者名</dt>
+                                                        <dd>
+                                                            <input type="text" class="readOnlyField c-form-control w240px"
+                                                                   th:field="*{representativeName}" maxlength="15"
+                                                                   th:errorclass="error">
+                                                            <div th:if="${#fields.hasErrors('representativeName')}"
+                                                                 th:errors="*{representativeName}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt>顧客区分&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{businessTypeSubstitute}" id="businessTypeSubstitute" />
+                                                            <select id="businessType"
+                                                                    th:field="*{businessType}"
+                                                                    class="pref c-form-control"
+                                                                    th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{businessTypeItems}"
+                                                                        th:value="${item.key}"
+                                                                        th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{businessType}"></option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('businessType')}"
+                                                                 th:errors="*{businessType}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt>確認書類&nbsp<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{confDocumentTypeSubstitute}" id="confDocumentTypeSubstitute" />
+                                                            <select id="confDocumentType" title="確認書類"
+                                                                    name="confDocumentType" th:errorclass="error"
+                                                                    class="c-form-control">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{confDocumentTypeItems}"
+                                                                        th:value="${item.key}"
+                                                                        th:text="${item.value}" 
+                                                                        th:selected="${item.key} == *{confDocumentType}"> 
+                                                                </option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('confDocumentType')}"
+                                                                 th:errors="*{confDocumentType}" 
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt>電話番号<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <!--2023-renew No85-1 from here-->
+                                                            <input type="text" class="readOnlyField c-form-control w100p" autocomplete="tel"
+                                                                   th:field="*{memberInfoTel}" maxlength="14"
+                                                                   th:errorclass="error">
+                                                            <!--2023-renew No85-1 to here-->
+                                                            <div th:if="${#fields.hasErrors('memberInfoTel')}"
+                                                                 th:errors="*{memberInfoTel}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt>FAX番号</dt>
+                                                        <dd>
+                                                            <!--2023-renew No85-1 from here-->
+                                                            <input type="text" class="readOnlyField c-form-control w100p" autocomplete="tel"
+                                                                   th:field="*{memberInfoFax}" maxlength="14"
+                                                                   th:errorclass="error">
+                                                            <!--2023-renew No85-1 to here-->
+                                                            <div th:if="${#fields.hasErrors('memberInfoFax')}"
+                                                                 th:errors="*{memberInfoFax}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25"> 
+                                            <div class="col mr25"> 
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <div> 
+                                                            <dt>休診曜日</dt>
+                                                        </div>
+                                                        <dd> 
+                                                            <table class="c-tbl tbl_list">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>&nbsp</th>
+                                                                    <th class="txt_center">日</th>
+                                                                    <th class="txt_center">月</th>
+                                                                    <th class="txt_center">火</th>
+                                                                    <th class="txt_center">水</th>
+                                                                    <th class="txt_center">木</th>
+                                                                    <th class="txt_center">金</th>
+                                                                    <th class="txt_center">土</th>
+                                                                    <th class="txt_center">祝</th>
+                                                                    <th class="txt_center">無休</th>
+                                                                </tr>
+                                                            </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>AM</td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amSunNonConsultationSubstitute}" id="amSunNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amSunNonConsultation}" id="amSunNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amMonNonConsultationSubstitute}" id="amMonNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amMonNonConsultation}" id="amMonNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amTueNonConsultationSubstitute}" id="amTueNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amTueNonConsultation}" id="amTueNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amWedNonConsultationSubstitute}" id="amWedNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amWedNonConsultation}" id="amWedNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amThuNonConsultationSubstitute}" id="amThuNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amThuNonConsultation}" id="amThuNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amFriNonConsultationSubstitute}" id="amFriNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amFriNonConsultation}" id="amFriNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amSatNonConsultationSubstitute}" id="amSatNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amSatNonConsultation}" id="amSatNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{amHolidayNonConsultationSubstitute}" id="amHolidayNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{amHolidayNonConsultation}" id="amHolidayNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center" rowspan="2"><input type="hidden" th:field="*{allConsultationSubstitute}" id="allConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{allConsultation}" id="allConsultation" onclick="setAllConsultation();" name="allConsultation" /><i></i></label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PM</td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmSunNonConsultationSubstitute}" id="pmSunNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmSunNonConsultation}" id="pmSunNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmMonNonConsultationSubstitute}" id="pmMonNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmMonNonConsultation}" id="pmMonNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmTueNonConsultationSubstitute}" id="pmTueNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmTueNonConsultation}" id="pmTueNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmWedNonConsultationSubstitute}" id="pmWedNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmWedNonConsultation}" id="pmWedNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmThuNonConsultationSubstitute}" id="pmThuNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmThuNonConsultation}" id="pmThuNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmFriNonConsultationSubstitute}" id="pmFriNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmFriNonConsultation}" id="pmFriNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmSatNonConsultationSubstitute}" id="pmSatNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmSatNonConsultation}" id="pmSatNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                    <td  class="txt_center"><input type="hidden" th:field="*{pmHolidayNonConsultationSubstitute}" id="pmHolidayNonConsultationSubstitute" /><label class="c-form-control"><input type="checkbox" th:field="*{pmHolidayNonConsultation}" id="pmHolidayNonConsultation" class="nonConsultation" /><i></i></label></td>
+                                                                </tr>
+                                                                </tbody>
+
+                                                        </table>
+                                                        </dd>
+                                                    </div> 
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" th:field="*{medicalTreatment}" id="medicalTreatment" />
+                                        <input type="hidden" th:field="*{medicalTreatment1Disp}" id="medicalTreatment1Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment2Disp}" id="medicalTreatment2Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment3Disp}" id="medicalTreatment3Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment4Disp}" id="medicalTreatment4Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment5Disp}" id="medicalTreatment5Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment6Disp}" id="medicalTreatment6Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment7Disp}" id="medicalTreatment7Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment8Disp}" id="medicalTreatment8Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment9Disp}" id="medicalTreatment9Disp" />
+                                        <input type="hidden" th:field="*{medicalTreatment10Disp}" id="medicalTreatment10Disp" />
+
+                                        <div class="wrap_flex_equivalent mt25"> 
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px" > 
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment1Title" th:utext="*{medicalTreatment1Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                        <th:block th:if="*{isMedicalTreatmentJudge1}">
+                                                            <input type="hidden" name="medicalTreatment1Substitute" id="medicalTreatment1Substitute" />
+                                                            <label class="c-form-control">
+                                                                <input type="checkbox"
+                                                                       id="medicalTreatment1"
+                                                                       th:checked="*{medicalTreatment1}"
+                                                                       th:field="*{medicalTreatment1}"
+                                                                /><i></i>対象
+                                                            </label>
+                                                        </th:block>
+                                                        <th:block th:unless="*{isMedicalTreatmentJudge1}">
+                                                            <input type="checkbox" hidden th:field="*{medicalTreatment1}" id="medicalTreatment1" />
+                                                            <input type="hidden" name="medicalTreatment1Substitute" id="medicalTreatment1Substitute" />
+                                                        </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment3Title" th:utext="*{medicalTreatment3Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge3}">
+                                                                <input type="hidden"
+                                                                       name="medicalTreatment3Substitute"
+                                                                       id="medicalTreatment3Substitute"/>
+                                                                <label class="c-form-control">
+                                                                    <input type="checkbox"
+                                                                           id="medicalTreatment3"
+                                                                           th:checked="*{medicalTreatment3}"
+                                                                           th:field="*{medicalTreatment3}"
+                                                                    /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge3}">
+                                                                <input type="checkbox" th:field="*{medicalTreatment3}" id="medicalTreatment3" />
+                                                                <input type="hidden" name="medicalTreatment3Substitute" id="medicalTreatment3Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col"> 
+                                                <dl class="c-dl-base dt_w180px" > 
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment2Title" th:utext="*{medicalTreatment2Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge2}">
+                                                                <input type="hidden"
+                                                                       name="medicalTreatment2Substitute"
+                                                                       id="medicalTreatment2Substitute"/>
+                                                                <label class="c-form-control">
+                                                                    <input type="checkbox"
+                                                                           id="medicalTreatment2"
+                                                                           th:checked="*{medicalTreatment2}"
+                                                                           th:value="*{medicalTreatment2}"
+                                                                           th:field="*{medicalTreatment2}"
+                                                                    /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge2}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment2}" id="medicalTreatment2" />
+                                                                <input type="hidden" name="medicalTreatment2Substitute" id="medicalTreatment2Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment4Title" th:utext="*{medicalTreatment4Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge4}">
+                                                                <input type="hidden"
+                                                                       name="medicalTreatment4Substitute"
+                                                                       id="medicalTreatment4Substitute"/>
+                                                                <label class="c-form-control">
+                                                                    <input type="checkbox"
+                                                                           id="medicalTreatment4"
+                                                                           th:checked="*{medicalTreatment4}"
+                                                                           th:value="*{medicalTreatment4}"
+                                                                           th:field="*{medicalTreatment4}"
+                                                                    /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge4}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment4}" id="medicalTreatment4" />
+                                                                <input type="hidden" name="medicalTreatment4Substitute" id="medicalTreatment4Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px" >
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment5Title" th:utext="*{medicalTreatment5Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                        <th:block th:if="*{isMedicalTreatmentJudge5}">
+                                                            <input type="hidden" name="medicalTreatment5Substitute" id="medicalTreatment5Substitute" />
+                                                            <label class="c-form-control">
+                                                                <input type="checkbox"
+                                                                       id="medicalTreatment5"
+                                                                       th:checked="*{medicalTreatment5}"
+                                                                       th:value="*{medicalTreatment5}"
+                                                                       th:field="*{medicalTreatment5}"
+                                                                /><i></i>対象
+                                                            </label>
+                                                        </th:block>
+                                                        <th:block th:unless="*{isMedicalTreatmentJudge5}">
+                                                            <input type="checkbox" hidden th:field="*{medicalTreatment5}" id="medicalTreatment5" />
+                                                            <input type="hidden" name="medicalTreatment5Substitute" id="medicalTreatment5Substitute" />
+                                                        </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment7Title" th:utext="*{medicalTreatment7Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge7}">
+                                                                <input type="hidden" name="medicalTreatment7Substitute" id="medicalTreatment7Substitute"/>
+                                                                <label class="c-form-control">
+                                                                    <input type="checkbox"
+                                                                           id="medicalTreatment7"
+                                                                           th:checked="*{medicalTreatment7}"
+                                                                           th:value="*{medicalTreatment7}"
+                                                                           th:field="*{medicalTreatment7}"
+                                                                    /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge7}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment7}" id="medicalTreatment7" />
+                                                                <input type="hidden" name="medicalTreatment7Substitute" id="medicalTreatment7Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w180px" >
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment6Title" th:utext="*{medicalTreatment6Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge6}">
+                                                                <input type="hidden" name="medicalTreatment6Substitute" id="medicalTreatment6Substitute"/>
+                                                                <label class="c-form-control">
+                                                                    <input type="checkbox"
+                                                                           id="medicalTreatment6"
+                                                                           th:checked="*{medicalTreatment6}"
+                                                                           th:value="*{medicalTreatment6}"
+                                                                           th:field="*{medicalTreatment6}"
+                                                                    /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge6}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment6}" id="medicalTreatment6" />
+                                                                <input type="hidden" name="medicalTreatment6Substitute" id="medicalTreatment6Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment8Title" th:utext="*{medicalTreatment8Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge8}">
+                                                                <input type="hidden" name="medicalTreatment8Substitute" id="medicalTreatment8Substitute"/>
+                                                                <label class="c-form-control">
+                                                                    <input type="checkbox"
+                                                                           id="medicalTreatment8"
+                                                                           th:checked="*{medicalTreatment8}"
+                                                                           th:value="*{medicalTreatment8}"
+                                                                           th:field="*{medicalTreatment8}"
+                                                                    /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge8}">
+                                                               <input type="checkbox" hidden th:field="*{medicalTreatment8}" id="medicalTreatment8" />
+                                                                <input type="hidden" name="medicalTreatment8Substitute" id="medicalTreatment8Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                    </div>
+
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px" >
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment9Title" th:utext="*{medicalTreatment9Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge9}">
+                                                                <input type="hidden" name="medicalTreatment9Substitute" id="medicalTreatment9Substitute"/>
+                                                                <label class="c-form-control">
+                                                                        <input type="checkbox"
+                                                                               id="medicalTreatment9"
+                                                                               th:checked="*{medicalTreatment9}"
+                                                                               th:value="*{medicalTreatment9}"
+                                                                               th:field="*{medicalTreatment9}"
+                                                                        /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge9}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment9}" id="medicalTreatment9" />
+                                                                <input type="hidden" name="medicalTreatment9Substitute" id="medicalTreatment9Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w180px" >
+                                                    <div class="edit-radio">
+                                                        <dt><span id="medicalTreatment10Title" th:utext="*{medicalTreatment10Title}" th:remove="tag"></span></dt>
+                                                        <dd>
+                                                            <input type="hidden" name="medicalTreatment10Substitute" id="medicalTreatment10Substitute"/>
+                                                            <th:block th:if="*{isMedicalTreatmentJudge10}">
+                                                                <label class="c-form-control">
+                                                                    <input type="checkbox"
+                                                                           id="medicalTreatment10"
+                                                                           th:checked="*{medicalTreatment10}"
+                                                                           th:value="*{medicalTreatment10}"
+                                                                           th:field="*{medicalTreatment10}"
+                                                                    /><i></i>対象
+                                                                </label>
+                                                            </th:block>
+                                                            <th:block th:unless="*{isMedicalTreatmentJudge10}">
+                                                                <input type="checkbox" hidden th:field="*{medicalTreatment10}" id="medicalTreatment10" />
+                                                                <input type="hidden" name="medicalTreatment10Substitute" id="medicalTreatment10Substitute" />
+                                                            </th:block>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25"> 
+                                            <div class="col mr25"> 
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt>その他</dt>
+                                                        <dd>
+                                                            <input type="text" class="readOnlyField medicalTreatmentMemo c-form-control w800px"
+                                                                   th:field="*{medicalTreatmentMemo}" maxlength="30"
+                                                                   th:errorclass="error">
+                                                            <div th:if="${#fields.hasErrors('medicalTreatmentMemo')}"
+                                                                 th:errors="*{medicalTreatmentMemo}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25"> 
+                                            <div class="col mr25"> 
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt class="w230px">医薬品・注射針販売区分&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{drugSalesTypeSubstitute}" id="drugSalesTypeSubstitute" />
+                                                            <select id="drugSalesType"
+                                                                    th:field="*{drugSalesType}"
+                                                                    class="pref c-form-control"
+                                                                    th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{drugSalesTypeItems}"
+                                                                        th:value="${item.key}"
+                                                                        th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{drugSalesType}"></option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('drugSalesType')}"
+                                                                 th:errors="*{drugSalesType}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt class="w230px">医療機器販売区分&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{medicalEquipmentSalesTypeSubstitute}" id="medicalEquipmentSalesTypeSubstitute" />
+                                                            <select id="medicalEquipmentSalesType"
+                                                                    th:field="*{medicalEquipmentSalesType}"
+                                                                    class="pref c-form-control"
+                                                                    th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{medicalEquipmentSalesTypeItems}"
+                                                                        th:value="${item.key}"
+                                                                        th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{medicalEquipmentSalesType}"></option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('medicalEquipmentSalesType')}"
+                                                                 th:errors="*{medicalEquipmentSalesType}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt class="w230px">歯科専用品販売区分&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{dentalMonopolySalesTypeSubstitute}" id="dentalMonopolySalesTypeSubstitute" />
+                                                            <select id="dentalMonopolySalesType"
+                                                                    th:field="*{dentalMonopolySalesType}"
+                                                                    class="pref c-form-control"
+                                                                    th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{dentalMonopolySalesTypeItems}"
+                                                                        th:value="${item.key}"
+                                                                        th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{dentalMonopolySalesType}"></option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('dentalMonopolySalesType')}"
+                                                                 th:errors="*{dentalMonopolySalesType}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent mt25">
+                                            <div class="col mr25">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt class="w230px">クレジット決済使用可否&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{creditPaymentUseFlagSubstitute}" id="creditPaymentUseFlagSubstitute" />
+                                                            <select id="creditPaymentUseFlag"
+                                                                    th:field="*{creditPaymentUseFlag}"
+                                                                    class="pref c-form-control"
+                                                                    th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{creditPaymentUseFlagItems}"
+                                                                        th:value="${item.key}"
+                                                                        th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{creditPaymentUseFlag}"></option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('creditPaymentUseFlag')}"
+                                                                 th:errors="*{creditPaymentUseFlag}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt class="w230px">代金引換使用可否&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{cashDeliveryUseFlagSubstitute}" id="cashDeliveryUseFlagSubstitute" />
+                                                            <select id="cashDeliveryUseFlag" class="c-form-control"
+                                                                    name="cashDeliveryUseFlag" th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{cashDeliveryUseFlagItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{cashDeliveryUseFlag}"></option>
+                                                            </select>
+                                                            <div id="cashDeliveryUseFlagError"
+                                                                 th:if="${#fields.hasErrors('cashDeliveryUseFlag')}"
+                                                                 th:errors="*{cashDeliveryUseFlag}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt class="w230px">月締請求使用可否&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{monthlyPayUseFlagSubstitute}" id="monthlyPayUseFlagSubstitute" />
+                                                            <select id="monthlyPayUseFlag" class="c-form-control"
+                                                                    name="monthlyPayUseFlag" th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{monthlyPayUseFlagItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{monthlyPayUseFlag}"></option>
+                                                            </select>
+                                                            <div id="monthlyPayUseFlagError"
+                                                                 th:if="${#fields.hasErrors('monthlyPayUseFlag')}"
+                                                                 th:errors="*{monthlyPayUseFlag}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt class="w230px">経理区分&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{accountingTypeSubstitute}" id="accountingTypeSubstitute" />
+                                                            <select id="accountingType" class="c-form-control"
+                                                                    name="accountingType" th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{accountingTypeItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{accountingType}"></option>
+                                                            </select>
+                                                            <div id="accountingTypeError"
+                                                                 th:if="${#fields.hasErrors('accountingType')}"
+                                                                 th:errors="*{accountingType}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w180px">
+                                                    <div class="edit">
+                                                        <dt class="w230px">コンビニ・郵便振込使用可否&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{transferPaymentUseFlagSubstitute}" id="transferPaymentUseFlagSubstitute" />
+                                                            <select id="transferPaymentUseFlag"
+                                                                    th:field="*{transferPaymentUseFlag}"
+                                                                    class="pref c-form-control"
+                                                                    th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{transferPaymentUseFlagItems}"
+                                                                        th:value="${item.key}"
+                                                                        th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{transferPaymentUseFlag}"></option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('transferPaymentUseFlag')}"
+                                                                 th:errors="*{transferPaymentUseFlag}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt class="w230px">口座自動引落使用可否&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{directDebitUseFlagSubstitute}" id="directDebitUseFlagSubstitute" />
+                                                            <select id="directDebitUseFlag" class="c-form-control"
+                                                                    name="directDebitUseFlag" th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{directDebitUseFlagItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{directDebitUseFlag}"></option>
+                                                            </select>
+                                                            <div id="directDebitUseFlagError"
+                                                                 th:if="${#fields.hasErrors('directDebitUseFlag')}"
+                                                                 th:errors="*{directDebitUseFlag}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt class="w230px">名簿区分&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{memberListTypeSubstitute}" id="memberListTypeSubstitute" />
+                                                            <select id="memberListType" class="c-form-control"
+                                                                    name="memberListType" th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{memberListTypeItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{memberListType}"></option>
+                                                            </select>
+                                                            <div id="memberListTypeError"
+                                                                 th:if="${#fields.hasErrors('memberListType')}"
+                                                                 th:errors="*{memberListType}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="edit">
+                                                        <dt class="w230px">オンラインログイン可否&nbsp;<span class="ico_required">必須</span></dt>
+                                                        <dd>
+                                                            <input type="hidden" th:field="*{onlineLoginAdvisabilitySubstitute}" id="onlineLoginAdvisabilitySubstitute" />
+                                                            <select id="onlineLoginAdvisability" class="c-form-control"
+                                                                    name="onlineLoginAdvisability" th:errorclass="error">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{onlineLoginAdvisabilityItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{onlineLoginAdvisability}"></option>
+                                                            </select>
+                                                            <div id="onlineLoginAdvisabilityError"
+                                                                 th:if="${#fields.hasErrors('onlineLoginAdvisability')}"
+                                                                 th:errors="*{onlineLoginAdvisability}" class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- 2023-renew No22 from here-->
+                            <article class="l-article" id="upload-image-container">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">確認書類画像</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <ul class="c-image-list">
+                                            <th:block th:each="item, stat: *{uploadFileModelList}"
+                                                th:unless="*{#lists.isEmpty(uploadFileModelList)}">
+                                                <li th:if="${!item.isDeleted}">
+                                                    <div th:if="${item.extensionType.value != '2'}" class="img imagePreviewer">
+                                                        <div class="photobox">
+                                                            <img class="c-pointer"
+                                                            th:onclick="previewImageClick([[${stat.index}]], [[${memberInfoUpdateModel.uploadFileModelList}]])"
+                                                                th:id="'upload-image-' + '-' + ${stat.index}"
+                                                                th:src="${item.filePath}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div  th:if="${item.extensionType.value == '2'}" class="img imagePreviewer">
+                                                          <a class="pdf-preview" target="_blank" th:href="${item.filePath}">
+                                                              <img th:src="@{/assets/images/pdf-icon.png}">
+                                                               <div th:text="${item.originName}"></div>
+                                                          </a>
+                                                    </div>
+                                                    <button class="c-btn-icon c-btn-white" type="button"
+                                                              th:onClick="'deleteUpload(' + ${item.fileNo} + ')'">
+                                                        <i class="material-icons clear"></i>
+                                                    </button>
+                                                    <input type="hidden" th:id="'imagePath' + '-' + ${stat.index}"
+                                                             th:name="'uploadFileModelList[' + ${stat.index} + '].imagePath'"
+                                                             th:value="${item.filePath}"/>
+                                                </li>
+                                            </th:block>
+                                            <input type="hidden" id="selectFileNo" th:field="*{fileNo}"/>
+                                            <input type="submit" id="doDeleteFile" name="doDeleteFile" style="display: none">
+                                        </ul>
+                                        <input type="file" id="imagePdfUpload" th:field="*{uploadFiles}"
+                                            th:errorclass="error"
+                                            accept="image/png, image/jpeg, application/pdf" multiple hidden/>
+                                        <div class="file_drop" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
+                                            <img src="/admin/assets/images/icon/file_up.svg" alt="">
+                                            <div class="txt">ここにファイルをドロップ　または</div>
+                                            <button class="c-btn btn_back" type="button" onclick="openUploadImage();">
+                                                ファイルを選択
+                                            </button>
+                                            <input class="c-btn btn_regular ml10 w160px"
+                                                   id="doUploadFile" name="doUploadFile"
+                                                   type="submit" value="画像アップロード" style="display: none;"/>
+                                        </div>
+                                        <div id="error-upload-message" class="c-error-txt mt5">
+                                            <div th:if="${#fields.hasErrors('uploadFiles')}"
+                                            th:errors="*{uploadFiles}" class="c-error-txt mt5"></div>
+                                        </div>
+                                   </div>
+                                </div>
+                            </article>
+                            <!-- 2023-renew No22 to here-->
+
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">管理用メモ</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner"> 
+                                    <div class="l-inner_wrap">
+                                     <dl class="c-dl-base dt_w180px">
+                                         <textarea class="c-form-control w100p" rows="6" th:field="*{memo}"
+                                                   placeholder="入力してください" th:errorclass="error"></textarea>
+                                         <div id="memoErr"th:if="${#fields.hasErrors('memo')}"
+                                                          th:errors="*{memo}" class="c-error-txt mt5"></div>
+                                    </dl>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">反社会的勢力でないことの保証</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-base">
+                                            <div class="edit-radio">
+                                                <dt class="w700px">暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。</dt>
+                                                <dd>
+                                                    <label class="c-form-control">
+                                                        <input type="checkbox" name="noAntiSocialFlag"
+                                                               th:field="*{noAntiSocialFlag}"
+                                                               th:value="*{noAntiSocialFlag}"
+                                                               th:checked="*{noAntiSocialFlag}"/>
+                                                        <i></i>保証する
+                                                    </label>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">情報提供</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-base dt_w180px">
+                                          <div>
+                                              <dt>メールによるおトク情報</dt>
+                                              <dd>
+                                                  <input type="hidden" th:field="*{sendMailSubstitute}" id="sendMailSubstitute" />
+                                                  <label class="c-form-control disabled-checkbox">
+                                                      <input id="sendMail" type="checkbox"
+                                                             th:value="*{sendMail}"
+                                                             th:field="*{sendMail}"
+                                                             th:checked="*{sendMail}"
+                                                      ><i></i>希望する</label>
+                                              </dd>
+                                          </div>
+                                          <div class="wrap_flex_equivalent">
+                                              <div class="col mr25">
+                                                  <dl class="c-dl-base dt_w180px">
+                                                    <div>
+                                                      <dt>FAXによるおトク情報</dt>
+                                                      <dd>
+                                                          <input type="hidden" th:field="*{sendFaxSubstitute}" id="sendFaxSubstitute" />
+                                                          <label class="c-form-control disabled-checkbox">
+                                                              <input id="sendFax" type="checkbox"
+                                                                     th:value="*{sendFax}"
+                                                                     th:field="*{sendFax}"
+                                                                     th:checked="*{sendFax}"
+                                                              ><i></i>希望する</label>
+                                                      </dd>
+                                                      </div>
+                                                   </dl>
+                                              </div>
+                                              <div class="col">
+                                                  <dl class="c-dl-base dt_w180px">
+                                                    <div>
+                                                  <dt>DMによるおトク情報</dt>
+                                                  <dd>
+                                                      <input type="hidden" th:field="*{sendDirectMailSubstitute}" id="sendDirectMailSubstitute" />
+                                                      <label class="c-form-control disabled-checkbox">
+                                                          <input id="sendDirectMail" type="checkbox"
+                                                                 th:value="*{sendDirectMail}"
+                                                                 th:field="*{sendDirectMail}"
+                                                                 th:checked="*{sendDirectMail}"
+                                                          ><i></i>希望する</label>
+                                                  </dd>
+                                              </div>
+                                                  </dl>
+                                              </div>
+                                          </div>
+                                          <div>
+                                              <dt>金属商品価格お知らせメール</dt>
+                                              <dd>
+                                                  <input type="hidden" name="metalPermitFlagSubstitute" id="metalPermitFlagSubstitute" />
+                                                  <label class="c-form-control disabled-checkbox">
+                                                      <input id="metalPermit" type="checkbox"
+                                                             th:value="*{metalPermit}"
+                                                             th:field="*{metalPermit}"
+                                                             th:checked="*{metalPermit}"
+                                                      ><i></i>希望する</label>
+                                              </dd>
+                                          </div>
+                                          <!-- 2023-renew No79 from here -->
+                                          <div>
+                                              <dt>ご注文受付完了メール</dt>
+                                              <dd>
+                                                  <input type="hidden" name="orderCompletePermitFlagSubstitute" id="orderCompletePermitFlagSubstitute" />
+                                                  <label class="c-form-control disabled-checkbox">
+                                                      <input id="orderCompletePermit" type="checkbox"
+                                                             th:value="*{orderCompletePermit}"
+                                                             th:field="*{orderCompletePermit}"
+                                                             th:checked="*{orderCompletePermit}"
+                                                      ><i></i>希望する</label>
+                                              </dd>
+                                          </div>
+                                          <div>
+                                              <dt>商品発送完了メール</dt>
+                                              <dd>
+                                                  <input type="hidden" name="deliveryCompletePermitFlagSubstitute" id="deliveryCompletePermitFlagSubstitute" />
+                                                  <label class="c-form-control disabled-checkbox">
+                                                      <input id="deliveryCompletePermit" type="checkbox"
+                                                             th:value="*{deliveryCompletePermit}"
+                                                             th:field="*{deliveryCompletePermit}"
+                                                             th:checked="*{deliveryCompletePermit}"
+                                                      ><i></i>希望する</label>
+                                              </dd>
+                                          </div>
+                                          <!-- 2023-renew No79 to here -->
+                                      </dl>
+                                     </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="l-section_side" >
+                        <input type="hidden" th:field="*{approveStatusFlag}" />
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">会員状態情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-base dt_w180px">
+                                            <div class="edit-radio">
+                                                <dt>状態</dt>
+                                                <dd>
+                                                    <span th:text="*{#enumtype.getLabel('HTypeMemberInfoStatus', memberInfoStatus)}" th:remove="tag"></span>
+                                                </dd>
+                                            </div>
+                                            <div class="edit-radio">
+                                                <dt>入会日</dt>
+                                                <dd>
+                                                    <span th:text="*{admissionYmd}" th:remove="tag"></span>
+                                                </dd>
+                                            </div>
+                                            <div class="edit-radio">
+                                                <dt>退会日</dt>
+                                                <dd>
+                                                    <span th:text="*{secessionYmd}" th:remove="tag"></span>
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>登録日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(registTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>更新日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(updateTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>アカウントロック状態</dt>
+                                                <dd th:if="*{accountLock}">ロック</dd>
+                                                <dd th:if="*{!accountLock}">正常</dd>
+
+                                                <dd th:if="*{accountLockTime}" class="w30p">
+                                                    <button type="submit" name="doOnceUnLock"
+                                                            th:onclick="return simpleUnlockAccountConfirm()"
+                                                            class="c-btn-small btn_back">ロック解除
+                                                    </button>
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>アカウントロック日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(accountLockTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>ログイン失敗回数</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{loginFailureCount}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>オンライン登録状態</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#enumtype.getLabel('HTypeOnlineRegistFlag', onlineRegistFlag)}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>承認状態 <span class="ico_required">必須</span></dt>
+                                                <dd>
+                                                    <input type="hidden" th:field="*{approveStatusSubstitute}" id="approveStatusSubstitute" />
+                                                    <select id="approveStatus"
+                                                            th:field="*{approveStatus}"
+                                                            class="pref c-form-control"
+                                                            th:errorclass="error">
+                                                        <option value="">選択してください</option>
+                                                        <option th:each="item : *{approveStatusItems}"
+                                                                th:value="${item.key}"
+                                                                th:text="${item.value}"
+                                                                th:selected="${item.key} == *{approveStatus}"></option>
+                                                    </select>
+                                                    <div th:if="${#fields.hasErrors('approveStatus')}"
+                                                         th:errors="*{approveStatus}" class="c-error-txt mt5"></div>
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>顧客番号・パスワード通知メール送信</dt>
+                                                <dd>
+                                                    <label class="c-form-control disabled-checkbox">
+                                                        <input type="hidden" name="sendNoticeMailFlagSubstitute" id="sendNoticeMailFlagSubstitute" />
+                                                        <input id="sendNoticeMailFlag" type="checkbox"
+                                                               value="1"
+                                                               th:field="*{sendNoticeMailFlag}"
+                                                               th:checked="*{sendNoticeMailFlag eq true}"
+                                                        ><i></i>送信する</label>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">最終ログイン情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-nobase">
+                                            <div>
+                                                <dt>日時</dt>
+                                                <dd class="c-times_inner"
+                                                    th:text="*{#date.convert(lastLoginTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>デバイス</dt>
+                                                <th:block th:if="*{lastLoginDeviceType}">
+                                                    <dd th:text="*{lastLoginDeviceType != null} ? *{lastLoginDeviceType.label} : ''"></dd>
+                                                </th:block>
+                                            </div>
+                                            <div>
+                                                <dt>ユーザーエージェント</dt>
+                                                <dd th:text="*{lastLoginUserAgent}"></dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">パスワード</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <dl class="c-dl-nobase">
+                                            <div>
+                                                <dt>パスワード</dt>
+                                                <dd>
+                                                    <input type="password" class="c-form-control w100p" autocomplete="tel"
+                                                           th:field="*{memberInfoPassword}" maxlength="20"
+                                                           th:errorclass="error">
+                                                    <div th:if="${#fields.hasErrors('memberInfoPassword')}"
+                                                         th:errors="*{memberInfoPassword}"
+                                                         class="c-error-txt mt5">abcasdf</div>
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>ログイン時パスワード変更</dt>
+                                                <dd>
+                                                    <label class="c-form-control disabled-checkbox">
+                                                        <input id="passwordNeedChangeFlag" type="checkbox"
+                                                               value="1"
+                                                               th:field="*{passwordNeedChange}"
+                                                               th:checked="*{passwordNeedChange eq true}"
+                                                        ><i></i>要求する</label>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <a class="c-btn btn_back icon_left"
+                                   th:href="@{/memberinfo/details/(memberInfoSeq=*{memberInfoSeq})}">
+                                    <i class="material-icons navigate_before"></i>戻る
+                                </a>
+                            </div>
+                            <div class="col_left">
+                                <input type="hidden" id="isConfirmBtnClicked" value="false"/>
+                                <button class="c-btn btn_regular" type="submit" onclick="clickConfirm()" name="doConfirm" id="doConfirm">確認
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+<!--2023-renew No22 from here-->
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content-container">
+        <div class="modal-content">
+            <iframe id="pdf-viewer" title="webviewer" frameborder="0" width="800" height="900"></iframe>
+            <img class="" id="modal-img">
+            <div class="modal-footer">
+                <div class="modal-paging"></div>
+                <div class="modal-paging">
+                    <span onclick="closeModel()" class="c-pointer t_underline">Close</span> of <b>Esc Key</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--2023-renew No22 to here-->
+<script type="text/javascript">
+    var zipsearch = new Zipsearch();
+    function callZipSearchFunc(name, self) {
+
+        if (name === 'memberZip') {
+            zipsearch.zipCodeSearchPrefectureNameReturn(false,$id('memberInfoPrefecture'),$id('memberInfoAddress1'),$id('memberInfoAddress2'),$id('memberInfoAddress3'),$id('memberInfoZipCode'),$id('memberInfoZipErrorMsg'));
+        } else {
+            zipsearch.zipCodeSearchPrefectureNameReturn(false,$id('receiverPrefecture'),$id('receiverAddress1'),$id('receiverAddress2'),$id('receiverAddress3'),$id('receiverZipCode'),$id('receiverZipErrorMsg'));
+        }
+        remove($("#memberInfoAddress1"));
+        remove($("#memberInfoAddress2"));
+        remove($("#memberInfoPrefecture"));
+    }
+
+    function remove(elInput) {
+        if (elInput.hasClass('error')) {
+            // 自分のerrorクラスを削除
+            elInput.removeClass('error');
+
+            // 該当項目のエラーメッセージを削除
+            // 以下の汎用的な実装だと全パターンが対応されていない（エラーメッセージ出力のdiv構成によって異なるため）
+            // 一旦、サンプルとして、一番多いパターンを対象し実装してみる
+            // 今後は、エラーメッセージ出力のdivに対象項目に紐付ける「id」を付与されば、全パターンが対応可能
+            var errorMsgDiv = elInput.parent().find('div.c-error-txt')[0];
+            if (typeof errorMsgDiv !== "undefined" && errorMsgDiv !== null) {
+                errorMsgDiv.remove();
+            } else {
+                errorMsgDiv = document.getElementById(elInput.id + 'Error');
+                if (typeof errorMsgDiv !== "undefined" && errorMsgDiv !== null) {
+                    errorMsgDiv.remove();
+                }
+            }
+
+            // 親articleのerrorクラスを確認・削除
+            removeParentArticleError(elInput);
+        }
+    }
+    /* Window Onload
+  -----------------------------------------------------------*/
+    jQuery(function($){
+        setAllConsultation();
+    });
+/* -----------------------------------------------------------*/
+
+    // 2023-renew No22 from here
+    function openUploadImage() {
+        reverseDisabledValue();
+        document.getElementById('imagePdfUpload').click()
+    }
+
+    function uploadAction(files) {
+        if (validate(files)) {
+            document.getElementById("doUploadFile").click();
+        }
+    }
+    function validate(files) {
+        const acceptExtensionList = document.getElementById('imagePdfUpload').accept
+        const maxSize = 1024 * 1024 * 5
+        for (const file of files) {
+            if (file.size > maxSize) {
+                document.getElementById("imagePdfUpload").value = null
+                showErrorUploadMessage('アップロードできるファイルは5MB以下となります。')
+                return false
+            }
+        }
+        showErrorUploadMessage('')
+        return true
+    }
+    function showErrorUploadMessage(msg) {
+        document.getElementById('error-upload-message').innerText = msg
+        document.getElementById('upload-image-container').classList.add('error')
+        if (msg) {
+            document.getElementById('error-upload-message').style.visibility = 'visible'
+        } else {
+            document.getElementById('error-upload-message').style.visibility = 'hidden'
+        }
+    }
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function onload() {
+        const imagePdfUpload = document.querySelector('#imagePdfUpload');
+        // ファイル選択のイベントをハンドリング
+        imagePdfUpload.addEventListener('change', (ev) => {
+            // 全てのファイルを取得
+            const files = imagePdfUpload.files;
+            uploadAction(files)
+        })
+    }
+
+    onload()
+
+    function dragDrop(ev) {
+        ev.preventDefault();
+        $("#imagePdfUpload").prop("files", ev.dataTransfer.files).change();
+        if (validate(ev.dataTransfer.files)) {
+            document.getElementById("doUploadFile").click();
+        }
+    }
+
+    function deleteUpload(imageNo) {
+        document.getElementById('selectFileNo').value = imageNo
+        document.getElementById('doDeleteFile').click();
+    }
+
+    const modal = document.getElementById("modal-overlay");
+    const modalImg = document.getElementById("modal-img");
+    const pdfViewer = document.getElementById('pdf-viewer')
+
+    document.addEventListener('keydown', keyDownHandler)
+    document.addEventListener('click', handleClickOutsideBox)
+
+    function handleClickOutsideBox(event) {
+        const target = event.target
+        if (target.classList.contains('modal-content-container')) {
+           closeModel()
+        }
+    }
+
+    function previewImageClick(index, list) {
+        const ext = list[index].fileName.split('.').pop().toLowerCase();
+        const path = list[index].filePath
+        if (ext.includes('pdf')) {
+            pdfViewer.src = path
+            pdfViewer.style.display = 'block'
+            modalImg.style.display = 'none'
+        } else {
+            modalImg.src = path;
+            pdfViewer.style.display = 'none'
+            modalImg.style.display = 'block'
+        }
+
+        modal.style.display = "block";
+
+    }
+
+    function closeModel() {
+        modal.style.display = "none";
+    }
+
+    function keyDownHandler(event) {
+        if (modal.style.display === 'block' && event.key === 'Escape') {
+            closeModel()
+        }
+    }
+
+    function clickConfirm() {
+        reverseDisabledValue()
+        const uploadImageContainer = document.getElementById('upload-image-container')
+        if (uploadImageContainer.classList.contains('error')) {
+            uploadImageContainer.classList.remove('error')
+        }
+        document.getElementById('doConfirm').click()
+    }
+    // 2023-renew No22 to here
+</script>
+</body>
+</html>

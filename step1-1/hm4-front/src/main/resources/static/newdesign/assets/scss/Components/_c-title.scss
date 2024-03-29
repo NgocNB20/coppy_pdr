@@ -1,0 +1,153 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-title {
+
+  // ページ タイトル
+  &-page {
+    margin-bottom: 50px;
+    @include font-style(18, 36, normal);
+
+    strong {
+      @include font-style(26, 36, normal);
+    }
+
+    @include media(sm) {
+      margin: 0 vwset(20) vwset(30);
+      @include font-style(17, 30, normal);
+
+      strong {
+        @include font-sp-style(24, 30);
+      }
+    }
+
+  }
+
+  // 吹き出しタイトル
+  &-bubble {
+    display: inline-block;
+    position: relative;
+    border: solid 1px $color-a1;
+    border-radius: 9999px;
+    padding: 4px 17px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 42px;
+      transform: skew(45deg);
+      width: 8px;
+      height: 9px;
+      border-left: solid 1px #8e8e8e;
+      background-color: $color-fff;
+    }
+
+    @include media(sm) {
+      padding: vwset(5) vwset(30);
+    }
+
+  }
+
+  // コンテンツ タイトル
+  &-contents {
+    margin-block: 71px 73px;
+    text-align: center;
+    @include font-style(26,40);
+    color: $color-000;
+
+    @include media(sm) {
+      margin-block: vwset(50);
+      @include font-sp-style(22,24);
+    }
+  }
+
+  // フォーム系 タイトル大
+  &-form {
+
+    margin-block: 50px;
+    padding-bottom: 17px;
+    border-bottom: solid 5px $color-orange-lightGray;
+
+    &__inner {
+      @include width(1600px, 20px, vwset(10));
+    }
+
+    &__text {
+      @include font-style(20,40,bold);
+    }
+
+    @include media(sm) {
+      margin-block: vwset(22);
+      padding-bottom: vwset(20);
+
+      &__text {
+        @include font-sp-style(20);
+      }
+
+    }
+    
+  }
+
+  // フォーム系 タイトル中
+  &-form-m {
+    padding-block: 70px 30px;
+    display: inline-grid;
+    grid-auto-flow: column;
+    gap: 20px;
+    align-items: center;
+    @include font-style(20,40,500);
+
+    // フォーム系 タイトル中 下の文章
+    + p {
+      @include font-style(16,30);
+      margin-block: -10px 35px;
+    }
+
+
+    @include media(sm) {
+
+      padding: vwset(50) vwset(20) vwset(25);
+      gap: vwset(15);
+      @include font-sp-style(17,30,bold);
+
+      // フォーム系 タイトル中 下の文章
+      + p {
+        @include font-sp-style(14,22);
+        margin: vwset(-10) vwset(20) vwset(30);
+      }
+
+      &--line {
+        position: relative;
+  
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: vwset(375);
+          height: 5px;
+          background: $color-orange-lightGray;
+        }
+      }
+    }
+
+    &--first {
+      padding-top: 0;
+    }
+
+    &--reserve {
+      gap: 10px;
+      color: $color-primary;
+      background: $color-orange-light;
+    }
+
+
+  }
+
+
+  
+
+}

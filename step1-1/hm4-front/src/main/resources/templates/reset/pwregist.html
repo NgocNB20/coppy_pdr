@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-reset">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">パスワードを忘れた場合</span></div>
+                </div>
+            </div>
+        </div>
+
+        <form id="pwregistForm" th:action="@{/reset/pwregist.html}" th:object="${resetPwregistModel}" method="post">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>パスワードを忘れた場合</strong></h2>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">パスワードの変更</h3>
+                </div>
+            </div>
+
+            <th:block th:if="*{!isErrorUrl()}">
+                <div class="l-section">
+                    <div class="l-section__inner">
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">新しいパスワードを入力し、「変更する」ボタンを押すとパスワードが変更されます。</p>
+                            <p class="c-page-description__text c-page-description--margin-m"><span class="c-require">必須</span>は、必須項目です。</p>
+                        </div>
+                        <div class="l-form">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt><p><span>新しいパスワード</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <span class="l-form__password p-reset__password-1">
+                                                <input type="password" id="memberInfoNewPassWord" th:field="*{memberInfoNewPassWord}"
+                                                       title="新しいパスワード"  maxlength="20" class="c-input c-input--width-l js-password-input"
+                                                       th:errorclass="c-input--error">
+                                                <button name="" type="button" class="c-textlink c-textlink--text c-textlink--large c-textlink--password js-password-btn">
+                                                  <span></span><p>パスワードを表示</p>
+                                                </button>
+                                            </span>
+                                            <span class="l-form__list-memo">（半角英数記号6～20文字）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoNewPassWord')}"
+                                              th:errors="*{memberInfoNewPassWord}" class="c-field-error c-field-error--top"></span>
+
+                                        <div class="l-form__list-text l-form__list-text--margin"><strong>▼  確認のためパスワードを再入力してください。</strong></div>
+                                        <p>
+                                            <span class="l-form__password p-reset__password-2">
+                                                <input type="password" id="memberInfoNewPassWordConfirm" th:field="*{memberInfoNewPassWordConfirm}"
+                                                       title="新しいパスワード（確認）" maxlength="20" class="c-input c-input--width-l js-password-input"
+                                                       th:errorclass="c-input--error">
+                                                <button name="" type="button" class="c-textlink c-textlink--text c-textlink--large c-textlink--password js-password-btn">
+                                                    <span></span><p>パスワードを表示</p>
+                                                </button>
+                                            </span>
+                                            <span class="l-form__list-memo">（半角英数記号6～20文字）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoNewPassWordConfirm')}"
+                                              th:errors="*{memberInfoNewPassWordConfirm}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="c-form-lower__text">
+                                半角英数記号6文字以上20文字以内（推奨8文字以上）<br>
+                                ※数字のみ、同じ文字の連続を避け、第三者に推測されにくいものを設定してください。<br>（×悪い例：123456、password、taro123）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-button-wrap">
+                    <button id="doOncePassWordReset" name="doOncePassWordReset" type="submit" class="c-button c-button--primary c-button--width-l">変更する</button>
+                </div>
+            </th:block>
+        </form>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>

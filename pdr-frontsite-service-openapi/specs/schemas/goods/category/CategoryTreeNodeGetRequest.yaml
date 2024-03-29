@@ -1,0 +1,40 @@
+type: object
+description: カテゴリ木構造取得リクエスト
+properties:
+  categoryId:
+    type: string
+    description: カテゴリID
+    example: 1
+  categorySeqList:
+    type: array
+    description: カテゴリSEQリスト
+    items:
+      type: integer
+      format: int32
+      example: 1000
+  maxHierarchical:
+    type: integer
+    format: int32
+    description: 最大表示階層数
+    example: 1
+  siteType:
+    type: string
+    description: サイト区分
+    example: 1
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 1
+  notInCategoryIdList:
+    type: array
+    description: 公開状態
+    items:
+      type: string
+  orderField:
+    type: string
+    description: 並替項目
+    example: registTime
+  orderAsc:
+    type: boolean
+    description: 並替昇順フラグ
+    example: true

@@ -1,0 +1,11 @@
+type: object
+description: カート共通情報レスポンス
+properties:
+  cartGoodsSumCount:
+    type: number
+    description: 商品合計点数
+    example: 1
+  cartGoodsSumPrice:
+    type: number
+    description: 商品合計金額
+    example: 1

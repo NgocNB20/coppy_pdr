@@ -1,0 +1,164 @@
+<!-- PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+</head>
+
+<body id="d_guide">
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="law"><span><!--MAIN--></span>
+                    <div class="gSection mt0">
+                        <h3 class="mTitle">特定商取引に基づく表記</h3>
+                        <div id="d_gsn">
+                            <ul>
+                                <li><a th:href="@{/guide/law.html#l1}" id="go-Law-1">会社名</a></li>
+                                <li><a th:href="@{/guide/law.html#l2}" id="go-Law-2">代表者</a></li>
+                                <li><a th:href="@{/guide/law.html#l3}" id="go-Law-3">所在地・電話番号</a></li>
+                                <li><a th:href="@{/guide/law.html#l4}" id="go-Law-4">商品代金以外の必要料金</a></li>
+                                <li><a th:href="@{/guide/law.html#l5}" id="go-Law-5">お支払いについて</a></li>
+                                <li><a th:href="@{/guide/law.html#l6}" id="go-Law-6">支払方法・支払期限</a></li>
+                                <li><a th:href="@{/guide/law.html#l7}" id="go-Law-7">お届けについて</a></li>
+                                <li><a th:href="@{/guide/law.html#l8}" id="go-Law-8">返品・交換について</a></li>
+                                <li><a th:href="@{/guide/law.html#l9}" id="go-Law-9">消費税について</a></li>
+                                <li><a th:href="@{/guide/law.html#l10}" id="go-Law-10">Eメールアドレス</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="l1" class="gSection">
+                        <h4 class="subGTitle">会社名</h4>
+                        <div class="subGsection">
+                            <p>株式会社ピーディーアール</p>
+                        </div>
+                    </div>
+                    <div id="l2" class="gSection">
+                        <h4 class="subGTitle">代表者</h4>
+                        <div class="subGsection">
+                            <p>代表取締役 仲谷公司</p>
+                        </div>
+                    </div>
+                    <div id="l3" class="gSection">
+                        <h4 class="subGTitle">所在地・電話番号</h4>
+                        <div class="subGsection">
+                            <p>
+                                愛知県名古屋市天白区原４－１０６<br/>
+                                TEL:052-846-2727（代表電話）
+                            </p>
+                        </div>
+                    </div>
+                    <div id="l4" class="gSection">
+                        <h4 class="subGTitle">商品代金以外の必要料金</h4>
+                        <div class="subGsection">
+                            <p>ご注文商品の合計金額が5,800円未満（税別）の場合には、送料として全国一律800円（税別）をご購入金額に加算させていただきます。</p>
+                        </div>
+                    </div>
+                    <div id="l5" class="gSection">
+                        <h4 class="subGTitle">お支払いについて</h4>
+                        <div class="subGsection">
+                            <p>コンビニ・郵便振込・スマホ決済、代金引換、口座自動引落、クレジットカード決済の4種類をご用意しています。</p>
+                        </div>
+                    </div>
+                    <div id="l6" class="gSection">
+                        <h4 class="subGTitle">支払方法・支払期限</h4>
+                        <div class="subGsection">
+                            <h5 class="subGGTitle">コンビニ・郵便振込・スマホ決済</h5>
+                            <p>商品発送日より30日以内にお支払いください。</p>
+                            <h5 class="subGGTitle">代金引換</h5>
+                            <p>商品配達時に、配達ドライバーに代金をお支払いいただく方法です。</p>
+                            <h5 class="subGGTitle">口座自動引落</h5>
+                            <p>ご指定の口座から1カ月分の代金をまとめてお引き落としする方法です。毎月20日締（発送日基準）の翌月6日引き落としです。</p>
+                            <h5 class="subGGTitle">クレジットカード決済</h5>
+                            <p>ご注文ごとに決済させていただきます。ご請求日は各カード会社により異なります。</p>
+                        </div>
+                    </div>
+                    <div id="l7" class="gSection">
+                        <h4 class="subGTitle">お届けについて</h4>
+                        <div class="subGsection">
+                            <p>
+                                ご指定がない場合、２～３日以内に発送致します。<br/>
+                                品切れ等で発送が遅れる場合は、ご連絡させていただきます。
+                            </p>
+                        </div>
+                    </div>
+                    <div id="l8" class="gSection">
+                        <h4 class="subGTitle">返品・交換について</h4>
+                        <div class="subGsection">
+                            <p>
+                                品質不良や初めてご購入いただいた商品でサイズが合わない、使い勝手が思ったものと違うなどの場合、ご購入から３ヶ月以内であれば、返品・交換を承ります。(返送料弊社負担)<br/>
+                                その際、ぜひ理由をお聞かせください。今後の商品、サービス改善のための貴重なご意見として参考にさせていただきます。<br/>
+                                お客様のご注文間違い・ご都合による場合は、ご購入から３ヶ月以内の未開封商品のみ返品・交換を承ります。<br/>
+                                この場合、返送料はお客様にご負担いただきます。返品前にカスタマーサービスデスク（TEL：0120-108394）までご連絡ください。<br/>
+                                （インターネットでの返品・交換の受付は承っておりません。）
+
+                            </p>
+                            <p>
+                                <strong class="gpText">●返品をお受けできない商品</strong><br/>
+                                ・在庫処分品<br/>
+                                ・アウトレット品<br/>
+                                ・名入れ印刷済商品<br/>
+                                ・使用期限を過ぎた商品<br/>
+                                ・経年劣化とみられる商品<br/>
+                                ・食品<br/>
+                                ・お試しの範囲を超えて消費された商品<br/>
+                                ・時価商品<br/>
+                                ・医薬品<br/>
+                                ・返品不可マークのついている商品<br/>
+                                ・その他　返品不可として販売した商品
+                            </p>
+                        </div>
+                    </div>
+                    <div id="o3" class="gSection">
+                        <h4 class="subGTitle">キャンセルについて </h4>
+                        <div class="subGsection">
+                            <p>
+                                弊社が発送準備を行うまでは、ご注文デスク（TEL：0120−108648）にてキャンセルを承ることが可能です。（ただし名入れ商品・直送商品は除く）
+                                また、ご注文受付完了後すぐに発送準備に入るため、その注文当日の連絡でも、一旦受け取って頂いてからの返品をお願いしています。 <br/>
+                                ※上記「返品・交換について」の「返品をお受けできない商品」に記載の通り、返品不可商品がございますのでご注意ください。 <br/>
+                                ※「セールde予約」のキャンセルは、お届けの1週間前まで可能です。 </p>
+
+                        </div>
+                    </div>
+                    <div id="l9" class="gSection">
+                        <h4 class="subGTitle">消費税について</h4>
+                        <div class="subGsection">
+                            <p>
+                                弊社では、お客様が一般消費者ではないことから、現時点では消費税総額表示は行っておりません。<br/>
+                                （消費税総額表示の義務付けは事業者間取引における価格表示は対象となりません。）商品代金の他、消費税を頂戴いたしますので、ご了承ください。
+                            </p>
+                        </div>
+                    </div>
+                    <div id="l10" class="gSection">
+                        <h4 class="subGTitle">Eメールアドレス</h4>
+                        <div class="subGsection">
+                            <p>
+                                onlineshop@pdr.co.jp
+                            </p>
+                        </div>
+                    </div>
+
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

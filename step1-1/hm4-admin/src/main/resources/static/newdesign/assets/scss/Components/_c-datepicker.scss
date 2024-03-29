@@ -1,0 +1,343 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.c-datepicker {
+  display: inline-block;
+  position: relative;
+
+  input {
+    width: 100%;
+    background: url(/ec/shop/sttc/static/assets/images/icon/calendar.svg) no-repeat;
+    background-size: 22px auto;
+    background-position: top 50% right 17px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @include media(sm) {
+
+        background-size: vwset(15) auto;
+        background-position: top 50% right 10px
+    }
+  }
+
+}
+
+// ui-datepicker （ overwrite the jquery-ui.min.css ）
+// -----------------------------------------------------------------
+
+.ui-datepicker {
+  box-shadow: 1px 0 3px rgba($color: $color-000, $alpha: .2);
+  padding: 15px 0 20px;
+  z-index: 9 !important;
+
+  .ui-widget-header {
+      border: 0;
+      background-color: $color-fff;
+      margin-bottom: 5px;
+  }
+
+
+  // pager
+  .ui-datepicker-prev,
+  .ui-datepicker-next {
+    border: 0;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    text-decoration: none;
+    transform: translateY(-50%);
+
+    span {
+      display: none;
+    }
+
+    &::before,
+    &::after {
+      // font-size: 26px;
+      // color: #283246;
+    }
+
+    &:hover {
+      background: none;
+      opacity: 1;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        color: #2F6BCC; 
+      }
+    }
+
+  }
+
+  .ui-datepicker-prev {
+    left: 10px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      @include icon('arrow-left', 'a1a1a1');
+      background-size: 10px auto;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .ui-datepicker-next {
+    right: 10px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      @include icon('arrow-right', 'a1a1a1');
+      background-size: 10px auto;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // title
+  .ui-datepicker-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin: 0;
+    padding: 0 30px;
+    line-height: 1.5;
+
+    &::after {
+      content: "月";
+    }
+  }
+
+  // month / year
+  select.ui-datepicker-month,
+  select.ui-datepicker-year {
+    font-size: 14px;
+    height: 32px;
+    line-height: normal;
+    margin-right: 5px;
+    padding: 0 25px 0 8px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    appearance: none;
+    @include icon('arrow-down', '666666');
+    background-size: 9px auto;
+    background-position: center right 8px;
+    text-align: left;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  select.ui-datepicker-year {
+    width: 70px;
+  }
+
+  select.ui-datepicker-month {
+    width: 55px;
+    margin-left: 10px;
+  }
+
+  // table
+  table {
+    width: 84%;
+    margin: 0 auto;
+    font-size: 14px;
+
+    td {
+      font-weight: normal;
+      padding-block: 2px;
+    }
+
+    th {
+      padding: 0.5em 0.3em;
+    }
+
+    .ui-state-default {
+      color: $color-666;
+      text-align: center;
+      border: 0;
+      background: none;
+      border-radius: 4px;
+      padding: 4px;
+    }
+
+    a.ui-state-default:hover {
+      color: $color-primary;
+      background: $color-orange-lightGray;
+    }
+
+    .ui-state-active {
+      background: $color-primary !important;
+      color: $color-fff !important;
+    }
+
+    .ui-state-highlight {
+      color: $color-primary;
+      background: $color-orange-lightGray;
+    }
+
+
+
+
+  }
+
+  // 
+  .ui-widget-content {
+    padding: 0 10px;
+
+    .ui-state-default {
+      border: none;
+      background: none;
+    }
+
+    .ui-priority-secondary {
+      opacity: 1;
+    }
+  }
+  
+  .ui-datepicker-buttonpane button {
+    margin: 10px 0;
+    @include font-style(14,20,normal);
+    color: $color-333;
+  }
+
+
+
+}
+
+
+// ui-widget , ui-dialog , ui-button （ overwrite the jquery-ui.min.css ）
+// -----------------------------------------------------------------
+.ui-widget {
+  font-family: $fontFamily;
+
+  * {
+    font-family: $fontFamily !important;
+  }
+
+  
+  &.ui-widget-content {
+    border: 0;
+    box-shadow: 0 6px 10px rgba(42, 50, 68, 0.1);
+    border-radius: 4px;
+    padding: 15px 0 0;
+  }
+}
+
+.ui-dialog {
+  padding: 0;
+
+    .ui-dialog-titlebar {
+      border-radius: 0;
+      border: 0;
+      background-color: transparent;
+      margin: 0;
+      text-align: left;
+      padding: 30px 30px 0;
+    }
+
+    .ui-dialog-titlebar .ui-dialog-title {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .ui-dialog-titlebar-close {
+      width: 30px;
+      height: 30px;
+      background-color: #A1AABA;
+      background-image: none;
+      border-radius: 4px;
+      right: 30px;
+      top: 30px;
+      margin-top: 0;
+      padding: 0;
+      border: 2px solid #A1AABA;
+    }
+
+    .ui-dialog-titlebar-close:hover {
+      border: 2px solid #777D8A;
+      background-color: #777D8A;
+    }
+
+    .ui-dialog-titlebar-close .ui-button-icon {
+      text-indent: 0;
+      top: 1px;
+      left: 1px;
+      margin-top: 0;
+      margin-left: 0;
+      width: 24px;
+      height: 24px;
+    }
+
+    .ui-dialog-titlebar-close .ui-button-icon:before {
+      color: #FFFFFF;
+      content: "";
+      line-height: 25px;
+    }
+
+    .ui-dialog-content {
+      padding: 25px 30px 30px;
+      text-align: left;
+    }
+
+    .ui-dialog-buttonpane {
+      margin-top: 0;
+    }
+
+    .ui-dialog-buttonpane.ui-widget-content {
+      border: 0;
+      padding: 10px 30px 40px;
+      border-radius: 0 0 4px 4px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+    }
+
+    .ui-dialog-buttonpane .ui-dialog-buttonset {
+      float: none;
+    }
+
+    .ui-dialog-buttonpane button {
+      margin: 0 5px;
+    }
+
+    .ui-dialog-buttonpane button.ui-button {
+      min-width: 160px;
+    }
+
+    @-moz-document url-prefix() {
+      .ui-dialog-titlebar-close .ui-button-icon {
+        padding-top: 1px;
+      }
+    }
+
+
+}
+
+.ui-button .ui-icon,
+.ui-button:focus .ui-icon,
+.ui-button:active .ui-icon {
+  background-image: none;
+}
+
+.ui-widget-overlay {
+  background-color: rgba(40, 50, 70, 0.5);
+}
+
+
+

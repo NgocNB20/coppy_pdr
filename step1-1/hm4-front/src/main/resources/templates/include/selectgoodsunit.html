@@ -1,0 +1,619 @@
+<!--	2023-renew No11 from here	-->
+<!-- SP用の絞り込み -->
+<div class="p-product-detail__stock-sortSM l-sm">
+    <dl>
+        <dt>条件で絞り込む</dt>
+        <dd>
+            <div class="c-sortbox" th:if="*{isPattern1Use()}">
+                <div class="c-sortbox__title"><span id="sortboxTitle" th:text="*{unitTitle1}"></span></div>
+                <div class="c-sortbox__contents">
+                    <div class="c-sortbox__control">
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--select" onclick="selectAllFilter(this);"><svg viewBox="0 0 14 11"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/select.svg#select}"></use></svg>すべて選択</button>
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--delete" onclick="clearFilter(this);"><svg viewBox="0 0 10 10"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use></svg>クリア</button>
+                    </div>
+                    <div class="c-sortbox__list">
+                        <ul id="data-simplebar-sm-unitTitle1" data-simplebar data-simplebar-auto-hide="false">
+                        </ul>
+                    </div>
+                    <div class="c-sortbox__button">
+                        <button type="button" class="c-button c-button--ccc c-button--width-s js-sort-close">キャンセル</button>
+                        <button type="button" class="c-button c-button--primary c-button--width-s" onclick="filterBySmHeaders();">絞り込む</button>
+                    </div>
+                </div>
+            </div>
+            <div class="c-sortbox" th:if="*{isPattern2Use()}">
+                <div class="c-sortbox__title" th:text="*{unitTitle2}"></div>
+                <div class="c-sortbox__contents">
+                    <div class="c-sortbox__control">
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--select" onclick="selectAllFilter(this);"><svg viewBox="0 0 14 11"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/select.svg#select}"></use></svg>すべて選択</button>
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--delete" onclick="clearFilter(this);"><svg viewBox="0 0 10 10"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use></svg>クリア</button>
+                    </div>
+                    <div class="c-sortbox__list">
+                        <ul id="data-simplebar-sm-unitTitle2" data-simplebar data-simplebar-auto-hide="false">
+                        </ul>
+                    </div>
+                    <div class="c-sortbox__button">
+                        <button type="button" class="c-button c-button--ccc c-button--width-s js-sort-close">キャンセル</button>
+                        <button type="button" class="c-button c-button--primary c-button--width-s" onclick="filterBySmHeaders();">絞り込む</button>
+                    </div>
+                </div>
+            </div>
+        </dd>
+    </dl>
+</div>
+<!-- // SP用の絞り込み -->
+<table id="goodsStockInfoItemList" class="c-table c-table--pcspdevide js-limit" data-limit="21">
+    <!-- PC用の絞り込み -->
+    <tr class="c-table__tr js-limit-unit l-lg" fixed-filter-choice="1">
+        <th class="c-table__th">商品情報</th>
+        <th class="c-table__th" th:if="*{isPattern1Use()}">
+            <div class="c-sortbox">
+                <div class="c-sortbox__title dropdown-header" data-field-name="unitTitle1" th:text="*{unitTitle1}">
+                    <span id="unitTitle1" th:text="*{unitTitle1}"/>
+                </div>
+                <div class="c-sortbox__contents">
+                    <div class="c-sortbox__control">
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--select" onclick="selectAllFilter(this);"><svg viewBox="0 0 14 11"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/select.svg#select}"></use></svg>すべて選択</button>
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--delete" onclick="clearFilter(this);"><svg viewBox="0 0 10 10"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use></svg>クリア</button>
+                    </div>
+                    <div class="c-sortbox__list">
+                        <ul id="data-simplebar-unitTitle1" data-simplebar data-simplebar-auto-hide="false">
+                        </ul>
+                    </div>
+                    <div class="c-sortbox__button">
+                        <button type="button" class="c-button c-button--ccc c-button--width-s js-sort-close">キャンセル</button>
+                        <button type="button" class="c-button c-button--primary c-button--width-s" onclick="filterByHeaders();">絞り込む</button>
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th class="c-table__th" th:if="*{isPattern2Use()}">
+            <div class="c-sortbox">
+                <div class="c-sortbox__title dropdown-header" data-field-name="unitTitle2">
+                    <span id="unitTitle2" th:text="*{unitTitle2}"/>
+                </div>
+                <div class="c-sortbox__contents">
+                    <div class="c-sortbox__control">
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--select" onclick="selectAllFilter(this);"><svg viewBox="0 0 14 11"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/select.svg#select}"></use></svg>すべて選択</button>
+                        <button type="button" class="c-textlink c-textlink--text c-textlink--delete" onclick="clearFilter(this);"><svg viewBox="0 0 10 10"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use></svg>クリア</button>
+                    </div>
+                    <div class="c-sortbox__list">
+                        <ul id="data-simplebar-unitTitle2" data-simplebar data-simplebar-auto-hide="false">
+                        </ul>
+                    </div>
+                    <div class="c-sortbox__button">
+                        <button type="button" class="c-button c-button--ccc c-button--width-s js-sort-close">キャンセル</button>
+                        <button type="button" class="c-button c-button--primary c-button--width-s" onclick="filterByHeaders();">絞り込む</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </th>
+        <th class="c-table__th">価格<small>(税抜)</small></th>
+        <th class="c-table__th">数量</th>
+    </tr>
+    <!-- // PC用の絞り込み -->
+    <input type="hidden" id="indexStock" name="indexStock" value="">
+    <tr class="c-table__tr js-limit-unit"
+        th:each="stockItem, stat : ${goodsIndexModel.goodsStockInfoItems}"
+        th:id="${'tbRow-' + stat.index}"
+        th:item-attr="${stockItem.goodsCode + '/' + stockItem.price}"
+        custom-filter-choice="1">
+        <td class="p-product-detail__stock-item">
+            <div class="p-product-detail__stock-item-inner">
+                <div class="p-product-detail__stock-item-image">
+                    <th:block th:if="${stockItem.goodsImageItems != null && stockItem.goodsImageItems.size > 0}">
+                        <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${stockItem.goodsImageItems[0]}}"
+                             th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${stockItem.goodsImageItems[0]} + ' 2x'"
+                             alt="" height="122" width="122" decoding="async" loading="lazy">
+                    </th:block>
+                    <th:block th:unless="${stockItem.goodsImageItems != null && stockItem.goodsImageItems.size > 0}">
+                        <img th:src="@{ __${@environment.getProperty('images.path.goods')}__/noimage.gif}"
+                             alt="" height="122" width="122" decoding="async" loading="lazy">
+                    </th:block>
+                </div>
+                <div class="p-product-detail__stock-item-overview">
+                    <div class="p-product-detail__stock-item-text">
+                    商品番号：<span th:id="'goodGcd-'+ ${stat.index}" th:text="${stockItem.goodsCode}"/><br>
+                    在庫：<span th:text="${stockItem.stock}"/></div>
+                    <div class="p-product-detail__stock-item-spec l-sm"><span class="p-product-detail__stock-item-heading">[[*{unitTitle1}]]：</span>[[${stockItem.patternTitle1}]]</div>
+                    <div class="p-product-detail__stock-item-spec l-sm"><span class="p-product-detail__stock-item-heading">[[*{unitTitle2}]]：</span>[[${stockItem.patternTitle2}]]</div>
+                </div>
+                <!-- 2023-renew No92 from here -->
+                <th:block th:if="${stockItem.otherGoodsItem != null}">
+                    <div class="p-product-detail__stock-recommend">
+                        <div class="c-title-bubble">こちらもおすすめ</div>
+                        <div class="p-product-detail__stock-recommend-image">
+                            <a id="goChildImageGoodsPage" th:href="@{/goods/index.html(gcd=${stockItem.otherGoodsItem.gcd})}">
+                            <img th:if="${stockItem.otherGoodsItem.goodsImageItems != null && stockItem.otherGoodsItem.goodsImageItems.size > 0}"
+                                 th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${stockItem.otherGoodsItem.goodsImageItems[0]}}"
+                                 th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${stockItem.otherGoodsItem.goodsImageItems[0]} + ' 2x'"
+                                alt="" height="90" width="90" decoding="async" loading="lazy">
+                            <img th:unless="${stockItem.otherGoodsItem.goodsImageItems != null && stockItem.otherGoodsItem.goodsImageItems.size > 0}"
+                                 th:src="@{ __${@environment.getProperty('images.path.goods')}__/noimage.gif}"
+                                 alt="" width="90" height="90" decoding="async" loading="lazy"/>
+                            </a>
+                        </div>
+                        <div class="p-product-detail__stock-recommend-overview">
+                            <div class="p-product-detail__stock-recommend-title"
+                                th:text="${stockItem.otherGoodsItem.goodsGroupName}"></div>
+                            <div class="c-product__item-price">
+                                <th:block sec:authorize="!isAuthenticated()">
+                                    <div class="p-product-detail__stock-recommend-notlogin c-product__item-notlogin">価格はログイン後表示</div>
+                                </th:block>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <div class="c-product__item-price-unit">
+                                        <th:block th:if="${stockItem.otherGoodsItem.goodsPriceInTaxLow != null}">[[${#number.convert(stockItem.otherGoodsItem.goodsPriceInTaxLow)}]]<span>円</span></th:block>
+                                        <th:block th:if="${stockItem.otherGoodsItem.goodsPriceInTaxHight != null}"><span>～</span>[[${#number.convert(stockItem.otherGoodsItem.goodsPriceInTaxHight)}]]<span>円</span></th:block>
+                                    </div>
+                                    <div class="c-product__item-price-unit c-product__item-price-unit--sale">
+                                        <th:block th:if="${stockItem.otherGoodsItem.preDiscountPriceLow != null}"><small> → </small>[[${#number.convert(stockItem.otherGoodsItem.preDiscountPriceLow)}]]<span>円</span></th:block>
+                                        <th:block th:if="${stockItem.otherGoodsItem.preDiscountPriceHight != null}"><span>～</span>[[${#number.convert(stockItem.otherGoodsItem.preDiscountPriceHight)}]]<span>円</span></th:block>
+                                    </div><br>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                <!-- 2023-renew No92 to here -->
+                </th:block>
+            </div>
+        </td>
+        <td class="p-product-detail__stock-spec l-lg isUnit1" data-field-name="unitTitle1">
+            <span th:id="'unitValue1-' + ${stat.index}" th:text="${stockItem.patternTitle1}"/>
+        </td>
+        <td class="p-product-detail__stock-spec l-lg isUnit2" data-field-name="unitTitle2" th:if="*{isUseUnit2()}">
+            <span th:id="'unitValue2-' + ${stat.index}" th:text="${stockItem.patternTitle2}"/>
+        </td>
+        <td class="c-table__price p-product-detail__stock-price" sec:authorize="isAuthenticated()" th:id="${'cellPrice-' + stat.index}">
+            <!--    2023-renew No2 from here-->
+            <th:block th:if="${stockItem.isNoGoodsStockItemSaleCheck()}">
+                <div class="p-product-detail__stock-item-heading l-sm">価格<small>(税抜)</small>：</div>
+                <div class="p-product-detail__stock-licence c-product__item-licence">ご購入には書類の提出が必要です</div>
+            </th:block>
+            <th:block th:unless="${stockItem.isNoGoodsStockItemSaleCheck()}">
+                <!--    2023-renew No10 from here-->
+                <th:block th:if="${stockItem.isDisplayPrice()}">
+                    <div class="p-product-detail__stock-item-heading l-sm">価格<small>(税抜)</small>：</div>
+                    <th:block th:if="${stockItem.isDisplayDiscountFlag()}">
+                        <div class="p-product-detail__stock-spirit-icon l-sm"><img th:src="@{/newdesign/assets/images/icon/spirit.svg}" width="40" alt="心意気価格"></div>
+                        <div class="p-product-detail__stock-spirit l-lg">
+                            <div class="p-product-detail__stock-spirit-icon"><img th:src="@{/newdesign/assets/images/icon/spirit.svg}" width="40" alt="心意気価格"></div>
+                            セール中１回限り<strong th:if="${stockItem.saleEmotionPrice != null}">[[${#number.convert(stockItem.saleEmotionPrice)}]]</strong>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${stockItem.customerSalePrice != null || stockItem.salePrice != null}">
+                        <div th:id="${'cellPriceDetail-' + stat.index}" class="c-product__item-price">
+                            <th:block th:if="${stockItem.isDisplayDiscountFlag()}">
+                                <div class="p-product-detail__stock-spiritSM l-sm">
+                                セール中１回限り<strong th:if="${stockItem.saleEmotionPrice != null}">[[${#number.convert(stockItem.saleEmotionPrice)}]]</strong></div>
+                            </th:block>
+                            <th:block th:if="${stockItem.level != null && stockItem.level != '1'}">
+                                <small>[[${stockItem.level}]]&nbsp;:&nbsp;</small>
+                            </th:block>
+                            <th:block th:if="${stockItem.level != null && stockItem.level == '1' && stockItem.multiLevelFlag}">
+                                <small>[[${stockItem.level}]]&nbsp;:&nbsp;</small>
+                            </th:block>
+                            <div class="c-product__item-price-unit">
+                                [[${#number.convert(stockItem.price)}]]
+                            </div>
+                            <div class="c-product__item-price-unit c-product__item-price-unit--sale"
+                                th:if="${stockItem.customerSalePrice != null || stockItem.salePrice != null}">
+                                <small> → </small>
+                                <th:block th:if="${stockItem.customerSalePrice != null}">[[${#number.convert(stockItem.customerSalePrice)}]]</th:block>
+                                <th:block th:if="${stockItem.customerSalePrice == null && stockItem.salePrice != null}">[[${#number.convert(stockItem.salePrice)}]]</th:block>
+                            </div><br>
+                        </div>
+                    </th:block>
+                    <th:block th:unless="${stockItem.customerSalePrice != null || stockItem.salePrice != null}">
+                        <div th:id="${'cellPriceDetail-' + stat.index}" class="c-product__item-price">
+                            <th:block th:if="${stockItem.isDisplayDiscountFlag()}">
+                                <div class="p-product-detail__stock-spiritSM l-sm">
+                                セール中１回限り<strong th:if="${stockItem.saleEmotionPrice != null}">[[${#number.convert(stockItem.saleEmotionPrice)}]]</strong></div>
+                            </th:block>
+                            <th:block th:if="${stockItem.level != null && stockItem.level != '1'}">
+                                <small>[[${stockItem.level}]]&nbsp;:&nbsp;</small>
+                            </th:block>
+                            <th:block th:if="${stockItem.level != null && stockItem.level == '1' && stockItem.multiLevelFlag}">
+                                <small>[[${stockItem.level}]]&nbsp;:&nbsp;</small>
+                            </th:block>
+                            <div class="c-product__item-price-unit">
+                                [[${#number.convert(stockItem.price)}]]
+                            </div>
+                        </div>
+                    </th:block>
+                </th:block>
+                <th:block th:if="!${stockItem.isDisplayPrice()}">
+                    <div class="p-product-detail__stock-item-heading l-sm">価格<small>(税抜)</small>：</div>
+                    <div class="c-product__item-price c-product__item-price--null">ー</div>
+                </th:block>
+                <!--    2023-renew No10 to here-->
+            </th:block>
+            <!--    2023-renew No2 to here-->
+        </td>
+        <td class="c-table__price p-product-detail__stock-price" sec:authorize="!isAuthenticated()">
+            <div class="p-product-detail__stock-notlogin c-product__item-notlogin">価格はログイン後表示</div>
+        </td>
+        <td class="c-table__quantity p-product-detail__stock-quantity">
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="c-table__stock p-product-detail__stock-stock" th:if="${stockItem.iconDisplayGoodsUnit() != null}">
+                    [[${stockItem.iconDisplayGoodsUnit()}]]
+                </div>
+                <th:block th:if="${stockItem.isDisplayArrivalNotification()}">
+                    <!--	2023-renew No65 from here	-->
+                    <input type="submit" name="doRestockAdd" hidden></input>
+                    <button type="button" th:goods_index="${stat.index}" onclick="addRestock(this);" class="c-textlink c-textlink--right c-textlink--large c-textlink--text c-textlink--arrival">
+                        <svg viewBox="0 0 17 20"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/new-arrival.svg#new-arrival}"></use></svg>
+                        </span><p>入荷お知らせを設定する</p>
+                    </button>
+                    <!--	2023-renew No65 to here	-->
+                </th:block>
+                <div class="p-product-detail__stock-quantity-inner">
+                    <div class="c-count-quantity--wrap" th:if="${stockItem.isDisplayAddCart()}">
+                        <div class="c-count-quantity js-count-quantity">
+                            <button type="button" class="c-count-quantity__minus minus_button" data-type="minus" th:data-field="'goodsStockInfoItems[' + ${stat.index} + '].gcnt'" disabled="disabled"></button>
+                            <input th:id="'gcnt-' + ${stat.index}" type="text" maxlength="3" min="1" max="999" class="c-input c-count-quantity__result input_result"
+                                   th:field="*{goodsStockInfoItems[__${stat.index}__].gcnt}" th:errorclass="field-error">
+                            <button type="button" class="c-count-quantity__plus plus_button" data-type="plus" th:data-field="'goodsStockInfoItems[' + ${stat.index} + '].gcnt'"></button>
+                        </div>
+                        <div class="c-field-error" th:id="'goodsCode-' + ${stat.index} + '-error'"></div>
+                    </div>
+                    <div class="p-product-detail__stock-button l-lg">
+                        <th:block th:if="${stockItem.isDisplayAddCart()}">
+                            <input type="hidden" id="goodsGroupSeq"/>
+                            <input type="hidden" id="goodsSeq"/>
+                            <input type="hidden" id="gcd" th:value="${stockItem.goodsCode}"/>
+                            <button type="button" class="c-button c-button--primary c-button--width-s p-product-detail__stock-cart js-modal" field-validate="true"
+                                th:id="'goAjaxCart-' + ${stat.index}"
+                                th:href="@{/cart/index.html(gcd=${stockItem.goodsCode}, gcnt='')}"
+                                onclick="ajaxCartAddFavorite(this);return false;">カートに入れる</button>
+                        </th:block>
+                        <th:block th:if="${stockItem.isPossibleAddFavorite()}">
+                            <button type="button" class="c-textlink c-textlink--text c-textlink--add-fav js-btn-favorite p-product-detail__stock-favorite"
+                                    href="#" th:id="'favoriteAddBtn-' + ${stat.index}"
+                                    th:add-fav-status="!${goodsIndexModel.favoriteGoodsCodeList != null && #lists.contains(goodsIndexModel.favoriteGoodsCodeList, stockItem.goodsCode)}"
+                                    th:classappend="${goodsIndexModel.favoriteGoodsCodeList != null && #lists.contains(goodsIndexModel.favoriteGoodsCodeList, stockItem.goodsCode)} ? 'is-active' : ''"
+                                    th:onclick="'favoriteRegistInline(this);'">
+                                <span><svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg></span><p>お気に入り</p>
+                            </button>
+                        </th:block>
+                        <th:block th:if="${stockItem.isDisplaySaleDeReserve()}">
+                        <button type="button" class="c-button c-button--primary-line c-button--width-s c-button--sale-reserve"
+                                th:if="${stockItem.isDisplaySaleDeReserve()}"
+                                th:indexStock="${stat.index}"
+                                onclick="saleDeReserveAjaxCall($(this).attr('indexStock'));"><span><img th:src="@{/newdesign/assets/images/icon/sale-reserve.svg}" width="38" alt="セールde予約"></span><p>セールde予約する</p></button>
+                        </th:block>
+                    </div>
+                    <div class="l-sm p-product-detail__stock-buttonSM-1" th:if="${stockItem.isDisplayAddCart()}">
+                        <button type="button" class="c-button c-button--primary c-button--width-s p-product-detail__stock-cart js-modal" field-validate="true"
+                            th:id="'goAjaxCartSm-' + ${stat.index}"
+                            th:href="@{/cart/index.html(gcd=${stockItem.goodsCode}, gcnt='')}"
+                            onclick="ajaxCartAddFavorite(this);return false;">カートに入れる</button>
+                    </div>
+                    <div class="l-sm p-product-detail__stock-buttonSM-2">
+                        <th:block th:if="${stockItem.isPossibleAddFavorite()}">
+                            <button type="button" class="c-textlink c-textlink--text c-textlink--add-fav js-btn-favorite p-product-detail__stock-favorite"
+                                    href="#" th:id="'favoriteAddBtnSm-' + ${stat.index}"
+                                    th:add-fav-status="${goodsIndexModel.favoriteGoodsCodeList != null && #lists.contains(goodsIndexModel.favoriteGoodsCodeList, stockItem.goodsCode)}"
+                                    th:classappend="${goodsIndexModel.favoriteGoodsCodeList != null && #lists.contains(goodsIndexModel.favoriteGoodsCodeList, stockItem.goodsCode)} ? 'is-active' : ''"
+                                    th:onclick="'favoriteRegistInline(this);'">
+                                <span><svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg></span><p>お気に入り</p>
+                            </button>
+                        </th:block>
+                        <th:block th:if="${stockItem.isDisplaySaleDeReserve()}">
+                            <button type="button" class="c-button c-button--primary-line c-button--width-s c-button--sale-reserve"
+                                 th:if="${stockItem.isDisplaySaleDeReserve()}"
+                                 th:indexStock="${stat.index}"
+                                 onclick="saleDeReserveAjaxCall($(this).attr('indexStock'));"><span><img th:src="@{/newdesign/assets/images/icon/sale-reserve.svg}" width="38" alt="セールde予約"></span><p>セールde予約する</p></button>
+                            <button id="doSaleReserveAdd" name="doSaleReserveAdd" hidden="hidden" type="submit"></button>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+            <th:block sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login/order.html}" class="p-product-detail__stock-quantity-notlogin c-button c-button--primary-line c-button--width-m">ログイン</a>
+            </th:block>
+        </td>
+    </tr>
+</table>
+<div class="p-product-detail__stock-more js-more-wrap" onclick="btnShowAllHasClicked();"><div class="c-button c-button--readmore2 js-more" custom-js-more="1"><p>すべての商品を見る</p></div></div>
+
+<script th:inline="javascript">
+    let hasClickedShowAllBtn = false;
+
+    $(document).ready(function($) {
+        groupingRowData();
+        initFilterHeaders();
+    });
+
+    function btnShowAllHasClicked() {
+        hasClickedShowAllBtn = true;
+    }
+
+    function groupingRowData() {
+        let arrMap = [];
+        let ignoreIndexArr = [];
+
+        // detect grouping row data
+        $("tr[id^=tbRow-]").each(function(index) {
+            if (ignoreIndexArr.includes(index)) {
+                return;
+            }
+
+            let curVal = null;
+            let nextVal = null;
+            let curItemAttr = $("#tbRow-" + index).attr("item-attr");
+            if (curItemAttr) {
+                curVal = curItemAttr.split("/");
+            }
+
+            let nextIndex = 0;
+            let nextItemAttr = null;
+            let newMap = new Map();
+            newMap.set(index, [index]);
+            do {
+                nextItemAttr = $("#tbRow-" + (index + nextIndex + 1)).attr("item-attr");
+                if (nextItemAttr) {
+                    nextVal = nextItemAttr.split("/");
+                    // check same code
+                    if (curVal[0] === nextVal[0]) {
+                        newMap.get(index).push(index + nextIndex + 1);
+                        ignoreIndexArr.push(index + nextIndex + 1);
+                    } else {
+                        break;
+                    }
+                }
+                nextIndex++;
+            } while (nextItemAttr);
+
+            if (newMap.get(index).length > 0) {
+                arrMap.push(newMap);
+            }
+        });
+
+        // update merge price data
+        arrMap.forEach(myMap => {
+        for (let [key, value] of myMap) {
+            value.forEach(addIndex => {
+                $("#cellPrice-" + key).append($("#cellPriceDetail-" + addIndex));
+            });
+        }
+        });
+
+        // remove redundant rows
+        ignoreIndexArr.forEach((index) => {
+        $("#tbRow-" + index).remove();
+        });
+    }
+
+    function initFilterHeaders() {
+        $(".dropdown-header").each(function(index) {
+            let headerTitle = $(this).attr('data-field-name');
+            let checkboxValues = $('td[data-field-name="' + headerTitle + '"]')
+            .toArray()
+            .map(childData => {
+                return $(childData).children(":first").text();
+            })
+            .filter(text => text.trim().length > 0)
+
+            $('#data-simplebar-unitTitle' + (index + 1) + ' > .simplebar-wrapper > .simplebar-mask > .simplebar-offset > .simplebar-content-wrapper > .simplebar-content')
+            .append([...new Set(checkboxValues)]
+            .map(text => {
+                return $('<li class="unitTitle' + (index + 1) + '-item"><label class="c-checkbox"><span class="c-checkbox__box"><input name="spec' + (index + 1) + 'Group" type="checkbox" value="' + text + '" checked> <span></span></span><p>' + text + '</p></label></li>');
+            })
+            .sort());
+            $('#data-simplebar-sm-unitTitle' + (index + 1) + ' > .simplebar-wrapper > .simplebar-mask > .simplebar-offset > .simplebar-content-wrapper > .simplebar-content')
+            .append([...new Set(checkboxValues)]
+            .map(text => {
+                return $('<li class="unitTitle' + (index + 1) + '-sm-item"><label class="c-checkbox"><span class="c-checkbox__box"><input name="spec' + (index + 1) + 'Group" type="checkbox" value="' + text + '" checked> <span></span></span><p>' + text + '</p></label></li>');
+            })
+            .sort());
+        });
+    }
+
+    function filterByHeaders() {
+        let unitTitle1Selected = $('.unitTitle1-item input:checked')
+        .toArray()
+        .map(el => {
+            return $(el).val();
+        });
+
+        let unitTitle2Selected = $('.unitTitle2-item input:checked')
+        .toArray()
+        .map(el => {
+            return $(el).val();
+        });
+
+        filterDataByHeaders(unitTitle1Selected, unitTitle2Selected);
+    }
+
+    function filterBySmHeaders() {
+        let unitTitle1Selected = $('.unitTitle1-sm-item input:checked')
+        .toArray()
+        .map(el => {
+            return $(el).val();
+        });
+
+        let unitTitle2Selected = $('.unitTitle2-sm-item input:checked')
+        .toArray()
+        .map(el => {
+            return $(el).val();
+        });
+
+        filterDataByHeaders(unitTitle1Selected, unitTitle2Selected);
+    }
+
+    function filterDataByHeaders(unitTitle1Selected, unitTitle2Selected) {
+        let unitTitle1RowVal = null;
+        let unitTitle2RowVal = null;
+        if (unitTitle1Selected && unitTitle1Selected.length) {
+            if (unitTitle2Selected && unitTitle2Selected.length) {
+                $('.isUnit1').each(function() {
+                    unitTitle1RowVal = $(this).children(":first").text();
+                    if (unitTitle1Selected.includes(unitTitle1RowVal)) {
+                        $(this).next().each(function() {
+                            unitTitle2RowVal = $(this).children(":first").text();
+                            if (unitTitle2Selected.includes(unitTitle2RowVal)) {
+                                $(this).parent().attr("custom-filter-choice", "1");
+                                $(this).parent().show();
+                            } else {
+                                $(this).parent().attr("custom-filter-choice", "0");
+                                $(this).parent().hide();
+                            }
+                        });
+                    } else {
+                        $(this).parent().attr("custom-filter-choice", "0");
+                        $(this).parent().hide();
+                    }
+                });
+            } else {
+                $('.isUnit1').each(function() {
+                    unitTitle1RowVal = $(this).children(":first").text();
+                    if (unitTitle1Selected.includes(unitTitle1RowVal)) {
+                        $(this).parent().attr("custom-filter-choice", "1");
+                        $(this).parent().show();
+                    } else {
+                        $(this).parent().attr("custom-filter-choice", "0");
+                        $(this).parent().hide();
+                    }
+                });
+            }
+        } else if (unitTitle2Selected && unitTitle2Selected.length) {
+            $('.isUnit2').each(function() {
+                unitTitle2RowVal = $(this).children(":first").text();
+                if (unitTitle2Selected.includes(unitTitle2RowVal)) {
+                    $(this).parent().attr("custom-filter-choice", "1");
+                    $(this).parent().show();
+                } else {
+                    $(this).parent().attr("custom-filter-choice", "0");
+                    $(this).parent().hide();
+                }
+            });
+        } else {
+            $('.isUnit1').each(function() {
+                $(this).parent().attr("custom-filter-choice", "0");
+                $(this).parent().hide();
+            });
+        }
+        toggleShowAllDataBtnAfterFilter();
+    }
+
+    function toggleShowAllDataBtnAfterFilter() {
+        if (!hasClickedShowAllBtn) {
+            let limitNum = $('#goodsStockInfoItemList').data('limit');
+            let largeScreenFilter = $('.c-table__tr.js-limit-unit.l-lg:visible');
+            if (largeScreenFilter.length === 0) {
+                limitNum -= 1;
+            }
+            let target = $('#goodsStockInfoItemList').find('.js-limit-unit:visible');
+            let moreButton = $('#goodsStockInfoItemList').siblings('.js-more-wrap').children('.js-more');
+
+            $(target).slice(limitNum).hide();
+
+            if (target.length <= limitNum) {
+                moreButton.parent('.js-more-wrap').hide();
+            } else {
+                moreButton.parent('.js-more-wrap').show();
+            }
+        }
+    }
+
+    function selectAllFilter(el) {
+        $(el).parent().siblings('.c-sortbox__list').find('[class^=unitTitle]')
+        .each(function() {
+            $(this).find('input:checkbox').prop('checked', true);
+        });
+    }
+
+    function clearFilter(el) {
+        $(el).parent().siblings('.c-sortbox__list').find('[class^=unitTitle]')
+        .each(function() {
+            $(this).find('input:checkbox').prop('checked', false);
+        });
+    }
+
+  function favoriteRegistInline(obj) {
+      let isRegisterNew = $(obj).attr('add-fav-status') === 'true';
+      if ($(obj).attr("href") === "#") {
+          let favoriteId = $(obj).attr('id').split('-')[1];
+          let gcdParam = $('#goodGcd-' + favoriteId).text();
+          toggleErrorMessage(false, null);
+          toggleFavoriteAjaxCall(gcdParam, isRegisterNew).done(function (data) {
+              handleToggleFavoriteAjaxResponse(obj, data, favoriteId, isRegisterNew);
+          }).fail(function (error) {
+              console.log("Request failed: ", error);
+          });
+      }
+  }
+
+  function toggleFavoriteAjaxCall(gcd, isRegisterNew) {
+      let def = $.Deferred(); // Ajax通信を行う
+      const urlPath = isRegisterNew ? "/getFavoriteRegisterResponse" : "/getFavoriteUnregisterResponse";
+      $.ajax({
+          type: "GET",
+          url: pkg_common.getAppComplementUrl() + urlPath,
+          dataType: "json",
+          data: {
+              "gcd": gcd
+          },
+          timeout: 30000
+      }).done(function (response) {
+          def.resolve(response);
+      }).fail(function (jqXHR, textStatus) {
+          def.reject(textStatus);
+      });
+      return def.promise();
+  }
+
+  function handleToggleFavoriteAjaxResponse(obj, data, index, isRegisterNew) {
+      if ((!isRegisterNew && data) || (isRegisterNew && data && data.length > 0)) {
+          const status = isRegisterNew
+              ? data[0].favoriteRegistSuccess
+              : data.favoriteUnregistStatus;
+          if (status === "true") {
+              $(obj).attr('add-fav-status', !isRegisterNew + '');
+          } else {
+              const errorMsg = isRegisterNew
+                  ? data[0].errorFavoriteMsg
+                  : data.errorFavoriteMsg;
+              if (errorMsg) {
+                  toggleErrorMessage(true, errorMsg);
+              }
+          }
+      }
+  }
+
+  function toggleErrorMessage(isDisplay, errorMsg) {
+      if (isDisplay) {
+          $("html,body").animate({scrollTop:0});
+          let errorFavoriteMsg = $("<ul/>")
+              .attr("id", "errorFavoriteMsg")
+              .addClass("c-global-error c-global-error--margin-m inputError");
+          errorFavoriteMsg.append("<li>" + errorMsg + "</li>");
+
+          $("#errorMessages")
+              .css("display","inherit")
+              .append(errorFavoriteMsg);
+      } else {
+          $("#errorMessages")
+              .css("display", "none")
+              .children().remove();
+      }
+  }
+
+  function saleDeReserveAjaxCall(idx) {
+      $("#indexStock").val(idx);
+      $("#doSaleReserveAdd").click();
+  }
+
+  <!--	2023-renew No65 from here	-->
+  function addRestock(obj) {
+      let index = $(obj).attr('goods_index');
+      let gcd = $('#goodGcd-' + index).text();
+      $('#gcdStock').val(gcd);
+      $('[name=doRestockAdd]:first').click();
+    }
+
+  <!--	2023-renew No65 to here	-->
+</script>
+<!--	2023-renew No11 to here	-->

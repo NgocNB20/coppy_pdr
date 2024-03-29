@@ -1,0 +1,7 @@
+type: object
+description: 配送方法詳細DtoMapレスポンス
+properties:
+  deliveryMethodMaster:
+    type: object
+    additionalProperties:
+      $ref: ../shop/DeliveryMethodDetailsDtoResponse.yaml

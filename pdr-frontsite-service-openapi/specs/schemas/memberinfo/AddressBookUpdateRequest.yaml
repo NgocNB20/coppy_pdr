@@ -1,0 +1,84 @@
+type: object
+description: アドレス帳情報更新リクエスト
+properties:
+  addressBookSeq:
+    type: integer
+    format: int32
+    description: アドレス帳SEQ（必須）
+    example: 1000000
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ (FK)（必須）
+    example: 1000001
+  addressBookName:
+    type: string
+    description: アドレス帳名（必須）
+    example: 実家
+  addressBookFirstName:
+    type: string
+    description: アドレス帳氏名(名）
+    example: 花子
+  addressBookLastName:
+    type: string
+    description: アドレス帳氏名(姓)（必須）
+    example: 田中
+  addressBookFirstKana:
+    type: string
+    description: アドレス帳フリガナ(名)
+    example: ハナコ
+  addressBookLastKana:
+    type: string
+    description: アドレス帳フリガナ(姓)（必須）
+    example: タナカ
+  addressBookZipCode:
+    type: string
+    description: アドレス帳住所-郵便番号（必須）
+    example: "0700000"
+  addressBookPrefecture:
+    type: string
+    description: アドレス帳住所-都道府県（必須）
+    example: 北海道
+  addressBookAddress1:
+    type: string
+    description: アドレス帳住所-市区郡（必須）
+    example: 旭川市
+  addressBookAddress2:
+    type: string
+    description: アドレス帳住所-町村・番地
+    example: １－４７
+  addressBookAddress3:
+    type: string
+    description: アドレス帳住所-それ以降の住所
+    example: ＨＩＴ－ＭＡＬＬマンション
+  addressBookTel:
+    type: string
+    description: アドレス帳TEL
+    example: "11122223333"
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2021/12/12 12:00:00
+  addressBookAddress4:
+    type: string
+    description: 住所録住所-方書1
+    example: 住所録住所-方書1
+  addressBookAddress5:
+    type: string
+    description: 住所録住所-方書2
+    example: 住所録住所-方書2
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 10000000
+  addressBookApproveFlagPdr:
+    type: string
+    description: 住所録承認フラグ
+    example: 1

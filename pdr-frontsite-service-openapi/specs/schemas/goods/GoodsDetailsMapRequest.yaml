@@ -1,0 +1,10 @@
+type: object
+description: 商品詳細情報MAP取得リクエスト
+properties:
+  goodsSeqList:
+    type: array
+    description: 商品SEQリスト
+    items:
+      type: integer
+      format: int32
+      example: 1000

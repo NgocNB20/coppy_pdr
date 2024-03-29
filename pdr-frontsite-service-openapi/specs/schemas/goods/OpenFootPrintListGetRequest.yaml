@@ -1,0 +1,18 @@
+type: object
+description: 公開あしあと商品情報取得リクエスト
+properties:
+  limit:
+    type: integer
+    format: int32
+    description: 取得件数
+    example: 10
+  exceptGoodsGroupSeq:
+    type: integer
+    format: int32
+    description: 取得対象外の商品
+    example: 10000001
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: 2023101116559922
+

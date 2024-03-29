@@ -1,0 +1,35 @@
+type: object
+description: 商品グループ画像リクエスト
+properties:
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ (FK)（必須）
+    example: 1000
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ (FK)（必須）
+    example: 1000
+  imageFileName:
+    type: string
+    description: 画像ファイル名
+    example: furniture-001/furniture-001_01.jpg
+  displayFlag:
+    type: string
+    description: 表示状態
+    example: 0
+  tmpFilePath:
+    type: string
+    description: テンポラリーファイルパス
+    example: furniture-001/furniture-001_01.jpg
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00

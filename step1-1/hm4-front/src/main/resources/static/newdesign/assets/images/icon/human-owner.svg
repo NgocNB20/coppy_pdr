@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-path">
+      <circle id="楕円形_23" data-name="楕円形 23" cx="25" cy="25" r="25" fill="#5d5d5d"/>
+    </clipPath>
+  </defs>
+  <g id="グループ_1522" data-name="グループ 1522" transform="translate(-343 -672)">
+    <circle id="楕円形_20" data-name="楕円形 20" cx="25" cy="25" r="25" transform="translate(343 672)" fill="#4aa2db"/>
+    <g id="マスクグループ_3" data-name="マスクグループ 3" transform="translate(343 672)" clip-path="url(#clip-path)">
+      <path id="Icon_material-person" data-name="Icon material-person" d="M28.731,30.731A11.365,11.365,0,1,0,17.365,19.365,11.362,11.362,0,0,0,28.731,30.731Zm0,3.465C21.144,34.2,6,38,6,45.561v5.683H51.462V45.561C51.462,38,36.317,34.2,28.731,34.2Z" transform="translate(-3.731 -1.244)" fill="#fff"/>
+    </g>
+    <g id="楕円形_37" data-name="楕円形 37" transform="translate(343 672)" fill="none" stroke="#4aa2db" stroke-width="1">
+      <circle cx="25" cy="25" r="25" stroke="none"/>
+      <circle cx="25" cy="25" r="24.5" fill="none"/>
+    </g>
+  </g>
+</svg>

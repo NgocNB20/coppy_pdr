@@ -1,0 +1,252 @@
+<div class="l-side">
+    <!-- ヘッダー -->
+    <header class="l-header">
+        <div class="l-header_inner">
+            <div class="l-header_logo">
+                <a a th:href="@{/order/}"><img src="/admin/assets/images/header_logo_md.png" alt=""></a>
+            </div>
+            <div class="c-menu">
+                <div class="js_open icon">
+                    <i></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- サイドバー -->
+    <div class="l-side-cat">
+        <ul class="l-side-cat_parent">
+            <th:block sec:authorize="hasAnyAuthority('ORDER:4')">
+                <li id="g_order" class="order">
+                    <div class="acdon"><i></i>
+                        <div><span>受注管理</span></div>
+                    </div>
+                    <div class="submenu">
+                        <ul>
+                            <li id="l_searchOrder"><a th:href="@{/order/}" id="goOrderSearchPage-g0">
+                                <div><span>受注検索</span></div>
+                            </a></li>
+                            <!--PDR Migrate Customization from here-->
+                            <!--出荷CSV登録 削除-->
+                            <!--PDR Migrate Customization to here-->
+                        </ul>
+                    </div>
+                </li>
+            </th:block>
+            <th:block sec:authorize="hasAnyAuthority('MEMBER:4')">
+                <li id="g_memberinfo" class="account">
+                    <div class="acdon"><i></i>
+                        <div><span>会員管理</span></div>
+                    </div>
+                    <div class="submenu">
+                        <ul>
+                            <li id="l_searchMember"><a th:href="@{/memberinfo/}">
+                                <div><span>会員検索</span></div>
+                            </a></li>
+                        </ul>
+                    </div>
+                </li>
+            </th:block>
+            <th:block sec:authorize="hasAnyAuthority('GOODS:4')">
+                <li id="g_goods" class="product">
+                    <div class="acdon"><i></i>
+                        <div><span>商品管理</span></div>
+                    </div>
+                    <div class="submenu">
+                        <ul>
+                            <li id="l_searchGoods"><a th:href="@{/goods/}" id="goGoodsSearchPage">
+                                <div><span>商品検索</span></div>
+                            </a></li>
+                            <!--PDR Migrate Customization from here-->
+                            <!--商品登録 削除-->
+                            <!--PDR Migrate Customization to here-->
+                            <li id="l_searchFavorite"><a th:href="@{/goods/favorite/}" id="goFavoriteSearchPage">
+                                 <div><span>お気に入り商品検索</span></div>
+                            </a></li>
+                            <li id="l_searchReStock"><a th:href="@{/goods/restock/}" id="goReStockSearchPage">
+                                <div><span>入荷お知らせ商品検索</span></div>
+                            </a></li>
+                            <li id="l_searchCategory"><a th:href="@{/goods/category/}" id="goCategoryListPage">
+                                <div><span>カテゴリー一覧</span></div>
+                            </a></li>
+                            <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                <li id="l_registCategory"><a th:href="@{/goods/category/input/}"
+                                                             id="goCategoryInputPage">
+                                    <div><span>カテゴリー登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                <li id="l_uploadGoods"><a th:href="@{/goods/bundledupload/csv/}"
+                                                          id="goGoodsBundledUploadPage">
+                                    <div><span>商品CSV登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                <li id="l_imageUploadGoods"><a th:href="@{/goods/bundledupload/image/}"
+                                                               id="goGoodsImageBundledUploadPage">
+                                    <div><span>画像登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <!-- 2023-renew category-csv from here -->
+                            <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                <li id="l_uploadCategory"><a th:href="@{/goods/category/bundledupload/csv/}"
+                                                               id="goCategoryBundledUploadPage">
+                                    <div><span>カテゴリーCSV登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <!-- 2023-renew category-csv to here -->
+                        </ul>
+                    </div>
+                </li>
+            </th:block>
+            <th:block sec:authorize="hasAnyAuthority('SHOP:4')">
+                <li id="g_shop" class="storefront">
+                    <div class="acdon"><i></i>
+                        <div><span>店舗管理</span></div>
+                    </div>
+                    <div class="submenu">
+                        <ul>
+                            <li id="l_newsSearchShop"><a th:href="@{/news/}" id="goNewsSearchPage-g2">
+                                <div><span>ニュース検索</span></div>
+                            </a></li>
+                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                <li id="l_newsRegistShop"><a th:href="@{/news/registupdate/}" id="goNewsRegistPage-g">
+                                    <div><span>ニュース登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <!--PDR Migrate Customization from here-->
+                            <!--問い合わせ検索 削除-->
+                            <!--アイコン一覧 削除-->
+                            <!--アイコン登録 削除-->
+                            <!--PDR Migrate Customization to here-->
+                            <li id="l_freeListShop"><a th:href="@{/freearea/}" id="goFreeAreaSearchPage-g">
+                                <div><span>フリーエリア検索</span></div>
+                            </a></li>
+                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                <li id="l_freeRegistShop"><a th:href="@{/freearea/registupdate/}"
+                                                             id="goFreeAreaRegistPage-g">
+                                    <div><span>フリーエリア登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <!--PDR Migrate Customization from here-->
+                            <!--クーポン検索 削除-->
+                            <!--クーポン登録 削除-->
+                            <!--PDR Migrate Customization to here-->
+                            <li id="l_questionnaireSearchShop">
+                                <a th:href="@{/questionnaire/}" id="goQuestionnaireSearchPage-g2">
+                                    <div><span>アンケート検索</span></div>
+                                </a></li>
+                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                <li id="l_questionnaireRegistShop"><a th:href="@{/questionnaire/registupdate(md=new)}"
+                                                                      id="goquestionnaireRegistPage-g">
+                                    <div><span>アンケート登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                <li id="l_questionnaireResponseShop"><a th:href="@{/questionnaire/response/}"
+                                                                        id="goQuestionnaireResponsePage-g">
+                                    <div><span>アンケート回答出力</span></div>
+                                </a></li>
+                            </th:block>
+                            <!--2023-renew No42 from here-->
+                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                <li id="l_digitalCatalogShop"><a th:href="@{/digitalcatalog/digitalCatalogUpload/}"
+                                                                        id="goDigitalCatalogPage-g">
+                                    <div><span>デジタルカタログ アップロード</span></div>
+                                </a></li>
+                            </th:block>
+                            <!--2023-renew No42 to here-->
+                        </ul>
+                    </div>
+                </li>
+            </th:block>
+            <th:block sec:authorize="hasAnyAuthority('CAMPAIGN:4')">
+                <li id="g_campaign" class="campaign">
+                    <div class="acdon"><i></i>
+                        <div><span>広告管理</span></div>
+                    </div>
+                    <div class="submenu">
+                        <ul>
+                            <li id="l_reportCampaign"><a th:href="@{/campaign/report/}">
+                                <div><span>広告効果測定レポート</span></div>
+                            </a></li>
+                            <li id="l_searchCampaign"><a th:href="@{/campaign/}">
+                                <div><span>広告検索</span></div>
+                            </a></li>
+                            <th:block sec:authorize="hasAnyAuthority('CAMPAIGN:8')">
+                                <li id="l_registCampaign"><a th:href="@{/campaign/regist/}">
+                                    <div><span>新規広告登録</span></div>
+                                </a></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </li>
+            </th:block>
+
+            <th:block sec:authorize="hasAnyAuthority('REPORT:4')">
+                <li id="g_totaling" class="report">
+                    <div class="acdon"><i></i>
+                        <div><span>レポート</span></div>
+                    </div>
+                    <div class="submenu">
+                        <ul>
+                            <th:block sec:authorize="hasAnyAuthority('REPORT:4')">
+                                <li id="l_searchKeywordAccording"><a th:href="@{/searchkeywordaccording/}">
+                                    <div><span>検索キーワード集計</span></div>
+                                </a></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </li>
+            </th:block>
+            <th:block sec:authorize="hasAnyAuthority('SETTING:4','ADMIN:4','BATCH:4')">
+                <li id="g_system" class="settings">
+                    <div class="acdon"><i></i>
+                        <div><span>システム設定</span></div>
+                    </div>
+                    <div class="submenu">
+                        <ul>
+                            <th:block sec:authorize="hasAnyAuthority('SETTING:4')">
+                                <li id="l_searchShopInfo"><a th:href="@{/shopinfo/}">
+                                    <div><span>店舗情報詳細</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('SETTING:4')">
+                                <li id="l_searchSettlementMethod"><a th:href="@{/settlement/}">
+                                    <div><span>決済方法設定</span></div>
+                                </a></li>
+                            </th:block>
+                            <!--PDR Migrate Customization from here-->
+                            <!--配送方法設定 削除-->
+                            <!--PDR Migrate Customization to here-->
+                            <th:block sec:authorize="hasAnyAuthority('ADMIN:4')">
+                                <li id="l_searchAdministrator"><a th:href="@{/administrator/}">
+                                    <div><span>運営者一覧</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('ADMIN:8')">
+                                <li id="l_registAdministrator"><a th:href="@{/administrator/regist/(inputMd=new)}">
+                                    <div><span>運営者登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('ADMIN:4')">
+                                <li id="l_searchAuth"><a th:href="@{/administrator/auth/}">
+                                    <div><span>権限グループ一覧</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('ADMIN:8')">
+                                <li id="l_registAuth"><a th:href="@{/administrator/authregister(md=new)}">
+                                    <div><span>権限グループ登録</span></div>
+                                </a></li>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('BATCH:4')">
+                                <li id="l_batchManagement"><a th:href="@{/batchmanagement/}">
+                                    <div><span>バッチ管理</span></div>
+                                </a></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+</div>

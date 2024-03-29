@@ -1,0 +1,20 @@
+type: object
+description: WEB-API連携割引適用結果取得リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 1
+  goodsCode:
+    type: string
+    description: 申込商品 (複数パイプ区切り)
+    example: 1
+  quantity:
+    type: string
+    description: 数量 (複数パイプ区切り)
+    example: 5
+  orderDisplay:
+    type: string
+    description: 表示順 (複数パイプ区切り)
+    example: 3

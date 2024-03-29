@@ -1,0 +1,805 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+</head>
+
+<body id="gotop" class="p-mypage" onload="setAllConsultation()">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__link">
+                            <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__link">
+                            <a th:href="@{/member/confirm/index.html}" class="c-textlink c-textlink--hover">マイページ</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">会員情報・メール配信設定変更</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+                <!--2023-renew AddNo2 from here-->
+                <div class="l-main">
+                    <h2 class="c-title-page"><strong>会員情報・メール配信設定変更</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo() ? 'global-info-message' : 'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form id="updateForm" th:object="${memberConfirmUpdateModel}" method="post" enctype="multipart/form-data" th:action="@{/member/confirm/update.html}">
+
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">下記より変更していただき、変更内容をご確認のうえ「変更を依頼する」ボタンを押してください。<br>
+                                <em>※項目によっては反映に数日かかる場合がございます。お急ぎの場合はご注文デスク（TEL：0120-108648　受付時間：09:00-17:00
+                                    日祝休）までご連絡ください。</em></p>
+                            <p class="c-page-description__text c-page-description--margin-m"><span
+                                    class="c-require">必須</span>は、必須項目です。</p>
+                        </div>
+                        <h4 class="c-title-form-m c-title-form-m--first"><p>会員情報</p></h4>
+                        <div class="l-form">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt>
+                                        <p><span>お客様番号<span class="l-form__list-title-memo">※変更できません</span></span></p>
+                                    </dt>
+                                    <dd><p id="customerNo" th:text="${memberConfirmUpdateModel.customerNo}"/></dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>事業所名</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" id="memberInfoLastName" autocomplete="name" class="c-input c-input--width-l" th:field="*{memberInfoLastName}" th:errorclass="c-input--error"/>
+                                            <span class="l-form__list-memo">（全角）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoLastName')}" th:errors="*{memberInfoLastName}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>事業所名フリガナ</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" id="memberInfoLastKana" autocomplete="name" class="c-input c-input--width-l" th:field="*{memberInfoLastKana}" th:errorclass="c-input--error"/>
+                                            <span class="l-form__list-memo">（カタカナ・スペースなし）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoLastKana')}" th:errors="*{memberInfoLastKana}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>代表者名</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" id="representativeName" autocomplete="name" class="c-input c-input--width-l" th:field="*{representativeName}" th:errorclass="c-input--error"/>
+                                            <span class="l-form__list-memo">（全角・スペースなし）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('representativeName')}" th:errors="*{representativeName}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>業種<br><span class="l-form__list-title-memo">※変更できません</span></span></p></dt>
+                                    <dd>
+                                        <div class="l-form__list-radio-unit">
+                                            <p id="businessType" th:text="${memberConfirmUpdateModel.businessType != null} ? ${memberConfirmUpdateModel.businessType.label} : ''"></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>電話番号</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="tel" id="memberInfoTel" autocomplete="tel" class="c-input c-input--width-l" th:field="*{memberInfoTel}" th:errorclass="c-input--error"/>
+                                            <span class="l-form__list-memo">（半角数字・ハイフンなし）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoTel')}" th:errors="*{memberInfoTel}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>FAX番号</span><span class="c-any">任意</span></p></dt>
+                                    <dd>
+                                        <p>
+                                        <input type="tel" id="memberInfoFax" autocomplete="tel" class="c-input c-input--width-l" th:field="*{memberInfoFax}" th:errorclass="c-input--error"/>
+                                        <span class="l-form__list-memo">（半角数字・ハイフンなし）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoFax')}" th:errors="*{memberInfoFax}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list l-form__list-zicode">
+                                    <dt><p><span>郵便番号</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <span>
+                                                <input type="text" id="memberInfoZipCode1" maxlength="3" autocomplete="postal-code" class="c-input c-input--width-s" th:field="*{memberInfoZipCode1}" th:errorclass="c-input--error">
+                                            </span>
+                                            <span>ー</span>
+                                            <span>
+                                                <input type="text" id="memberInfoZipCode2" maxlength="4" autocomplete="postal-code" class="c-input c-input--width-s" th:field="*{memberInfoZipCode2}" th:errorclass="c-input--error">
+                                            </span>
+                                            <span class="l-form__list-memo">（半角数字）</span>
+                                            <button type="button" id="doZipCodeSearch" class="c-button c-button--address" value="住所検索" onClick="callZipSearchFunc()">
+                                                <p>住所検索</p>
+                                            </button>
+                                        </p>
+                                        <div class="l-form__list-text l-form__list-text--small l-form__list-text--top">
+                                            ※郵便番号を入力し、住所検索ボタンをクリックしてください。住所が自動で入力されます。<br/>
+                                            <span id="zipErrorMsg"/>
+                                            <th:block th:if="${#fields.hasErrors('memberInfoZipCode1') && #fields.hasErrors('memberInfoZipCode2')}">
+                                                <span th:errors="*{memberInfoZipCode1}" class="c-field-error c-field-error--top"></span>
+                                            </th:block>
+                                            <th:block th:unless="${#fields.hasErrors('memberInfoZipCode1') && #fields.hasErrors('memberInfoZipCode2')}">
+                                                <span th:if="${#fields.hasErrors('memberInfoZipCode1')}" th:errors="*{memberInfoZipCode1}" class="c-field-error c-field-error--top"></span>
+                                                <span th:if="${#fields.hasErrors('memberInfoZipCode2')}" th:errors="*{memberInfoZipCode2}" class="c-field-error c-field-error--top"></span>
+                                            </th:block>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>都道府県　市区郡</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" id="memberInfoAddress1" autocomplete="name" class="c-input c-input--width-l" th:field="*{memberInfoAddress1}" th:errorclass="c-input--error"/>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoAddress1')}" th:errors="*{memberInfoAddress1}" class="c-field-error c-field-error--top"></span>
+                                        <input type="hidden" id="memberInfoPrefecture" th:field="*{memberInfoPrefecture}"/>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>町村・番地</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" id="memberInfoAddress2" autocomplete="name" class="c-input c-input--width-l" th:field="*{memberInfoAddress2}" th:errorclass="c-input--error"/>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoAddress2')}" th:errors="*{memberInfoAddress2}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>マンション・建物名</span><span class="c-any">任意</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" id="memberInfoAddress3" autocomplete="name" class="c-input c-input--width-l" th:field="*{memberInfoAddress3}" th:errorclass="c-input--error"/>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoAddress3')}" th:errors="*{memberInfoAddress3}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt>
+                                        <div class="l-form__list-title-wrap">
+                                            <p><span>メールアドレス</span></p>
+                                        </div>
+                                    </dt>
+                                    <dd>
+                                        <p>
+                                            <span id="memberInfoMail"
+                                                 th:text="${memberConfirmUpdateModel.memberInfoMail}"/>
+                                            　<span class="l-form__list-memo">※メールアドレス変更の方は<a th:href="@{/member/mail/index.html}" class="c-inlinelink">こちら</a></span>
+                                        </p>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>休診曜日</span><span class="c-any">任意</span></p></dt>
+                                    <dd>
+                                        <div class="l-form__list-text l-form__list-text--small l-form__list-text--bottom">「休診」にチェックを入れてください。</div>
+                                        <div class="p-regist__closed-wrap">
+                                            <table class="l-form__table p-regist__closed">
+                                                <thead>
+                                                    <tr>
+                                                        <th>&nbsp;</th>
+                                                        <th>日</th>
+                                                        <th>月</th>
+                                                        <th>火</th>
+                                                        <th>水</th>
+                                                        <th>木</th>
+                                                        <th>金</th>
+                                                        <th>土</th>
+                                                        <th>祝</th>
+                                                        <th>無休</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>AM</th>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amSunNonConsultationSubstitute}" id="amSunNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{amSunNonConsultation}" id="amSunNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amMonNonConsultationSubstitute}" id="amMonNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{amMonNonConsultation}" id="amMonNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amTueNonConsultationSubstitute}" id="amTueNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{amTueNonConsultation}" id="amTueNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amWedNonConsultationSubstitute}" id="amWedNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{amWedNonConsultation}" id="amWedNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amThuNonConsultationSubstitute}" id="amThuNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{amThuNonConsultation}" id="amThuNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amFriNonConsultationSubstitute}" id="amFriNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{amFriNonConsultation}" id="amFriNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amSatNonConsultationSubstitute}" id="amSatNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{amSatNonConsultation}" id="amSatNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{amHolidayNonConsultationSubstitute}" id="amHolidayNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" name="" th:field="*{amHolidayNonConsultation}" id="amHolidayNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td rowspan="2">
+                                                            <input type="hidden" th:field="*{allConsultationSubstitute}" id="allConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{allConsultation}" id="allConsultation" onclick="setAllConsultation();" name="allConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>PM</th>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmSunNonConsultationSubstitute}" id="pmSunNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{pmSunNonConsultation}" id="pmSunNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmMonNonConsultationSubstitute}" id="pmMonNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{pmMonNonConsultation}" id="pmMonNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmTueNonConsultationSubstitute}" id="pmTueNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{pmTueNonConsultation}" id="pmTueNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmWedNonConsultationSubstitute}" id="pmWedNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{pmWedNonConsultation}" id="pmWedNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmThuNonConsultationSubstitute}" id="pmThuNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{pmThuNonConsultation}" id="pmThuNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmFriNonConsultationSubstitute}" id="pmFriNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{pmFriNonConsultation}" id="pmFriNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmSatNonConsultationSubstitute}" id="pmSatNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" th:field="*{pmSatNonConsultation}" id="pmSatNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" th:field="*{pmHolidayNonConsultationSubstitute}" id="pmHolidayNonConsultationSubstitute"/>
+                                                            <label class="c-checkbox">
+                                                                <span class="c-checkbox__box">
+                                                                    <input type="checkbox" name="" th:field="*{pmHolidayNonConsultation}" id="pmHolidayNonConsultation" class="nonConsultation"/>
+                                                                    <span></span>
+                                                                </span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>診療科目</span><span class="c-any">任意</span></p></dt>
+                                    <dd>
+                                        <table class="l-form__table p-regist__subject">
+                                            <tr th:if="*{isMedicalTreatmentJudge1()}">
+                                                <th>
+                                                    <span id="medicalTreatment1Title" th:utext="*{medicalTreatment1Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment1Substitute" id="medicalTreatment1Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment1}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge2()}">
+                                                <th>
+                                                    <span id="medicalTreatment2Title" th:utext="*{medicalTreatment2Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment2Substitute" id="medicalTreatment2Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment2}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge3()}">
+                                                <th>
+                                                    <span id="medicalTreatment3Title" th:utext="*{medicalTreatment3Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment3Substitute" id="medicalTreatment3Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment3}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge4()}">
+                                                <th>
+                                                    <span id="medicalTreatment4Title" th:utext="*{medicalTreatment4Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment4Substitute" id="medicalTreatment4Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment4}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge5()}">
+                                                <th>
+                                                    <span id="medicalTreatment5Title" th:utext="*{medicalTreatment5Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment5Substitute" id="medicalTreatment5Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment5}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge6()}">
+                                                <th>
+                                                    <span id="medicalTreatment6Title" th:utext="*{medicalTreatment6Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment6Substitute"
+                                                           id="medicalTreatment6Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment6}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge7()}">
+                                                <th>
+                                                    <span id="medicalTreatment7Title" th:utext="*{medicalTreatment7Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment7Substitute" id="medicalTreatment7Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment7}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge8()}">
+                                                <th>
+                                                    <span id="medicalTreatment8Title" th:utext="*{medicalTreatment8Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment8Substitute" id="medicalTreatment8Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment8}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge9()}">
+                                                <th>
+                                                    <span id="medicalTreatment9Title" th:utext="*{medicalTreatment9Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment9Substitute" id="medicalTreatment9Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment9}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isMedicalTreatmentJudge10()}">
+                                                <th>
+                                                    <span id="medicalTreatment10Title" th:utext="*{medicalTreatment10Title}" th:remove="tag"></span>
+                                                </th>
+                                                <td>
+                                                    <input type="hidden" name="medicalTreatment10Substitute" id="medicalTreatment10Substitute"/>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box">
+                                                            <input type="checkbox" th:field="*{medicalTreatment10}"> <span></span>
+                                                        </span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>その他</th>
+                                                <td class="p-regist__subject-other">
+                                                    <input type="text" id="medicalTreatmentMemo" class="c-input" th:field="*{medicalTreatmentMemo}" th:errorclass="c-input--error"/>
+                                                    <div th:if="${#fields.hasErrors('medicalTreatmentMemo')}" th:errors="*{medicalTreatmentMemo}" class="c-field-error c-field-error--top"></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>確認書類</span><span class="c-any">任意</span></p></dt>
+                                    <dd>
+                                        <div class="l-form__list-text l-form__list-text--small">
+                                            医薬品をお買い求めの方は確認書類の提出が必要です。下記確認書類よりいずれか1つアップロードしてください。<br>
+                                            【確認書類】<br>
+                                            ・診療所開設届<br>
+                                            ・診療所開設届出済証<br>
+                                            ・保険医療機関指定通知書<br>
+                                            ・歯科技工所開設届<br>
+                                            ※既に提出済みの方は不要です。
+                                        </div>
+                                        <div class="l-form__list-text l-form__list-text--small l-form__list-text--top">
+                                            ・後日マイページからアップロード可能です<br>・FAXでのご提出もできます。FAX：0120-108649（受付時間：24時間／年中無休）に送信してください。
+                                        </div>
+                                        <div id="error-upload-message">
+                                            <div th:if="${#fields.hasErrors('uploadFiles')}" th:errors="*{uploadFiles}" class="p-regist__drop-error"></div>
+                                        </div>
+                                        <div class="p-regist__drop">
+                                            <div class="p-regist__drop-uploaded">
+                                                <div class="p-regist__drop-uploaded-image" th:each="item, stat: *{uploadFileModelList}" th:unless="*{#lists.isEmpty(uploadFileModelList)}">
+                                                    <img th:if="${item.extensionType.value != '2'}" th:id="'upload-image-' + '-' + ${stat.index}" th:src="${item.filePath}" alt="">
+                                                    <img th:if="${item.extensionType.value == '2'}" th:id="'upload-image-' + '-' + ${stat.index}" th:src="${item.filePath}" alt="">
+                                                    <button class="clear-image" type="button" th:if="${item.isSavedImage()}" th:onClick="'deleteUpload(' + ${item.fileNo} + ')'">
+                                                        ✖
+                                                    </button>
+                                                    <input type="hidden" th:id="'imagePath' + '-' + ${stat.index}" th:name="'registUploadFiles[' + ${stat.index} + '].imagePath'" th:value="${item.filePath}"/>
+                                                </div>
+                                                <input type="hidden" id="selectFileNo" th:field="*{fileNo}"/>
+                                                <input type="submit" id="doDeleteFile" name="doDeleteFile" style="display: none">
+                                            </div>
+                                            <div id="p-regist__drop-area" class="p-regist__drop-area" ondrop="dragDrop(event)" ondragover="allowDrop(event)" th:classappend="${#fields.hasErrors('uploadFiles')} ? 'field-error'">
+                                                <img th:src="@{/images/member/confirm/file-up.svg}" alt="ファイルアップロード" width="95" class="p-regist__drop-logo l-lg">
+                                                <div class="p-regist__drop-text l-lg">ここにファイルをドロップ　または</div>
+                                                <button class="c-button p-regist__drop-button" type="button" onclick="openUploadImage();">
+                                                    ファイルを選択
+                                                </button>
+                                                <input id="doUploadFile" name="doUploadFile" type="submit" value="画像アップロード" style="display: none;"/>
+                                            </div>
+                                            <input type="file" id="imagePdfUpload" th:field="*{uploadFiles}" accept="image/png, image/jpeg, application/pdf" th:errorclass="error" multiple hidden/>
+
+                                            <div class="l-form__list-text l-form__list-text--small">
+                                                ※アップロードできる画像の上限は3枚とします。<br>
+                                                ※許容する画像ファイルの拡張子はpng、jpeg、pdfです。<br>
+                                                ※最大サイズは1ファイル5MBまでです。
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt>
+                                        <p>
+                                            <span>反社会的勢力ではないこと<br class="l-sm">の保証<br>
+                                                <span class="l-form__list-title-memo">※変更できません</span>
+                                            </span>
+                                        </p>
+                                    </dt>
+                                    <dd>
+                                        <div class="l-form__list-text l-form__list-text--bottom">
+                                            暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。
+                                        </div>
+                                        <p id="isNoAntiSocialFlag" th:text="${memberConfirmUpdateModel.noAntiSocialFlag != null}
+                                        ? ${memberConfirmUpdateModel.noAntiSocialFlag.label}
+                                        : ''"/>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <h4 class="c-title-form-m c-title-form-m--line"><p>メール配信設定</p><span
+                                class="c-any">任意</span>
+                        </h4>
+                        <div class="l-form">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt><p>メールによるおトク情報</p></dt>
+                                    <dd>
+                                        <div class="p-regist__mail">
+                                            <label class="c-checkbox">
+                                                <span class="c-checkbox__box">
+                                                    <input type="checkbox" th:field="*{sendMail}"> <span></span>
+                                                </span>
+                                                <p>希望する</p>
+                                            </label>
+                                            <div class="p-regist__mail-text">
+                                                セール情報、おすすめ商品、メルマガ限定キャンペーンなどをメールでお送りします。
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>金属商品価格お知らせメール</p></dt>
+                                    <dd>
+                                        <div class="p-regist__mail">
+                                            <label class="c-checkbox">
+                                                <span class="c-checkbox__box">
+                                                    <input type="checkbox" th:field="*{metalPermit}"> <span></span></span>
+                                                <p>希望する</p>
+                                            </label>
+                                            <div class="p-regist__mail-text">金属商品の価格をメールでお送りします。</div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>ご注文受付完了メール</p></dt>
+                                    <dd>
+                                        <div class="p-regist__mail">
+                                            <!-- 2023-renew No79 from here -->
+                                            <label class="c-checkbox">
+                                                <span class="c-checkbox__box">
+                                                    <input type="checkbox" th:field="*{orderCompletePermit}"> <span></span>
+                                                </span>
+                                                <!-- 2023-renew No79 to here -->
+                                                <p>希望する</p>
+                                            </label>
+                                            <div class="p-regist__mail-text">
+                                                ご注文確定時に自動配信されるメールです。（オンラインショップからのご注文の際に送信されます。）
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p>商品発送完了メール</p></dt>
+                                    <dd>
+                                        <div class="p-regist__mail">
+                                            <!-- 2023-renew No79 from here -->
+                                            <label class="c-checkbox">
+                                                <span class="c-checkbox__box">
+                                                    <input type="checkbox" th:field="*{deliveryCompletePermit}"> <span></span>
+                                                </span>
+                                                <!-- 2023-renew No79 to here -->
+                                                <p>希望する</p>
+                                            </label>
+                                            <div class="p-regist__mail-text">
+                                                商品発送時に自動配信されるメールです。（オンラインショップからのご注文の際に送信されます。）
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <p class="p-regist__mail-memo">※希望しない場合はチェックを外してください。<br>※配信停止・再開はマイページから変更できます。</p>
+                            </div>
+                        </div>
+
+                        <div class="c-button-wrap c-button-wrap--upper">
+                            <p class="c-button-wrap__text-l">
+                                必ず、変更内容にお間違えないかご確認のうえ「変更を依頼する」を押してください。</p>
+                        </div>
+                        <div class="c-button-wrap">
+                            <button type="button" style="width: 300px !important;"
+                                    class="c-button c-button--primary-line c-button--width-l"
+                                    th:onclick="|window.location.href='@{/member/confirm/index.html}'|">戻る</button>
+                            <button type="submit" style="width: 300px !important;"
+                                    class="c-button c-button--primary c-button--width-l">変更を依頼する</button>
+                        </div>
+                        <div class="c-button-wrap c-button-wrap--line">
+                            <a th:href="@{/index.html}" style="color: #f36b30;text-decoration: dotted" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" style="color: #f36b30;text-decoration: dotted" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </form>
+                </div>
+                <!--2023-renew AddNo2 to here-->
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+<style>
+    .clear-image {
+        padding: 0;
+        background: white;
+        border: 1px solid #f4673c;
+        color: #f4673c;
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+        font-size: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+</style>
+<script type="text/javascript">
+    var zipsearch = new Zipsearch();
+    zipsearch.switchZipCodeButton();
+
+    function callZipSearchFunc() {
+        zipsearch.zipCodeSearchPrefectureNameReturn(true, document.getElementById('memberInfoPrefecture'), document.getElementById('memberInfoAddress1'), document.getElementById('memberInfoAddress2'), document.getElementById('memberInfoAddress3'), document.getElementById('memberInfoZipCode1'), document.getElementById('memberInfoZipCode2'));
+    }
+
+    function onload() {
+        const imagePdfUpload = document.querySelector('#imagePdfUpload');
+        // ファイル選択のイベントをハンドリング
+        imagePdfUpload.addEventListener('change', (ev) => {
+            // 全てのファイルを取得
+            const files = imagePdfUpload.files;
+            uploadAction(files)
+        })
+    }
+
+    onload();
+
+    function uploadAction(files) {
+        if (validate(files)) {
+            document.getElementById("doUploadFile").click();
+        }
+    }
+
+    function validate(files) {
+        const acceptExtensionList = document.getElementById('imagePdfUpload').accept
+        const maxSize = 1024 * 1024 * 5
+        for (const file of files) {
+            if (file.size > maxSize) {
+                document.getElementById("imagePdfUpload").value = null
+                showErrorUploadMessage('アップロードできるファイルは5MB以下となります。')
+                return false
+            }
+        }
+        showErrorUploadMessage('')
+        return true
+    }
+
+    function showErrorUploadMessage(msg) {
+        document.getElementById('error-upload-message').innerText = msg
+        document.getElementById('error-upload-message').classList.add('p-regist__drop-error')
+        if (msg) {
+            document.getElementById('error-upload-message').style.visibility = 'visible'
+        } else {
+            document.getElementById('error-upload-message').style.visibility = 'hidden'
+        }
+    }
+
+    function openUploadImage() {
+        document.getElementById('imagePdfUpload').click()
+    }
+
+    function deleteUpload(imageNo) {
+        document.getElementById('selectFileNo').value = imageNo
+        document.getElementById('doDeleteFile').click();
+    }
+
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function dragDrop(ev) {
+        ev.preventDefault();
+        $("#imagePdfUpload").prop("files", ev.dataTransfer.files).change();
+        document.getElementById("doUploadFile").click();
+    }
+
+    function setAllConsultation() {
+        var elements = document.getElementsByClassName("nonConsultation");
+        var allConsultation = document.getElementById('allConsultation');
+        var cnt = elements.length;
+
+
+        for (var index = 0; index < cnt; index++) {
+            if (allConsultation.checked == true) {
+                elements[index].checked = false;
+                elements[index].disabled = true;
+            } else {
+                elements[index].disabled = false;
+            }
+        }
+    }
+</script>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

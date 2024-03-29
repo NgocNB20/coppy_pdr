@@ -1,0 +1,47 @@
+/* 2023-renew No14 from here */
+/* TODO This is sample. Needs correction when reflecting the design. */
+.ttl_button {
+    text-align: center;
+}
+
+.date_picker {
+    width: 80% !important;
+    height: 25px !important;
+}
+
+.img-button-reserve {
+    width: 250px;
+    height: 50px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    background: #f36b30 !important;
+    border: 1px solid #f36b30 !important;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    color: #ffffff !important;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.custom-calendar-saturday a.ui-state-default {
+    background-color: #c1e0ff;
+}
+
+.custom-calendar-sunday a.ui-state-default {
+    background-color: #ffc1c1;
+}
+
+.custom-calendar-holiday a.ui-state-default {
+    background-color: #ffc1c1;
+}
+
+/* 2023-renew No14 from here */

@@ -1,0 +1,11 @@
+type: object
+description: 前回支払方法取得レスポンス
+properties:
+  settlementMethodType:
+    type: string
+    description: 決済タイプ
+    example: 0
+  customerCardId:
+    type: string
+    description: 顧客カードID
+    example: 123456

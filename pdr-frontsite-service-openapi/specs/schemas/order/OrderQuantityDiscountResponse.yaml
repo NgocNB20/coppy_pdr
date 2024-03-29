@@ -1,0 +1,15 @@
+type: object
+description: 数量割引取得結果連携レスポンス
+properties:
+  checkMessageDtoList:
+    type: array
+    description: エラーメッセージ用List
+    items:
+      $ref: '#/components/schemas/CheckMessageDtoResponse'
+  receiveOrderDto:
+    type: string
+    description: 受注Dto
+components:
+  schemas:
+    CheckMessageDtoResponse:
+      $ref: ./CheckMessageDtoResponse.yaml

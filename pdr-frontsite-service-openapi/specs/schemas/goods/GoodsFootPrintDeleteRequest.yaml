@@ -1,0 +1,7 @@
+type: object
+description: あしあと商品情報削除リクエスト
+properties:
+  accessUid:
+    type: string
+    description: 端末識別情報（必須）
+    example: uid

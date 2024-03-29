@@ -1,0 +1,125 @@
+type: object
+description: 受注配送DTOリクエスト
+properties:
+  addType:
+    type: string
+    description: 追加種別
+    example: 1
+  tmpOrderGoodsEntityList:
+    type: array
+    description: 受注商品Dtoリスト
+    items:
+      $ref: '#/components/schemas/OrderGoodsRequest'
+  orderGoodsEntityList:
+    type: array
+    description: 受注商品Dtoリスト
+    items:
+      $ref: '#/components/schemas/OrderGoodsRequest'
+  orderDeliveryEntity:
+    type: object
+    description: 受注配送エンティティ
+    $ref: '#/components/schemas/OrderDeliveryRequest'
+  deliveryMethodEntity:
+    type: object
+    description: 配送方法エンティティ
+    $ref: '#/components/schemas/DeliveryMethodRequest'
+  receiverRegistFlg:
+    type: boolean
+    description: 「このお届け先を住所に登録する」フラグ
+    example: 1
+  deliveryDtoList:
+    type: array
+    description: 「このお届け先を住所に登録する」フラグ
+    items:
+      $ref: '#/components/schemas/DeliveryDtoRequest'
+  originalCarriage:
+    type: number
+    description: 前回送料
+    example: 0
+  firstSelectedOrderGoodsEntityList:
+    type: array
+    description: 受注商品Dtoリスト
+    items:
+      $ref: '#/components/schemas/OrderGoodsRequest'
+  deliveryInformationDetailDto:
+    type: object
+    description: 配送情報取得 詳細情報
+    $ref: '#/components/schemas/WebApiGetDeliveryInformationResponseDetailDtoRequest'
+  orderDeliveryNowDtoList:
+    type: array
+    description: 今すぐお届け分List
+    items:
+      $ref: '#/components/schemas/OrderDeliveryNowDtoRequest'
+  orderReserveDeliveryDtoList:
+    type: array
+    description: お取りおき商品情報List
+    items:
+      $ref: '#/components/schemas/OrderReserveDeliveryDtoRequest'
+  orderDependingOnReceiptGoodsDtoList:
+    type: array
+    description: お取りおき商品情報List
+    items:
+      $ref: '#/components/schemas/OrderDependingOnReceiptGoodsDtoRequest'
+  businessType:
+    type: string
+    description: 顧客区分
+    example: 0
+  confDocumentType:
+    type: string
+    description: 確認書類
+    example: 0
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 0
+  addressBookSeq:
+    type: integer
+    format: int32
+    description: 住所録SEQ
+    example: 0
+  deliveryDate:
+    type: string
+    description: 取りおき お届け時期
+    example: 0
+  discountPrice:
+    type: number
+    description: 値引き
+    default: 0
+    example: 0
+  taxPrice:
+    type: number
+    description: 消費税
+    default: 0
+    example: 0
+  totalTax:
+    type: number
+    description: 消費税合計
+    example: 0
+  requisitionType:
+    type: string
+    description: 請求書種別
+    example: 0
+  cityCd:
+    type: string
+    description: お届け先都道府県コード
+    example: 0
+
+components:
+  schemas:
+    OrderGoodsRequest:
+      $ref: ./OrderGoodsRequest.yaml
+    OrderDeliveryRequest:
+      $ref: ./OrderDeliveryRequest.yaml
+    DeliveryMethodRequest:
+      $ref: ./DeliveryMethodRequest.yaml
+    DeliveryDtoRequest:
+      $ref: ./DeliveryDtoRequest.yaml
+    WebApiGetDeliveryInformationResponseDetailDtoRequest:
+      $ref: ./WebApiGetDeliveryInformationResponseDetailDtoRequest.yaml
+    OrderDeliveryNowDtoRequest:
+      $ref: ./OrderDeliveryNowDtoRequest.yaml
+    OrderReserveDeliveryDtoRequest:
+      $ref: ./OrderReserveDeliveryDtoRequest.yaml
+    OrderDependingOnReceiptGoodsDtoRequest:
+      $ref: ./OrderDependingOnReceiptGoodsDtoRequest.yaml

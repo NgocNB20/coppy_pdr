@@ -1,0 +1,1 @@
+SELECT * FROM questionnaire WHERE questionnaireSeq = /*questionnaireSeq*/''

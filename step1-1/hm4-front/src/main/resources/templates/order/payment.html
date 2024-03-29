@@ -1,0 +1,520 @@
+<!-- PDR Migrate Customization from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script th:inline="javascript">
+        //<![CDATA[
+        $(function() {
+
+            // 預かりカード選択時の上位ラジオボタン制御
+            $( 'input[name$="registCardSelect"]:radio' ).change( function() {
+                $( 'input[name$="creditCardType"][value=0]' ).prop('checked', 'checked');
+                $( 'input[name$="settlementMethod"][value=1001]' ).prop('checked', 'checked');
+                dispNewCard();
+            });
+
+            // 新しいカード/過去ご利用カード選択時の上位ラジオボタン制御
+            $( 'input[name$="creditCardType"]:radio' ).change( function() {
+                $( 'input[name$="registCardSelect"]:radio' ).prop('checked', false);
+                $( 'input[name$="settlementMethod"][value=1001]' ).prop('checked', 'checked');
+                dispNewCard();
+            });
+
+            // 支払い方法選択時のラジオボタン制御
+            $( 'input[name$="settlementMethod"]:radio' ).change( function() {
+                $( 'input[name$="registCardSelect"]:radio' ).prop('checked', false);
+                $( 'input[name$="creditCardType"]:radio' ).prop('checked', false);
+
+                var displayCredit = /*[[${paymentModel.isDisplayCredit()}]]*/
+                if( $('input[type=radio][id^="settlementMethod-"]:checked').val() == 1001 && !displayCredit ){
+                    $( 'input[name$="creditCardType"][value=1]' ).prop('checked', 'checked');
+                }
+                dispNewCard();
+            });
+
+            // 初期表示時
+            var settlementMethodCheckedRadio = $('input[type=radio][id^="settlementMethod-"]:checked');
+            var dataRadioValue = settlementMethodCheckedRadio.attr('data-radio');
+            $( '#' + dataRadioValue ).show();
+            dispNewCard();
+
+        });
+
+        function dispNewCard(){
+            if( $('input[type=radio][id^="creditCardType-"]:checked').val() == 1 ){
+                $( '#new-card' ).show();
+            } else {
+                $( '#new-card' ).hide();
+            }
+        }
+
+        //]]>
+    </script>
+</head>
+
+<body id="gotop" class="p-order-confirm p-order-payment">
+<div class="l-mainwrap l-order">
+    <div th:replace="~{newdesign/include/headerorder}"></div>
+
+    <main class="l-page">
+
+        <div class="c-orderflow">
+            <ul>
+                <li class="c-orderflow__step c-orderflow__step--already"><span>ショッピングカート</span></li>
+                <li class="c-orderflow__step c-orderflow__step--current"><span>注文内容確認</span></li>
+                <li class="c-orderflow__step"><span>注文完了</span></li>
+            </ul>
+        </div>
+
+        <form autocomplete="off" id="paymentForm" th:action="@{/order/payment.html}" th:object="${paymentModel}" method="post">
+            <input type="hidden" th:field="*{invoiceAttachmentFlag}"/>
+            <input type="hidden" id="pToken" th:field="${orderCommonModel.pToken}"/>
+
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>お支払い方法</strong></h2>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <th:block id="isNotOrderPriceZero" th:if="*{!isOrderPriceZero()}">
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">下記よりお支払い方法を選択してください。</p>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+            <div class="l-section p-order-payment__select">
+                <div class="l-section__inner">
+                    <th:block id="isNotOrderPriceZero" th:if="*{!isOrderPriceZero()}">
+                        <th:block th:each="paymentModelItem, paymentModelItemStat : *{paymentModelItems}" hiddenlinenumber="true">
+                            <div class="p-order-payment__select-unit" >
+                                <div class="p-order-payment__select-radio" th:classappend="${#fields.hasErrors('settlementMethod')} ? 'l-form__list--error' : ''">
+                                    <th:block th:if="${paymentModelItem.isUsabilityFlag()}">
+                                        <input th:id="'settlementMethod-' + ${paymentModelItemStat.index}"
+                                               name="settlementMethod"
+                                               th:checked="*{settlementMethod} == ${paymentModelItem.settlementMethodValue}"
+                                               th:value="${paymentModelItem.settlementMethodValue}"
+                                               type="radio" class="c-radio js-radio" th:data-radio="'payment-' + ${paymentModelItemStat.index}">
+                                        <label th:for="'settlementMethod-' + ${paymentModelItemStat.index}">
+                                            <span th:id="'settlementMethodLabel-' + ${paymentModelItemStat.index}" th:remove="tag" th:text="${paymentModelItem.settlementMethodLabel}"/>
+                                        </label>
+                                        <span style="display:none;" th:id="'settlementMethodTypeName-' + ${paymentModelItemStat.index}" th:text="${paymentModelItem.settlementMethodTypeName}"/>
+                                    </th:block>
+                                    <th:block th:if="${!paymentModelItem.isUsabilityFlag()}">
+                                        <input th:id="'settlementMethod-' + ${paymentModelItemStat.index}" type="radio" class="c-radio js-radio" disabled>
+                                        <label th:for="'settlementMethod-' + ${paymentModelItemStat.index}">
+                                            <span th:id="'settlementMethodLabel-' + ${paymentModelItemStat.index}" th:remove="tag" th:text="${paymentModelItem.settlementMethodLabel}"/><span class="p-order-payment__select-memolink">事前登録されていない方は<span class="c-inlinelink js-modal" data-target="modal-about">こちら</span></span>
+                                        </label>
+                                    </th:block>
+                                    <div th:if="${#fields.hasErrors('settlementMethod')}" th:errors="*{settlementMethod}" class="c-field-error c-field-error--top-large"></div>
+                                </div>
+                            </div>
+                            <th:block th:if="${paymentModelItem.isCreditType()}"><!-- 決済クレジットカード -->
+                                <th:block th:if="${paymentModelItem.isUsabilityFlag()}">
+                                    <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                        <div class="p-order-payment__contents">
+                                            <th:block th:if="${paymentModelItem.isDispSettlementNotePC()}">
+                                                <th:block th:if="${paymentModelItem.isRegistedCard()}">
+                                                    <h3 class="p-order-payment__contents-title p-order-payment__contents-title--bottom">過去ご利用カード<small>※カード情報は「マイページ」の「カード情報」より削除いただけます。</small></h3>
+                                                    <th:block th:each="registedCardItem, registedCardItemStat : ${paymentModelItem.registedCardItems}" hiddenlinenumber="true">
+                                                        <div class="p-order-payment__select-radio"
+                                                             th:classappend="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].creditCardType') ||
+                                                                 #fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].registCardSelect')}    ? 'l-form__list--error' : '' ">
+                                                            <input th:id="'creditCardType-' + ${paymentModelItemStat.index} + '-0'" type="radio" th:name="'paymentModelItems[' + ${paymentModelItemStat.index} + '].creditCardType'" th:checked="${paymentModelItem.creditCardType == '0'}" th:value="0" style="display: none;" />
+                                                            <input th:id="'registCardSelect-' + ${paymentModelItemStat.index} + '-' + ${registedCardItemStat.index}"
+                                                                   th:name="'paymentModelItems[' + ${paymentModelItemStat.index} + '].registCardSelect'"
+                                                                   th:checked="${registedCardItem.registCardSelectValue == paymentModelItem.registCardSelect}" th:value="${registedCardItem.registCardSelectValue}"
+                                                                   type="radio" class="c-radio">
+                                                            <label th:for="'registCardSelect-' + ${paymentModelItemStat.index} + '-' + ${registedCardItemStat.index}"> <span th:id="'registedCardBrand-' + ${paymentModelItemStat.index} + '-' + ${registedCardItemStat.index}" th:text="${registedCardItem.registedCardBrand}" th:remove="tag"/><br>カードNo.　<span th:id="'registedCardNumber-' + ${paymentModelItemStat.index} + '-' + ${registedCardItemStat.index}" th:text="${registedCardItem.registedCardNumber}" th:remove="tag"/><br>有効期限　　<span th:id="'registedExpirationDateMonth-' + ${paymentModelItemStat.index} + '-' + ${registedCardItemStat.index}" th:text="${registedCardItem.registedExpirationDateMonth}" th:remove="tag"/>/<span th:id="'registedExpirationDateYear-' + ${paymentModelItemStat.index} + '-' + ${registedCardItemStat.index}" th:text="${registedCardItem.registedExpirationDateYear}" th:remove="tag"/></label>
+                                                        </div>
+                                                    </th:block>
+                                                </th:block>
+                                                <div class="p-order-payment__select-radio"
+                                                     th:classappend="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].creditCardType') ||
+                                                         #fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].registCardSelect')}    ? 'l-form__list--error' : '' ">
+                                                    <input th:id="'creditCardType-' + ${paymentModelItemStat.index} + '-1'" type="radio" th:name="'paymentModelItems[' + ${paymentModelItemStat.index} + '].creditCardType'" th:checked="${paymentModelItem.creditCardType == '1'}" th:value="1" class="c-radio">
+                                                    <label th:for="'creditCardType-' + ${paymentModelItemStat.index} + '-1'"><strong>新しいカード</strong></label>
+                                                    <div th:if="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].registCardSelect')}"
+                                                         th:errors="*{paymentModelItems[__${paymentModelItemStat.index}__].registCardSelect}" class="c-field-error c-field-error--top"></div>
+                                                    <div th:if="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].creditCardType')}"
+                                                         th:errors="*{paymentModelItems[__${paymentModelItemStat.index}__].creditCardType}" class="c-field-error c-field-error--top"></div>
+                                                </div>
+
+                                                <div class="p-order-payment__new" id="new-card" style="display: none;">
+                                                    <div class="p-order-payment__new-form">
+                                                        <div class="l-form">
+                                                            <div class="l-form__list-wrap">
+                                                                <dl class="l-form__list">
+                                                                    <dt><p><span>カード会社選択</span></p></dt>
+                                                                    <dd>
+                                                                        <div class="c-select c-select--card" th:classappend="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].cardBrand')} ? 'c-select--error' : ''">
+                                                                            <select class="c-select__inner" th:name="'paymentModelItems[' + ${paymentModelItemStat.index} + '].cardBrand'" title="カード会社選択">
+                                                                                <option value="">選択してください</option>
+                                                                                <option th:each="cardBrandItem : *{cardBrandItems}"
+                                                                                        th:value="${cardBrandItem.key}" th:text="${cardBrandItem.value}"
+                                                                                        th:selected="${cardBrandItem.key} == ${paymentModelItem.cardBrand}"></option>
+                                                                            </select>
+                                                                            <div th:if="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].cardBrand')}"
+                                                                                 th:errors="*{paymentModelItems[__${paymentModelItemStat.index}__].cardBrand}" class="c-field-error c-field-error--top"></div>
+                                                                        </div>
+                                                                    </dd>
+                                                                </dl>
+                                                                <dl class="l-form__list">
+                                                                    <dt><p><span>カード番号</span></p></dt>
+                                                                    <dd>
+                                                                        <p>
+                                                                            <input type="text" id="cardNewNumber" maxlength="16" title="カード番号" inputmode="numeric" autocomplete="name" class="c-input c-input--width-l"
+                                                                                   th:classappend="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].cardNumber')} ? 'c-input--error' : ''">
+                                                                            <span class="l-form__list-memo">（半角数字・ハイフンなし） </span>
+                                                                            <input type="hidden" id="cardNumber" th:field="*{paymentModelItems[__${paymentModelItemStat.index}__].cardNumber}"/>
+                                                                        </p>
+                                                                        <span th:if="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].cardNumber')}"
+                                                                             th:errors="*{paymentModelItems[__${paymentModelItemStat.index}__].cardNumber}"
+                                                                             class="c-field-error c-field-error--top"></span>
+                                                                    </dd>
+                                                                </dl>
+                                                                <dl class="l-form__list">
+                                                                    <dt><p><span>有効期限</span></p></dt>
+                                                                    <dd>
+                                                                        <p>
+                                                                            <span>月&nbsp;</span>
+                                                                            <span class="c-select c-select--expiration" th:classappend="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].expirationDateMonth')} ? 'c-select--error' : ''">
+                                                                                <select id="expirationNewDateMonth" class="c-select__inner" title="有効期限">
+                                                                                    <option value="">選択</option>
+                                                                                    <option th:each="expirationDateMonthItem : *{expirationDateMonthItems}"
+                                                                                            th:value="${expirationDateMonthItem.key}" th:text="${expirationDateMonthItem.value}"
+                                                                                            th:selected="${expirationDateMonthItem.key} == ${paymentModelItem.expirationDateMonth}"></option>
+                                                                                </select>
+                                                                            </span>
+                                                                            <span>&nbsp;／&nbsp;年&nbsp;</span>
+                                                                            <span class="c-select c-select--expiration" th:classappend="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].expirationDateYear')} ? 'c-select--error' : ''">
+                                                                                <select id="expirationNewDateYear" class="c-select__inner">
+                                                                                    <option value="">選択</option>
+                                                                                    <option th:each="expirationDateYearItem : *{expirationDateYearItems}"
+                                                                                            th:value="${expirationDateYearItem.key}" th:text="${expirationDateYearItem.value}"
+                                                                                            th:selected="${expirationDateYearItem.key} == ${paymentModelItem.expirationDateYear}"></option>
+                                                                                </select>
+                                                                            </span>
+                                                                            <input type="hidden" id="expirationDateMonth" th:field="*{paymentModelItems[__${paymentModelItemStat.index}__].expirationDateMonth}"/>
+                                                                            <input type="hidden" id="expirationDateYear" th:field="*{paymentModelItems[__${paymentModelItemStat.index}__].expirationDateYear}"/>
+                                                                            <div th:if="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].expirationDateMonth')}"
+                                                                                 th:errors="*{paymentModelItems[__${paymentModelItemStat.index}__].expirationDateMonth}"
+                                                                                 class="c-field-error c-field-error--top"></div>
+                                                                            <div th:if="${#fields.hasErrors('paymentModelItems[' + paymentModelItemStat.index+'].expirationDateYear')}"
+                                                                                 th:errors="*{paymentModelItems[__${paymentModelItemStat.index}__].expirationDateYear}"
+                                                                                 class="c-field-error c-field-error--top"></div>
+                                                                        </p>
+                                                                    </dd>
+                                                                </dl>
+                                                                <dl class="l-form__list">
+                                                                    <dt>
+                                                                        <p><span>お支払い回数</span></p>
+                                                                    </dt>
+                                                                    <dd><p><span id="dispPaymentType" title="お支払い回数" th:text="${paymentModelItem.dispPaymentType}" th:remove="tag"/></p></dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="p-order-payment__contents-text"><em>お手持ちのクレジットカードですぐにご利用いただけます。<br>事前登録は必要ありません。</em></p>
+                                                    <p class="p-order-payment__contents-memo p-order-payment__contents--margin-m">
+                                                        ※ご請求金額にかかわらずご利用いただけます。<br>
+                                                        ※お支払回数は１回払いのみとさせていただきます。<br>
+                                                        ※弊社ではセキュリティ上の配慮からカード情報は保持しておりません。カード番号等の情報は国際セキュリティ基準をクリアした決済代行会社にて管理されます。<br>
+                                                        ※カード利用明細はお送りいたしません。<br>
+                                                        ※デビットカード・プリペイドカードはご利用いただけません。
+                                                    </p>
+                                                    <h4 class="p-order-payment__contents-heading p-order-payment__contents--margin-m"><strong>■ご利用いただけるカードブランド</strong></h4>
+                                                    <div class="p-order-payment__contents-nest">
+                                                        <img src="/newdesign/assets/images/guide/payment/credit.jpg" alt="">
+                                                    </div>
+                                                </div>
+
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${!paymentModelItem.isUsabilityFlag()}">
+                                    <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                        <div class="p-order-payment__contents">
+                                            <div>
+                                                <p class="p-order-payment__contents-text"><em>お手持ちのクレジットカードですぐにご利用いただけます。<br>事前登録は必要ありません。</em></p>
+                                                <p class="p-order-payment__contents-memo p-order-payment__contents--margin-m">
+                                                    ※ご請求金額にかかわらずご利用いただけます。<br>
+                                                    ※お支払回数は１回払いのみとさせていただきます。<br>
+                                                    ※弊社ではセキュリティ上の配慮からカード情報は保持しておりません。カード番号等の情報は国際セキュリティ基準をクリアした決済代行会社にて管理されます。<br>
+                                                    ※カード利用明細はお送りいたしません。<br>
+                                                    ※デビットカード・プリペイドカードはご利用いただけません。
+                                                </p>
+                                                <h4 class="p-order-payment__contents-heading p-order-payment__contents--margin-m"><strong>■ご利用いただけるカードブランド</strong></h4>
+                                                <div class="p-order-payment__contents-nest">
+                                                    <img src="/newdesign/assets/images/guide/payment/credit.jpg" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </th:block>
+
+                            <th:block th:if="${paymentModelItem.isConveniencePostaltransferType()}">
+                                <th:block th:if="${!paymentModelItem.isUsabilityFlag()}">
+                                    <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                        <div class="p-order-payment__contents">
+                                            <h3 class="p-order-payment__contents-title p-order-payment__contents-title--bottom">コンビニエンスストア・ゆうちょ銀行（郵便局）がご利用いただけます。<br>また振込用紙に記載のバーコードでスマホ決済もご利用いただけます。</h3>
+                                            <p class="p-order-payment__contents-text">商品発送日より30日以内に同梱の振込用紙でお振込みください。</p>
+                                            <p class="p-order-payment__contents-memo">
+                                                ※お届け先とご請求先が異なる場合は、ご請求先に振込用紙を封書でお届けします。<br>
+                                                ※郵便局にて現金で振込される場合の手数料の加算料金はお客様負担となります。<br>
+                                                ※ネットバンキング、ゆうちょダイレクト、電信振替はご利用いただけません。<br>
+                                                ※銀行振込は承っておりません。<br>
+                                                ※弊社の審査基準により、他のお支払方法に変更をお願いする、またはご注文をお断りする場合があります。
+                                            </p>
+                                            <h4 class="p-order-payment__contents-heading p-order-payment__contents--margin-m"><strong>■お支払い可能なコンビニエンスストア等</strong></h4>
+                                            <div class="p-order-payment__contents-nest">
+                                                <img src="/newdesign/assets/images/guide/payment/convenience.jpg" alt="" class="l-lg"><img src="/newdesign/assets/images/guide/payment/convenience_sp.jpg" alt="" class="l-sm">
+                                            </div>
+                                            <p class="p-order-payment__contents-text">コンビニエンスストア等の店頭では、原則としてアプリ支払いはできません。</p>
+
+                                            <p class="p-order-payment__contents-text p-order-payment__contents--margin-m"><em>この振込用紙のバーコードでスマホ決済がご利用いただけます。</em></p>
+                                            <h4 class="p-order-payment__contents-heading"><strong>■ご利用可能なスマホ決済サービス</strong><br>
+                                                （商品に同梱されたコンビニ・郵便振込用紙のバーコードをスマートフォンアプリのカメラで読み込んで、お支払いいただけます。）</h4>
+                                            <div class="p-order-payment__contents-nest">
+                                                <img src="/newdesign/assets/images/guide/payment/smartphone.jpg" alt="" class="l-lg"><img src="/newdesign/assets/images/guide/payment/smartphone_sp.jpg" alt="" class="l-sm">
+                                            </div>
+                                            <p class="p-order-payment__contents-memo">
+                                                ※スマホ決済サービスによって、決済可能上限金額が異なります。各サービスのホームページ等でご確認ください。<br>
+                                                ※スマホ決済サービスでお支払い後、コンビニ店頭などでお支払いされないようにご注意ください。<br>
+                                                ※内容は予告なく変更となる場合があります。<br>
+                                                ※通信料はお客様のご負担となります。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${paymentModelItem.isUsabilityFlag()}">
+                                    <th:block th:if="${paymentModelItem.isDispSettlementNotePC()}">
+                                        <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                            <span th:id="'settlementNotePC-' + ${paymentModelItemStat.index}" th:utext="${#pre.convert(paymentModelItem.settlementNotePC, false)}"/>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </th:block>
+
+                            <th:block th:if="${paymentModelItem.isReceiptPaymentType()}">
+                                <th:block th:if="${!paymentModelItem.isUsabilityFlag()}">
+                                    <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                        <div class="p-order-payment__contents">
+                                            <h3 class="p-order-payment__contents-title p-order-payment__contents-title--bottom">お届け商品と引き換えに、宅配業者の配達員に現金でお支払いください。</h3>
+                                            <p class="p-order-payment__contents-memo p-order-payment__contents--margin-m">
+                                                ※ご利用いただけない地域もあります。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${paymentModelItem.isUsabilityFlag()}">
+                                    <th:block th:if="${paymentModelItem.isDispSettlementNotePC()}">
+                                        <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                            <span th:id="'settlementNotePC-' + ${paymentModelItemStat.index}" th:utext="${#pre.convert(paymentModelItem.settlementNotePC, false)}"/>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </th:block>
+
+                            <th:block th:if="${paymentModelItem.isAutomaticWithdrawalType()}">
+                                <th:block th:if="${!paymentModelItem.isUsabilityFlag()}">
+                                    <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                        <div class="p-order-payment__contents">
+                                            <h3 class="p-order-payment__contents-title p-order-payment__contents-title--bottom">1ヵ月分の代金をまとめてご指定の口座から引き落とします。<br>毎月20日締、翌月6日引き落としです。</h3>
+                                            <p class="p-order-payment__contents-text">事前登録が必要です。<br>
+                                                ご希望のお客様は、「クイックオーダー」ページにて商品番号に「G（大文字）」とご入力いただくか、<br class="l-lm">
+                                                ご注文デスク（TEL：0120-108648）にお申し付けください。申込用紙を送付いたします。
+                                            </p>
+                                            <p class="p-order-payment__contents-memo p-order-payment__contents--margin-m">
+                                                ※手続き完了までに1～2ヵ月程かかります。その間は他のお支払い方法をご利用ください。<br>
+                                                ※信用組合、農業協同組合、ネット銀行は、一部お取り扱いできない場合があります。<br>
+                                                ※祝日等の都合により、締め日や引き落とし日が前後する場合があります。<br>
+                                                ※弊社の審査基準により、他のお支払い方法に変更をお願いする場合がございます。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${paymentModelItem.isUsabilityFlag()}">
+                                    <th:block th:if="${paymentModelItem.isDispSettlementNotePC()}">
+                                        <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                            <span th:id="'settlementNotePC-' + ${paymentModelItemStat.index}" th:utext="${#pre.convert(paymentModelItem.settlementNotePC, false)}"/>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </th:block>
+
+                            <th:block th:if="${paymentModelItem.isMonthlyBilling()}">
+                                <th:block th:if="${!paymentModelItem.isUsabilityFlag()}">
+                                    <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                        <div class="p-order-payment__contents">
+                                            <h3 class="p-order-payment__contents-title">月締請求</h3>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${paymentModelItem.isUsabilityFlag()}">
+                                    <th:block th:if="${paymentModelItem.isDispSettlementNotePC()}">
+                                        <div class="p-order-receive__case p-order-payment__select-detail" th:id="'payment-' + ${paymentModelItemStat.index}" style="display: none;">
+                                            <span th:id="'settlementNotePC-' + ${paymentModelItemStat.index}" th:utext="${#pre.convert(paymentModelItem.settlementNotePC, false)}"/>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+                    </th:block>
+                </div>
+            </div>
+
+            <hm:freearea key="payment_info"/>
+
+            <div class="l-section__inner" id="jsError"></div>
+
+            <div class="c-button-wrap">
+                <th:block th:if="*{isExistSettlementMethod()}">
+                    <div>
+                        <button id="doConfirm" name="doConfirm" type="submit" class="c-button c-button--primary c-button--width-l">お支払い方法を変更する</button>
+                        <div class="c-button-wrap__memo">
+                            <a th:href="@{/order/confirm.html}" class="c-textlink c-textlink--left c-textlink--large c-textlink--text"><p>ご注文内容確認画面へ戻る</p></a>
+                        </div>
+                    </div>
+                </th:block>
+                <th:block th:if="*{!isExistSettlementMethod()}">
+                    <div>
+                        <div class="c-button-wrap__memo">
+                            <a th:href="@{/index.html}" class="c-textlink c-textlink--left c-textlink--large c-textlink--text"><p>トップページヘ</p></a>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+
+            <input type="hidden" id="merchantId" th:value="*{merchantId}"/>
+            <input type="hidden" id="paygentTokenKey" th:value="*{paygentTokenKey}"/>
+            <input type="hidden" id="token" th:field="*{token}"/>
+            <input type="hidden" id="keepToken" th:field="*{keepToken}"/>
+        </form>
+    </main>
+    <div th:replace="~{newdesign/include/footerorder}"></div>
+</div>
+
+<!-- 【module modal-about】/////////////////////////////////////////////////  -->
+<div id="modal-about" class="c-modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--wide">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <!-- <p class="c-modal__hl-wide">注文確定後の追加・変更・キャンセルについて</p>  -->
+            <div class="c-modal__detail c-modal__detail--wide">
+                <div class="c-modal__detail-scroll c-modal__detail-scroll--wide c-scroll" data-simplebar data-simplebar-auto-hide="false">
+                    <div class="c-modal__detail-inner c-modal__detail-inner--wide">
+
+                        <div class="p-order-payment__contents">
+                            <h3 class="p-order-payment__contents-title p-order-payment__contents-title--bottom">1ヵ月分の代金をまとめてご指定の口座から引き落とします。<br>毎月20日締、翌月6日引き落としです。</h3>
+                            <p class="p-order-payment__contents-text">事前登録が必要です。<br>
+                                ご希望のお客様は、「クイックオーダー」ページにて商品番号に「G（大文字）」とご入力いただくか、ご注文デスク（TEL：0120-108648）にお申し付けください。申込用紙を送付いたします。
+                            </p>
+                            <p class="p-order-payment__contents-memo p-order-payment__contents--margin-m">
+                                ※手続き完了までに1～2ヵ月程かかります。その間は他のお支払い方法をご利用ください。<br>
+                                ※信用組合、農業協同組合、ネット銀行は、一部お取り扱いできない場合があります。<br>
+                                ※祝日等の都合により、締め日や引き落とし日が前後する場合があります。<br>
+                                ※弊社の審査基準により、他のお支払い方法に変更をお願いする場合がございます。
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // 【module modal-about】/////////////////////////////////////////////////  -->
+
+<!-- #380 トークン決済 from -->
+<script id="paygentJs" th:src="${@environment.getProperty('paygent.token.js.src')}"></script>
+<script>
+    <!--
+    var jQSelectorH = {
+        isCredit1: "input[name='settlementMethod']:checked",
+        isCredit2: "label",
+        isCredit3: "span[id^='settlementMethodTypeName']",
+        isCredit4: "div.cBox",
+        isRegisterdCard: "input[name$='creditCardType']:checked",
+        merchantId: "#merchantId",
+        paygentTokenKey: "#paygentTokenKey",
+        cardNo: "input[id^='cardNewNumber']",
+        origcardNo: "input[id^='cardNumber']",
+        expire1: "[id^='expirationNewDateYear']",
+        expire2: "[id^='expirationNewDateMonth']",
+        origexpire1: "[id^='expirationDateYear']",
+        origexpire2: "[id^='expirationDateMonth']",
+        securityCode: "input[id^='securityNewCode']",
+        token: "input[id^='token']",
+        keepToken: "input[id^='keepToken']",
+        doNext: "button[id^='doConfirm']",
+        jsErrorDiv: "#jsError",
+        templateError: "#templateError"
+    };
+    //-->
+
+
+</script>
+<script type="text/javascript" th:src="@{/common/js/pgtoken.js}"></script>
+<script>
+    $(function(){
+        initiate();
+    });
+
+    /**
+     * 選択された決済方法へのアクセスを返す
+     */
+    function getSelected() {
+        return $(jQSelectorH.isCredit1).parents("div");
+    }
+
+    /**
+     * 後続処理が必要か
+     * @return true:後続処理実施必要/false：後続処理実施不要
+     */
+    function needProcess(elem){
+
+        var isCredit = $(jQSelectorH.isCredit1).next(jQSelectorH.isCredit2).next(jQSelectorH.isCredit3).text().indexOf(CREDIT) != -1;
+        if(!isCredit) {
+            return false;
+        }
+
+        if(isGotToken){
+            return false;
+        }
+
+        if (!$(jQSelectorH.isRegisterdCard).val()) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+</script>
+<!-- テンプレートはページ独自-->
+<script type="text/template" id="templateError">
+    <div class="global-error-message">
+        <ul id="allMessages">
+            <li>${error}</li>
+        </ul>
+    </div>
+</script>
+<!-- #380 トークン決済 end -->
+
+</body>
+</html>
+<!-- PDR Migrate Customization to here -->

@@ -1,0 +1,149 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+    <!--/* Google Code for your Conversion Page start */-->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 848019204;
+        var google_conversion_language = "en";
+        var google_conversion_format = "3";
+        var google_conversion_color = "ffffff";
+        var google_conversion_label = "BEZfCPKsoXIQhP6ulAM";
+        var google_remarketing_only = false;
+        /* ]]> */
+
+
+    </script>
+    <script type="text/javascript" th:src="@{https://www.googleadservices.com/pagead/conversion.js}">
+    </script>
+    <!--/* Google Code for your Conversion Page end */-->
+    <!--/* Yahoo Code for your Conversion Page start */-->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var yahoo_conversion_id = 1000393950;
+        var yahoo_conversion_label = "hh9eCPi_uXIQoIuwlAM";
+        var yahoo_conversion_value = 0;
+        /* ]]> */
+
+
+    </script>
+    <script type="text/javascript" th:src="@{https://s.yimg.jp/images/listing/tool/cv/conversion.js}">
+    </script>
+    <!--/* Yahoo Code for your Conversion Page end */-->
+    <!--/* Yahoo Code for your Target List start */-->
+    <script type="text/javascript" language="javascript">
+        /* <![CDATA[ */
+        var yahoo_ydn_conv_io = "HEqqJxcOLDW6hR4kt66o";
+        var yahoo_ydn_conv_label = "IBVOM0A9X03IGRPF0PT375477";
+        var yahoo_ydn_conv_transaction_id = "";
+        var yahoo_ydn_conv_amount = "0";
+        /* ]]> */
+
+    </script>
+    <script type="text/javascript" language="javascript" charset="UTF-8"
+            th:src="@{https://b90.yahoo.co.jp/conv.js}"></script>
+    <!--/* Yahoo Code for your Target List end */-->
+</head>
+
+<body id="gotop" class="p-regist">
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/848019204/?label=BEZfCPKsoXIQhP6ulAM&amp;guid=ON&amp;script=0"/>
+            <img height="1" width="1" style="border-style:none;" alt="" src="https://b91.yahoo.co.jp/pagead/conversion/1000393950/?value=0&label=hh9eCPi_uXIQoIuwlAM&guid=ON&script=0&disvt=true"/>
+        </div>
+    </noscript>
+    <a id="top" name="top"></a>
+    <div class="l-mainwrap">
+
+        <div th:replace="~{newdesign/include/header}"></div>
+
+        <main class="l-page">
+            <div class="l-breadcrumbs">
+                <div class="l-breadcrumbs__inner">
+                    <div class="l-breadcrumbs__list">
+                        <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                            <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                        </div>
+                        <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__current">オンラインショップ会員登録</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="completeForm" th:action="@{/regist/complete.html}" th:object="${registModel}" method="post">
+                <div class="l-section">
+                    <div class="l-section__inner">
+                        <h2 class="c-title-page"><strong>オンラインショップ会員登録</strong></h2>
+                    </div>
+                </div>
+
+                <div class="c-title-form">
+                    <div class="c-title-form__inner">
+                        <h3 class="c-title-form__text">お申し込み完了</h3>
+                    </div>
+                </div>
+
+                <div class="l-complete">
+                    <div class="l-complete__inner">
+                        <p class="l-complete__title">お申し込みが完了しました。</p>
+                        <div class="l-complete__text-unit l-complete--margin-m">
+                            <p class="l-complete__text">弊社にて審査を行います。<br>
+                                審査完了後、ご登録メールアドレスに会員ID、初回パスワードを送信いたします。<br>
+                                24時間以内にメールに記載されたURLから、届いた初回パスワードでログインしてください。<br>
+                                場合により、メールが届くまでに少々お時間がかかる場合がございますので、ご了承ください。</p>
+                        </div>
+                        <div class="l-complete__result l-complete--margin-m">
+                            <div class="l-complete__result-title">ご登録メールアドレス</div>
+                            <div class="l-complete__result-item">
+                                <span id="memberInfoMail" th:text="*{memberInfoMail}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="l-trouble">
+                    <div class="l-trouble-inner">
+                        <p class="l-trouble-lead">
+                            メールが1時間以内に届かない場合、以下の可能性が考えられます。お使いの端末の設定をご確認いただきますようお願い致します。</p>
+                        <div class="l-trouble-contents">
+                            <div class="l-trouble-unit">
+                                <div class="c-title-bubble l-trouble-title">メールアドレスが誤っている</div>
+                                <p class="l-trouble-text">ご入力いただいたメールアドレスが誤っている場合は、<a th:href="@{/regist/inputtel.html}"
+                                                                                                              class="c-inlinelink">会員登録フォーム</a>より、もう一度お申し込みください。
+                                </p>
+                            </div>
+                            <div class="l-trouble-unit">
+                                <div class="c-title-bubble l-trouble-title">迷惑メールに振り分けられている</div>
+                                <p class="l-trouble-text">
+                                    お使いのメール機能により迷惑メールに振り分けられている場合がありますので、迷惑メールフォルダ・削除フォルダ等をご確認ください。</p>
+                            </div>
+                            <div class="l-trouble-unit">
+                                <div class="c-title-bubble l-trouble-title">受信拒否を含めた制限を設けている</div>
+                                <p class="l-trouble-text">
+                                    メールに受信拒否を含めた制限を設けている場合は、「@pdr.co.jp」を受信できるよう、設定を変更してください。</p>
+                            </div>
+                            <div class="l-trouble-unit">
+                                <div class="c-title-bubble l-trouble-title">弊社で審査を行っている状態</div>
+                                <p class="l-trouble-text">審査完了までお待ちください。審査には数日かかる場合もございます。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-button-wrap">
+                    <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                </div>
+            </form>
+        </main>
+
+        <div th:replace="~{newdesign/include/footer}"></div>
+    </div>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

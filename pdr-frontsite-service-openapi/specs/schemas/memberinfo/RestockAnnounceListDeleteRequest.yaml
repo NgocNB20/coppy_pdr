@@ -1,0 +1,14 @@
+# 2023-renew No65 from here
+type: object
+description: ストック コントローり情報リスト削除リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  gcd:
+    type: string
+    description: 商品コード
+    example: furniture-00101
+# 2023-renew No65 to here

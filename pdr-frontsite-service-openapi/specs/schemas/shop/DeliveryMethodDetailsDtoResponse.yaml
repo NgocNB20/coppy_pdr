@@ -1,0 +1,27 @@
+type: object
+description:  配送方法詳細Dtoレスポンス
+properties:
+  deliveryMethodEntity:
+    $ref: ../shop/DeliveryMethodEntityResponse.yaml
+  deliveryMethodTypeCarriageEntityList:
+    type: array
+    items:
+      $ref: ../shop/DeliveryMethodTypeCarriageEntityResponse.yaml
+  deliverySpecialChargeAreaCount:
+    type: integer
+    format: int32
+    description: 特別料金エリア件数
+    example: 2
+  deliveryImpossibleAreaCount:
+    type: integer
+    format: int32
+    description: 配送不可能エリア件数
+    example: 2
+  deliveryImpossibleAreaResultDtoList:
+    type: array
+    items:
+      $ref: ../shop/DeliveryImpossibleAreaResultDtoResponse.yaml
+  deliverySpecialChargeAreaResultDtoList:
+    type: array
+    items:
+      $ref: ../shop/DeliverySpecialChargeAreaResultDtoResponse.yaml

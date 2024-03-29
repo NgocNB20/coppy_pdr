@@ -1,0 +1,35 @@
+type: object
+description: カート一括登録リクエスト
+properties:
+  registCartGoodsList:
+    $ref: '#/components/schemas/CartGoodsForTakeOverDtoListRequest'
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 1000001
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: 2023101116559922
+  siteType:
+    type: string
+    description: サイト種別
+    example: 1
+  campainCode:
+    description: キャンペーンコード（必須）
+    example: bnr_s18
+    type: string
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+  zipcode:
+    type: string
+    description: 郵便番号
+    example: 5530001
+
+components:
+  schemas:
+    CartGoodsForTakeOverDtoListRequest:
+      $ref: ./CartGoodsForTakeOverDtoListRequest.yaml

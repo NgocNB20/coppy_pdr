@@ -1,0 +1,30 @@
+type: object
+description: WEB-API連携出荷予定日取得リクエスト
+properties:
+  orderCustomerNo:
+    type: integer
+    format: int32
+    description: 注文者顧客番号
+    example: 11111111
+  deliveryCustomerNo:
+    type: integer
+    format: int32
+    description: 配送先顧客番号
+    example: 11111111
+  deliveryZipcode:
+    type: string
+    description: 配送先郵便番号
+    example: 5530001
+  deliveryCompanyCode:
+    type: string
+    description: 配送会社コード
+    example: 0
+  info:
+    type: array
+    description: 情報
+    items:
+      $ref: '#/components/schemas/WebApiGetShipmentDateRequestDetailDtoRequest'
+components:
+  schemas:
+    WebApiGetShipmentDateRequestDetailDtoRequest:
+      $ref: ./WebApiGetShipmentDateRequestDetailDtoRequest.yaml

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>未登録会員照会発生通知</title>
+</head>
+<body>
+<div>
+    <!--    // PDR Migrate Customization from here-->
+    <span>未登録会員の照会が発生しました。</span>
+    <br>
+    <br>
+    <span th:utext="'お客様番号：' + ${mailContentsMap.get('CUSTOMER_NO')}"></span>
+    <br>
+    <span th:utext="'電話番号：' + ${mailContentsMap.get('MEMBERINFO_TEL')}"></span>
+    <!--    // PDR Migrate Customization from here-->
+    <br>
+    <br>
+    <span>以上</span>
+</div>
+</body>
+</html>

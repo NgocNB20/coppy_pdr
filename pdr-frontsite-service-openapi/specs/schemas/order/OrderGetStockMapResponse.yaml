@@ -1,0 +1,13 @@
+type: object
+description: 商品在庫情報Mapレスポンス
+properties:
+  stockMap:
+    type: object
+    description: 商品コードをキーにした商品在庫数MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetStockResponseDetailDtoResponse'
+
+components:
+  schemas:
+    WebApiGetStockResponseDetailDtoResponse:
+      $ref: ./WebApiGetStockResponseDetailDtoResponse.yaml

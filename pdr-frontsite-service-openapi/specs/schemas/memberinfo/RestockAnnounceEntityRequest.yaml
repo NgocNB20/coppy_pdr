@@ -1,0 +1,25 @@
+# 2023-renew No65 from here
+type: object
+description: 入荷お知らせりクラスリクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ (FK)（必須）
+    example: 10000001
+  goodsSeq:
+    type: integer
+    format: int32
+    description: 商品SEQ (FK)（必須）
+    example: 10000001
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2021/12/12 12:00:00
+# 2023-renew No65 to here

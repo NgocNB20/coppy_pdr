@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>カテゴリー一覧｜商品管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="goods">
+<div id="searchCategory" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form th:action="@{/goods/category/}" th:object="${categoryListModel}" method="post">
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">カテゴリー一覧</h1>
+                        <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                            <ul>
+                                <!--2023-renew categoryCSV from here-->
+                                <li>
+                                    <button class="c-btn btn_move" name="jumpBundledUpload" type="submit">アップロード</button>
+                                </li>
+                                <!--2023-renew categoryCSV to here-->
+                                <li>
+                                    <button class="c-btn btn_move" name="jumpInput" type="submit">カテゴリー登録</button>
+                                </li>
+                            </ul>
+                        </th:block>
+                    </div>
+                    <input type="hidden" id="resultIndex" name="resultIndex"/>
+                    <!-- カテゴリー一覧 -->
+                    <div class="l-section">
+                        <div class="l-article">
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap" id="targetCategory">
+                                <!--2023-renew categoryCSV from here-->
+                                    <div class="l-conttitle_wrap">
+                                        <div class="col_left">
+                                            <button type="submit" name="doCsvDownload"
+                                                                  class="c-btn btn_back icon"><i
+                                                                  class="material-icons save_alt"></i>ダウンロード
+                                            </button>
+                                        </div>
+                                    </div>
+                                <!--2023-renew categoryCSV to here-->
+                                    <table class="c-tbl tbl_cat_list" id="table-1">
+                                        <thead>
+                                        <tr>
+                                            <!--  <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                                <th style="display:none;">&nbsp;</th>
+                                             </th:block> -->
+                                            <th class="drag"></th>
+                                            <th class="cat_name">カテゴリー名</th>
+                                            <th class="cat_id">カテゴリーID</th>
+                                            <th class="status">公開状態</th>
+                                            <th class="item">公開商品数</th>
+                                            <th class="sitemap">サイトマップ出力</th>
+                                            <th:block
+                                                    sec:authorize="hasAnyAuthority('GOODS:8') || hasAnyAuthority('GOODS:4')">
+                                                <th class="btn_set"></th>
+                                            </th:block>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="cat01" th:each="item,stat: *{resultItems}" style="">
+                                            <td th:class="${item.modify?'drag':''}" >
+                                                <th:block th:if="${item.modify}">
+                                                    <i class="material-icons menu"></i>
+                                                </th:block>
+                                            </td>
+                                            <td class="cat_name">
+                                                <input type="hidden" th:id="'categorySeqPath' + '-' + ${stat.index}"
+                                                       th:name="'listForm:resultItems:' + ${stat.index} + ':categorySeqPath'"
+                                                       th:value="${item.categorySeqPath}" class="mypc"/>
+                                                <!-- <th:block th:if="${item.allOpenClose}">
+                                                  <th:block th:if="${!item.lowest}"> -->
+                                                <div class="c-open-btn">
+                                                    <span th:id="'levelView' + '-' + ${stat.index}"
+                                                          th:text="${item.levelView}" class="ispace"></span>
+                                                    <span class="cat_top" th:id="'categoryName' + '-' + ${stat.index}"
+                                                          th:text="${item.categoryName}"></span>
+                                                </div>
+                                                <!-- </th:block>
+                                              </th:block> -->
+                                            </td>
+                                            <td class="cat_id">
+                                                <span th:id="'categoryId' + '-' + ${stat.index}"
+                                                      th:text="${item.categoryId}"></span>
+                                            </td>
+                                            <td class="status"><span
+                                                    th:id="'categoryOpenStatusPC' + '-' + ${stat.index}"
+                                                    th:text="${item.categoryOpenStatusPC != null} ? ${item.categoryOpenStatusPC.label} : ''"></span></td>
+                                            <td class="item txt_right"><span
+                                                    th:id="'categoryOpenGoodsCountPC' + '-' + ${stat.index}"
+                                                    th:text="${#number.convert(item.categoryOpenGoodsCountPC)}"></span>
+                                            </td>
+                                            <td class="sitemap"><span th:id="'siteMapFlag' + '-' + ${stat.index}"
+                                                                      th:text="${item.siteMapFlag != null} ? ${item.siteMapFlag.label} : ''"></span></td>
+                                            <th:block th:if="${item.modify}">
+                                                <td class="btn_set">
+                                                    <div class="wrap_flex_center">
+                                                        <!-- <button class="c-btn-icon mr25" type="button"><i class="description"></i></button> -->
+                                                        <th:block sec:authorize="hasAnyAuthority('GOODS:4')">
+                                                            <a class="c-btn-icon mr25"
+                                                               th:id="'goGoodsList' + '-' + ${stat.index}"
+                                                               th:href="@{/goods/category/goodslist/(categoryId=${item.categoryId})}">
+                                                                <i class="description"
+                                                                   onclick="return simpleCategoryConfirm();"></i></a>
+                                                        </th:block>
+                                                        <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                                            <!-- <button class="c-btn-icon mr25" type="button"><i class="edit"></i></button> -->
+                                                            <a class="c-btn-icon mr25"
+                                                               th:id="'goInput' + '-' + ${stat.index}"
+                                                               th:href="@{/goods/category/input/(listScreen=true,categoryId=${item.categoryId})}"><i
+                                                                    class="edit"
+                                                                    onclick="return simpleCategoryConfirm();"></i></a>
+                                                        </th:block>
+                                                        <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                                            <button class="c-btn-icon" type="submit"
+                                                                    th:id="'doRemove' + '-' + ${stat.index}"
+                                                                    name="doRemove"
+                                                                    onclick="return simpleDeleteCategoryConfirm2(this);">
+                                                                <i class="material-icons clear"></i></button>
+                                                            <!-- <input type="submit" th:id="'doRemove' + '-' + ${stat.index}" name="doRemove" value="&#9656;削除" class="c-btn-icon" alt="削除" onclick="return simpleDeleteCategoryConfirm2(this);" /> -->
+                                                            <input type="hidden" id="deleteTargetIndex"
+                                                                   name="deleteTargetIndex" th:value="${stat.index}"/>
+                                                        </th:block>
+                                                    </div>
+                                                </td>
+                                            </th:block>
+                                            <th:block th:if="${!item.modify}">
+                                                <th:block
+                                                        sec:authorize="hasAnyAuthority('GOODS:8') || hasAnyAuthority('GOODS:4')">
+                                                    <td class="btn_set"></td>
+                                                </th:block>
+                                            </th:block>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <!--  <div class="c-back">
+                                 <a class="c-btn btn_back icon_left" href="!#"><i class="material-icons navigate_before"></i>戻る</a>
+                             </div> -->
+                            <th:block sec:authorize="hasAnyAuthority('GOODS:8')">
+                                <div class="col_left">
+                                    <button class="c-btn btn_regular" type="submit" id="doOrder" name="doOrder">表示順を登録
+                                    </button>
+                                </div>
+                            </th:block>
+                            <input type="hidden" id="dtCategory" name="dtCategory" th:field="*{dtCategory}"/>
+                            <input type="hidden" id="extractCategorySpecified" name="extractCategorySpecified"
+                                   th:field="*{extractCategorySpecified}"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+    <script type="text/javascript" th:src="@{/assets/js/treeTable.js}"></script>
+</div>
+</body>
+</html>

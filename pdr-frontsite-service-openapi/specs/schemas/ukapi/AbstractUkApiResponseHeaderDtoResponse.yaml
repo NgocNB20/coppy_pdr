@@ -1,0 +1,21 @@
+type: object
+description: UK-API連携共通レスポンス（Header）
+properties:
+  status:
+    type: string
+    description: ステータス
+    example: 0
+  QTime:
+    type: string
+    description: 処理時間
+    example: 17.121
+  errorMessage:
+    type: string
+    description: エラーメッセージ
+    example: リクエストパラメータの指定が不正です
+  reqID:
+    type: string
+    description: リクエストID
+    example: qwerasdfzxcv
+  fallback:
+    $ref: "./UkApiGetUkUniSearchResponseHeaderInfoFallBackDtoResponse.yaml"

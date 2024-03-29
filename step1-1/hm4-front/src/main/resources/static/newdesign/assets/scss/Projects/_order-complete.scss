@@ -1,0 +1,173 @@
+
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.p-order-complete {
+
+  &__main {
+    padding-top: 20px;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 118px;
+      height: 96px;
+      background-image: url(/ec/shop/sttc/static/assets/images/order/thanks.png);
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+  }
+
+  &__unit {
+    margin-inline: auto;
+    width: fit-content;
+    text-align: left;
+  }
+
+  &__bullet-point {
+
+    li {
+      @include font-style(16,36,normal);
+      text-indent: -11px;
+      padding-left: 11px;
+
+      &::before {
+        content: "・ ";
+      }
+    }
+  }
+
+  &__memo {
+    @include font-style(15,32);
+  }
+
+  &__aside {
+    margin: 80px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    text-align: center;
+
+    &-unit {
+      border-radius: 4px;
+      border: solid 1px #d6d6d6;
+      padding: 36px 20px 30px;
+      position: relative;
+      display: grid;
+      align-items: center;
+    }
+
+    &-title {
+      @include font-style(20,23,bold);
+      padding: 0 18px;
+      display: inline-block;
+      background: $color-fff;
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &-text {
+      @include font-style(16,30);
+    }
+
+    &-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+
+      .c-button {
+        width: 48%;
+        max-width: 250px;
+        height: 65px;
+        margin: 0 5px;
+        border-radius: 9999px;
+        background-color: $color-fff;
+        color: $color-333;
+        border: solid 1px $color-a1;
+      }
+
+    }
+  }
+
+  &--margin-m {
+    margin-top: 25px;
+  }
+
+  @include media(sm) {
+
+    &__main {
+      padding-top: vwset(20);
+  
+      &:after {
+        width: vwset(88);
+        height: vwset(71);
+        background-image: url(/ec/shop/sttc/static/assets/images/order/thanks.png);
+        top: -22px;
+      }
+    }
+
+    &__bullet-point {
+
+      li {
+        @include font-sp-style(15,30,normal);
+      }
+    }
+
+    &__memo {
+      @include font-sp-style(14,25);
+    }
+
+    &__aside {
+      margin: vwset(60) vwset(15) vwset(50);
+      grid-template-columns: 1fr;
+  
+      &-unit {
+        padding: vwset(30) vwset(18) vwset(30);
+      }
+  
+      &-title {
+        @include font-sp-style(17,21,bold);
+        padding: 0 vwset(15);
+      }
+  
+      &-text {
+        @include font-sp-style(15,30);
+        text-align: left;
+      }
+  
+      &-button {
+        display: block;
+        margin-top: 0;
+  
+        .c-button {
+          width: 100%;
+          max-width: vwset(292);
+          height: 65px;
+          margin: vwset(20) 0 0;
+        }
+  
+      }
+    }
+
+    &--margin-m {
+      margin-top: vwset(15);
+    }
+
+  }
+
+}

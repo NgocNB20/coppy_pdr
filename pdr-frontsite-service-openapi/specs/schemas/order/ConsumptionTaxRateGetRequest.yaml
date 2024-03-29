@@ -1,0 +1,8 @@
+type: object
+description: WEB-API連携 消費税率取得リクエスト
+properties:
+  goodsCodeList:
+    type: array
+    description: 注文DTOリクエスト
+    items:
+      type: string

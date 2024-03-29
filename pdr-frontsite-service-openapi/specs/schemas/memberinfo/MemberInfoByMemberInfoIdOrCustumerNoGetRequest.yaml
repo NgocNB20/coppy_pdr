@@ -1,0 +1,7 @@
+type: object
+description: 会員情報取得リクエスト
+properties:
+  memberInfoIdOrCustomerNo:
+    type: string
+    description: 会員ID 又は 顧客番号
+    example: itec@itec-hankyuhanshin.co.jp

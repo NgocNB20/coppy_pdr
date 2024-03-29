@@ -1,0 +1,11 @@
+# 2023-renew No11-33-75-112 from here
+type: object
+description: 取りおき情報取得レスポンス
+properties:
+  result:
+    $ref: ../webapi/AbstractWebApiResponseResultDtoResponse.yaml
+  info:
+    type: array
+    items:
+      $ref: ../order/WebApiGetReserveResponseDetailDtoResponse.yaml
+# 2023-renew No11-33-75-112 to here

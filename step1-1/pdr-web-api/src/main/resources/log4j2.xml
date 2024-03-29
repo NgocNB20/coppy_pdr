@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>      <!-- DTDスキーマ not found 警告対処 -->
+<project status="off">
+    <Properties>
+        <!-- ログ出力フォーマット指定 -->
+        <Property name="logformat">%d [%t] %-5p %c - %m%n</Property>
+        <Property name="logdir">C:/pdr/var/log/pdr-web-api</Property>
+        <!-- ログ出力先：LO環境は C:/pdr/var/log/pdr-web-api -->
+        <!-- ログ出力先：IT環境（デプロイ前にlogdirのパスを切り替えること） -->
+<!--        <Property name="logdir">/var/log/tomcat/dev_pdr/shop/web-api</Property>-->
+        <!-- ログ出力先：ST環境（デプロイ前にlogdirのパスを切り替えること） -->
+<!--        <Property name="logdir">/var/log/tomcat/stg_pdr/shop/web-api</Property>-->
+
+    </Properties>
+
+    <Appenders>
+
+    	<param name="Encoding" value="UTF-8" />
+
+        <!-- ログ出力先指定（指定ファイルに出力：履歴付き） -->
+        <!-- 会員系 -->
+        <RollingFile name="AddUserInformation" append="true" fileName="${logdir}/AddUserInformation.log" filePattern="${logdir}/AddUserInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetUserInformation" append="true" fileName="${logdir}/GetUserInformation.log" filePattern="${logdir}/GetUserInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RepUserMailaddress" append="true" fileName="${logdir}/RepUserMailaddress.log" filePattern="${logdir}/RepUserMailaddress-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetDestination" append="true" fileName="${logdir}/GetDestination.log" filePattern="${logdir}/GetDestination-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="AddDestination" append="true" fileName="${logdir}/AddDestination.log" filePattern="${logdir}/AddDestination-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="DelDestination" append="true" fileName="${logdir}/DelDestination.log" filePattern="${logdir}/DelDestination-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RepUserNotice" append="true" fileName="${logdir}/RepUserNotice.log" filePattern="${logdir}/RepUserNotice-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RepUserFax" append="true" fileName="${logdir}/RepUserFax.log" filePattern="${logdir}/RepUserFax-%d{MM-dd-yyyy}-%i.log">
+                    <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+                    <Policies><TimeBasedTriggeringPolicy /></Policies>
+                </RollingFile>
+
+        <!-- 商品系 -->
+        <RollingFile name="GetStock" append="true" fileName="${logdir}/GetStock.log" filePattern="${logdir}/GetStock-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetDiscountsResult" append="true" fileName="${logdir}/GetDiscountsResult.log" filePattern="${logdir}/GetDiscountsResult.log-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetReserve" append="true" fileName="${logdir}/GetReserve.log" filePattern="${logdir}/GetReserve-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetQuantityDiscount" append="true" fileName="${logdir}/GetQuantityDiscount.log" filePattern="${logdir}/GetQuantityDiscount-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetPrice" append="true" fileName="${logdir}/GetPrice.log" filePattern="${logdir}/GetPrice-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetSeriesPrice" append="true" fileName="${logdir}/GetSeriesPrice.log" filePattern="${logdir}/GetSeriesPrice-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetReStock" append="true" fileName="${logdir}/GetReStock.log" filePattern="${logdir}/GetReStock-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetSale" append="true" fileName="${logdir}/GetSale.log" filePattern="${logdir}/GetSale-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetSaleCheck" append="true" fileName="${logdir}/GetSaleCheck.log" filePattern="${logdir}/GetSaleCheck-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+
+        <!-- 注文系 -->
+        <RollingFile name="GetDiscountsResult" append="true" fileName="${logdir}/GetDiscountsResult.log" filePattern="${logdir}/GetDiscountsResult-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="AddOrderInformation" append="true" fileName="${logdir}/AddOrderInformation.log" filePattern="${logdir}/AddOrderInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetPromotionInformation" append="true" fileName="${logdir}/GetPromotionInformation.log" filePattern="${logdir}/GetPromotionInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetDeliveryInformation" append="true" fileName="${logdir}/GetDeliveryInformation.log" filePattern="${logdir}/GetDeliveryInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetDeliveryCompany" append="true" fileName="${logdir}/GetDeliveryCompany.log" filePattern="${logdir}/GetDeliveryCompany-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetShippingPropriety" append="true" fileName="${logdir}/GetShippingPropriety.log" filePattern="${logdir}/GetShippingPropriety-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetShipmentInformation" append="true" fileName="${logdir}/GetShipmentInformation.log" filePattern="${logdir}/GetShipmentInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="OrderPendingCheck" append="true" fileName="${logdir}/OrderPendingCheck.log" filePattern="${logdir}/OrderPendingCheck-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetNotYetShippingOrderHistory" append="true" fileName="${logdir}/GetNotYetShippingOrderHistory.log" filePattern="${logdir}/GetNotYetShippingOrderHistory-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetPreShipmentOrderHistory" append="true" fileName="${logdir}/GetPreShipmentOrderHistory.log" filePattern="${logdir}/GetPreShipmentOrderHistory-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetPreShipmentOrderHistoryAggregate" append="true" fileName="${logdir}/GetPreShipmentOrderHistoryAggregate.log" filePattern="${logdir}/GetPreShipmentOrderHistoryAggregate-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetPurchasedCommodityInformation" append="true" fileName="${logdir}/GetPurchasedCommodityInformation.log" filePattern="${logdir}/GetPurchasedCommodityInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetConsumptionTaxRate" append="true" fileName="${logdir}/GetConsumptionTaxRate.log" filePattern="${logdir}/GetConsumptionTaxRate-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetQuantityDiscountsResult" append="true" fileName="${logdir}/GetQuantityDiscountsResult.log" filePattern="${logdir}/GetQuantityDiscountsResult-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="CouponCheck" append="true" fileName="${logdir}/CouponCheck.log" filePattern="${logdir}/CouponCheck-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="AddCoupon" append="true" fileName="${logdir}/AddCoupon.log" filePattern="${logdir}/AddCoupon-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetCouponList" append="true" fileName="${logdir}/GetCouponList.log" filePattern="${logdir}/GetCouponList-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetBeforePayment" append="true" fileName="${logdir}/GetBeforePayment.log" filePattern="${logdir}/GetBeforePayment-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetShipmentDate" append="true" fileName="${logdir}/GetShipmentDate.log" filePattern="${logdir}/GetShipmentDate-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="CancelOrder" append="true" fileName="${logdir}/CancelOrder.log" filePattern="${logdir}/CancelOrder-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        
+        <!-- 与信系 -->
+         <RollingFile name="GetOrderDetailInformation" append="true" fileName="${logdir}/GetOrderDetailInformation.log" filePattern="${logdir}/GetOrderDetailInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+         <RollingFile name="CreditResult" append="true" fileName="${logdir}/CreditResult.log" filePattern="${logdir}/CreditResult-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        
+        <!-- 定期便系 -->
+        <RollingFile name="RegularGetEntry" append="true" fileName="${logdir}/RegularGetEntry.log" filePattern="${logdir}/RegularGetEntry-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RegularGetInformation" append="true" fileName="${logdir}/RegularGetInformation.log" filePattern="${logdir}/RegularGetInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RegularSetInformation" append="true" fileName="${logdir}/RegularSetInformation.log" filePattern="${logdir}/RegularSetInformation-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RegularEntryCheck" append="true" fileName="${logdir}/RegularEntryCheck.log" filePattern="${logdir}/RegularEntryCheck-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RegularEntry" append="true" fileName="${logdir}/RegularEntry.log" filePattern="${logdir}/RegularEntry-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RegularGetItem" append="true" fileName="${logdir}/RegularGetItem.log" filePattern="${logdir}/RegularGetItem-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="RegularMailSend" append="true" fileName="${logdir}/RegularMailSend.log" filePattern="${logdir}/RegularMailSend-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+
+        <!-- UK-API -->
+        <RollingFile name="GetUkRWord" append="true" fileName="${logdir}/GetUkRWord.log" filePattern="${logdir}/GetUkRWord-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetUkUniSearchGoods" append="true" fileName="${logdir}/GetUkUniSearchGoods.log" filePattern="${logdir}/GetUkUniSearchGoods-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetUkUniSearchContents" append="true" fileName="${logdir}/GetUkUniSearchContents.log" filePattern="${logdir}/GetUkUniSearchContents-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetUkUniSuggestGoods" append="true" fileName="${logdir}/GetUkUniSuggestGoods.log" filePattern="${logdir}/GetUkUniSuggestGoods-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="DeleteUkHistoryGoods" append="true" fileName="${logdir}/DeleteUkHistoryGoods.log" filePattern="${logdir}/DeleteUkHistoryGoods-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetUkUniSuggestContents" append="true" fileName="${logdir}/GetUkUniSuggestContents.log" filePattern="${logdir}/GetUkUniSuggestContents-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="DeleteUkHistoryContents" append="true" fileName="${logdir}/DeleteUkHistoryContents.log" filePattern="${logdir}/DeleteUkHistoryContents-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+
+        <!-- CUENOTE-API -->
+        <RollingFile name="GetReStockCuenoteApiAddressImport" append="true" fileName="${logdir}/GetReStockCuenoteApiAddressImport.log" filePattern="${logdir}/GetReStockCuenoteApiAddressImport-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetSaleCuenoteApiAddressImport" append="true" fileName="${logdir}/GetSaleCuenoteApiAddressImport.log" filePattern="${logdir}/GetSaleCuenoteApiAddressImport-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetCuenoteApiMailSet" append="true" fileName="${logdir}/GetCuenoteApiMailSet.log" filePattern="${logdir}/GetCuenoteApiMailSet-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetCuenoteApiDeliveryReserve" append="true" fileName="${logdir}/GetCuenoteApiDeliveryReserve.log" filePattern="${logdir}/GetCuenoteApiDeliveryReserve-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+        <RollingFile name="GetCuenoteApiGetDelivery" append="true" fileName="${logdir}/GetCuenoteApiGetDelivery.log" filePattern="${logdir}/GetCuenoteApiGetDelivery-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout><Pattern>${logformat}</Pattern></PatternLayout>
+            <Policies><TimeBasedTriggeringPolicy /></Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <!-- 会員系 -->
+        <logger name="addUserInformation" level="info"><AppenderRef ref="AddUserInformation"/></logger>
+        <logger name="getUserInformation" level="info"><AppenderRef ref="GetUserInformation"/></logger>
+        <logger name="repUserMailaddress" level="info"><AppenderRef ref="RepUserMailaddress"/></logger>
+        <logger name="getDestination" level="info"><AppenderRef ref="GetDestination"/></logger>
+        <logger name="addDestination" level="info"><AppenderRef ref="AddDestination"/></logger>
+        <logger name="delDestination" level="info"><AppenderRef ref="DelDestination"/></logger>
+        <logger name="repUserNotice" level="info"><AppenderRef ref="RepUserNotice"/></logger>
+        <logger name="repUserFax" level="info"><AppenderRef ref="RepUserFax"/></logger>
+
+        <!-- 商品系 -->
+        <logger name="getStock" level="info"><AppenderRef ref="GetStock"/></logger>
+        <logger name="getReserve" level="info"><AppenderRef ref="GetReserve"/></logger>
+        <logger name="getQuantityDiscount" level="info"><AppenderRef ref="GetQuantityDiscount"/></logger>
+        <logger name="getPrice" level="info"><AppenderRef ref="GetPrice"/></logger>
+        <logger name="getSeriesPrice" level="info"><AppenderRef ref="GetSeriesPrice"/></logger>
+        <logger name="getReStock" level="info"><AppenderRef ref="GetReStock"/></logger>
+        <logger name="getSale" level="info"><AppenderRef ref="GetSale"/></logger>
+        <logger name="getSaleCheck" level="info"><AppenderRef ref="GetSaleCheck"/></logger>
+
+        <!-- 注文系 -->
+        <logger name="getDiscountsResult" level="info"><AppenderRef ref="GetDiscountsResult"/></logger>
+        <logger name="addOrderInformation" level="info"><AppenderRef ref="AddOrderInformation"/></logger>
+        <logger name="getPromotionInformation" level="info"><AppenderRef ref="GetPromotionInformation"/></logger>
+        <logger name="getDeliveryInformation" level="info"><AppenderRef ref="GetDeliveryInformation"/></logger>
+        <logger name="getDeliveryCompany" level="info"><AppenderRef ref="GetDeliveryCompany"/></logger>
+        <logger name="getShippingPropriety" level="info"><AppenderRef ref="GetShippingPropriety"/></logger>
+        <logger name="getShipmentInformation" level="info"><AppenderRef ref="GetShipmentInformation"/></logger>
+        <logger name="orderPendingCheck" level="info"><AppenderRef ref="OrderPendingCheck"/></logger>
+        <logger name="getNotYetShippingOrderHistory" level="info"><AppenderRef ref="GetNotYetShippingOrderHistory"/></logger>
+        <logger name="getPreShipmentOrderHistory" level="info"><AppenderRef ref="GetPreShipmentOrderHistory"/></logger>
+        <logger name="getPreShipmentOrderHistoryAggregate" level="info"><AppenderRef ref="GetPreShipmentOrderHistoryAggregate"/></logger>
+        <logger name="getPurchasedCommodityInformation" level="info"><AppenderRef ref="GetPurchasedCommodityInformation"/></logger>
+        <logger name="getConsumptionTaxRate" level="info"><AppenderRef ref="GetConsumptionTaxRate"/></logger>
+        <logger name="getQuantityDiscountsResult" level="info"><AppenderRef ref="GetQuantityDiscountsResult"/></logger>
+        <logger name="couponCheck" level="info"><AppenderRef ref="CouponCheck"/></logger>
+        <logger name="addCoupon" level="info"><AppenderRef ref="AddCoupon"/></logger>
+        <logger name="getCouponList" level="info"><AppenderRef ref="GetCouponList"/></logger>
+        <logger name="getBeforePayment" level="info"><AppenderRef ref="GetBeforePayment"/></logger>
+        <logger name="getShipmentDate" level="info"><AppenderRef ref="GetShipmentDate"/></logger>
+        <logger name="cancelOrder" level="info"><AppenderRef ref="CancelOrder"/></logger>
+        
+        <!-- 与信系 -->
+        <logger name="getOrderDetailInformation" level="info"><AppenderRef ref="GetOrderDetailInformation"/></logger>
+        <logger name="creditResult" level="info"><AppenderRef ref="CreditResult"/></logger>
+        
+        <!-- 定期便系 -->
+        <logger name="regularGetEntry" level="info"><AppenderRef ref="RegularGetEntry"/></logger>
+        <logger name="regularGetInformation" level="info"><AppenderRef ref="RegularGetInformation"/></logger>
+        <logger name="regularSetInformation" level="info"><AppenderRef ref="RegularSetInformation"/></logger>
+        <logger name="regularEntryCheck" level="info"><AppenderRef ref="RegularEntryCheck"/></logger>
+        <logger name="regularEntry" level="info"><AppenderRef ref="RegularEntry"/></logger>
+        <logger name="regularGetItem" level="info"><AppenderRef ref="RegularGetItem"/></logger>
+        <logger name="regularMailSend" level="info"><AppenderRef ref="RegularMailSend"/></logger>
+
+        <!-- UK-API -->
+        <logger name="getUkRWord" level="info"><AppenderRef ref="GetUkRWord"/></logger>
+        <logger name="getUkUniSearchGoods" level="info"><AppenderRef ref="GetUkUniSearchGoods"/></logger>
+        <logger name="getUkUniSearchContents" level="info"><AppenderRef ref="GetUkUniSearchContents"/></logger>
+        <logger name="getUkUniSuggestGoods" level="info"><AppenderRef ref="GetUkUniSuggestGoods"/></logger>
+        <logger name="deleteUkHistoryGoods" level="info"><AppenderRef ref="DeleteUkHistoryGoods"/></logger>
+        <logger name="getUkUniSuggestContents" level="info"><AppenderRef ref="GetUkUniSuggestContents"/></logger>
+        <logger name="deleteUkHistoryContents" level="info"><AppenderRef ref="DeleteUkHistoryContents"/></logger>
+
+        <!-- CUENOTE-API -->
+        <logger name="getReStockCuenoteApiAddressImport" level="info"><AppenderRef ref="GetReStockCuenoteApiAddressImport"/></logger>
+        <logger name="getSaleCuenoteApiAddressImport" level="info"><AppenderRef ref="GetSaleCuenoteApiAddressImport"/></logger>
+        <logger name="getCuenoteApiMailSet" level="info"><AppenderRef ref="GetCuenoteApiMailSet"/></logger>
+        <logger name="getCuenoteApiDeliveryReserve" level="info"><AppenderRef ref="GetCuenoteApiDeliveryReserve"/></logger>
+        <logger name="getCuenoteApiGetDelivery" level="info"><AppenderRef ref="GetCuenoteApiGetDelivery"/></logger>
+
+    </Loggers>
+</project>

@@ -1,0 +1,31 @@
+type: object
+description: 配送区分別送料クラス
+properties:
+  deliveryMethodSeq:
+    type: integer
+    format: int32
+    description: 配送方法SEQ (FK)（必須）
+    example: 2
+  prefectureType:
+    type: string
+    description: 都道府県種別（必須）
+    example: 2
+    default: 0
+  maxPrice:
+    type: number
+    description: 上限金額（必須）
+    example: 1001
+  carriage:
+    type: number
+    description: 送料
+    example: 1001
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2021/12/12 12:00:00

@@ -1,0 +1,7 @@
+type: object
+description: 郵便番号住所情報取得リクエスト
+properties:
+  zipCode:
+    type: string
+    description: 郵便番号
+    example: 5530001

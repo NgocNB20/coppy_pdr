@@ -1,0 +1,15 @@
+type: object
+description: 商品チェック用お気に入り情報リスト取得リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ (FK)（必須）
+    example: 10000001
+  goodsDtoList:
+    $ref: "#/components/schemas/GoodsDtoListRequest"
+
+components:
+  schemas:
+    GoodsDtoListRequest:
+      $ref: ./GoodsDtoListRequest.yaml

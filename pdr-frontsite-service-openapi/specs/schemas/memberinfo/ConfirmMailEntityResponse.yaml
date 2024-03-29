@@ -1,0 +1,47 @@
+type: object
+description: 確認メールEntityレスポンス
+properties:
+  confirmMailSeq:
+    type: integer
+    format: int32
+    description: 確認メールSEQ（必須）
+    example: 1001
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+    default: 0
+  orderSeq:
+    type: integer
+    format: int32
+    description: 受注SEQ
+    example: 10000001
+    default: 0
+  confirmMail:
+    type: string
+    description: 確認メールアドレス
+    example: itec@itec-hankyuhanshin.co.jp
+  confirmMailType:
+    type: string
+    description: 確認メール種別（必須）
+    example: 01
+  confirmMailPassword:
+    type: string
+    description: 確認メールパスワード（必須）
+    example: password123
+  effectiveTime:
+    type: string
+    format: date-time
+    description: 有効期限（必須）
+    example: 2021/12/12 12:00:00
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2021/12/12 12:00:00

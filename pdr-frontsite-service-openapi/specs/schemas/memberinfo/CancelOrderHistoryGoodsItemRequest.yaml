@@ -1,0 +1,24 @@
+type: object
+description: キャンセル対象受注商品Itemリクエスト
+properties:
+  goodsCode:
+    type: string
+    description: 商品コード
+    example: 1
+  goodsName:
+    type: string
+    description: 商品名
+    example: 1
+  goodsCount:
+    type: integer
+    format: int32
+    description: 数量
+    example: 1
+  unitName:
+    type: string
+    description: 単位
+    example: 1
+  discountFlag:
+    type: string
+    description: 適用割引
+    example: 1

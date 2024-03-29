@@ -1,0 +1,100 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.p-reset {
+
+  .l-form__list {
+
+    @include media(lg) {
+      grid-template-columns: 370px 1fr;
+    }
+  }
+
+  // パスワード
+  &__password-2 {
+    padding-bottom: 0;
+  }
+
+  @media screen and (min-width: 1383px) {
+    &__password-2 {
+      padding-bottom: 48px;
+    }
+  }
+
+  .c-textlink--password {
+    top: 66px;
+  }
+
+  @include media(sm) {
+    .p-reset__password-1,
+    .p-reset__password-2 {
+      width: 100%;
+      padding-bottom: 0;
+    }
+
+    .c-textlink--password {
+      top: vwset(53);
+    }
+
+  }
+
+  // サンプルデータ
+  &__sample {
+    margin: 50px auto 0;
+    text-align: center;
+
+    &-inner {
+      margin-bottom: 40px;
+      padding: 40px 0 50px;
+      background: #f8f7f6;
+    }
+
+    img {
+      margin-top: 35px;
+    }
+
+    @include media(sm) {
+      margin: vwset(35) vwset(10) 0;
+ 
+      &-inner {
+        margin-bottom: vwset(20);
+        padding: vwset(30) vwset(20) vwset(35);
+        text-align: left;
+        @include font-sp-style(15,22);
+      }
+
+      img {
+        margin-top: vwset(23);
+      }
+
+      &-text {
+        @include font-sp-style(15,30);
+        text-align: left;
+      }
+  
+
+
+    }
+  }
+
+  // 枠外テキスト
+  &__text {
+    margin-top: 20px;
+    @include font-style(16,30);
+
+    @include media(sm) {
+      margin: vwset(20) vwset(15) 0;
+      @include font-sp-style(14,22);
+    }
+  }
+
+
+}
+
+
+
+
+

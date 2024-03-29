@@ -1,0 +1,9 @@
+type: object
+description: 商品詳細情報MAP取得リクエスト
+properties:
+  goodsCodeList:
+    type: array
+    description: 商品コードリスト
+    items:
+      type: string
+

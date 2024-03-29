@@ -1,0 +1,97 @@
+type: object
+description: アンケート回答画面表示用レスポンス
+properties:
+  questionEntity:
+    $ref: "#/components/schemas/QuestionEntityResponse"
+  questionSeq:
+    type: integer
+    format: int32
+    description: 設問SEQ
+    example: 10000001
+  displayNumber:
+    type: integer
+    format: int32
+    description: 設問No
+    example: 2
+  question:
+    type: string
+    description: 設問内容
+    example: 事業所のお名前/ご記入者のお名前
+  questionTextBox:
+    type: string
+    description: テキストボックス
+    example: 1
+  questionTextArea:
+    type: string
+    description: テキストエリア
+    example: 電話番号
+  questionRadio:
+    type: string
+    description: ラジオボタン・プルダウン選択肢
+    example: 1
+  questionRadioItems:
+    type: object
+    description: 選択肢にセットする値を格納するMap
+    additionalProperties:
+      type: string
+  questionRadioDisp:
+    type: string
+    description: （モバイル半角変換表示用）ラジオボタン・プルダウン選択肢
+    example: 1
+  questionPullDown:
+    type: string
+    description: ラジオボタン・プルダウン選択肢
+    example: 1
+  questionPullDownItems:
+    type: object
+    description: ラジオボタン・プルダウン選択肢リスト
+    additionalProperties:
+      type: string
+  questionPullDownDisp:
+    type: string
+    description: （モバイル半角変換表示用）ラジオボタン・プルダウン選択肢
+    example: 1
+  questionCheckBoxItems:
+    type: object
+    description: チェックボックス選択肢リスト
+    additionalProperties:
+      type: string
+  questionCheckBox:
+    type: array
+    description: チェックボックス選択肢
+    items:
+      type: string
+  questionCheckBoxDispItems:
+    type: array
+    description: チェックボックス選択肢リスト（確認画面表示用）
+    items:
+      type: string
+  questionCheckBoxDisp:
+    type: string
+    description: チェックボックス選択肢（確認画面表示用）
+    example: 1
+  replyRequiredFlag:
+    type: string
+    description: アンケート回答必須フラグ
+    example: 2
+    default: 0
+  replyType:
+    type: string
+    description: アンケート回答形式種別
+    example: 2
+    default: 0
+  replyValidatePattern:
+    type: string
+    description: アンケート回答文字種別
+    example: 2
+    default: 0
+  replyMaxLength:
+    type: integer
+    format: int32
+    description: アンケート回答桁数
+    example: 200
+
+components:
+  schemas:
+    QuestionEntityResponse:
+      $ref: ./QuestionEntityResponse.yaml

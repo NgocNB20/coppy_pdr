@@ -1,0 +1,38 @@
+type: object
+description: カテゴリ検索条件Dtoリクエスト
+properties:
+  categoryId:
+    type: string
+    description: カテゴリID
+    example: "1000"
+  categorySeqList:
+    type: array
+    description: カテゴリSEQリスト
+    items:
+      type: integer
+      format: int32
+      example: [ 10000000,10000001 ]
+  maxHierarchical:
+    type: integer
+    format: int32
+    description: 最大表示階層数
+    example: 3
+  openStatus:
+    type: string
+    description: 公開状態
+    example: 1
+  notInCategoryIdList:
+    type: array
+    description: 除外カテゴリIDリスト
+    items:
+      type: string
+      example: [ 10000000,10000001 ]
+  orderField:
+    type: string
+    description: 並替項目
+    example: categoryId
+  orderAsc:
+    type: boolean
+    description: 並替昇順フラグ
+    default: false
+    example: true

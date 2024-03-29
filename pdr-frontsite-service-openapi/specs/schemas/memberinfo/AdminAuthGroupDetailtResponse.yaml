@@ -1,0 +1,27 @@
+type: object
+description: 運営者に紐付けられた権限グループレスポンス
+properties:
+  adminAuthGroupSeq:
+    type: integer
+    format: int32
+    description: 運営者権限グループSEQ
+    example: 1001
+  authTypeCode:
+    type: string
+    description: 権限種別
+    example: MEMBER
+  authLevel:
+    type: integer
+    format: int32
+    description: 権限レベル
+    example: 4
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    sample: 2022/04/01 19:50:23.341
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    sample: 2022/04/01 19:50:23.341

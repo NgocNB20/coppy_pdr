@@ -1,0 +1,7 @@
+type: object
+description: 端末識別情報レスポンス
+properties:
+  accessUid:
+    type: string
+    description: 端末識別番号
+    example: 0000210421121212

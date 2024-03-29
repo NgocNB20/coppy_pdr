@@ -1,0 +1,97 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}"/>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-regist">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__current">オンラインショップ会員登録</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="inputtelForm" th:action="@{/regist/inputtel.html}" th:object="${registModel}" method="post">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>オンラインショップ会員登録</strong></h2>
+
+                    <hm:freearea key="member_info"/>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">ご登録電話番号入力</h3>
+                </div>
+            </div>
+
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <div class="c-page-description">
+                        <p class="c-page-description__text"><strong>P.D.R.オンラインショップへのご登録は日本国内の歯科医療機関様、歯科技工所様、医療機関様に限らせていただきます。</strong><br>
+                            歯科関連学校及び歯科関連個人の方、<a th:href="@{#}" class="c-inlinelink">これから開業される方</a>は、お手数ですがカスタマーサービスデスク（TEL：0120-108394　受付時間：10:00-16:00／土日祝休）までお問い合わせください。<br>
+                            お電話・FAXで過去にご注文いただいた方もP.D.R.オンラインショップでのご注文が初めての場合は、会員登録が必要です。
+                        </p>
+                        <p>
+                            <span class="c-require c-page-description--margin-m">必須</span>は、必須項目です。<br>
+                            <span class="c-page-description__text--small">※携帯電話番号でご登録希望の方へ：支払方法はクレジットカード、代金引換のみご利用いただけます。</span>
+                        </p>
+                    </div>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p><span>ご登録電話番号</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="tel" th:field="*{memberInfoTel}" th:errorclass="c-input--error" autocomplete="tel" class="c-input c-input--width-l" maxLength="14" title="ご登録電話番号" >
+                                        <span class="l-form__list-memo">（半角数字・ハイフンなし）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoTel')}" th:errors="*{memberInfoTel}"
+                                          class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-button-wrap">
+                <button name="doConfirmInputtel" type="submit" class="c-button c-button--primary c-button--width-l">
+                    次へ進む
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

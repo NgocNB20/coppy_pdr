@@ -1,0 +1,9 @@
+# 2023-renew No92 from here
+type: object
+description: 後継品代替品情報取得リクエスト
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品 (複数パイプ区切り)
+    example: 1
+# 2023-renew No92 to here

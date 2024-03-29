@@ -1,0 +1,7 @@
+type: object
+description: 代理のログインリクエスト
+properties:
+  adminId:
+    type: string
+    description: 管理者ID
+    sample: demoadmin

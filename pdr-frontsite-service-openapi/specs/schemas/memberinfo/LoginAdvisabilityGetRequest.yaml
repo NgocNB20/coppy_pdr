@@ -1,0 +1,23 @@
+type: object
+description: ログイン可否判定取得リクエスト
+properties:
+  memberInfoStatus:
+    type: string
+    description: 会員状態
+    example:
+  approveStatus:
+    type: string
+    description: 承認状態
+    example:
+  onlineloginAdvisability:
+    type: string
+    description: オンラインログイン可否
+    example:
+  memberListType:
+    type: string
+    description: 名簿区分
+    example:
+  accountingType:
+    type: string
+    description: 経理区分
+    example:

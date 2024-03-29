@@ -1,0 +1,9 @@
+type: array
+description: 商品規格DtoListレスポンス
+items:
+  $ref: "#/components/schemas/GoodsUnitDtoResponse"
+
+components:
+  schemas:
+    GoodsUnitDtoResponse:
+      $ref: ./GoodsUnitDtoResponse.yaml

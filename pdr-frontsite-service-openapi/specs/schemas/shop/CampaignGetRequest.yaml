@@ -1,0 +1,8 @@
+type: object
+description: キャンペーン取得リクエスト
+properties:
+  campaignCode:
+    type: string
+    description: キャンペーンコード
+    example: 'abc'
+

@@ -1,0 +1,13 @@
+type: object
+description: 注文履歴（未出荷）取得Web-APIレスポンス
+properties:
+  info:
+    $ref: "#/components/schemas/WebApiGetNotYetShippingOrderHistoryResponseDetailDtoListResponse"
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+components:
+  schemas:
+    WebApiGetNotYetShippingOrderHistoryResponseDetailDtoListResponse:
+      $ref: ./WebApiGetNotYetShippingOrderHistoryResponseDetailDtoListResponse.yaml
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

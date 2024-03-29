@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.test01 {
+
+  p {
+    margin: 20px;
+    color: #333;
+    @include media(sm) {
+      background: #ccc;
+    }
+  }
+
+  // PC
+  .test01-font {
+    @include font-style(22,28,bold);
+  }
+
+  // SP
+  .test01-font01 {
+    @include media(sm) {
+      // フォントサイズ（clamp）※最小・推奨・最大
+      @include font-clamp(22);
+    }
+  }
+
+  .test01-font02 {
+    @include media(sm) {
+      // フォントサイズ（vw）※１サイズのみ
+      @include font-vw(22);
+    }
+  }
+
+  .test01-font03 {
+    @include media(sm) {
+      // フォントサイズ（clamp）※最小＆最大サイズを変更したい場合
+      font-size: clamp(1.8rem, vwset(22), 3.0rem);
+    }
+  }
+
+  .test01-font04 {
+    @include media(sm) {
+      // フォントサイズ（clamp）※PCと同じくフォントサイズ＆行間＆太さ変更できる。フォントサイズは最小・最大指定できる
+      @include font-sp-style-clamp(22, 26, bold);
+    }
+  }
+
+  .test01-font04-01 {
+    @include media(sm) {
+      //  フォントサイズ（clamp） ※font4で、一部の引数だけ設定したい場合
+      @include font-sp-style-clamp(22, $weight:normal);
+
+    }
+  }
+
+  .test01-font05 {
+    @include media(sm) {
+      //  フォントサイズ（min） ※font4で、一部の引数だけ設定したい場合
+      @include font-sp-style(22, 26, bold);
+
+    }
+  }
+}
+

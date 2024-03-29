@@ -1,0 +1,1002 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta th:replace="~{newdesign/include/head}"/>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+    <script type="text/javascript" src="/common/js/jquery.mCustomScrollbar.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        $(function () {
+            $("#d_agreement").mCustomScrollbar({theme: "rounded"});
+        });
+
+        /*
+         * 休診曜日 無休にチェックが入った場合は他のすべてのチェックを外し、非活性にする。
+         *
+         */
+        function setAllConsultation() {
+            var elements = document.getElementsByClassName("nonConsultation");
+
+            var allConsultation = document.getElementById('allConsultation');
+
+            var cnt = elements.length;
+
+
+            for (var index = 0; index < cnt; index++) {
+                if (allConsultation.checked == true) {
+                    elements[index].checked = false;
+                    elements[index].disabled = true;
+                } else {
+                    elements[index].disabled = false;
+                }
+            }
+        }
+
+        //]]>
+
+
+    </script>
+</head>
+
+<body id="gotop" class="p-regist" onload="setAllConsultation();">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                        <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">オンラインショップ会員登録</span></div>
+                </div>
+            </div>
+        </div>
+
+        <form name="indexForm" id="indexForm" method="post" th:action="@{/regist/index.html}" th:object="${registModel}" enctype="multipart/form-data">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>オンラインショップ会員登録</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">お客様情報入力</h3>
+                </div>
+            </div>
+
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <div class="c-page-description">
+                        <p class="c-page-description__text">各項目に必要事項を入力し、ご利用規約をご確認の上、「ご利用規約に同意して申し込む」ボタンを押してください。<br>
+                            弊社でお申込内容を確認でき次第、ご登録メールアドレスに会員IDと初回パスワードをお送りします。
+                        </p>
+                        <ul class="c-page-description__bullet-point c-page-description--margin-m">
+                            <li>
+                                P.D.R.オンラインショップへのご登録は、日本国内の歯科医療機関様、歯科技工所様、医療機関様に限らせていただきます。
+                            </li>
+                            <li>確認のため、弊社よりご連絡させていただく場合がございます。</li>
+                            <li>会員登録は無料です。</li>
+                            <li>お客様の個人情報の利用目的および管理等の取り扱いにつきましては、「<a
+                                    th:href="@{/guide/agreement.html}" class="c-inlinelink">ご利用規約</a>」ならびに「<a
+                                    th:href="@{/guide/privacy.html}" class="c-inlinelink">プライバシーポリシー</a>」に定めておりますので、必ずご確認ください。
+                            </li>
+                        </ul>
+                        <p class="c-page-description__text c-page-description--margin-m"><span class="c-require">必須</span>は、必須項目です。</p>
+                    </div>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p>お客様番号</p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="${registModel.fromInputMemNoExist}"><span th:text="*{customerNo}"></span></th:block>
+                                        <th:block th:if="${!registModel.fromInputMemNoExist}"><span>会員登録後、発行されます。</span></th:block>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>事業所名</span><span class="c-require" th:if="${!registModel.fromInputMemNoExist}">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="${registModel.fromInputMemNoExist}"><span th:text="*{memberInfoLastName}"></span></th:block>
+                                        <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                            <input type="text" th:field="*{memberInfoLastName}" title="事業所名" maxLength="40" class="c-input c-input--width-l" th:errorclass="c-input--error"/><span class="l-form__list-memo">（全角）</span>
+                                        </th:block>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoLastName')}" th:errors="*{memberInfoLastName}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>事業所名フリガナ</span><span class="c-require" th:if="${!registModel.fromInputMemNoExist}">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="${registModel.fromInputMemNoExist}"><span th:text="*{memberInfoLastKana}"></span></th:block>
+                                        <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                            <input type="text" th:field="*{memberInfoLastKana}" title="事業所名フリガナ" maxLength="30" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                            <span class="l-form__list-memo">（半角カタカナ・スペースなし）</span>
+                                        </th:block>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoLastKana')}" th:errors="*{memberInfoLastKana}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>代表者名</span><span class="c-any" th:if="${!registModel.fromInputMemNoExist}">任意</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="${registModel.fromInputMemNoExist}"><span th:text="*{representativeName}"></span></th:block>
+                                        <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                            <input type="text" th:field="*{representativeName}" title="代表者名" maxLength="15" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                            <span class="l-form__list-memo">（全角）</span>
+                                        </th:block>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>業種</span><span class="c-require" th:if="${!registModel.fromInputMemNoExist}">必須</span></p></dt>
+                                <dd th:classappend="${#fields.hasErrors('businessType')} ? 'l-form__list--error'">
+                                    <th:block th:if="${registModel.fromInputMemNoExist}">
+                                        <span th:text="*{#enumtype.getLabel('HTypeBusinessType',businessType)}"/>
+                                    </th:block>
+                                    <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                        <div class="l-form__list-radio-unit">
+                                            <th:block th:each="item : *{businessTypeItems}">
+                                                <div>
+                                                    <input type="radio" name="businessType"
+                                                           class="c-radio" th:id="'business_'+ ${item.key}" th:value="${item.key}" th:checked="${item.key} == *{businessType}"/>
+                                                    <label th:for="'business_'+ ${item.key}" th:text="${item.value}"></label>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                        <span th:if="${#fields.hasErrors('businessType')}" th:errors="*{businessType}" class="c-field-error c-field-error--top-large"></span>
+                                    </th:block>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>電話番号</span><span class="c-require" th:if="${!registModel.fromInputMemNoExist}">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="${registModel.fromInputMemNoExist}">
+                                            <span th:text="*{memberInfoTel}"></span>
+                                        </th:block>
+                                        <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                            <input type="text" th:field="*{memberInfoTel}" title="電話番号" maxlength="14" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                            <span class="l-form__list-memo">（半角数字・ハイフンなし）</span>
+                                        </th:block>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoTel')}" th:errors="*{memberInfoTel}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>FAX番号</span><span class="c-any" th:if="${!registModel.memberInfoFaxExist}">任意</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="${!registModel.memberInfoFaxExist}">
+                                            <input type="text" th:field="*{memberInfoFax}" title="FAX番号" maxlength="14" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                            <span class="l-form__list-memo">（半角数字・ハイフンなし）</span>
+                                        </th:block>
+                                        <th:block th:if="${registModel.memberInfoFaxExist}">
+                                            <span th:text="*{memberInfoFax}"></span>
+                                        </th:block>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoFax')}" th:errors="*{memberInfoFax}" class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list l-form__list-zicode">
+                                <dt><p><span>郵便番号</span><span class="c-require" th:if="${!registModel.fromInputMemNoExist}">必須</span></p></dt>
+                                <dd>
+                                    <th:block th:if="${registModel.fromInputMemNoExist}">
+                                        <p>
+                                            〒<span th:remove="tag" th:text="*{memberInfoZipCode1}"/>-<span th:remove="tag" th:text="*{memberInfoZipCode2}"/>
+                                        </p>
+                                    </th:block>
+                                    <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                        <p>
+                                            <span>
+                                                <input type="text" id="memberInfoZipCode1" th:field="*{memberInfoZipCode1}" autocomplete="postal-code" placeholder="" maxlength="3" class="c-input c-input--width-s"
+                                                       th:classappend="${#fields.hasErrors('memberInfoZipCode1') || #fields.hasErrors('memberInfoZipCode2')} ? 'c-input--error'">
+                                            </span>
+                                            <span>ー</span>
+                                            <span>
+                                                <input type="text" id="memberInfoZipCode2" th:field="*{memberInfoZipCode2}" placeholder="" maxlength="4" class="c-input c-input--width-s"
+                                                       th:classappend="${#fields.hasErrors('memberInfoZipCode1') || #fields.hasErrors('memberInfoZipCode2')} ? 'c-input--error'">
+                                            </span>
+                                            <span class="l-form__list-memo">（半角数字）</span>
+                                            <button type="button" class="c-button c-button--address" id="doZipCodeSearchAjax" value="住所検索" title="住所検索" onClick="callZipSearchFunc();"><p>住所検索</p></button>
+                                        </p>
+                                        <span id="zipErrorMsg"/>
+                                        <div th:if="${#fields.hasErrors('memberInfoZipCode1')} and ${#fields.hasErrors('memberInfoZipCode2')}" th:errors="*{memberInfoZipCode1}" class="c-field-error c-field-error--top"></div>
+                                        <div th:if="${#fields.hasErrors('memberInfoZipCode1')} and ${!#fields.hasErrors('memberInfoZipCode2')}" th:errors="*{memberInfoZipCode1}" class="c-field-error c-field-error--top"></div>
+                                        <div th:if="${!#fields.hasErrors('memberInfoZipCode1')} and ${#fields.hasErrors('memberInfoZipCode2')}" th:errors="*{memberInfoZipCode2}" class="c-field-error c-field-error--top"></div>
+
+                                        <div class="l-form__list-text l-form__list-text--small l-form__list-text--top">※郵便番号を入力し、住所検索ボタンをクリックしてください。住所が自動で入力されます。</div>
+                                    </th:block>
+                                </dd>
+                            </dl>
+
+                            <th:block th:if="${registModel.fromInputMemNoExist}">
+                                <dl class="l-form__list">
+                                    <dt><p><span>住所</span></p></dt>
+                                    <dd>
+                                        <p><span th:text="${registModel.memberInfoAddress1} + ${registModel.memberInfoAddress2} + ${#strings.isEmpty(registModel.memberInfoAddress3) ? '' : registModel.memberInfoAddress3} "></span>
+                                        </p>
+                                    </dd>
+                                </dl>
+                            </th:block>
+                            <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                <dl class="l-form__list">
+                                    <dt><p><span>都道府県</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <div class="c-select c-select--prefecture" th:classappend="${#fields.hasErrors('memberInfoPrefecture')} ? 'c-select--error'">
+                                            <select class="c-select__inner" id="memberInfoPrefecture" name="memberInfoPrefecture">
+                                                <option value="" selected="selected">選択してください</option>
+                                                <option th:each="item : *{memberInfoPrefectureItems}"
+                                                        th:value="${item.key}"
+                                                        th:text="${item.value}"
+                                                        th:label="${item.value}"
+                                                        th:selected="${item.key} == *{memberInfoPrefecture}"></option>
+                                            </select>
+                                        </div>
+                                        <span th:if="${#fields.hasErrors('memberInfoPrefecture')}" th:errors="*{memberInfoPrefecture}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>市区郡</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" th:field="*{memberInfoAddress1}" title="市区郡" placeholder="例：名古屋市" maxLength="36" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoAddress1')}" th:errors="*{memberInfoAddress1}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+
+                                <dl class="l-form__list">
+                                    <dt><p><span>町村・番地</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" th:field="*{memberInfoAddress2}" title="町村・番地" placeholder="例：天白区原4-106" maxLength="40" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoAddress2')}" th:errors="*{memberInfoAddress2}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>マンション・建物名</span><span class="c-any">任意</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" th:field="*{memberInfoAddress3}" title="マンション・建物名" maxLength="40" placeholder="例：○○ビル101号室" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoAddress3')}" th:errors="*{memberInfoAddress3}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                            </th:block>
+                            <dl class="l-form__list">
+                                <dt>
+                                    <div class="l-form__list-title-wrap">
+                                        <p><span>メールアドレス</span><span class="c-require">必須</span></p>
+                                        <div class="l-form__list-title-text">
+                                            登録完了後は会員IDとしてもご利用いただけます
+                                        </div>
+                                    </div>
+                                </dt>
+                                <dd>
+                                    <p>
+                                        <input type="text" th:field="*{memberInfoMail}" title="メールアドレス" maxLength="256" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                        <span class="l-form__list-memo">（半角）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoMail')}" th:errors="*{memberInfoMail}" class="c-field-error c-field-error--top"></span>
+                                    <div class="l-form__list-text l-form__list-text--margin"><strong>▼ 確認のためメールアドレスを再入力してください。</strong></div>
+                                    <p>
+                                        <input type="text" th:field="*{memberInfoMailConfirm}" title="メールアドレス(確認)" maxLength="256" th:errorclass="c-input--error" class="c-input c-input--width-l">
+                                        <span class="l-form__list-memo">（半角）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoMailConfirm')}" th:errors="*{memberInfoMailConfirm}" class="c-field-error c-field-error--top"></span>
+                                    <div class="l-form__list-text l-form__list-text--small l-form__list-text--top">
+                                        ※迷惑メール受信拒否設定をされている方は、ドメイン「@pdr.co.jp」を受信できるように変更してください。
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>休診曜日</span><span class="c-any">任意</span></p></dt>
+                                <dd>
+                                    <div class="l-form__list-text l-form__list-text--small l-form__list-text--bottom">
+                                        「休診」にチェックを入れてください。
+                                    </div>
+                                    <div class="p-regist__closed-wrap">
+                                        <table class="l-form__table p-regist__closed">
+                                            <thead>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th>日</th>
+                                                <th>月</th>
+                                                <th>火</th>
+                                                <th>水</th>
+                                                <th>木</th>
+                                                <th>金</th>
+                                                <th>土</th>
+                                                <th>祝</th>
+                                                <th>無休</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th>AM</th>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amSunNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amMonNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amTueNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amWedNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amThuNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amFriNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amSatNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{amHolidayNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td rowspan="2"><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" id="allConsultation" th:field="*{allConsultation}" onclick="setAllConsultation();"><span></span></span></label></td>
+                                            </tr>
+                                            <tr>
+                                                <th>PM</th>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmSunNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmMonNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmTueNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmWedNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmThuNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmFriNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmSatNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                                <td><label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" th:field="*{pmHolidayNonConsultation}" class="nonConsultation"><span></span></span></label></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>診療科目</span><span class="c-any" th:if="${!registModel.fromInputMemNoExist}">任意</span></p></dt>
+                                <dd>
+                                    <table class="l-form__table p-regist__subject">
+                                        <div id="isMedicalTreatmentJudge1" th:if="*{isMedicalTreatmentJudge1()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment1Title" th:text="*{medicalTreatment1Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment1" th:field="*{medicalTreatment1}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge2" th:if="*{isMedicalTreatmentJudge2()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment2Title" th:text="*{medicalTreatment2Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox"><span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment2" th:field="*{medicalTreatment2}"> <span></span></span>
+                                                    <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge3" th:if="*{isMedicalTreatmentJudge3()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment3Title" th:text="*{medicalTreatment3Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment3" th:field="*{medicalTreatment3}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge4" th:if="*{isMedicalTreatmentJudge4()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment4Title" th:text="*{medicalTreatment4Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment4" th:field="*{medicalTreatment4}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge5" th:if="*{isMedicalTreatmentJudge5()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment5Title" th:text="*{medicalTreatment5Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment5" th:field="*{medicalTreatment5}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge6" th:if="*{isMedicalTreatmentJudge6()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment6Title" th:text="*{medicalTreatment6Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment6" th:field="*{medicalTreatment6}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge7" th:if="*{isMedicalTreatmentJudge7()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment7Title" th:text="*{medicalTreatment7Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment7" th:field="*{medicalTreatment7}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge8" th:if="*{isMedicalTreatmentJudge8()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment8Title" th:text="*{medicalTreatment8Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment8" th:field="*{medicalTreatment8}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge9" th:if="*{isMedicalTreatmentJudge9()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment9Title" th:text="*{medicalTreatment9Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment9" th:field="*{medicalTreatment9}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div id="isMedicalTreatmentJudge10" th:if="*{isMedicalTreatmentJudge10()}">
+                                            <tr>
+                                                <th><span id="medicalTreatment10Title" th:text="*{medicalTreatment10Title}"/></th>
+                                                <td>
+                                                    <label class="c-checkbox">
+                                                        <span class="c-checkbox__box"><input type="checkbox" id="medicalTreatment10" th:field="*{medicalTreatment10}"> <span></span></span>
+                                                        <p>対象</p>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </div>
+
+                                        <tr>
+                                            <th>その他</th>
+                                            <td class="p-regist__subject-other">
+                                                <input type="text" th:field="*{medicalTreatmentMemo}" title="その他診療内容" maxLength="30" th:errorclass="c-input--error" class="c-input">
+                                            </td>
+                                            <span th:if="${#fields.hasErrors('medicalTreatmentMemo')}" th:errors="*{medicalTreatmentMemo}" class="c-field-error c-field-error--top"></span>
+                                        </tr>
+                                    </table>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>確認書類</span><span class="c-any" th:if="${!registModel.fromInputMemNoExist}">任意</span></p></dt>
+                                <dd>
+                                    <div class="l-form__list-text l-form__list-text--small">
+                                        医薬品をお買い求めの方は確認書類の提出が必要です。下記確認書類よりいずれか1つアップロードしてください。<br>
+                                        【確認書類】<br>
+                                        ・診療所開設届<br>
+                                        ・診療所開設届出済証<br>
+                                        ・保険医療機関指定通知書<br>
+                                        ・歯科技工所開設届<br>
+                                        ※既に提出済みの方は不要です。
+                                    </div>
+                                    <div class="l-form__list-text l-form__list-text--small l-form__list-text--top">
+                                        ・後日マイページからアップロード可能です<br>・FAXでのご提出もできます。FAX：0120-108649（受付時間：24時間／年中無休）に送信してください。
+                                    </div>
+                                    <div id="error-upload-message">
+                                        <div th:if="${#fields.hasErrors('uploadFiles')}"
+                                              th:errors="*{uploadFiles}" class="p-regist__drop-error">
+                                        </div>
+                                    </div>
+                                    <div class="p-regist__drop" th:classappend="${#fields.hasErrors('uploadFiles')} ? 'l-form__list--error'">
+                                        <div class="p-regist__drop-uploaded">
+                                            <th:block th:each="item, stat: *{registUploadFiles}" th:if="*{!#lists.isEmpty(registUploadFiles)}">
+                                                <div class="p-regist__drop-uploaded-image">
+                                                    <div th:if="${item.extensionType.value != '2'}" class="img imagePreviewer"><img
+                                                         th:id="'upload-image-' + '-' + ${stat.index}"
+                                                         th:src="${item.filePath}" alt="">
+                                                    </div>
+                                                    <div th:if="${item.extensionType.value == '2'}" class="img imagePreviewer">
+                                                        <a target="_blank" th:href="@{(${item.filePath})}">
+                                                            <div th:text="${item.originName}"></div>
+                                                        </a>
+                                                    </div>
+                                                    <button class="p-regist__drop-uploaded-close" type="button" th:onClick="'deleteUpload(' + ${item.fileNo} + ')'">
+                                                        <span></span>
+                                                        <span></span>
+                                                    </button>
+                                                    <input type="hidden" th:id="'imagePath' + '-' + ${stat.index}" th:name="'registUploadFiles[' + ${stat.index} + '].imagePath'"
+                                                           th:value="${item.filePath}"/>
+                                                </div>
+                                            </th:block>
+                                            <input type="hidden" id="selectFileNo" th:field="*{fileNo}"/>
+                                            <input type="submit" id="doDeleteFile" name="doDeleteFile" style="display: none">
+                                        </div>
+                                        <div class="p-regist__drop-area" id="p-regist__drop-area" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
+                                            <img th:src="@{/images/member/confirm/file-up.svg}"
+                                                 alt="ファイルアップロード" width="95" class="p-regist__drop-logo l-lg">
+                                            <div class="p-regist__drop-text l-lg">ここにファイルをドロップ　または</div>
+                                            <button class="c-button p-regist__drop-button" type="button" onclick="openUploadImage();">
+                                                ファイルを選択
+                                            </button>
+                                            <input id="doUploadFile" name="doUploadFile" type="submit" value="画像アップロード" style="display: none;"/>
+                                        </div>
+                                        <input type="file" id="imagePdfUpload" th:field="*{uploadFiles}" accept="image/png, image/jpeg, application/pdf" th:errorclass="error" multiple hidden/>
+                                        <div class="l-form__list-text l-form__list-text--small">
+                                            ※アップロードできる画像の上限は3枚とします。<br>
+                                            ※許容する画像ファイルの拡張子はpng、jpeg、pdfです。<br>
+                                            ※最大サイズは1ファイル5MBまでです。
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p><span>反社会的勢力ではないこと<br class="l-lg">の保証</span><span class="c-require">必須</span></p></dt>
+                                <dd th:classappend="${#fields.hasErrors('noAntiSocialFlag')} ? 'l-form__list--error'">
+                                    <div class="l-form__list-text l-form__list-text--bottom">
+                                        暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。
+                                    </div>
+                                    <label class="c-checkbox">
+                                        <span class="c-checkbox__box" id="noAntiSocialFlag-0">
+                                        <input type="checkbox" id="noAntiSocialFlag" th:field="*{noAntiSocialFlag}"
+                                               value="1" th:errorclass="c-input--error"> <span></span></span>
+                                        <p>保証する</p>
+                                    </label>
+                                    <div th:if="${#fields.hasErrors('noAntiSocialFlag')}" th:errors="*{noAntiSocialFlag}" class="c-field-error c-field-error--top-large"></div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <h4 class="c-title-form-m c-title-form-m--line"><p>メール配信設定</p><span class="c-any">任意</span>
+                    </h4>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p>メールによるおトク情報</p></dt>
+                                <dd>
+                                    <div class="p-regist__mail">
+                                        <label class="c-checkbox">
+                                            <span class="c-checkbox__box">
+                                                <input type="checkbox" id="sendMail" th:field="*{sendMail}"> <span></span></span>
+                                            <p>希望する</p></label>
+                                        <div class="p-regist__mail-text">
+                                            セール情報、おすすめ商品、メルマガ限定キャンペーンなどをメールでお送りします。
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>金属商品価格お知らせメール</p></dt>
+                                <dd>
+                                    <div class="p-regist__mail">
+                                        <label class="c-checkbox">
+                                            <span class="c-checkbox__box">
+                                                <input type="checkbox" id="metalPermitFlag" th:field="*{metalPermitFlag}"> <span></span>
+                                            </span>
+                                            <p>希望する</p>
+                                        </label>
+                                        <div class="p-regist__mail-text">金属商品の価格をメールでお送りします。</div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>ご注文受付完了メール</p></dt>
+                                <dd>
+                                    <div class="p-regist__mail">
+                                        <label class="c-checkbox">
+                                            <span class="c-checkbox__box">
+                                                <input type="checkbox" id="orderCompletePermitFlag" th:field="*{orderCompletePermitFlag}"> <span></span>
+                                            </span>
+                                            <p>希望する</p>
+                                        </label>
+                                        <div class="p-regist__mail-text">
+                                            ご注文確定時に自動配信されるメールです。（オンラインショップからのご注文の際に送信されます。）
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>商品発送完了メール</p></dt>
+                                <dd>
+                                    <div class="p-regist__mail">
+                                        <label class="c-checkbox">
+                                            <span class="c-checkbox__box">
+                                                <input type="checkbox" id="deliveryCompletePermitFlag" th:field="*{deliveryCompletePermitFlag}"> <span></span>
+                                            </span>
+                                            <p>希望する</p>
+                                        </label>
+                                        <div class="p-regist__mail-text">
+                                            商品発送時に自動配信されるメールです。（オンラインショップからのご注文の際に送信されます。）
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <p class="p-regist__mail-memo">※希望しない場合はチェックを外してください。<br>※配信停止・再開はマイページから変更できます。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-section p-regist__rule">
+                <div class="l-section__inner">
+                    <h4 class="p-regist__rule-title"><p>ご利用規約</p></h4>
+                    <div class="p-regist__rule-main">
+                        <div class="p-regist__rule-scroll c-scroll2" data-simplebar data-simplebar-auto-hide="false">
+                            <!-- incluteさせるエリア --->
+                            <div class="c-terms">
+                                <p>
+                                    株式会社ピーディーアール（以下「当社」といいます）は、以下のご利用規約（以下「本規約」といいます）に基づいて会員（第3条で定義します）にピーディーアールオンラインショップ（以下「本サイト」といいます）のサービス・商品を提供いたします。</p>
+                                <dl>
+                                    <dt>第1条（本規約の適用）</dt>
+                                    <dd>
+                                        <p>
+                                            本サイトの提供・利用にあたっては、当社及び会員に本規約が適用されるものとします。当社は、本規約を変更できるものとします。本規約を変更する場合、当社は、本サイトにて本規約を変更する旨及び変更後の本規約の内容並びにその効力発生時期を告知します。</p>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第2条（本サイトの利用）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>会員は本規約に従い本サイトを利用するものとします。</li>
+                                            <li>
+                                                当社は、会員に事前通知することなく取扱商品、商品価格、各種キャンペーン等の本サイトの内容を変更することができるものとします。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第3条（会員登録）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>
+                                                本サイトは、日本国内の歯科医院、歯科技工所、その他歯科医療に携わる法人・個人のみにご利用いただけます。
+                                            </li>
+                                            <li>
+                                                本サイトのご利用には、本規約への同意と、当社が指定する個人情報の登録（以下「会員登録」といいます）が必要です。
+                                            </li>
+                                            <li>会員登録した者を「会員」といいます。</li>
+                                            <li>
+                                                第14条1項に所定する禁止事項を行った場合、またはそのおそれがある場合及び第15条１項の所定の事項に該当する場合またはそのおそれがある場合、当社は会員登録を許可しない場合があります。
+                                            </li>
+                                            <li>
+                                                会員ID及びパスワードは会員自身のみが利用でき、第三者に譲渡・貸与・開示できないものとします。
+                                            </li>
+                                            <li>
+                                                会員IDとパスワードを用いて当社に対して行われたことは全て会員本人の意思表示とみなし、そのために生じる効果（支払義務等）及び結果（損害の発生等）は全て会員が責任を負うものとします。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第4条（会員登録の変更手続き）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>
+                                                会員登録の内容に変更があった場合には、速やかに当社が別途指定する方法により届け出るものとします。
+                                            </li>
+                                            <li>
+                                                会員登録の変更前になされた契約は、変更前の会員情報に基づき取り扱われます。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第5条（契約の成立）</dt>
+                                    <dd>
+                                        <p>
+                                            会員が本サイトで商品をご注文いただいた時点で、商品購入についての契約申込みとなり、当社が発信した注文受付完了のE-mailが会員に受信された時点で売買契約が成立するものとします。</p>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第6条（商品のお届け）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>商品のお届け先は日本国内に限ります。</li>
+                                            <li>
+                                                交通事情や悪天候などにより予定日及び指定時間にお届けできない場合があります。
+                                            </li>
+                                            <li>ご注文時に品切れの商品は、入荷次第順次お届けいたします。</li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第7条（お支払い）</dt>
+                                    <dd>
+                                        <p>
+                                            商品の購入にあたりお支払いいただく金額は、商品代金、消費税及び当社規定の送料の合計額です。</p>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第8条（売買契約の解除（キャンセル））</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>
+                                                売買契約が成立した商品について、会員は出荷手配後のキャンセルはできないものとし、商品を一旦受け取った上で、次条の規定に従って返品手続きを行うものとします。
+                                            </li>
+                                            <li>
+                                                名入れ印刷済商品及びご注文いただいてからメーカー等に発注する商品については、出荷前であってもキャンセルできないものとします。
+                                            </li>
+                                            <li>
+                                                第14条及び第15条に該当する場合、商品の入手が困難になった場合、お届け先が長期ご不在の場合、またはお届け先が商品の受け取りを拒否した場合は、当社は当該売買契約の解除、その他の措置をとることができるものとします。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第9条（返品・交換）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>会員は返品・交換を希望する場合は、当社に事前にご連絡ください。</li>
+                                            <li>以下の場合は返品・交換できません。ただし、品質不良や返品理由が当社の責めに帰すべき事由に基づく場合は返品を承ります。
+                                                <ol>
+                                                    <li>名入れ印刷済商品</li>
+                                                    <li>お届け後半年を経過した商品</li>
+                                                    <li>使用期限または賞味期限を過ぎた商品</li>
+                                                    <li>経年劣化とみられる商品</li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                会員の都合（注文間違い等）による返品については、開封前の商品のみを受け付け、当該返品にかかる送料等の諸経費は会員が負担するものとします。
+                                            </li>
+                                            <li>
+                                                品質不良の場合、当社の責めに帰すべき事由による返品・交換の場合、またはサイズや使い勝手がイメージと使ったことによりご満足いただけなかった場合は当社が送料を負担します。これ以外の場合の送料は会員が負担するものとします。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第10条（医薬品等の販売・用途）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>
+                                                医薬品・医療機器(以下「医薬品等」といいます)に関しては、当社の販売先である会員が診療等の医療行為のために提供することを想定して販売するものとします。
+                                            </li>
+                                            <li>
+                                                医薬品等の想定外の使用や誤使用によって、会員や第三者に損害が発生した場合は、当社は一切の責任を負いません。
+                                            </li>
+                                            <li>
+                                                当社は、医薬品及び注射器・注射針（以下「注射針等」といいます）などの一部の医療機器に関しては、会員が診療等の医療行為を行うことを法的に許可されている施設（以下「医療機関等」といいます）など販売先として適切であると確認できた場合にのみ販売します。
+                                            </li>
+                                            <li>
+                                                当社は会員が医療機関等であることを確認するために、施設の名称、施設の住所及び公務所印が記された公的書類のコピーを請求することができるものとします。
+                                            </li>
+                                            <li>以下の場合は、販売をお断りいたします。
+                                                <ol>
+                                                    <li>
+                                                        医薬品及び注射針等一部の医療機器の販売先として適切であることについて本条4項に定める公的書類のコピーを提出できない場合（医療施設等を有しない医師個人を含む。）
+                                                    </li>
+                                                    <li>
+                                                        販売先が法規制に反する行為を行っている、もしくはそのおそれがあると当社が認めた場合
+                                                    </li>
+                                                    <li>その他、販売先として相応しくないと当社が判断した場合</li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第11条（サンプル品の臨床使用）</dt>
+                                    <dd>
+                                        <p>
+                                            当社が提供するサンプル品は、形状見本であり、実際の医療行為には使用できません。会員がサンプル品を医療行為に使用された場合、当社は一切の責任を負いません。</p>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第12条（著作権等）</dt>
+                                    <dd>
+                                        <p>
+                                            本サイトを通じて提供される全てのコンテンツ（画像・文章等）は当社または当社の提携先事業者の財産であり著作権法・その他の知的財産法によって保護されています。本サイトを通じて提供されるコンテンツの無断転載はお断りいたします。<br/>「P.D.R.」「ピーディーアール」は弊社の登録商標（登録第5252771号、登録第5252772号）です。
+                                        </p>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第13条（禁止事項）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>次の各号を禁止事項とします。
+                                                <ol>
+                                                    <li>会員が本規約に違反する行為</li>
+                                                    <li>虚偽の会員登録を行う行為</li>
+                                                    <li>
+                                                        不正に入手したお客様番号、会員ＩＤまたはパスワードを使用して本サイトにログインする行為
+                                                    </li>
+                                                    <li>
+                                                        他の会員、第三者及び当社に迷惑・不利益または損害を与える行為、またはそのおそれのある行為
+                                                    </li>
+                                                    <li>その他、当社が不適切と認めた行為</li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                会員が前項に定める禁止行為を行い、それにより当社または第三者が損害を被った場合、会員は損害賠償責任を負うものとします。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第14条（会員資格の抹消）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>下記のいずれかに該当する場合、当社は当該会員の会員資格を抹消することができるものとします。
+                                                <ol>
+                                                    <li>会員が本規約に違反した場合</li>
+                                                    <li>会員から商品代金が回収不可能またはそのおそれがある場合</li>
+                                                    <li>
+                                                        会員または実質的に会員の経営を支配する者が反社会的勢力に該当する場合、または当社に対して脅迫的な言動または暴力を用いた場合、偽計もしくは威力を用いて当社の業務を妨害しあるいは信用を毀損した場合
+                                                    </li>
+                                                    <li>ご注文が一定期間ない場合</li>
+                                                    <li>届先不明でお届けできない場合</li>
+                                                    <li>その他、資格抹消が適当と当社が認めた場合</li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                前項の規定により会員資格を抹消した場合、当社は当該会員からの注文品の出荷を拒絶し、会員との間に成立した注文品の売買契約を解除できるものとします。
+                                            </li>
+                                            <li>
+                                                前項の規定により会員資格を抹消した場合、抹消によって会員に損害が生じたとしても当社は損害賠償義務を負いません。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第15条（サービスの変更・中断）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>
+                                                当社は、本サイトを適切に運営するために、次のいずれかに該当する場合、会員に事前に通知を行うことなく本サイトを変更、中止または停止することができるものとします。
+                                                <ol>
+                                                    <li>システムの定期保守及び緊急保守の場合</li>
+                                                    <li>
+                                                        天災地変、火災、停電、第三者による妨害行為などによりシステムの運用が困難な場合
+                                                    </li>
+                                                    <li>その他、当社が必要と判断した場合</li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                前項に従って本サイトを変更、中止または停止した場合、会員に損害が生じたとしても当社は一切の責任を負いません。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第16条（免責事項）</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>
+                                                当社は、会員に対して通知義務を負う場合は、会員情報のメールアドレスへの通知を持って行うものとします。
+                                            </li>
+                                            <li>
+                                                当社は、会員の登録内容に従い事務を処理することにより免責されるものとします。
+                                            </li>
+                                            <li>
+                                                会員が、本サービスを利用することにより、他の会員または第三者に対して損害などを与えた場合には、当該会員は自己の責任と費用において解決し、当社には一切迷惑を与えないものとします。
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>第17条（管轄裁判所）</dt>
+                                    <dd>
+                                        <p>
+                                            本サイトの利用に関して、当社と会員の間に紛議が生じた場合は、名古屋地方裁判所を第一審の専属的合意管轄裁判所といたします。</p>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <!-- // include させるエリア -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-button-wrap">
+                <div th:if="${!registModel.fromInputMemNoExist}">
+                    <button name="doConfirm" type="submit" class="c-button c-button--primary c-button--width-l" id="doConfirm">
+                        ご利用規約に同意して申し込む
+                    </button>
+                </div>
+                <div th:unless="${!registModel.fromInputMemNoExist}">
+                    <button name="doConfirmUpdate" type="submit" class="c-button c-button--primary c-button--width-l" id="doConfirmUpdate">
+                        ご利用規約に同意して申し込む
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+<script type="text/javascript">
+    <!--
+    var zipsearch = new Zipsearch();
+    zipsearch.switchZipCodeButton();
+
+    function callZipSearchFunc() {
+        zipsearch.zipCodeSearchPrefectureNameReturn(true, document.getElementById('memberInfoPrefecture'), document.getElementById('memberInfoAddress1'), document.getElementById('memberInfoAddress2'), document.getElementById('memberInfoAddress3'), document.getElementById('memberInfoZipCode1'), document.getElementById('memberInfoZipCode2'));
+    }
+
+    -->
+    // 2023-renew No22 from here
+    function openUploadImage() {
+        document.getElementById('imagePdfUpload').click()
+    }
+
+    function uploadAction(files) {
+        if (validate(files)) {
+            document.getElementById("doUploadFile").click();
+        }
+    }
+
+    function validate(files) {
+        const acceptExtensionList = document.getElementById('imagePdfUpload').accept
+        const maxSize = 1024 * 1024 * 5
+        for (const file of files) {
+            if (file.size > maxSize) {
+                document.getElementById("imagePdfUpload").value = null
+                showErrorUploadMessage('アップロードできるファイルは5MB以下となります。')
+                return false
+            }
+        }
+        showErrorUploadMessage('')
+        return true
+    }
+
+    function showErrorUploadMessage(msg) {
+        document.getElementById('error-upload-message').innerText = msg
+        document.getElementById('error-upload-message').classList.add('p-regist__drop-error')
+        if (msg) {
+            document.getElementById('error-upload-message').style.visibility = 'visible'
+        } else {
+            document.getElementById('error-upload-message').style.visibility = 'hidden'
+        }
+    }
+
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function onload() {
+        const imagePdfUpload = document.querySelector('#imagePdfUpload');
+        // ファイル選択のイベントをハンドリング
+        imagePdfUpload.addEventListener('change', (ev) => {
+            // 全てのファイルを取得
+            const files = imagePdfUpload.files;
+            uploadAction(files)
+        })
+    }
+
+    onload()
+
+    function dragDrop(ev) {
+        ev.preventDefault();
+        $("#imagePdfUpload").prop("files", ev.dataTransfer.files).change();
+        if (validate(ev.dataTransfer.files)) {
+            document.getElementById("doUploadFile").click();
+        }
+    }
+
+    function deleteUpload(imageNo) {
+        document.getElementById('selectFileNo').value = imageNo
+        document.getElementById('doDeleteFile').click();
+    }
+
+    // 2023-renew No22 to here
+
+</script>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

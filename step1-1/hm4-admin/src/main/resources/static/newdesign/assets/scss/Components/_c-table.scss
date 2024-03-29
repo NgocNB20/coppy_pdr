@@ -1,0 +1,144 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.c-table {
+  $this: &;
+
+  // common
+  border-top: solid 1px $color-333;
+  border-bottom: solid 1px $color-333;
+
+  &__th {
+    background: $color-orange-lightGray;
+    padding: 5px;
+    text-align: center;
+    @include font-style(16,40,normal);
+  }
+
+  &__item {
+
+    @include media(lg) {
+    
+      a:hover {
+
+        [class$="-title"],
+        [class$="-spec"],
+        [class$="-text"],
+        [class$="-memo"] {
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+      }
+      
+      > * {
+        @include media(lg) {
+          transition: opacity $comMS $comES;
+       }
+      }
+    }
+
+  }
+
+  &__price {
+    text-align: right;
+    vertical-align: middle;
+
+    &--null {
+      text-align: center;
+    }
+  }
+
+  &__quantity {
+    vertical-align: middle;
+    text-align: center;
+
+    .c-field-error {
+      margin-top: 8px;
+      text-align: left;
+    }
+  }
+
+  &__stock {
+    display: inline-grid;
+    grid-auto-flow: column;
+    place-content: center;
+    place-items: center;
+    background: $color-e6;
+    color: $color-666;
+  }
+
+  &--error {
+    background: #fff2f2;
+  }
+
+  @include media(sm) {
+
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    &__th {
+      padding: vwset(5);
+      @include font-sp-style(12,30);
+    }
+
+    &__price {
+  
+      // 価格：●●円で両端揃え
+      padding-block: vwset(12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .c-product__item-price:only-child  {
+        margin-left: auto;
+      }
+    }
+
+    &__quantity {
+      text-align: left;
+      
+      .c-field-error {
+        margin-top: 8px;
+        @include font-sp-style(12,20);
+      }
+    }
+
+    &--error {
+      padding-inline: vwset(10) !important;
+    }
+  }
+
+  // PC/SP  SPで縦組みに変わる表組
+  &--pcspdevide {
+  
+    td {
+      padding: 20px 1.4vw;
+    }
+  
+    @include media(sm) {
+  
+      tr {
+        display: flex;
+        flex-wrap: wrap;
+        padding-inline: vwset(15);
+      }
+  
+      td {
+        padding: vwset(20) 0;
+      }
+
+    }
+  }
+
+  // エラー時
+  .field-error {
+    background: rgba($color: $color-f00, $alpha: .05);
+  }
+
+
+
+}

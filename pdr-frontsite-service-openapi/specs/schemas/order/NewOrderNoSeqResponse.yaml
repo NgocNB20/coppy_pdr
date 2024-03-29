@@ -1,0 +1,8 @@
+type: object
+description: 受注番号採番レスポンス
+properties:
+  orderCode:
+    type: integer
+    format: int32
+    description: 受注番号SEQ
+    example: 1001

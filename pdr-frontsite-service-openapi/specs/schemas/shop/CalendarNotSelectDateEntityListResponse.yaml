@@ -1,0 +1,4 @@
+type: array
+description: カレンダー選択不可日付EntityListレスポンス
+items:
+  $ref: ../shop/CalendarNotSelectDateEntityResponse.yaml

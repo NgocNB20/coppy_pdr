@@ -1,0 +1,7 @@
+type: object
+description: 注文履歴詳細情報取得リクエスト
+properties:
+  receiveOrderForHistoryDto:
+    type: string
+    description: 注文履歴詳細Dto取得レスポンス
+    example: 1000000

@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <file>/var/log/tomcat/pdr/batch/Scheduler.log</file>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/Scheduler.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHOFFICEZIPCODEUPDATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchofficezipcodeupdate.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchofficezipcodeupdate.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHGOODSASYNCHRONOUS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchgoodsasynchronous.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchgoodsasynchronous.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHSETTLEMENTEXPIREDNOTIFICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchsettlementexpirednotification.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchsettlementexpirednotification.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHMULTIPAYMENTPAYMENT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchmultipaymentpayment.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchmultipaymentpayment.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHMULTIPAYMENTCONFIRMATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchmultipaymentconfirmation.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchmultipaymentconfirmation.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHSTOCKREPORT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchstockreport.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchstockreport.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHTASKCLEAN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchtaskclean.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchtaskclean.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHGOODSIMAGEUPDATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchgoodsimageupdate.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchgoodsimageupdate.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHZIPCODEUPDATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchzipcodeupdate.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchzipcodeupdate.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHORDERRESERVESTOCKRELEASE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchorderreservestockrelease.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchorderreservestockrelease.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHCLEAR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchclear.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchclear.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHSETTLEMENTREMINDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchsettlementreminder.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchsettlementreminder.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHMAIL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchmail.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchmail.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHSTOCKSTATUSDISPLAYUPDATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchstockstatusdisplayupdate.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchstockstatusdisplayupdate.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHAUTHTIMELIMITORDERNOTIFICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchauthtimelimitordernotification.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchauthtimelimitordernotification.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHTOPTOTALING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchtoptotaling.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchtoptotaling.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHORDERCREDITLINEREPORT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchordercreditlinereport.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchordercreditlinereport.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHORDERCSVASYNC" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchordercsvasync.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchordercsvasync.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHSHIPMENTREGIST" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchshipmentregist.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchshipmentregist.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="BATCHSITEMAPXMLOUTPUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/batchsitemapxmloutput.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/batchsitemapxmloutput.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="QUESTIONNAIRETOTALING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/questionnairetotalingbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/questionnairetotalingbatch.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="JOBMONITORINGBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/jobmonitoringbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/jobmonitoringbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="GOODSPRICEUPDATEBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/goodspriceupdatebatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/goodspriceupdatebatch.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="MEMBERINFOUPDATEBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/memberinfoupdatebatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/memberinfoupdatebatch.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="DELVINFOIMPORTBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/delvinfoimportbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/delvinfoimportbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- 2023-renew No3 from here -->
+    <appender name="GOODSFEEDOUTPUTBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/goodsfeedoutputbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/goodsfeedoutputbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- 2023-renew No3 to here -->
+    <!-- 2023-renew No36-1, No61,67,95 from here -->
+    <appender name="CONTENTSFEEDOUTPUTBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/contentsfeedoutputbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/contentsfeedoutputbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- 2023-renew No36-1, No61,67,95 to here -->
+    <!-- 2023-renew No65 from here -->
+    <appender name="STOCKDATAIMPORTBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/stockdataimportbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/stockdataimportbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- 2023-renew No65 to here -->
+    <!-- 2023-renew No41 from here -->
+    <appender name="CUENOTEFCSALEMAILBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/cuenotefcsalemailbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/cuenotefcsalemailbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="CUENOTEFCSALEMAILCONFIRMBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/cuenotefcsalemailconfirmbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/cuenotefcsalemailconfirmbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="SALEDATAIMPORTBATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>/var/log/tomcat/pdr/batch/saledataimportbatch.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/tomcat/pdr/batch/saledataimportbatch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- 2023-renew No41 to here -->
+    <!-- ログ出力の重複を避けるため、「additivity="false"」は親Logger子Logger両方に付与すること -->
+    <logger name="jp.co.hankyuhanshin.itec.hmbase" level="INFO" additivity="false">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall" level="INFO">
+        <appender-ref ref="APP"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.listener.OfficeZipCodeJobListener" level="INFO" additivity="false">
+        <appender-ref ref="BATCHOFFICEZIPCODEUPDATE"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.tasklet.GoodsAsynchronousBatch" level="INFO" additivity="false">
+        <appender-ref ref="BATCHGOODSASYNCHRONOUS"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.settlement" level="INFO" additivity="false">
+        <appender-ref ref="BATCHSETTLEMENTEXPIREDNOTIFICATION"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.tasklet.MultipaymentPaymentBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="BATCHMULTIPAYMENTPAYMENT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.questionnaire.tasklet.QuestionnaireTotalingBatch"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="QUESTIONNAIRETOTALING"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.listener.MultipaymentConfirmationJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="BATCHMULTIPAYMENTCONFIRMATION"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockreport" level="INFO" additivity="false">
+        <appender-ref ref="BATCHSTOCKREPORT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.taskclean" level="INFO" additivity="false">
+        <appender-ref ref="BATCHTASKCLEAN"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.tasklet.GoodsImageUpdateBatch" level="INFO" additivity="false">
+        <appender-ref ref="BATCHGOODSIMAGEUPDATE"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.tasklet.ZipCodeUpdateBatch" level="INFO" additivity="false">
+        <appender-ref ref="BATCHZIPCODEUPDATE"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.jobmonitoring.tasklet.JobMonitoringBatch"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="JOBMONITORINGBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.tasklet.MultipaymentConfirmationBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="BATCHMULTIPAYMENTCONFIRMATION"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.memberinfoupdate.listener.MemberInfoUpdateJobListener"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="MEMBERINFOUPDATEBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goods.tasklet.GoodsPriceUpdateBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="GOODSPRICEUPDATEBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stock" level="INFO" additivity="false">
+        <appender-ref ref="BATCHORDERRESERVESTOCKRELEASE"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.delvinfo.listener.DelvInfoImportJobListener"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="DELVINFOIMPORTBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.clear" level="INFO" additivity="false">
+        <appender-ref ref="BATCHCLEAR"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.settlement" level="INFO" additivity="false">
+        <appender-ref ref="BATCHSETTLEMENTREMINDER"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.mail" level="INFO" additivity="false">
+        <appender-ref ref="BATCHMAIL"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdisplay" level="INFO" additivity="false">
+        <appender-ref ref="BATCHSTOCKSTATUSDISPLAYUPDATE"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.memberinfoupdate.tasklet.MemberInfoUpdateBatch"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="MEMBERINFOUPDATEBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.listener.ZipCodeUpdateJobListener" level="INFO" additivity="false">
+        <appender-ref ref="BATCHZIPCODEUPDATE"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.order" level="INFO" additivity="false">
+        <appender-ref ref="BATCHAUTHTIMELIMITORDERNOTIFICATION"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.jobmonitoring.listener.JobMonitoringJobListener"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="JOBMONITORINGBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goods.listener.GoodsPriceUpdateJobListener"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="GOODSPRICEUPDATEBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.shop.top" level="INFO" additivity="false">
+        <appender-ref ref="BATCHTOPTOTALING"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.creditline" level="INFO" additivity="false">
+        <appender-ref ref="BATCHORDERCREDITLINEREPORT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.tasklet.OrderCsvAsyncBatch" level="INFO" additivity="false">
+        <appender-ref ref="BATCHORDERCSVASYNC"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.zip.tasklet.OfficeZipCodeUpdateBatch" level="INFO" additivity="false">
+        <appender-ref ref="BATCHOFFICEZIPCODEUPDATE"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.delvinfo.tasklet.DelvInfoImportBatch" level="DEBUG" additivity="false">
+        <appender-ref ref="DELVINFOIMPORTBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.questionnaire.listener.QuestionnaireTotalingJobListener"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="QUESTIONNAIRETOTALING"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.listener.GoodsAsyncJobListener" level="INFO" additivity="false">
+        <appender-ref ref="BATCHGOODSASYNCHRONOUS"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.listener.OrderCsvAsyncJobListener" level="INFO" additivity="false">
+        <appender-ref ref="BATCHORDERCSVASYNC"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.listener.ShipmentRegistJobListener" level="INFO" additivity="false">
+        <appender-ref ref="BATCHSHIPMENTREGIST"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.order.tasklet.ShipmentRegistBatch" level="INFO" additivity="false">
+        <appender-ref ref="BATCHSHIPMENTREGIST"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.multipayment.listener.MultipaymentPaymentJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="BATCHMULTIPAYMENTPAYMENT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.shop.sitemap" level="INFO" additivity="false">
+        <appender-ref ref="BATCHSITEMAPXMLOUTPUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.online.goods.listener.GoodsImageUpdateBatchJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="BATCHGOODSIMAGEUPDATE"/>
+    </logger>
+    <!-- 2023-renew No3 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goodsfeedoutput.tasklet.GoodsFeedOutputBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="GOODSFEEDOUTPUTBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.goodsfeedoutput.listener.GoodsFeedOutputJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="GOODSFEEDOUTPUTBATCH"/>
+    </logger>
+    <!-- 2023-renew No3 to here -->
+    <!-- 2023-renew No36-1, No61,67,95 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.contentsfeedoutput.tasklet.ContentsFeedOutputBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="CONTENTSFEEDOUTPUTBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.contentsfeedoutput.listener.ContentsFeedOutputJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="CONTENTSFEEDOUTPUTBATCH"/>
+    </logger>
+    <!-- 2023-renew No36-1, No61,67,95 to here -->
+    <!-- 2023-renew No65 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.tasklet.StockDataImportBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="STOCKDATAIMPORTBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.listener.StockDataImportJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="STOCKDATAIMPORTBATCH"/>
+    </logger>
+    <!-- 2023-renew No65 to here -->
+    <!-- 2023-renew No41 from here -->
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemail.tasklet.CuenotefcSaleMailBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="CUENOTEFCSALEMAILBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemail.listener.CuenotefcSaleMailJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="CUENOTEFCSALEMAILBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemailconfirm.tasklet.CuenotefcSaleMailConfirmBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="CUENOTEFCSALEMAILCONFIRMBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.cuenotefcsalemailconfirm.listener.CuenotefcSaleMailConfirmJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="CUENOTEFCSALEMAILCONFIRMBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.tasklet.SaleDataImportBatch"
+            level="INFO" additivity="false">
+        <appender-ref ref="SALEDATAIMPORTBATCH"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.batch.offline.stockdataimport.listener.SaleDataImportJobListener"
+            level="INFO" additivity="false">
+        <appender-ref ref="SALEDATAIMPORTBATCH"/>
+    </logger>
+    <logger name="org.seasar.doma.jdbc" additivity="false" level="WARN">
+        <appender-ref ref="APP"/>
+    </logger>
+    <!-- 2023-renew No41 to here -->
+    <root level="INFO">
+        <appender-ref ref="APP"/>
+    </root>
+</configuration>

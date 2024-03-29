@@ -1,0 +1,11 @@
+type: object
+description: 商品規格リスト取得リクエスト
+properties:
+  ggcd:
+    type: string
+    description: 商品グループコード
+    example: "1000"
+  gcd:
+    type: string
+    description: 商品コード
+    example: "1000"

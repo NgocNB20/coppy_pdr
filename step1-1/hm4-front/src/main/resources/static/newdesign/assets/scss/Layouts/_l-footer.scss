@@ -1,0 +1,357 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.l-footer {
+  overflow: hidden;
+  background-color: $color-orange-lightGray;
+  margin-top: 150px;
+  padding-top: 70px;
+
+  &__inner {
+    @include width(1600px, 20px, 0px);
+  }
+
+  &__nav {
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      li {  
+        margin-bottom: 10px;
+        @include font-style(15,16);
+
+        &:not(:last-child) {
+          margin-right: 23px;
+          padding-right: 23px;
+          border-right: solid 1px $color-333;
+        }
+      }
+    }
+  }
+
+  &__contents {
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    margin: 45px auto 38px;
+  }
+
+  &__item {
+    $this: &;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5% 2.2%;
+    background: $color-fff;
+    text-align: center;
+
+    &:not(:last-child) {
+      margin-right: 30px;
+    }
+
+    dt {
+      margin-bottom: 16px;
+      @include font-style(20,30,bold);
+      color: $color-000;
+
+      small {
+        @include font-style(16,30,normal);
+      }
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: auto 0;
+    }
+
+    strong {
+      display: flex;
+      align-items: center;
+      margin-right: 14px;
+      padding-bottom: 2px;
+      @include font-style(30,32,bold);
+      font-size: min(2.5rem,3rem);
+      color: $color-primary;
+
+      span {
+        margin-right: 11px;
+        @include font-style(24,30,bold);
+        color: $color-000;
+      }
+    }
+
+    #{$this}-time {
+      @include font-style(16,30);
+      color: $color-000;
+    }
+
+    // ご注文
+    #{$this}-tel {
+      margin-bottom: 12px;
+
+      strong {
+        padding-left: 34px;
+        background: url(/ec/shop/sttc/static/assets/images/icon/tel.svg) no-repeat;
+        background-position: 4px center;  
+      }
+    }
+
+    #{$this}-fax {
+
+      strong {
+        padding-left: 34px;
+        background: url(/ec/shop/sttc/static/assets/images/icon/fax.svg) no-repeat;
+        background-position: left center;  
+      }
+    }
+
+    // カスタマーサービスデスク
+    &#{$this}-call {
+
+      dd {
+        display: flex;
+        height: 100%;
+      }
+
+      strong {
+        padding-left: 44px;
+        background: url(/ec/shop/sttc/static/assets/images/icon/callcenter.svg) no-repeat;
+        background-position: left center;  
+      }
+    }
+
+    // 公式SNS
+    &#{$this}-sns {
+      min-width: 225px;
+  
+      dd {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 39px 39px 39px;
+        gap: 22px;
+        place-content: center;
+      }
+
+      img {
+        width: 39px;
+        margin-bottom: 10px;
+      }
+
+    }
+  }
+
+  &__copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0;
+
+    p {
+      @include font-style(12,30);
+      color: #777;
+    }
+
+    span {
+      margin: 0 14px;
+
+      img {
+        width: 35px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1400px) {
+    &__item {
+      p {
+        justify-content: center;
+      }
+    }
+  }
+
+  @include media(sm) {
+    margin-top: 0;
+    padding-top: vwset(30);
+  
+    &__inner {
+      width: 90%;
+    }
+  
+    &__nav {
+  
+      ul {
+        justify-content: flex-start;
+  
+        li {  
+          margin-bottom: vwset(17);
+          @include font-sp-style(14,16);
+
+          &:not(:last-child) {
+              margin-right: vwset(12);
+              padding-right: vwset(12);
+            }
+          }
+      }
+    }
+  
+    &__contents {
+      flex-flow: column;
+      margin: vwset(18) auto vwset(25);
+    }
+  
+    &__item {
+      $this: &;
+      padding: vwset(22) vwset(32);
+
+      &:not(:last-child) {
+        margin-right: 0;
+        margin-bottom: vwset(15);
+      }
+  
+      dt {
+        margin-bottom: vwset(15);
+        @include font-sp-style(17,19);
+  
+        small {
+          @include font-sp-style(14);
+        }
+      }
+  
+      p {
+        justify-content: center;
+      }
+  
+      strong {
+        margin: 0;
+        @include font-sp-style(22,19);
+
+        span {
+          margin-right: vwset(8);
+          @include font-sp-style(19,26);
+        }
+      }
+
+      #{$this}-time {
+        @include font-sp-style(14,30);
+      }
+
+      // ご注文
+      #{$this}-tel {
+        margin-bottom: vwset(12);
+  
+        strong {
+          padding-left: vwset(26);
+          background-size: auto vwset(20);
+          background-position: vwset(5) center;
+        }
+      }
+  
+      #{$this}-fax {
+
+        strong {
+          padding-left: vwset(26);
+          background-size: auto vwset(20);
+        }
+      }
+  
+      // カスタマーサービスデスク
+      &#{$this}-call {
+
+        dt {
+          margin-bottom: vwset(10);
+        }
+
+        strong {
+          padding-left: vwset(31);
+          background-size: auto vwset(20);
+        }
+      }
+
+      // 公式SNS
+      &#{$this}-sns {
+
+        dd {
+          display: inline-block;
+          grid-template-columns: vwset(50) vwset(50) vwset(50);
+          gap: vwset(33);
+        }
+
+        img {
+          width: vwset(50);
+          margin-top: vwset(10);
+          margin-inline: vwset(16);
+        }
+      }
+    }
+  
+    &__copyright {
+      margin: vwset(25) 0;
+  
+      p {
+        @include font-sp-style(10,20);
+      }
+  
+      span {
+        display: grid;
+        margin: 0 vwset(10);
+  
+        img {
+          width: vwset(25);
+        }
+      }
+    }
+  }
+}
+
+// ページトップ
+
+.pagetop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba($color-000, .5);
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity $comMS $comES, visibility $comMS $comES;
+  visibility: hidden;
+  bottom: 60px;
+  right: 20px;
+  position: fixed;
+  z-index: 100;
+
+  svg {
+    width: 23px;
+    padding-bottom: 3px;
+    fill: $color-fff;
+  }
+
+  .is-scroll & {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:hover {
+    @include media(lg) {
+      opacity: .5;
+    }
+  }
+
+  @include media(sm) {
+    width: vwset(50);
+    height: vwset(50);
+    bottom: vwset(40);
+    right: vwset(12);
+
+    svg {
+      width: vwset(23);
+    }
+  }
+}

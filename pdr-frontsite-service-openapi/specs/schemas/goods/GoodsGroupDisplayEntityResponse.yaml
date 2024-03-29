@@ -1,0 +1,266 @@
+type: object
+description: 商品グループ表示レスポンス
+properties:
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ (FK)（必須）
+    example: 1000
+  informationIcon:
+    type: string
+    description: インフォメーションアイコン
+    example: 10000001/10000002
+  searchKeyword:
+    type: string
+    description: 商品検索キーワード
+    example: ダイニングテーブル
+  searchKeywordEm:
+    type: string
+    description: 商品検索キーワード全角
+    example: ダイニングテーブル　ダイニングテーブル　ＦＵＲＮＩＴＵＲＥ－００１
+  unitManagementFlag:
+    type: string
+    description: 規格管理フラグ（必須）
+    example: OFF
+  unitTitle1:
+    type: string
+    description: 規格タイトル１
+    example: 規格タイトル１
+  unitTitle2:
+    type: string
+    description: 規格タイトル２
+    example: 規格タイトル２
+  metaDescription:
+    type: string
+    description: meta-description
+    example: meta-description
+  metaKeyword:
+    type: string
+    description: meta-keyword
+    example: meta-keyword
+  deliveryType:
+    type: string
+    description: 商品納期
+    example: 注文から1週間程度でお届けします
+  goodsNote1:
+    type: string
+    description: 商品説明１
+    example: 商品説明１
+  #2023-renew No64 from here
+  goodsNote1Sub:
+    type: string
+    description: 商品説明1Sub
+    example: 商品説明1Sub
+  goodsNote1OpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細1_公開開始日時
+    example: 2022/01/01 12:00:00
+  goodsNote1SubOpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細1Sub_公開開始日時
+    example: 2022/01/01 12:00:00
+  #2023-renew No64 to here
+  goodsNote2:
+    type: string
+    description: 商品説明２
+    example: 商品説明２
+  #2023-renew No64 from here
+  goodsNote2Sub:
+    type: string
+    description: 商品説明2Sub
+    example: 商品説明2Sub
+  goodsNote2OpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細2_公開開始日時
+    example: 2022/01/01 12:00:00
+  goodsNote2SubOpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細2Sub_公開開始日時
+    example: 2022/01/01 12:00:00
+  #2023-renew No64 to here
+  goodsNote3:
+    type: string
+    description: 商品説明３
+    example: 商品説明３
+  goodsNote4:
+    type: string
+    description: 商品説明４
+    example: 商品説明４
+  #2023-renew No64 from here
+  goodsNote4Sub:
+    type: string
+    description: 商品説明4Sub
+    example: 商品説明4Sub
+  goodsNote4OpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細4_公開開始日時
+    example: 2022/01/01 12:00:00
+  goodsNote4SubOpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細4Sub_公開開始日時
+    example: 2022/01/01 12:00:00
+  #2023-renew No64 to here
+  goodsNote5:
+    type: string
+    description: 商品説明５
+    example: 商品説明５
+  goodsNote6:
+    type: string
+    description: 商品説明６
+    example: 商品説明６
+  goodsNote7:
+    type: string
+    description: 商品説明７
+    example: 商品説明７
+  goodsNote8:
+    type: string
+    description: 商品説明８
+    example: 商品説明８
+  goodsNote9:
+    type: string
+    description: 商品説明９
+    example: 商品説明９
+  goodsNote10:
+    type: string
+    description: 商品説明１０
+    example: 商品説明１０
+  #2023-renew No64 from here
+  goodsNote10Sub:
+    type: string
+    description: 商品説明10Sub
+    example: 商品説明10Sub
+  goodsNote10OpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細10_公開開始日時
+    example: 2022/01/01 12:00:00
+  goodsNote10SubOpenStartTime:
+    type: string
+    format: date-time
+    description: 商品詳細10Sub_公開開始日時
+    example: 2022/01/01 12:00:00
+  #2023-renew No64 to here
+  goodsNote11:
+    type: string
+    description: 商品説明１１
+    example: 商品説明１１
+  goodsNote12:
+    type: string
+    description: 商品説明１２
+    example: 商品説明１２
+  goodsNote13:
+    type: string
+    description: 商品説明１３
+    example: 商品説明１３
+  goodsNote14:
+    type: string
+    description: 商品説明１４
+    example: 商品説明１４
+  goodsNote15:
+    type: string
+    description: 商品説明１５
+    example: 商品説明１５
+  goodsNote16:
+    type: string
+    description: 商品説明１６
+    example: 商品説明１６
+  goodsNote17:
+    type: string
+    description: 商品説明１７
+    example: 商品説明１７
+  goodsNote18:
+    type: string
+    description: 商品説明１８
+    example: 商品説明１８
+  goodsNote19:
+    type: string
+    description: 商品説明１９
+    example: 商品説明１９
+  goodsNote20:
+    type: string
+    description: 商品説明２０
+    example: 商品説明２０
+# 2023-renew No11-33-75-112 from here
+  goodsNote21:
+    type: string
+    description: 商品説明２１
+    example: 商品説明２１
+# 2023-renew No11-33-75-112 to here
+# 2023-renew No0 from here
+  goodsNote22:
+    type: string
+    description: 商品説明２２
+    example: 商品説明２２
+# 2023-renew No0 to here
+  orderSetting1:
+    type: string
+    description: 受注連携設定１
+    example: 受注連携設定１
+  orderSetting2:
+    type: string
+    description: 受注連携設定２
+    example: 受注連携設定２
+  orderSetting3:
+    type: string
+    description: 受注連携設定３
+    example: 受注連携設定３
+  orderSetting4:
+    type: string
+    description: 受注連携設定４
+    example: 受注連携設定４
+  orderSetting5:
+    type: string
+    description: 受注連携設定５
+    example: 受注連携設定５
+  orderSetting6:
+    type: string
+    description: 受注連携設定６
+    example: 受注連携設定６
+  orderSetting7:
+    type: string
+    description: 受注連携設定７
+    example: 受注連携設定７
+  orderSetting8:
+    type: string
+    description: 受注連携設定８
+    example: 受注連携設定８
+  orderSetting9:
+    type: string
+    description: 受注連携設定９
+    example: 受注連携設定９
+  orderSetting10:
+    type: string
+    description: 受注連携設定１０
+    example: 受注連携設定１０
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2022/01/01 12:00:00
+  saleIconFlag:
+    type: string
+    description: SALEアイコンフラグ
+    example: 0
+  reserveIconFlag:
+    type: string
+    description: お取りおきアイコンフラグ
+    example: 0
+  newIconFlag:
+    type: string
+    description: NEWアイコンフラグ
+    example: 0
+  outletIconFlag:
+    type: string
+    description: アウトレットアイコンフラグ
+    example: 0

@@ -1,0 +1,139 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-service {
+  $this: &;
+
+  &__unit {
+    background: $color-fff;
+    border: solid 4px rgba($color-primary, .2);
+    min-height: 105px;
+    padding: 10px;
+    display: grid;
+    place-content: center;
+    position: relative;
+    text-align: center;
+  }
+
+  &__icon {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__text {
+    margin-top: 18px;
+    @include font-style(18,25);
+
+    strong {
+      color: $color-primary;
+      @include font-style(22,25);
+
+      span {
+        @include font-style(30,25);
+      }
+    }
+
+    small {
+      @include font-style(14,25);
+    }
+
+    span {
+      @include font-style(16,25);
+    }
+  }
+
+  @include media(lg) {
+    &--unit02 {
+      #{$this}-text {
+        margin-top: 14px;
+      }
+    }
+
+    &--unit03 {
+      #{$this}__text {
+        margin-top: 9px;
+      }
+
+      #{$this}__icon {
+        top: -26px;
+      }
+    }
+
+    &--unit04 {
+      #{$this}__text {
+        margin-top: 9px;
+      }
+
+      #{$this}__icon {
+        top: -28px;
+      }
+    }
+  }
+
+  @include media(sm) {
+
+    &__unit {
+      min-height: inherit;
+      padding: 0;
+    }
+
+    &__icon {
+      top: vwset(-15);
+    }
+
+    &__text {
+      margin-block: vwset(28) vwset(12);
+      @include font-sp-style(16,24);
+
+      strong {
+        color: $color-primary;
+        @include font-sp-style(20,24);
+
+        span {
+          @include font-sp-style(28,24);
+        }
+      }
+
+      small {
+        @include font-sp-style(13,24);
+      }
+
+      span {
+        @include font-sp-style(15,24);
+      }
+    }
+
+    &--unit01 {
+      #{$this}__icon {
+        width: vwset(65);
+      }
+    }
+
+    &--unit02 {
+      #{$this}__icon {
+        width: vwset(41);
+      }
+    }
+
+    &--unit03 {
+      #{$this}__icon {
+        top: vwset(-18);
+        width: vwset(37);
+      }
+    }
+
+    &--unit04 {
+      #{$this}__icon {
+        top: vwset(-17);
+        width: vwset(44);
+      }
+    }
+  }
+}
+
+

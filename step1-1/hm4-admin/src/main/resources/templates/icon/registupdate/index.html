@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>アイコン登録更新｜店舗管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <script src="/admin/assets/js/jquery.minicolors.min.js"></script>
+    <link rel="stylesheet" href="/admin/assets/css/jquery.minicolors.css">
+</head>
+
+<body id="shop">
+<div id="iconRegistShop" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form id="indexForm" th:action="@{/icon/registupdate/}" th:object="${iconRegistUpdateModel}"
+                      method="post" onsubmit="return errorCheckOnclickConfirmButton();">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">アイコン登録更新</h1>
+                    </div>
+
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+
+                    <!-- アイコン登録更新 -->
+                    <div class="l-section" id="mainContainer">
+                        <article class="l-article">
+                            <div class="l-article_title no_slide">
+                                <h2 class="c-pagetitle_h3">基本設定</h2>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <div class="l-article_inner">
+                                        <dl class="c-dl-base dt_fn13 dt_w160px mb20">
+                                            <th:block th:if="*{!isRegist}">
+                                                <div class="edit icon-inline">
+                                                    <dt>アイコンID</dt>
+                                                    <dd class="wrap_flex_center" th:text="*{iconSeq}"></dd>
+                                                </div>
+                                            </th:block>
+
+                                            <div class="edit">
+                                                <dt>アイコン名<span class="ico_required">必須</span></dt>
+                                                <dd>
+                                                    <input type="text" class="c-form-control w300px js-icon-text"
+                                                           placeholder="入力してください" th:field="*{iconName}"
+                                                           th:errorclass="error">
+                                                    <ul>
+                                                        <div th:id="iconNameError"
+                                                             th:if="${#fields.hasErrors('iconName')}"
+                                                             th:errors="*{iconName}" class="c-error-txt mt5"></div>
+                                                    </ul>
+                                                </dd>
+                                            </div>
+
+                                            <div class="edit icon-color-edit">
+                                                <dt>カラーコード<span class="ico_required">必須</span></dt>
+                                                <dd>
+                                                    <input type="text" class="c-form-control w240px js-icon-color"
+                                                           autocomplete="off" placeholder="入力してください"
+                                                           th:field="*{colorCode}" th:errorclass="error">
+                                                    <ul>
+                                                        <div th:id="colorCodeError"
+                                                             th:if="${#fields.hasErrors('colorCode')}"
+                                                             th:errors="*{colorCode}" class="c-error-txt mt5"></div>
+                                                    </ul>
+                                                    <div class="icon-color-list">
+                                                        <button type="button" class="icon-color-btn js-icon-color-btn"
+                                                                value="#e31616"></button>
+                                                        <button type="button" class="icon-color-btn js-icon-color-btn"
+                                                                value="#e05b09"></button>
+                                                        <button type="button" class="icon-color-btn js-icon-color-btn"
+                                                                value="#00b562"></button>
+                                                        <button type="button" class="icon-color-btn js-icon-color-btn"
+                                                                value="#2f6bcc"></button>
+                                                        <button type="button" class="icon-color-btn js-icon-color-btn"
+                                                                value="#ffe200"></button>
+                                                        <button type="button" class="icon-color-btn js-icon-color-btn"
+                                                                value="#77481f"></button>
+                                                        <button type="button" class="icon-color-btn js-icon-color-btn"
+                                                                value="#000000"></button>
+                                                    </div>
+                                                </dd>
+                                            </div>
+
+                                            <div class="edit icon-inline">
+                                                <dt>アイコンイメージ</dt>
+                                                <dd class="wrap_flex_center"><span class="c-item-icons js-icon-sample"
+                                                                                   th:text="*{iconName}"></span></dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <a class="c-btn btn_back icon_left" th:href="@{/icon/}"><i
+                                        class="material-icons navigate_before"></i>戻る</a>
+                            </div>
+                            <div class="col_left">
+                                <input type="hidden" id="isConfirmBtnClicked" value="false"/>
+                                <button class="c-btn btn_regular" type="submit" id="doConfirm" name="doConfirm">確認
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

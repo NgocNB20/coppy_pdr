@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.c-ribbon {
+  position: absolute;
+  width: 50px;
+  padding: 13px 0 12px;
+  background-color: #f39800;
+  border-radius: 2px 2px 0 0;
+  text-align: center;
+  @include font-style(15,15,bold);
+  color: $color-fff;
+  filter: drop-shadow(2px 3px 0 $color-fff);
+  z-index: 100;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      border-left: 25px solid #f39800;
+      border-right: 25px solid #f39800;
+      border-bottom: 10px solid transparent;
+      border-radius: 0 0 2px 2px;
+    }
+
+    &--small {
+      width: 38px;
+      padding: 9px 0 8px;
+      @include font-style(12,12);
+
+      &::after {
+        border-left-width: 19px;
+        border-right-width: 19px;
+        border-bottom: 7px solid transparent;
+        }
+    }
+
+  @include media(sm) {
+
+    width: vwset(38);
+    padding: vwset(11) 0 vwset(10);
+    @include font-sp-style(12,12);
+  
+      &::after {
+        content: '';
+        top: 99%;
+        border-left: vwset(19.4) solid #f39800;
+        border-right: vwset(19.4) solid #f39800;
+        border-bottom: vwset(10) solid transparent;
+      }
+
+      &--small {
+        width: vwset(30);
+        padding: vwset(8) 0 vwset(7);
+        @include font-style(10,10);
+  
+        &::after {
+          border-left-width: vwset(15);
+          border-right-width: vwset(15);
+          border-bottom-width: vwset(7);
+          }
+      }
+
+
+  }
+}
+
+

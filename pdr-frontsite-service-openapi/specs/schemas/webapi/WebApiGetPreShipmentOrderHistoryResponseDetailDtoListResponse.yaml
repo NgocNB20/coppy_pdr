@@ -1,0 +1,8 @@
+type: array
+description: WEB-API連携取得結果DTOListクラスレスポンス
+items:
+  $ref: "#/components/schemas/WebApiGetPreShipmentOrderHistoryResponseDetailDtoResponse"
+components:
+  schemas:
+    WebApiGetPreShipmentOrderHistoryResponseDetailDtoResponse:
+      $ref: ./WebApiGetPreShipmentOrderHistoryResponseDetailDtoResponse.yaml

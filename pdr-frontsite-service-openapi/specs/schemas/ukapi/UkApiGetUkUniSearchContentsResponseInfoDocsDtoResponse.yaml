@@ -1,0 +1,25 @@
+type: object
+description: UK-API連携ユニサーチ（コンテンツ）レスポンス（docs）
+properties:
+  content_id:
+    type: string
+    description: コンテンツID
+    example: series-10313
+  content_name:
+    type: string
+    description: コンテンツ名
+    example: 開催中のSALE
+  transition_url:
+    type: string
+    description: 遷移先URL
+    example: https://shop.pdr.co.jp/special.html?fkey=wsale
+  content_image_url:
+    type: string
+    description: コンテンツ画像URL
+    example: https://shop.pdr.co.jp/d_images/test.gif
+  search_keyword:
+    type: array
+    items:
+      type: string
+      description: 検索キーワード
+      example: セール^ASALE

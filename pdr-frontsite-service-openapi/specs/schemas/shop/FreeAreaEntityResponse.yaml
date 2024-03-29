@@ -1,0 +1,49 @@
+type: object
+description: フリーエリアEntityレスポンス
+properties:
+  freeAreaSeq:
+    type: integer
+    format: int32
+    description: フリーエリアSEQ（必須）
+    example: 10000001
+  freeAreaKey:
+    type: string
+    description: フリーエリアKEY（必須）
+    example: cartnotice
+  openStartTime:
+    type: string
+    format: date-time
+    description: 公開開始日時（必須）
+    example: 2021/12/12 12:00:00
+  freeAreaTitle:
+    type: string
+    description: フリーエリアタイトル
+    example: cartnotice
+  freeAreaBody:
+    type: string
+    description: フリーエリア本文
+    example: <p>※送料は全国一律580円（税込）です。<br />
+  targetGoods:
+    type: string
+    description: 対象商品
+    example: 2
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2021/12/12 12:00:00
+  freeAreaOpenStatus:
+    type: string
+    description: 公開状態 ※一時テーブルの時に利用する
+    example: 2
+    default: 0
+  siteMapFlag:
+    type: string
+    description: サイトマップ出力フラグ（必須）
+    example: 2
+    default: 0

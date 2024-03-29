@@ -1,0 +1,145 @@
+/*2023-renew AddNo2 from here*/
+@media screen and (max-width: 599.9px) {
+    .p-regist .c-button-wrap .c-button {
+        padding-inline: 0;
+    }
+}
+.c-button-wrap {
+    display: grid;
+    grid-auto-flow: column;
+    place-content: center;
+    gap: 40px;
+    margin: 80px 20px;
+}
+.c-button-wrap .c-button {
+    min-width: 200px;
+}
+@media screen and (max-width: 1100px) {
+    .c-button-wrap .c-button {
+        min-width: 300px;
+    }
+}
+.c-button-wrap__memo {
+    margin-top: 20px;
+    text-align: center;
+}
+.c-button-wrap__text-l {
+    font-size: 18px;
+    line-height: 1.6666666667;
+    font-weight: bold;
+}
+.c-button-wrap__text-m {
+    font-size: 15px;
+    line-height: 2;
+}
+.c-button-wrap--complete {
+    margin-block: 65px 0;
+}
+.c-button-wrap--upper {
+    margin-bottom: -30px;
+}
+.c-button-wrap--lower {
+    margin-top: -55px;
+}
+.c-button-wrap--line {
+    padding-top: 80px;
+    border-top: solid 5px #f5f3f2;
+}
+@media screen and (max-width: 599.9px) {
+    .c-button-wrap {
+        grid-auto-flow: row;
+        gap: 6.6666666667vw;
+        margin: 13.3333333333vw 5.3333333333vw;
+    }
+    .c-button-wrap .c-button {
+        min-width: 300px;
+        width: 88vw;
+    }
+    .c-button-wrap .c-button:first-child {
+        order: 2;
+    }
+    .c-button-wrap__text-l {
+        font-size: min(4vw, 18px);
+        line-height: 1.6666666667;
+        font-weight: bold;
+        text-align: center;
+    }
+    .c-button-wrap__text-m {
+        font-size: min(4vw, 18px);
+        line-height: 2;
+    }
+    .c-button-wrap--complete {
+        margin-block: 9.6vw 0;
+    }
+    .c-button-wrap--complete .c-button {
+        min-width: 275px;
+        width: 73.3333333333vw;
+    }
+    .c-button-wrap--upper {
+        margin-bottom: -8vw;
+    }
+    .c-button-wrap--lower {
+        margin-top: -8vw;
+    }
+    .c-button-wrap--line {
+        padding-top: 13.3333333333vw;
+    }
+}
+.c-button--width-l {
+    height: 70px;
+    padding: 0 50px 2px;
+    font-size: 20px;
+    line-height: 1.2727272727;
+    font-weight: bold;
+}
+@media screen and (max-width: 599.9px) {
+    .c-button--width-l {
+        min-width: 73.3333333333vw;
+        height: 17.3333333333vw;
+        padding: 0 13.3333333333vw;
+        font-size: min(5.3333333333vw, 2.3rem);
+    }
+}
+.c-button--primary {
+    border-radius: 9999px;
+    background-color: #f36b30;
+    color: #fff;
+}
+.c-inlinelink {
+    font-weight: bold;
+    color: #00ae97;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    transition: opacity 400ms ease;
+    cursor: pointer;
+}
+.c-button {
+    display: inline-grid;
+    grid-auto-flow: column;
+    place-content: center;
+    place-items: center;
+    transition: opacity 400ms ease;
+    cursor: pointer;
+}
+.c-button--primary-line {
+    border-radius: 9999px;
+    background-color: #fff;
+    color: #f36b30;
+    border: solid 1px #f36b30;
+}
+.c-button--width-l {
+    height: 70px;
+    padding: 0 50px 2px;
+    font-size: 20px;
+    line-height: 1.2727272727;
+    font-weight: bold;
+}
+@media screen and (max-width: 599.9px) {
+    .c-button--width-l {
+        min-width: 73.3333333333vw;
+        height: 17.3333333333vw;
+        padding: 0 13.3333333333vw;
+        font-size: min(5.3333333333vw, 21px);
+    }
+}
+/*2023-renew AddNo2 to here*/

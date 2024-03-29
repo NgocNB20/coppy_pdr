@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  generator:
+    image: openapitools/openapi-generator-cli:v5.3.1
+    volumes:
+      - .:/work
+    command: [
+      "batch",
+      "services/goods/service-server.yaml",
+      "services/goods/service-client.yaml",
+      "services/shop/service-server.yaml",
+      "services/shop/service-client.yaml",
+      "services/webapi/service-server.yaml",
+      "services/webapi/service-client.yaml",
+      "services/ukapi/service-server.yaml",
+      "services/ukapi/service-client.yaml",
+      "services/memberinfo/service-server.yaml",
+      "services/memberinfo/service-client.yaml",
+      "services/cart/service-server.yaml",
+      "services/cart/service-client.yaml",
+      "services/order/service-server.yaml",
+      "services/order/service-client.yaml",
+      "services/user/service-server.yaml",
+      "services/user/service-client.yaml",
+      "-v"
+    ]
+    working_dir: /work

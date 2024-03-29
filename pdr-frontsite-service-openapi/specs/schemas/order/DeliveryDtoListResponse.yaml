@@ -1,0 +1,13 @@
+type: object
+description: 配送Dtoリストレスポンス
+properties:
+  deliveryDtoList:
+    type: array
+    description: 配送DTOリスト
+    items:
+      $ref: '#/components/schemas/DeliveryDtoResponse'
+
+components:
+  schemas:
+    DeliveryDtoResponse:
+      $ref: ./DeliveryDtoResponse.yaml

@@ -1,0 +1,96 @@
+
+
+/* ###################################
+            default styling
+ ################################### */
+
+
+/******************
+	FLICK N SLIDE
+*******************/
+.main { padding: 0 }
+.main ul {
+margin: 0;
+padding: 0;
+}
+
+.yourElement img {
+  vertical-align: bottom;
+  border: none;
+}
+
+#slideShow {
+  width: 100%;
+  position:relative;
+	}
+#slideShow .nav {
+  width: 100%;
+  text-align: center;
+}
+#slideShow .nav ul {
+  width: 100%;
+  padding-bottom: 10px;
+  margin: 0 auto;
+}
+#slideShow .nav ul li {
+  display: inline-block;
+  margin-bottom: 0;
+  line-height: 20px;
+  font-size: 14px;
+   color: #b2b2b2;
+}
+#slideShow .nav ul li a {
+  font-family: Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
+  font-weight: bold;
+  color: #b2b2b2;
+  text-decoration: none;
+}
+#slideShow .nav ul li.selected a { color: #f4673c; }
+#slideShow .containerOuter {
+  position: relative;
+  padding: 3px 0 0;
+}
+#slideShow .nav ul li.prev,
+#slideShow .nav ul li.next {
+	display: none;
+}
+#slideShow .container {
+  position: relative;
+  cursor: pointer;
+  text-align:center;
+  vertical-align:middle;
+}
+#slideShow .containerInner {}
+#slideShow .containerInner > div.item {
+  width: 300px;
+  height: 314px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  padding-right:0px;
+  padding-left:0px;
+  margin:0 50px;
+}
+#slideShow .item { position: relative }
+#slideShow .item > span {
+  width: 300px;
+  padding: 0px;
+  right: 10px;
+  top: 301px;
+  text-align: right;
+  color: #000;
+  font-size: 10px;
+  position:absolute
+}
+#slideShow .arrows {
+  position: absolute;
+  top:0px;
+  width:100%;
+}
+#slideShow .arrows > .prev {
+  float: left;
+  padding-left:5px
+}
+#slideShow .arrows > .next {
+  float: right;
+  padding-right:5px;
+}

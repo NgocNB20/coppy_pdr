@@ -1,0 +1,15 @@
+type: object
+description: UK-API連携ユニサーチ（コンテンツ）レスポンス（response）
+properties:
+  numFound:
+    type: integer
+    description: 検索ヒット件数
+    example: 10
+  page:
+    type: integer
+    description: 検索結果ページ数
+    example: 1
+  docs:
+    type: array
+    items:
+      $ref: "./UkApiGetUkUniSearchContentsResponseInfoDocsDtoResponse.yaml"

@@ -1,0 +1,303 @@
+type: object
+description: 受注サマリエンティティレスポンス
+properties:
+  orderSeq:
+    type: integer
+    format: int32
+    description: 受注SEQ（必須）
+    example: 10000004
+  orderVersionNo:
+    type: integer
+    format: int32
+    description: 受注履歴連番（必須）
+    example: 10000004
+  orderCode:
+    type: string
+    description: 受注コード（必須）
+    example: 0
+  orderType:
+    type: string
+    description: 受注種別（必須）
+    example: 1
+  orderTime:
+    type: string
+    format: date-time
+    description: 受注日時（必須）
+    example: 2022/01/01 12:00:00
+  salesTime:
+    type: string
+    format: date-time
+    description: 売上日時
+    example: 2022/01/01 12:00:00
+  cancelTime:
+    type: string
+    format: date-time
+    description: キャンセル日時
+    example: 2022/01/01 12:00:00
+  salesFlag:
+    type: string
+    description: 売上フラグ（必須）
+    example: 1
+    default: 0
+  cancelFlag:
+    type: string
+    description: キャンセルフラグ（必須）
+    example: 1
+    default: 0
+  waitingFlag:
+    type: string
+    description: 保留中フラグ（必須）
+    example: 1
+    default: 0
+  orderStatus:
+    type: string
+    description: 受注状態（必須）
+    example: 1
+    default: 0
+  beforeDiscountOrderPrice:
+    type: number
+    description: 割引前受注金額（必須）
+    example: 10000001
+  orderPrice:
+    type: number
+    description: 受注金額（必須）
+    example: 10000001
+  receiptPriceTotal:
+    type: number
+    description: 入金累計（必須）
+    example: 10000001
+  orderSiteType:
+    type: string
+    description: 受注サイト種別（必須）
+    example: 1
+    default: 0
+  orderDeviceType:
+    type: string
+    description: 受注デバイス種別（必須）
+    example: 1
+    default: 0
+  carrierType:
+    type: string
+    description: キャリア種別（必須）
+    example: 1
+    default: 0
+  periodicOrderSeq:
+    type: integer
+    format: int32
+    description: 定期受注SEQ
+    example: 10000004
+  settlementMethodSeq:
+    type: integer
+    format: int32
+    description: 決済方法SEQ（必須）
+    example: 10000004
+  taxSeq:
+    type: integer
+    format: int32
+    description: 消費税SEQ
+    example: 10000004
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ（必須）
+    example: 10000004
+  memberRank:
+    type: string
+    description: 会員ランク（必須）
+    example: 1
+    default: 0
+  prefectureType:
+    type: string
+    description: 都道府県種別
+    example: 1
+  orderSex:
+    type: string
+    description: ご注文主性別（必須）
+    example: 1
+    default: 0
+  orderAgeType:
+    type: string
+    description: ご注文主年代
+    example: 1
+  repeatPurchaseType:
+    type: string
+    description: リピート購入種別（必須）
+    example: 1
+    default: 0
+  settlementMailRequired:
+    type: string
+    description: 決済関連メール要否フラグ
+    example: 1
+    default: 0
+  reminderSentFlag:
+    type: string
+    description: 督促メール送信済みフラグ
+    example: 1
+    default: 0
+  expiredSentFlag:
+    type: string
+    description: 期限切れメール送信済みフラグ
+    example: 1
+    default: 0
+  pointActivateFlag:
+    type: string
+    description: ポイント確定フラグ（必須）
+    example: 1
+    default: 0
+  userAgent:
+    type: string
+    description: ユーザーエージェント
+    example: 0
+  freeAreaKey:
+    type: string
+    description: フリーエリアキー
+    example: 0
+  orderPointAddBasePrice:
+    type: number
+    description: ポイント付与基準金額
+    example: 10000001
+  orderPointAddRate:
+    type: number
+    description: ポイント付与率
+    example: 10000001
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ（必須）
+    example: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2022/01/01 12:00:00
+  orderGoodsVersionNo:
+    type: integer
+    format: int32
+    description: 受注商品連番
+    example: 123
+  pointSeq:
+    type: integer
+    format: int32
+    description: ポイントSEQ
+    example: 123
+  pointVersionNo:
+    type: integer
+    format: int32
+    description: ポイント連番
+    example: 123
+  couponDiscountPrice:
+    type: number
+    description: クーポン割引額
+    example: 123
+  usePoint:
+    type: number
+    description: 使用ポイント
+    example: 123
+  pointDiscountPrice:
+    type: number
+    description: ポイント利用額
+    example: 123
+  pointType:
+    type: string
+    description: ポイント種別
+    example: 1
+  point:
+    type: number
+    description: ポイント数
+    example: 123
+  totalAcquisitionPoint:
+    type: number
+    description: 獲得ポイント合計
+    example: 123
+  settlementMethodName:
+    type: string
+    description: 決済方法名
+    example: クレジット（後決済）
+  settlementMethodDisplayNamePC:
+    type: string
+    description: 決済方法表示名PC
+    example: クレジット（後決済）
+  receiverTimeZone:
+    type: string
+    description: お届け時間帯
+    example: 0
+  orderName:
+    type: string
+    description: ご注文主氏名
+    example: 氏名
+  orderKana:
+    type: string
+    description: ご注文主フリガナ
+    example: ガナ
+  orderTel:
+    type: string
+    description: ご注文主電話番号
+    example: 0987546112
+  orderContactTel:
+    type: string
+    description: ご注文主連絡先電話番号
+    example: 0987546112
+  orderMail:
+    type: string
+    description: ご注文主メールアドレス
+    example: ayumi.komada@pdr.co.jpsd
+  receiverName:
+    type: string
+    description: お届け先氏名
+    example: ayumi
+  receiverKana:
+    type: string
+    description: お届け先フリガナ
+    example: ayumi
+  receiverTel:
+    type: string
+    description: お届け先電話番号
+    example: 098745612
+  orderConsecutiveNo:
+    type: integer
+    format: int32
+    description: 注文連番
+    example: 0
+  deliveryCode:
+    type: string
+    description: 伝票番号
+    example: 10003
+  shipmentStatus:
+    type: string
+    description: 出荷状態
+    example: 10003
+  deliveryNote:
+    type: string
+    description: 配送方法備考
+    example: note
+  receiptTime:
+    type: string
+    format: date-time
+    description: 入金日時
+    example: 2022/01/01 12:00:00
+  emergencyFlag:
+    type: string
+    format: int32
+    description: 異常フラグ
+    example: 1
+  paymentStatus:
+    type: string
+    description: 入金状態
+    example: 入金済み
+  deliveryMethodName:
+    type: string
+    description: 配送方法名称
+    example: 入金済み
+  orderStatusForSearchResult:
+    type: string
+    description: 検索結果表示用受注状態
+    example: 1
+  cartGoodsPriceTotal:
+    type: number
+    description: 商品金額合計（カート画面）
+    example: 50000

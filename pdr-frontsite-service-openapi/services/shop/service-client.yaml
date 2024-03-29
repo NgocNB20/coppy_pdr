@@ -1,0 +1,15 @@
+inputSpec: specs/openapi.shop.yaml
+generatorName: java
+outputDir: out/shop/service-client
+additionalProperties:
+  artifactId: pdr-frontsite-shop-service-client
+  interfaceOnly: true
+  modelPackage: jp.co.hankyuhanshin.itec.hitmall.api.shop.param
+  apiPackage: jp.co.hankyuhanshin.itec.hitmall.api.shop
+  groupId: jp.co.hankyuhanshin.itec.hitmall.pdr.frontsite-service
+  dateLibrary: legacy
+  java8: true
+  library: resttemplate
+  parentGroupId: org.springframework.boot
+  parentArtifactId: spring-boot-starter-parent
+  parentVersion: 2.6.2

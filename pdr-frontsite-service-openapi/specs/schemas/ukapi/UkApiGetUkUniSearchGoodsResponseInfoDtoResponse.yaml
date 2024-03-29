@@ -1,0 +1,21 @@
+type: object
+description: UK-API連携ユニサーチ（商品）レスポンス（response）
+properties:
+  numFound:
+    type: integer
+    description: 検索ヒット件数
+    example: 10
+  page:
+    type: integer
+    description: 検索結果ページ数
+    example: 1
+  category:
+    type: string
+    description: 階層パス
+    example: c-sika:c-series-3
+  docs:
+    type: array
+    items:
+      $ref: "./UkApiGetUkUniSearchGoodsResponseInfoDocsDtoResponse.yaml"
+  pageInfo:
+    $ref: "../PageInfoResponse.yaml"

@@ -1,0 +1,15 @@
+inputSpec: specs/openapi.webapi.yaml
+generatorName: spring
+outputDir: out/webapi/service-server
+additionalProperties:
+  artifactId: pdr-frontsite-webapi-service-server
+  interfaceOnly: true
+  modelPackage: jp.co.hankyuhanshin.itec.hitmall.api.webapi.param
+  apiPackage: jp.co.hankyuhanshin.itec.hitmall.api.webapi
+  groupId: jp.co.hankyuhanshin.itec.hitmall.pdr.frontsite-service
+  dateLibrary: legacy
+  java8: true
+  library: spring-boot
+  parentGroupId: org.springframework.boot
+  parentArtifactId: spring-boot-starter-parent
+  parentVersion: 2.6.2

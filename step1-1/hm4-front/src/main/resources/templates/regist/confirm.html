@@ -1,0 +1,310 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja"><head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-regist">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">オンラインショップ会員登録</span></div>
+                </div>
+            </div>
+        </div>
+
+        <form id="confirmForm" th:action="@{/regist/confirm.html}" th:object="${registModel}" method="post">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page">オンラインショップ会員登録</h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">お申し込み内容確認</h3>
+                </div>
+            </div>
+
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <div class="c-page-description">
+                        <p class="c-page-description__text">ご入力いただいた内容に間違いがなければ「申し込む」ボタンを押してください。</p>
+                    </div>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p>お客様番号</p></dt>
+                                <dd>
+                                    <p>
+                                        <!-- 2023-renew No85-1 from here -->
+                                        <th:block th:if="${!registModel.fromInputMemNoExist}">
+                                            会員登録後、発行されます。
+                                        </th:block>
+                                        <th:block th:unless="${!registModel.fromInputMemNoExist}">
+                                            <span th:remove="tag" th:text="*{customerNo}"/>
+                                        </th:block>
+                                        <!-- 2023-renew No85-1 to here -->
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>事業所名</p></dt>
+                                <dd><p><span th:remove="tag" th:text="*{memberInfoLastName}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>事業所名フリガナ</p></dt>
+                                <dd><p><span th:remove="tag" th:text="*{memberInfoLastKana}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>代表者名</p></dt>
+                                <dd><p><span th:remove="tag" th:text="*{representativeName}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>業種</p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="*{!fromInputMemNoExist}">
+                                            <span th:remove="tag" th:text="*{#enumtype.getLabel('HTypeFrontBusinessType',businessType)}"/>
+                                        </th:block>
+                                        <th:block th:unless="*{!fromInputMemNoExist}">
+                                            <span th:remove="tag" th:text="*{#enumtype.getLabel('HTypeBusinessType',businessType)}"/>
+                                        </th:block>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>電話番号</p></dt>
+                                <dd><p><span th:remove="tag" th:text="*{memberInfoTel}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>FAX番号</p></dt>
+                                <dd><p><span th:remove="tag" th:text="*{memberInfoFax}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>郵便番号</p></dt>
+                                <dd><p>〒<span th:remove="tag" th:text="*{memberInfoZipCode1}"></span>-<span th:remove="tag" th:text="*{memberInfoZipCode2}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>住所</p></dt>
+                                <dd>
+                                    <p>
+                                        <span th:remove="tag" th:text="*{memberInfoPrefecture}"/><span th:remove="tag" th:text="*{memberInfoAddress1}"/>
+                                        <span th:remove="tag" th:text="*{memberInfoAddress2}"/><span th:remove="tag" th:text="*{memberInfoAddress3}"/>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>メールアドレス</p></dt>
+                                <dd><p><span th:remove="tag" th:text="*{memberInfoMail}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>休診曜日</p></dt>
+                                <dd><p><span th:remove="tag" th:text="*{nonConsultation}"/></p></dd>
+                            </dl>
+
+                            <input type="hidden" id="medicalTreatment"/>
+                            <dl class="l-form__list">
+                                <dt><p><span>診療科目</span></p></dt>
+                                <dd>
+                                    <table class="l-form__table p-regist__subject">
+                                        <th:block th:if="*{isMedicalTreatmentJudge1()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment1Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment1()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge2()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment2Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment2()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge3()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment3Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment3()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge4()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment4Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment4()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge5()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment5Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment5()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge6()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment6Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment6()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge7()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment7Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment7()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge8()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment8Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment8()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge9()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment9Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment9()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:if="*{isMedicalTreatmentJudge10()}">
+                                            <tr>
+                                                <th><span th:text="*{medicalTreatment10Title}"/></th>
+                                                <td><span th:remove="tag" th:text="*{isMedicalTreatment10()} ? '対象' : '対象外'"></span></td>
+                                            </tr>
+                                        </th:block>
+                                        <tr>
+                                            <th>その他</th>
+                                            <td colspan="5"><span th:text="*{medicalTreatmentMemo}"/></td>
+                                        </tr>
+                                    </table>
+                                </dd>
+                            </dl>
+                            <!-- 2023-renew No22 from here -->
+                            <dl class="l-form__list">
+                                <dt><p><span>確認書類</span></p></dt>
+                                <dd>
+                                    <div class="p-regist__drop">
+                                        <div class="p-regist__drop-uploaded">
+                                            <th:block th:each="item, stat: *{registUploadFiles}" th:unless="*{#lists.isEmpty(registUploadFiles)}">
+                                                <div th:if="${item.extensionType.value != '2'}" class="p-regist__drop-uploaded-image">
+                                                    <img th:id="'upload-image-' + '-' + ${stat.index}" th:src="${item.filePath}" alt="">
+                                                </div>
+                                                <div th:if="${item.extensionType.value == '2'}" class="p-regist__drop-uploaded-image">
+                                                    <a target="_blank" th:href="@{(${item.filePath})}">
+                                                        <div th:text="${item.displayNameWithIndex()}"></div>
+                                                    </a>
+                                                </div>
+                                                <input type="hidden" th:id="'imagePath' + '-' + ${stat.index}"
+                                                       th:name="'registUploadFiles[' + ${stat.index} + '].imagePath'"
+                                                       th:value="${item.filePath}"/>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <!-- 2023-renew No22 to here -->
+                            <dl class="l-form__list">
+                                <dt><p><span>反社会的勢力ではないこと<br class="l-lg">の保証</span></p></dt>
+                                <dd>
+                                    <div class="l-form__list-text l-form__list-text--bottom">
+                                        暴力団、暴力団構成員、暴力団関係企業もしくは関係者、総会屋、その他の反社会的勢力ではないことを保証する。
+                                    </div>
+                                    <th:block th:if="*{noAntiSocialFlag}">
+                                        <p>保証する</p>
+                                    </th:block>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <h4 class="c-title-form-m c-title-form-m--line"><p>メール配信設定</p></h4>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p>メールによるおトク情報</p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="*{sendMail}">
+                                            <span th:remove="tag" id="isSendMail">希望する</span>
+                                        </th:block>
+                                        <th:block th:unless="*{sendMail}">
+                                            <span th:remove="tag" id="isNotSendMail">希望しない</span>
+                                        </th:block>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>金属商品価格お知らせメール</p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="*{metalPermitFlag}">
+                                            <span th:remove="tag" id="isMetalPermitFlag">希望する</span>
+                                        </th:block>
+                                        <th:block th:unless="*{metalPermitFlag}">
+                                            <span th:remove="tag" id="isNotMetalPermitFlag">希望しない</span>
+                                        </th:block>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <!-- 2023-renew No79 from here -->
+                            <dl class="l-form__list">
+                                <dt><p>ご注文受付完了メール</p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="*{orderCompletePermitFlag}">
+                                            <span th:remove="tag" id="isOrderCompletePermitFlag">希望する</span>
+                                        </th:block>
+                                        <th:block th:if="*{!orderCompletePermitFlag}">
+                                            <span th:remove="tag" id="isNotOrderCompletePermitFlag"></span>
+                                        </th:block>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>商品発送完了メール</p></dt>
+                                <dd>
+                                    <p>
+                                        <th:block th:if="*{deliveryCompletePermitFlag}">
+                                            <span th:remove="tag" id="isDeliveryCompletePermitFlag">希望する</span>
+                                        </th:block>
+                                        <th:block th:if="*{!deliveryCompletePermitFlag}">
+                                            <span th:remove="tag" id="isNotDeliveryCompletePermitFlag"></span>
+                                        </th:block>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <!-- 2023-renew No79 to here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-button-wrap">
+                <button id="doIndex" name="doIndex" type="submit" class="c-button c-button--primary-line c-button--width-l">修正する</button>
+                <!--2023-renew No85-1 from here-->
+                <th:block th:if="*{!fromInputMemNoExist}">
+                    <button id="doOnceMemberInfoRegist" name="doOnceMemberInfoRegist" type="submit" class="c-button c-button--primary c-button--width-l">申し込む</button>
+                </th:block>
+                <th:block th:unless="*{!fromInputMemNoExist}">
+                    <button id="doOnceMemberInfoUpdate" name="doOnceMemberInfoUpdate" type="submit" class="c-button c-button--primary-line c-button--width-l">申し込む</button>
+                </th:block>
+                <!--2023-renew No85-1 to here-->
+            </div>
+
+        </form>
+    </main>
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>アイコン登録更新確認 ｜店舗管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="shop">
+<div id="iconRegistShop" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form id="confirmForm" th:action="@{/icon/registupdate/confirm}" th:object="${iconRegistUpdateModel}"
+                      method="post">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">アイコン登録更新：確認</h1>
+                    </div>
+
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+
+                    <!-- アイコン登録確認 -->
+                    <div class="l-section">
+                        <article class="l-article">
+                            <div class="l-article_title no_slide">
+                                <h2 class="c-pagetitle_h3">基本設定</h2>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <div class="l-article_inner">
+                                        <dl class="c-dl-base dt_fn13 dt_w160px mb20">
+                                            <th:block th:if="*{!isRegist}">
+                                                <div class="edit icon-inline">
+                                                    <dt>アイコンID</dt>
+                                                    <dd class="wrap_flex_center" th:text="*{iconSeq}"></dd>
+                                                </div>
+                                            </th:block>
+
+                                            <div class="edit icon-inline">
+                                                <dt>アイコンイメージ</dt>
+                                                <dd th:class="'wrap_flex_center ' + *{#style.diff(modifiedList, {'iconName'})}">
+                                                    <span class="c-item-icons js-icon-textcolor" th:text="*{iconName}"
+                                                          th:style="'background-color: ' + *{colorCode}"></span>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button class="c-btn btn_back icon_left" type="submit" name="doCancel"><i
+                                        class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                            <div class="col_left">
+                                <button class="c-btn btn_regular" type="submit" name="doOnceRegist">登録</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

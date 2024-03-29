@@ -1,0 +1,18 @@
+# 2023-renew No65 from here
+type: object
+description: 入荷お知らせDtoListレスポンス
+properties:
+  pageInfo:
+    $ref: "#/components/schemas/PageInfoResponse"
+  restockAnnounceDtoListResponse:
+    type: array
+    items:
+      $ref: "#/components/schemas/RestockAnnounceDtoResponse"
+
+components:
+  schemas:
+    PageInfoResponse:
+      $ref: ../PageInfoResponse.yaml
+    RestockAnnounceDtoResponse:
+      $ref: ./RestockAnnounceDtoResponse.yaml
+# 2023-renew No65 to here

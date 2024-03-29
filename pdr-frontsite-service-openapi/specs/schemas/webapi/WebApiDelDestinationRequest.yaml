@@ -1,0 +1,13 @@
+type: object
+description: WEB-API連携お届け先削除リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 2
+  receiveCustomerNo:
+    type: integer
+    format: int32
+    description: お届け先顧客番号
+    example: 1

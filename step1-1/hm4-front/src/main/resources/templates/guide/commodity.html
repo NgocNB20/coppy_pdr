@@ -1,0 +1,212 @@
+<!-- PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <!--/* TODO-HM4　<link rel="canonical" id="goSSLCanonical"/>  */-->
+</head>
+
+<body id="d_guide">
+<a id="top" name="top"></a>
+
+<div id="d_layout"><span><!--LAYOUT--></span>
+    <div id="layoutHeader" th:replace="~{include/header}"></div>
+
+    <div class="topic_path">
+        <p id="d_topic_path"><a th:href="@{/index.html}" id="goTopPage">TOP</a> &gt; ご利用ガイド</p>
+    </div>
+
+    <div id="d_container">
+        <div class="wrap"><span><!--CONTAINER--></span>
+            <h2 class="ctTitle">ご利用ガイド</h2>
+            <div id="layoutSidemenu" th:replace="~{include/sidemenuguide}"></div>
+            <div id="d_main">
+                <div class="commodity"><span><!--MAIN--></span>
+                    <div class="gSection mt0">
+                        <h3 class="mTitle">商品について</h3>
+                        <div id="d_gsn">
+                            <ul>
+                                <li><a th:href="@{/guide/commodity.html#c1}" id="go-Commodity-1">商品検索</a></li>
+                                <li><a th:href="@{/guide/commodity.html#c2}" id="go-Commodity-2">アイコンについて</a></li>
+                                <li><a th:href="@{/guide/commodity.html#c3}" id="go-Commodity-3">商品ページの画像</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="c1" class="gSection">
+                        <h4 class="subGTitle">商品検索</h4>
+                        <div class="subGsection">
+                            <h5 class="subGGTitle">商品を検索する</h5>
+                            <div class="pointBox">
+                                <h6 class="pointTitle"><span>商品カテゴリーからの検索方法</span></h6>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>ページ左側にあるカテゴリーメニューまたは、ページ上部にあるオレンジの帯部分、ページ中央にあるカテゴリ一覧からお好きなカテゴリーを選択していただくと、そのカテゴリーの商品一覧が表示されます。</p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/commodity/method_1.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pointBox">
+                                <h6 class="pointTitle"><span>キーワードからの検索方法</span></h6>
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>
+                                                各ページ上部に「商品検索」窓がございます。<br/>
+                                                商品名の一部、キーワード、商品番号等を入力していただき、「虫眼鏡」のマークをクリックしてください。
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/commodity/method_2.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5 class="subGGTitle">クイックオーダー機能から商品を探す</h5>
+                            <div class="pointBox">
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>
+                                                総合カタログ及びセールカタログをお持ちのお客様は商品番号で簡単に注文できるクイックオーダー機能がご利用いただけます。
+                                            </p>
+                                            <p>
+                                                <a th:href="@{/cart/catalog.html}" id="go-Order-quick-g">クイックオーダーはこちら</a>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/commodity/method_3.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5 class="subGGTitle">お気に入りリストから商品を探す</h5>
+                            <div class="pointBox">
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>
+                                                マイページのお気に入りリストに登録済みの商品から選んでご購入いただけます。
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/commodity/method_4.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5 class="subGGTitle">ご注文履歴から商品を探す</h5>
+                            <div class="pointBox">
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>
+                                                過去にご注文いただいた商品をマイページのご注文履歴から選んでご購入いただけます。
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/commodity/method_5.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="c2" class="gSection">
+                        <h4 class="subGTitle">アイコンについて</h4>
+                        <div class="subGsection">
+                            <div class="icon_list">
+                                <dl>
+                                    <dt><img src="/images/icon/sale.gif" alt="SALE"/></dt>
+                                    <dd>セール対象商品です。</dd>
+                                </dl>
+                                <dl>
+                                    <dt><img src="/images/icon/new.gif" alt="NEW"/></dt>
+                                    <dd>新商品です。</dd>
+                                </dl>
+                                <dl>
+                                    <dt><img src="/images/icon/reservation_ok.gif" alt="大容量予約OK"/></dt>
+                                    <dd>セール期間中は大容量商品の予約ができます。</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon01.jpg" alt="オリジナル商品マーク"/></dt>
+                                    <dd>P.D.R.オリジナルの商品です。</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon08.jpg" alt="返品不可マーク"/></dt>
+                                    <dd>このマークがついている商品は返品がお受けできません。</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon03.jpg" alt="サンプル商品マーク"/></dt>
+                                    <dd>このマークがついている商品はサンプルをご用意しています。</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon06.jpg" alt="クール便マーク"/></dt>
+                                    <dd>
+                                        夏季のみクール便でお届けします。同時にご注文いただいたすべての商品をクール便でお届けすることもございますのでご了承ください。(追加料金はいただきません)<br/>
+                                        ※沖縄等一部のお客様は陸送配達となります。<br/>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon02.jpg" alt="陸送マーク"/></dt>
+                                    <dd>
+                                        このマークの商品は、航空法により航空機への搭載が制限されている商品です。ご注文商品に陸送マークがついている場合は、<br/>
+                                        ご注文いただいたすべての商品を陸送いたします。(追加料金はいただきません)<br/>
+                                        ※天候・船便の都合によりお届けが遅れる場合がございます。（お届け日、お届け時間帯はご指定いただけません）<br/>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon07.jpg" alt="書類マーク"/></dt>
+                                    <dd>このマークのついた商品の購入には書類の提出が必要です。<br/>
+                                        <a th:href="@{/guide/order.html#o3}" style="text-decoration:underline; color:#f4673c;"> 医薬品のご注文について</a><br/>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon05.jpg" alt="劇薬マーク"/></dt>
+                                    <dd>このマークの商品は劇薬です。</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="imgHf"><img src="/images/icon/icon04.jpg" alt="要処方マーク"/></dt>
+                                    <dd>このマークの商品は要処方せん医薬品です。</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="c3" class="gSection">
+                        <h4 class="subGTitle">商品ページの画像</h4>
+                        <div class="subGsection">
+                            <div class="pointBox">
+                                <div class="pointSubBox">
+                                    <div class="tBox">
+                                        <div>
+                                            <p>
+                                                商品詳細ページの商品画像は、大きい画像の下に小さい画像がある場合、カーソルをあてると大きい画像が入れ替わります。<br/>
+                                                また、大きい画像の左下に虫眼鏡マークが表示される画像はクリックすることで画像の拡大ができます。（商品によっては拡大にならない場合がございます。ご了承ください。）
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="/images/guide/commodity/method_6.jpg" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span><!--MAIN--></span></div>
+            </div>
+            <span><!--CONTAINER--></span></div>
+    </div>
+
+    <div id="layoutFooter" th:replace="~{include/footer}"></div>
+    <span><!--LAYOUT--></span></div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here-->

@@ -1,0 +1,144 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>注文確認</title>
+</head>
+<body>
+<div>
+    <div>
+        <span>ピーディーアールオンラインショップ</span>
+    </div>
+    <div>
+        <span>ご注文受付のご連絡</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span th:text="${mailContentsMap.get('ORDER_NAME')}+'様'"></span>
+    </div>
+    <br>
+    <div>
+        <span>この度は、ピーディーアールオンラインショップにてご注文いただき、誠にありがとうございました。</span>
+    </div>
+    <br>
+    <div>
+        <div><span>詳細は「注文履歴」からもご確認いただけます。</span></div>
+        <div><span>また、商品が発送されましたら、メールにてお知らせいたします。</span></div>
+    </div>
+    <br>
+    <br>
+    <div> 
+        <div><span>【注文履歴】</span></div>
+        <div><span><a th:href="${hostUrl} + 'member/history/unshipped.html'"
+                                  th:text="'URL：' + ${hostUrl} + 'member/history/unshipped.html'"></a></span></div>
+    </div>
+    <br>
+    <div> 
+        <div><span>【ご注文日】</span></div>
+        <div><span th:text="${mailContentsMap.get('ORDER_DATE')}"></span></div>
+    </div>
+    <br>
+    <div> 
+        <div><span>【お届け先】</span></div>
+        <div><span th:text="${mailContentsMap.get('ORDER_ZIP_CODE')} + ' ' + ${mailContentsMap.get('ORDER_ADDRESS')}"></span></div>
+    </div>
+    <br>
+    <div> 
+        <div><span>【お支払い方法】</span></div>
+        <div><span th:text="${mailContentsMap.get('ORDER_SETTLEMENT_METHOD')}"></span></div>
+    </div>
+    <br>
+    <div> 
+        <div><span>【ご注文内容】</span></div>
+        <div>
+            <th:block th:each="count: ${#numbers.sequence(1, mailContentsMap.get('RECEIVER_COUNTER') - 1)}">
+                <div><span th:text="'■'+${mailContentsMap.get('ALLOCATION_DELIVERY_TYPE_' + count)}"></span></div>
+                <th:block th:if="${mailContentsMap.get('ORDER_CODE_' + count) != null and mailContentsMap.get('ORDER_CODE_' + count) != ''}">
+                    <div>
+                        <span th:text="'受注番号：' + ${mailContentsMap.get('ORDER_CODE_' + count)}"></span>
+                    </div>
+                </th:block>
+                <th:block th:if="${mailContentsMap.get('RECEIVER_DATE_' + count) != null and mailContentsMap.get('RECEIVER_DATE_' + count) != ''}">
+                    <div>
+                        <span>お届け希望日：</span>
+                        <span th:text="${mailContentsMap.get('RECEIVER_DATE_' + count)}"></span>
+                    </div>
+                </th:block>
+                <th:block th:if="${mailContentsMap.get('RECEIVER_TIME_ZONE_' + count) != null and mailContentsMap.get('RECEIVER_TIME_ZONE_' + count) != ''}">
+                    <div>
+                        <span th:text="'お届け時間帯：' + ${mailContentsMap.get('RECEIVER_TIME_ZONE_' + count)}"></span>
+                    </div>
+                </th:block>
+                <th:block th:if="${mailContentsMap.get('DELIVERY_DATE_' + count) != null and mailContentsMap.get('DELIVERY_DATE_' + count) != ''}">
+                    <div>
+                        <span th:text="'お届け時期：' + ${mailContentsMap.get('DELIVERY_DATE_' + count)}"></span>
+                    </div>
+                </th:block>
+                <!-- 2023-renew No24 from here -->
+                <th:block th:if="${mailContentsMap.get('COUPON_CODE_' + count) != null and mailContentsMap.get('COUPON_CODE_' + count) != ''}">
+                    <div>
+                        <span th:text="'適用クーポン名：' + ${mailContentsMap.get('COUPON_NAME_' + count)}"></span>
+                    </div>
+                    <div>
+                        <span th:text="'適用クーポンコード：' + ${mailContentsMap.get('COUPON_CODE_' + count)}"></span>
+                    </div>
+                </th:block>
+                <!-- 2023-renew No24 to here -->
+                <div><span th:utext="${mailContentsMap.get('ORDER_GOODS_INFO_' + count)}"></span></div>
+                <div>
+                    <span th:text="'合計：' + ${mailContentsMap.get('SUB_TOTAL_PRICE_' + count)}"></span>
+                    <span>円</span>
+                </div>
+                <div>
+                    <span th:text="${'送料：' + mailContentsMap.get('CARRIAGE_' + count)}"></span>
+                    <span>円</span>
+                </div>
+                <div>
+                    <th:block th:if="${mailContentsMap.get('DISCOUNT_' + count) != null and mailContentsMap.get('DISCOUNT_' + count) != ''}">
+                        <span th:text="'値引：-' + ${mailContentsMap.get('DISCOUNT_' + count)}"></span>
+                        <span>円</span>
+                    </th:block>
+                </div>
+                <div>
+                    <span th:text="'消費税：' + ${mailContentsMap.get('TAX_' + count)}"></span>
+                    <span>円</span>
+                </div>
+                <div>
+                    <span th:text="'ご請求予定金額：' + ${mailContentsMap.get('TOTAL_PRICE_' + count)}"></span>
+                    <span>円</span>
+                </div>
+                <br>
+                <th:block th:if="${mailContentsMap.get('PRECAUTIONS_' + count) != null and mailContentsMap.get('PRECAUTIONS_' + count) != ''}">
+                    <div>
+                        <span th:text="${mailContentsMap.get('PRECAUTIONS_' + count)}"></span>
+                    </div>
+                    <br>
+                </th:block>
+            </th:block>
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <span>【ピーディーアールオンラインショップ　カスタマーサービスデスク】</span>
+    </div>
+    <div>
+        <span>　TEL：0120-108394（受付時間：月～金　9:00～16:00 休業日：土日祝）</span>
+    </div>
+    <div>
+        <span>　FAX：0120-108649（年中無休/24時間受付）</span>
+    </div>
+    <br>
+    <div>
+        <span>※本メールは送信専用メールアドレスから自動で配信しております。</span>
+    </div>
+    <div>
+        <span>　ご返信いただいてもお答えできませんのでご了承ください。</span>
+    </div>
+    <div>
+        <span>※このメールにお心当たりのない方・お問い合わせは、上記カスタマーサービスデスクまでご連絡ください。</span>
+    </div>
+</div>
+</body>
+</html>

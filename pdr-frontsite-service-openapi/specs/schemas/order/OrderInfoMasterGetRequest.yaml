@@ -1,0 +1,10 @@
+type: object
+description: 注文情報マスタ取得リクエスト
+properties:
+  cartDto:
+    $ref: '#/components/schemas/CartDtoRequest'
+
+components:
+  schemas:
+    CartDtoRequest:
+      $ref: ../cart/CartDtoRequest.yaml

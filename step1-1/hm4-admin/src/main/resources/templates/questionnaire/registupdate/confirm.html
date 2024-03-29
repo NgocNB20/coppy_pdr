@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <title>アンケート登録更新｜店舗管理</title>
+
+    <script th:inline="javascript">
+        var isOpen = /*[[${questionnaireRegistUpdateModel.isOpen()}]]*/ false;
+        $(function () {
+            if (isOpen) {
+                $("#doOnceRegistUpdate").click(function () {
+                    return confirm("公開期間中のアンケートです\r\n変更してよろしいですか？");
+                });
+            }
+        });
+    </script>
+</head>
+
+<body id="shop">
+<div id="questionnaireRegistShop" class="l-mainwrap">
+
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+
+                <!--                <table id="col2Frame">-->
+                <!--                    <tr>-->
+                <!--                        <td id="mainContents">-->
+
+                <form id="indexForm" th:action="@{/questionnaire/registupdate/confirm}"
+                      th:object="${questionnaireRegistUpdateModel}" method="post">
+                    <input type="hidden" th:field="*{scSeq}"/>
+
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">アンケート登録更新</h1>
+                    </div>
+                    <div th:if="${allMessages}" class="inputError"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <div class="l-section" id="mainContainer">
+                        <!--          Block 1      -->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">基本共通設定</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <!--               アンケートキー    -->
+                                        <div class="wrap_flex_equivalent">
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+
+                                                        <dt>アンケートキー</dt>
+                                                        <dd th:text="*{questionnaireKey}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>アンケートSEQ</dt>
+                                                        <dd th:text="*{questionnaireSeq}"></dd>
+
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <!--                アンケート名    -->
+                                        <div>
+                                            <dt>アンケート名</dt>
+                                            <dd th:class="*{#style.diff(modifiedQuestionnaireList, {'name'})}"
+                                                th:text="*{name}"></dd>
+                                        </div>
+                                        <!--                   公開開始日時 -->
+                                        <div class="wrap_flex_equivalent">
+                                             <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>公開開始日時</dt>
+                                                        <dd class="c-times_inner"
+                                                            th:classappend="*{#style.diff(modifiedQuestionnaireList, {'openStartTime'})}">
+                                                            <span th:remove="tag"
+                                                                th:text="*{#date.convert(openStartDate)}"></span>
+                                                            <span th:remove="tag"
+                                                                  th:text="*{#date.convert(openStartTime, 'HH:mm:ss')}"></span>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                             </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                       <dt>公開終了日時</dt>
+                                                        <dd class="c-times_inner"
+                                                            th:classappend="*{#style.diff(modifiedQuestionnaireList, {'openEndTime'})}">
+                                                        <span th:remove="tag"
+                                                              th:text="*{#date.convert(openEndDate)}"></span>
+                                                            <span th:remove="tag"
+                                                                  th:text="*{#date.convert(openEndTime, 'HH:mm:ss')}"></span>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <!--                  サイトマップ出力  -->
+                                        <div>
+                                            <dt>サイトマップ出力</dt>
+                                            <dd th:class="*{#style.diff(modifiedQuestionnaireList, {'siteMapFlag'})}" th:text="*{#enumtype.getLabel('HTypeSiteMapFlag', siteMapFlag)}"></dd>
+
+                                        </div>
+                                        <!--                   管理用メモ -->
+                                        <div>
+                                            <dt>管理用メモ</dt>
+                                            <dd th:class="*{#style.diff(modifiedQuestionnaireList, {'memo'})}"
+                                                th:utext="*{#pre.convert(memo) == '' ? '&nbsp;' : #pre.convert(memo)}"></dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Block 2-->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">基本サイト別設定</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div>
+                                            <dt>表示名</dt>
+                                            <dd th:class="*{#style.diff(modifiedQuestionnaireList, {'namePc'})}"
+                                                th:text="*{namePc == null ? '&nbsp;' : namePc}"></dd>
+                                        </div>
+                                        <div>
+                                            <dt>公開状態</dt>
+                                            <dd th:class="*{#style.diff(modifiedQuestionnaireList, {'openStatusPc'})}"
+                                                th:text="*{#enumtype.getLabel('HTypeOpenStatus', openStatusPc)}"></dd>
+                                        </div>
+                                        <div>
+                                            <dt>説明文 （HTML可）</dt>
+                                            <dd th:class="*{#style.diff(modifiedQuestionnaireList, {'freeTextPc'})}"
+                                                th:utext="*{#pre.convert(freeTextPc) == '' ? '&nbsp;' : #pre.convert(freeTextPc)}"></dd>
+                                        </div>
+                                        <div>
+                                            <dt>回答完了文 （HTML可）</dt>
+                                            <dd th:class="*{#style.diff(modifiedQuestionnaireList, {'completeTextPc'})}"
+                                                th:utext="*{#pre.convert(completeTextPc) == '' ? '&nbsp;' : #pre.convert(freeTextPc)}"></dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <!--          Block 3      -->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">設問設定</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap" style="padding-top: 0px;">
+<!--                                    <dl class="c-dl-base dt_fn13 dt_w160px">-->
+                                        <table class="c-tbl no_line mt35">
+                                            <thead>
+                                            <tr>
+                                                <th class="number" rowspan="2">#</th>
+                                                <th class="w250px" rowspan="2">設問内容
+                                                </th>
+                                                <th class="w200px" rowspan="2">公開状態
+                                                </th>
+                                                <th class="center" colspan="5" style="text-align: center;">
+                                                    回答入力設定
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="w150px">必須</th>
+                                                <th class="w150px">形式</th>
+                                                <th class="w150px">文字種</th>
+                                                <th class="w75px">桁数</th>
+                                                <th class="w450px">選択肢</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody style="font-size: 14px;">
+                                            <tr th:each="item, stat: *{indexPageItems}">
+
+
+                                                <td th:class="*{isDiffItems('dspNo',__${stat.index}__)}" th:text="*{indexPageItems[__${stat.index}__].orderDisplay}"></td>
+                                                <td th:class="*{isDiffItems('question',__${stat.index}__)}" th:text="${item.question}"></td>
+                                                <td  th:class="*{isDiffItems('openStatus',__${stat.index}__)}" th:text="${#enumtype.getLabel('HTypeOpenStatus', item.openStatus)}"></td>
+                                                <td th:class="*{isDiffItems('replyRequiredFlag',__${stat.index}__)}" th:text="${#enumtype.getLabel('HTypeReplyRequiredFlag', item.replyRequiredFlag)}"></td>
+                                                <td th:class="*{isDiffItems('replyType',__${stat.index}__)}" th:text="${#enumtype.getLabel('HTypeReplyType', item.replyType)}"></td>
+                                                <td th:class="*{isDiffItems('replyValidatePattern',__${stat.index}__)}">
+                                                    <th:block th:if="${item.replyValidatePattern}">
+                                                        <span th:remove="tag"
+                                                              th:text="${#enumtype.getLabel('HTypeReplyValidatePattern',item.replyValidatePattern)}"></span>
+                                                    </th:block>
+                                                </td>
+                                                <td th:class="*{isDiffItems('replyMaxLength',__${stat.index}__)}"  th:text="${item.replyMaxLength}"></td>
+                                                <td th:class="*{isDiffItems('choices',__${stat.index}__)}" th:text="${item.choices}"></td>
+
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+<!--                                    </dl>-->
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+                    <!-- 追尾ボタン -->
+                    <!--/* 追尾ボタン */-->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button name="doCancelConfirm" type="submit" class="c-btn btn_back icon_left"><i
+                                        class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                            <div class="col_left">
+                                <button class="c-btn btn_regular" type="submit" id="doOnceRegistUpdate" name="doOnceRegistUpdate">登録</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+
+
+</div>
+</body>
+</html>

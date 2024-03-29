@@ -1,0 +1,7 @@
+type: object
+description: WEB-API連携取得結果DTOレスポンス
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品
+    example: furniture-00201

@@ -1,0 +1,14 @@
+type: object
+description: カート商品チェックMapレスポンス
+properties:
+  messages:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        $ref: "#/components/schemas/CheckMessageDtoResponse"
+
+components:
+  schemas:
+    CheckMessageDtoResponse:
+      $ref: ./CheckMessageDtoResponse.yaml

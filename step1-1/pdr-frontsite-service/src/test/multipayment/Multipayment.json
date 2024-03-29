@@ -1,0 +1,88 @@
+{
+	"id": "d7352a8c-4a00-483d-8919-ccb7009ccbdb",
+	"name": "Multipayment",
+	"timestamp": "2023-10-24T03:10:58.340Z",
+	"collection_id": "30684847-0dbca05d-cd11-4802-894a-0ac644df90d8",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-10-24T03:10:55.213Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "cf3ed233-9812-4ddd-a253-e653f95a4301",
+			"name": "マルチペイショップID取得 - OK",
+			"url": "http://localhost:8888/multipayment?shopSeq=1001",
+			"time": 2402,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2402
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d0beac35-c2fd-49ea-b810-e63dfe05f2e9",
+			"name": "マルチペイショップID取得 - OK (Response null)",
+			"url": "http://localhost:8888/multipayment?shopSeq=1234",
+			"time": 354,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				354
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4c780aa2-2264-4979-a3b2-231bc0bab02e",
+			"name": "マルチペイショップID取得 - NOTOK",
+			"url": "http://localhost:8888/multipayment?shopSeq=xxxx",
+			"time": 4,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2760,
+	"collection": {
+		"requests": [
+			{
+				"id": "cf3ed233-9812-4ddd-a253-e653f95a4301",
+				"method": "GET"
+			},
+			{
+				"id": "d0beac35-c2fd-49ea-b810-e63dfe05f2e9",
+				"method": "GET"
+			},
+			{
+				"id": "4c780aa2-2264-4979-a3b2-231bc0bab02e",
+				"method": "GET"
+			}
+		]
+	}
+}

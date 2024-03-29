@@ -1,0 +1,326 @@
+type: object
+description: 会員Entityレスポンス
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ（必須）
+    example: 10000001
+  memberInfoStatus:
+    type: string
+    description: 会員状態（必須）
+    default: 0
+  memberInfoUniqueId:
+    type: string
+    description: 会員一意制約用ID
+    example: 1001itec@itec.hankyu-hanshin.co.jp
+  memberInfoId:
+    type: string
+    description: 会員ID
+    example: itec@itec-hankyuhanshin.co.jp
+  memberInfoPassword:
+    type: string
+    description: 会員パスワード
+    example: itec123
+  memberInfoLastName:
+    type: string
+    description: 会員氏名(姓)（必須）
+    example: アイテック
+  memberInfoFirstName:
+    type: string
+    description: 会員氏名(名）
+    example: 太郎
+  memberInfoLastKana:
+    type: string
+    description: 会員フリガナ(姓)（必須）
+    example: アイテック
+  memberInfoFirstKana:
+    type: string
+    description: 会員フリガナ(名)
+    example: タロウ
+  memberInfoSex:
+    type: string
+    description: 会員性別
+    example: 男性
+  memberInfoBirthday:
+    type: string
+    format: date-time
+    description: 会員生年月日（必須）
+    example: 2022/01/01
+  memberInfoTel:
+    type: string
+    description: 会員TEL
+    example: 0123456789
+  memberInfoContactTel:
+    type: string
+    description: 会員連絡先TEL
+    example:
+  memberInfoZipCode:
+    type: string
+    description: 会員住所-郵便番号（必須）
+    example:
+  memberInfoPrefecture:
+    type: string
+    description: 会員住所-都道府県（必須）
+    example:
+  prefectureType:
+    type: string
+    description: 都道府県種別
+    example:
+  memberInfoAddress1:
+    type: string
+    description: 会員住所-市区郡（必須）
+    example:
+  memberInfoAddress2:
+    type: string
+    description: 会員住所-町村・番地
+    example:
+  memberInfoAddress3:
+    type: string
+    description: 会員住所-それ以降の住所
+    example:
+  memberInfoMail:
+    type: string
+    description: 会員メールアドレス
+    example: itec@itec.hankyu-hanshin.co.jp
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: uid
+  versionNo:
+    type: integer
+    format: int32
+    description:  更新カウンタ（必須）
+    default: 0
+  admissionYmd:
+    type: string
+    description: 入会日Ymd
+    example: 20220101
+  secessionYmd:
+    type: string
+    description: 退会日Ymd
+    example: 20220101
+  memo:
+    type: string
+    description: メモ
+    example: メモ
+  memberInfoFax:
+    type: string
+    description: 会員FAX
+    example:
+  lastLoginTime:
+    type: string
+    format: date-time
+    description: 最終ログイン日時
+    example: 2021/11/11 12:00:00
+  lastLoginUserAgent:
+    type: string
+    description: 最終ログインユーザーエージェント
+    example: Mozilla/5.0
+  paymentMemberId:
+    type: string
+    description: 決済代行会社会員ID
+    example:
+  paymentCardRegistType:
+    type: string
+    description: 決済代行会社カード保持種別
+    example: 0
+    default: 0
+  passwordNeedChangeFlag:
+    type: string
+    description: パスワード変更要求フラグ
+    example: 0
+    default: 0
+  lastLoginDeviceType:
+    type: string
+    description: 決済代行会社カード保持種別
+    example: 0
+    default: 0
+  loginFailureCount:
+    type: integer
+    format: int32
+    description: ログイン失敗回数
+  accountLockTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時
+    example: 2021/12/12 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時
+    example: 2021/12/12 12:00:00
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+  representativeName:
+    type: string
+    description: 代表者名
+    example:
+  memberInfoAddress4:
+    type: string
+    description: 会員住所-方書1
+    example:
+  memberInfoAddress5:
+    type: string
+    description: 会員住所-方書2
+    example:
+  businessType:
+    type: string
+    description: 顧客区分
+    example: 0
+    default: 0
+  sendFaxPermitFlag:
+    type: string
+    description: FAX配信希望フラグ
+    example: 0
+    default: 0
+  sendDirectMailFlag:
+    type: string
+    description: ダイレクトメール送信希望フラグ
+    example: 0
+    default: 0
+  nonConsultationDay:
+    type: string
+    description: 休診曜日
+    example:
+  approveStatus:
+    type: string
+    description: 承認状態
+    example: 0
+    default: 0
+  drugSalesType:
+    type: string
+    description: 医薬品・注射針販売区分
+    example: 0
+    default: 0
+  medicalEquipmentSalesType:
+    type: string
+    description: 医療機器販売区分
+    example: 0
+    default: 0
+  dentalMonopolySalesType:
+    type: string
+    description: 歯科専売品販売区分
+    example: 0
+    default: 0
+  creditPaymentUseFlag:
+    type: string
+    description: クレジット決済使用可否
+    example: 0
+    default: 0
+  transferPaymentUseFlag:
+    type: string
+    description: コンビニ・郵便振込使用可否
+    example: 0
+    default: 0
+  cashDeliveryUseFlag:
+    type: string
+    description: 代金引換使用可否
+    example: 0
+    default: 0
+  directDebitUseFlag:
+    type: string
+    description: 口座自動引落使用可否
+    example: 0
+    default: 0
+  monthlyPayUseFlag:
+    type: string
+    description: 月締請求使用可否
+    example: 0
+    default: 0
+  memberListType:
+    type: string
+    description: 名簿区分
+    example: 0
+    default: 0
+  onlineRegistFlag:
+    type: string
+    description: オンライン登録フラグ
+    example: 0
+    default: 0
+  confDocumentType:
+    type: string
+    description: 確認書類
+    example: 0
+    default: 0
+  medicalTreatmentFlag:
+    type: string
+    description: 診療内容
+    example:
+  medicalTreatmentMemo:
+    type: string
+    description: その他診療内容
+    example:
+  metalPermitFlag:
+    type: string
+    description: 金属商品価格お知らせメール
+    example: 0
+    default: 0
+  accountingType:
+    type: string
+    description: 経理区分
+    example: 0
+    default: 0
+  onlineLoginAdvisability:
+    type: string
+    description: オンラインログイン可否
+    example: 0
+    default: 0
+  sendMailPermitFlag:
+    type: string
+    description: メールによるおトク情報
+    example: 0
+    default: 0
+  sendMailStartTime:
+    type: string
+    format: date-time
+    description: メール配信開始日時
+    example: 2021/12/12 12:00:00
+  sendMailStopTime:
+    type: string
+    format: date-time
+    description: メール配信停止日時
+    example: 2021/12/12 12:00:00
+  noAntiSocialFlag:
+    type: string
+    description: 反社会的勢力ではないことの保証
+    example:
+  # 2023-renew No71 from here
+  topSaleAnnounceFlg:
+    type: string
+    description: トップセール通知フラグ
+    example: 0
+    default: 0
+  saleAnnounceWatchFlg:
+    type: string
+    description: セール通知既読フラグ
+    example: 0
+    default: 0
+  topStockAnnounceFlg:
+    type: string
+    description: トップ入荷通知フラグ
+    example: 0
+    default: 0
+  stockAnnounceWatchFlg:
+    type: string
+    description: 入荷通知既読フラグ
+    example: 0
+    default: 0
+  # 2023-renew No71 to here
+  orderCompletePermitFlag:
+      type: string
+      description: 注文完了メール
+      example: 0
+      default: 1
+  deliveryCompletePermitFlag:
+      type: string
+      description: 発送完了メール
+      example: 0
+      default: 1

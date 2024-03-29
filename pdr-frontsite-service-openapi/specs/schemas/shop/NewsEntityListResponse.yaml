@@ -1,0 +1,13 @@
+type: object
+description: ニュースEntityListレスポンス
+properties:
+  pageInfo:
+    $ref: "#/components/schemas/PageInfoResponse"
+  newsEntityListResponse:
+    type: array
+    items:
+      $ref: ../shop/NewsEntityResponse.yaml
+components:
+  schemas:
+    PageInfoResponse:
+      $ref: ../PageInfoResponse.yaml

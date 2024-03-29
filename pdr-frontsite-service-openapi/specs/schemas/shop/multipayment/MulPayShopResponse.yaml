@@ -1,0 +1,7 @@
+type: object
+description: マルチペイショップレスポンス
+properties:
+  mulPayShopId:
+    type: string
+    description: マルペイショップID
+    example: tshop00049879

@@ -1,0 +1,12 @@
+「ローカル環境用」は、移行手順簡略化のため、移行DML実行後のバックアップファイルです。
+
+リストア手順は下記を参照してください。
+
+* https://e4-vcs.itechh.ne.jp/gitlab/hitmall/pdr-ver4/project/-/wikis/Step1_Ver4化/開発環境構築/手順6_DB作成#必要なテーブルデータを作成
+
+当バックアップは「\40_移行後データ修正」配下の下記SQLも実行済です。
+・ALTER_TABLE_CAMPAIGN.sql
+・ALTER_TABLE_FREEAREA.sql
+・ALTER_TABLE_SHOP.sql
+・ALTER_TABLE_SITEMAP.sql
+

@@ -1,0 +1,272 @@
+.field-error-message {
+    color: red;
+    font-size: 1.2rem;
+}
+.global-error-message {
+    color: red;
+    font-size: 1.2rem;
+    background-color: #ff000017;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+    border: 1px solid #ffcece;
+}
+.global-info-message {
+    font-size: 1.2rem;
+    background-color: #1d9bf026;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+    border: 1px solid #acdaff;
+}
+.global-warning-message {
+    font-size: 1.2rem;
+    background-color: #ffe81233;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+    border: 1px solid #ffd5ac;
+}
+.field-error {
+    background-color: #FFCCFF !important;
+}
+.field-error-layout {
+    display: inline-block;
+}
+.transition0 {
+    margin-top: 20px;
+    padding: 20px 30px;
+    background: #CC0000;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+.must {
+    color: #990000;
+}
+<!--/* TODO-HM4-DESIGN:繝�繧ｶ繧､繝ｳ譖ｴ譁ｰ蠕�縺｡ */-->
+#favorite_btn:disabled {
+    cursor:text;
+}
+#cartMessage ul{
+    list-style-type: none;
+}
+#cartMessage ul li{
+    font-size: 1.4rem;
+    padding: 5px;
+    text-align: center;
+}
+<!--/* TODO-HM4-DESIGN:繝�繧ｶ繧､繝ｳ譖ｴ譁ｰ蠕�縺｡ 繧ｫ繝ｼ繝医ム繧､繧｢繝ｭ繧ｰ縺ｮscroll蛻ｶ蠕｡繧�閭梧勹濶ｲ縲�start */-->
+.ui-dialog {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .2em;
+    outline: 0;
+}
+/* Overlays */
+.ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    z-index: 100%;
+}
+/* Overlays */
+.ui-widget-overlay {
+    background: #666666 50% 50% repeat;
+    opacity: .5;
+    filter: Alpha(Opacity=50); /* support: IE8 */
+}
+#cartMessage {
+    padding: 20px !important;
+    border-radius: 5px !important;
+}
+#cartMessage .keepShopping {
+    cursor: pointer;
+}
+
+.l-form__list .field-error-message {
+    color: #e31616;
+    font-size: 1.2rem;
+    letter-spacing: 100;
+    line-height: 1.8;
+}
+.l-form__list dd .name-wrap {
+    display: flex;
+}
+.l-form__list dd .name-wrap > * {
+    max-width: 50%;
+}
+.l-form__list .address-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+.l-form__list .address-wrap .c-select__wrap {
+    margin-right: 15px;
+}
+.l-form__list .address-wrap .field-error-message {
+    order: 99;
+    width: 100%;
+}
+.privacy_item { 
+    color: #2369ba;
+    font-size: 1.4rem;
+    font-weight: 700;
+    counter-increment: num;
+}
+    
+.privacy_item:before {
+    content: "";
+}
+.privacy_item:after {
+    content: "";
+}
+@media screen and (max-width: 899.9px) {
+    .l-form__list dt.l-form__top-tit--wrap .field-error-message {
+        margin-top: 0;
+        margin-left: 16px;
+    }
+    .l-form__list dd .last-name-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        margin-right: 0;
+    }
+    .l-form__list dd .last-name-wrap input {
+        flex-grow: 1;
+    }
+    .l-form__list dd .last-name-wrap .field-error-message {
+        width: 100%;
+    }
+    .l-form__list dd .first-name-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 4.2666666667vw;
+        margin-right: 0;
+    }
+    .l-form__list dd .first-name-wrap input {
+        flex-grow: 1;
+    }
+    .l-form__list dd .first-name-wrap .field-error-message {
+        width: 100%;
+    }
+    .l-form__list dd .name-wrap {
+        display: block;
+    }
+    .l-form__list dd .name-wrap > * {
+        max-width: none;
+    }
+    .l-form__list dd .first-name-wrap .field-error-message {
+        width: 100%;
+    }
+    .img-mb5-mobile {
+        margin-bottom: 5px!important;
+    }
+    .step .c-margin--m .secure3d-link a img {
+        width: 32%!important;
+    }
+    
+}
+<!--/* TODO-HM4-DESIGN:繝�繧ｶ繧､繝ｳ譖ｴ譁ｰ蠕�縺｡ 繧ｫ繝ｼ繝医ム繧､繧｢繝ｭ繧ｰ縺ｮscroll蛻ｶ蠕｡繧�閭梧勹濶ｲ縲�end */-->
+
+.mr-10 {
+    margin-right: 10px!important;
+}
+
+guide-table div {
+    margin-top: 20px;
+    overflow-x: auto
+}
+
+.guide-table table {
+    width: 50%
+}
+
+.guide-table table td, .guide-table table th {
+    padding: 10px;
+    border: 1px solid #e4e4e4;
+    text-align: center;
+    white-space: nowrap
+}
+
+.guide-table table td.none, .guide-table table th.none {
+    color: #e31616
+}
+
+.guide-table table thead td, .guide-table table thead th {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.3571428571
+}
+
+.guide-table table tbody td, .guide-table table tbody th {
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5
+}
+
+.guide-table table tbody tr th {
+    text-align: left;
+}
+
+.guide-table table tbody tr td {
+    text-align: right;
+}
+
+.guide-law ul li {
+    margin: 2px 0 2px 2em;
+}
+.guide-commodity-label-item{
+    display:flex;
+    align-items:center;
+}
+.guide-commodity-label-item span{
+    width: 8rem;
+    text-align: center;
+    padding: 0 .8vw;
+    border-radius:.2vw;
+    color:#FFFFFF;
+    font-size: 1rem;
+    font-weight: bolder;
+}.guide-commodity-label-item span.red{
+     background-color:#e31616;
+}
+.guide-commodity-label-item span.green{
+    background-color:#51ba23;
+}
+.guide-commodity-label-item span.orange{
+    background-color:#e07409;
+}
+.guide-commodity-label-item span.blue{
+    background-color:#2369ba;
+}
+.numberic-right{
+    text-align: right !important;
+}
+.diff {
+	background: #48bbe633 !important;
+}
+.wrap-breadcrumb {
+    white-space: normal !important;
+}
+.wrap-breadcrumb-list {
+    flex-wrap: wrap;
+}
+
+.c-req {
+    color: #e31616;
+    font-size: 12px;
+}
+
+.no {
+    padding-right: 22px
+}

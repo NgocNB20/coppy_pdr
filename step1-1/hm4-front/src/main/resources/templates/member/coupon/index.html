@@ -1,0 +1,147 @@
+<!-- 2023-renew No24 from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <script type="text/javascript" th:src="@{/common/js/coupon.js}"></script>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+    <script>
+        jQuery(function ($) {
+            if ($("#couponNameAdd").val()) {
+                $("#modal-coupon").fadeIn();
+                var couponName = document.getElementById("couponNameAdd").value;
+                if (couponName) {
+                    $("#couponNameDialog").html(couponName);
+                }
+            }
+        });
+    </script>
+</head>
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div id="layoutHeader" th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">クーポン一覧</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+                <form id="indexForm" th:action="@{/member/coupon/index.html}" th:object="${couponModel}" method="post">
+                    <input type="hidden" id="loginUserId" th:field="*{loginUserId}"/>
+                    <input type="hidden" name="couponNameAdd" id="couponNameAdd" th:value="${couponNameAdd}"/>
+                    <div class="l-main p-mypage-coupon">
+                        <h2 class="c-title-page"><strong>クーポン一覧</strong></h2>
+
+                        <hm:freearea key="coupon_info"/>
+
+                        <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                            <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="p-mypage-coupon__title">クーポンを取得する</h3>
+                        <div class="p-mypage-coupon__contents">
+                            <div class="p-mypage-coupon__get">
+                                <p>クーポン番号をお持ちの場合は、クーポン番号を下欄に入力後、取得ボタンを押してください。</p>
+                                <div class="p-mypage-coupon__get-input">
+                                    <input th:field="*{couponCodeAdd}" th:errorclass="c-input--error" type="text" name="couponCodeAdd" id="couponCodeAdd" title="クーポンコード" maxlength="10" placeholder="" class="c-input">
+                                    <input class="c-button c-button--primary" type="submit" id="doAddCoupon" name="doAddCoupon" data-target="modal-coupon" value="クーポンを取得"/>
+                                </div>
+                            </div>
+                            <span th:if="${#fields.hasErrors('couponCodeAdd')}" th:errors="*{couponCodeAdd}" class="c-field-error c-field-error--top"></span>
+                        </div>
+
+                        <h3 class="p-mypage-coupon__title">取得済みクーポン</h3>
+                        <th:block th:if="${#lists.isEmpty(couponModel.couponItemList)}">
+                            <div class="p-mypage-coupon__contents">
+                                <div class="p-mypage-coupon__nodata">
+                                    <p class="p-mypage-coupon__nodata-title">現在、ご利用いただけるクーポンはございません。</p>
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${!#lists.isEmpty(couponModel.couponItemList)}">
+                            <div class="p-mypage-coupon__contents">
+                                <p>ご利用の際は「このクーポンを使う」ボタンを押してください。<br>
+                                    また、ショッピングカートで該当のクーポンが選択されていることをご確認ください。<br>
+                                    クーポンの併用はできません。</p>
+                                <th:block th:each="item, stat: *{couponItemList}">
+                                    <div class="p-mypage-coupon__unit" th:classappend="${couponModel.couponCode == item.couponCode} ? p-mypage-coupon__unit--selected : ''">
+                                        <div class="p-mypage-coupon__unit-head">
+                                            <div class="p-mypage-coupon__unit-title">
+                                                <span th:utext="${#pre.convert(item.couponConditions, false)}"></span>
+                                                <strong th:utext="${item.couponName}"></strong>
+                                            </div>
+                                            <div class="p-mypage-coupon__unit-code">クーポンコード：<em th:text="${item.couponCode}"></em></div>
+                                        </div>
+                                        <div class="p-mypage-coupon__unit-body">
+                                            <p th:utext="${#pre.convert(item.couponExplain, false)}"></p>
+                                            <th:block th:if="${couponModel.couponCode != item.couponCode}">
+                                                <div class="p-mypage-coupon__unit-button">
+                                                    <button name="doSelectCoupon" id="doSelectCoupon" type="submit" onclick="saveCookie(this.value);" th:value="${item.couponCode}"
+                                                            class="c-button c-button--primary">このクーポンを使う</button>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${couponModel.couponCode == item.couponCode}">
+                                                <div class="p-mypage-coupon__unit-button">
+                                                    <button name="doSelectCoupon" id="doSelectCoupon" type="submit" class="c-button" disabled>選択済み</button>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </th:block>
+
+                        <div class="c-button-wrap">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+<!-- 【module modal-coupon】/////////////////////////////////////////////////  -->
+<div id="modal-coupon" class="c-modal" >
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents p-mypage-coupon__modal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <p>クーポンを取得しました !</p>
+            <div class="p-mypage-coupon__modal-title">
+                <strong><span id="couponNameDialog"></span></strong>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<!-- // 【module modal-coupon】/////////////////////////////////////////////////  -->
+<!-- 2023-renew No24 to here -->

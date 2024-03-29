@@ -1,0 +1,53 @@
+type: object
+description: お届け先参照詳細情報レスポンス
+properties:
+  receiveCustomerNo:
+    type: integer
+    format: int32
+    description: お届け先顧客番号
+    example: 1
+  officeName:
+    type: string
+    description: お届け先事業所名
+    example: お届け先事業所名
+  officeKana:
+    type: string
+    description: お届け先事業所名フリガナ
+    example: お届け先事業所名フリガナ
+  representative:
+    type: string
+    description: お届け先代表者名
+    example: お届け先代表者名
+  businessType:
+    type: integer
+    format: int32
+    description: お届け先顧客区分
+    example: 1
+  tel:
+    type: string
+    description: お届け先電話番号
+    example: 9999999999
+  zipCode:
+    type: string
+    description: お届け先郵便番号
+    example: 0700000
+  city:
+    type: string
+    description: お届け先住所１(都道府県・市区町村)
+    example: 大阪市
+  address:
+    type: string
+    description: お届け先住所２(丁目・番地)
+    example: お届け先住所２(丁目・番地)
+  building:
+    type: string
+    description: お届け先住所３(建物名・部屋番号)
+    example: お届け先住所３(建物名・部屋番号)
+  other:
+    type: string
+    description: お届け先住所４(方書１、２)
+    example: お届け先住所４(方書１、２)
+  approvalFlag:
+    type: string
+    description: 承認フラグ
+    example: 1

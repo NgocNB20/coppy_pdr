@@ -1,0 +1,14 @@
+type: object
+description: カート再構築レスポンス
+properties:
+  cartDto:
+    $ref: '#/components/schemas/CartDtoResponse'
+  checkMessageDtoList:
+    $ref: '#/components/schemas/CheckMessageDtoListResponse'
+
+components:
+  schemas:
+    CartDtoResponse:
+      $ref: ./CartDtoResponse.yaml
+    CheckMessageDtoListResponse:
+      $ref: ./CheckMessageDtoListResponse.yaml

@@ -1,0 +1,90 @@
+type: object
+description: カテゴリレスポンス
+properties:
+  categorySeq:
+    type: integer
+    format: int32
+    description: カテゴリSEQ
+    example: 1000000
+  categoryId:
+    type: string
+    description: カテゴリID
+    example: furniture
+  categoryName:
+    type: string
+    description: カテゴリ名
+    example: TOP
+  categoryOpenStatus:
+    type: string
+    description: カテゴリ公開状態PC（必須）
+    example: 0
+    default: 0
+  categoryOpenStartTime:
+    type: string
+    format: date-time
+    description: カテゴリ公開終了日時PC
+    example: 2022/01/01 12:00:00
+  categoryOpenEndTime:
+    type: string
+    format: date-time
+    description: カテゴリ公開開始日時携帯
+    example: 2022/01/01 12:00:00
+  categoryType:
+    type: string
+    description: カテゴリ種別
+    example: 0
+    default: 0
+  categorySeqPath:
+    type: string
+    description: カテゴリSEQパス（必須）
+    example: TOP
+  orderDisplay:
+    type: integer
+    format: int32
+    description: 表示順
+    example: 1
+  rootCategorySeq:
+    type: integer
+    format: int32
+    description: ルートカテゴリSEQ（必須）
+    example: 1
+  categoryLevel:
+    type: integer
+    format: int32
+    description: カテゴリ階層（必須）
+    example: 1
+  categoryPath:
+    type: string
+    description: カテゴリパス（必須）
+    example: TOP
+  manualDisplayFlag:
+    type: string
+    description: 手動表示フラグ（必須）
+    example: 0
+    default: 0
+  versionNo:
+    type: integer
+    format: int32
+    description: 更新カウンタ（必須）
+    example: 2
+    default: 0
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00
+  siteMapFlag:
+    type: string
+    description: サイトマップ出力フラグ（必須）
+    example: 0
+    default: 0
+  openGoodsCount:
+    type: integer
+    format: int32
+    description: PC公開商品点数
+    example: 1

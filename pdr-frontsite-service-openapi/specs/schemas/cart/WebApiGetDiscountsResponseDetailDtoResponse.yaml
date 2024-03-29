@@ -1,0 +1,39 @@
+type: object
+description: 割引適用結果
+properties:
+  goodsCode:
+    type: string
+    description: 申込商品
+    example: furniture-00201
+  saleType:
+    type: string
+    description: 適用割引
+    example:
+  saleGroupCode:
+    type: string
+    description: 数量割引グループコード
+    example:
+  salePrice:
+    type: number
+    description: 割引価格
+    example: 1000
+  quantity:
+    type: string
+    description: 数量
+    example:
+  saleCode:
+    type: string
+    description: セールコード
+    example:
+  note:
+    type: string
+    description: 備考
+    example:
+  hints:
+    type: string
+    description: 注意事項
+    example:
+  orderDisplay:
+    type: string
+    description: 表示順
+    example: 1

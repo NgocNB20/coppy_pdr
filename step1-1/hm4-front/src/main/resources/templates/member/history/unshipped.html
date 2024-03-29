@@ -1,0 +1,424 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script type="text/javascript" src="/common/js/ajaxcartadd.js"></script>
+    <!-- 2023-renew No68 from here -->
+    <script type="text/javascript">
+        jQuery(function ($) {
+            let isDispCancelOrder = $("#isDispCancelOrder")
+            if (isDispCancelOrder && isDispCancelOrder.val() === 'true') {
+                $("#modal-complete").fadeIn()
+                $('body').addClass('is-modal-opened');
+            }
+        });
+
+        // 注文キャンセル確認ダイアログ 表示
+        function cancelOrderDialogOpen(cancelledOrderNo) {
+            if (cancelledOrderNo) {
+                $("#cancelledOrderNo").val(cancelledOrderNo)
+            }
+            $("#modal-cancel").fadeIn()
+            $('body').addClass('is-modal-opened');
+        }
+
+        // 注文キャンセル確認ダイアログ 選択
+        function doCancelOrder(flg) {
+            $('.c-modal').fadeOut(function () {
+                $('body').removeClass('is-modal-opened');
+            });
+            if (flg) {
+                $("#doCancelOrder").click();
+            }
+        }
+    </script>
+    <script th:inline="javascript">
+        var cancelledOrderNo = /*[[${unshippedModel.cancelledOrderNo}]]*/ "";
+        var cancelReceiveDate = /*[[${unshippedModel.cancelReceiveDate}]]*/ "";
+        $(function () {
+            $("#cancelOrderNo").html(cancelledOrderNo)
+            $("#cancelReceiveDate").html(cancelReceiveDate)
+        });
+    </script>
+    <!-- 2023-renew No68 to here -->
+</head>
+
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                        <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a
+                            th:href="@{/member/index.html}"
+                            class="c-textlink c-textlink--hover">マイページ</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">購入履歴／発送前のご注文</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember.html}"></div>
+                <div class="l-main p-mypage-history">
+                    <h2 class="c-title-page"><strong>購入履歴／発送前のご注文</strong></h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form id="unshippedForm" th:action="@{/member/history/unshipped.html}" th:object="${unshippedModel}" method="post">
+                        <!-- 2023-renew No68 from here -->
+                        <input type="image" name="doCancelOrder" id="doCancelOrder" style="display: none"/>
+                        <input type="hidden" id="cancelledOrderNo" name="cancelledOrderNo"/>
+                        <input type="hidden" id="isDispCancelOrder" th:value="${dispCancelOrder}"/>
+                        <!-- 2023-renew No68 to here -->
+                        <th:block th:if="${!unshippedModel.isDisplayByGoodsCode()}">
+                            <div class="c-page-description">
+                                <p class="c-page-description__text">セールde予約または発送前のご注文内容をご確認いただけます。</p>
+                                <ul class="c-page-description__bullet-point">
+                                    <li>キャンセルご希望の場合は『キャンセルリクエスト』を押してください。</li>
+                                    <li>「今すぐお届け」はご注文受付完了後すぐに発送準備に入るため、キャンセルリクエストが間に合わない場合があります。<br>その場合、一旦受け取って頂いてからの返品（お客様送料負担）となります。
+                                    </li>
+                                </ul>
+                                <p class="c-page-description__text c-page-description--margin-m">※返品をお受けできない商品は<a
+                                        th:href="@{/guide/law.html#l8}"
+                                        class="c-inlinelink">こちら</a>です。事前にご確認ください。<br>
+                                    ※「セールde予約」のキャンセル・変更は、お届けの１週間前まで可能です。<br>
+                                    ※追加・変更や、お困りの場合はお手数をおかけしますがご注文デスク（TEL：0120-108648 受付時間：9:00~17:00 日祝休）までお問い合わせください。
+                                </p>
+                                <p class="c-page-description__text c-page-description--margin-m"><a
+                                        th:href="@{/member/history/shipped.html}"
+                                        class="c-textlink c-textlink--right c-textlink--text">購入履歴／発送済のご注文はこちら</a>
+                                </p>
+
+                                <hm:freearea key="orderhistory_info"/>
+                            </div>
+                        </th:block>
+
+                        <th:block th:if="${unshippedModel.isDisplayByGoodsCode()}">
+                            <div class="c-page-description">
+                                <p class="c-page-description__text">セールde予約または発送前のご注文内容をご確認いただけます。</p>
+                                <ul class="c-page-description__bullet-point">
+                                    <li>商品ごとのお届け予定一覧です。</li>
+                                    <li>キャンセルご希望の場合は、お届け予定日一覧にてキャンセルリクエストボタンを押してください。</li>
+                                </ul>
+                                <p class="c-page-description__text c-page-description--margin-m"><a
+                                        th:href="@{/member/history/shipped.html}"
+                                        class="c-textlink c-textlink--right c-textlink--text">購入履歴／発送済のご注文はこちら</a>
+                                </p>
+                                <hm:freearea key="orderhistory_info"/>
+                            </div>
+                        </th:block>
+                        <!--  2023-renew No06 from here-->
+                        <th:block th:if="${!unshippedModel.isOrderHistoryEmpty()}">
+                            <div class="p-mypage-history__tab c-tab">
+                                <th:block th:if="${!unshippedModel.isDisplayByGoodsCode()}">
+                                    <div class="c-tab__button js-tab--active">お届け予定日別一覧</div>
+                                    <input type="submit" id="doDisplayByGoodsCode" name="doDisplayByGoodsCode" class="c-tab__button" value="商品別一覧"/>
+                                </th:block>
+                                <th:block th:if="${unshippedModel.isDisplayByGoodsCode()}">
+                                    <input type="submit" id="doDisplayByReceiveDate" name="doDisplayByReceiveDate" class="c-tab__button" value="お届け予定日別一覧"/>
+                                    <div class="c-tab__button js-tab--active">商品別一覧</div>
+                                </th:block>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${unshippedModel.orderHistoryOrderItemByGoodsCodeMap != null && unshippedModel.orderHistoryOrderItemByGoodsCodeMap.size() > 0}">
+                            <div class="p-mypage-history__tab c-tab">
+                                <th:block th:if="${!unshippedModel.isDisplayByGoodsCode()}">
+                                    <div class="c-tab__button js-tab--active">お届け予定日別一覧</div>
+                                    <input type="submit" id="doDisplayByGoodsCode" name="doDisplayByGoodsCode" class="c-tab__button" value="商品別一覧"/>
+                                </th:block>
+                                <th:block th:if="${unshippedModel.isDisplayByGoodsCode()}">
+                                    <input type="submit" id="doDisplayByReceiveDate" name="doDisplayByReceiveDate" class="c-tab__button" value="お届け予定日別一覧"/>
+                                    <div class="c-tab__button js-tab--active">商品別一覧</div>
+                                </th:block>
+                            </div>
+                        </th:block>
+
+
+                        <th:block th:if="${!unshippedModel.isDisplayByGoodsCode() && !unshippedModel.isOrderHistoryEmpty() && !#lists.isEmpty(unshippedModel.orderHistoryOrderItems)}">
+                            <!--  2023-renew No06 to here-->
+                            <th:block th:each="orderHistoryOrderItem, orderHistoryOrderItemStat : ${unshippedModel.orderHistoryOrderItems}">
+                                <div class="p-mypage-history__contents p-mypage-history__delivery">
+                                    <div class="p-mypage-history__delivery-day"><img th:src="@{/newdesign/assets/images/icon/calendar.svg}" alt="" width="22">
+                                        お届け日：<span id="receiveDate" th:remove="tag" th:text="${orderHistoryOrderItem.receiveDate}"></span>
+                                    </div>
+                                    <div class="p-mypage-history__delivery-outline">
+                                        ご注文日時：<span id="orderTime" th:remove="tag" th:text="${#date.convert(orderHistoryOrderItem.orderTime, 'yyyy/MM/dd HH:mm')}"></span><br>
+                                        受注番号：<span id="orderCode" th:remove="tag" th:text="${orderHistoryOrderItem.orderCode}"></span><br>
+                                        受付方法：<span id="receptionTypeName" th:remove="tag" th:text="${orderHistoryOrderItem.receptionTypeName}"></span><br>
+                                        お届け先：<span id="receiveOfficeName" th:remove="tag" th:text="${orderHistoryOrderItem.receiveOfficeName}"></span><br>
+                                        お届け先住所：〒<span id="receiveZipCode" th:remove="tag" th:text="${orderHistoryOrderItem.receiveZipCode}"></span>
+                                        <span id="receiveAddress1" th:remove="tag" th:text="${orderHistoryOrderItem.receiveAddress1}"></span>
+                                        <span id="receiveAddress2" th:remove="tag" th:text="${orderHistoryOrderItem.receiveAddress2}"></span>
+                                        <span id="receiveAddress3" th:remove="tag" th:text="${orderHistoryOrderItem.receiveAddress3}"></span>
+                                        <span id="receiveAddress4" th:remove="tag" th:text="${orderHistoryOrderItem.receiveAddress4}"></span>
+                                        <span id="receiveAddress5" th:remove="tag" th:text="${orderHistoryOrderItem.receiveAddress5}"></span><br>
+                                        お支払い方法：<span id="paymentType" th:remove="tag" th:text="${orderHistoryOrderItem.paymentType}"></span><br>
+                                        <!-- 2023-renew No24 from here -->
+                                        <th:block th:if="${orderHistoryOrderItem.couponCode != null}">
+                                            クーポン名：<span th:remove="tag" th:text="${orderHistoryOrderItem.couponName}"></span><br>
+                                            クーポンコード：<span th:remove="tag" th:text="${orderHistoryOrderItem.couponCode}"></span>
+                                        </th:block>
+                                        <!-- 2023-renew No24 to here -->
+                                    </div>
+                                    <div class="p-mypage-history__delivery-price"><span>お支払金額（税込）：&yen;</span><span id="paymentTotalPrice" th:remove="tag" th:text="${orderHistoryOrderItem.paymentTotalPrice}"></span></div>
+                                    <!-- 2023-renew No68 from here -->
+                                    <th:block th:if="${!orderHistoryOrderItem.isCancelYesNo()}">
+                                        <div class="p-mypage-history__delivery-cancel-status">キャンセルできません（発送準備中）</div>
+                                    </th:block>
+
+                                    <th:block th:if="${orderHistoryOrderItem.isCancelYesNo()}">
+                                        <div th:cancelledOrderNo="${orderHistoryOrderItem.orderCode}" id="cancelOrderDialogOpen"
+                                             class="p-mypage-history__delivery-cancel-request c-button js-modal"
+                                             onclick="cancelOrderDialogOpen(this.getAttribute('cancelledOrderNo')); return false;">
+                                            <svg viewBox="0 0 16.6 16.6" width="8">
+                                                <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/close.svg#close}"></use>
+                                            </svg>キャンセルリクエスト
+                                        </div>
+                                    </th:block>
+                                    <!-- 2023-renew No68 to here -->
+                                    <div class="p-mypage-history__list">
+                                        <table class="c-table c-table--pcspdevide">
+                                            <thead>
+                                            <tr class="c-table__tr l-lg">
+                                                <th class="c-table__th">商品番号</th>
+                                                <th class="c-table__th">商品名</th>
+                                                <th class="c-table__th">数量</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="orderHistoryGoodsItems" limit="10">
+                                            <th:block th:each="orderHistoryGoodsItem, orderHistoryGoodsItemStat : ${orderHistoryOrderItem.orderHistoryGoodsItems}">
+                                                <tr class="c-table__tr">
+                                                    <td class="p-mypage-history__list-no">
+                                                        <span class="p-mypage-history__list-heading l-sm">商品番号：</span><span th:remove="tag" th:text="${orderHistoryGoodsItem.goodsCode}"></span>
+                                                    </td>
+                                                    <td class="c-table__item p-mypage-history__list-item">
+                                                        <th:block th:if="${orderHistoryGoodsItem.isViewLinkGoodsName()}">
+                                                            <a th:href="@{/goods/index.html(gcd=${orderHistoryGoodsItem.gcd})}" class="p-mypage-history__list-item-inner">
+                                                                <div class="p-mypage-history__list-item-image">
+                                                                    <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${orderHistoryGoodsItem.goodsImage}}"
+                                                                         th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${orderHistoryGoodsItem.goodsImage} + ' 2x'"
+                                                                         alt="" height="120" width="120" decoding="async" loading="lazy">
+                                                                </div>
+                                                                <div class="p-mypage-history__list-item-overview">
+                                                                    <div class="p-mypage-history__list-item-title">
+                                                                        <span th:remove="tag" th:text="${orderHistoryGoodsItem.goodsName}"/>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </th:block>
+                                                        <th:block th:if="${!orderHistoryGoodsItem.isViewLinkGoodsName()}">
+                                                                    <span class="p-mypage-history__list-item-inner">
+                                                                        <div class="p-mypage-history__list-item-image">
+                                                                            <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${orderHistoryGoodsItem.goodsImage}}"
+                                                                                 th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${orderHistoryGoodsItem.goodsImage} + ' 2x'"
+                                                                                 alt="" height="120" width="120" decoding="async" loading="lazy">
+                                                                        </div>
+                                                                        <div class="p-mypage-history__list-item-overview">
+                                                                            <div class="p-mypage-history__list-item-title">
+                                                                                <span th:remove="tag" th:text="${orderHistoryGoodsItem.goodsName}"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </span>
+                                                        </th:block>
+
+                                                    </td>
+                                                    <td class="p-mypage-history__list-quantity"><span class="p-mypage-history__list-heading l-sm">数量：</span>
+                                                        <span th:remove="tag" th:text="${orderHistoryGoodsItem.goodsCount}"></span>
+                                                        <span th:remove="tag" th:text="${orderHistoryGoodsItem.unitName}"></span>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </th:block>
+
+                        <!--  2024-renew No06 from here-->
+                        <th:block th:if="${unshippedModel.isDisplayByGoodsCode()}">
+                            <th:block th:if="*{orderHistoryOrderItemByGoodsCodeMap != null && orderHistoryOrderItemByGoodsCodeMap.size > 0}">
+                                <div class="p-mypage-history__contents p-mypage-history__goods">
+                                    <div class="p-mypage-history__list">
+                                        <th:block th:each="itemMap, itemMapStat : *{orderHistoryOrderItemByGoodsCodeMap}">
+                                            <table class="c-table c-table--pcspdevide">
+                                                <thead>
+                                                <tr class="c-table__tr l-lg">
+                                                    <th class="c-table__th">商品番号</th>
+                                                    <th class="c-table__th">商品名</th>
+                                                    <th class="c-table__th">お届け予定日</th>
+                                                    <th class="c-table__th">数量</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="c-table__tr">
+                                                    <td class="p-mypage-history__list-no" th:rowspan="${itemMap.value.size}">
+                                                        <span class="p-mypage-history__list-heading l-sm">商品番号：</span><span th:remove="tag" th:text="${itemMap.key}"></span>
+                                                    </td>
+                                                    <td class="c-table__item p-mypage-history__list-item" th:rowspan="${itemMap.value.size}">
+                                                        <th:block th:if="${itemMap.value[0].goodsItem.isViewLinkGoodsName()}">
+                                                            <a th:id="'goGoodsDetail-' + ${itemMapStat.index}" th:href="@{/goods/index.html(gcd=${itemMap.key})}" class="p-mypage-history__list-item-inner">
+                                                                <div class="p-mypage-history__list-item-image">
+                                                                    <img th:id="'goodsGroupImageList-' + ${itemMapStat.index}"
+                                                                         th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${itemMap.value[0].goodsItem.goodsImage}}"
+                                                                         th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${itemMap.value[0].goodsItem.goodsImage} + ' 2x'"
+                                                                         alt="" height="120" width="120" decoding="async" loading="lazy">
+                                                                </div>
+                                                                <div class="p-mypage-history__list-item-overview">
+                                                                    <div class="p-mypage-history__list-item-title">
+                                                                        <span th:remove="tag" th:text="${itemMap.value[0].goodsItem.goodsName}"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </th:block>
+                                                        <th:block th:if="${!itemMap.value[0].goodsItem.isViewLinkGoodsName()}">
+                                                                    <span th:id="'goGoodsDetail-' + ${itemMapStat.index}" class="p-mypage-history__list-item-inner">
+                                                                        <div class="p-mypage-history__list-item-image">
+                                                                            <img th:id="'goodsGroupImageList-' + ${itemMapStat.index}"
+                                                                                 th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${itemMap.value[0].goodsItem.goodsImage}}"
+                                                                                 th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${itemMap.value[0].goodsItem.goodsImage} + ' 2x'"
+                                                                                 alt="" height="120" width="120" decoding="async" loading="lazy">
+                                                                        </div>
+                                                                        <div class="p-mypage-history__list-item-overview">
+                                                                            <div class="p-mypage-history__list-item-title">
+                                                                                <span th:remove="tag" th:text="${itemMap.value[0].goodsItem.goodsName}"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </span>
+                                                        </th:block>
+                                                    </td>
+                                                    <th:block th:each="orderHistoryOrderItem, orderHistoryOrderItemStat : ${itemMap.value}">
+                                                        <th:block th:if="${orderHistoryOrderItemStat.index == 0}">
+                                                            <td class="p-mypage-history__list-delivery-date l-lg">
+                                                                <span th:remove="tag" th:text="${orderHistoryOrderItem.receiveDate}"></span>
+                                                            </td>
+                                                            <td class="p-mypage-history__list-quantity l-lg">
+                                                                <span class="p-mypage-history__list-heading l-sm">数量：</span>
+                                                                <span th:remove="tag" th:text="${orderHistoryOrderItem.goodsItem.goodsCount}"></span>
+                                                                <span th:remove="tag" th:text="${orderHistoryOrderItem.goodsItem.unitName}"></span>
+                                                            </td>
+                                                        </th:block>
+                                                    </th:block>
+                                                    <td class="p-mypage-history__nest l-sm">
+                                                        <table class="p-mypage-history__nest-table">
+                                                            <tr>
+                                                                <th class="c-table__th">お届け予定日</th>
+                                                                <th class="c-table__th">数量</th>
+                                                            </tr>
+                                                            <th:block th:each="orderHistoryOrderItem, orderHistoryOrderItemStat : ${itemMap.value}">
+                                                                <tr>
+                                                                    <td class="p-mypage-history__nest-delivery">
+                                                                        <span th:remove="tag" th:text="${orderHistoryOrderItem.receiveDate}"></span>
+                                                                    </td>
+                                                                    <td class="p-mypage-history__nest-quantity">
+                                                                        <span th:remove="tag" th:text="${orderHistoryOrderItem.goodsItem.goodsCount}"></span>
+                                                                        <span th:remove="tag" th:text="${orderHistoryOrderItem.goodsItem.unitName}"></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </th:block>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <th:block th:each="orderHistoryOrderItem, orderHistoryOrderItemStat : ${itemMap.value}">
+                                                    <th:block th:if="${orderHistoryOrderItemStat.index > 0}">
+                                                        <tr class="c-table__tr l-lg">
+                                                            <td class="p-mypage-history__list-delivery-date">
+                                                                <span th:remove="tag" th:text="${orderHistoryOrderItem.receiveDate}"></span>
+                                                            </td>
+                                                            <td class="p-mypage-history__list-quantity">
+                                                                <span class="p-mypage-history__list-heading l-sm">数量：</span>
+                                                                <span th:remove="tag" th:text="${orderHistoryOrderItem.goodsItem.goodsCount}"></span>
+                                                                <span th:remove="tag" th:text="${orderHistoryOrderItem.goodsItem.unitName}"></span>
+                                                            </td>
+                                                        </tr>
+                                                    </th:block>
+                                                </th:block>
+                                                </tbody>
+                                            </table>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        <!--  2024-renew No06 to here-->
+                        <div class="c-button-wrap">
+                            <a th:href="@{/index.html}"
+                               class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}"
+                               class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+
+<!-- 2023-renew No68 from here -->
+<!-- 注文キャンセル確認ダイアログ -->
+<div id="modal-cancel" class="c-modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--normal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <div class="c-modal__detail c-modal__detail--complete">
+                <div class="c-modal__detail-inner">
+                    <p class="c-modal__detail-complete-title">注文をキャンセルリクエストしますが、よろしいですか。</p>
+                </div>
+                <div class="c-modal__detail-inner">
+                    <p class="c-modal__detail-complete-text">※キャンセルした注文は、注文履歴には残りません。</p>
+                </div>
+            </div>
+            <div class="c-modal__button c-modal__button--small">
+                <button class="c-button c-button--primary-line c-button--width-m js-modal-close"
+                        onclick="doCancelOrder(false);">いいえ
+                </button>
+                <button class="c-button c-button--primary c-button--width-m js-modal" onclick="doCancelOrder(true);">はい
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 注文キャンセル成功通知ダイアログ -->
+<div id="modal-complete" class="c-modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--normal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <div class="c-modal__detail c-modal__detail--complete">
+                <div class="c-modal__detail-inner">
+                    <p class="c-modal__detail-complete-title">下記のキャンセルが完了しました。</p>
+                </div>
+                <div class="c-modal__detail-inner">
+                    <p>受注番号： <span id="cancelOrderNo"></span><br>お届け予定日： <span id="cancelReceiveDate"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 2023-renew No68 to here -->
+
+<!--Ajax処理URL cookieがoffの場合、URLにjsessionidを付与する為のダミーリンク-->>
+<a id="goAjaxProcessUrl" th:href="@{/teeda.ajax}" style="display:none;"></a>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

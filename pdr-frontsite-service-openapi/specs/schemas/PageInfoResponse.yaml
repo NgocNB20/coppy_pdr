@@ -1,0 +1,33 @@
+type: object
+description:  ページ情報レスポンス
+properties:
+  page:
+    description: 現在ページ番号
+    type: integer
+    format: int32
+    example: 2
+  limit:
+    description: ページサイズ
+    type: integer
+    format: int32
+    example: 100
+  nextPage:
+    description: 次のページ番号
+    type: integer
+    format: int32
+    example: 3
+  prevPage:
+    description: 前のページ番号
+    type: integer
+    format: int32
+    example: 1
+  total:
+    description: 全件数
+    type: integer
+    format: int32
+    example: 1000
+  totalPages:
+    description: ページ数
+    type: integer
+    format: int32
+    example: 10

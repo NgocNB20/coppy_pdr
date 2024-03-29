@@ -1,0 +1,149 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.c-sortbox {
+  position: relative;
+
+  &__title {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    @include media(lg) {
+
+      &::after {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-left: 12px;
+        border: solid 1px $color-ccc;
+        border-radius: 2px;
+        background: $color-fff;
+        margin-right: 5px;
+        display: flex;
+        justify-self: center;
+        align-items: center;
+        @include icon('arrow-down', 'f36b30');
+        background-size: 14px auto;
+        background-position: top 52% center;
+        transition: background-color $comMS $comES;
+      }
+
+      &:hover {
+        color: $color-primary;
+
+        &::after {
+          background-color: $color-orange-light;
+        }
+      }
+    }
+  }
+
+  &__contents {
+    width: 270px;
+    box-shadow: 0 1px 6px rgba($color-000, .3);
+    background: $color-fff;
+    border: solid 1px $color-e6;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+
+    @include media(lg) {
+      left: 50%;
+      transform: translateX(-50%);
+      transition: opacity $comMS $comES, visibility $comMS $comES;
+    }
+
+    &.js-sort-open {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__control {
+    margin-block: 15px 20px;
+    text-align: left;
+
+    button {
+      margin-left: 32px;
+      @include font-style(15,20,bold);
+    }
+  }
+
+  &__button {
+    margin: 22px auto;
+    text-align: center;
+
+    button {
+      width: 110px;
+      margin: 0 5px;
+      font-weight: normal;
+    }
+  }
+
+  &__list {
+    background: $color-orange-lightGray;
+    padding: 10px 10px 10px 30px;
+    text-align: left;
+
+    ul {
+      height: 170px;
+      padding: 10px 30px 10px 0;
+    }
+
+    .simplebar-track {
+      width: 20px;
+      border: solid 1px $color-e6;
+      background: $color-fff;
+      box-shadow: 0 1px 1px rgba($color-666, .1) inset;
+    }
+    
+    .simplebar-track .simplebar-scrollbar.simplebar-visible::before {
+      opacity: 1;
+    }
+    
+    .simplebar-track .simplebar-scrollbar::before {
+      width: 10px;
+      margin-inline: auto;
+      background: $color-primary;
+    }
+
+
+  }
+
+  @include media(sm) {
+
+    &__title {
+      background: $color-fff;
+      border: solid 1px $color-ccc;
+      border-radius: 3px;
+      padding: vwset(10) vwset(15);
+      @include font-style(15,15);
+      @include icon('arrow-down', 'a1a1a1');
+      background-size: vwset(11) auto;
+      background-position: right 20px center;
+      width: 100%;
+    }
+
+    &__contents {
+      width: 73vw;
+    }
+
+    &__control {
+      margin-block: vwset(30);
+  
+      button {
+        margin-left: vwset(36);
+        @include font-sp-style(15,20);
+      }
+    }
+
+  }
+}

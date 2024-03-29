@@ -1,0 +1,10 @@
+type: object
+description: 配送方法選択可能リスト取得リクエスト
+properties:
+  receiveOrderDto:
+    type: string
+    description: 受注決済エンティティ
+  available:
+    type: boolean
+    description: 利用可能、不可能どちらかを指定。null..全部 / true..利用可能のみ / false..利用不可能のみ
+    example: true

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <file>C:/pdr/var/log/tomcat/dev_pdr/batch/Batch.log</file>
+        <encoder>
+            <pattern>%d [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:/pdr/var/log/tomcat/dev_pdr/batch/Batch.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <logger name="ACCESS" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="LOGICAL" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="SQLEXCP" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hmbase" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="EXCEPT" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="ACTION" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="SESSION" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="FREE" level="INFO">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.seasar.doma.jdbc" additivity="false" level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

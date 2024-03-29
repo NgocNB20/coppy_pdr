@@ -1,0 +1,11 @@
+# 2023-renew No92 from here
+type: array
+description: 商品グループDtoListレスポンス
+items:
+  $ref: "#/components/schemas/GoodsGroupDtoResponse"
+
+components:
+  schemas:
+    GoodsGroupDtoResponse:
+      $ref: ./GoodsGroupDtoResponse.yaml
+# 2023-renew No92 to here

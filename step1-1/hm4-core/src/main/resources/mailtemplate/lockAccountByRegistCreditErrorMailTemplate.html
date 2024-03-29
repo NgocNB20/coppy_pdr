@@ -1,0 +1,34 @@
+<!--2023-renew No60 from here-->
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>アカウントロック通知</title>
+</head>
+<body>
+<div>
+<body>
+<div>
+    <br>
+    <span>下記お客様について、</span>
+    <br>
+    <span>規定回数を超えてクレジットカード登録に失敗したため、</span>
+    <br>
+    <span>アカウントをロックいたしました。</span>
+    <br>
+    <br>
+     <span th:text="'【お客様番号】'+${mailContentsMap.get('CUSTOMER_NO')}"></span>
+     <br>
+     <span th:text="'【事業所名】'+${mailContentsMap.get('OFFICE_NAME')}+ ' 様'"></span>
+    <br>
+    <br>
+    <span>解除する場合は、</span>
+    <br>
+    <span>管理画面の会員詳細画面からロック解除ボタンを押下してください。</span>
+</div>
+</body>
+</div>
+<!--<div th:replace="~{common/signature}"></div>-->
+<br>
+</body>
+</html>
+<!--2023-renew No60 to here-->

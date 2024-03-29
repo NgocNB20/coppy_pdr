@@ -1,0 +1,684 @@
+openapi: 3.0.3
+info:
+  title: 【PDRフロントサイトサービス】注文のAPI仕様
+  description: PDRフロントサイトサービスのOpenAPI定義：注文
+  version: 4.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /order/convenience:
+    get:
+      tags:
+        - Order
+      summary: コンビニ取得
+      description: コンビニ取得
+      operationId: getConvenience
+      responses:
+        200:
+          description: コンビニEntityListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvenienceEntityListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/order-info-master/get:
+    post:
+      tags:
+        - Order
+      summary: 注文情報マスタ取得
+      description: 注文情報マスタ取得
+      operationId: getOrderInfoMaster
+      requestBody:
+        required: true
+        description: 注文情報マスタ取得リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInfoMasterGetRequest'
+      responses:
+        200:
+          description: 注文情報マスタDtoレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderInfoMasterDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/order-delivery-information/get:
+    post:
+      tags:
+        - Order
+      summary: WEB-API連携 配送情報取得
+      description: WEB-API連携 配送情報取得
+      operationId: getOrderDeliveryInformation
+      requestBody:
+        required: true
+        description: 配送情報取得リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderDeliveryInformationRequest'
+      responses:
+        200:
+          description: 配送情報取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDeliveryInformationDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/delivery-method-select-list/get:
+    post:
+      tags:
+        - Order
+      summary: 配送方法選択可能リスト取得
+      description: 配送方法選択可能リスト取得
+      operationId: getDeliveryMethodSelectList
+      requestBody:
+        required: true
+        description: 配送方法選択可能リスト取得リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryMethodSelectListGetRequest'
+      responses:
+        200:
+          description: 配送Dtoリストレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/stock:
+    get:
+      tags:
+        - Order
+      summary: WEB-API連携商品在庫情報
+      description: WEB-API連携商品在庫情報
+      operationId: getOrderStock
+      parameters:
+        - in: query
+          name: orderGetStockRequest
+          description: 商品在庫情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/OrderGetStockRequest'
+      responses:
+        200:
+          description: 商品在庫情報Mapレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderGetStockMapResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/reserve/get:
+    post:
+      tags:
+        - Order
+      summary: WEB-API連携取りおき情報
+      description: WEB-API連携取りおき情報
+      operationId: getOrderReserve
+      requestBody:
+        required: true
+        description: 取りおきリクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderGetReserveRequest'
+      responses:
+        200:
+          description: 取りおきMapレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderGetReserveMapResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/settlement-method-select-list/get:
+    post:
+      tags:
+        - Order
+      summary: 決済方法選択可能リスト取得
+      description: 決済方法選択可能リスト取得
+      operationId: getSettlementMethodSelectList
+      requestBody:
+        required: true
+        description: 取りおきリクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettlementMethodSelectListGetRequest'
+      responses:
+        200:
+          description: 決済方法選択可能リストレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementMethodSelectListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/bill-price-calculate:
+    post:
+      tags:
+        - Order
+      summary: 請求金額算出
+      description: 請求金額算出
+      operationId: registBillPriceCalculate
+      requestBody:
+        required: true
+        description: 請求金額算出リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillPriceCalculateRequest'
+      responses:
+        200:
+          description: 請求金額算出レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillPriceCalculateResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/check:
+    post:
+      tags:
+        - Order
+      summary: 注文可能チェック
+      description: 注文可能チェック
+      operationId: check
+      requestBody:
+        description: 注文可能チェックリクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCheckRequest'
+      responses:
+        200:
+          description: 注文メッセージDtoレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderMessageDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /order/order-screen:
+    post:
+      tags:
+        - Order
+      summary: 注文画面用注文登録
+      description: 注文画面用注文登録
+      operationId: registOrderScreen
+      requestBody:
+        description: 注文画面用注文登録リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderScreenRegistRequest'
+      responses:
+        200:
+          description: 注文画面用注文登録レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderScreenRegistResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/order-complete-mail-send:
+    post:
+      tags:
+        - Order
+      summary: 注文受付完了メール送信
+      description: 注文受付完了メール送信
+      operationId: sendOrderCompleteMail
+      requestBody:
+        description: 注文受付完了メール送信リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCompleteMailSendRequest'
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/get-consumption-tax-rate:
+    get:
+      tags:
+        - Order
+      summary: WEB-API連携 消費税率取得
+      description: WEB-API連携 消費税率取得
+      operationId: getConsumptionTaxRate
+      parameters:
+        - in: query
+          name: consumptionTaxRateGetRequest
+          description: WEB-API連携 消費税率取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/ConsumptionTaxRateGetRequest'
+      responses:
+        200:
+          description: WEB-API連携 消費税率レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumptionTaxRateResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/order-quantity-discount:
+    post:
+      tags:
+        - Order
+      summary: 数量割引取得結果連携
+      description: 数量割引取得結果連携
+      operationId: registOrderQuantityDiscount
+      requestBody:
+        description: 数量割引取得結果連携リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderQuantityDiscountRequest'
+      responses:
+        200:
+          description: 数量割引取得結果連携レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderQuantityDiscountResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/order-promotion-information:
+    post:
+      tags:
+        - Order
+      summary: プロモーション連携
+      description: プロモーション連携
+      operationId: registOrderPromotionInformation
+      requestBody:
+        description: プロモーション連携リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPromotionInformationRequest'
+      responses:
+        200:
+          description: プロモーション連携レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderPromotionInformationResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/new-orderno-seq:
+    get:
+      tags:
+        - Order
+      summary: 受注番号採番
+      description: 受注番号採番
+      operationId: getNewOrderNoSeq
+      responses:
+        200:
+          description: 受注番号採番レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewOrderNoSeqResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /order/order-before-payment:
+    post:
+      tags:
+        - Order
+      summary: 前回支払方法取得
+      description: 前回支払方法取得
+      operationId: getBeforePayment
+      requestBody:
+        description: 前回支払方法取得リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderBeforePaymentRequest'
+      responses:
+        200:
+          description: 前回支払方法取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderBeforePaymentResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    OrderCheckRequest:
+      $ref: ./schemas/order/OrderCheckRequest.yaml
+    OrderScreenRegistResponse:
+      $ref: ./schemas/order/OrderScreenRegistResponse.yaml
+    OrderScreenRegistRequest:
+      $ref: ./schemas/order/OrderScreenRegistRequest.yaml
+    OrderMessageDtoResponse:
+      $ref: ./schemas/order/OrderMessageDtoResponse.yaml
+    ConvenienceEntityListResponse:
+      $ref: ./schemas/order/ConvenienceEntityListResponse.yaml
+    OrderInfoMasterGetRequest:
+      $ref: ./schemas/order/OrderInfoMasterGetRequest.yaml
+    OrderInfoMasterDtoResponse:
+      $ref: ./schemas/order/OrderInfoMasterDtoResponse.yaml
+    OrderDeliveryInformationRequest:
+      $ref: ./schemas/order/OrderDeliveryInformationRequest.yaml
+    OrderDeliveryInformationDtoResponse:
+      $ref: ./schemas/order/OrderDeliveryInformationDtoResponse.yaml
+    DeliveryMethodSelectListGetRequest:
+      $ref: ./schemas/order/DeliveryMethodSelectListGetRequest.yaml
+    DeliveryDtoListResponse:
+      $ref: ./schemas/order/DeliveryDtoListResponse.yaml
+    OrderGetStockRequest:
+      $ref: ./schemas/order/OrderGetStockRequest.yaml
+    OrderGetStockMapResponse:
+      $ref: ./schemas/order/OrderGetStockMapResponse.yaml
+    OrderGetReserveRequest:
+      $ref: ./schemas/order/OrderGetReserveRequest.yaml
+    OrderGetReserveMapResponse:
+      $ref: ./schemas/order/OrderGetReserveMapResponse.yaml
+    SettlementMethodSelectListGetRequest:
+      $ref: ./schemas/order/SettlementMethodSelectListGetRequest.yaml
+    SettlementMethodSelectListResponse:
+      $ref: ./schemas/order/SettlementMethodSelectListResponse.yaml
+    BillPriceCalculateRequest:
+      $ref: ./schemas/order/BillPriceCalculateRequest.yaml
+    BillPriceCalculateResponse:
+      $ref: ./schemas/order/BillPriceCalculateResponse.yaml
+    OrderCompleteMailSendRequest:
+      $ref: ./schemas/order/OrderCompleteMailSendRequest.yaml
+    ResultFlagResponse:
+      $ref: ./schemas/ResultFlagResponse.yaml
+    ConsumptionTaxRateGetRequest:
+      $ref: ./schemas/order/ConsumptionTaxRateGetRequest.yaml
+    ConsumptionTaxRateResponse:
+      $ref: ./schemas/order/ConsumptionTaxRateResponse.yaml
+    OrderQuantityDiscountRequest:
+      $ref: ./schemas/order/OrderQuantityDiscountRequest.yaml
+    OrderQuantityDiscountResponse:
+      $ref: ./schemas/order/OrderQuantityDiscountResponse.yaml
+    OrderPromotionInformationRequest:
+      $ref: ./schemas/order/OrderPromotionInformationRequest.yaml
+    OrderPromotionInformationResponse:
+      $ref: ./schemas/order/OrderPromotionInformationResponse.yaml
+    NewOrderNoSeqResponse:
+      $ref: ./schemas/order/NewOrderNoSeqResponse.yaml
+    OrderBeforePaymentRequest:
+      $ref: ./schemas/order/OrderBeforePaymentRequest.yaml
+    OrderBeforePaymentResponse:
+      $ref: ./schemas/order/OrderBeforePaymentResponse.yaml
+    ErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ClientErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ServerErrorResponse:
+      $ref: ./schemas/Error.yaml

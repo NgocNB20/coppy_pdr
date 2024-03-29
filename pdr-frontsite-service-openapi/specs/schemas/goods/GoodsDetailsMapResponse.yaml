@@ -1,0 +1,9 @@
+type: object
+description: 商品詳細情報MAP取得レスポンス
+additionalProperties:
+  $ref: "#/components/schemas/GoodsDetailsDtoResponse"
+
+components:
+  schemas:
+    GoodsDetailsDtoResponse:
+      $ref: ./GoodsDetailsDtoResponse.yaml

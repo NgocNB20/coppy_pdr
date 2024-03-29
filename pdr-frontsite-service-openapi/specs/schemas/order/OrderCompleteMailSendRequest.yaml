@@ -1,0 +1,8 @@
+type: object
+description: 注文受付完了メール送信リクエスト
+properties:
+  receiveOrderDtoList:
+    type: array
+    description: 受注DTOリスト
+    items:
+      type: string

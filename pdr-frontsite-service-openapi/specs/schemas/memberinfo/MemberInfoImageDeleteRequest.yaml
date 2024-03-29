@@ -1,0 +1,15 @@
+# 2023-renew No22 from here
+type: object
+description: 会員情報画像削除依頼
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  memberImageNo:
+    type: integer
+    format: int32
+    description: 会員画像のファイル名
+    example: 1
+# 2023-renew No22 to here

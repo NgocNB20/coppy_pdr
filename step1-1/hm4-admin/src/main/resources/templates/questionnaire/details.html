@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/jquery.jqplot.css}"/>
+    <script type="text/javascript" th:src="@{/assets/js/jqplot/jquery.jqplot.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/jqplot/jqplot.pieRenderer.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/jqplot/jqplot.highlighter.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/h.graph.js}"></script>
+    <title>アンケート詳細｜店舗管理</title>
+    <style type="text/css">
+        .pieGraphTable {
+            border-collapse: separate;
+        }
+        .pieGraphTableTd {
+            background-color: #eef4f9;
+            border: solid 1px #999;
+            width:500px;
+            vertical-align: top;
+        }
+        .graphTitle {
+            margin-top: 10px;
+            padding: 0 10px 0;
+            text-align: left;
+        }
+        .pieGraph {
+            height: 300px;
+        }
+
+    </style>
+</head>
+
+<body id="shop">
+<div id="questionnaireSearchShop" class="l-mainwrap">
+
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form id="indexForm" th:action="@{/questionnaire/details/}"
+                      th:object="${questionnaireDetailModel}" method="post">
+                    <input type="hidden" th:field="*{seq}"/>
+
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">アンケート検索：</h1>
+                        <h2 class="c-pagetitle_h2" th:text="${questionnaireDetailModel.name + 'の詳細'}"></h2>
+                    </div>
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <div class="l-section" id="mainContainer">
+                        <!--          Block 1      -->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">基本共通設定</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div class="wrap_flex_equivalent">
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>アンケートキー</dt>
+                                                        <dd th:text="*{questionnaireKey}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>アンケートSEQ</dt>
+                                                        <dd th:text="*{questionnaireSeq}"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <dl class="c-dl-base dt_w160px">
+                                                <div>
+                                                    <dt>アンケート名</dt>
+                                                    <dd th:text="*{name}"></dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                        <div class="wrap_flex_equivalent">
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>登録日時</dt>
+                                                        <dd class="c-times_inner">
+                                                            <span th:remove="tag" th:text="*{#date.convert(registTime)}"></span>
+                                                            <span th:remove="tag" th:text="*{#date.convert(registTime, 'HH:mm:ss')}"></span>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>更新日時</dt>
+                                                        <dd class="c-times_inner">
+                                                            <span th:remove="tag" th:text="*{#date.convert(updateTime)}"></span>
+                                                            <span th:remove="tag" th:text="*{#date.convert(updateTime, 'HH:mm:ss')}"></span>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="wrap_flex_equivalent">
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>公開開始日時</dt>
+                                                        <dd class="c-times_inner">
+                                                            <span th:remove="tag" th:text="*{#date.convert(openStartTime)}"></span>
+                                                            <span th:remove="tag" th:text="*{#date.convert(openStartTime, 'HH:mm:ss')}"></span>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                            <div class="col">
+                                                <dl class="c-dl-base dt_w160px">
+                                                    <div>
+                                                        <dt>公開終了日時</dt>
+                                                        <dd class="c-times_inner">
+                                                            <span th:remove="tag" th:text="*{#date.convert(openEndTime)}"></span>
+                                                            <span th:remove="tag" th:text="*{#date.convert(openEndTime, 'HH:mm:ss')}"></span>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <!-- PDR Migrate Customization from here -->
+                                        <!-- サイトマップ出力 -->
+                                        <div>
+                                            <dt>サイトマップ出力</dt>
+                                            <dd th:text="*{#enumtype.getLabel('HTypeSiteMapFlag', siteMapFlag)}"></dd>
+                                        </div>
+                                        <!-- PDR Migrate Customization to here -->
+
+                                        <!-- 管理用メモ -->
+                                        <div>
+                                            <dt>管理用メモ</dt>
+                                            <dd th:utext="*{#pre.convert(memo)}"></dd>
+                                        </div>
+                                        <div th:if="*{!isOrderQestion()}">
+                                            <dt>アンケートページ用URL</dt>
+                                            <dd th:text="*{getQuestionnairePageUrlPc()}"></dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Block 2-->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">基本サイト別設定</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div>
+                                            <dt>表示名</dt>
+                                            <dd th:text="*{namePc}"></dd>
+                                        </div>
+                                        <div>
+                                            <dt>公開状態</dt>
+                                            <dd th:text="*{#enumtype.getLabel('HTypeOpenStatus', openStatusPc.value)}"></dd>
+                                        </div>
+                                        <div>
+                                            <dt>説明文 （HTML可）</dt>
+                                            <dd th:utext="*{#pre.convert(freeTextPc)}"></dd>
+                                        </div>
+                                        <div>
+                                            <dt>回答完了文 （HTML可）</dt>
+                                            <dd th:utext="*{#pre.convert(completeTextPc)}"></dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <!--設問設定-->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">設問設定</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <table class="c-tbl no_line mt35">
+                                            <thead>
+                                            <tr>
+                                                <th class="sort" rowspan="2"></th>
+                                                <th class="number" rowspan="2">#</th>
+                                                <th class="w250px" rowspan="2">設問内容
+                                                </th>
+                                                <th class="w200px" rowspan="2">公開状態
+                                                </th>
+                                                <th class="center" colspan="5" style="text-align: center;">
+                                                    回答入力設定
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="w150px">必須</th>
+                                                <th class="w150px">形式</th>
+                                                <th class="w150px">文字種</th>
+                                                <th class="w75px">桁数</th>
+                                                <th class="w350px">選択肢</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="item, stat: *{questionnaireDetailModelItems}">
+                                                <td><span></span></td>
+                                                <td class="number">
+                                                    <span th:text="*{questionnaireDetailModelItems[__${stat.index}__].orderDisplay}"></span>
+                                                </td>
+                                                <td><span th:text="${item.question}"></span></td>
+                                                <td>
+                                                    <span th:text="${#enumtype.getLabel('HTypeOpenDeleteStatus', item.openStatus.value)}"></span>
+                                                </td>
+                                                <td>
+                                                    <span th:text="${#enumtype.getLabel('HTypeReplyRequiredFlag', item.replyRequiredFlag.value)}"></span>
+                                                </td>
+                                                <td>
+                                                    <span th:text="${#enumtype.getLabel('HTypeReplyType', item.replyType.value)}"></span>
+                                                </td>
+                                                <td>
+                                                    <span th:if="${item.replyValidatePattern != null}" th:text="${#enumtype.getLabel('HTypeReplyValidatePattern',item.replyValidatePattern.value)}"></span>
+                                                </td>
+                                                <td><span th:text="${item.replyMaxLength}"></span></td>
+                                                <td>
+                                                    <div th:each="choicesDisp : ${item.choicesDispItems}">
+                                                        <span th:text="${choicesDisp}"></span><br/></div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <!--集計情報-->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">集計情報</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div th:if="*{!isEmptyReplyCount}">
+                                            <dt>回答数</dt>
+                                            <dd th:text="*{replyCount}"></dd>
+                                            <dt>集計日時</dt>
+                                            <dd class="c-times_inner">
+                                                <span th:remove="tag" th:if="*{totalRegistTime != null}" th:text="*{#date.convert(totalRegistTime)}"></span>
+                                                <span th:remove="tag" th:if="*{totalRegistTime != null}" th:text="*{#date.convert(totalRegistTime, 'HH:mm:ss')}"></span>
+                                            </dd>
+                                        </div>
+                                        <div th:if="*{isEmptyReplyCount}">
+                                            <span>未集計</span>
+                                        </div>
+
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                        <!--項目別集計情報　※選択形式の項目のみ-->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">項目別集計情報　※選択形式の項目のみ</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                            <span th:if="*{isNotEmptyPieGraphItems()}" th:remove="tag">
+                                <table class="pieGraphTable">
+                                    <span th:each="pieGraphItems,idx : *{pieGraphItemsItems}" th:remove="tag">
+                                        <tr>
+                                            <span th:each="pieGraph,index : ${pieGraphItems}" th:remove="tag">
+                                                <td class="pieGraphTableTd" th:if="${pieGraph.graphDataJson != 'null' && pieGraph.graphDataJson != ''}">
+                                                    <div class="graphTitle"><span th:id="${'graphTitle' + index.index + idx.index}" th:remove="tag" th:text="${pieGraph.graphTitle}"/></div>
+                                                    <div class="pieGraph" th:id="${'graphDataJson' + index.index + idx.index}" th:text="${pieGraph.graphDataJson}" nographmsg="回答なし"/></td>
+                                            </span>
+                                        </tr>
+                                    </span>
+                                </table>
+                            </span>
+                            </div>
+                        </article>
+                    </div>
+                    <!-- 追尾ボタン -->
+                    <!--/* 追尾ボタン */-->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <th:block th:if="*{questionnaireSeq != null}"><a class="c-btn btn_back icon_left"
+                                                                                 th:href="@{/questionnaire/(md=list)}"><i
+                                        class="material-icons navigate_before"></i>戻る</a></th:block>
+                                <th:block th:if="*{questionnaireSeq == null}"><a class="c-btn btn_back icon_left"
+                                                                                 th:href="@{/questionnaire/}"><i
+                                        class="material-icons navigate_before"></i>戻る</a></th:block>
+                            </div>
+                            <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                <div class="col_left">
+                                    <a class="c-btn btn_regular"
+                                       th:href="@{/questionnaire/registupdate/(seq=*{seq})}">修正</a>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+
+
+</div>
+</body>
+</html>

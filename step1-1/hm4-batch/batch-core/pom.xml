@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.hankyuhanshin.itec.hitmall.batch</groupId>
+        <artifactId>hm4-batch</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>batch-core</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <name>batch-core</name>
+    <description>Hit-mall 4 batch-core package</description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>jp.co.hankyuhanshin.itec.hitmall</groupId>
+            <artifactId>hm4-core</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                    <compilerArgs>
+                        <arg>--patch-module=jdk.unsupported=${project.basedir}/../lib/rt-0.0.1-SNAPSHOT.jar</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>ISO-8859-1</encoding>
+                    <!--
+                        【補足】
+                            上記ビルド時のエンコーディング設定は、UTF-8ではなく「ISO-8859-1」とする。
+                            こうしないと、環境依存設定値（profilesタグ参照）の埋込時に、全角文字が必ず文字化けしてしまう。。
+                            詳細はナゾだが、おそらくMaven内部の処理がISO-8859-1固定で処理するために、必要な設定なのであろう。
+                            ＜参考＞
+                            https://stackoverflow.com/questions/14327003/wrong-encoding-after-activating-resource-filtering
+
+                            propertiesファイル自体のエンコードはUTF-8でOK。
+                            ※core-LO.propertiesなど環境依存ファイルもすべて含めて、UTF-8で良い
+                     -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>LO</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>config/envdepend/*.*</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+                <filters>
+                    <filter>src/main/resources/config/envdepend/batch-LO.properties</filter>
+                </filters>
+            </build>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>IT</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>config/envdepend/*.*</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+                <filters>
+                    <filter>src/main/resources/config/envdepend/batch-IT.properties</filter>
+                </filters>
+            </build>
+        </profile>
+
+        <profile>
+            <id>ST</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>config/envdepend/*.*</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+                <filters>
+                    <filter>src/main/resources/config/envdepend/batch-ST.properties</filter>
+                </filters>
+            </build>
+        </profile>
+
+        <profile>
+            <id>PR</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>config/envdepend/*.*</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+                <filters>
+                    <filter>src/main/resources/config/envdepend/batch-PR.properties</filter>
+                </filters>
+            </build>
+        </profile>
+
+        <profile>
+            <id>DE</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>config/envdepend/*.*</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+                <filters>
+                    <filter>src/main/resources/config/envdepend/batch-DE.properties</filter>
+                </filters>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

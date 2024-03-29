@@ -1,0 +1,13 @@
+type: object
+description: 注文画面用注文登録レスポンス
+properties:
+  orderTime:
+    type: string
+    format: date-time
+    description: 受注日時
+    example: 2021/12/12 12:00:00
+  receiveOrderDtoList:
+    type: array
+    description: 受注DTOリスト
+    items:
+      type: string

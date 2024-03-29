@@ -1,0 +1,26 @@
+type: object
+description: アクセス情報登録リクエスト
+properties:
+  accessType:
+    type: string
+    description: アクセス種別
+    example: G001
+    default: G001
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品ｸﾞﾙｰﾌﾟSEQ
+    example: 1
+  accessCount:
+    type: integer
+    format: int32
+    description: アクセス数
+    example: 1
+  accessUid:
+    type: string
+    description: 端末識別情報（必須）
+    example: 6057201212013834
+  campainCode:
+    type: string
+    description: キャンペーンコード（必須）
+    example: bnr_s18

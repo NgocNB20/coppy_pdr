@@ -1,0 +1,481 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.c-product {
+  $this: &;
+
+  // 要素
+  &__item {
+
+    a {
+      display: block;
+
+      @include media(lg) {
+
+        &:hover {
+          #{$this}__item-button {
+            opacity: .5;
+          }
+
+          #{$this}__item-title,
+          #{$this}__item-spec,
+          #{$this}__item-sale-comment,
+          #{$this}__item-price,
+          #{$this}__item-price-unit,
+          #{$this}__item-regular-price {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+          }
+
+        }
+        
+        > * {
+          @include media(lg) {
+            transition: opacity $comMS $comES;
+         }
+        }
+      }
+    }
+
+    &-image {
+      margin-bottom: 18px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-icon {
+      $this: &;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 9px;
+
+      span {
+        display: grid;
+        place-content: center;
+        width: 48%;
+        margin-bottom: 4%;
+        @include font-style(14, 21, bold);
+        font-size:min(1.2vw,1.4rem);
+        white-space: nowrap;
+      }
+
+      &--new {
+        border: solid 2px $color-orange;
+        color: $color-orange;
+      }
+
+      &--sale {
+        border: solid 2px $color-f00;
+        color: $color-f00;
+      }
+
+      &--outlet {
+        border: solid 2px $color-green;
+        color: $color-green;
+      }
+
+      &--reserve {
+        width: 100% !important;
+        border: solid 2px $color-primary;
+        color: $color-primary;
+      }
+
+      &--list {
+        justify-content: left;
+
+        span {
+          width: auto;
+          min-width: 96px;
+          margin: 0 6px 6px 0;
+        }
+
+        #{$this}--reserve {
+          width: 200px !important;
+        }
+      }
+    }
+
+    &-title,
+    &-spec {
+      @include font-style(15, 25);
+      margin-bottom: 9px;
+    }
+
+    &-sale-comment {
+      text-align: right;
+      @include font-style(14, 25);
+      color: $color-f00;
+    }
+
+    &-price {
+      text-align: right;
+      @include font-style(20, 25, bold);
+
+      &--null {
+        text-align: center;
+        @include font-style(15, 25, normal);
+      }
+
+      small {
+        @include font-style(15, 24, normal);
+      }
+
+      &--sale {
+        color: $color-f00;
+
+        small {
+          @include font-style(13, 24);
+        }
+
+      }
+
+      &-unit {
+        display: inline-block;
+
+        &--sale {
+          color: $color-f00;
+        }
+
+        span {
+          @include font-style(15, 25)
+        }
+      }
+    }
+
+    &-regular-price {
+      text-align: right;
+      @include font-style(15, 25);
+      color: $color-a1;
+
+      small {
+        @include font-style(12, 20)
+      }
+
+    }
+
+    &-stock {
+      margin-top: 15px;
+      background: $color-e6;
+      text-align: center;
+      @include font-style(14, 25, bold);
+      color: $color-666;
+    }
+
+    &-notlogin,
+    &-licence {
+      @include font-style(15, 25, bold);
+      color: $color-000;
+    }
+
+    &-button {
+      margin-top: 28px;
+      text-align: center;
+
+      button {
+        padding: 0 30px;
+      }
+    }
+
+
+    @include media(sm) {
+
+      &-image {
+        margin-bottom: vwset(16);
+      }
+  
+      &-icon {
+        margin-bottom: vwset(7);
+  
+        span {
+          @include font-sp-style(12,16);
+        }
+
+        &--list {
+  
+          span {
+            min-width: vwset(75);
+            margin: 0 vwset(5) vwset(5) 0;
+            }
+      
+            #{$this}--reserve {
+              width: vwset(155) !important;
+            }
+          }
+      }
+
+      &-title,
+      &-spec {
+        @include font-sp-style(14, 22);
+        margin-bottom: vwset(10);
+      }
+
+      &-sale-comment {
+        @include font-style(13, 22);
+      }
+
+      &--status {
+        width: vwset(156);
+
+        span {
+          border-radius: vwset(2);
+          padding: vwset(3) 0;
+          width: vwset(70);
+          margin: 0 vwset(6) vwset(6) 0;
+          @include font-style(11,14);
+        }
+      }
+
+      &-price {
+        @include font-sp-style(17, 22);
+
+        &--null {
+          @include font-sp-style(12, 25, normal);
+        }
+
+        small {
+          @include font-style(12, 22);
+        }
+
+        &--sale {  
+          small {
+            font-weight: bold;
+          }
+        }
+      }
+
+      &-unit {
+        
+        span {
+          @include font-style(14, 22)
+        }
+      }
+
+      &-regular-price {
+        @include font-style(11, 25);
+  
+        small {
+          @include font-style(11, 25)
+        }
+
+      }
+
+      &-stock {
+        margin-top: vwset(15);
+        @include font-style(11, 20);
+      }
+
+      &-notlogin,
+      &-licence {
+        @include font-sp-style(14, 22);
+      }
+
+    }
+  }
+
+  // サムネイルリスト（可変列）
+  &--thumb {
+    border-top: solid 1px $color-e6;
+    border-bottom: solid 1px $color-e6;
+    overflow: hidden;
+    display: grid;
+    column-gap: 5.69%;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    .c-product__item {
+      padding-top: 48px;
+      padding-bottom: 40px;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        width: calc(100% + 75px);
+        height: 1px;
+        background: $color-e6;
+        position: absolute;
+        bottom: -1px;
+        right: 0;
+      }
+    }
+
+    @include media(sm) {
+      margin-inline: vwset(15);
+      column-gap: vwset(20);
+      grid-template-columns: 1fr 1fr;
+  
+      .c-product__item {
+        padding-top: vwset(34);
+        padding-bottom: vwset(34);
+  
+        &::before {
+          content: "";
+          width: calc(100% + vwset(20));
+        }
+      }
+
+    }
+  }
+
+
+  // スライダー ※メモ：TOP、お客様がよく・・・がベース
+  &--slider {
+    position: relative;
+
+    #{$this}-swiper {
+      overflow-x: hidden;
+      margin-inline: 70px;
+    }
+
+    .swiper-slide {
+      width: 200px;
+      margin-right: 3.07%;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 40px;
+      height: 40px;
+      background-color: #bbb;
+      background-position: center;
+      background-size: 11px auto;
+      top: 84px;
+
+      &:after {
+        content: none;
+      }
+    }
+
+    .swiper-button-prev {
+      @include icon('arrow-left', 'ffffff');
+      left: 0;
+    }
+    
+    .swiper-button-next {
+      @include icon('arrow-right', 'ffffff');
+      right: 0;
+    }
+
+    @include media(sm) {
+
+      #{$this}-swiper {
+        margin-inline: 0;
+      }
+
+      .swiper-slide {
+        width: 41.3vw;
+        margin: 0 2.65vw;
+      }
+
+      .swiper-button-prev,
+      .swiper-button-next {
+        display: none;
+      }
+    }
+
+
+  }
+  
+  // リスト表示
+  &--list {
+
+    border-top: solid 1px $color-e6;
+
+    .c-product__item {
+      border-bottom: solid 1px #e4e4e4;
+      padding-block: 20px;
+      
+      a {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 200px 1fr 315px;
+        gap: 40px;
+        align-items: center;
+       }
+
+      &-title {
+        margin-bottom: 0;
+        @include font-style(16,30,bold);
+      }
+
+      &-text {
+        margin-top: 13px;
+        @include font-style(15,30);
+      }
+
+      &-notlogin,
+      &-licence {
+        text-align: right;
+      }
+
+      &-stock {
+        max-width: 200px;
+        margin-left: auto;
+        margin-bottom: 15px;
+      }
+
+    }
+
+    @include media(sm) {
+
+      margin-inline: vwset(15);
+
+      .c-product__item {
+
+        padding-block: vwset(25);
+        
+        a {
+          grid-template-columns: vwset(130) 1fr;
+          grid-template-rows: max-content 1fr;
+          column-gap: vwset(20);
+          row-gap: vwset(5);
+          align-items: flex-start;
+         }
+
+        &-image {
+          grid-column: 1 / 2;
+          grid-row: 1 / 3;
+          margin-bottom: 0;
+        }
+
+        &-overview {
+          grid-column: 2 / 3;
+          grid-row: 1 / 2;
+        }
+
+        &-state {
+          grid-column: 2 / 3;
+          grid-row: 2 / 3;
+        }
+  
+        &-title {
+          @include font-sp-style(14,22);
+          margin-bottom: vwset(5);
+        }
+  
+        &-text {
+          margin-top: vwset(5);
+          @include font-sp-style(13,22);
+        }
+  
+        &-notlogin,
+        &-licence {
+          text-align: left;
+        }
+
+        &-stock {
+          max-width: vwset(155);
+        }
+  
+      }
+    }
+  }
+
+}
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>発送完了メール</title>
+</head>
+<body>
+<div>
+    <div>
+        <span>歯科材料の通販　ピーディーアール</span>
+    </div>
+    <div>
+        <span>発送完了のお知らせ</span>
+        <th:block th:if="${mailContentsMap.get('RECEIVER_DATE') != ''}">
+            <span th:text="'【お届け予定日】' + ${mailContentsMap.get('RECEIVER_DATE')}"></span>
+        </th:block>
+    </div>
+</div>
+<br>
+<br>
+<div>
+    <span th:text="${mailContentsMap.get('NAME')}"></span>
+    <span>様</span>
+</div>
+<br>
+<div>
+    <div>
+        <span>この度はご注文いただき、誠にありがとうございました。</span>
+    </div>
+    <div>
+        <span>商品の発送が完了いたしました。</span>
+    </div>
+    <div>
+        <span>またのご利用を心からお待ちしております。</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span>■発送内容</span>
+    </div>
+    <div>
+        <span>受注番号：</span>
+        <span th:text="${mailContentsMap.get('ORDER_CODE')}"></span>
+    </div>
+    <div>
+        <span>【お支払い方法】</span>
+        <span th:text="${mailContentsMap.get('PAYMENT_METHOD')}"></span>
+    </div>
+    <th:block th:if="${mailContentsMap.get('RECEIVER_DATE') != ''}">
+        <span>【お届け予定日】</span>
+        <span th:text="${mailContentsMap.get('RECEIVER_DATE')}"></span>
+    </th:block>
+    <div>
+        <span>【時間帯指定】</span>
+        <span th:text="${mailContentsMap.get('RECEIVER_TIME_ZONE')}"></span>
+    </div>
+    <div>
+        <span>【配送方法】</span>
+        <span th:text="${mailContentsMap.get('DELIVERY_METHOD')}"></span>
+    </div>
+    <div>
+        <span>【荷物お問合せ番号】</span>
+        <span th:text="${mailContentsMap.get('INVOICE_NO')}"></span>
+    </div>
+</div>
+<br>
+<div>
+    <th:block th:if="${mailContentsMap.get('DELIVERY_METHOD_URL') != ''}">
+        <span>*下記URL（配送業者ホームページ）から商品の配送状況を確認できます。</span>
+        <br>
+        <span>
+            <a th:href="${mailContentsMap.get('DELIVERY_METHOD_URL')}"
+            th:text="${mailContentsMap.get('DELIVERY_METHOD_URL')}"></a>
+        </span>
+        <div>
+            <span>※道路状況・天候等の諸事情でお届けが遅れる場合がございますのでご了承ください。</span>
+        </div>
+        <div>
+            <span>配送業者のホームページに反映されるまでにお時間がかかる場合がございます。</span>
+        </div>
+        <div>
+            <span>※TEL・FAX、返品交換で受付分もお知らせしております。</span>
+        </div>
+    </th:block>
+</div>
+<br>
+    <div>
+        <div>
+            <span>ご請求金額：</span>
+            <span th:text="${mailContentsMap.get('TOTAL_PRICE')}"></span>
+            <span>円</span>
+        </div>
+        <div>
+            <span>※お預かり金のある方は充当の上、発送させていただきました。</span>
+        </div>
+    </div>
+<br>
+<div>
+    <div>
+        <span>■お届け先</span>
+    </div>
+    <div>
+        <span>お名前：</span><span th:text="${mailContentsMap.get('RECEIVER_NAME')}"></span>
+        <span>様</span>
+    </div>
+    <div>
+        <span>郵便番号：〒</span><span th:text="${mailContentsMap.get('RECEIVER_ZIP_CODE')}"></span>
+    </div>
+    <div>
+        <span>ご住所：</span><span th:text="${mailContentsMap.get('RECEIVER_ADDRESS')}"></span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span>何かございましたら下記カスタマーサービスデスクまでご連絡ください。</span>
+    </div>
+    <div>
+        <span>今後ともよろしくお願いいたします。</span>
+    </div>
+</div>
+<br>
+<br>
+<div>
+    <div>
+        <span>【ピーディーアールオンラインショップ　カスタマーサービスデスク】</span>
+    </div>
+    <div>
+        <span>　TEL：0120-108394（受付時間：月～金　9:00～16:00 休業日：土日祝）</span>
+    </div>
+    <div>
+        <span>　FAX：0120-108649（年中無休/24時間受付）</span>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <span>※本メールは送信専用メールアドレスから自動で配信しております。</span>
+    </div>
+    <div>
+       <span>　ご返信いただいてもお答えできませんのでご了承ください。</span>
+    </div>
+    <div>
+        <span>※このメールにお心当たりのない方・お問い合わせは、上記カスタマーサービスデスクまでご連絡ください。</span>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+type: object
+description: WEB-API連携 お届け先登録レスポンス
+properties:
+  result:
+    $ref: "#/components/schemas/AbstractWebApiResponseResultDtoResponse"
+
+
+components:
+  schemas:
+    AbstractWebApiResponseResultDtoResponse:
+      $ref: ./AbstractWebApiResponseResultDtoResponse.yaml

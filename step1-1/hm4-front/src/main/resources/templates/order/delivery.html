@@ -1,0 +1,575 @@
+<!-- PDR Migrate Customization from here -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script type="text/javascript" src="/common/js/order_deilvery.js"></script>
+
+    <script type="text/javascript">
+        // 変更（セールde予約）
+        function setGoodsCodeIndex(goodsCode){
+            // 行インデックスhiddenを生成しformに追加
+            $("<input>", {
+                type: 'hidden',
+                id: 'goodsCodeIndex',
+                name: 'goodsCodeIndex',
+                value: goodsCode
+            }).appendTo('#reserveDeliveryItems');
+        }
+
+        jQuery(function ($) {
+            const DEFAULT = {
+                BREAKPOINT: 899,
+                SCROLL_OFFSET_LG: -50,
+                SCROLL_OFFSET_SM: -80,
+                SCROLL_DURATION_LG: 900,
+                SCROLL_DURATION_SM: 1200,
+                SCROLL_EASING_LG: 'easeInOutQuart',
+                SCROLL_EASING_SM: 'easeInOutQuart'
+            }
+
+            function getDeviceType() {
+                const windowWidth = window.innerWidth;
+                const deviceType = windowWidth > DEFAULT.BREAKPOINT ? 'lg' : 'sm';
+                return deviceType;
+            }
+
+            var deviceTypeDefault = getDeviceType();
+
+            if (deviceTypeDefault === 'lg') {
+                $("input[id^='orderGoodsCount-1']").prop('disabled', true);
+            }
+            if (deviceTypeDefault === 'sm') {
+                $("input[id^='orderGoodsCount-2']").prop('disabled', true);
+            }
+
+            window.addEventListener('resize', function(event) {
+                const windowWidth = window.innerWidth;
+                const deviceType = windowWidth > DEFAULT.BREAKPOINT ? 'lg' : 'sm';
+                if (deviceType === 'lg') {
+                    $("input[id^='orderGoodsCount-1']").prop('disabled', true);
+                }
+                if (deviceType === 'sm') {
+                    $("input[id^='orderGoodsCount-2']").prop('disabled', true);
+                }
+            }, true);
+        });
+
+    </script>
+</head>
+
+<body id="gotop" class="p-order-confirm p-order-delivery">
+<div class="l-mainwrap l-order">
+    <div th:replace="~{newdesign/include/headerorder}"></div>
+
+    <main class="l-page">
+
+        <div class="c-orderflow">
+            <ul>
+                <li class="c-orderflow__step c-orderflow__step--already"><span>ショッピングカート</span></li>
+                <li class="c-orderflow__step c-orderflow__step--current"><span>注文内容確認</span></li>
+                <li class="c-orderflow__step"><span>注文完了</span></li>
+            </ul>
+        </div>
+
+        <th:block th:if="${deliveryModel.isExistDeliveryMethod()}">
+            <form id="deliveryForm" th:action="@{/order/delivery.html}" th:object="${deliveryModel}" method="post">
+                <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>お届け内容の変更</strong></h2>
+
+                    <hm:freearea key="delivery_info"/>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="c-page-description">
+                        <p class="c-page-description__text">下記より変更ができます。</p>
+                        <p class="c-page-description__text c-page-description--margin-m"><strong>※沖縄ならび島しょ部のお客様は配送都合上、お届けにお時間がかかります。また、時間帯の指定をいただいてもご利用できません。（船便になる場合があるため）<br>
+                            ※天候、交通事情などで下記お届け予定より遅れる場合もございます。ご了承ください。</strong></p>
+                    </div>
+
+                    <h4 class="c-title-form-m c-title-form-m--first"><p>お届け先</p></h4>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p>事業所名</p></dt>
+                                <dd><p><span id="receiverLastName" th:remove="tag" th:text="${deliveryModel.receiverLastName}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>電話番号</p></dt>
+                                <dd><p><span id="receiverTel" th:remove="tag" th:text="${deliveryModel.receiverTel}"/></p></dd>
+                            </dl>
+                            <dl class="l-form__list">
+                                <dt><p>住所</p></dt>
+                                <dd><p>〒<span id="receiverZipCode1" th:remove="tag" th:text="${deliveryModel.receiverZipCode1}"/>-<span id="receiverZipCode2" th:remove="tag" th:text="${deliveryModel.receiverZipCode2}"/><br><span id="receiverAddress1" th:remove="tag" th:text="${deliveryModel.receiverAddress1}"/><span id="receiverAddress2" th:remove="tag" th:text="${deliveryModel.receiverAddress2}"/><span id="receiverAddress3" th:remove="tag" th:text="${deliveryModel.receiverAddress3}"/></p></dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <h4 class="c-title-form-m c-title-form-m--line" th:if="${!deliveryModel.isHideDeliveryAssignFlag()}"><p>今すぐお届け</p></h4>
+
+                    <br>
+                    <div class="mb15">
+                        <hm:freearea key="attention_delivery"/>
+                    </div>
+
+                    <div class="l-form p-order-delivery__delivery-date" th:if="*{!isHideDeliveryAssignFlag()}">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p>お届け希望日</p></dt>
+                                <dd>
+                                    <th:block th:if="*{isDeliveryAssignFlag()}">
+                                        <div class="c-select c-select--delivery" th:classappend="${#fields.hasErrors('deliveryDate')} ? 'c-select--error' : ''">
+                                            <select th:id="deliveryDate" title="お届け希望日" name="deliveryDate" class="c-select__inner">
+                                                <option th:each="item : *{deliveryDateItems}"
+                                                        th:value="${item.key}" th:text="${item.value}"
+                                                        th:selected="${item.key} == *{deliveryDate}">
+
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <span th:if="${#fields.hasErrors('deliveryDate')}" th:errors="*{deliveryDate}" class="c-field-error c-field-error--top"></span>
+                                    </th:block>
+                                    <th:block th:if="*{!isDeliveryAssignFlag()}">
+                                        <div class="c-select c-select--delivery" th:classappend="${#fields.hasErrors('deliveryDate')} ? 'c-select--error' : ''">
+                                            <select th:id="deliveryDate" title="お届け希望日" name="deliveryDate" class="c-select__inner" disabled="disabled">
+                                                <option th:each="item : *{deliveryDateItems}"
+                                                        th:value="${item.key}" th:text="${item.value}"
+                                                        th:selected="${item.key} == *{deliveryDate}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <span th:if="${#fields.hasErrors('deliveryDate')}" th:errors="*{deliveryDate}" class="c-field-error c-field-error--top"></span>
+                                    </th:block>
+                                </dd>
+                            </dl>
+
+                            <dl class="l-form__list">
+                                <dt><p>お届け時間帯</p></dt>
+                                <dd>
+                                    <th:block th:if="*{isDeliveryAssignFlag()}">
+                                        <th:block th:if="*{isViewReceiverTimeZoneYamato()}">
+                                            <div class="c-select c-select--delivery" th:classappend="${#fields.hasErrors('receiverTimeZoneYamato')} ? 'c-select--error' : ''">
+                                                <select th:id="receiverTimeZoneYamato" title="お届け時間帯" name="receiverTimeZoneYamato" class="c-select__inner">
+                                                    <option th:each="item : *{receiverTimeZoneYamatoItems}"
+                                                            th:value="${item.key}" th:text="${item.value}"
+                                                            th:selected="${item.key} == *{receiverTimeZoneYamato}"></option>
+                                                </select>
+                                            </div>
+                                            <span th:if="${#fields.hasErrors('receiverTimeZoneYamato')}" th:errors="*{receiverTimeZoneYamato}" class="c-field-error c-field-error--top"></span>
+                                        </th:block>
+                                        <th:block th:if="*{isViewReceiverTimeZoneJapanPost()}">
+                                            <div class="c-select c-select--delivery" th:classappend="${#fields.hasErrors('receiverTimeZoneJapanPost')} ? 'c-select--error' : ''">
+                                                <select th:id="receiverTimeZoneJapanPost" title="お届け時間帯" name="receiverTimeZoneJapanPost" class="c-select__inner">
+                                                    <option th:each="item : *{receiverTimeZoneJapanPostItems}"
+                                                            th:value="${item.key}" th:text="${item.value}"
+                                                            th:selected="${item.key} == *{receiverTimeZoneJapanPost}"></option>
+                                                </select>
+                                            </div>
+                                            <span th:if="${#fields.hasErrors('receiverTimeZoneJapanPost')}" th:errors="*{receiverTimeZoneJapanPost}" class="c-field-error c-field-error--top"></span>
+                                        </th:block>
+                                    </th:block>
+                                    <th:block th:if="*{!isDeliveryAssignFlag()}">
+                                        <th:block th:if="*{isViewReceiverTimeZoneYamato()}">
+                                            <div class="c-select c-select--delivery" th:classappend="${#fields.hasErrors('receiverTimeZoneYamato')} ? 'c-select--error' : ''">
+                                                <select th:id="receiverTimeZoneYamato" title="お届け時間帯" name="receiverTimeZoneYamato" class="c-select__inner" disabled="disabled">
+                                                    <option th:each="item : *{receiverTimeZoneYamatoItems}"
+                                                            th:value="${item.key}" th:text="${item.value}"
+                                                            th:selected="${item.key} == *{receiverTimeZoneYamato}"></option>
+                                                </select>
+                                            </div>
+                                            <span th:if="${#fields.hasErrors('receiverTimeZoneYamato')}" th:errors="*{receiverTimeZoneYamato}" class="c-field-error c-field-error--top"></span>
+                                        </th:block>
+                                        <th:block th:if="*{isViewReceiverTimeZoneJapanPost()}">
+                                            <div class="c-select c-select--delivery" th:classappend="${#fields.hasErrors('receiverTimeZoneJapanPost')} ? 'c-select--error' : ''">
+                                                <select th:id="receiverTimeZoneJapanPost" title="お届け時間帯" name="receiverTimeZoneJapanPost" class="c-select__inner" disabled="disabled">
+                                                    <option th:each="item : *{receiverTimeZoneJapanPostItems}"
+                                                            th:value="${item.key}" th:text="${item.value}"
+                                                            th:selected="${item.key} == *{receiverTimeZoneJapanPost}"></option>
+                                                </select>
+                                            </div>
+                                            <span th:if="${#fields.hasErrors('receiverTimeZoneJapanPost')}" th:errors="*{receiverTimeZoneJapanPost}" class="c-field-error c-field-error--top"></span>
+                                        </th:block>
+                                    </th:block>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <!-- 今すぐお届け商品 -->
+                    <th:block th:if="*{isViewDeliveryNowGoods()}">
+                        <!-- 2023-renew No14 from here -->
+                        <div class="p-order-confirm__list p-order-confirm__list--normal">
+                            <table class="c-table c-table--pcspdevide">
+                                <tr class="c-table__tr l-lg">
+                                    <th class="c-table__th">商品情報</th>
+                                    <th class="c-table__th">数量</th>
+                                    <th class="c-table__th">お届け希望日</th>
+                                </tr>
+                                <th:block th:each="deliveryNowItem, deliveryNowItemStat : *{deliveryNowItems}">
+                                    <tr class="c-table__tr">
+                                        <td class="c-table__item p-order-confirm__list-item">
+                                            <div class="p-order-confirm__list-item-inner">
+                                                <div class="p-order-confirm__list-item-image">
+                                                    <div>
+                                                        <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${deliveryNowItem.goodsImage}}"
+                                                             th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${deliveryNowItem.goodsImage} + ' 2x'"
+                                                             th:alt="${deliveryNowItem.goodsImageAlt}"
+                                                             height="150" width="150" decoding="async" loading="lazy">
+                                                    </div>
+                                                </div>
+                                                <div class="p-order-confirm__list-item-overview">
+                                                    <div class="p-order-confirm__list-item-text"><span th:text="${deliveryNowItem.goodsCode}" th:remove="tag" /></div>
+                                                    <div class="p-order-confirm__list-item-title"><span th:text="${deliveryNowItem.goodsName}" th:remove="tag" /></div>
+                                                    <th:block th:if="${deliveryNowItem.isViewUnit1()}">
+                                                        <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${deliveryNowItem.unitTitle1}" th:remove="tag" />：</span><span th:text="${deliveryNowItem.unitValue1}" th:remove="tag" /></div>
+                                                    </th:block>
+                                                    <th:block th:if="${deliveryNowItem.isViewUnit2()}">
+                                                        <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${deliveryNowItem.unitTitle2}" th:remove="tag" />：</span><span th:text="${deliveryNowItem.unitValue2}" th:remove="tag" /></div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-order-confirm__nest l-sm">
+                                            <table class="p-order-confirm__nest-table">
+                                                <tr>
+                                                    <th class="c-table__th">数量</th>
+                                                    <th class="c-table__th">お届け希望日</th>
+                                                </tr>
+                                                <tr>
+                                                    <th:block th:if="${deliveryNowItem.isEmotionPriceGoods()}">
+                                                        <td class="p-order-confirm__nest-quantity"><span th:id="'orderGoodsCount-0-' + ${deliveryNowItemStat.index}" th:remove="tag" th:text="${#number.convert(deliveryNowItem.orderGoodsCount)}"/></td>
+                                                    </th:block>
+                                                    <th:block th:if="${!deliveryNowItem.isEmotionPriceGoods()}">
+                                                        <td class="p-order-confirm__nest-quantity">
+                                                            <div class="c-count-quantity--wrap">
+                                                                <div class="c-count-quantity js-count-quantity">
+                                                                    <button type="button" class="c-count-quantity__minus minus_button" data-type="minus" th:data-field="'deliveryNowItems[' + ${deliveryNowItemStat.index} + '].orderGoodsCount'"></button>
+                                                                    <input th:id="'orderGoodsCount-1-' + ${deliveryNowItemStat.index}"
+                                                                           th:value="${deliveryNowItem.orderGoodsCount}"
+                                                                           th:name="'deliveryNowItems[' + ${deliveryNowItemStat.index} + '].orderGoodsCount'"
+                                                                           th:classappend="${#fields.hasErrors('deliveryNowItems[' + deliveryNowItemStat.index+'].orderGoodsCount')} ? 'c-input--error' : ''"
+                                                                           type="number" class="c-input c-count-quantity__result input_result" min="1" max="999" maxlength="3">
+                                                                    <button type="button" class="c-count-quantity__plus plus_button" data-type="plus" th:data-field="'deliveryNowItems[' + ${deliveryNowItemStat.index} + '].orderGoodsCount'"></button>
+                                                                </div>
+                                                                <div th:if="${#fields.hasErrors('deliveryNowItems[' + deliveryNowItemStat.index+'].orderGoodsCount')}" th:errors="*{deliveryNowItems[__${deliveryNowItemStat.index}__].orderGoodsCount}" class="c-field-error c-field-error--top"></div>
+                                                            </div>
+                                                        </td>
+                                                    </th:block>
+                                                    <td class="p-order-confirm__nest-delivery">
+                                                        <span th:id="'deliveryDateLabel-0-' + ${deliveryNowItemStat.index}"></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="c-table__quantity p-order-confirm__list-quantity l-lg">
+                                            <div class="p-order-confirm__list-quantity-inner">
+                                                <div class="c-count-quantity--wrap">
+                                                    <th:block th:if="${deliveryNowItem.isEmotionPriceGoods()}">
+                                                        <div class="p-order-confirm__nest-quantity">
+                                                            <span th:id="'orderGoodsCount-0-' + ${deliveryNowItemStat.index}" th:remove="tag" th:text="${#number.convert(deliveryNowItem.orderGoodsCount)}"/>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:if="${!deliveryNowItem.isEmotionPriceGoods()}">
+                                                        <div class="c-count-quantity js-count-quantity">
+                                                            <button type="button" class="c-count-quantity__minus minus_button" data-type="minus" th:data-field="'deliveryNowItems[' + ${deliveryNowItemStat.index} + '].orderGoodsCount'"></button>
+                                                            <input th:id="'orderGoodsCount-2-' + ${deliveryNowItemStat.index}"
+                                                                   th:value="${deliveryNowItem.orderGoodsCount}"
+                                                                   th:name="'deliveryNowItems[' + ${deliveryNowItemStat.index} + '].orderGoodsCount'"
+                                                                   th:classappend="${#fields.hasErrors('deliveryNowItems[' + deliveryNowItemStat.index+'].orderGoodsCount')} ? 'field-error' : ''"
+                                                                   type="number" class="c-input c-count-quantity__result input_result" min="1" max="999" maxlength="3">
+                                                            <button type="button" class="c-count-quantity__plus plus_button" data-type="plus" th:data-field="'deliveryNowItems[' + ${deliveryNowItemStat.index} + '].orderGoodsCount'"></button>
+                                                        </div>
+                                                    </th:block>
+
+                                                    <div th:if="${#fields.hasErrors('deliveryNowItems[' + deliveryNowItemStat.index+'].orderGoodsCount')}" th:errors="*{deliveryNowItems[__${deliveryNowItemStat.index}__].orderGoodsCount}" class="c-field-error c-field-error--top"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-order-confirm__list-delivery l-lg">
+                                            <span th:id="'deliveryDateLabel-1-' + ${deliveryNowItemStat.index}"></span>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </div>
+                        <!-- 2023-renew No14 to here -->
+                    </th:block>
+
+                    <!-- セールde予約商品 -->
+                    <th:block th:if="*{isViewReserveDeliveryGoods()}">
+                        <!-- 2023-renew No14 from here -->
+                        <h4 class="p-order-delivery__title c-title-form-m c-title-form-m--reserve">
+                            <span><img src="/newdesign/assets/images/icon/sale-reserve.svg" width="44" alt="セールde予約"></span><p>セールde予約注文</p>
+                        </h4>
+                        <div class="p-order-confirm__list p-order-confirm__list--reserve">
+                            <table class="c-table c-table--pcspdevide">
+                                <tr class="c-table__tr l-lg">
+                                    <th class="c-table__th">商品情報</th>
+                                    <th class="c-table__th">お届け希望日</th>
+                                    <th class="c-table__th">数量</th>
+                                    <th class="c-table__th"></th>
+                                </tr>
+                                <tbody id="reserveDeliveryItems">
+                                <th:block th:each="itemMap, itemMapStat : *{reserveDeliveryItemMap}">
+                                    <th:block th:if="${itemMap.value.size} == 1">
+                                        <th:block th:each="reserveDeliveryItem, reserveDeliveryItemStat : ${itemMap.value}">
+                                            <tr class="c-table__tr">
+                                                <td class="c-table__item p-order-confirm__list-item">
+                                                    <div class="p-order-confirm__list-item-inner">
+                                                        <div class="p-order-confirm__list-item-image">
+                                                            <div>
+                                                                <img th:src="@{${#image.convert(reserveDeliveryItem.goodsImage, 0, 'p1')}}"
+                                                                     th:attr="srcset=${#image.convert(reserveDeliveryItem.goodsImage, 0, 'p1x2')} + ' 2x'"
+                                                                     th:alt="${reserveDeliveryItem.goodsImageAlt}"
+                                                                     height="150" width="150" decoding="async" loading="lazy">
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-order-confirm__list-item-overview">
+                                                            <a href="">
+                                                                <div class="p-order-confirm__list-item-text"><span th:text="${reserveDeliveryItem.goodsCode}" th:remove="tag" /></div>
+                                                                <div class="p-order-confirm__list-item-title"><span th:text="${reserveDeliveryItem.goodsName}" th:remove="tag" /></div>
+                                                                <th:block th:if="${reserveDeliveryItem.isViewUnit1()}">
+                                                                    <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${reserveDeliveryItem.unitTitle1}" th:remove="tag" />：</span><span th:text="${reserveDeliveryItem.unitValue1}" th:remove="tag" /></div>
+                                                                </th:block>
+                                                                <th:block th:if="${reserveDeliveryItem.isViewUnit2()}">
+                                                                    <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${reserveDeliveryItem.unitTitle2}" th:remove="tag" />：</span><span th:text="${reserveDeliveryItem.unitValue2}" th:remove="tag" /></div>
+                                                                </th:block>
+                                                                <th:block th:if="${reserveDeliveryItem.isDispReserveDeliveryGoodsHistoryCount()}">
+                                                                    <div class="p-order-confirm__list-item-memo">（参考）過去１年の購入数量： <span th:text="${#number.convert(reserveDeliveryItem.reserveDeliveryGoodsHistoryCount)}" th:remove="tag" /> <span th:text="${reserveDeliveryItem.unit}" th:remove="tag" />&nbsp;</div>
+                                                                </th:block>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="p-order-confirm__list-delivery l-lg"><span th:text="${#date.convert(reserveDeliveryItem.reserveDeliveryDate, 'yyyy/MM/dd')}" th:remove="tag"></span></td>
+                                                <td class="c-table__quantity p-order-confirm__list-quantity l-lg">
+                                                    <div class="p-order-confirm__list-quantity-static"><span th:text="${#number.convert(reserveDeliveryItem.orderGoodsCount)}" th:remove="tag" /></div>
+                                                </td>
+                                                <td class="p-order-confirm__nest l-sm">
+                                                    <table class="p-order-confirm__nest-table">
+                                                        <tr>
+                                                            <th class="c-table__th">お届け希望日</th>
+                                                            <th class="c-table__th">数量</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="p-order-confirm__nest-delivery">
+                                                                <span><img src="/newdesign/assets/images/icon/sale-reserve.svg" width="30" alt="セールde予約"></span>
+                                                                <span><span th:text="${#date.convert(reserveDeliveryItem.reserveDeliveryDate, 'yyyy/MM/dd')}" th:remove="tag"></span></span>
+                                                            </td>
+                                                            <td class="p-order-confirm__nest-quantity"><span th:text="${#number.convert(reserveDeliveryItem.orderGoodsCount)}" th:remove="tag" /></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="p-order-confirm__list-button">
+                                                    <button type="submit" class="c-button c-button--change" onclick="setGoodsCodeIndex($(this).attr('gcdForHref'));" th:gcdForHref="${itemMap.key}"
+                                                            th:id="'doReserveChange-' + ${itemMapStat.index} + '-' + ${reserveDeliveryItemStat.index}" name="doReserveChange">
+                                                        <svg viewBox="0 0 14 15"><use xlink:href="/newdesign/assets/images/icon/change.svg#change"></use></svg><p>変更</p>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </th:block>
+                                    </th:block>
+
+                                    <th:block th:if="${itemMap.value.size} > 1">
+                                        <th:block th:each="reserveDeliveryItem, reserveDeliveryItemStat : ${itemMap.value}">
+                                            <th:block th:if="${reserveDeliveryItemStat.index == 0}">
+                                                <tr class="c-table__tr p-order-confirm__list-rowspan">
+                                                    <td class="c-table__item p-order-confirm__list-item" th:rowspan="${itemMap.value.size}">
+                                                        <div class="p-order-confirm__list-item-inner">
+                                                            <div class="p-order-confirm__list-item-image">
+                                                                <div>
+                                                                    <img th:src="@{${#image.convert(reserveDeliveryItem.goodsImage, 0, 'p1')}}"
+                                                                         th:attr="srcset=${#image.convert(reserveDeliveryItem.goodsImage, 0, 'p1x2')} + ' 2x'"
+                                                                         th:alt="${reserveDeliveryItem.goodsImageAlt}"
+                                                                         height="150" width="150" decoding="async" loading="lazy">
+                                                                </div>
+                                                            </div>
+                                                            <div class="p-order-confirm__list-item-overview">
+                                                                <a href="">
+                                                                    <div class="p-order-confirm__list-item-text"><span th:text="${reserveDeliveryItem.goodsCode}" th:remove="tag" /></div>
+                                                                    <div class="p-order-confirm__list-item-title"><span th:text="${reserveDeliveryItem.goodsName}" th:remove="tag" /></div>
+                                                                    <th:block th:if="${reserveDeliveryItem.isViewUnit1()}">
+                                                                        <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${reserveDeliveryItem.unitTitle1}" th:remove="tag" />：</span><span th:text="${reserveDeliveryItem.unitValue1}" th:remove="tag" /></div>
+                                                                    </th:block>
+                                                                    <th:block th:if="${reserveDeliveryItem.isViewUnit2()}">
+                                                                        <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${reserveDeliveryItem.unitTitle2}" th:remove="tag" />：</span><span th:text="${reserveDeliveryItem.unitValue2}" th:remove="tag" /></div>
+                                                                    </th:block>
+                                                                    <th:block th:if="${reserveDeliveryItem.isDispReserveDeliveryGoodsHistoryCount()}">
+                                                                        <div class="p-order-confirm__list-item-memo">（参考）過去１年の購入数量： <span th:text="${#number.convert(reserveDeliveryItem.reserveDeliveryGoodsHistoryCount)}" th:remove="tag" />&nbsp; <span th:text="${reserveDeliveryItem.unit}" th:remove="tag" />&nbsp;</div>
+                                                                    </th:block>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="p-order-confirm__list-delivery l-lg"><span th:text="${#date.convert(reserveDeliveryItem.reserveDeliveryDate, 'yyyy/MM/dd')}" th:remove="tag"></span></td>
+                                                    <td class="c-table__quantity p-order-confirm__list-quantity l-lg">
+                                                        <div class="p-order-confirm__list-quantity-static"><span th:text="${#number.convert(reserveDeliveryItem.orderGoodsCount)}" th:remove="tag" /></div>
+                                                    </td>
+                                                    <td class="p-order-confirm__nest l-sm">
+                                                        <table class="p-order-confirm__nest-table">
+                                                            <tr>
+                                                                <th class="c-table__th">お届け希望日</th>
+                                                                <th class="c-table__th">数量</th>
+                                                            </tr>
+                                                            <th:block th:each="reserveDeliveryItemSmMode, reserveDeliveryItemSmModeStat : ${itemMap.value}">
+                                                                <tr>
+                                                                    <td class="p-order-confirm__nest-delivery">
+                                                                        <span><img src="/newdesign/assets/images/icon/sale-reserve.svg" width="30" alt="セールde予約"></span>
+                                                                        <span th:text="${#date.convert(reserveDeliveryItemSmMode.reserveDeliveryDate, 'yyyy/MM/dd')}"></span>
+                                                                    </td>
+                                                                    <td class="p-order-confirm__nest-quantity"><span th:text="${#number.convert(reserveDeliveryItemSmMode.orderGoodsCount)}" th:remove="tag" /></td>
+                                                                </tr>
+                                                            </th:block>
+                                                        </table>
+                                                    </td>
+                                                    <td class="p-order-confirm__list-button" th:rowspan="${itemMap.value.size}">
+                                                        <button type="submit" class="c-button c-button--change" onclick="setGoodsCodeIndex($(this).attr('gcdForHref'));" th:gcdForHref="${itemMap.key}"
+                                                                th:id="'doReserveChange-' + ${itemMapStat.index} + '-' + ${reserveDeliveryItemStat.index}" name="doReserveChange">
+                                                            <svg viewBox="0 0 14 15"><use xlink:href="/newdesign/assets/images/icon/change.svg#change"></use></svg><p>変更</p>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+
+                                            <th:block th:if="${reserveDeliveryItemStat.index >0 && reserveDeliveryItemStat.index < itemMap.value.size - 1}">
+                                                <tr class="c-table__tr p-order-confirm__list-rowspan l-lg">
+                                                    <td class="p-order-confirm__list-delivery"><span th:text="${#date.convert(reserveDeliveryItem.reserveDeliveryDate, 'yyyy/MM/dd')}"></span></td>
+                                                    <td class="c-table__quantity p-order-confirm__list-quantity">
+                                                        <div class="p-order-confirm__list-quantity-static">
+                                                            <div class="p-order-confirm__list-item-heading l-sm">数量：</div><span th:text="${#number.convert(reserveDeliveryItem.orderGoodsCount)}" th:remove="tag" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+
+                                            <th:block th:if="${reserveDeliveryItemStat.index > 0 && reserveDeliveryItemStat.index == itemMap.value.size - 1}">
+                                                <tr class="c-table__tr l-lg">
+                                                    <td class="p-order-confirm__list-delivery"><span th:text="${#date.convert(reserveDeliveryItem.reserveDeliveryDate, 'yyyy/MM/dd')}"></span></td>
+                                                    <td class="c-table__quantity p-order-confirm__list-quantity">
+                                                        <div class="p-order-confirm__list-quantity-static">
+                                                            <div class="p-order-confirm__list-item-heading l-sm">数量：</div><span th:text="${#number.convert(reserveDeliveryItem.orderGoodsCount)}" th:remove="tag" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 2023-renew No14 to here -->
+                    </th:block>
+
+                    <!-- 入荷次第お届け商品 -->
+                    <th:block th:if="*{isViewDependingOnReceipt()}">
+                        <!-- 2023-renew No14 from here -->
+                        <h4 class="c-title-form-m"><p>入荷次第お届け商品</p></h4>
+                        <div class="p-order-confirm__list p-order-confirm__list--normal">
+                            <table class="c-table c-table--pcspdevide">
+                                <tr class="c-table__tr l-lg">
+                                    <th class="c-table__th">商品情報</th>
+                                    <th class="c-table__th">数量</th>
+                                </tr>
+                                <tbody>
+                                <th:block th:each="dependingOnReceiptItem, dependingOnReceiptItemStat : *{dependingOnReceiptItems}">
+                                    <tr class="c-table__tr">
+                                        <td class="c-table__item p-order-confirm__list-item">
+                                            <div class="p-order-confirm__list-item-inner">
+                                                <div class="p-order-confirm__list-item-image">
+                                                    <img th:src="@{${@environment.getProperty('images.path.goods.resize.p1')} + ${dependingOnReceiptItem.goodsImage}}"
+                                                         th:attr="srcset=${@environment.getProperty('images.path.goods.resize.p1x2')} + ${dependingOnReceiptItem.goodsImage} + ' 2x'"
+                                                         th:alt="${dependingOnReceiptItem.goodsImageAlt}"
+                                                         height="150" width="150" decoding="async" loading="lazy">
+                                                </div>
+                                                <div class="p-order-confirm__list-item-overview">
+                                                    <div class="p-order-confirm__list-item-text"><span th:text="${dependingOnReceiptItem.goodsCode}" th:remove="tag" /></div>
+                                                    <div class="p-order-confirm__list-item-title"><span th:text="${dependingOnReceiptItem.goodsName}" th:remove="tag" /></div>
+                                                    <th:block th:if="${dependingOnReceiptItem.isViewUnit1()}">
+                                                        <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${dependingOnReceiptItem.unitTitle1}" th:remove="tag" />：</span><span th:text="${dependingOnReceiptItem.unitValue1}" th:remove="tag" /></div>
+                                                    </th:block>
+                                                    <th:block th:if="${dependingOnReceiptItem.isViewUnit2()}">
+                                                        <div class="p-order-confirm__list-item-spec"><span class="p-order-confirm__list-item-heading"><span th:text="${dependingOnReceiptItem.unitTitle2}" th:remove="tag" />：</span><span th:text="${dependingOnReceiptItem.unitValue2}" th:remove="tag" /></div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-order-confirm__nest l-sm">
+                                            <table class="p-order-confirm__nest-table">
+                                                <tr>
+                                                    <th class="c-table__th">数量</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="p-order-confirm__nest-quantity"><span th:text="${#number.convert(dependingOnReceiptItem.orderGoodsCount)}"/></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="c-table__quantity p-order-confirm__list-quantity l-lg">
+                                            <div class="p-order-confirm__list-quantity-static">
+                                                <span th:text="${#number.convert(dependingOnReceiptItem.orderGoodsCount)}"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 2023-renew No14 to here -->
+                    </th:block>
+
+                </div>
+            </div>
+
+                <div class="c-button-wrap">
+                    <div>
+                        <button name="doConfirm" type="submit" class="c-button c-button--primary c-button--width-l">お届け内容を変更する</button>
+                        <div class="c-button-wrap__memo">
+                            <a th:href="@{/order/confirm.html}" id="goConfirm" class="c-textlink c-textlink--left c-textlink--large c-textlink--text"><p>ご注文内容確認画面へ戻る</p></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </th:block>
+
+        <th:block th:if="${!deliveryModel.isExistDeliveryMethod()}">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>お届け内容の変更</strong></h2>
+
+                    <hm:freearea key="delivery_info"/>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="c-page-description">
+                        <p class="c-page-description__text">下記より変更ができます。</p>
+                        <p class="c-page-description__text c-page-description--margin-m"><strong>※沖縄ならび島しょ部のお客様は配送都合上、お届けにお時間がかかります。また、時間帯の指定をいただいてもご利用できません。（船便になる場合があるため）<br>
+                            ※天候、交通事情などで下記お届け予定より遅れる場合もございます。ご了承ください。</strong></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+
+        <!--↓作業用お届け時間帯コードデータ  -->
+        <span id="receiverTimeZoneCodes" th:text="${deliveryModel.receiverTimeZoneCodes}" style="display: none"></span>
+    </main>
+
+    <div th:replace="~{newdesign/include/footerorder}"></div>
+</div>
+</body>
+</html>
+<!-- PDR Migrate Customization to here -->

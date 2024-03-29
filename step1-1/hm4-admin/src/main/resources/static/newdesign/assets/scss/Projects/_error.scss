@@ -1,0 +1,140 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.p-error {
+  $this: &;
+
+  &__main {
+    margin: 100px auto 80px;
+
+    @include media(sm) {
+      margin: vwset(50) vwset(20);
+    }
+  }
+
+  &__title {
+    @include font-style(22,38);
+    text-align: center;
+
+    @include media(sm) {
+      @include font-sp-style(20,35);
+    }
+  }
+
+  &__text-area {
+    margin-top: 35px;
+    text-align: center;
+
+    @include media(sm) {
+      text-align: left;
+      margin-top: vwset(30);
+    }
+  }
+
+  &__text {
+    @include font-style(16,36);
+
+    @include media(sm) {
+      @include font-sp-style(15,30);
+    }
+  }
+
+  &__footer {
+    margin-top: 70px;
+    text-align: center;
+    @include font-style(12,30);
+    color: #777;
+
+    @include media(sm) {
+      margin-top: vwset(45);
+      @include font-sp-style(10,20);
+    }
+  }
+
+  &__logo {
+
+    margin-bottom: 50px;
+    text-align: center;
+
+    strong {
+      display: block;
+      @include font-style(18,18,normal);
+      color: $color-primary;
+      margin-bottom: 15px;
+    }
+
+    @include media(sm) {
+
+      margin-bottom: vwset(32);
+      
+      strong {
+        @include font-sp-style(14,14);
+        margin-bottom: vwset(12);
+      }
+
+      img {
+        width: vwset(96);
+      }
+    }
+  }
+
+  &__maintenance {
+    width: 800px;
+    margin-inline: auto;
+    padding: 25px;
+    border: solid 4px $color-orange-lightGray;
+    text-align: center;
+
+    dt {
+      margin-bottom: 15px;
+    }
+
+    &-date {
+      @include font-style(20,40);
+      color: $color-primary;
+    }
+  
+    &-text {
+      @include font-style(15,28);
+    }
+
+    @include media(sm) {
+      
+      width: 100%;
+      padding: vwset(20);
+  
+      dt {
+        margin-bottom: vwset(12);
+        @include font-style(15,18);
+      }
+  
+      &-date {
+        @include font-sp-style(16,30);
+        color: $color-primary;
+      }
+    
+      &-text {
+        margin-top: vwset(5);
+        @include font-sp-style(14,22);
+      }
+
+
+    }
+  }
+
+  &--static {
+    display: grid;
+    align-items: center;
+
+    #{$this}__main {
+      margin-block: 0;
+    }
+
+  }
+
+}
+
+

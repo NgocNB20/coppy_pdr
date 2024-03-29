@@ -1,0 +1,9 @@
+type: array
+description: カテゴリ登録商品エンティティリストレスポンス
+items:
+  $ref: "#/components/schemas/CategoryGoodsEntityResponse"
+
+components:
+  schemas:
+    CategoryGoodsEntityResponse:
+      $ref: ./CategoryGoodsEntityResponse.yaml

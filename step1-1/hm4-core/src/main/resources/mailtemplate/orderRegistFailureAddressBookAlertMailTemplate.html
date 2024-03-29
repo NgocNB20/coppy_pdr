@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>住所録登録失敗通知</title>
+</head>
+<body>
+<div>
+  <span>【ピーディーアール　オンラインショップ】住所録登録失敗通知</span>
+  <br>
+  <span>住所録登録に失敗しました。</span>
+  <br>
+  <span>基幹側には会員情報登録が連携され、EC側のDB登録に失敗しているため、会員データ不整合が発生している可能性があります。</span>
+  <br>
+  <br>
+  <span>お客様番号：</span><span th:text="${mailContentsMap.get('CUSTOMER_NO')}"></span>
+  <br>
+  <br>
+  <span>以上</span>
+</div>
+</body>
+</html>

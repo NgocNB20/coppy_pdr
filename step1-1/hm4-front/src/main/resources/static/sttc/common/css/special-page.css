@@ -1,0 +1,352 @@
+@charset "Shift_JIS";
+
+
+/* �v���R�� style
+---------------------------------------------------- */
+#pro-collection {
+	padding: 0 0 15px 0;
+	background: #000000;
+}
+#pro-collection p,
+#pro-collection li {
+	margin: 0;
+	color: #BDBDBD;
+	line-height: 2;
+}
+#pro-collection #pro-colle-box1 {
+	margin: 0px 15px 30px 15px;
+}
+
+#pro-collection #pro-colle-box1 h4 {
+	margin: 0 0 5px 0;
+}
+#pro-collection #uniform-box {
+	margin: 0 0 20px 0;
+}
+#pro-collection #home-uniform {
+	float: left;
+	padding: 0 0 0 55px;
+}
+#pro-collection #visitor-uniform {
+	padding: 0 30px 0 0;
+	float: right;
+}
+#pro-collection #notice {
+	padding: 20px;
+	margin: 20px;
+	border: 1px solid #6B6B6B;
+}
+#pro-collection #notice h4 {
+	margin: 0 0 5px 0;
+}
+#pro-collection #notice p {
+	margin: 0 0 20px 0;
+}
+#pro-collection #notice ul,
+#pro-collection #notice li {
+	margin: 0;
+	list-style: none;
+}
+#pro-collection #notice li {
+	margin: 0 0 0 25px;
+	text-indent: -16px;
+}
+
+/* kanemoto2000 style
+---------------------------------------------------- */
+body#kanemoto2000 {
+	margin: 0;
+	padding: 0;
+}
+
+#kanemoto2000 {
+	width: 573px;
+	padding: 0 0 15px 0;
+	font-size:12px;
+}
+
+#kanemoto2000 p,
+#kanemoto2000 dl,
+#kanemoto2000 dt,
+#kanemoto2000 dd,
+#kanemoto2000 ul,
+#kanemoto2000 li {
+	margin: 0;
+	padding: 0;
+}
+
+#kanemoto2000 #contents {
+	width: 573px;
+	background: #fdde17;
+}
+
+#kanemoto2000 #contents div.goods {
+	width: 573px;
+	background: #fdde17;
+}
+
+#kanemoto2000 #contents div.goods div.goods_l {
+	float: left;
+	width: 278px;
+}
+
+#kanemoto2000 #contents div.goods div.goods_r {
+	float: right;
+	width: 295px;
+}
+
+#kanemoto2000 #contents div.goods p.btn {
+	padding:5px 0;
+	text-align: center;
+}
+
+/* -----for IE6----- */
+* #kanemoto2000 #contents div.goods p.btn {
+	padding:0 0 5px 0;
+	text-align: center;
+}
+/* -----for IE6 end----- */
+
+#kanemoto2000 #contents div#setumei {
+	width: 573px;
+	background: url(/image/news/kanemoto2000/bk_setumei.gif);
+	line-height: 1.5em;
+}
+
+#kanemoto2000 #contents #setumei p.tit {
+	padding-bottom:10px;
+}
+
+#kanemoto2000 #contents div#setumei dl dt {
+	padding: 5px 0 5px 0;
+	font-weight: bold;
+}
+
+#kanemoto2000 #contents div#setumei div.setumeiBox {
+	width: 533px;
+	padding: 10px 20px 10px 20px;
+}
+
+#kanemoto2000 #contents div#setumei p.kakudai_l {
+	float: left;
+	width: 245px;
+	text-align: center;
+}
+
+#kanemoto2000 #contents div#setumei p.kakudai_r {
+	float: right;
+	width: 285px;
+	text-align: center;
+}
+
+#kanemoto2000 #contents div#setumei div.aboutgoods_l {
+	width: 262px;
+	float: left;
+	margin-right: 10px;
+}
+
+#kanemoto2000 #contents div#setumei div.aboutgoods_r {
+	width: 261px;
+	float: right;
+}
+
+#kanemoto2000 #contents div#setumei div.aboutgoods_r p.forbaseball{
+	width: 247px;
+	padding: 7px;
+	margin-top: 10px;
+	color: #fff;
+	background: #1759ff;
+}
+
+#kanemoto2000 #contents div#hosoku {
+	width: 573px;
+	background: url(/image/news/kanemoto2000/bk01.jpg) no-repeat right top;
+}
+
+#kanemoto2000 #contents div#hosoku p.tit {
+	width: 553px;
+	margin: 0 10px 3px 10px;
+	padding-top: 10px;
+	padding-bottom: 3px;
+	border-bottom: 3px solid #000;
+}
+
+#kanemoto2000 #contents div#hosoku ul {
+ margin-left: 30px;
+ margin-top: 5px;
+ font-size: 11px;
+}
+
+#kanemoto2000 #contents div#hosoku ul li {
+ line-height: 15px;
+}
+
+#kanemoto2000 #contents div#hosoku ul li.txt01 {
+ font-size: 14px;
+ font-weight: bold;
+}
+
+
+#kanemoto2000 #contents div#hosoku p.caution {
+	width: 553px;
+	padding: 10px 0 10px 0;
+	margin: 17px 10px;
+	text-align: center;
+	background: #fffad7;
+}
+
+
+#kanemoto2000 #bannerArea {
+	width: 573px;
+	padding: 10px 0 20px 0;
+	background: #3f3f3f;
+}
+
+#kanemoto2000 #bannerArea p {
+	text-align: center;
+}
+
+
+/* enquete_present style
+---------------------------------------------------- */
+body#enquete_present {
+	margin: 0;
+	padding: 0;
+}
+
+#enquete_present {
+	width: 573px;
+	padding: 0 0 20px 0;
+	font-size:12px;
+	background-color: #ffeb5a;
+}
+
+#enquete_present dl,
+#enquete_present ul,
+#enquete_present ul li,
+#enquete_present p {
+	margin: 0;
+	padding: 0;
+}
+
+#enquete_present #itemBox01 {
+	width: 553px;
+	padding: 7px 10px 10px 10px;
+}
+
+#enquete_present #itemBox01 div.item01 {
+	margin-right: 10px;
+	padding-bottom: 10px;
+	float: left;
+	width: 271px;
+	background: #efeee0;
+}
+
+#enquete_present #itemBox01 div.item02 {
+	padding-bottom: 10px;
+	float: left;
+	width: 271px;
+	background: #efeee0;
+}
+
+#enquete_present #itemBox01 div.item01 dl {
+	margin: 0;
+	padding: 0;
+	padding-top: 10px;
+}
+
+#enquete_present #itemBox01 div.item02 dl {
+	margin: 0;
+	padding: 0;
+	padding-top: 20px;
+}
+
+#enquete_present #itemBox01 div.item01 dl dt {
+	margin: 0;
+	padding: 0 10px;
+	float: left;
+}
+
+#enquete_present #itemBox01 div.item02 dl dt {
+	margin: 0;
+	padding: 10px 15px 0 15px;
+	float: left;
+}
+
+#enquete_present #itemBox01 div.item01 dl dd,
+#enquete_present #itemBox01 div.item02 dl dd {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+#enquete_present #itemBox01 div.item01 img.present {
+	padding: 0 14px;
+}
+
+#enquete_present #itemBox01 div.item02 img.present {
+	padding: 13px 13px 0 13px;
+}
+
+#enquete_present div.item03 {
+	width: 551px;
+	padding: 0 10px 0 10px;
+}
+
+#enquete_present div.item03 div {
+	background: url(/image/news/enquate/img_03_bk.jpg) repeat-x;
+}
+
+#enquete_present div.item03 div ul li {
+	float: left;
+	list-style: none;
+}
+
+#enquete_present div.item03 div ul li.goods {
+	padding-left: 3px;
+	list-style: none;
+}
+
+#enquete_present div.item03 div ul li.title {
+	padding: 5px 0 0 15px;
+	list-style: none;
+}
+
+#enquete_present div.item03 div ul li.goodsup {
+	padding: 15px 0 0 10px;
+	list-style: none;
+}
+
+#enquete_present div.btnArea p {
+	text-align: center;
+}
+
+#enquete_present div.btnArea p.btn {
+	padding-top: 7px;
+}
+
+
+
+
+
+
+/* Float Clear style
+---------------------------------------------------- */
+.clearfix:after {
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	display: block;
+	content: '[.]';
+}
+.clearfix {
+	display: inline-block;
+}
+/* Hides from IE-mac \*/
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+/* End hide from IE-mac */

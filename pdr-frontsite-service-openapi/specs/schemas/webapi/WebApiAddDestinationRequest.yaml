@@ -1,0 +1,11 @@
+type: object
+description: WEB-API連携 お届け先登録リクエスト
+properties:
+  AbstractWebApiRequestDtoRequest:
+    description: リクエストDTOリクエスト
+    $ref: "#/components/schemas/AbstractWebApiRequestDtoRequest"
+
+components:
+  schemas:
+    AbstractWebApiRequestDtoRequest:
+      $ref: ./AbstractWebApiRequestDtoRequest.yaml

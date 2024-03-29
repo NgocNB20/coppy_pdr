@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}"
+                                                                                          class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a
+                            th:href="@{/member/index.html}"
+                            class="c-textlink c-textlink--hover">マイページ</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">パスワード</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember.html}"></div>
+                <div class="l-main p-mypage-pass">
+                    <h2 class="c-title-page"><strong>パスワード</strong></h2>
+                    <form id="indexForm" th:action="@{/member/pass/index.html}" th:object="${memberPassModel}"
+                          method="post">
+                        <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                            <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">
+                                現在のパスワードと新しいパスワードの両方を入力し、「変更する」ボタンを押すとパスワードが変更されます。</p>
+                            <p class="c-page-description__text c-page-description--margin-m"><span
+                                    class="c-require">必須</span>は、必須項目です。</p>
+                        </div>
+                        <div class="l-form">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt><p><span>現在のパスワード</span><span class="c-require">必須</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input th:field="*{memberInfoPassWord}" th:errorclass="c-input--error"
+                                                   type="password" name="memberInfoPassWord" title="現在のパスワード"
+                                                   maxlength="20" autocomplete="password"
+                                                   class="c-input c-input--width-l"/>
+                                            <span class="l-form__list-memo">（半角英数記号6～20文字）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoPassWord')}" th:errors="*{memberInfoPassWord}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>新しいパスワード</span><span class="c-require">必須</span></p></dt>
+                                    <dd th:classappend="${#fields.hasErrors('memberInfoNewPassWordConfirm')} ? 'p-mypage-pass__password-2' : ''">
+                                        <p>
+                                            <span class="l-form__password p-mypage-pass__password-1">
+                                                <input th:field="*{memberInfoNewPassWord}" th:errorclass="c-input--error" type="password" name="memberInfoNewPassWord" title="新しいパスワード" maxlength="100" class="c-input c-input--width-l">
+                                                <button name="" type="button" class="c-textlink c-textlink--text c-textlink--large c-textlink--password js-password-btn">
+                                                    <span></span><p>パスワードを表示</p>
+                                                </button>
+                                            </span>
+                                            <span class="l-form__list-memo">（半角英数記号6～20文字）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoNewPassWord')}" th:errors="*{memberInfoNewPassWord}" class="c-field-error c-field-error--top"></span>
+                                        <div class="l-form__list-text l-form__list-text--margin">
+                                            <strong>▼  確認のためパスワードを再入力してください。</strong>
+                                        </div>
+                                        <p>
+                                            <span class="l-form__password" th:classappend="${#fields.hasErrors('memberInfoNewPassWordConfirm')} ? '' : 'p-mypage-pass__password-2'">
+                                                <input th:field="*{memberInfoNewPassWordConfirm}" th:errorclass="c-input--error" type="password" name="memberInfoNewPassWordConfirm" maxlength="100" class="c-input c-input--width-l">
+                                                <button name="" type="button"
+                                                        class="c-textlink c-textlink--text c-textlink--large c-textlink--password js-password-btn">
+                                                    <span></span><p>パスワードを表示</p>
+                                                </button>
+                                            </span>
+                                            <span class="l-form__list-memo">（半角英数記号6～20文字）</span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('memberInfoNewPassWordConfirm')}" th:errors="*{memberInfoNewPassWordConfirm}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="c-form-lower__text">
+                                半角英数記号6文字以上20文字以内（推奨8文字以上）<br>
+                                ※数字のみ、同じ文字の連続を避け、第三者に推測されにくいものを設定してください。<br>（×悪い例：123456、password、taro123）
+                            </div>
+                        </div>
+                        <div class="c-button-wrap">
+                            <button name="doOncePassWordUpdate" type="submit"
+                                    class="c-button c-button--primary c-button--width-l">変更する
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>

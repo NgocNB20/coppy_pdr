@@ -1,0 +1,7 @@
+type: object
+description: WEB-API連携取得結果DTOListクラスレスポンス
+properties:
+  couponName:
+    type: string
+    description: クーポン名称
+    example: 10000円引きクーポン

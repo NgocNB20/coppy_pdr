@@ -1,0 +1,75 @@
+type: object
+description: カートDtoリクエスト
+properties:
+  goodsTotalCount:
+    type: number
+    description: 商品合計点数
+    example: 1000
+  goodsTotalPrice:
+    type: number
+    description: 商品合計金額（税抜）
+    example: 1000
+  goodsTotalPriceInTax:
+    type: number
+    description: 商品合計金額（税込）
+    example: 1000
+  cartGoodsDtoList:
+    type: array
+    description: カート商品リスト
+    items:
+      $ref: ./CartGoodsDtoRequest.yaml
+  settlementMethodType:
+    type: string
+    description: 決済種別
+    example: 0
+  discountsResponseDetailMap:
+    type: object
+    description: 割引適用結果MAP
+    additionalProperties:
+      $ref: "#/components/schemas/WebApiGetDiscountsResponseDetailDtoRequest"
+  consumptionTaxRateMap:
+    type: object
+    description: 消費税率MAP
+    additionalProperties:
+      $ref: "#/components/schemas/WebApiGetConsumptionTaxRateResponseDetailDtoRequest"
+  beforeTransferEmotionGoodsCodeMap:
+    type: object
+    description: 振替前心意気商品コードMAP(公開中の商品のみ)
+    additionalProperties:
+      type: string
+  totalPriceTax:
+    type: number
+    description: 商品合計消費税額
+    example: 1000
+  couponCode:
+    type: string
+    description: クーポン番号
+    example: x7HChWJZaV
+  quantityDiscountsResponseDetailMap:
+    type: object
+    description: 数量割引適用結果MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetQuantityDiscountResultResponseDetailDtoRequest'
+  reserveMap:
+    type: object
+    description: 取りおき情報MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetReserveResponseDetailDtoRequest'
+  saleCheckMap:
+    type: object
+    description: 販売可否判定MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetSaleCheckDetailResponse'
+
+components:
+  schemas:
+    WebApiGetDiscountsResponseDetailDtoRequest:
+      $ref: ./WebApiGetDiscountsResponseDetailDtoRequest.yaml
+    WebApiGetConsumptionTaxRateResponseDetailDtoRequest:
+      $ref: ./WebApiGetConsumptionTaxRateResponseDetailDtoRequest.yaml
+    WebApiGetQuantityDiscountResultResponseDetailDtoRequest:
+      $ref: ./WebApiGetQuantityDiscountResultResponseDetailDtoRequest.yaml
+    WebApiGetReserveResponseDetailDtoRequest:
+      $ref: ./WebApiGetReserveResponseDetailDtoRequest.yaml
+    WebApiGetSaleCheckDetailResponse:
+      $ref: ../webapi/WebApiGetSaleCheckDetailResponse.yaml

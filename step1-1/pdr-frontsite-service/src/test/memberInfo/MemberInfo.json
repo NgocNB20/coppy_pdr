@@ -1,0 +1,1219 @@
+{
+	"info": {
+		"_postman_id": "79e975fb-69a1-42da-863b-95ea7e06cfc2",
+		"name": "memberInfo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10602063"
+	},
+	"item": [
+		{
+			"name": "会員ログイン失敗回数リセット - OK",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\": \"10145631\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/reset-login-failure-count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"reset-login-failure-count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "パスワード再設定メール送信 - NOTOK",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoMail\":\"seio-t8+memseq10144138@itec.hankyu-hanshin.co.jp\",\r\n    \"memberInfoTel\":\"0736641080\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/password/password-reset-send-mail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"password",
+						"password-reset-send-mail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "パスワード再設定メール送信 - OK",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoMail\":\"huan.tranvan@vti.com.vn\",\r\n    \"memberInfoTel\":\"22222222222\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/password/password-reset-send-mail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"password",
+						"password-reset-send-mail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "メールアドレス変更",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\":\"10149571\",\r\n    \"memberInfoNewMail\":\"hang.hoangthu@vti.com.vn\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/mail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"mail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "会員ログイン情報更新",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\":\"10149571\",\r\n    \"userAgent\":\"0\" ,\r\n    \"deviceType\":\"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/login-info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"login-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "会員ログイン失敗情報更新",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\":\"10149571\",\r\n    \"accountLockTime\":\"2023-10-26\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/login-failure-with-locktime",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"login-failure-with-locktime"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "会員ログイン失敗情報更新",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\":\"10149571\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/login-failure",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"login-failure"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "アドレス帳情報更新",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"addressBookSeq\":\"10000008\",\r\n    \"memberInfoSeq\":\"10149571\",\r\n    \"addressBookName\":\"name\",\r\n    \"addressBookFirstName\":\"名\",\r\n    \"addressBookLastName\":\"姓\",\r\n    \"addressBookFirstKana\":\"イ\",\r\n    \"addressBookLastKana\":\"セイ\",\r\n    \"addressBookZipCode\":\"0600034\",\r\n    \"addressBookPrefecture\":\"北海道\",\r\n    \"addressBookAddress1\":\"札幌市中央区\",\r\n    \"addressBookAddress2\":\"北四条東（１～８丁目）\",\r\n    \"addressBookAddress3\":\"\",\r\n    \"addressBookTel\":\"061111111\",\r\n    \"registTime\":\"2021-11-29\",\r\n    \"updateTime\":\"2021-11-29\",\r\n    \"addressbookapproveflag\":\"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/addressbook",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"addressbook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "未登録会員照会発生メール送信",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerNo\":\"\",\r\n    \"memberInfoTel\":\"22222222222\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/memberinfo-unregist-inquiry-mail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"memberinfo-unregist-inquiry-mail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/addressbook/{addressBookSeq} : アドレス帳情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/addressbook/10000001?memberInfoSeq=10000001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"addressbook",
+						"10000001"
+					],
+					"query": [
+						{
+							"key": "memberInfoSeq",
+							"value": "10000001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/confirmmail : 確認メール情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/confirmmail?password=6877af786bd286eb63172908b91cb439&confirmMailType=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"confirmmail"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "6877af786bd286eb63172908b91cb439"
+						},
+						{
+							"key": "confirmMailType",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/loginadvisability : ログイン可否判定取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/loginadvisability?memberInfoStatus=0&approveStatus=0&onlineloginAdvisability=1&memberListType=1&accountingType=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"loginadvisability"
+					],
+					"query": [
+						{
+							"key": "memberInfoStatus",
+							"value": "0"
+						},
+						{
+							"key": "approveStatus",
+							"value": "0"
+						},
+						{
+							"key": "onlineloginAdvisability",
+							"value": "1"
+						},
+						{
+							"key": "memberListType",
+							"value": "1"
+						},
+						{
+							"key": "accountingType",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/by-memberinfoid-or-customerno : 会員情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/by-memberinfoid-or-customerno?memberInfoIdOrCustomerNo=9000062",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"by-memberinfoid-or-customerno"
+					],
+					"query": [
+						{
+							"key": "memberInfoIdOrCustomerNo",
+							"value": "9000062"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/by-memberinfoid-or-customerno : 会員情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/by-memberinfoid-or-customerno?memberInfoIdOrCustomerNo=test_kyousei@itec.hankyu-hanshin.co.jp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"by-memberinfoid-or-customerno"
+					],
+					"query": [
+						{
+							"key": "memberInfoIdOrCustomerNo",
+							"value": "test_kyousei@itec.hankyu-hanshin.co.jp\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/{memberInfoSeq} : 会員取得取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/10148934",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"10148934"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/pasword/reset : パスワード再設定会員情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/pasword/reset?mid=6877af786bd286eb63172908b91cb439",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"pasword",
+						"reset"
+					],
+					"query": [
+						{
+							"key": "mid",
+							"value": "6877af786bd286eb63172908b91cb439"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/by-shop-unique-id : 会員情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/by-shop-unique-id?shopUniqueId=1001test_syouni@itec.hankyu-hanshin.co.jp\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"by-shop-unique-id"
+					],
+					"query": [
+						{
+							"key": "shopUniqueId",
+							"value": "1001test_syouni@itec.hankyu-hanshin.co.jp\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/by-tel : 電話番号より会員情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/by-tel?memberInfoTel=9999999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"by-tel"
+					],
+					"query": [
+						{
+							"key": "memberInfoTel",
+							"value": "9999999"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/by-tel-customerno : 電話番号と顧客番号から会員情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/by-tel-customerno?memberInfoTel=9999999&customerNo=9000095",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"by-tel-customerno"
+					],
+					"query": [
+						{
+							"key": "memberInfoTel",
+							"value": "9999999"
+						},
+						{
+							"key": "customerNo",
+							"value": "9000095"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/update-mail : 会員変更メールアドレス取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/update-mail?mid=6877af786bd286eb63172908b91cb439",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"update-mail"
+					],
+					"query": [
+						{
+							"key": "mid",
+							"value": "6877af786bd286eb63172908b91cb439"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /memberinfo/favorite/goods-stock-status/get : お気に入り情報リスト削除",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"favoriteDtoListRequest\": [\r\n    {\r\n      \"favoriteEntityRequest\": {\r\n            \"memberInfoSeq\": 1001,\r\n            \"goodsSeq\": 1001,\r\n            \"registTime\": \"2022-11-28\",\r\n            \"updateTime\": \"2022-11-28\"\r\n        },\r\n      \"goodsDetailsDtoRequest\": {\r\n            \"goodsSeq\": null,\r\n            \"goodsGroupSeq\": null,\r\n            \"versionNo\": null,\r\n            \"registTime\": \"2022-11-28\",\r\n            \"updateTime\": \"2022-11-28\",\r\n            \"goodsCode\": null,\r\n            \"goodsGroupMaxPrice\": null,\r\n            \"goodsGroupMinPrice\": null,\r\n            \"preDiscountMinPrice\": null,\r\n            \"preDiscountMaxPrice\": null,\r\n            \"goodsTaxType\": null,\r\n            \"taxRate\": null,\r\n            \"alcoholFlag\": null,\r\n            \"goodsPriceInTax\": null,\r\n            \"goodsPrice\": null,\r\n            \"deliveryType\": null,\r\n            \"saleStatus\": null,\r\n            \"saleStartTime\": \"2022-11-28\",\r\n            \"saleEndTime\": \"2022-11-28\",\r\n            \"unitManagementFlag\": null,\r\n            \"stockManagementFlag\": null,\r\n            \"individualDeliveryType\": null,\r\n            \"purchasedMax\": null,\r\n            \"freeDeliveryFlag\": null,\r\n            \"orderDisplay\": null,\r\n            \"unitValue1\": null,\r\n            \"unitValue2\": null,\r\n            \"preDiscountPrice\": null,\r\n            \"preDisCountPriceInTax\": null,\r\n            \"janCode\": null,\r\n            \"catalogCode\": null,\r\n            \"salesPossibleStock\": null,\r\n            \"realStock\": null,\r\n            \"orderReserveStock\": null,\r\n            \"remainderFewStock\": null,\r\n            \"orderPointStock\": null,\r\n            \"safetyStock\": null,\r\n            \"goodsGroupCode\": null,\r\n            \"whatsnewDate\": null,\r\n            \"goodsOpenStatus\": null,\r\n            \"openStartTime\": null,\r\n            \"openEndTime\": null,\r\n            \"goodsGroupName\": null,\r\n            \"unitTitle1\": null,\r\n            \"unitTitle2\": null,\r\n            \"goodsPreDiscountPrice\": null,\r\n            \"goodsGroupImageEntityList\": null,\r\n            \"snsLinkFlag\": null,\r\n            \"metaDescription\": null,\r\n            \"stockStatus\": null,\r\n            \"goodsIconList\": null,\r\n            \"goodsNote1\": null,\r\n            \"goodsNote2\": null,\r\n            \"goodsNote3\": null,\r\n            \"goodsNote4\": null,\r\n            \"goodsNote5\": null,\r\n            \"goodsNote6\": null,\r\n            \"goodsNote7\": null,\r\n            \"goodsNote8\": null,\r\n            \"goodsNote9\": null,\r\n            \"goodsNote10\": null,\r\n            \"orderSetting1\": null,\r\n            \"orderSetting2\": null,\r\n            \"orderSetting3\": null,\r\n            \"orderSetting4\": null,\r\n            \"orderSetting5\": null,\r\n            \"orderSetting6\": null,\r\n            \"orderSetting7\": null,\r\n            \"orderSetting8\": null,\r\n            \"orderSetting9\": null,\r\n            \"orderSetting10\": null,\r\n            \"unitImage\": null,\r\n            \"goodsOptionDisplayName\": null,\r\n            \"goodsClassType\": null,\r\n            \"dentalMonopolySalesFlg\": null,\r\n            \"saleIconFlag\": null,\r\n            \"reserveIconFlag\": null,\r\n            \"newIconFlag\": null,\r\n            \"landSendFlag\": null,\r\n            \"coolSendFlag\": null,\r\n            \"coolSendFrom\": null,\r\n            \"coolSendTo\": null,\r\n            \"tax\": null,\r\n            \"unit\": null,\r\n            \"goodsManagementCode\": null,\r\n            \"goodsDivisionCode\": null,\r\n            \"goodsCategory1\": null,\r\n            \"goodsCategory2\": null,\r\n            \"goodsCategory3\": null,\r\n            \"reserveFlag\": null,\r\n            \"priceMarkDispFlag\": null,\r\n            \"salePriceMarkDispFlag\": null,\r\n            \"salePriceIntegrityFlag\": null,\r\n            \"saleYesNo\": null,\r\n            \"saleNgMessage\": null,\r\n            \"deliveryYesNo\": null,\r\n            \"emotionPriceType\": null\r\n        },\r\n      \"goodsGroupImageEntityListRequest\": [],\r\n      \"goodsInformationIconDetailsDtoListRequest\": [],\r\n      \"stockStatus\": \"0\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/favorite/goods-stock-status/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"favorite",
+						"goods-stock-status",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /memberinfo/favorite/for-cart-check/get : カートチェック用お気に入り情報リスト取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\": 10148934,\r\n    \"cartDto\": {\r\n        \"goodsTotalCount\": 11,\r\n        \"goodsTotalPrice\": 21,\r\n        \"goodsTotalPriceInTax\": 30,\r\n        \"cartGoodsDtoList\": [],\r\n        \"settlementMethodType\": \"0\",\r\n        \"discountsResponseDetailMap\": {},\r\n        \"consumptionTaxRateMap\": {},\r\n        \"beforeTransferEmotionGoodsCodeMap\": {},\r\n        \"totalPriceTax\": 21,\r\n        \"couponCode\": \"check\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/favorite/for-cart-check/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"favorite",
+						"for-cart-check",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /memberinfo/favorite/for-goods-check/get : 商品チェック用お気に入り情報リスト取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\": 10148934,\r\n    \"goodsDtoList\": [\r\n        {\r\n            \"goodsEntity\": {\r\n                \"goodsSeq\": 10000012\r\n            },\r\n            \"stockDto\": {},\r\n            \"deleteFlg\": \"0\",\r\n            \"stockStatus\": \"0\",\r\n            \"unitImage\": {}\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/favorite/for-goods-check/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"favorite",
+						"for-goods-check",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/favorite/list : お気に入り情報リスト取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/favorite/list?page=1&limit=100&sort=true&siteType=0&memberInfoSeq=10148934",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"favorite",
+						"list"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "orderBy",
+							"value": "memberinfoseq",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "true"
+						},
+						{
+							"key": "siteType",
+							"value": "0"
+						},
+						{
+							"key": "memberInfoSeq",
+							"value": "10148934"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/orderhistory/detail : 注文履歴詳細情報取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/orderhistory/detail?memberInfoSeq=10148934&orderCode=1000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"orderhistory",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "memberInfoSeq",
+							"value": "10148934"
+						},
+						{
+							"key": "orderCode",
+							"value": "1000000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /memberinfo/addressbook : アドレス帳情報登録",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"addressBookSeq\": 1000001,\r\n    \"memberInfoSeq\": 10148934,\r\n    \"addressBookName\": \"ds\",\r\n    \"addressBookFirstName\": \"ds\",\r\n    \"addressBookLastName\": \"ds\",\r\n    \"addressBookFirstKana\": null,\r\n    \"addressBookLastKana\": \"ds\",\r\n    \"addressBookZipCode\": \"ds\",\r\n    \"addressBookPrefecture\": \"ds\",\r\n    \"addressBookAddress1\": \"ds\",\r\n    \"addressBookAddress2\": \"ds\",\r\n    \"addressBookAddress3\": \"ds\",\r\n    \"addressBookAddress4\": \"ds\",\r\n    \"addressBookAddress5\": \"ds\",\r\n    \"addressBookTel\": \"ds\",\r\n    \"registTime\": \"2022-11-28\",\r\n    \"updateTime\": \"2022-11-28\",\r\n    \"customerNo\": 9000062,\r\n    \"addressBookApproveFlagPdr\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/addressbook",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"addressbook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /memberinfo/favorite : お気に入り情報登録",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"gcd\": \"1000\",\r\n    \"memberInfoSeq\": 10148934,\r\n    \"siteType\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /memberinfo/orderhistory/list : 注文履歴情報リスト取得",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/orderhistory/list?memberInfoSeq=10148934&page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"orderhistory",
+						"list"
+					],
+					"query": [
+						{
+							"key": "memberInfoSeq",
+							"value": "10148934"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "orderBy",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /memberinfo/favorite/list : お気に入り情報リスト削除",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get-OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"get-OK：AllItems\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.freeareaList).to.have.lengthOf(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberInfoSeq\": \"10000001\",\r\n    \"gcd\": \"40-8145\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/memberinfo/favorite/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"memberinfo",
+						"favorite",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

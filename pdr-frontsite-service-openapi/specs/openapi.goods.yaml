@@ -1,0 +1,1010 @@
+openapi: 3.0.3
+info:
+  title: 【PDRフロントサイトサービス】商品のAPI仕様
+  description: PDRフロントサイトサービスのOpenAPI定義：商品
+  version: 4.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /goods/category/category-tree-node:
+    get:
+      tags:
+        - Goods
+      summary: カテゴリ木構造取得
+      description: カテゴリ木構造取得
+      operationId: getCategoryTreeNode
+      parameters:
+        - in: query
+          name: categoryTreeNodeGetRequest
+          description: 複数カテゴリ取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/CategoryTreeNodeGetRequest'
+      responses:
+        200:
+          description: カテゴリ木構造レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryTreeNodeResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/category/multiple-category-map:
+    get:
+      tags:
+        - Category
+      summary: 複数カテゴリ取得
+      description: 複数カテゴリ取得
+      operationId: getMultipleCategoryMap
+      parameters:
+        - in: query
+          name: multipleCategoryMapGetRequest
+          description: 複数カテゴリ取得リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/MultipleCategoryMapGetRequest'
+      responses:
+        200:
+          description: 複数カテゴリMapレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultipleCategoryMapResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/category/{categoryId}:
+    get:
+      tags:
+        - Goods
+      summary: カテゴリ取得
+      description: カテゴリ取得
+      operationId: getCategory
+      parameters:
+        - name: categoryId
+          in: path
+          description: カテゴリId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: カテゴリEntityレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryEntityResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/details-list:
+    get:
+      tags:
+        - Goods
+      summary: 商品詳細情報リスト取得
+      description: 商品詳細情報リスト取得
+      operationId: getDetailsList
+      parameters:
+        - in: query
+          name: goodsDetailsListGetRequest
+          description: 商品詳細情報リスト取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/GoodsDetailsListGetRequest'
+      responses:
+        200:
+          description: 商品詳細DtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsDetailsDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/details-map:
+    get:
+      tags:
+        - Goods
+      summary: 商品詳細情報MAP取得
+      description: 商品詳細情報MAP取得
+      operationId: getDetailsMap
+      parameters:
+        - in: query
+          name: goodsDetailsMapGetRequest
+          description: 商品詳細情報MAP取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/GoodsDetailsMapGetRequest'
+      responses:
+        200:
+          description: 商品詳細DtoMAP取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsDetailsDtoMapResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/footprint/open-list:
+    get:
+      tags:
+        - Goods
+      summary: 公開あしあと商品情報取得
+      description: 公開あしあと商品情報取得
+      operationId: getFootprintOpenList
+      parameters:
+        - in: query
+          name: openFootPrintListGetRequest
+          description: 公開あしあと商品情報取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/OpenFootPrintListGetRequest'
+      responses:
+        200:
+          description: 商品グループDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsGroupDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/category/details:
+    get:
+      tags:
+        - Goods
+      summary: カテゴリ情報取得
+      description: カテゴリ情報取得
+      operationId: getCategoryDetails
+      parameters:
+        - in: query
+          name: categoryDetailsGetRequest
+          description: カテゴリ情報取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/CategoryDetailsGetRequest'
+      responses:
+        200:
+          description: カテゴリDtoレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDetailsDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/category/open-category-pass-list:
+    get:
+      tags:
+        - Goods
+      summary: 公開カテゴリパスリスト取得
+      description: 公開カテゴリパスリスト取得
+      operationId: getOpenCategoryPassList
+      parameters:
+        - in: query
+          name: openCategoryPassListGetRequest
+          description: 公開カテゴリパスリスト取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/OpenCategoryPassListGetRequest'
+      responses:
+        200:
+          description: カテゴリDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDetailsDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/group/open-goods-group-details-list:
+    get:
+      tags:
+        - Goods
+      summary: 公開商品グループ情報検索
+      description: 公開商品グループ情報検索
+      operationId: getOpenGoodsGroupDetailsList
+      parameters:
+        - in: query
+          name: openGoodsGroupDetailsListGetRequest
+          description: 公開商品グループ情報検索リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/OpenGoodsGroupDetailsListGetRequest'
+        - in: query
+          name: pageInfoRequest
+          description: ページ情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageInfoRequest'
+      responses:
+        200:
+          description: 商品グループDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsGroupDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/group/open-goods-group-details:
+    get:
+      tags:
+        - Goods
+      summary: 公開商品グループ詳細情報取得
+      description: 公開商品グループ詳細情報取得
+      operationId: getOpenGoodsGroupDetails
+      parameters:
+        - in: query
+          name: openGoodsGroupDetailsGetRequest
+          description: 公開商品グループ詳細情報取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/OpenGoodsGroupDetailsGetRequest'
+      responses:
+        200:
+          description: 商品グループDtoレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsGroupDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/relation/open-related-goods-list:
+    get:
+      tags:
+        - Goods
+      summary: 関連商品情報取得
+      description: 関連商品情報取得
+      operationId: getRelationOpenRelatedGoodsList
+      parameters:
+        - in: query
+          name: openRelatedGoodsListGetRequest
+          description: 関連商品情報取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/OpenRelatedGoodsListGetRequest'
+        - in: query
+          name: pageInfoRequest
+          description: ページ情報リクエスト
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageInfoRequest'
+      responses:
+        200:
+          description: 商品グループDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsGroupDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/footprint/goods:
+    post:
+      tags:
+        - Goods
+      summary: あしあと商品情報登録
+      description: あしあと商品情報登録
+      operationId: registFootprintGoods
+      requestBody:
+        required: true
+        description: あしあと商品情報登録リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoodsFootPrintRegistRequest"
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - Goods
+      summary: あしあと商品クリアクラス
+      description: あしあと商品クリアクラス
+      operationId: deleteFootprintGoods
+      requestBody:
+        required: true
+        description: あしあと商品情報削除リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoodsFootPrintDeleteRequest"
+      responses:
+        200:
+          description: 成功
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/details/by-code:
+    get:
+      tags:
+        - Goods
+      summary: 商品詳細情報取得(商品コード)
+      description: 商品詳細情報取得(商品コード)
+      operationId: getDetailsByCode
+      parameters:
+        - in: query
+          name: goodsDetailsGetByCodeRequest
+          description: 商品詳細情報取得(商品コード)リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/GoodsDetailsGetByCodeRequest'
+      responses:
+        200:
+          description: 商品詳細Dtoレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsDetailsDtoResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/goods/unit-list:
+    get:
+      tags:
+        - Goods
+      summary: 商品規格リスト取得
+      description: 商品規格リスト取得
+      operationId: getGoodsUnitList
+      parameters:
+        - in: query
+          name: goodsUnitListGetRequest
+          description: 商品規格リスト取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/GoodsUnitListGetRequest'
+      responses:
+        200:
+          description: 商品規格DtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsUnitDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/category/details-list:
+    get:
+      tags:
+        - Goods
+      summary: カテゴリ情報DTO取得
+      description: カテゴリ情報DTO取得
+      operationId: getCategoryDetailsList
+      parameters:
+        - in: query
+          name: multipleCategoryGetRequest
+          description: 複数カテゴリ情報取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/MultipleCategoryGetRequest'
+      responses:
+        200:
+          description: カテゴリ情報DtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDetailsDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/get-salable-goods-type:
+      get:
+        tags:
+          - Goods
+        summary: 販売可否取得
+        description: 販売可否取得
+        operationId: getSalableGoodsType
+        parameters:
+          - in: query
+            name: salesAdvisabilityEntityRequest
+            description: 販売可否取得Entityリクエスト
+            required: true
+            schema:
+              $ref: '#/components/schemas/SalesAdvisabilityEntityRequest'
+        responses:
+          200:
+            description: 販売可否取得レスポンス
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/GetSalableGoodsTypeResponse'
+          400:
+            description: Bad Request（業務ルールエラー）
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ClientErrorResponse'
+          500:
+            description: Internal Server Error（アサートエラー、予想外エラーの場合）
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ServerErrorResponse'
+          default:
+            description: システムエラー
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ErrorResponse"
+  /goods/category/category-data/get:
+    post:
+      tags:
+        - Goods
+      summary: カテゴリーデータ取得
+      description: カテゴリーデータ取得
+      operationId: getCategoryData
+      requestBody:
+        required: true
+        description: カテゴリーデータ取得リクエスト
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryDataGetRequest'
+      responses:
+        200:
+          description: カテゴリ情報DtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDetailsDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /goods/goods-details-map:
+    get:
+      tags:
+        - Goods
+      summary: 商品詳細情報MAP取得
+      description: 商品詳細情報MAP取得
+      operationId: getGoodsDetailsMap
+      parameters:
+        - in: query
+          name: goodsDetailsMapRequest
+          description: 商品詳細情報MAP取得リクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/GoodsDetailsMapRequest'
+      responses:
+        200:
+          description: 商品詳細情報MAP取得レスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsDetailsMapResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  # 2023-renew No92 from here
+  /goods/group/goods-codes:
+      post:
+        tags:
+          - Goods
+        summary: 商品グループ詳細情報取得
+        description: 商品グループ詳細情報取得
+        operationId: getGoodsGroupsByGoodsCodes
+        parameters:
+          - in: query
+            name: goodsGroupDtoListByGoodsCodesGetRequest
+            description: 商品グループ詳細情報取得リクエスト
+            required: true
+            schema:
+              $ref: '#/components/schemas/GoodsGroupDtoListByGoodsCodesGetRequest'
+        responses:
+          200:
+            description: 商品グループDtoレスポンス
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/GoodsGroupDtoListWithoutPagingResponse'
+          400:
+            description: Bad Request（業務ルールエラー）
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ClientErrorResponse'
+          500:
+            description: Internal Server Error（アサートエラー、予想外エラーの場合）
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ServerErrorResponse'
+          default:
+            description: システムエラー
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ErrorResponse"
+  # 2023-renew No92 to here
+  # 2023-renew AddNo5 from here
+  /goods/group/goods-group-codes:
+      get:
+        tags:
+          - Goods
+        summary: 商品グループ詳細情報取得
+        description: 商品グループ詳細情報取得
+        operationId: getGoodsGroupListByGoodsGroupCodes
+        parameters:
+          - in: query
+            name: goodsGroupByGoodsGroupCodesGetRequest
+            description: 商品グループ詳細情報取得リクエスト
+            required: true
+            schema:
+              $ref: '#/components/schemas/GoodsGroupByGoodsGroupCodesGetRequest'
+        responses:
+          200:
+            description: 商品グループDtoListレスポンス
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/GoodsGroupDtoListWithoutPagingResponse'
+          400:
+            description: Bad Request（業務ルールエラー）
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ClientErrorResponse'
+          500:
+            description: Internal Server Error（アサートエラー、予想外エラーの場合）
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ServerErrorResponse'
+          default:
+            description: システムエラー
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ErrorResponse"
+  # 2023-renew AddNo5 to here
+  # 2023-renew No21 from here
+  /goods/togeter-buy-status:
+    get:
+      tags:
+        - Goods
+      summary: 商品をまとめて購入する ステータスごとにグループを購入する
+      description: 商品をまとめて購入する ステータスごとにグループを購入する
+      operationId: getGoodsTogetherBuyListByStatus
+      parameters:
+        - in: query
+          name: goodsGroupTogetherBuyRequest
+          description: 一緒に買う商品情報取得リクエスト
+          required: true
+          schema:
+            $ref: "#/components/schemas/GoodsGroupTogetherBuyRequest"
+      responses:
+        200:
+          description: 商品グループDtoListレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoodsGroupDtoListResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  # 2023-renew No21 to here
+  #2023-renew No65 from here
+  /goods/salegoods/list:
+    get:
+      tags:
+        - Goods
+      summary: セール商品詳細リスト
+      description: セール商品詳細リスト
+      operationId: getSaleGoodsList
+      parameters:
+        - in: query
+          name: saleGoodsListGetRequest
+          description: セール商品Listクラスリクエスト
+          required: true
+          schema:
+            $ref: '#/components/schemas/SaleGoodsListGetRequest'
+      responses:
+        200:
+          description: セール商品Listレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleGoodsListGetResponse'
+        400:
+          description: Bad Request（業務ルールエラー）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientErrorResponse'
+        500:
+          description: Internal Server Error（アサートエラー、予想外エラーの場合）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+        default:
+          description: システムエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  #2023-renew No65 to here
+components:
+  schemas:
+    CategoryTreeNodeGetRequest:
+      $ref: ./schemas/goods/category/CategoryTreeNodeGetRequest.yaml
+    CategoryTreeNodeResponse:
+      $ref: ./schemas/goods/category/CategoryTreeNodeResponse.yaml
+    MultipleCategoryMapGetRequest:
+      $ref: ./schemas/goods/category/MultipleCategoryMapGetRequest.yaml
+    MultipleCategoryMapResponse:
+      $ref: ./schemas/goods/category/MultipleCategoryMapResponse.yaml
+    GoodsFootPrintDeleteRequest:
+      $ref: ./schemas/goods/GoodsFootPrintDeleteRequest.yaml
+    GoodsFootPrintRegistRequest:
+      $ref: ./schemas/goods/GoodsFootPrintRegistRequest.yaml
+    OpenRelatedGoodsListGetRequest:
+      $ref: ./schemas/goods/OpenRelatedGoodsListGetRequest.yaml
+    OpenFootPrintListGetRequest:
+      $ref: ./schemas/goods/OpenFootPrintListGetRequest.yaml
+    GoodsGroupDtoListResponse:
+      $ref: ./schemas/goods/GoodsGroupDtoListResponse.yaml
+    CategoryEntityResponse:
+      $ref: ./schemas/goods/category/CategoryEntityResponse.yaml
+    GoodsDetailsListGetRequest:
+      $ref: ./schemas/goods/GoodsDetailsListGetRequest.yaml
+    GoodsDetailsDtoListResponse:
+      $ref: ./schemas/goods/GoodsDetailsDtoListResponse.yaml
+    GoodsDetailsMapGetRequest:
+      $ref: ./schemas/goods/GoodsDetailsMapGetRequest.yaml
+    GoodsDetailsDtoMapResponse:
+      $ref: ./schemas/goods/GoodsDetailsDtoMapResponse.yaml
+    CategoryDetailsGetRequest:
+      $ref: ./schemas/goods/category/CategoryDetailsGetRequest.yaml
+    CategoryDetailsDtoResponse:
+      $ref: ./schemas/goods/category/CategoryDetailsDtoResponse.yaml
+    OpenCategoryPassListGetRequest:
+      $ref: ./schemas/goods/category/OpenCategoryPassListGetRequest.yaml
+    CategoryDetailsDtoListResponse:
+      $ref: ./schemas/goods/category/CategoryDetailsDtoListResponse.yaml
+    OpenGoodsGroupDetailsListGetRequest:
+      $ref: ./schemas/goods/OpenGoodsGroupDetailsListGetRequest.yaml
+    OpenGoodsGroupDetailsGetRequest:
+      $ref: ./schemas/goods/OpenGoodsGroupDetailsGetRequest.yaml
+    GoodsGroupDtoResponse:
+      $ref: ./schemas/goods/GoodsGroupDtoResponse.yaml
+    GoodsDetailsGetByCodeRequest:
+      $ref: ./schemas/goods/GoodsDetailsGetByCodeRequest.yaml
+    GoodsDetailsDtoResponse:
+      $ref: ./schemas/goods/GoodsDetailsDtoResponse.yaml
+    GoodsUnitListGetRequest:
+      $ref: ./schemas/goods/GoodsUnitListGetRequest.yaml
+    GoodsUnitDtoListResponse:
+      $ref: ./schemas/goods/GoodsUnitDtoListResponse.yaml
+    MultipleCategoryGetRequest:
+      $ref: ./schemas/goods/MultipleCategoryGetRequest.yaml
+    SalesAdvisabilityEntityRequest:
+      $ref: ./schemas/goods/SalesAdvisabilityEntityRequest.yaml
+    GetSalableGoodsTypeResponse:
+      $ref: ./schemas/goods/GetSalableGoodsTypeResponse.yaml
+    CategoryDataGetRequest:
+      $ref: ./schemas/goods/category/CategoryDataGetRequest.yaml
+    GoodsDetailsMapRequest:
+      $ref: ./schemas/goods/GoodsDetailsMapRequest.yaml
+    GoodsDetailsMapResponse:
+      $ref: ./schemas/goods/GoodsDetailsMapResponse.yaml
+    # 2023-renew No92 from here
+    GoodsGroupDtoListByGoodsCodesGetRequest:
+      $ref: ./schemas/goods/GoodsGroupDtoListByGoodsCodesGetRequest.yaml
+    GoodsGroupDtoListWithoutPagingResponse:
+      $ref: ./schemas/goods/GoodsGroupDtoListWithoutPagingResponse.yaml
+    # 2023-renew No92 to here
+    # 2023-renew AddNo5 from here
+    GoodsGroupByGoodsGroupCodesGetRequest:
+      $ref: ./schemas/goods/GoodsGroupByGoodsGroupCodesGetRequest.yaml
+    # 2023-renew AddNo5 to here
+    ResultCountResponse:
+      $ref: ./schemas/ResultCountResponse.yaml
+    PageInfoRequest:
+      $ref: ./schemas/PageInfoRequest.yaml
+    ErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ClientErrorResponse:
+      $ref: ./schemas/Error.yaml
+    ServerErrorResponse:
+      $ref: ./schemas/Error.yaml
+    # 2023-renew No21 from here
+    GoodsGroupTogetherBuyRequest:
+      $ref: ./schemas/goods/GoodsGroupTogetherBuyRequest.yaml
+    # 2023-renew No21 to here
+    # 2023-renew No65 from here
+    SaleGoodsListGetRequest:
+      $ref: ./schemas/goods/SaleGoodsListGetRequest.yaml
+    SaleGoodsListGetResponse:
+      $ref: ./schemas/goods/SaleGoodsListGetResponse.yaml
+    # 2023-renew No65 to here

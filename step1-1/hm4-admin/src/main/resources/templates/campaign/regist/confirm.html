@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	  xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+	<meta th:replace="~{include/head_new}"/>
+	<title>新規広告登録確認｜広告管理</title>
+	<script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="campaign">
+<div id="registCampaign" class="l-mainwrap">
+	<!-- side -->
+	<div th:replace="~{include/sidemenu_new}"></div>
+	<main id="layout" class="l-page">
+		<div th:replace="~{include/header_new}"></div>
+		<div id="container" class="l-container">
+			<!-- contents -->
+			<div class="l-main">
+				<form id="registconfirmForm" th:action="@{/campaign/registconfirm}" th:object="${campaignRegistModel}" method="post">
+					<div class="l-pagetitle_wrap">
+						<h1 class="c-pagetitle_h1">新規広告登録：確認</h1>
+					</div>
+					<div th:if="${allMessages}"
+						 th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+						<ul th:each="message : ${allMessages}">
+							<li th:utext="${message}"></li>
+						</ul>
+					</div>
+					<div class="l-section">
+						<article class="l-article">
+							<div class="l-article_title no_slide">
+								<h2 class="c-pagetitle_h3">広告情報</h2>
+							</div>
+							<div class="l-article_inner">
+								<div class="l-inner_wrap">
+									<dl class="c-dl-base dt_fn13 dt_w160px">
+										<div>
+											<dt>広告コード</dt>
+											<dd th:text="*{campaignCode}"></dd>
+										</div>
+										<div>
+											<dt>広告名</dt>
+											<dd th:text="*{campaignName}"></dd>
+										</div>
+										<div>
+											<dt>広告メモ</dt>
+											<dd th:text="*{note}"></dd>
+										</div>
+										<div>
+											<dt>広告コスト</dt>
+											<dd><span th:text="*{#number.convert(campaignCost)}" th:remove="tag"></span><label> 円</label></dd>
+										</div>
+										<div>
+											<dt>リダイレクトURL</dt>
+											<dd th:text="*{redirectUrl}"></dd>
+										</div>
+										<div>
+											<dt>広告URLPC</dt>
+											<dd th:text="*{campaignUrlPc}"></dd>
+										</div>
+									</dl>
+								</div>
+							</div>
+						</article>
+					</div>
+					<!-- 追尾ボタン -->
+					<div class="l-pagebtn-nav">
+						<div class="l-pagebtn-nav_inner">
+							<div class="c-back">
+								<button class="c-btn btn_back icon_left" type="submit" id="doReturn" name="doReturn"><i
+										class="material-icons navigate_before"></i>戻る
+								</button>
+							</div>
+							<div class="col_left">
+								<button class="c-btn btn_regular" type="submit" id="doOnceRegist" name="doOnceRegist">登録</button>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+		<div th:replace="~{include/footer_new}"></div>
+	</main>
+</div>
+</body>
+</html>

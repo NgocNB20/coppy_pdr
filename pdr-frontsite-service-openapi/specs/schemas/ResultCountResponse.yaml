@@ -1,0 +1,8 @@
+type: object
+description: 結果カウントレスポンス
+properties:
+  resultCount:
+    type: integer
+    format: int32
+    description: 結果カウント
+    example: 1

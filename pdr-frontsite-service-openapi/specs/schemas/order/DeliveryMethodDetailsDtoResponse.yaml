@@ -1,0 +1,38 @@
+type: object
+description: WEB-API連携取得結果DTOレスポンス
+properties:
+  deliveryMethodEntity:
+    $ref: '#/components/schemas/DeliveryMethodEntityResponse'
+  deliveryMethodTypeCarriageEntityList:
+    type: array
+    items:
+      $ref: '#/components/schemas/DeliveryMethodTypeCarriageEntityResponse'
+  deliverySpecialChargeAreaCount:
+    type: integer
+    format: int32
+    description: 特別料金エリア件数
+    example: 1
+  deliveryImpossibleAreaCount:
+    type: integer
+    format: int32
+    description: 配送不可能エリア件数
+    example: 1
+  deliveryImpossibleAreaResultDtoList:
+    type: array
+    items:
+      $ref: '#/components/schemas/DeliveryImpossibleAreaResultDtoResponse'
+  deliverySpecialChargeAreaResultDtoList:
+    type: array
+    items:
+      $ref: '#/components/schemas/DeliverySpecialChargeAreaResultDtoResponse'
+
+components:
+  schemas:
+    DeliveryMethodEntityResponse:
+      $ref: ../shop/DeliveryMethodEntityResponse.yaml
+    DeliveryMethodTypeCarriageEntityResponse:
+      $ref: ../shop/DeliveryMethodTypeCarriageEntityResponse.yaml
+    DeliveryImpossibleAreaResultDtoResponse:
+      $ref: ../shop/DeliveryImpossibleAreaResultDtoResponse.yaml
+    DeliverySpecialChargeAreaResultDtoResponse:
+      $ref: ../shop/DeliverySpecialChargeAreaResultDtoResponse.yaml

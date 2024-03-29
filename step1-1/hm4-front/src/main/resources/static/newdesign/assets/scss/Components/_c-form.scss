@@ -1,0 +1,391 @@
+@charset "utf-8";
+
+// ==========================================================================
+//  c-form
+// ==========================================================================
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+
+// input
+// -----------------------------------------------------------------
+.c-input {
+  border-radius: 4px;
+  background: $color-fff;
+  border: solid 1px $color-ccc;
+  height: 60px;
+  padding: 0 20px;
+  @include font-style(16);
+  transition: border-color $comMS $comES;
+
+  @include media(sm) {
+    height: vwset(50);
+    padding: 0 vwset(12);
+    @include font-sp-style(15);
+  }
+
+  // 幅 / 大
+  &--width-l {
+    max-width: 700px;
+    width: 100%;
+    
+    @include media(sm) {
+      width: 100%;
+    }
+  }
+
+  &--width-s {
+    max-width: 200px;
+    width: 32vw;
+
+    @include media(sm) {
+      width: vwset(105);
+    }
+  }
+
+  // 高さ / 小
+  &--height-s {
+    height: 50px;
+
+    @include media(sm) {
+      height: vwset(40);
+    }
+  }
+
+  // エラー
+  &--error {
+    background: #fff2f2;
+  }
+
+}
+
+
+// textarea
+// -----------------------------------------------------------------
+.c-text-area {
+  border-radius: 4px;
+  background: $color-fff;
+  border: solid 1px $color-ccc;
+  @include font-style(16,28.8);
+  padding: 10px 20px;
+
+  @include media(sm) {
+    padding: 10px 12px; 
+    @include font-sp-style(15);
+  }
+}
+
+
+// radio
+// -----------------------------------------------------------------
+.c-radio {
+  display: none;
+}
+
+.c-radio + label {
+  padding: 0 20px 0 30px;
+  position: relative;
+  @include font-style(16,20);
+  cursor: pointer;
+  display: block;
+
+  &::before {
+    content: "";
+    display: block;
+    border: 1px solid $color-ccc;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 2px;
+    transition: all .3s;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    background: $color-ccc;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    top: 6px;
+    transition: all .3s;
+  }
+
+
+  @include media(sm) {
+    padding: 0 20px 0 40px;
+    @include font-sp-style(15,30);
+
+    &::before {
+      width: 30px;
+      height: 30px;
+      top: 0;
+    }
+
+    &::after {
+      width: 18px;
+      height: 18px;
+      left: 6px;
+    }
+  }
+}
+
+.c-radio:disabled + label {
+  &::before {
+    border: 1px solid rgba($color: $color-e6, $alpha: 1);
+    background: $color-fff;
+  }
+
+  &::after {
+    content: "×";
+    background: none;
+    color: $color-ccc;
+    top: 1px;
+    left: 2.5px;
+  }
+
+  @include media(sm) {
+
+    &::after {
+      top: vwset(0);
+      left: vwset(5);
+      @include font-sp-style(20,30,bold);
+    }
+
+
+  }
+}
+
+.c-radio:checked + label {
+
+  &::before {
+    border: 1px solid $color-primary;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    background: $color-primary;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    top: 6px;
+  }
+
+  @include media(sm) {
+
+    &::after {
+      width: 18px;
+      height: 18px;
+      left: 6px;
+    }
+  }
+}
+
+.c-radio:checked:disabled + label {
+    &::before,
+    &::after {
+    opacity: .4;
+  }
+}
+
+
+
+
+// checkbox
+// -----------------------------------------------------------------
+.c-checkbox {
+  display: inline-flex;
+  align-items: center;
+  @include font-style(16, 20);
+  cursor: pointer;
+  width: fit-content;
+
+  @include media(sm) {
+    align-items: flex-start;
+    @include font-sp-style(16, 30);
+  }
+
+  &__box {
+    input[type = "checkbox"] {
+      display: none;
+    }
+
+    span {
+      background-color: $color-fff;
+      background-position: center;
+      background-size: 15px auto;
+      background-color: $color-ccc;
+      border-radius: 50%;
+      display: block;
+      width: 24px;
+      height: 24px;
+      transition: border-color $comMS $comES, background-color $comMS $comES;
+      @include icon('check', 'ffffff');
+
+      @include media(sm) {
+        background-size: vwset(18) auto;
+        width: vwset(30);
+        height: vwset(30);
+      }
+    }
+
+    input[type = "checkbox"]:disabled + span {
+      background-color: rgba($color: $color-e6, $alpha: 1);
+    }
+
+    input[type = "checkbox"]:checked + span {
+      background-color: $color-primary;
+    }
+
+    input[type = "checkbox"]:checked:disabled + span {
+      background-color: rgba($color: $color-primary, $alpha: .4);
+    }
+  }
+
+  p {
+    margin: 0 10px;
+    @include font-style(16, 20);
+
+    @include media(sm) {
+      @include font-sp-style(16, 30);
+    }
+  }
+}
+
+
+// select　【メモ】LCのコンパイル後のcssには記載がある箇所。
+// -----------------------------------------------------------------
+.c-select {
+  $this: &;
+  display: inline-block;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    @include icon('arrow-down', 'a1a1a1');
+    width: 12px;
+    height: 8px;
+
+    @include media(sm){
+      right: vwset(18);
+      width: vwset(14);
+      height: vwset(10);
+    }
+  }
+
+  &__inner {
+    width: 100%;
+    border-radius: 4px;
+    background: $color-fff;
+    border: solid 1px $color-ccc;
+    height: 60px;
+    padding: 0 40px 0 20px;
+    text-indent: .01px; // 【メモ】矢印非表示対策
+    overflow: hidden;   // 【メモ】矢印非表示対策
+    cursor: pointer;
+    position: relative;
+    @include font-style(16);
+  
+    @include media(sm) {
+      height: vwset(50);
+      display: block;
+      padding: 0 25px 0 12px;
+      @include font-sp-style(15);
+    }
+  }
+
+  &--prefecture {
+    width: 250px;
+  }
+
+  &--delivery {
+    width: 250px;
+  }
+
+  &--card {
+    width: 250px;
+  }
+
+  &--expiration {
+    min-width: 190px;
+    width: 30%;
+
+    @include media(sm) {
+      min-width: vwset(95);
+      margin-bottom: vwset(10);
+    }
+
+  }
+
+  // エラー
+  &--error {
+
+    #{$this}__inner {
+      background: #fff2f2;
+    }
+  }
+}
+
+// 必須タグ
+// -----------------------------------------------------------------
+
+.c-require {
+  display: inline-block;
+  padding: 0 4px 1px;
+  background-color: $color-orange;
+  color: $color-fff;
+  @include font-style(13, 19, bold);
+  white-space: nowrap;
+}
+
+// 任意タグ
+// -----------------------------------------------------------------
+
+.c-any {
+  display: inline-block;
+  padding: 0 4px 1px;
+  background-color: $color-fff;
+  border: solid 1px #f39800;
+  color: #f39800;
+  @include font-style(13, 19, bold);
+  white-space: nowrap;
+}
+
+
+// 枠外テキスト
+// -----------------------------------------------------------------
+.c-form-lower {
+
+  &__text {
+    margin-top: 20px;
+    @include font-style(16,30);
+
+    @include media(sm) {
+      margin: vwset(20) vwset(15) 0;
+      @include font-sp-style(14,22);
+    }
+  }
+}
+

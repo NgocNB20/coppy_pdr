@@ -1,0 +1,32 @@
+type: object
+description: 販売可否取得Entityリクエスト
+properties:
+  salesAdvisabilitySeq:
+    type: integer
+    format: int32
+    description: 販売可否判定SEQ
+    example:
+  loginType:
+    type: string
+    description: ログイン状態
+    example:
+  dentalMonopolySalesFlg:
+    type: string
+    description: 歯科専売可否フラグ
+    example:
+  businessType:
+    type: string
+    description: 顧客区分
+    example:
+  confDocumentType:
+    type: string
+    description: 確認書類
+    example:
+  goodsClassType:
+    type: string
+    description: 薬品区分
+    example:
+  salableGoodsType:
+    type: string
+    description: 販売可能商品区分
+    example:

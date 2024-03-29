@@ -1,0 +1,12 @@
+type: object
+description: WEB-API連携クーポン取得リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 11111111
+  couponNo:
+    type: string
+    description: クーポン番号
+    example: A123456

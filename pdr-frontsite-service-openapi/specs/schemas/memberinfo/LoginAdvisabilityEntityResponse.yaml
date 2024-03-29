@@ -1,0 +1,32 @@
+type: object
+description: ログイン可否判定Entityレスポンス
+properties:
+  loginAdvisabilityseq:
+    type: integer
+    format: int32
+    description: ログイン可否判定SEQ
+    example:
+  memberInfoStatus:
+    type: string
+    description: 会員状態
+    example:
+  approveStatus:
+    type: string
+    description: 承認状態
+    example:
+  onlineloginAdvisability:
+    type: string
+    description: オンラインログイン可否
+    example:
+  memberListType:
+    type: string
+    description: 名簿区分
+    example:
+  accountingType:
+    type: string
+    description: 経理区分
+    example:
+  loginAdvisabilitytype:
+    type: string
+    description: ログイン可否区分
+    example:

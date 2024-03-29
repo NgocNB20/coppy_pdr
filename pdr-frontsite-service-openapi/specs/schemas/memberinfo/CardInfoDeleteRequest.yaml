@@ -1,0 +1,11 @@
+type: object
+description: 指定カード情報削除リクエスト
+properties:
+  memberInfoSeq:
+    type: string
+    description: 会員SEQ
+    example: 1000000
+  cardId:
+    type: string
+    description: クレジットカードId
+    example: 123456789

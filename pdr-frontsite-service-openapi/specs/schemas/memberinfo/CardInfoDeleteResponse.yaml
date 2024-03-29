@@ -1,0 +1,7 @@
+type: object
+description: カード情報削除レスポンス
+properties:
+  cardInfoDelete:
+    type: string
+    description: カード情報削除
+    example: カード情報削除

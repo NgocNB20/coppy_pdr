@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="APPLICATIONLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%d %-7c %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="PAYGENT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>C:/pdr/var/log/tomcat/dev_pdr/shop/frontSiteServicePaygent.log</File>
+        <encoder>
+            <pattern>%d [%t] %-5p %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:/pdr/var/log/tomcat/dev_pdr/shop/frontSiteServicePaygent.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <appender name="PROCESSTHREAD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>C:/pdr/var/log/tomcat/dev_pdr/shop/frontSiteServiceProcessThread.log</File>
+        <encoder>
+            <pattern>%m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:/pdr/var/log/tomcat/dev_pdr/shop/frontSiteServiceProcessThread.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="ACCESSINFOLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>C:/pdr/var/log/tomcat/dev_pdr/shop/access/accessInfoCntFrontSiteService.log</File>
+        <encoder>
+            <pattern>%m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                C:/pdr/var/log/tomcat/dev_pdr/shop/access/accessInfoCntFrontSiteService.log.%d{yyyy-MM-dd-HH}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- ログ出力の重複を避けるため、「additivity="false"」は親Logger子Logger両方に付与すること -->
+    <logger name="jp.co.hankyuhanshin.itec" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="SESSION" additivity="false" level="INFO">
+        <appender-ref ref="APPLICATIONLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.aop.gmo.MultipaymentAlertInterceptor" additivity="false"
+            level="DEBUG">
+        <appender-ref ref="PAYGENT"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="ACTION" additivity="false" level="INFO">
+        <appender-ref ref="APPLICATIONLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="ACCESS" additivity="false" level="INFO">
+        <appender-ref ref="APPLICATIONLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="jp.co.hankyuhanshin.itec.hitmall.application.thread" level="DEBUG" additivity="false">
+        <appender-ref ref="PROCESSTHREAD"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="FREE" additivity="false" level="INFO">
+        <appender-ref ref="APPLICATIONLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="EXCEPT" additivity="false" level="INFO">
+        <appender-ref ref="APPLICATIONLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="ACCESSINFOLOGGER" level="INFO">
+        <appender-ref ref="ACCESSINFOLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="SQLEXCP" additivity="false" level="INFO">
+        <appender-ref ref="APPLICATIONLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="LOGICAL" additivity="false" level="INFO">
+        <appender-ref ref="APPLICATIONLOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.seasar.doma.jdbc" additivity="false" level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

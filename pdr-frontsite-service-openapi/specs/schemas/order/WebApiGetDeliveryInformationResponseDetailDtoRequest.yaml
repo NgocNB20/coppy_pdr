@@ -1,0 +1,34 @@
+type: object
+description: WEB-API連携 配送情報取得結果DTO
+properties:
+  deliveryAssignFlag:
+    type: string
+    description: お届け希望日、時間帯指定可否
+    example: 0
+  deliveryCompanyCode:
+    type: string
+    description: 配送会社コード
+    example: 0
+  deliveryFlag:
+    type: string
+    description: お届け可否
+    example: 0
+  nodeliveryGoodsCode:
+    type: string
+    description: お届け不可申込商品
+    example: 0
+  comEarlyReceiveDate:
+    type: string
+    format: date-time
+    description: 共通最短お届け日
+    example: 2021/12/12 12:00:00
+  dateInfo:
+    type: array
+    description: 日付情報リスト
+    items:
+      $ref: '#/components/schemas/WebApiGetDeliveryInformationResponseDetailDateInfoDtoRequest'
+
+components:
+  schemas:
+    WebApiGetDeliveryInformationResponseDetailDateInfoDtoRequest:
+      $ref: ./WebApiGetDeliveryInformationResponseDetailDateInfoDtoRequest.yaml

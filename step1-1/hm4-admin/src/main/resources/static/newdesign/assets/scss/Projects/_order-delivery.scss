@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+
+.p-order-delivery {
+
+  &__delivery-date {
+    margin-bottom: 30px;
+  }
+
+  &__title {
+    display: grid;
+    justify-content: flex-start;
+    margin-block: 50px 15px;
+    padding: 20px;
+  }
+
+  @include media(sm) {
+
+    &__title {
+      margin: vwset(25) vwset(15) 0;
+      padding: vwset(18) vwset(14);
+    }
+
+    .p-order-confirm__list--normal .p-order-confirm__nest {
+      margin-bottom: 20px;
+    }
+    
+    .p-order-confirm__list--reserve::after {
+      display: none;
+    }
+
+    .p-order-confirm__list--reserve .c-table {
+      border-bottom: solid 2px #333333;
+    }
+
+    &__delivery-date {
+      margin-bottom: vwset(5);
+    }
+
+    .l-form__list-wrap::after {
+      display: none;
+    }
+  }
+}

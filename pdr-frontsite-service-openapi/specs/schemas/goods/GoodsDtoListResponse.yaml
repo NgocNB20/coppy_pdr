@@ -1,0 +1,9 @@
+type: array
+description: 商品DTOリストレスポンス
+items:
+  $ref: "#/components/schemas/GoodsDtoResponse"
+
+components:
+  schemas:
+    GoodsDtoResponse:
+      $ref: ./GoodsDtoResponse.yaml

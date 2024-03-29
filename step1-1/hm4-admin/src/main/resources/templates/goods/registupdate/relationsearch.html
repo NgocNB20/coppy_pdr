@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall" lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <title>商品登録更新｜商品管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="goods">
+<div id="registGoods">
+    <div id="layout">
+        <div th:replace="~{include/header}"></div>
+        <div id="layoutGlobalnav" th:replace="~{include/globalnav}"></div>
+        <div id="container">
+            <table id="col2Frame">
+                <tr>
+                    <td id="sideBar">
+                        <div id="layoutLocalnavgoods" th:replace="~{include/localnavgoods}"></div>
+                    </td>
+                    <td id="mainContents">
+                        <h2>商品管理：商品登録更新：関連商品検索</h2>
+                        <form id="relationsearchForm" th:action="@{/goods/registupdate/relationsearch/}"
+                              th:object="${goodsRegistUpdateRelationsearchModel}" method="post">
+                            <!--エラーメッセージ-->
+                            <div th:if="${allMessages}" class="inputError">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+
+                            <input type="hidden" id="orderField"/>
+                            <input type="hidden" id="orderAsc"/>
+                            <input type="hidden" id="pageNumber"/>
+                            <input type="submit" id="doDisplayChange" style="display:none" value="表示切替"/>
+                            <input type="hidden" id="md"/>
+                            <input type="hidden" id="scGoodsGroupSeq"/>
+                            <!--サブナビゲーション-->
+                            <!-- <div id="localSubNav" class="clearfix">
+                                <ul>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist1.gif}" id="doNextPageIndex" name="doNextPageIndex" value="商品基本情報入力" alt="商品基本情報入力" /></li>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist2.gif}" id="doNextPageCategory" name="doNextPageCategory" value="カテゴリー" alt="カテゴリー" /></li>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist3.gif}" id="doNextPageDetails" name="doNextPageDetails" value="商品詳細" alt="商品詳細" /></li>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist4.gif}" id="doNextPageDetailstext" name="doNextPageDetailstext" value="商品詳細テキスト" alt="商品詳細テキスト" /></li>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist6.gif}" id="doNextPageUnit" name="doNextPageUnit" value="規格" alt="規格" /></li>
+                                   <li><input type="image" th:src="@{/images/tab_goods_regist11.gif}" id="doNextPageRank" name="doNextPageRank" value="ランク" alt="ランク" /></li>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist5.gif}" id="doNextPageImage" name="doNextPageImage" value="商品画像" alt="商品画像" /></li>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist7.gif}" id="doNextPageStock" name="doNextPageStock" value="在庫" alt="在庫" /></li>
+                                    <li class="on"><input type="image" th:src="@{/images/tab_goods_regist8_on.gif}" id="doNextPageRelation" name="doNextPageRelation" value="関連商品" alt="関連商品" /></li>
+                                    <span id="isRmsUse-0"><li><input type="image" th:src="@{/images/tab_goods_regist10.gif}" id="doNextPageRms" name="doNextPageRms" value="楽天" alt="楽天" /></li></span>
+                                    <li><input type="image" th:src="@{/images/tab_goods_regist9.gif}" id="doNextPageConfirm" name="doNextPageConfirm" value="登録内容確認" alt="登録内容確認" /></li>
+                                </ul>
+                            </div> -->
+
+                            <div class="editInner">
+                                <!-- <h4>商品情報</h4>
+                                <table border="0" cellpadding="0" cellspacing="0" class="subTable1">
+                                    <tr>
+                                        <th>商品管理番号</th>
+                                        <td><span id="goodsGroupCode-d" th:text="*{goodsGroupCode}" /></td>
+                                        <th>商品名</th>
+                                        <td><span id="goodsGroupName-d" th:text="*{goodsGroupName}" /></td>
+                                    </tr>
+                                </table> -->
+
+                                <h4>商品検索</h4>
+                                <table border="0" cellpadding="0" cellspacing="0" class="searchConditionTable2">
+                                    <tr>
+                                        <th>商品管理番号</th>
+                                        <td>
+                                            <input type="text" id="searchGoodsGroupCode"
+                                                   th:field="*{searchGoodsGroupCode}" maxlength="20"
+                                                   class="textField w150" title="商品管理番号" th:errorclass="error"/>
+                                            <div th:if="${#fields.hasErrors('searchGoodsGroupCode')}"
+                                                 th:errors="*{searchGoodsGroupCode}" class="c-error-txt mt5"></div>
+                                        </td>
+                                        <th>商品名</th>
+                                        <td>
+                                            <input type="text" id="searchGoodsGroupName"
+                                                   th:field="*{searchGoodsGroupName}" maxlength="120"
+                                                   class="textField w300" title="商品名" th:errorclass="error"/>
+                                            <div th:if="${#fields.hasErrors('searchGoodsGroupName')}"
+                                                 th:errors="*{searchGoodsGroupName}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>カテゴリー</th>
+                                        <td>
+                                            <select id="searchCategoryId" name="searchCategoryId" th:errorclass="error">
+                                                <option value="">選択してください</option>
+                                                <option th:each="item : *{searchCategoryIdItems}" th:value="${item.key}"
+                                                        th:text="${item.value}"
+                                                        th:selected="${item.key} == *{searchCategoryId}">選択してください
+                                                </option>
+                                            </select>
+                                            <div th:if="${#fields.hasErrors('searchCategoryId')}"
+                                                 th:errors="*{searchCategoryId}" class="c-error-txt mt5"></div>
+                                        </td>
+                                        <th>検索キーワード</th>
+                                        <td>
+                                            <input type="text" id="searchRelationGoodsKeyword"
+                                                   th:field="*{searchRelationGoodsKeyword}" maxlength="100"
+                                                   class="textField w300" title="検索キーワード" th:errorclass="error"/>
+                                            <div th:if="${#fields.hasErrors('searchRelationGoodsKeyword')}"
+                                                 th:errors="*{searchRelationGoodsKeyword}"
+                                                 class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!--検索アクション-->
+                                <div id="behaviorTable">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img th:src="@{/images/op_search.gif}" alt="検索する" width="56"
+                                                     height="24"/>
+                                                <input type="image" th:src="@{/images/button/search.gif}" id="doSearch"
+                                                       name="doSearch" value="検索" alt="検索"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <!--====================商品検索結果表示の場合====================-->
+                                <th:block th:if="*{isResultGoodsReration}" id="isResultGoodsReration" limit="100"
+                                          sort="goodsGroupCode" asc="true">
+                                    <br/><br/>
+                                    <h2>商品検索：検索結果</h2>
+                                    <th:block th:if="*{isResultNoData}" id="isResultNoData">
+                                        <p class="notice">全件数：0件</p>
+                                    </th:block>
+
+                                    <th:block th:if="*{!isResultNoData}" id="isNotResultNoData">
+                                        <table class="actions">
+                                            <tr>
+                                                <td class="pager">
+                                                    全件数：<span id="totalCount" th:text="*{resultItems.size()}"></span> 件
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table border="0" cellpadding="0" cellspacing="0"
+                                               class="dataListTable1 fullwidth">
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th>No</th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerGoodsGroupCode">商品管理番号<span
+                                                        id="goodsGroupCodeSort"/></a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerGoodsGroupName">商品名<span id="goodsGroupNameSort"/></a>
+                                                </th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerGoodsOpenStatusPC">公開状態PC<span
+                                                        id="goodsOpenStatusPCSort"/></a></th>
+                                            </tr>
+                                            <tbody id="resultItems" limit="100" sort="goodsGroupCode" asc="true">
+                                            <tr th:each="item, stat : *{resultItems}">
+                                                <td class="check">
+                                                    <input type="checkbox" th:id="'resultCheck' + '-' + ${stat.index}"
+                                                           th:field="*{resultItems[__${stat.index}__].resultCheck}"/>
+                                                    <input type="hidden"
+                                                           th:id="'resultGoodsGroupSeq' + '-' + ${stat.index}"
+                                                           th:name="'resultItems' + '[' + ${stat.index} +']' + '.' +'resultGoodsGroupSeq'"
+                                                           th:value="${item.resultGoodsGroupSeq}"/>
+                                                </td>
+                                                <td><span id="resultDspNo" th:text="${item.resultDspNo}"></span></td>
+                                                <td class="option1"><span id="resultGoodsGroupCode"
+                                                                          th:text="${item.resultGoodsGroupCode}"></span>
+                                                </td>
+                                                <td class="option1 break-word"><span id="resultGoodsGroupName"
+                                                                                     th:text="${item.resultGoodsGroupName}"></span>
+                                                </td>
+                                                <td><span id="resultGoodsOpenStatusPC"
+                                                          th:text="${#enumtype.getLabel('HTypeOpenDeleteStatus', item.resultGoodsOpenStatusPC)}"></span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <th:block th:if="*{!isResultNoData}" id="isNotResultNoData">
+                                            <div id="behaviorTable">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <img th:src="@{/images/info_addrelationitem.gif}"
+                                                                 alt="関連商品に追加"/>
+                                                            <input type="image" th:src="@{/images/button/add2.gif}"
+                                                                   id="doSelectRelationGoods"
+                                                                   name="doSelectRelationGoods" value="追加" alt="追加"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+                            </div>
+
+                            <!--ページアクション-->
+                            <div class="buttons2">
+                                <input type="image" th:src="@{/images/button/prev.gif}" id="doReturn" name="doReturn"
+                                       value="戻る" alt="戻る"/>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="~{include/footer}"></div>
+    </div>
+</div>
+</body>
+</html>

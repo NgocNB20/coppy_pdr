@@ -1,0 +1,33 @@
+type: object
+description: カード情報登録リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 1
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 1
+  cardBrand:
+    type: string
+    description: カード会社
+    example: XXX
+  cardNumber:
+    type: string
+    description: カード番号
+    example: 1234567890
+  expirationDateYear:
+    type: string
+    description: カード有効期限(年)
+    example: 99
+  expirationDateMonth:
+    type: string
+    description: カード有効期限(月)
+    example: 01
+  keepToken:
+    type: string
+    description: カード預かり通信用トークン
+    example: 123456789

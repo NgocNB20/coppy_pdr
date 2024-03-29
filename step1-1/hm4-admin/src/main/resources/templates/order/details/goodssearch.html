@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      lang="ja">
+<head>
+    <meta th:replace="~{include/head}"/>
+    <title>受注検索｜受注管理</title>
+    <script>
+	jQuery(function($){
+		$("#searchDiscountSaleDate").datepicker();
+		$("#searchOpenStartTimeFrom").datepicker();
+		$("#searchOpenStartTimeTo").datepicker();
+		$("#searchOpenEndTimeFrom").datepicker();
+		$("#searchOpenEndTimeTo").datepicker();
+		$("#searchSaleStartTimeFrom").datepicker();
+		$("#searchSaleStartTimeTo").datepicker();
+		$("#searchSaleEndTimeFrom").datepicker();
+		$("#searchSaleEndTimeTo").datepicker();
+		$("#searchRegOrUpTimeFrom").datepicker();
+		$("#searchRegOrUpTimeTo").datepicker();
+
+		// 日付補助ボタン
+		$("input[id^='targetDate_']").click(function() {
+			var mode = $(this).attr("id").replace("targetDate_", "").split("_");
+			setTargetDate(mode[0], mode[1]+"From", mode[1]+"To");
+		});
+	});
+
+    </script>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="order">
+<div id="searchOrder">
+    <div id="layout">
+        <div th:replace="~{include/header}"></div>
+        <div id="layoutGlobalnav" th:replace="~{include/globalnav}"></div>
+
+        <div id="container">
+            <table id="col2Frame">
+                <tr>
+                    <td id="sideBar">
+                        <div id="localNavorder" th:replace="~{include/localnavorder}"></div>
+                    </td>
+                    <td id="mainContents">
+
+                        <h2>受注検索：受注番号「<span id="orderCode-1" th:text="${goodsSearchModel.orderCode}"></span>」の詳細：修正 商品検索
+                        </h2>
+                        <form id="goodsSearchForm" th:action="@{/order/details/goodssearch/}"
+                              th:object="${goodsSearchModel}" method="post">
+                            <div th:if="${allMessages}" class="inputError">
+                                <ul th:each="message : ${allMessages}">
+                                    <li th:utext="${message}"></li>
+                                </ul>
+                            </div>
+
+                            <div class="editInner2">
+                                <!--検索条件部_START-->
+                                <table border="0" cellpadding="0" cellspacing="0" class="actions">
+                                    <tr>
+                                        <td class="pager">
+                                            <div th:replace="~{include/pager::pager2(totalCountDisplayFlag=false,duplicateSelectFlag=false)}"></div>
+                                            <span id="site" layout="none">
+						<label for="both"><input type="radio" name="site" id="both" value="0"/>PCとモバイル</label>
+						<label for="pc"><input type="radio" name="site" id="pc" value="1"/>PCのみ</label>
+						<label for="mb"><input type="radio" name="site" id="mb" value="2"/>モバイルのみ</label>
+					</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br/>
+
+                                <table border="0" cellpadding="0" cellspacing="0"
+                                       class="searchConditionTable2 fullwidth">
+                                    <tr>
+                                        <th rowspan="3">商品情報</th>
+                                        <td colspan="3">
+                                            <label><input type="checkbox" id="searchIndividualDeliveryType"
+                                                          th:field="*{searchIndividualDeliveryType}"/>&nbsp;個別配送のみ</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <label>商品管理番号&nbsp;<input type="text" id="searchGoodsGroupCode"
+                                                                      th:field="*{searchGoodsGroupCode}"
+                                                                      th:errorclass="error" value="" maxlength="20"
+                                                                      class="textField w150" title="商品管理番号"/></label>&nbsp;&nbsp;
+                                            <div th:if="${#fields.hasErrors('searchGoodsGroupCode')}"
+                                                 th:errors="*{searchGoodsGroupCode}" class="c-error-txt mt5"></div>
+                                            <label>商品番号&nbsp;<input type="text" id="searchGoodsCode" value=""
+                                                                    th:field="*{searchGoodsCode}" th:errorclass="error"
+                                                                    maxlength="20" class="textField w150" title="商品番号"/></label>&nbsp;&nbsp;
+                                            <div th:if="${#fields.hasErrors('searchGoodsCode')}"
+                                                 th:errors="*{searchGoodsCode}" class="c-error-txt mt5"></div>
+                                            <label>JANコード&nbsp;<input type="text" id="searchJanCode"
+                                                                      th:field="*{searchJanCode}" th:errorclass="error"
+                                                                      value="" maxlength="16" class="textField w150"
+                                                                      title="JAN/カタログコード"/></label>
+                                            <div th:if="${#fields.hasErrors('searchJanCode')}"
+                                                 th:errors="*{searchJanCode}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <label>商品名&nbsp;<input type="text" id="searchGoodsGroupName"
+                                                                   th:field="*{searchGoodsGroupName}"
+                                                                   th:errorclass="error" maxlength="120"
+                                                                   class="textField w300" title="商品名"/></label>
+                                            <div th:if="${#fields.hasErrors('searchGoodsGroupName')}"
+                                                 th:errors="*{searchGoodsGroupName}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>価格</th>
+                                        <td colspan="3">
+                                            <label><input type="text" id="searchMinPrice" value="" maxlength="8"
+                                                          th:field="*{searchMinPrice}" th:errorclass="error"
+                                                          class="textField w100 right" title="価格-From"/>&nbsp;円</label>
+                                            <div th:if="${#fields.hasErrors('searchMinPrice')}"
+                                                 th:errors="*{searchMinPrice}" class="c-error-txt mt5"></div>
+                                            &nbsp;～&nbsp;
+                                            <label><input type="text" id="searchMaxPrice" value="" maxlength="8"
+                                                          th:field="*{searchMaxPrice}" th:errorclass="error"
+                                                          class="textField w100 right" title="価格-To"/>&nbsp;円</label>
+                                            <div th:if="${#fields.hasErrors('searchMaxPrice')}"
+                                                 th:errors="*{searchMaxPrice}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="3">公開状態</th>
+                                        <td>
+                                            <select name="goodsOpenStatus" id="goodsOpenStatus" title="公開状態"
+                                                    th:classappend="${#fields.hasErrors('goodsOpenStatus')} ? 'error'">
+                                                <option value="">選択してください</option>
+                                                <option th:each="item : *{goodsOpenStatusItems}" th:value="${item.key}"
+                                                        th:text="${item.value}"
+                                                        th:selected="${item.key} == *{goodsOpenStatus}">
+                                                </option>
+                                            </select>
+                                            <div th:if="${#fields.hasErrors('goodsOpenStatus')}"
+                                                 th:errors="*{goodsOpenStatus}" class="c-error-txt mt5"></div>
+                                        </td>
+                                        <th rowspan="3">販売状態</th>
+                                        <td>
+                                            <select name="goodsSaleStatus" id="goodsSaleStatus" title="販売状態"
+                                                    th:classappend="${#fields.hasErrors('goodsSaleStatus')} ? 'error'">
+                                                <option value="">選択してください</option>
+                                                <option th:each="item : *{goodsSaleStatusItems}" th:value="${item.key}"
+                                                        th:text="${item.value}"
+                                                        th:selected="${item.key} == *{goodsSaleStatus}">
+                                                </option>
+                                            </select>
+                                            <div th:if="${#fields.hasErrors('goodsSaleStatus')}"
+                                                 th:errors="*{goodsSaleStatus}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" id="targetDate_today_searchOpenStartTime" value="今日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_yesterday_searchOpenStartTime"
+                                                   value="昨日" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_crrentMonth_searchOpenStartTime"
+                                                   value="今月" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_prevMonth_searchOpenStartTime"
+                                                   value="先月" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_clear_searchOpenStartTime" value="クリア"
+                                                   class="targetDateStyle"/>
+                                            <br/>
+                                            公開開始日&nbsp;<label><input type="text" id="searchOpenStartTimeFrom" value=""
+                                                                     maxlength="10"
+                                                                     th:field="*{searchOpenStartTimeFrom}"
+                                                                     th:errorclass="error" class="textField w80"
+                                                                     title="公開開始日-From"/></label>
+                                            <div th:if="${#fields.hasErrors('searchOpenStartTimeFrom')}"
+                                                 th:errors="*{searchOpenStartTimeFrom}" class="c-error-txt mt5"></div>
+                                            &nbsp;～&nbsp;
+                                            <label><input type="text" id="searchOpenStartTimeTo"
+                                                          th:field="*{searchOpenStartTimeTo}" th:errorclass="error"
+                                                          value="" maxlength="10" class="textField w80"
+                                                          title="公開開始日-To"/></label>
+                                            <div th:if="${#fields.hasErrors('searchOpenStartTimeTo')}"
+                                                 th:errors="*{searchOpenStartTimeTo}" class="c-error-txt mt5"></div>
+                                        </td>
+                                        <td>
+                                            <input type="button" id="targetDate_today_searchSaleStartTime" value="今日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_yesterday_searchSaleStartTime"
+                                                   value="昨日" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_crrentMonth_searchSaleStartTime"
+                                                   value="今月" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_prevMonth_searchSaleStartTime"
+                                                   value="先月" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_clear_searchSaleStartTime" value="クリア"
+                                                   class="targetDateStyle"/>
+                                            <br/>
+                                            販売開始日&nbsp;<label><input type="text" id="searchSaleStartTimeFrom"
+                                                                     th:field="*{searchSaleStartTimeFrom}"
+                                                                     th:errorclass="error" value="" maxlength="10"
+                                                                     class="textField w80" title="販売開始日-From"/></label>
+                                            <div th:if="${#fields.hasErrors('searchSaleStartTimeFrom')}"
+                                                 th:errors="*{searchSaleStartTimeFrom}" class="c-error-txt mt5"></div>
+                                            &nbsp;～&nbsp;
+                                            <label><input type="text" id="searchSaleStartTimeTo"
+                                                          th:field="*{searchSaleStartTimeTo}" th:errorclass="error"
+                                                          value="" maxlength="10" class="textField w80"
+                                                          title="販売開始日-To"/></label>
+                                            <div th:if="${#fields.hasErrors('searchSaleStartTimeTo')}"
+                                                 th:errors="*{searchSaleStartTimeTo}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" id="targetDate_today_searchOpenEndTime" value="今日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_yesterday_searchOpenEndTime" value="昨日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_crrentMonth_searchOpenEndTime"
+                                                   value="今月" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_prevMonth_searchOpenEndTime" value="先月"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_clear_searchOpenEndTime" value="クリア"
+                                                   class="targetDateStyle"/>
+                                            <br/>
+                                            公開終了日&nbsp;<label><input type="text" id="searchOpenEndTimeFrom"
+                                                                     th:field="*{searchOpenEndTimeFrom}"
+                                                                     th:errorclass="error" value="" maxlength="10"
+                                                                     class="textField w80" title="公開終了日-From"/></label>
+                                            <div th:if="${#fields.hasErrors('searchOpenEndTimeFrom')}"
+                                                 th:errors="*{searchOpenEndTimeFrom}" class="c-error-txt mt5"></div>
+                                            &nbsp;～&nbsp;
+                                            <label><input type="text" id="searchOpenEndTimeTo"
+                                                          th:field="*{searchOpenEndTimeTo}" th:errorclass="error"
+                                                          value="" maxlength="10" class="textField w80"
+                                                          title="公開終了日-To"/></label>
+                                            <div th:if="${#fields.hasErrors('searchOpenEndTimeTo')}"
+                                                 th:errors="*{searchOpenEndTimeTo}" class="c-error-txt mt5"></div>
+                                        </td>
+                                        <td>
+                                            <input type="button" id="targetDate_today_searchSaleEndTime" value="今日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_yesterday_searchSaleEndTime" value="昨日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_crrentMonth_searchSaleEndTime"
+                                                   value="今月" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_prevMonth_searchSaleEndTime" value="先月"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_clear_searchSaleEndTime" value="クリア"
+                                                   class="targetDateStyle"/>
+                                            <br/>
+                                            販売終了日&nbsp;<label><input type="text" id="searchSaleEndTimeFrom"
+                                                                     th:field="*{searchSaleEndTimeFrom}"
+                                                                     th:errorclass="error" value="" maxlength="10"
+                                                                     class="textField w80" title="販売終了日-From"/></label>
+                                            <div th:if="${#fields.hasErrors('searchSaleEndTimeFrom')}"
+                                                 th:errors="*{searchSaleEndTimeFrom}" class="c-error-txt mt5"></div>
+                                            &nbsp;～&nbsp;
+                                            <label><input type="text" id="searchSaleEndTimeTo"
+                                                          th:field="*{searchSaleEndTimeTo}" th:errorclass="error"
+                                                          value="" maxlength="10" class="textField w80"
+                                                          title="販売終了日-To"/></label>
+                                            <div th:if="${#fields.hasErrors('searchOpenEndTimeTo')}"
+                                                 th:errors="*{searchOpenEndTimeTo}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>キーワード</th>
+                                        <td><input type="text" id="searchKeyword" th:field="*{searchKeyword}"
+                                                   th:errorclass="error" value="" maxlength="100" class="textField w200"
+                                                   title="キーワード"/>
+                                            <div th:if="${#fields.hasErrors('searchKeyword')}"
+                                                 th:errors="*{searchKeyword}" class="c-error-txt mt5"></div>
+                                        </td>
+                                        <th>カテゴリー</th>
+                                        <td>
+                                            <select name="searchCategoryId" id="searchCategoryId" title="カテゴリー"
+                                                    th:classappend="${#fields.hasErrors('searchCategoryId')} ? 'error'">
+                                                <option value="">選択してください</option>
+                                                <option th:each="item : *{searchCategoryIdItems}" th:value="${item.key}"
+                                                        th:text="${item.value}"
+                                                        th:selected="${item.key} == *{searchCategoryId}">
+                                                </option>
+                                            </select>
+                                            <div th:if="${#fields.hasErrors('searchCategoryId')}"
+                                                 th:errors="*{searchCategoryId}" class="c-error-txt mt5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2">更新／登録日</th>
+                                        <td colspan="3">
+					<span id="selectRegitOrUpdate" title="更新／登録日"
+                          th:classappend="${#fields.hasErrors('selectRegitOrUpdate')} ? 'error'">
+						<label><input type="radio" id="regit" name="selectRegitOrUpdate"
+                                      th:field="*{selectRegitOrUpdate}" value="0"/>&nbsp;登録日&nbsp;&nbsp;</label>
+						<label><input type="radio" id="update" name="selectRegitOrUpdate"
+                                      th:field="*{selectRegitOrUpdate}" value="1"/>&nbsp;更新日&nbsp;&nbsp;</label>
+						<div th:if="${#fields.hasErrors('selectRegitOrUpdate')}" th:errors="*{selectRegitOrUpdate}"
+                             class="c-error-txt mt5"></div>
+					</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <input type="button" id="targetDate_today_searchRegOrUpTime" value="今日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_yesterday_searchRegOrUpTime" value="昨日"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_crrentMonth_searchRegOrUpTime"
+                                                   value="今月" class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_prevMonth_searchRegOrUpTime" value="先月"
+                                                   class="targetDateStyle"/>
+                                            <input type="button" id="targetDate_clear_searchRegOrUpTime" value="クリア"
+                                                   class="targetDateStyle"/>
+                                            <br/>
+                                            <label><input type="text" id="searchRegOrUpTimeFrom"
+                                                          th:field="*{searchRegOrUpTimeFrom}" th:errorclass="error"
+                                                          value="" maxlength="10" class="textField w80"
+                                                          title="更新／登録日-From"/></label>
+                                            <div th:if="${#fields.hasErrors('searchRegOrUpTimeFrom')}"
+                                                 th:errors="*{searchRegOrUpTimeFrom}" class="c-error-txt mt5"></div>
+                                            &nbsp;～&nbsp;
+                                            <label><input type="text" id="searchRegOrUpTimeTo"
+                                                          th:field="*{searchRegOrUpTimeTo}" th:errorclass="error"
+                                                          maxlength="10" class="textField w80"
+                                                          title="更新／登録日-To"/></label>
+                                            <div th:if="${#fields.hasErrors('searchRegOrUpTimeTo')}"
+                                                 th:errors="*{searchRegOrUpTimeTo}" class="c-error-txt mt5"></div>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div id="behaviorTable">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img th:src="@{/images/op_search.gif}" alt="検索する" width="56"
+                                                     height="24"/>
+                                                <input type="image" th:src="@{/images/button/search.gif}"
+                                                       id="doGoodsSearch" name="doGoodsSearch" value="検索" alt="検索"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--検索条件部_END-->
+                                <br/><br/>
+                                <!--検索結果_START-->
+                                <th:block th:if="*{isResult}" id="isResult">
+                                    <h2>検索結果</h2>
+                                    <input type="hidden" id="pageNumber" name="pageNumber"/>
+                                    <input type="hidden" id="orderField" th:field="*{orderField}"/>
+                                    <input type="hidden" id="orderAsc" th:field="*{orderAsc}"/>
+                                    <input type="submit" id="doDisplayChange" name="doDisplayChange"
+                                           style="display:none" value="表示切替"/>
+                                    <div th:if="*{resultItems.size() == 0}" id="isResultItemsExist">
+                                        全件数：<span id="totalCount" th:text="*{resultItems.size()}"></span>件
+                                    </div>
+
+                                    <div th:if="*{resultItems.size() != 0}" id="isNotResultItemsExist">
+                                        <table class="actions">
+                                            <tr>
+                                                <div th:replace="~{include/pager::pager2(totalCountDisplayFlag=false,duplicateSelectFlag=false)}"></div>
+                                            </tr>
+                                        </table>
+
+                                        <table border="0" cellpadding="0" cellspacing="0" class="massaction">
+                                            <tr>
+                                                <td><input type="image" th:src="@{/images/button/add.gif}"
+                                                           id="doOrderGoodsAdd-2" name="doOrderGoodsAdd" value="追加"
+                                                           alt="追加"/>&nbsp;&nbsp;<a href="#"
+                                                                                    onClick="return allCheckDefaultCount('goodsSearchForm', 'resultItems', 'resultGoodsCheck');">全て選択</a>
+                                                    ｜ <a href="#"
+                                                         onClick="return allUnCheckDefaultCount('goodsSearchForm', 'resultItems', 'resultGoodsCheck');">選択解除</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table border="0" cellpadding="0" cellspacing="0"
+                                               class="dataListTable1 fullwidth">
+                                            <tr th:with="sortStr=*{orderAsc}?'&nbsp;▲':'&nbsp;▼'">
+                                                <th>&nbsp;</th>
+                                                <th>No</th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerGoodsGroupCode">
+                                                    商品管理番号
+                                                    <th:block th:if="*{orderField == 'goodsGroupCode'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerGoodsCode">
+                                                    商品番号
+                                                    <th:block th:if="*{orderField == 'goodsCode'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerJanCode">
+                                                    JANコード
+                                                    <th:block th:if="*{orderField == 'janCode'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerGoodsGroupName">
+                                                    商品名
+                                                    <th:block th:if="*{orderField == 'goodsGroupName'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerUnitValue1">
+                                                    規格1
+                                                    <th:block th:if="*{orderField == 'unitValue1'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerUnitValue2">
+                                                    規格2
+                                                    <th:block th:if="*{orderField == 'unitValue2'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerGoodsPrice">
+                                                    価格
+                                                    <th:block th:if="*{orderField == 'goodsPrice'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerIndividualDeliveryType">
+                                                    個別<br/>配送
+                                                    <th:block th:if="*{orderField == 'individualDeliveryType'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                                <th><a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerSalesPossibleStock">
+                                                    販売可能在庫数
+                                                    <th:block th:if="*{orderField == 'salesPossibleStock'}"><span
+                                                            th:text="${sortStr}"></span></th:block>
+                                                </a></th>
+                                            </tr>
+                                            <tbody id="resultItems">
+                                            <tr th:each="item,stat: *{resultItems}">
+                                                <td class="check">
+                                                    <input type="hidden" th:id="'resultGoodsSeq-'+${stat.index}"/>
+                                                    <input type="checkbox"
+                                                           th:name="'resultItems' + '[' + ${stat.index} +']' + '.' +'resultGoodsCheck'"
+                                                           value="true" th:checked="${item.resultGoodsCheck}"
+                                                           th:id="'resultGoodsCheck' + '-' + ${stat.index}"/>
+                                                </td>
+                                                <td><span th:id="'resultNo-'+${stat.index}"
+                                                          th:text="${item.resultNo}"></span></td>
+                                                <td><span th:id="'goodsGroupCode-'+${stat.index}"
+                                                          th:text="${item.goodsGroupCode}"></span></td>
+                                                <td><span th:id="'resultGoodsCode-'+${stat.index}"
+                                                          th:text="${item.resultGoodsCode}"></span></td>
+                                                <td><span th:id="'resultJanCode-'+${stat.index}"
+                                                          th:text="${item.resultJanCode}"></span></td>
+                                                <td class="option1 break-word"><span
+                                                        th:id="'resultGoodsGroupName-'+${stat.index}"
+                                                        th:text="${item.resultGoodsGroupName}"></span></td>
+                                                <td class="break-word"><span th:id="'resultUnitValue1-'+${stat.index}"
+                                                                             th:text="${item.resultUnitValue1}"></span>
+                                                </td>
+                                                <td class="break-word"><span th:id="'resultUnitValue2-'+${stat.index}"
+                                                                             th:text="${item.resultUnitValue2}"></span>
+                                                </td>
+                                                <td nowrap="nowrap" class="price"><span
+                                                        th:id="'resultGoodsPrice-'+${stat.index}"
+                                                        th:text="${#number.convert(item.resultGoodsPrice)}"></span>&nbsp;円
+                                                </td>
+                                                <td><span th:id="'resultIndividualDeliveryType-'+${stat.index}"
+                                                          th:text="${#enumtype.getLabel('HTypeViewIndividualDelivery',item.resultIndividualDeliveryType)}"></span>
+                                                </td>
+                                                <td class="right">
+                                                    <th:block th:id="'isStockManagementFlag-'+${stat.index}"
+                                                              th:if="${item.isStockManagementFlag()}">
+                                                        <span th:id="'resultSalesPossibleStock-'+${stat.index}"
+                                                              th:text="${#number.convert(item.resultSalesPossibleStock)}"></span>
+                                                    </th:block>
+                                                    <span th:id="'isNotStockManagementFlag-'+${stat.index}"
+                                                          th:if="${!item.isStockManagementFlag()}">－</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table border="0" cellpadding="0" cellspacing="0" class="massaction">
+                                            <tr>
+                                                <td><input type="image" th:src="@{/images/button/add.gif}"
+                                                           id="doOrderGoodsAdd" name="doOrderGoodsAdd" value="追加"
+                                                           alt="追加"/>&nbsp;&nbsp;<a href="#"
+                                                                                    onClick="return allCheckDefaultCount('goodsSearchForm', 'resultItems', 'resultGoodsCheck');">全て選択</a>
+                                                    ｜ <a href="#"
+                                                         onClick="return allUnCheckDefaultCount('goodsSearchForm', 'resultItems', 'resultGoodsCheck');">選択解除</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!--ページネーション-->
+                                        <div th:replace="~{include/pager::pager1}"></div>
+                                    </div>
+                                </th:block>
+                                <!--検索結果_END-->
+                            </div>
+
+                            <div id="isNotFromConfirm" class="buttons3">
+                                <input type="image" th:src="@{/images/button/cancel_1.gif}" id="doCancel"
+                                       name="doCancel" value="キャンセル" alt="キャンセル"/>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="~{include/footer}"></div>
+    </div>
+</div>
+</body>
+</html>

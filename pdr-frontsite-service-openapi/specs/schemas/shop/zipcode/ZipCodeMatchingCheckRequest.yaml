@@ -1,0 +1,11 @@
+type: object
+description: 郵便番号整合性チェックリクエスト
+properties:
+  zipCode:
+    type: string
+    description: 郵便番号
+    example: 5530001
+  prefecture:
+    type: string
+    description: 都道府県
+    example: 大阪府

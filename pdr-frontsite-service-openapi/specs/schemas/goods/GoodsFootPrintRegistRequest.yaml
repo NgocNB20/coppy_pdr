@@ -1,0 +1,22 @@
+type: object
+description: あしあと商品情報登録リクエスト
+properties:
+  accessUid:
+    type: string
+    description: 端末識別情報（必須）
+    example: uid
+  goodsGroupSeq:
+    type: integer
+    format: int32
+    description: 商品グループSEQ (FK)（必須）
+    example: 1000
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00

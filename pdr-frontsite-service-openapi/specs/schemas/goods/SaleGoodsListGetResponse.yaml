@@ -1,0 +1,10 @@
+# 2023-renew No65 from here
+type: array
+description: セール商品DtoListレスポンス
+items:
+  $ref: "#/components/schemas/SaleGoodsListDetailGetResponse"
+components:
+  schemas:
+    SaleGoodsListDetailGetResponse:
+      $ref: ./SaleGoodsListDetailGetResponse.yaml
+# 2023-renew No65 to here

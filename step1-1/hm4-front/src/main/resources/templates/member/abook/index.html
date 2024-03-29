@@ -1,0 +1,143 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+    <script>
+        function setAddressBookIndex(addressBookIndex){
+            // Ajax処理等でhiddenがすでに作られていた場合に対する考慮
+            // 行インデックスhiddenがすでに存在する場合は要素削除
+            if ($("#addressBookIndex")[0]) {
+                $("#addressBookIndex").remove();
+            }
+            // 行インデックスhiddenを生成しformに追加
+            $("<input>", {
+                type: 'hidden',
+                id: 'addressBookIndex',
+                name: 'addressBookIndex',
+                value: addressBookIndex
+            }).appendTo('#addressBookItems');
+        }
+    </script>
+</head>
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/index.html}" id="goTopPage" class="c-textlink c-textlink--hover">TOP</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                            <span class="l-breadcrumbs__link">
+                                <a th:href="@{/member/index.html}" class="c-textlink c-textlink--hover">マイページ</a>
+                            </span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__current">お届け先リスト（会員住所以外）</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+                <div class="l-main p-mypage-abook">
+                    <h2 class="c-title-page"><strong>お届け先リスト</strong>（会員住所以外）</h2>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <form id="indexForm" th:object="${memberAbookModel}" method="post"
+                          th:action="@{/member/abook/index.html}">
+
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">
+                                ご請求先（会員住所）以外で、ご登録いただいているお届け先の一覧です。</p>
+                            <ul class="c-page-description__bullet-point">
+                                <li>
+                                    こちらの画面では、お届け先の削除ができます。（修正はできませんので、ご注文いただく際にお届け先住所の変更画面より新たに登録をお願いします。）
+                                </li>
+                                <li>ご請求先（会員住所）の住所変更は<a th:href="@{/member/confirm/index.html}" class="c-inlinelink">こちら</a>より行ってください。
+                                </li>
+                            </ul>
+                            <p class="c-page-description__text c-page-description--margin-m">
+                                お困りの場合は、ご注文デスク（TEL：0120-108648　受付時間：09:00-17:00／日祝休）までお電話ください。</p>
+                        </div>
+                        <div id="isNotAddressBookEmpty" th:if="${!memberAbookModel.isAddressBookEmpty()}">
+                            <div class="p-mypage-abook__list">
+                                <table class="c-table c-table--pcspdevide">
+                                    <thead>
+                                    <tr class="c-table__tr l-lg">
+                                        <th class="c-table__th">事業所名</th>
+                                        <th class="c-table__th">住所</th>
+                                        <th class="c-table__th">電話番号</th>
+                                        <th class="c-table__th"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="addressBookItems">
+                                    <th:block th:each="addressBookItem, stat : ${memberAbookModel.addressBookItems}">
+                                        <tr class="c-table__tr">
+                                            <td class="p-mypage-abook__list-name">
+                                                <p th:text="${addressBookItem.addressBookName}"></p>
+                                            </td>
+                                            <td class="p-mypage-abook__list-address">
+                                                <p>〒<span id="addressBookZipCode" th:remove="tag" th:text="${addressBookItem.addressBookZipCode}"></span>
+                                                    <br>
+                                                    <span id="addressBookAddress1" th:text="${addressBookItem.addressBookAddress1}" th:remove="tag"></span>
+                                                    <span id="addressBookAddress2" th:text="${addressBookItem.addressBookAddress2}" th:remove="tag"></span>
+                                                    <span id="addressBookAddress3" th:text="${addressBookItem.addressBookAddress3}" th:remove="tag"></span>
+                                                    <br>
+                                                    <span id="addressBookAddress4" th:text="${addressBookItem.addressBookAddress4}" th:remove="tag"></span>
+                                                </p>
+                                            </td>
+                                            <td class="p-mypage-abook__list-tel">
+                                                <p><span id="addressBookTel" th:text="${addressBookItem.addressBookTel}" th:remove="tag"></span></p>
+                                            </td>
+                                            <td class="p-mypage-abook__list-button">
+                                                <button type="submit" id="doOnceDelete" name="doOnceDelete" th:onclick="'setAddressBookIndex(' + ${stat.index} + ');'" class="c-textlink c-textlink--text c-textlink--delete">
+                                                    <svg viewBox="0 0 10 10">
+                                                        <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use>
+                                                    </svg>
+                                                    削除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="c-button-wrap">
+                            <a th:href="@{/index.html}" id="go-Shop-Top"
+                               class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" id="go-Member-Top"
+                               class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

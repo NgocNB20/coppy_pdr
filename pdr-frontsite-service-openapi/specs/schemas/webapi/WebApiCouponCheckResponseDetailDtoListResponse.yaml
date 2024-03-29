@@ -1,0 +1,8 @@
+type: array
+description: WEB-API連携取得結果DTOクラスレスポンス
+items:
+  $ref: "#/components/schemas/WebApiCouponCheckResponseDetailDtoResponse"
+components:
+  schemas:
+    WebApiCouponCheckResponseDetailDtoResponse:
+      $ref: ./WebApiCouponCheckResponseDetailDtoResponse.yaml

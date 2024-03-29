@@ -1,0 +1,12 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<symbol  viewBox="0 0 12 12" id="shoplogo">
+<g id="test">
+	<rect width="3" height="3"/>
+	<rect x="4" width="8" height="3"/>
+	<rect y="9" width="3" height="3"/>
+	<rect y="4.5" width="3" height="3"/>
+	<rect x="4" y="9" width="8" height="3"/>
+	<rect x="4" y="4.5" width="8" height="3"/>
+</g>
+</symbol>
+</svg>

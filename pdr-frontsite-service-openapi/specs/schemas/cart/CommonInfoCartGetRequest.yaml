@@ -1,0 +1,12 @@
+type: object
+description: カート共通情報リクエスト
+properties:
+  memberInfoSeq:
+    description: 会員SEQ
+    example: 10000000
+    format: int32
+    type: integer
+  accessUid:
+    type: string
+    description: 端末識別情報
+    example: "2023101116559922"

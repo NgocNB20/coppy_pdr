@@ -1,0 +1,7 @@
+type: object
+description: 公開カテゴリパスリスト取得リクエスト
+properties:
+  categorySeqPath:
+    type: string
+    description: カテゴリSEQパス
+    example: TOP

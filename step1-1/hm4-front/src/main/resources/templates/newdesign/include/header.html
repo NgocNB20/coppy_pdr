@@ -1,0 +1,413 @@
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/848019204/?guid=ON&amp;script=0"/>
+    </div>
+    JavaScriptを有効にしてください
+</noscript>
+<hm:freearea key="header_obi"/>
+
+<header class="l-header">
+    <div class="l-header__container l-header__common">
+        <div class="l-header__inner">
+            <p class="l-header__discription l-lg"><span>歯科材料の通販 </span><span>ピーディーアールの公式オンラインショップ </span></p>
+            <div class="l-header__main" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                <h1 class="l-header__logo"><a th:href="@{/index.html}"><img th:src="@{/newdesign/assets/images/common/logo.svg}" width="86" alt="P.D.R."></a></h1>
+                <div class="l-header__category l-headermenu l-lg">
+                    <div class="l-header__category-button l-headermenu__button"><p>カテゴリーから探す</p></div>
+                    <div class="l-headermenu__contents" id="headerPageItems-1"></div>
+                </div>
+                <div class="l-header__search">
+                    <form th:action="@{/search/index.html}" method="GET">
+                        <input type="hidden" id="fromView" value="header" name="fromView"/>
+                        <input name="keyword" type="text" th:value="*{keyword}" id="search" maxlength="255" title="検索キーワード" placeholder="キーワード検索" autocomplete="off">
+                        <button name="doSearch" type="submit"><svg viewBox="0 0 23 22"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/search.svg#search}"></use></svg></button>
+
+                        <!-- 2023-renew No3-suggest-goods-front from here -->
+                        <div id="suggestBlock" class="suggestBlock" style="display:none;"></div>
+                        <!-- 2023-renew No3-suggest-goods-front to here -->
+                    </form>
+                </div>
+                <div class="l-header__links l-lg">
+                    <div class="l-header__quick"><a th:href="@{/cart/catalog.html}"><svg viewBox="0 0 26 18.469"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/quick.svg#quick}"></use></svg><p>クイックオーダー</p></a></div>
+                    <ul>
+                        <li><a th:href="@{/guide/faq.html}" class="c-textlink c-textlink--hover">よくある質問</a></li>
+                        <li><a th:href="@{/inquiry/index.html}" class="c-textlink c-textlink--hover">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div class="l-header__biginer l-lg">
+                    <a th:href="@{/guide/shop.html#s1}">
+                        <svg viewBox="0 0 18.44 24">
+                            <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/beginners.svg#beginners}"></use>
+                        </svg>
+                        <p>初めての方へ</p>
+                    </a>
+                </div>
+                <!-- case ログインの場合 -->
+                <nav class="l-header__button l-lg" sec:authorize="isAuthenticated()">
+                    <a th:href="@{/member/index.html}" class="l-header__button-member">
+                        <span><svg viewBox="0 0 30 31" class="member"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/member.svg#member}"></use></svg></span>
+                        <p>マイページ</p>
+                        <!-- 2023-renew No71 from here -->
+                        <th:block th:if="${baseInfo.getMyPageAnnounceFlg == true}">
+                            <em class="c-baloon c-baloon--hot">!</em>
+                        </th:block>
+                        <!-- 2023-renew No71 to here -->
+                    </a>
+                    <form id="logoutForm" th:action="@{/logout}" method="POST"></form>
+                    <a href="javascript:logoutForm.submit()" class="l-header__button-login">
+                        <span><svg viewBox="0 0 45 35" class="logout"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/logout.svg#logout}"></use></svg></span>
+                        <p>ログアウト</p>
+                    </a>
+                    <a th:href="@{/cart/index.html}" class="l-header__button-cart">
+                        <span><svg viewBox="0 0 35 35" class="cart"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/cart.svg#cart}"></use></svg></span>
+                        <p>&yen;<span id="sumPrice" th:text="${#number.convert(baseInfo.cartGoodsSumPrice)}"></span></p>
+                        <em id="sumCount" th:text="${baseInfo.cartGoodsSumCount > 1000?'999+':baseInfo.cartGoodsSumCount}" class="c-baloon c-baloon--number"></em>
+                    </a>
+                </nav>
+                <!-- case ログアウトの場合 -->
+                <nav class="l-header__button l-lg" sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/regist/inputtel.html}" class="l-header__button-member">
+                        <span><svg viewBox="0 0 37 35" class="newmember"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/newmember.svg#newmember}"></use></svg></span>
+                        <p>新規会員登録</p>
+                    </a>
+                    <a th:href="@{/login/order.html}" class="l-header__button-login">
+                        <span><svg viewBox="0 0 42 35" class="login"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/login.svg#login}"></use></svg></span>
+                        <p>ログイン</p>
+                    </a>
+                    <a th:href="@{/cart/index.html}" class="l-header__button-cart">
+                        <span><svg viewBox="0 0 35 35" class="cart"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/cart.svg#cart}"></use></svg></span>
+                        <p>&yen;0</p>
+                        <em class="c-baloon c-baloon--number">0</em>
+                    </a>
+                </nav>
+                <!-- for sm only //////////////////// -->
+                <!-- // case ログインの場合 -->
+                <th:block sec:authorize="isAuthenticated()">
+                    <nav class="l-header__button-sm l-nav-sm l-sm">
+                        <a th:href="@{/guide/shop.html#s1}" class="l-header__button-sm-biginer"><svg viewBox="0 0 18.44 24"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/beginners.svg#beginners}"></use></svg><p>初めての方へ</p></a>
+                        <!-- case ログインの場合 -->
+                        <a th:href="@{/member/index.html}" class="l-header__button-sm-member">
+                            <span>
+                                <svg viewBox="0 0 30 31" class="member">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/member.svg#member}"</use>
+                                </svg>
+                            </span>
+                            <p>マイページ</p>
+                            <!-- 2023-renew No71 from here -->
+                            <th:block th:if="${baseInfo.getMyPageAnnounceFlg == true}">
+                                <em class="c-baloon c-baloon--hot">!</em>
+                            </th:block>
+                            <!-- 2023-renew No71 to here -->
+                        </a>
+                        <!-- // case ログインの場合 -->
+                        <a th:href="@{/cart/index.html}" class="l-header__button-sm-cart">
+                            <span>
+                                <svg viewBox="0 0 35 35" class="cart">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/cart.svg#cart}"></use>
+                                </svg>
+                            </span>
+                            <p>カート</p>
+                            <em th:text="${baseInfo.cartGoodsSumCount > 1000?'999+':baseInfo.cartGoodsSumCount}" class="c-baloon c-baloon--number"></em>
+                        </a>
+                        <button type="button" class="l-hamburger l-header__button-sm-menu"><!-- l-hamburger は一旦削除 -->
+                            <span>
+                                <svg viewBox="0 0 60 50" class="menu">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/menu.svg#menu}"></use>
+                                </svg>
+                            </span>
+                            <p>メニュー</p><em class="c-baloon c-baloon--hot">!</em>
+                        </button>
+                    </nav>
+                </th:block>
+
+                <!-- // case ログアウトの場合 -->
+                <th:block sec:authorize="!isAuthenticated()">
+                    <nav class="l-header__button-sm l-nav-sm l-sm">
+                        <a th:href="@{/guide/shop.html#s1}" class="l-header__button-sm-biginer"><svg viewBox="0 0 18.44 24"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/beginners.svg#beginners}"></use></svg><p>初めての方へ</p></a>
+                        <!-- case ログアウトの場合 -->
+                        <a th:href="@{/login/order.html}" class="l-header__button-sm-login">
+                            <span>
+                                <svg viewBox="0 0 45 35" class="login">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/login.svg#login}"></use>
+                                </svg>
+                            </span>
+                            <p>ログイン</p>
+                        </a>
+                        <!-- // case ログアウトの場合 -->
+                        <a th:href="@{/cart/index.html}" class="l-header__button-sm-cart">
+                            <span>
+                                <svg viewBox="0 0 35 35" class="cart">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/cart.svg#cart}"></use>
+                                </svg>
+                            </span>
+                            <p>カート</p><em class="c-baloon c-baloon--number">0</em>
+                        </a>
+                        <button type="button" class="l-hamburger l-header__button-sm-menu"><!-- l-hamburger は一旦削除 -->
+                            <span>
+                                <svg viewBox="0 0 60 50" class="menu">
+                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/menu.svg#menu}"></use>
+                                </svg>
+                            </span>
+                            <p>メニュー</p>
+                        </button>
+                    </nav>
+                </th:block>
+                <!-- // for sm only //////////////////// -->
+            </div>
+        </div>
+    </div>
+    <div class="l-header__container l-header__member">
+        <div class="l-header__inner">
+            <!-- case ログインの場合 -->
+            <div class="l-header__member-name l-lg" sec:authorize="isAuthenticated()">
+                <small>ようこそ</small>
+                <th:block th:with="userInfo=${session.commonInfo.commonInfoUser}">
+                <p class="l-header__member-name--login"><span th:text="${userInfo.memberInfoLastName == null?'ゲスト':userInfo.memberInfoLastName}"></span> 様</p>
+                </th:block>
+            </div>
+            <div class="l-header__member-information" sec:authorize="isAuthenticated()">
+                <dl>
+                    <dt class="l-lg">
+                        <div class="l-header__information-icon">
+                            <svg viewBox="0 0 34 40" class="l-header__information-icon-base is-active">
+                                <path id="info2" fill-rule="evenodd" clip-rule="evenodd" d="M31.4,20c0,2.3-1.1,4.4-2.9,5.7v12.6
+                                c0,0.8-0.7,1.4-1.5,1.4c-0.7,0-1.3-0.6-1.4-1.4v-0.1c-0.3-0.1-0.5-0.2-0.8-0.4l-10-6c-1.1-0.7-2.6-1.6-4-2.4H5.5
+                                c-2.7,0.1-4.9-2.1-4.9-4.7v-9.3c0.1-2.7,2.3-4.8,4.9-4.7h5.3c1.4-0.9,2.9-1.8,4-2.4l10-6C25,2,25.3,1.9,25.6,1.8V1.6
+                                c0-0.8,0.7-1.4,1.5-1.4c0.7,0,1.3,0.6,1.4,1.4v12.6C30.3,15.6,31.4,17.7,31.4,20L31.4,20z M9,12.5H5.5c-1.6,0-2.9,1.2-2.9,2.8v9.3
+                                c0,1.6,1.4,2.9,2.9,2.8H9V12.5L9,12.5z M26.6,3.9L15.9,9.8l-4.3,2.6L11,12.7v14.5l1.3,0.8l3.6,2.2l10.7,5.9V3.9L26.6,3.9z"/>
+                            </svg>
+                            <svg width="20" height="20" viewBox="0 0 20 20" class="wave-small">
+                                <circle cx="0" cy="0" r="8" transform="rotate(-45, 8, 8)"/>
+                            </svg>
+                            <svg width="30" height="30" class="wave" data-percent="45">
+                                <circle cx="0" cy="0" r="12" transform="rotate(-45, 14, 14)"/>
+                            </svg>
+                        </div>
+                        <p>お知らせ</p>
+                    </dt>
+                    <dt class="l-sm js-accordion-arrow">
+                        <div class="l-header__information-icon">
+                            <svg viewBox="0 0 34 40" class="l-header__information-icon-base is-active">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M31.4,20c0,2.3-1.1,4.4-2.9,5.7v12.6
+                                c0,0.8-0.7,1.4-1.5,1.4c-0.7,0-1.3-0.6-1.4-1.4v-0.1c-0.3-0.1-0.5-0.2-0.8-0.4l-10-6c-1.1-0.7-2.6-1.6-4-2.4H5.5
+                                c-2.7,0.1-4.9-2.1-4.9-4.7v-9.3c0.1-2.7,2.3-4.8,4.9-4.7h5.3c1.4-0.9,2.9-1.8,4-2.4l10-6C25,2,25.3,1.9,25.6,1.8V1.6
+                                c0-0.8,0.7-1.4,1.5-1.4c0.7,0,1.3,0.6,1.4,1.4v12.6C30.3,15.6,31.4,17.7,31.4,20L31.4,20z M9,12.5H5.5c-1.6,0-2.9,1.2-2.9,2.8v9.3
+                                c0,1.6,1.4,2.9,2.9,2.8H9V12.5L9,12.5z M26.6,3.9L15.9,9.8l-4.3,2.6L11,12.7v14.5l1.3,0.8l3.6,2.2l10.7,5.9V3.9L26.6,3.9z"/>
+                            </svg>
+                            <svg width="20" height="20" viewBox="0 0 20 20" class="wave-small">
+                                <circle cx="0" cy="0" r="8" transform="rotate(-45, 8, 8)"/>
+                            </svg>
+                            <svg width="30" height="30" class="wave" data-percent="45">
+                                <circle cx="0" cy="0" r="12" transform="rotate(-45, 14, 14)"/>
+                            </svg>
+                        </div>
+                        <p>お知らせ</p>
+                    </dt>
+                    <dd class="js-accordion-block" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                        <!-- 2023-renew No71 from here -->
+                        <th:block th:if="${baseInfo.getTopSaleAnnounceFlg != null && baseInfo.getTopSaleAnnounceFlg.value == '1'}">
+                            <p th:class="${baseInfo.getSaleAnnounceWatchFlg != null && baseInfo.getSaleAnnounceWatchFlg.value == '0' ? '' : 'l-header__member-information-not-active' }">
+                                <th:block th:if="${baseInfo.getSaleAnnounceWatchFlg != null && baseInfo.getSaleAnnounceWatchFlg.value == '0' }">
+                                    <em class="c-baloon c-baloon--hot">!</em>
+                                </th:block>
+                                <a th:href="@{/member/favorite/index.html}" class="c-textlink c-textlink--text">お気に入り商品がセール中です</a>
+                            </p>
+                        </th:block>
+                        <th:block th:if="${baseInfo.getTopStockAnnounceFlg != null && baseInfo.getTopStockAnnounceFlg.value == '1'}">
+                            <p th:class="${baseInfo.getStockAnnounceWatchFlg != null && baseInfo.getStockAnnounceWatchFlg.value == '0' ? '' : 'l-header__member-information-not-active' }">
+                                <th:block th:if="${baseInfo.getStockAnnounceWatchFlg != null && baseInfo.getStockAnnounceWatchFlg.value == '0' }">
+                                    <em class="c-baloon c-baloon--hot">!</em>
+                                </th:block>
+                                <a th:href="@{/member/restock/index.html}" class="c-textlink c-textlink--text">入荷待ち商品が入荷しました</a>
+                            </p>
+                        </th:block>
+                        <!-- 2023-renew No71 to here -->
+                        <p class="l-header__member-information-not-active"><a th:href="@{/member/index.html}" class="c-textlink c-textlink--text">クーポンがあります</a></p>
+                    </dd>
+                </dl>
+            </div>
+            <!-- // case ログインの場合 -->
+            <!-- case ログアウトの場合 -->
+            <div class="l-header__member-name l-lg" sec:authorize="!isAuthenticated()">
+                <p class="l-header__member-name--logout"><span>ご覧いただきありがとうございます（ログインは右上のボタンから）</span></p>
+            </div>
+            <!-- // case ログアウトの場合 -->
+            <nav class="l-header__member-nav l-lg" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+
+                <a th:href="@{/member/coupon/index.html}" class="c-button">
+                    <svg viewBox="0 0 31.75 22.344" class="coupon">
+                        <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/coupon.svg#coupon}"></use>
+                    </svg>
+                    <p>クーポン</p>
+                    <!-- 2023-renew No24 from here -->
+                    <th:block th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                        <th:block th:if="${baseInfo.couponCount != null && baseInfo.couponCount > 0}">
+                            <em th:text="${baseInfo.couponCount}" class="c-baloon c-baloon--number"></em>
+                        </th:block>
+                    </th:block>
+                    <!-- 2023-renew No24 to here -->
+                </a>
+                <a th:href="@{/member/history/shipped.html}" class="c-button"><svg viewBox="0 0 16.81 16.813" class="history"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/history.svg#history}"></use></svg><p>購入履歴</p></a>
+                <a th:href="@{/member/favorite/index.html}" class="c-button"><svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg><p>お気に入り</p></a>
+            </nav>
+        </div>
+    </div>
+    <hm:freearea key="header_keyword"/>
+</header>
+
+<!-- for sm only //////////////////// -->
+<div class="l-hamburger__back l-sm"></div>
+<div class="l-hamburger__container l-sm">
+    <button type="button" class="l-hamburger__close"><span></span> <span></span></button>
+    <p class="l-hamburger__discription"><span>歯科材料の通販 </span><br><span>ピーディーアールの公式オンラインショップ </span></p>
+    <!-- case ログインの場合 -->
+    <div class="l-hamburger__button" sec:authorize="isAuthenticated()">
+        <a th:href="@{/member/index.html}" class="l-hamburger__button-member c-button" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+            <span><svg viewBox="0 0 30 31" class="member"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/member.svg#member}"></use></svg></span>
+            <p>マイページ</p>
+            <!-- 2023-renew No71 from here -->
+            <th:block th:if="${baseInfo.getMyPageAnnounceFlg == true}">
+                <em class="c-baloon c-baloon--hot">!</em>
+            </th:block>
+            <!-- 2023-renew No71 to here -->
+        </a>
+        <a href="javascript:logoutForm.submit()" class="l-hamburger__button-login c-button">
+            <span><svg viewBox="0 0 45 35" class="logout"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/logout.svg#logout}"></use></svg></span>
+            <p>ログアウト</p>
+        </a>
+    </div>
+    <!-- // case ログインの場合 -->
+    <!-- case ログアウトの場合 -->
+    <div class="l-hamburger__button" sec:authorize="!isAuthenticated()">
+        <a th:href="@{/regist/inputtel.html}" class="l-hamburger__button-member c-button">
+            <span><svg viewBox="0 0 37 35" class="newmember"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/newmember.svg#newmember}"></use></svg></span>
+            <p>新規会員登録</p>
+        </a>
+        <a th:href="@{/login/order.html}" class="l-hamburger__button-login c-button">
+            <span><svg viewBox="0 0 42 35" class="login"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/login.svg#login}"></use></svg></span>
+            <p>ログイン</p>
+        </a>
+    </div>
+    <!-- // case ログアウトの場合 -->
+    <div class="l-hamburger__member" sec:authorize="isAuthenticated()">
+        <!-- case ログインの場合 -->
+        <div class="l-hamburger__member-name">
+            <th:block th:with="userInfo=${session.commonInfo.commonInfoUser}">
+            <small>ようこそ</small>
+            <p class="l-hamburger__member-name--login"><span th:text="${userInfo.memberInfoLastName == null?'ゲスト':userInfo.memberInfoLastName}"></span> 様</p>
+            </th:block>
+        </div>
+        <!-- // case ログインの場合 -->
+        <nav class="l-hamburger__member-nav" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+            <a th:href="@{/member/coupon/index.html}" class="c-button">
+                <svg viewBox="0 0 31.75 22.344" class="coupon">
+                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/coupon.svg#coupon}"></use>
+                </svg>
+                <p>クーポン</p>
+                <!-- 2023-renew No24 from here -->
+                <th:block th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                    <th:block th:if="${baseInfo.couponCount != null && baseInfo.couponCount > 0}">
+                        <em th:text="${baseInfo.couponCount}" class="c-baloon c-baloon--number"></em>
+                    </th:block>
+                </th:block>
+                <!-- 2023-renew No24 to here -->
+            </a>
+            <a th:href="@{/member/history/shipped.html}" class="c-button"><svg viewBox="0 0 16.81 16.813" class="history"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/history.svg#history}"></use></svg><p>購入履歴</p></a>
+            <a th:href="@{/member/favorite/index.html}" class="c-button"><svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg><p>お気に入り</p></a>
+        </nav>
+    </div>
+    <div class="l-hamburger__member" sec:authorize="!isAuthenticated()">
+        <!-- case ログアウトの場合 -->
+        <div class="l-hamburger__member-name">
+            <p class="l-hamburger__member-name--logout"><span>ご覧いただきありがとうございます<br>（ログインは右上のボタンから）</span></p>
+        </div>
+        <!-- // case ログアウトの場合 -->
+        <nav class="l-hamburger__member-nav" th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+            <a th:href="@{/member/coupon/index.html}" class="c-button">
+                <svg viewBox="0 0 31.75 22.344" class="coupon">
+                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/coupon.svg#coupon}"></use>
+                </svg>
+                <p>クーポン</p>
+                <!-- 2023-renew No24 from here -->
+                <th:block th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                    <th:block th:if="${baseInfo.couponCount != null && baseInfo.couponCount > 0}">
+                        <em th:text="${baseInfo.couponCount}" class="c-baloon c-baloon--number"></em>
+                    </th:block>
+                </th:block>
+                <!-- 2023-renew No24 to here -->
+            </a>
+            <a th:href="@{/member/history/shipped.html}" class="c-button"><svg viewBox="0 0 16.81 16.813" class="history"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/history.svg#history}"></use></svg><p>購入履歴</p></a>
+            <a th:href="@{/member/favorite/index.html}" class="c-button"><svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg><p>お気に入り</p></a>
+        </nav>
+    </div>
+
+    <div class="l-hamburger__unit">
+        <div class="l-hamburger__links">
+            <div class="l-hamburger__quick"><a href="" class="c-button"><svg viewBox="0 0 26 18.469"><use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/quick.svg#quick}"></use></svg><p>クイックオーダー</p></a></div>
+            <ul>
+                <a th:href="@{/guide/faq.html}" class="c-button">よくある質問</a>
+                <a th:href="@{/inquiry/index.html}" class="c-button">お問い合わせ</a>
+            </ul>
+        </div>
+    </div>
+
+    <div class="l-hamburger__unit">
+        <p class="l-hamburger__title">カテゴリーから探す</p>
+        <!--/* sideMenuCategory.jsでここにHTMLが生成される */-->
+        <div class="l-category-wrap">
+            <ul class="l-category sidemenuPageItems-1 l-sm"></ul>
+        </div>
+    </div>
+
+    <!-- フリーエリア  freeArea_banner PCサイド ＆ SPハンバーガー ///////////////////////////////////// -->
+    <div class="freeArea_banner">
+        <div class="freeArea_banner__unit c_banner">
+            <p class="freeArea_banner__title">動画コンテンツ</p>
+            <div class="freeArea_banner__movie">
+                <a href="" class="freeArea_banner__item c_banner__item">
+                    <div class="freeArea_banner__image"><img th:src="@{/d_images/banner/bnr_side_01_240000.jpg}" width="360" alt="おすすめ商品を動画でご紹介!"></div>
+                    <p class="freeArea_banner__heading c_banner__heading"><strong>おすすめ商品を動画でご紹介!</strong></p>
+                    <p class="freeArea_banner__text c_banner__heading">P.D.R.オリジナル商品の魅力をご紹介いたします。</p>
+                </a>
+                <a href="" class="freeArea_banner__item c_banner__item">
+                    <div class="freeArea_banner__image"><img th:src="@{/d_images/banner/bnr_side_02_240000.jpg}" width="360" alt="普段よく行う動作の正しい方法"></div>
+                    <p class="freeArea_banner__heading c_banner__heading"><strong>普段よく行う動作の正しい方法</strong></p>
+                    <p class="freeArea_banner__text c_banner__text">マスクやグローブのつけかた・はずしかた、手洗いのしかたなどを解説します。</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="freeArea_banner__unit c_banner">
+            <p class="freeArea_banner__title">便利なサービス</p>
+            <div class="freeArea_banner__service">
+                <a href=""><img th:src="@{/d_images/banner/bnr_side_service_pop_240000.jpg}" width="360" alt="院内・お渡し用 POPデータダウンロード"></a>
+                <a href=""><img th:src="@{/d_images/banner/bnr_side_service_fax_240000.jpg}" width="360" alt="FAX注文書ダウンロード"></a>
+                <a href=""><img th:src="@{/d_images/banner/bnr_side_service_name_240000.jpg}" width="360" alt="P.D.R.名入れ工房"></a>
+                <a href=""><img th:src="@{/d_images/banner/bnr_side_service_pay_240000.jpg}" width="360" alt="スマホ決済もご利用可能です。"></a>
+                <a href=""><img th:src="@{/d_images/banner/bnr_side_service_sample_240000.jpg}" width="360" alt="無料サンプル"></a>
+                <a href=""><img th:src="@{/d_images/banner/bnr_side_service_catalog_240000.jpg}" width="360" alt="カタログ請求"></a>
+            </div>
+        </div>
+    </div>
+    <!-- // フリーエリア ///////////////////////////////////// -->
+
+    <div class="l-hamburger__closebutton">
+        <div class="l-hamburger__close2 c-button c-button--close">
+            <p>閉じる</p>
+        </div>
+    </div>
+</div>
+<!-- // for sm only //////////////////// -->
+<!-- 2023-renew No3-suggest-goods-front from here -->
+<th:block th:with="userInfo=${session.commonInfo.commonInfoUser}">
+    <input type="hidden" id="cryptUserId" th:value="${userInfo.cryptUserId}"/>
+</th:block>
+<th:block th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+    <input type="hidden" id="accessUid" th:value="${baseInfo.accessUid}"/>
+</th:block>
+<input id="uniSuggestGoodsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.unisuggest.goods')}"/>
+<input id="deleteHistoryGoodsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.delete.history.goods')}"/>
+<input id="uniSuggestContentsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.unisuggest.contents')}"/>
+<input id="deleteHistoryContentsSrc" type="hidden" th:value="${@environment.getProperty('ukapi.url.delete.history.contents')}"/>
+<!-- 2023-renew No3-suggest-goods-front to here -->
+<input id="goodsImageSrc" type="hidden" th:value="${@environment.getProperty('images.path.goods')}"/>

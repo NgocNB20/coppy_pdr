@@ -1,0 +1,9 @@
+type: array
+description: 商品グループ画像エンティティリストリクエスト
+items:
+  $ref: "#/components/schemas/GoodsGroupImageEntityRequest"
+
+components:
+  schemas:
+    GoodsGroupImageEntityRequest:
+      $ref: ./GoodsGroupImageEntityRequest.yaml

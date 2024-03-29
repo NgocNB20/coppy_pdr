@@ -1,0 +1,12 @@
+.field-error-message {
+    color: red;
+}
+.global-error-message {
+    color: red;
+}
+.field-error {
+    background-color: #FFCCFF;
+}
+.field-error-layout {
+    display: inline-block;
+}

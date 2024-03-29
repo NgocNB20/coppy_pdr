@@ -1,0 +1,333 @@
+@charset "UTF-8";
+/*2023-renew AddNo2 from here*/
+.c-input {
+    border-radius: 4px;
+    background: #fff;
+    border: solid 1px #cccccc;
+    height: 60px;
+    padding: 0 20px;
+    font-size: 16px;
+    transition: border-color 400ms ease;
+}
+@media screen and (max-width: 599.9px) {
+    .c-input {
+        height: 13.3333333333vw;
+        padding: 0 3.2vw;
+        font-size: min(4vw, 18px);
+    }
+}
+.c-input--width-l {
+    max-width: 700px;
+    width: 100%;
+}
+@media screen and (max-width: 599.9px) {
+    .c-input--width-l {
+        width: 100%;
+    }
+}
+.c-input--width-s {
+    max-width: 200px;
+    width: 32vw;
+}
+@media screen and (max-width: 599.9px) {
+    .c-input--width-s {
+        width: 28vw;
+    }
+}
+.c-input--height-s {
+    height: 50px;
+}
+@media screen and (max-width: 599.9px) {
+    .c-input--height-s {
+        height: 10.6666666667vw;
+    }
+}
+.c-input--error {
+    background: #fff2f2;
+}
+
+.c-text-area {
+    border-radius: 4px;
+    background: #fff;
+    border: solid 1px #cccccc;
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 10px 20px;
+}
+@media screen and (max-width: 599.9px) {
+    .c-text-area {
+        padding: 10px 12px;
+        font-size: min(4vw, 18px);
+    }
+}
+
+.c-radio {
+    display: none;
+}
+
+.c-radio + label {
+    padding: 0 20px 0 30px;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.25;
+    cursor: pointer;
+    display: block;
+}
+.c-radio + label::before {
+    content: "";
+    display: block;
+    border: 1px solid #cccccc;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 2px;
+    transition: all 0.3s;
+}
+.c-radio + label::after {
+    content: "";
+    display: block;
+    background: #cccccc;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    top: 6px;
+    transition: all 0.3s;
+}
+@media screen and (max-width: 599.9px) {
+    .c-radio + label {
+        padding: 0 20px 0 40px;
+        font-size: min(4vw, 18px);
+        line-height: 2;
+    }
+    .c-radio + label::before {
+        width: 30px;
+        height: 30px;
+        top: 0;
+    }
+    .c-radio + label::after {
+        width: 18px;
+        height: 18px;
+        left: 6px;
+    }
+}
+
+.c-radio:disabled + label::before {
+    border: 1px solid #e6e6e6;
+    background: #fff;
+}
+.c-radio:disabled + label::after {
+    content: "×";
+    background: none;
+    color: #cccccc;
+    top: 1px;
+    left: 2.5px;
+}
+@media screen and (max-width: 599.9px) {
+    .c-radio:disabled + label::after {
+        top: 0vw;
+        left: 1.3333333333vw;
+        font-size: min(5.3333333333vw, 23px);
+        line-height: 1.5;
+        font-weight: bold;
+    }
+}
+
+.c-radio:checked + label::before {
+    border: 1px solid #f36b30;
+}
+.c-radio:checked + label::after {
+    content: "";
+    display: block;
+    background: #f36b30;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    top: 6px;
+}
+@media screen and (max-width: 599.9px) {
+    .c-radio:checked + label::after {
+        width: 18px;
+        height: 18px;
+        left: 6px;
+    }
+}
+
+.c-radio:checked:disabled + label::before, .c-radio:checked:disabled + label::after {
+    opacity: 0.4;
+}
+
+.c-checkbox {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 1.25;
+    cursor: pointer;
+    width: fit-content;
+}
+@media screen and (max-width: 599.9px) {
+    .c-checkbox {
+        align-items: flex-start;
+        font-size: min(4.2666666667vw, 19px);
+        line-height: 1.875;
+    }
+}
+.c-checkbox__box input[type=checkbox] {
+    display: none;
+}
+.c-checkbox__box span {
+    background-color: #fff;
+    background-position: center;
+    background-size: 15px auto;
+    background-color: #cccccc;
+    border-radius: 50%;
+    display: block;
+    width: 24px;
+    height: 24px;
+    transition: border-color 400ms ease, background-color 400ms ease;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 12"><path fill="%23ffffff" d="M0.7,5.2c0-0.2,0-0.5,0.2-0.7C1.1,4.1,1.6,4,2,4.2c0,0,0.1,0,0.1,0.1l4.3,4.4l6.2-7.5c0.2-0.4,0.7-0.5,1.1-0.3c0,0,0.1,0.1,0.1,0.1c0.4,0.3,0.5,0.9,0.2,1.4l-7.3,9L1.1,5.8C0.9,5.6,0.8,5.4,0.7,5.2z"></path></svg>');
+    background-repeat: no-repeat;
+}
+@media screen and (max-width: 599.9px) {
+    .c-checkbox__box span {
+        background-size: 4.8vw auto;
+        width: 8vw;
+        height: 8vw;
+    }
+}
+.c-checkbox__box input[type=checkbox]:disabled + span {
+    background-color: #e6e6e6;
+}
+.c-checkbox__box input[type=checkbox]:checked + span {
+    background-color: #f36b30;
+}
+.c-checkbox__box input[type=checkbox]:checked:disabled + span {
+    background-color: rgba(243, 107, 48, 0.4);
+}
+.c-checkbox p {
+    margin: 0 10px;
+    font-size: 16px;
+    line-height: 1.25;
+}
+@media screen and (max-width: 599.9px) {
+    .c-checkbox p {
+        font-size: min(4.2666666667vw, 19px);
+        line-height: 1.875;
+    }
+}
+
+.c-select {
+    display: inline-block;
+    position: relative;
+}
+.c-select:before {
+    content: "";
+    display: inline-block;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 18"><path fill="%23a1a1a1" d="M27.1,2.9c0-0.5-0.2-1-0.5-1.3c-0.6-0.7-1.7-0.7-2.4-0.1l-0.1,0.1l-9.9,10.6L4.1,1.6C3.5,0.9,2.4,0.9,1.7,1.5L1.6,1.6c-0.7,0.8-0.7,1.9,0,2.7l12.5,13.3L26.6,4.3C26.9,3.9,27.1,3.4,27.1,2.9z"></path></svg>');
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 8px;
+}
+@media screen and (max-width: 599.9px) {
+    .c-select:before {
+        right: 4.8vw;
+        width: 3.7333333333vw;
+        height: 2.6666666667vw;
+    }
+}
+.c-select__inner {
+    width: 100%;
+    border-radius: 4px;
+    background: #fff;
+    border: solid 1px #cccccc;
+    height: 60px;
+    padding: 0 40px 0 20px;
+    text-indent: 0.01px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+}
+@media screen and (max-width: 599.9px) {
+    .c-select__inner {
+        height: 13.3333333333vw;
+        display: block;
+        padding: 0 25px 0 12px;
+        font-size: min(4vw, 18px);
+    }
+}
+.c-select--prefecture {
+    width: 250px;
+}
+.c-select--delivery {
+    width: 250px;
+}
+.c-select--card {
+    width: 250px;
+}
+.c-select--expiration {
+    min-width: 190px;
+    width: 30%;
+}
+@media screen and (max-width: 599.9px) {
+    .c-select--expiration {
+        min-width: 25.3333333333vw;
+        margin-bottom: 2.6666666667vw;
+    }
+}
+.c-select--error .c-select__inner {
+    background: #fff2f2;
+}
+
+.c-require {
+    display: inline-block;
+    padding: 0 4px 1px;
+    background-color: #ffa131;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.4615384615;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.c-any {
+    display: inline-block;
+    padding: 0 4px 1px;
+    background-color: #fff;
+    border: solid 1px #f39800;
+    color: #f39800;
+    font-size: 13px;
+    line-height: 1.4615384615;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.c-form-lower__text {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.875;
+}
+@media screen and (max-width: 599.9px) {
+    .c-form-lower__text {
+        margin: 5.3333333333vw 4vw 0;
+        font-size: min(3.7333333333vw, 17px);
+        line-height: 1.5714285714;
+    }
+}
+/*2023-renew AddNo2 to here*/

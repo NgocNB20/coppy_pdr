@@ -1,0 +1,14 @@
+type: object
+description: WEB-API連携 消費税率レスポンス
+properties:
+  taxRateMap:
+    type: object
+    description: 消費税率MAP
+    additionalProperties:
+      $ref: '#/components/schemas/WebApiGetConsumptionTaxRateResponseDetailDtoResponse'
+
+
+components:
+  schemas:
+    WebApiGetConsumptionTaxRateResponseDetailDtoResponse:
+      $ref: ../cart/WebApiGetConsumptionTaxRateResponseDetailDtoResponse.yaml

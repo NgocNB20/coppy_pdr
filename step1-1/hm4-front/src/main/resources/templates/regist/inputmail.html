@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-regist">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                            <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item">
+                        <span class="l-breadcrumbs__current">オンラインショップ会員登録</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="inputtelForm" th:action="@{/regist/inputmail.html}" th:object="${registModel}" method="post">
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <h2 class="c-title-page"><strong>オンラインショップ会員登録</strong></h2>
+
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="c-title-form">
+                <div class="c-title-form__inner">
+                    <h3 class="c-title-form__text">ご登録メールアドレス入力</h3>
+                </div>
+            </div>
+
+            <div class="l-section">
+                <div class="l-section__inner">
+                    <div class="c-page-description">
+                        <p class="c-page-description__text">メールアドレスを入力し、次へお進みください。</p>
+                        <p class="c-page-description__text c-page-description--margin-m">
+                            <span class="c-require">必須</span>は、必須項目です。</p>
+                    </div>
+                    <div class="l-form">
+                        <div class="l-form__list-wrap">
+                            <dl class="l-form__list">
+                                <dt><p><span>ご登録メールアドレス</span><span class="c-require">必須</span></p></dt>
+                                <dd>
+                                    <p>
+                                        <input type="email" th:field="*{memberInfoMail}" th:errorclass="c-input--error"
+                                               autocomplete="email" maxLength="256" class="c-input c-input--width-l">
+                                        <span class="l-form__list-memo">（半角）</span>
+                                    </p>
+                                    <span th:if="${#fields.hasErrors('memberInfoMail')}" th:errors="*{memberInfoMail}"
+                                          class="c-field-error c-field-error--top"></span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-button-wrap">
+                <button name="doConfirmInputMail" type="submit" class="c-button c-button--primary c-button--width-l">次へ進む</button>
+            </div>
+
+        </form>
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+</body>
+</html>

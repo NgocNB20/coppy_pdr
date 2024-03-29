@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.12</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>jp.co.hankyuhanshin.itec.hitmall.batch</groupId>
+    <artifactId>hm4-batch</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <name>hm4-batch</name>
+    <description>Hit-mall 4 batch package</description>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.testSourceEncoding>UTF-8</project.build.testSourceEncoding>
+    </properties>
+
+    <modules>
+        <module>batch-core</module>
+        <module>batch-apps/goods-asynchronous-batch</module>
+        <module>batch-apps/office-zip-code-update-batch</module>
+        <module>batch-apps/site-map-xml-output-batch</module>
+        <module>batch-apps/stock-status-display-update-batch</module>
+        <module>batch-apps/top-totaling-batch</module>
+        <module>batch-apps/zip-code-batch</module>
+        <module>batch-apps/clear-batch</module>
+        <module>batch-apps/task-clean-batch</module>
+        <module>batch-apps/mail-batch</module>
+        <module>batch-apps/goods-image-update-batch</module>
+        <module>batch-apps/order-csv-asynchronous-batch</module>
+        <module>batch-apps/questionnaire-totaling-batch</module>
+        <module>batch-apps/member-info-update-batch</module>
+        <module>batch-apps/goods-price-update-batch</module>
+        <module>batch-apps/delv-info-import-batch</module>
+        <module>batch-apps/job-monitoring-batch</module>
+        <module>batch-apps/digital-catalog-import-batch</module>
+        <module>batch-apps/goods-feed-output-batch</module>
+        <module>batch-apps/contents-feed-output-batch</module>
+        <module>batch-apps/stock-data-import-batch</module>
+        <module>batch-apps/cuenotefc-sale-mail-batch</module>
+        <module>batch-apps/cuenotefc-sale-mail-confirm-batch</module>
+        <module>batch-apps/sale-data-import-batch</module>
+        <module>batch-apps/goods-purchased-together-update-batch</module>
+        <module>scheduler</module>
+    </modules>
+
+</project>

@@ -1,0 +1,15 @@
+inputSpec: specs/openapi.ukapi.yaml
+generatorName: spring
+outputDir: out/ukapi/service-server
+additionalProperties:
+  artifactId: pdr-frontsite-ukapi-service-server
+  interfaceOnly: true
+  modelPackage: jp.co.hankyuhanshin.itec.hitmall.api.ukapi.param
+  apiPackage: jp.co.hankyuhanshin.itec.hitmall.api.ukapi
+  groupId: jp.co.hankyuhanshin.itec.hitmall.pdr.frontsite-service
+  dateLibrary: legacy
+  java8: true
+  library: spring-boot
+  parentGroupId: org.springframework.boot
+  parentArtifactId: spring-boot-starter-parent
+  parentVersion: 2.6.2

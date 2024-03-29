@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>受注詳細 処理履歴 | 受注管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+</head>
+
+<body id="order">
+<div id="searchOrder" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form th:action="@{/order/details/historydetails/}" th:object="${orderHistoryDetailsModel}"
+                      method="post">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">受注詳細</h1>
+                        <h1 class="c-pagetitle_h1">処理履歴</h1>
+                    </div>
+
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+
+                    <div class="l-section">
+                        <div class="l-article-un wrap_flex_center">
+                            <div class="c-number mr50" th:text="*{orderCode}"></div>
+                            <dl class="c-times mr45">
+                                <dt>受注日時</dt>
+                                <dd th:text="*{#date.convert(orderTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                            </dl>
+                            <div class="c-status">
+                                <span th:if="*{!isStateCancel()} AND *{orderStatus.value} == '0'"
+                                      th:text="*{orderStatus != null} ? *{orderStatus.label} : ''" class="c-status02 ico_orange"></span>
+                                <span th:if="*{!isStateCancel()} AND *{orderStatus.value} == '1'"
+                                      th:text="*{orderStatus != null} ? *{orderStatus.label} : ''" class="c-status02 ico_blue"></span>
+                                <span th:if="*{!isStateCancel()} AND *{orderStatus.value} == '3'"
+                                      th:text="*{orderStatus != null} ? *{orderStatus.label} : ''" class="c-status02 ico_green"></span>
+                                <span th:if="*{isStateCancel()}" th:text="*{cancelFlag != null} ? *{cancelFlag.label} : ''"
+                                      class="c-status02 ico_gray"></span>
+                                <span th:if="*{paymentStatus} == '1' OR *{paymentStatus} == '3'"
+                                      th:text="*{#enumtype.getLabel('HTypePaymentStatus',paymentStatus)}"
+                                      class="c-status02 ico_orange"></span>
+                                <span th:if="*{paymentStatus} == '2'"
+                                      th:text="*{#enumtype.getLabel('HTypePaymentStatus',paymentStatus)}"
+                                      class="c-status02 ico_green"></span>
+                                <span th:if="*{orderReceiverItem.shipmentStatus.value} == '0'"
+                                      th:text="*{orderReceiverItem.shipmentStatus != null} ? *{orderReceiverItem.shipmentStatus.label} : ''"
+                                      class="c-status02 ico_orange"></span>
+                                <span th:if="*{orderReceiverItem.shipmentStatus.value} == '1'"
+                                      th:text="*{orderReceiverItem.shipmentStatus != null} ? *{orderReceiverItem.shipmentStatus.label} : ''"
+                                      class="c-status02 ico_green"></span>
+                                <span th:if="*{isWaiting()}" th:text="*{waitingFlag != null} ? *{waitingFlag.label} : ''"
+                                      class="c-status02 ico_orange"></span>
+                                <span th:if="*{isEmergency()}" class="c-status02 ico_red">請求決済エラー</span>
+                                <span th:if="*{isRelease()}" class="c-status02 ico_red">GMO連携解除</span>
+                            </div>
+                            <dl class="c-times col_left" th:if="*{isCancel()}">
+                                <dt class="mr25">キャンセル日時</dt>
+                                <dd th:class="*{#style.diff(modifiedOrderSummaryList, {'cancelTime'})}"
+                                    th:text="*{#date.convert(cancelTime, 'yyyy/MM/dd HH:mm:ss')}"></dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="l-section_column">
+                        <div class="l-section_inner">
+                            <!-- 受注商品 -->
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">受注商品</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <th:block
+                                                th:each="itemsub, statsub: *{orderReceiverItem.orderGoodsUpdateItems}">
+                                            <div th:class="*{#lists.isEmpty(modifiedOrderGoodsList)} ? 'order_product' : *{#style.diff(modifiedOrderGoodsList.get(__${statsub.index}__), {'goodsCount'})} + ' order_product'">
+                                                <div class="item">
+                                                    <div class="product_name" th:text="${itemsub.goodsGroupName}"></div>
+                                                    <dl class="c-dl-base">
+                                                        <div class="sml_sty"
+                                                             th:if="${!#strings.isEmpty(itemsub.unitValue1)}">
+                                                            <dt>規格1</dt>
+                                                            <dd th:text="${itemsub.unitValue1}"></dd>
+                                                        </div>
+                                                        <div class="sml_sty"
+                                                             th:if="${!#strings.isEmpty(itemsub.unitValue2)}">
+                                                            <dt>規格2</dt>
+                                                            <dd th:text="${itemsub.unitValue2}"></dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                                <div class="management_number">
+                                                    <dl class="c-dl-base">
+                                                        <div class="mb15">
+                                                            <dt>商品管理番号</dt>
+                                                            <dd th:text="${itemsub.goodsGroupCode}"></dd>
+                                                        </div>
+                                                        <div class="sml_sty">
+                                                            <dt>商品番号</dt>
+                                                            <dd th:text="${itemsub.goodsCode}"></dd>
+                                                        </div>
+                                                        <div class="sml_sty">
+                                                            <dt th:if="${!#strings.isEmpty(itemsub.janCode)}">JANコード</dt>
+                                                            <dd th:text="${itemsub.janCode}"></dd>
+                                                        </div>
+                                                        <div class="sml_sty">
+                                                            <dt th:if="${!#strings.isEmpty(itemsub.catalogCode)}">カタログコード</dt>
+                                                            <dd th:text="${itemsub.catalogCode}"></dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                                <div class="fee">
+                                                    <div class="charge_detail">
+                                                        <div class="item_price">
+                                                            <span th:text="${#number.convert(itemsub.goodsPriceInTax)} + 円"></span>
+                                                            <span class="c-annotation">税込</span>
+                                                        </div>
+                                                        <div class="times"
+                                                             th:text="${#number.convert(itemsub.goodsCount)}"></div>
+                                                        <div class="total">
+                                                            <span th:text="${#number.convert(itemsub.postTaxOrderGoodsPrice)} + 円"></span>
+                                                            <span class="c-annotation">税込</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-status">
+                                                        <span th:if="${itemsub.isIndividualDelivery()}"
+                                                              class="c-status03 ico_green">個別配送</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- お届け先 -->
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">お届け先</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap delivery_target">
+                                        <!-- お届け先情報 -->
+                                        <div class="delivery_target_info">
+                                            <div class="c-pagetitle_h4 mb15">お届け先情報</div>
+                                            <dl class="c-dl-base dt_w120px">
+                                                <div>
+                                                    <dt>氏名</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'receiverLastName', 'receiverFirstName'})}"
+                                                        th:text="*{orderReceiverItem.receiverLastName != null ? orderReceiverItem.receiverLastName : ''} + ' ' + *{orderReceiverItem.receiverFirstName != null ? orderReceiverItem.receiverFirstName : ''}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>フリガナ</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'receiverLastKana', 'receiverFirstKana'})}"
+                                                        th:text="*{orderReceiverItem.receiverLastKana != null ? orderReceiverItem.receiverLastKana : ''} + ' ' + *{orderReceiverItem.receiverFirstKana != null ? orderReceiverItem.receiverFirstKana : ''}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>電話番号</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'receiverTel'})}"
+                                                        th:text="*{orderReceiverItem.receiverTel}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>郵便番号</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'receiverZipCode'})}"
+                                                        th:text="*{orderReceiverItem.receiverZipCode}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>住所</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'receiverPrefecture', 'receiverAddress1', 'receiverAddress2', 'receiverAddress3'})}">
+                                                        [[*{orderReceiverItem.receiverPrefecture} +
+                                                        *{orderReceiverItem.receiverAddress1}]]<br>
+                                                        [[*{orderReceiverItem.receiverAddress2}]]
+                                                        <th:block
+                                                                th:if="*{!#strings.isEmpty(orderReceiverItem.receiverAddress3)}">
+                                                            [[*{orderReceiverItem.receiverAddress3}]]
+                                                        </th:block>
+                                                    </dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                        <!-- 配送情報 -->
+                                        <div class="delivery_info">
+                                            <div class="c-pagetitle_h4 mb15">配送情報</div>
+                                            <dl class="c-dl-base dt_w120px">
+                                                <div>
+                                                    <dt>配送方法</dt>
+                                                    <dd th:class="*{#style.diff(modifiedDeliveryMethod, {'deliveryMethodName'})}"
+                                                        th:text="*{orderReceiverItem.deliveryMethodName}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>お届け希望日</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'receiverDate'})}"
+                                                        th:text="*{ orderReceiverItem.isReceiverDateNoSelected() ? '指定なし' : #date.convert(orderReceiverItem.receiverDate)}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>お届け時間帯</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'receiverTimeZone'})}"
+                                                        th:text="*{ #strings.isEmpty(orderReceiverItem.receiverTimeZone) ? '指定なし' : orderReceiverItem.receiverTimeZone }"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>出荷日</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'shipmentDate'})}"
+                                                        th:text="*{ orderReceiverItem.shipmentDate == null ? 'ー' : #date.convert(orderReceiverItem.shipmentDate)}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>配送伝票番号</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'deliveryCode'})}"
+                                                        th:text="*{ #strings.isEmpty(orderReceiverItem.deliveryCode) ? 'ー' : orderReceiverItem.deliveryCode}"></dd>
+                                                </div>
+                                                <div>
+                                                    <dt>納品書</dt>
+                                                    <dd th:class="*{#style.diff(modifiedOrderDeliveryList, {'invoiceAttachmentFlag'})}"
+                                                        th:text="*{invoiceAttachmentFlag != null} ? *{invoiceAttachmentFlag.label} : ''"></dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- お支払い情報 -->
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">お支払い情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap">
+                                        <table class="c-tbl-base td_txt_right tbl_pay_info">
+                                            <tbody>
+                                            <tr>
+                                                <th>商品数量合計</th>
+                                                <td th:class="*{diffGoodsCountTotalStyleClass}!='' ? *{diffGoodsCountTotalStyleClass} : 'total'">
+                                                    <strong th:text="*{#number.convert(orderGoodsCountTotal)}"></strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>商品合計金額（税抜）</th>
+                                                <td th:class="*{#style.diff(modifiedOrderSettlementList, {'goodsPriceTotal'})}!='' ? *{#style.diff(modifiedOrderSettlementList, {'goodsPriceTotal'})} : 'total'">
+                                                    <strong th:text="*{#number.convert(goodsPriceTotal)}"></strong><span
+                                                        class="currency">円</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>送料合計金額（税抜）</th>
+                                                <td th:class="*{#style.diff(modifiedOrderSettlementList, {'carriage'})}">
+                                                    <strong th:text="*{#number.convert(carriage)}"></strong><span
+                                                        class="currency">円</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>手数料（税抜）</th>
+                                                <td th:class="*{#style.diff(modifiedOrderSettlementList, {'settlementCommission'})}">
+                                                    <strong th:text="*{#number.convert(settlementCommission)}"></strong><span
+                                                        class="currency">円</span>
+                                                </td>
+                                            </tr>
+                                            <tr th:each="item, stat : *{orderAdditionalChargeItems}">
+                                                <th th:class="*{#lists.isEmpty(modifiedAdditionalChargeList)} ? '' : *{#style.diff(modifiedAdditionalChargeList.get(__${stat.index}__), {'additionalDetailsName'})}"
+                                                    th:text="${item.additionalDetailsName}"></th>
+                                                <td th:class="*{#lists.isEmpty(modifiedAdditionalChargeList)} ? '' : *{#style.diff(modifiedAdditionalChargeList.get(__${stat.index}__), {'additionalDetailsPrice'})}">
+                                                    <strong th:text="${#number.convert(item.additionalDetailsPrice)}"></strong><span
+                                                        class="currency">円</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>消費税</th>
+                                                <td>
+                                                    <strong th:class="*{#style.diff(modifiedOrderSettlementList, {'taxPrice'})}"
+                                                            th:text="*{#number.convert(taxPrice)}"></strong><span>円</span>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="*{isDisplayCouponDiscount()}">
+                                                <th th:text="*{couponName}"></th>
+                                                <td th:class="*{#style.diff(modifiedOrderSettlementList, {'couponDiscountPrice'})}">
+                                                    <div class="tax_detail">
+                                                        <dl>
+                                                            <dt th:if="*{!#strings.isEmpty(applyCouponId)}">
+                                                                クーポンID：[[*{applyCouponId}]]
+                                                            </dt>
+                                                            <dd></dd>
+                                                            <strong th:text="*{#number.convert(couponDiscountPrice)}"></strong><span
+                                                                class="currency">円</span>
+                                                        </dl>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="total">
+                                                <th>お支払い合計（税込）</th>
+                                                <td th:class="*{#style.diff(modifiedOrderBillList, {'billPrice'})}!='' ? *{#style.diff(modifiedOrderBillList, {'billPrice'})} : 'totalPrice'">
+                                                    <strong th:text="*{#number.convert(billPriceExceptPromotionDiscount)}"></strong><span
+                                                        class="currency">円</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- 管理メモ -->
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">管理メモ</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div th:class="*{#style.diff(modifiedMemoList, {'memo'})} + ' l-inner_wrap'"
+                                         th:utext="*{ #strings.isEmpty(memo) ? '管理メモはありません' : #pre.convert(memo) }"></div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="l-section_side">
+                            <!-- 配送メモ -->
+                            <article class="l-article">
+                                <div class="l-article_title no_slide">
+                                    <h2 class="c-pagetitle_h3">配送メモ</h2>
+                                </div>
+                                <div th:class="*{#style.diff(modifiedOrderDeliveryList, {'deliveryNote'})} + ' l-article_inner'">
+                                    <div class="l-inner_wrap"
+                                         th:utext="*{ #strings.isEmpty(orderReceiverItem.deliveryNote) ? 'お客様からのメモはありません' : #pre.convert(orderReceiverItem.deliveryNote) }"></div>
+                                </div>
+                            </article>
+
+                            <!-- 決済情報 -->
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">決済情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap settlement_info">
+                                        <dl class="c-dl-base dt_w150px">
+                                            <div>
+                                                <dt>決済方法</dt>
+                                                <dd th:class="*{#style.diff(modifiedSettlementMethodList, {'settlementMethodName'})}"
+                                                    th:text="*{settlementMethodName}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>請求状態</dt>
+                                                <dd>
+                                                    [[*{billStatus != null} ? *{billStatus.label} : '']]
+                                                    <th:block th:if="*{isEmergency()}"><br/>
+                                                        <div th:class="*{#style.diff(modifiedMulPayBillList, {'errInfo'})} + ' mt5'">
+                                                            [[*{errInfo}]]
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:if="*{isEmergency()} AND *{isMulPayErr()}"><br/>[[*{mulPayErrMsg}]]
+                                                    </th:block>
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>入金累計金額</dt>
+                                                <dd th:class="*{#style.diff(modifiedReceiptMoneyList, {'receiptPriceTotal'})}"
+                                                    th:text="*{#number.convert(receiptPriceTotal)} + 円"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>入金日</dt>
+                                                <dd th:class="*{#style.diff(modifiedReceiptMoneyList, {'receiptTime'})}"
+                                                    th:text="*{ receiptTime == null ? 'ー' : #date.convert(receiptTime)}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>入金額</dt>
+                                                <dd th:class="*{#style.diff(modifiedReceiptMoneyList, {'receiptPrice'})}"
+                                                    th:text="*{#number.convert(receiptPrice)} + 円"></dd>
+                                            </div>
+                                            <div class="all">
+                                                <dt>決済詳細</dt>
+                                                <dd>
+                                                    <dl class="c-dl-base sml_sty dt_w150px">
+                                                        <th:block th:if="*{isConveni()}">
+                                                            <div>
+                                                                <dt>コンビニ</dt>
+                                                                <dd th:class="*{#style.diff(modifiedMulPayBillList, {'convenience'})}"
+                                                                    th:text="*{conveniName}"></dd>
+                                                            </div>
+                                                            <th:block th:if="*{isPaymentTimeLimitDateFlag()}">
+                                                                <div>
+                                                                    <dt>払込期限</dt>
+                                                                    <dd th:class="*{#style.diff(modifiedMulPayBillList, {'convenience'})}"
+                                                                        th:text="*{#date.convert(paymentTimeLimitDate)}"></dd>
+                                                                </div>
+                                                            </th:block>
+                                                            <!--/* PDR Migrate Customization from here */-->
+                                                            <!--/* コンビニ決済受付番号情報 削除 */-->
+                                                            <!--/* PDR Migrate Customization to here */-->
+                                                        </th:block>
+
+                                                        <th:block th:if="*{isCredit()}">
+                                                            <div th:if="*{!isNullOrderId()}">
+                                                                <dt>決済ID</dt>
+                                                                <dd th:class="*{#style.diff(modifiedMulPayBillList, {'orderId'})}"
+                                                                    th:text="*{orderId}"></dd>
+                                                            </div>
+                                                            <div>
+                                                                <dt>カード</dt>
+                                                                <dd th:text="*{cardBrandDisplayPc}"></dd>
+                                                            </div>
+                                                            <div>
+                                                                <dt>処分区分</dt>
+                                                                <dd th:class="*{#style.diff(modifiedMulPayBillList, {'jobCd'})}"
+                                                                    th:text="*{jobCd}"></dd>
+                                                            </div>
+                                                            <div>
+                                                                <dt>お支払い種別</dt>
+                                                                <dd>
+                                                                    <span th:class="*{#style.diff(modifiedMulPayBillList, {'method'})}">[[*{getMethodDsp()}]]</span>
+                                                                    <th:block th:if="*{isPayTimesSetting()}"><span
+                                                                            th:class="*{#style.diff(modifiedMulPayBillList, {'payTimes'})}">（支払回数：[[*{payTimes}]]回）</span>
+                                                                    </th:block>
+                                                                </dd>
+                                                            </div>
+                                                            <div th:if="*{isPaymentTimeLimitDateFlag()}">
+                                                                <dt>払込期限</dt>
+                                                                <dd th:text="*{#date.convert(paymentTimeLimitDate)}"></dd>
+                                                            </div>
+                                                        </th:block>
+
+                                                        <th:block th:if="*{isPayEasy()}">
+                                                            <div>
+                                                                <dt>収納機関番号</dt>
+                                                                <dd th:class="*{#style.diff(modifiedMulPayBillList, {'bkCode'})}"
+                                                                    th:text="*{bkCode}"></dd>
+                                                            </div>
+                                                            <div>
+                                                                <dt>お客様番号</dt>
+                                                                <dd th:class="*{#style.diff(modifiedMulPayBillList, {'custId'})}"
+                                                                    th:text="*{custId}"></dd>
+                                                            </div>
+                                                            <div>
+                                                                <dt>確認番号</dt>
+                                                                <dd th:class="*{#style.diff(modifiedMulPayBillList, {'confNo'})}"
+                                                                    th:text="*{confNo}"></dd>
+                                                            </div>
+                                                            <div th:if="*{isPaymentTimeLimitDateFlag()}">
+                                                                <dt>払込期限</dt>
+                                                                <dd th:text="*{#date.convert(paymentTimeLimitDate)}"></dd>
+                                                            </div>
+                                                        </th:block>
+
+                                                        <th:block th:if="*{isElse()}">
+                                                            <div th:if="*{isPaymentTimeLimitDateFlag()}">
+                                                                <dt>払込期限</dt>
+                                                                <dd th:class="*{#style.diff(modifiedOrderBillList, {'paymentTimeLimitDate'})}"
+                                                                    th:text="*{#date.convert(paymentTimeLimitDate)}"></dd>
+                                                            </div>
+                                                        </th:block>
+                                                    </dl>
+                                                </dd>
+                                            </div>
+                                            <div class="all" th:if="*{isPaymentTimeLimitDateFlag()}">
+                                                <dt>メール通知</dt>
+                                                <dd>
+                                                    <dl class="c-dl-base sml_sty dt_w150px">
+                                                        <div>
+                                                            <dt>督促/期限切れメール</dt>
+                                                            <dd th:class="*{#style.diff(modifiedOrderIndexList, {'settlementMailRequired'})}"
+                                                                th:if="*{isMailRequiredOn()}">送信する
+                                                            </dd>
+                                                            <dd th:class="*{#style.diff(modifiedOrderIndexList, {'settlementMailRequired'})}"
+                                                                th:if="*{!isMailRequiredOn()}">送信しない
+                                                            </dd>
+                                                        </div>
+                                                        <div th:if="*{isMailRequiredOn()}">
+                                                            <dt>督促メール送信状態</dt>
+                                                            <dd th:class="*{#style.diff(modifiedOrderIndexList, {'reminderSentFlag'})}"
+                                                                class="as_center"
+                                                                th:text="*{reminderSentFlag != null} ? *{reminderSentFlag.label} : ''"></dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>期限切れメール送信予定</dt>
+                                                            <dd th:class="*{#style.diff(modifiedOrderBillList, {'cancelableDate'})}"
+                                                                class="as_center"
+                                                                th:text="*{#date.convert(cancelableDate)}"></dd>
+                                                        </div>
+                                                        <div th:if="*{isMailRequiredOn()}">
+                                                            <dt>期限切れメール送信状態</dt>
+                                                            <dd th:class="*{#style.diff(modifiedOrderIndexList, {'expiredSentFlag'})}"
+                                                                class="as_center"
+                                                                th:text="*{expiredSentFlag != null} ? *{expiredSentFlag.label} : ''"></dd>
+                                                        </div>
+                                                    </dl>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- お客様情報 -->
+                            <article class="l-article">
+                                <div class="l-article_title">
+                                    <h2 class="c-pagetitle_h3">お客様情報</h2>
+                                    <div class="c-open-btn"><i></i></div>
+                                </div>
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap customer_info">
+                                        <dl class="c-dl-nobase">
+                                            <div>
+                                                <dt>メールアドレス</dt>
+                                                <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderMail'})}"
+                                                    th:text="*{orderMail}"></dd>
+                                            </div>
+                                        </dl>
+                                        <div class="c-mgntb25">
+                                            <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderLastName', 'orderFirstName'})}"
+                                                th:text="*{orderLastName + ' ' + orderFirstName}"></dd>
+                                            <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderLastKana', 'orderFirstKana'})}"
+                                                th:text="*{orderLastKana + ' ' + orderFirstKana}"></dd>
+                                        </div>
+                                        <div class="mb25">
+                                            <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderZipCode'})}"
+                                                th:text="*{orderZipCode}"></dd>
+                                            <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderPrefecture', 'orderAddress1', 'orderAddress2', 'orderAddress3'})}"
+                                                th:text="*{orderPrefecture + orderAddress1 + orderAddress2 + (#strings.isEmpty(orderAddress3) ? '' : orderAddress3) }"></dd>
+                                        </div>
+                                        <dl class="c-dl-nobase">
+                                            <div>
+                                                <dt>電話番号</dt>
+                                                <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderTel'})}"
+                                                    th:text="*{orderTel}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>連絡先電話番号</dt>
+                                                <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderContactTel'})}"
+                                                    th:text="*{orderContactTel}"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>性別</dt>
+                                                <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderSex'})}"
+                                                    th:text="*{orderSex != null} ? *{orderSex.label} : ''"></dd>
+                                            </div>
+                                            <div>
+                                                <dt>生年月日</dt>
+                                                <dd th:class="*{#style.diff(modifiedOrderPersonList, {'orderBirthday'})}"
+                                                    th:text="*{#date.convert(orderBirthday)}"></dd>
+                                            </div>
+                                            <div th:if="*{isDispOrderAge()}">
+                                                <dt>年齢</dt>
+                                                <dd th:text="*{orderAge} + 才"></dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button type="submit" class="c-btn btn_back icon_left" name="doProcesshistory"><i
+                                        class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>

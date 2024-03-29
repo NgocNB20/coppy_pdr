@@ -1,0 +1,13 @@
+type: object
+description: カードブランドリスト取得レスポンス
+properties:
+  cardBrandList:
+    type: array
+    description: カードブランドリスト
+    items:
+      $ref: "#/components/schemas/CardBrandResponse"
+
+components:
+  schemas:
+    CardBrandResponse:
+      $ref: ../cart/CardBrandResponse.yaml

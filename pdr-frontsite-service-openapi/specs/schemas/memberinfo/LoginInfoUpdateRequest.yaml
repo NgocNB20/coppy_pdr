@@ -1,0 +1,16 @@
+type: object
+description: 取得した会員のログイン情報を更新リクエスト
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  userAgent:
+    type: string
+    description: ユーザーエージェント
+    example: Mozilla/5.0
+  deviceType:
+    type: string
+    description: デバイス種別
+    example: 0

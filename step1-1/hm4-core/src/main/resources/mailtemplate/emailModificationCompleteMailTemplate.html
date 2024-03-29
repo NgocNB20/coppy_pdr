@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>メールアドレス変更完了のお知らせ</title>
+</head>
+<body>
+<div>
+    <div>
+        <span>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+    <div>
+        <span>■　ピーディーアールオンラインショップ</span>
+    </div>
+    <div>
+        <span>■　メールアドレス変更完了のお知らせ</span>
+    </div>
+    <div>
+        <span>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+    </div>
+</div>
+<div>
+    <div>
+        <br>
+        <div>
+            <span>　</span><span th:text="${mailContentsMap.get('M_LAST_NAME')} + ' 様'"></span>
+        </div>
+        <br>
+        <div>
+            <span>　ピーディーアールオンラインショップをご利用いただき</span>
+        </div>
+        <div>
+            <span>　誠にありがとうございます。</span>
+        </div>
+        <br>
+        <div>
+            <span>　メールアドレスの変更が完了しました。</span>
+        </div>
+        <div>
+            <span>　ご変更いただいたメールアドレスは、ログイン時の会員IDとしても</span>
+        </div>
+        <div>
+            <span>　ご利用いただけます。</span>
+        </div>
+        <br>
+    </div>
+    <div>
+        <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+    </div>
+    <div>
+        <div>
+            <span>　</span><span th:text="'【ログインメールアドレス】' + ${mailContentsMap.get('M_ID')}"></span>
+        </div>
+        <br>
+        <div>
+            <span>　</span><span th:text="'【変更日】' + ${mailContentsMap.get('M_MAIL_UPDATE_YMD')}"></span>
+        </div>
+        <br>
+        <!--            PDR Migrate Customization from here-->
+        <div>
+            <span>◆ご登録情報は、以下のURLよりログイン後、ご確認ください。</span>
+        </div>
+        <div>
+            <span>　<a th:href="${hostUrl} + 'login/member.html'"
+                      th:text="${hostUrl} + 'login/member.html'"></a></span>
+        </div>
+        <br>
+        <div>
+            <span>◆パスワードを忘れた場合は、以下のURLにてお手続きください。</span>
+        </div>
+        <div>
+            <span>　<a th:href="${hostUrl} + 'reset/index.html'"
+                                th:text="${hostUrl} + 'reset/index.html'"></a></span>
+        </div>
+        <div>
+            <span>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</span>
+        </div>
+        <div>
+            <span>※本メールは送信専用メールアドレスから自動で配信しております。</span>
+        </div>
+        <div>
+            <span>　ご返信いただいてもお答えできませんのでご了承ください。</span>
+        </div>
+        <div>
+            <span>　このメールにお心当たりのない方・お問い合わせは、下記お問い合わせURLから</span>
+        </div>
+        <div>
+            <span>　入力いただくか、下記カスタマーサービスデスクまでご連絡ください。</span>
+        </div>
+    </div>
+</div>
+<div th:replace="~{common/signatureWithUrl}"></div>
+<!--PDR Migrate Customization to here-->
+</body>
+</html>

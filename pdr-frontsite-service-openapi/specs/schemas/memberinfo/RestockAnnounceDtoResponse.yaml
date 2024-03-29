@@ -1,0 +1,24 @@
+# 2023-renew No65 from here
+type: object
+description: 入荷お知らせDtoレスポンス
+properties:
+  RestockAnnounceEntityResponse:
+    $ref: '#/components/schemas/RestockAnnounceEntityResponse'
+  goodsDetailsDtoResponse:
+    $ref: '#/components/schemas/GoodsDetailsDtoResponse'
+  goodsGroupImageEntityListResponse:
+    $ref: '#/components/schemas/GoodsGroupImageEntityListResponse'
+  stockStatus:
+    type: string
+    description: 在庫表示
+    example: 1
+
+components:
+  schemas:
+    RestockAnnounceEntityResponse:
+      $ref: ./RestockAnnounceEntityResponse.yaml
+    GoodsDetailsDtoResponse:
+      $ref: ../goods/GoodsDetailsDtoResponse.yaml
+    GoodsGroupImageEntityListResponse:
+      $ref: ../goods/GoodsGroupImageEntityListResponse.yaml
+# 2023-renew No65 to here

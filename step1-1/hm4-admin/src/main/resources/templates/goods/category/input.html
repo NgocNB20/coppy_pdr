@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>カテゴリー登録更新｜商品管理</title>
+    <script type="text/javascript" th:src="@{/assets/js/thickbox.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/multiTab.js}"></script>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/thickbox.css}"/>
+    <script type="text/javascript" th:src="@{/assets/js/jquery-confirm.min.js}"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/css/jquery-confirm.min.css}">
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+        function dragDrop(ev) {
+            ev.preventDefault();
+            $("#imageUpload").prop("files", ev.dataTransfer.files).change();
+        }
+
+        function openUploadImage() {
+            $("#imageUpload").click();
+        }
+
+        $(function () {
+            // -------------------------------------------------------------------
+            // 商品画像プレビュー表示の初期化
+            // -------------------------------------------------------------------
+            initImagePreviewer();
+            prepareThickBox();
+
+            // -------------------------------------------------------------------
+            // 新HIT-MALL：画面リロード後の自動スクロール
+            // -------------------------------------------------------------------
+            var targetAutoScrollTagId = document.getElementById('targetAutoScrollTagId').value;
+            if (targetAutoScrollTagId !== '') {
+                var targetAutoScrollElement = document.getElementById(targetAutoScrollTagId);
+                targetAutoScrollElement.scrollIntoView({block: 'center'});
+            }
+        });
+
+        $(function() {
+            // -------------------------------------------------------------------
+            // 商品画像アップロードのinputタグのonchangeイベントをハンドリング
+            $("#imageUpload").change(function () {
+                if (fileSizeCheck('imageUpload') === false) {
+                    document.getElementById("imageUpload").value = null
+                    return false;
+                }
+                // 選択された画像をサーバーにアップロード
+                $("#doUploadImagePC").click();
+            });
+
+            // 更新の場合、親カテゴリーレンダリング
+            const categoryPathName = $("#categoryPathName").val();
+            if (categoryPathName !== '') {
+                const parentCat = categoryPathName.split(' > ');
+                let catBody = '';
+                let catTr = '';
+                for (let i = 0; i < parentCat.length; i++) {
+                    if (i === 0) {
+                        catTr = '<tr><td class="cat_name"><div class="cat_top" style="padding-left: 10px;">' + parentCat[i] + '</div></td></tr>';
+                    } else {
+                        if (i % 2 !== 0) {
+                            catTr = '<tr class="stripe"><td class="cat_name"><div class="cat_end" style="margin-left:' + (i - 1) * 30 + 'px">' + parentCat[i] + '</div></td></tr>';
+                        } else {
+                            catTr = '<tr><td class="cat_name"><div class="cat_end" style="margin-left:' + (i - 1) * 30 + 'px">' + parentCat[i] + '</div></td></tr>';
+                        }
+                    }
+                    catBody = catBody + catTr;
+                }
+                $('#catBody').html(catBody);
+            }
+        })
+
+    </script>
+</head>
+
+<body id="goods">
+<div id="registCategory" class="l-mainwrap">
+    <!-- side -->
+    <div th:replace="~{include/sidemenu_new}"></div>
+
+    <main class="l-page">
+        <!-- header -->
+        <div th:replace="~{include/header_new}"></div>
+
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form th:action="@{/goods/category/input/}" th:object="${categoryInputModel}" method="post"
+                      enctype="multipart/form-data" onsubmit="return errorCheckOnclickConfirmButton();">
+                    <!--画面リロード後の自動スクロールのターゲットポジション-->
+                    <input type="hidden" th:field="*{targetAutoScrollTagId}"/>
+
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">カテゴリー登録更新</h1>
+                        <ul>
+                            <li>
+                                <button class="c-btn btn_move" type="submit" name="jumpList">カテゴリー一覧</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+
+                    <div class="l-section" id="mainContainer">
+                        <!-- カテゴリー管理情報 -->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">カテゴリー管理情報</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <div class="edit">
+                                            <dt>カテゴリーID<span class="ico_required" th:if="*{!listScreen}">必須</span></dt>
+                                            <th:block th:if="*{isListScreen}">
+                                                <dd>
+                                                    <span th:text="*{categoryId}"></span>
+                                                </dd>
+                                            </th:block>
+                                            <th:block th:if="*{!isListScreen}">
+                                                <dd>
+                                                    <input type="text" class="c-form-control w320px"
+                                                           placeholder="入力してください"
+                                                           th:field="*{categoryId}" maxlength="20"
+                                                           th:errorclass="error">
+                                                    <div id="categoryIdError" th:if="${#fields.hasErrors('categoryId')}"
+                                                         th:errors="*{categoryId}" class="c-error-txt mt5"></div>
+                                                </dd>
+                                            </th:block>
+                                        </div>
+                                        <div class="edit">
+                                            <dt>カテゴリー名<span class="ico_required">必須</span></dt>
+                                            <dd>
+                                                <input type="text" class="c-form-control w320px" placeholder="入力してください"
+                                                       th:field="*{categoryName}" maxlength="120" th:errorclass="error">
+                                                <div id="categoryNameError" th:if="${#fields.hasErrors('categoryName')}"
+                                                     th:errors="*{categoryName}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+                                        <div>
+                                            <dt>管理オプション</dt>
+                                            <dd>
+                                                <ul class="c-list-left list_sp20">
+                                                    <li>
+                                                        <label class="c-form-control">
+                                                            <input type="checkbox" th:field="*{categoryType}"
+                                                                   th:checked="*{categoryType eq '0'}" value="0"><i></i>カテゴリーをメニューに表示する
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label class="c-form-control">
+                                                            <input type="checkbox" th:field="*{manualDisplayFlag}"
+                                                                   th:checked="*{manualDisplayFlag eq '1'}"
+                                                                   value="1"><i></i>商品を手動で並び替える
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label class="c-form-control">
+                                                            <input type="checkbox" th:field="*{siteMapFlag}"
+                                                                   th:checked="*{siteMapFlag eq '1'}" value="1"><i></i>サイトマップに出力する
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                                <div id="categoryTypeError" th:if="${#fields.hasErrors('categoryType')}"
+                                                     th:errors="*{categoryType}" class="c-error-txt mt5"></div>
+                                                <div id="manualDisplayFlagError"
+                                                     th:if="${#fields.hasErrors('manualDisplayFlag')}"
+                                                     th:errors="*{manualDisplayFlag}" class="c-error-txt mt5"></div>
+                                                <div id="siteMapFlagError" th:if="${#fields.hasErrors('siteMapFlag')}"
+                                                     th:errors="*{siteMapFlag}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+                                        <div class="edit">
+                                            <dt>メタ説明文</dt>
+                                            <dd>
+                                                <input type="text" class="c-form-control w100p" placeholder="入力してください"
+                                                       th:field="*{metaDescription}" maxlength="400"
+                                                       th:errorclass="error">
+                                                <div id="metaDescriptionError"
+                                                     th:if="${#fields.hasErrors('metaDescription')}"
+                                                     th:errors="*{metaDescription}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>メタキーワード</dt>
+                                            <dd>
+                                                <input type="text" class="c-form-control w100p" placeholder="入力してください"
+                                                       th:field="*{metaKeyword}" maxlength="400" th:errorclass="error">
+                                                <div class="c-annotation mt5">※複数入力の場合は半角カンマで区切ってください。</div>
+                                                <div id="metaKeywordError" th:if="${#fields.hasErrors('metaKeyword')}"
+                                                     th:errors="*{metaKeyword}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- 新規カテゴリー追加 -->
+                        <input type="hidden" id="categoryPathName" th:value="*{categoryPathName}">
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">親カテゴリー</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <th:block th:if="*{isListScreen}">
+                                    <div class="l-inner_wrap">
+                                        <table class="c-tbl tbl_cat_list">
+                                            <thead>
+                                            <tr>
+                                                <th class="cat_name">カテゴリー名</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="catBody">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="*{!isListScreen}">
+                                    <div class="l-inner_wrap" id="targetCategory">
+                                        <table class="c-tbl tbl_cat_list" id="table-1">
+                                            <thead>
+                                            <tr>
+                                                <th class="check"></th>
+                                                <th class="cat_top">カテゴリー名</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="cat01" th:each="item, stat: *{categoryTreeItems}">
+                                                <td class="check">
+                                                    <label class="c-form-control">
+                                                        <input type="radio" name="target"
+                                                               th:id="'target' + '-' + ${stat.index}"
+                                                               th:field="*{target}" th:value="${item.value}"
+                                                               th:checked="${item.value} == *{target}"><i></i>
+                                                    </label>
+                                                </td>
+                                                <td class="cat_name">
+                                                    <input type="hidden"
+                                                           th:name="'categoryTreeItems[' + ${stat.index} + '].categorySeq'"
+                                                           th:value="${item.categorySeq}"/>
+                                                    <input type="hidden"
+                                                           th:name="'categoryTreeItems[' + ${stat.index} + '].categorySeqPath'"
+                                                           th:value="${item.categorySeqPath}" class="mypc"
+                                                           th:id="'categorySeqPath' + '-' + ${stat.index}"/>
+                                                    <div class="c-open-btn" id="idx">
+                                                        <span th:id="'levelView' + '-' + ${stat.index}"
+                                                              th:text="${item.getCategoryIndent()}"
+                                                              class="ispace"></span>
+                                                        <span class="cat_top"
+                                                              th:id="'categoryName' + '-' + ${stat.index}"
+                                                              th:text="${item.tCategoryName}"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </article>
+
+                        <!-- カテゴリー情報 -->
+                        <article class="l-article">
+                            <div class="l-article_title">
+                                <h2 class="c-pagetitle_h3">カテゴリー情報</h2>
+                                <div class="c-open-btn"><i></i></div>
+                            </div>
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <dl class="c-dl-base dt_fn13 dt_w160px">
+                                        <!--2023-renew categoryCSV from here-->
+                                        <div class="edit">
+                                            <dt>カテゴリー名PC<span class="ico_required">必須</span></dt>
+                                            <dd>
+                                                <input type="text" class="c-form-control w100p" placeholder="入力してください"
+                                                       th:field="*{categoryNamePC}" maxlength="120"
+                                                       th:errorclass="error">
+                                                <div id="categoryNamePCError"
+                                                     th:if="${#fields.hasErrors('categoryNamePC')}"
+                                                     th:errors="*{categoryNamePC}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+                                        <!--2023-renew categoryCSV to here-->
+                                        <div class="edit">
+                                            <dt>公開状態<span class="ico_required">必須</span></dt>
+                                            <dd>
+                                                <select id="categoryOpenStatusPC" class="c-form-control"
+                                                        name="categoryOpenStatusPC" th:errorclass="error">
+                                                    <option value="">選択してください</option>
+                                                    <option th:each="item : *{categoryOpenStatusPCItems}"
+                                                            th:value="${item.key}" th:text="${item.value}"
+                                                            th:selected="${item.key} == *{categoryOpenStatusPC}">
+                                                        選択してください
+                                                    </option>
+                                                </select>
+                                                <div id="categoryOpenStatusPCError"
+                                                     th:if="${#fields.hasErrors('categoryOpenStatusPC')}"
+                                                     th:errors="*{categoryOpenStatusPC}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>公開期間</dt>
+                                            <dd>
+                                                <div class="wrap_flex_wrap wrap_flex_center">
+                                                    <label class="c-datepicker">
+                                                        <input type="text" class="c-form-control w150px"
+                                                               placeholder="年/月/日"
+                                                               th:field="*{categoryOpenFromDatePC}" autocomplete="off"
+                                                               maxlength="10" th:errorclass="error">
+                                                    </label>
+                                                    <input type="text" class="c-form-control w100px ml10"
+                                                           placeholder="00:00:00"
+                                                           th:field="*{categoryOpenFromTimePC}" maxlength="8"
+                                                           th:errorclass="error">
+                                                    <span class="ml10 mr10">〜</span>
+                                                    <label class="c-datepicker">
+                                                        <input type="text" class="c-form-control w150px"
+                                                               placeholder="年/月/日"
+                                                               th:field="*{categoryOpenToDatePC}" autocomplete="off"
+                                                               maxlength="10" th:errorclass="error">
+                                                    </label>
+                                                    <input type="text" class="c-form-control w100px ml10"
+                                                           placeholder="00:00:00"
+                                                           th:field="*{categoryOpenToTimePC}" maxlength="8"
+                                                           th:errorclass="error">
+                                                </div>
+                                                <div>
+                                                    <div id="categoryOpenFromDatePCError"
+                                                         th:if="${#fields.hasErrors('categoryOpenFromDatePC')}"
+                                                         th:errors="*{categoryOpenFromDatePC}"
+                                                         class="c-error-txt mt5"></div>
+                                                    <div id="categoryOpenFromTimePCError"
+                                                         th:if="${#fields.hasErrors('categoryOpenFromTimePC')}"
+                                                         th:errors="*{categoryOpenFromTimePC}"
+                                                         class="c-error-txt mt5"></div>
+                                                    <div id="categoryOpenToDatePCError"
+                                                         th:if="${#fields.hasErrors('categoryOpenToDatePC')}"
+                                                         th:errors="*{categoryOpenToDatePC}"
+                                                         class="c-error-txt mt5"></div>
+                                                    <div id="categoryOpenToTimePCError"
+                                                         th:if="${#fields.hasErrors('categoryOpenToTimePC')}"
+                                                         th:errors="*{categoryOpenToTimePC}"
+                                                         class="c-error-txt mt5"></div>
+                                                </div>
+                                            </dd>
+                                        </div>
+
+                                        <div class="edit">
+                                            <dt>フリーエリア<br>（HTML可）</dt>
+                                            <div class="wrap_flex_y flex_grow">
+                                                <dd>
+                                                    <!--2023-renew No19 from here-->
+                                                    <textarea class="c-form-control w100p" rows="5" name=""
+                                                              placeholder="入力してください"
+                                                              th:field="*{freeTextPC}" maxlength="4000" th:errorclass="error"></textarea>
+                                                    <!--2023-renew No19 to here-->
+                                                </dd>
+                                                <div id="freeTextPCError" th:if="${#fields.hasErrors('freeTextPC')}"
+                                                     th:errors="*{freeTextPC}" class="c-error-txt mt5"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit" id="autoScrollCategoryImages">
+                                            <dt>カテゴリー画像</dt>
+                                            <dd>
+                                                <th:block th:if="*{isExistCategoryImagePathPC}">
+                                                    <div class="cat-container c-img imagePreviewer">
+                                                        <div class="cat-container-sub">
+                                                            <button class="c-btn-icon c-btn-white" type="submit"
+                                                                    name="doDeleteImagePC"><i
+                                                                    class="material-icons clear"></i></button>
+                                                            <img th:src="*{categoryImagePathPC}" th:alt="*{fileNamePC}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-img-txt">
+                                                        <th:block th:text="*{fileNamePC}"></th:block>
+                                                    </div>
+                                                </th:block>
+                                                <th:block th:if="*{!isExistCategoryImagePathPC}">
+                                                    <input type="file" id="imageUpload"
+                                                           th:field="*{uploadCategoryImagePC}" accept="image/*" hidden
+                                                           th:errorclass="error"/>
+                                                    <div class="file_drop w100p" ondrop="dragDrop(event)"
+                                                         ondragover="allowDrop(event)">
+                                                        <img src="/admin/assets/images/icon/file_up.svg" alt="">
+                                                        <div class="txt">ここにファイルをドロップ　または</div>
+                                                        <button class="c-btn btn_back" type="button"
+                                                                onclick="openUploadImage();">ファイルを選択
+                                                        </button>
+                                                    </div>
+                                                    <input type="submit" id="doUploadImagePC" name="doUploadImagePC"
+                                                           hidden>
+                                                </th:block>
+                                                <div id="uploadCategoryImagePCError"
+                                                     th:if="${#fields.hasErrors('uploadCategoryImagePC')}"
+                                                     th:errors="*{uploadCategoryImagePC}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- 追尾ボタン -->
+                    <div class="l-pagebtn-nav">
+                        <div class="l-pagebtn-nav_inner">
+                            <div class="c-back">
+                                <button class="c-btn btn_back icon_left" type="submit" name="doCancel"><i
+                                        class="material-icons navigate_before"></i>戻る
+                                </button>
+                            </div>
+                            <div class="col_left">
+                                <input type="hidden" id="isNextBtnClicked" value="false"/>
+                                <button class="c-btn btn_regular" type="submit" id="doNext" name="doNext">確認</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+    <script type="text/javascript" th:src="@{/assets/js/treeTable.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $("#targetCategory table tr").each(function () {
+                if ($(this).css('display') === 'none'){
+                    $(this).css('display', '');
+                }
+                if($(this).find('div.c-open-btn').hasClass('close'))
+                {
+                    $(this).find('div.c-open-btn').removeClass('close');
+                }
+            });
+            // stripeクラス自動的に追加されるため
+            $('.cat_top').closest('.c-open-btn').click();
+            $('.cat_top').closest('.c-open-btn').click();
+        })
+
+    </script>
+</div>
+</body>
+</html>

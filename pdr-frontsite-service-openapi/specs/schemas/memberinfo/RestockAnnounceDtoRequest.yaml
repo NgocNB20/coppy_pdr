@@ -1,0 +1,22 @@
+type: object
+description:  入荷お知らせり商品DTOリストリクエスト
+properties:
+  restockAnnounceEntityRequest:
+    $ref: '#/components/schemas/RestockAnnounceEntityRequest'
+  goodsDetailsDtoRequest:
+    $ref: '#/components/schemas/GoodsDetailsDtoRequest'
+  goodsGroupImageEntityListRequest:
+    $ref: '#/components/schemas/GoodsGroupImageEntityListRequest'
+  stockStatus:
+    type: string
+    description: 在庫表示
+    example: 1
+
+components:
+  schemas:
+    RestockAnnounceEntityRequest:
+      $ref: ./RestockAnnounceEntityRequest.yaml
+    GoodsDetailsDtoRequest:
+      $ref: ../goods/GoodsDetailsDtoRequest.yaml
+    GoodsGroupImageEntityListRequest:
+      $ref: ../goods/GoodsGroupImageEntityListRequest.yaml

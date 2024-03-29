@@ -1,0 +1,33 @@
+# 2023-renew No22 from here
+type: object
+description: 会員情報画像返信
+properties:
+  memberInfoSeq:
+    type: integer
+    format: int32
+    description: 会員SEQ
+    example: 10000001
+  memberImageNo:
+    type: integer
+    format: int32
+    description: 会員画像のファイル名
+    example: 1
+  memberImageFileName:
+    type: string
+    description: '会員画像のファイル名'
+    example: 'image.jpg'
+  memberImageType:
+    type: string
+    description: 'type=会員画像種別 0: JPEG 1: PNG 2: PDF'
+    example: '1'
+  registTime:
+    type: string
+    format: date-time
+    description: 登録日時（必須）
+    example: 2022/01/01 12:00:00
+  updateTime:
+    type: string
+    format: date-time
+    description: 更新日時（必須）
+    example: 2022/01/01 12:00:00
+# 2023-renew No22 to here

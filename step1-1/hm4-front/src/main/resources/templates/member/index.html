@@ -1,0 +1,384 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{/newdesign/include/head}">
+    <script type="text/javascript" th:src="@{/common/js/ajaxcartadd.js}"></script>
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-mypage">
+<div class="l-mainwrap">
+    <div id="layoutHeader" th:replace="~{/newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">マイページ</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember.html}"></div>
+                <div class="l-main p-mypage-top">
+                    <th:block th:with="userInfo=${session.commonInfo.commonInfoUser}">
+                    <h2 class="c-title-page"><strong><th:block th:text="${userInfo.memberInfoLastName == null?'ゲスト':userInfo.memberInfoLastName}"></th:block> 様のマイページ</strong></h2>
+                    </th:block>
+                    <!-- 2023-renew No24 from here -->
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo() ? 'global-info-message' : 'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hm:freearea key="mypage_info"/>
+
+                    <th:block th:with="baseInfo=${session.commonInfo.commonInfoBase}">
+                        <th:block th:if="${baseInfo.couponCount != null && baseInfo.couponCount > 0}">
+                            <div class="p-mypage-top__coupon">
+                                <h2 class="p-mypage-top__title">
+                                    <svg viewBox="0 0 31.75 22.344" class="coupon"><use th:attr="'xlink:href'= @{/newdesign/assets/images/icon/coupon.svg#coupon}"></use></svg><strong>今すぐ使えるお得なクーポン配布中！</strong>
+                                </h2>
+                                <div class="p-mypage-top__button-more">
+                                    <a class="c-button c-button--a1-line" th:href="@{/member/coupon/index.html}">
+                                        <svg viewBox="0 0 31.75 22.344" class="coupon"><use th:attr="'xlink:href'= @{/newdesign/assets/images/icon/coupon.svg#coupon}"></use></svg>
+                                        <p>クーポン一覧</p>
+                                    </a></div>
+                            </div>
+                        </th:block>
+                    </th:block>
+                    <!-- 2023-renew No24 to here -->
+
+                    <!-- 2023-renew No65 from here -->
+                    <div class="p-mypage-top__slider" th:object="${memberModel}">
+                        <a th:href="@{/member/favorite/index.html}">
+                            <h2 class="p-mypage-top__title">
+                                <svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'= @{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg><strong>セール中のお気に入り商品</strong>
+                            </h2>
+                        </a>
+                        <th:block th:if="${memberModel.isViewFavoriteAnnounceGoods()}">
+                            <div class="c-product c-product--slider">
+                                <div class="swiper c-product-swiper js-product-swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide c-product__item"
+                                             th:each="item, stat: ${memberModel.favoriteAnnounceGoodsItems}">
+                                            <a th:id="'goFavoriteImageGoodsPage' + ${stat.index}"
+                                               th:href="@{/goods/index.html(gcd=${item.gcd})}">
+                                                <div class="c-product__item-image">
+                                                    <img th:src="@{${#image.convert(item.goodsImageItems, 0, 'p1')}}"
+                                                         th:attr="srcset=${#image.convert(item.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                         th:alt="${item.goodsGroupName}" height="200" width="200" decoding="async" loading="lazy">
+                                                </div>
+                                                <div class="c-product__item-icon">
+                                                    <span class="c-product__item-icon--reserve" th:if="${item.isReserveIconFlag()}">セールde予約</span>
+                                                    <span class="c-product__item-icon--sale" th:if="${item.isSaleIconFlag()}">SALE</span>
+                                                    <span class="c-product__item-icon--new" th:if="${item.isNewIconFlag()}">NEW</span>
+                                                    <span class="c-product__item-icon--outlet" th:if="${item.isOutletIconFlag()}">アウトレット</span>
+                                                </div>
+                                                <div class="c-product__item-title" th:text="${item.goodsGroupName}"></div>
+                                                <div class="c-product__item-spec">
+                                                    <th:block th:if="${item.isUnit1()}">
+                                                        <span th:text="${item.unitTitle1}" th:remove="tag"></span>
+                                                        ：<span th:text="${item.unitValue1}" th:remove="tag"></span><br>
+                                                    </th:block>
+                                                    <th:block th:if="${item.isUnit2()}">
+                                                        <span th:text="${item.unitTitle2}" th:remove="tag"></span>
+                                                        ：<span th:text="${item.unitValue2}" th:remove="tag"></span>
+                                                    </th:block>
+                                                </div>
+                                                <th:block th:unless="${item.isStockSoldOutIconDisp()}">
+                                                    <th:block th:if="${item.isSaleIconFlag()}">
+                                                        <th:block th:if="${item.isSale()}">
+                                                            <div class="c-product__item-sale-comment" th:unless="${#strings.isEmpty(item.goodsPreDiscountPrice)}">
+                                                                <span th:remove="tag" th:id="'goodsMessageText-' + ${stat.index}" th:text="${item.goodsPreDiscountPrice}"></span>
+                                                            </div>
+                                                            <!-- 2023-renew AddNo5 from here -->
+                                                            <div class="c-product__item-price c-product__item-price--sale">
+                                                                <small>セール：</small>
+                                                                <th:block th:if="${item.isSameSalePrice()}">
+                                                                    <div class="c-product__item-price-unit">
+                                                                        <th:block th:text="|${#number.convert(item.preDiscountPriceLow)}|"></th:block><span>円</span>
+                                                                    </div>
+                                                                </th:block>
+                                                                <th:block th:unless="${item.isSameSalePrice()}">
+                                                                    <div class="c-product__item-price-unit">
+                                                                        <th:block th:text="|${#number.convert(item.preDiscountPriceLow)}|"></th:block><span>円</span>
+                                                                    </div>
+                                                                    <div class="c-product__item-price-unit">～
+                                                                        <th:block th:text="|${#number.convert(item.preDiscountPriceHight)}|"></th:block><span>円</span>
+                                                                    </div>
+                                                                </th:block>
+                                                            </div>
+                                                            <div class="c-product__item-regular-price">
+                                                                <small>通常価格：</small>
+                                                                <th:block th:if="${item.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                </th:block>
+                                                                <th:block th:unless="${item.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                    <th:block>～
+                                                                        <th:block th:text="|${#number.convert(item.goodsPriceInTaxHight)}円|"></th:block>
+                                                                    </th:block>
+                                                                </th:block>
+                                                            </div>
+                                                        </th:block>
+                                                        <th:block th:if="${!item.isSale()}">
+                                                            <div class="c-product__item-regular-price">
+                                                                <small>通常価格：</small>
+                                                                <th:block th:if="${item.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                </th:block>
+                                                                <th:block th:unless="${item.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                    <th:block th:if="${item.goodsPriceInTaxHight != null}">～
+                                                                        <th:block th:text="|${#number.convert(item.goodsPriceInTaxHight)}円|"></th:block>
+                                                                    </th:block>
+                                                                </th:block>
+                                                            </div>
+                                                        </th:block>
+                                                    </th:block>
+                                                    <th:block th:if="${!item.isSaleIconFlag()}">
+                                                        <div class="c-product__item-price">
+                                                            <div class="c-product__item-price-unit">
+                                                                <th:block th:if="${item.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                </th:block>
+                                                                <th:block th:unless="${item.isSamePrice()}">
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                    <th:block th:if="${item.goodsPriceInTaxHight != null}">～
+                                                                        <th:block th:text="|${#number.convert(item.goodsPriceInTaxHight)}円|"></th:block>
+                                                                    </th:block>
+                                                                </th:block>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- 2023-renew AddNo5 to here -->
+                                                </th:block>
+                                                <!-- 2023-renew No16-2 from here -->
+                                                <th:block th:if="${item.isPriceHideGoods()}">
+                                                    <div class="c-product__item-notlogin">
+                                                        <span>価格はログイン後表示</span>
+                                                    </div>
+                                                </th:block>
+                                                <!-- 2023-renew No16-2 to here -->
+                                            </a>
+                                            <div class="c-product__item-button" th:if="${item.isDisplayAddCart()}">
+                                                <button th:id="'goAjaxCart' + ${stat.index}" th:href="@{/cart/index.html(gcd=${item.gcd}, gcnt=1)}"
+                                                        onclick="ajaxCartAddFavorite(this);return false;"
+                                                        class="c-button c-button--primary c-button--width-s">カートに入れる
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block th:unless="${memberModel.isViewFavoriteAnnounceGoods()}">
+                            <div class="p-mypage-top__nodata">
+                                <p class="p-mypage-top__nodata-title">現在、対象商品はございません。</p>
+                                <p class="p-mypage-top__nodata-text">商品ページからお気に入り登録していただくと、セール中にこちらに表示されます。ぜひご活用ください。</p>
+                            </div>
+                        </th:block>
+                        <div class="p-mypage-top__button-more">
+                            <a class="c-button c-button--a1-line" th:href="@{/member/favorite/index.html}">
+                                <svg viewBox="0 0 24.9 21.5" class="favorite"><use th:attr="'xlink:href'= @{/newdesign/assets/images/icon/favorite.svg#favorite}"></use></svg>
+                                <p>お気に入り商品一覧</p>
+                            </a></div>
+                    </div>
+
+                    <!-- 2023-renew No65 from here -->
+                    <div class="p-mypage-top__slider" th:object="${memberModel}">
+                        <a th:href="@{/member/restock/index.html}">
+                            <h2 class="p-mypage-top__title">
+                                <svg viewBox="0 0 17 20" class="new-arrival"><use th:attr="'xlink:href'= @{/newdesign/assets/images/icon/new-arrival.svg#new-arrival}" ></use></svg><strong>入荷お知らせ</strong>
+                            </h2>
+                        </a>
+                        <th:block th:if="${memberModel.isViewRestockAnnounceGoods()}">
+                            <div class="c-product c-product--slider">
+                            <div class="swiper c-product-swiper js-product-swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide c-product__item"
+                                         th:each="item, restockAnnounceGoodsItemStat: ${memberModel.restockAnnounceGoodsItems}">
+                                        <a th:id="'goFavoriteImageGoodsPage-' + ${restockAnnounceGoodsItemStat.index}" th:classappend="${!item.isGoodsOpen()} ? 'a-disable' : ''"
+                                           th:href="@{/goods/index.html(gcd=${item.gcd})}">
+                                            <div class="c-product__item-image">
+                                                <img th:src="@{${#image.convert(item.goodsImageItems, 0, 'p1')}}"
+                                                     th:attr="srcset=${#image.convert(item.goodsImageItems, 0, 'p1x2')} + ' 2x'"
+                                                     th:alt="${item.goodsGroupName}" height="200" width="200" decoding="async" loading="lazy">
+                                            </div>
+                                            <div class="c-product__item-icon">
+                                                <span class="c-product__item-icon--reserve" th:if="${item.isReserveIconFlag()}">セールde予約</span>
+                                                <span class="c-product__item-icon--sale" th:if="${item.isSaleIconFlag()}">SALE</span>
+                                                <span class="c-product__item-icon--new" th:if="${item.isNewIconFlag()}">NEW</span>
+                                                <span class="c-product__item-icon--outlet" th:if="${item.isOutletIconFlag()}">アウトレット</span>
+                                            </div>
+                                            <div class="c-product__item-title" th:text="${item.goodsGroupName}"></div>
+                                            <div class="c-product__item-spec">
+                                                <th:block th:if="${item.isUnit1()}">
+                                                    <span th:text="${item.unitTitle1}" th:remove="tag"></span>
+                                                    ：<span th:text="${item.unitValue1}" th:remove="tag"></span><br/>
+                                                </th:block>
+                                                <th:block th:if="${item.isUnit2()}">
+                                                    <span th:text="${item.unitTitle2}" th:remove="tag"></span>
+                                                    ：<span th:text="${item.unitValue2}" th:remove="tag"></span><br/>
+                                                </th:block>
+                                            </div>
+                                            <th:block th:unless="${item.isStockSoldOutIconDisp()}">
+                                                <th:block th:if="${item.isSaleIconFlag()}">
+                                                    <th:block th:if="${item.isSale()}">
+                                                        <div class="c-product__item-sale-comment" th:unless="${#strings.isEmpty(item.goodsPreDiscountPrice)}">
+                                                            <span th:text="${item.goodsPreDiscountPrice}"></span>
+                                                        </div>
+                                                        <!-- 2023-renew AddNo5 from here -->
+                                                        <div class="c-product__item-price c-product__item-price--sale">
+                                                            <small>セール：</small>
+                                                            <th:block th:if="${item.isSameSalePrice()}">
+                                                                <div class="c-product__item-price-unit">
+                                                                    <th:block th:text="|${#number.convert(item.preDiscountPriceLow)}|"></th:block><span>円</span>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:unless="${item.isSameSalePrice()}">
+                                                                <div class="c-product__item-price-unit">
+                                                                    <th:block th:text="|${#number.convert(item.preDiscountPriceLow)}|"></th:block><span>円</span>
+                                                                </div>
+                                                                <div class="c-product__item-price-unit">～
+                                                                    <th:block th:text="|${#number.convert(item.preDiscountPriceHight)}|"></th:block><span>円</span>
+                                                                </div>
+                                                            </th:block>
+                                                        </div>
+                                                        <div class="c-product__item-regular-price">
+                                                            <small>通常価格：</small>
+                                                            <th:block th:if="${item.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                            </th:block>
+                                                            <th:block th:unless="${item.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                <th:block>～
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxHight)}円|"></th:block>
+                                                                </th:block>
+                                                            </th:block>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:unless="${item.isSale()}">
+                                                        <div class="c-product__item-regular-price">
+                                                            <small>通常価格：</small>
+                                                            <th:block th:if="${item.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                            </th:block>
+                                                            <th:block th:unless="${item.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                <th:block th:if="${item.goodsPriceInTaxHight != null}">～
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxHight)}円|"></th:block>
+                                                                </th:block>
+                                                            </th:block>
+                                                        </div>
+                                                    </th:block>
+                                                </th:block>
+                                                <th:block th:if="${!item.isSaleIconFlag()}">
+                                                    <div class="c-product__item-price">
+                                                        <div class="c-product__item-price-unit">
+                                                            <th:block th:if="${item.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                            </th:block>
+                                                            <th:block th:unless="${item.isSamePrice()}">
+                                                                <th:block th:text="|${#number.convert(item.goodsPriceInTaxLow)}円|"></th:block>
+                                                                <th:block th:if="${item.goodsPriceInTaxHight != null}">～
+                                                                    <th:block th:text="|${#number.convert(item.goodsPriceInTaxHight)}円|"></th:block>
+                                                                </th:block>
+                                                            </th:block>
+                                                            <!-- 2023-renew AddNo5 to here -->
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                            </th:block>
+                                            <!-- 2023-renew No16-2 from here -->
+                                            <th:block th:if="${item.isPriceHideGoods()}">
+                                                <div class="c-product__item-notlogin">
+                                                    <span>価格はログイン後表示</span>
+                                                </div>
+                                            </th:block>
+                                            <!-- 2023-renew No16-2 to here -->
+                                        </a>
+                                        <div class="c-product__item-button" th:if="${item.isDisplayAddCart()}">
+                                            <button th:id="'goAjaxCart' + ${restockAnnounceGoodsItemStat.index}" th:href="@{/cart/index.html(gcd=${item.gcd}, gcnt=1)}"
+                                                    onclick="ajaxCartAddFavorite(this);return false;"
+                                                    class="c-button c-button--primary c-button--width-s">カートに入れる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        </th:block>
+                        <th:block th:unless="${memberModel.isViewRestockAnnounceGoods()}">
+                            <div class="p-mypage-top__nodata">
+                                <p class="p-mypage-top__nodata-title">現在、対象商品はございません。</p>
+                                <p class="p-mypage-top__nodata-text">商品が在庫切れの際に、商品ページから「入荷お知らせ」を設定していただくと、在庫がある場合にこちらに表示されます。ぜひご活用ください。</p>
+                            </div>
+                        </th:block>
+                        <div class="p-mypage-top__button-more">
+                            <a class="c-button c-button--a1-line" th:href="@{/member/restock/index.html}">
+                                <svg viewBox="0 0 17 20" class="new-arrival"><use th:attr="'xlink:href'= @{/newdesign/assets/images/icon/new-arrival.svg#new-arrival}"></use></svg>
+                                <p>入荷お知らせ一覧</p>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 2023-renew No65 to here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="layoutFooter" th:replace="~{/newdesign/include/footer}"></div>
+
+</div>
+
+<script th:src="@{/newdesign/assets/js/category/footerMenuCategory.js}" defer="defer"></script>
+<script th:src="@{/newdesign/assets/js/goodsviewer.js}" defer="defer"></script>
+
+
+<div id="modal-cart" class="c-modal p-product-detail__modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--normal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <p class="c-modal__hl">カートに以下の商品を追加しました。</p>
+            <div class="c-modal__detail">
+                <div class="c-modal__detail-inner">
+                    <p>
+                        商品番号：<span id="cartMessageGoodsCode"></span><br>
+                        商品名：<span id="cartMessageGoodsName"></span><br>
+                    <div id="isCartMessageUnitTitle1" style="display:none;">
+                        <span id="cartMessageUnitTitle1"></span>：<span id="cartMessageUnitValue1"></span><br>
+                    </div>
+                    <div id="isCartMessageUnitTitle2" style="display:none;">
+                        <span id="cartMessageUnitTitle2"></span>：<span id="cartMessageUnitValue2"></span><br>
+                    </div>
+                    </p>
+                    <p>
+                        数量：<span id="cartMessageGoodsCount"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="c-modal__button">
+                <a href="" class="c-button c-button--primary-line c-button--width-m js-modal-close">お買い物を続ける</a>
+                <a th:href="@{/cart/index.html}" class="c-button c-button--primary c-button--width-m">ご購入手続きへ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

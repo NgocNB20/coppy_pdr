@@ -1,0 +1,16 @@
+type: object
+description: 商品グループDtoListレスポンス
+properties:
+  pageInfo:
+    $ref: "#/components/schemas/PageInfoResponse"
+  goodsGroupDtoListResponse:
+    type: array
+    items:
+      $ref: "#/components/schemas/GoodsGroupDtoResponse"
+
+components:
+  schemas:
+    PageInfoResponse:
+      $ref: ../PageInfoResponse.yaml
+    GoodsGroupDtoResponse:
+      $ref: ./GoodsGroupDtoResponse.yaml

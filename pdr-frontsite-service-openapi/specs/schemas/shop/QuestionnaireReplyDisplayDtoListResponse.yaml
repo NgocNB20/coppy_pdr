@@ -1,0 +1,7 @@
+type: object
+description: アンケート回答画面表示用DtoListレスポンス
+properties:
+  questionnaireReplyDisplayDtoResponse:
+    type: array
+    items:
+      $ref: ../shop/QuestionnaireReplyDisplayDtoResponse.yaml

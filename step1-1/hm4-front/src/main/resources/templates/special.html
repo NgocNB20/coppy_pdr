@@ -1,0 +1,91 @@
+<!--PDR Migrate Customization from here-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+
+    <script th:inline="javascript">
+        if (typeof(_ukwq) !== 'undefined') {
+            _ukwq = [];
+
+            // 共通部
+            _ukwq.push(['_setClient', _contentsClient]);
+            if (_cryptoLoginId != null) { _ukwq.push(['_setLoginID', _cryptoLoginId]); }
+            _ukwq.push(['_setReqURL', _reqUrl]);
+            _ukwq.push(['_setRefURL', _refUrl]);
+            _ukwq.push(['_setDisplay', _display]);
+            // 商品詳細
+            _ukwq.push(['_setItem', String(/*[[${specialModel.fkey}]]*/)]);
+            _ukwq.push(['_sendProductLog']);
+        }
+    </script>
+</head>
+
+<body id="gotop" class="p-special">
+<a id="top" name="top"></a>
+<div class="l-mainwrap">
+    <th:block th:unless="${param.header != null && param.header[0].equals('no')}">
+        <div id="layoutHeader" th:replace="~{newdesign/include/header}"></div>
+    </th:block>
+    <!-- NORMAL CASE -->
+    <th:block th:unless="${param.menu != null && param.menu[0].equals('no')}">
+        <main class="l-page">
+            <div class="l-breadcrumbs">
+                <div class="l-breadcrumbs__inner">
+                    <div class="l-breadcrumbs__list">
+                        <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                        <form th:object="${specialModel}" method="post">
+                            <div class="l-breadcrumbs__item"><span id="freeAreaTitle" th:utext="*{freeAreaTitle}" class="l-breadcrumbs__current"></span></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--CONTAINER-->
+            <div class="l-container">
+                <div class="l-container__inner">
+                    <th:block th:unless="${param.menu != null && param.menu[0].equals('no')}">
+                        <div id="layoutSidemenu" th:replace="~{newdesign/include/sidemenu}"></div>
+                    </th:block>
+                    <!--MAIN-->
+                    <div class="l-main">
+                        <form id="specialForm" th:object="${specialModel}" method="post">
+                            <p id="freeAreaBodyPc" th:utext="*{freeAreaBodyPc}" title="特集"/></p>
+                        </form>
+                    </div>
+                    <!--MAIN--></div>
+                <!--CONTAINER--></div>
+        </main>
+    </th:block>
+    <!-- CASE: NO MENU -->
+    <th:block th:if="${param.menu != null && param.menu[0].equals('no')}">
+        <main class="l-page">
+            <div class="l-breadcrumbs">
+                <div class="l-breadcrumbs__inner">
+                    <div class="l-breadcrumbs__list">
+                        <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span></div>
+                        <form th:object="${specialModel}" method="post">
+                            <div class="l-breadcrumbs__item"><span id="freeAreaTitle" th:utext="*{freeAreaTitle}" class="l-breadcrumbs__current"></span></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-section">
+                <form id="specialForm" th:object="${specialModel}" method="post">
+                    <p id="freeAreaBodyPc" th:utext="*{freeAreaBodyPc}" title="特集"/></p>
+                </form>
+            </div>
+
+        </main>
+    </th:block>
+
+    <th:block th:unless="${param.footer != null && param.footer[0].equals('no')}">
+        <div id="layoutFooter" th:replace="~{newdesign/include/footer}"></div>
+    </th:block>
+</div>
+</body>
+</html>
+<!--PDR Migrate Customization to here-->

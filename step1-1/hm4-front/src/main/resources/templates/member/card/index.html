@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <meta charset="utf-8" th:replace="~{newdesign/include/head}">
+    <title>歯科・技工材料の通販サイト | P.D.R.オンライン</title>
+</head>
+
+<body id="gotop" class="p-mypage">
+<a id="top" name="top"></a>
+
+<div class="l-mainwrap">
+    <div th:replace="~{newdesign/include/header}"></div>
+
+    <main class="l-page">
+        <div class="l-breadcrumbs">
+            <div class="l-breadcrumbs__inner">
+                <div class="l-breadcrumbs__list">
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link">
+                        <a th:href="@{/index.html}" class="c-textlink c-textlink--hover">TOP</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__link"><a
+                            th:href="@{/member/index.html}"
+                            class="c-textlink c-textlink--hover">マイページ</a></span>
+                    </div>
+                    <div class="l-breadcrumbs__item"><span class="l-breadcrumbs__current">カード情報</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-container">
+            <div class="l-container__inner">
+                <div th:replace="~{newdesign/include/sidemenumember}"></div>
+                <div class="l-main p-mypage-card cBox">
+                    <h2 class="c-title-page"><strong>カード情報</strong></h2>
+                    <span style="display:none;" id="settlementMethodTypeName-0">CREDIT</span>
+                    <div th:if="${allMessages != null && !#lists.isEmpty(allMessages)}">
+                        <div th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                            <ul th:each="message : ${allMessages}">
+                                <li th:utext="${message}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form id="registNewCreditCardForm" th:object="${memberCardModel}" th:action="@{/member/card/index.html}" method="post">
+                        <div class="c-page-description">
+                            <p class="c-page-description__text">クレジットカードの登録・削除ができます。<br>
+                                ※お支払い回数は一回払いのみです。<br>
+                                ※クレジットカードの情報は、弊社では保持しておりません。国際セキュリティ基準をクリアした決済代行会社で管理されています。<br>
+                                ※ご請求金額に関わらずご利用いただけます。<br>
+                                ※カード利用明細はご利用のカード会社から送付されます。
+                            </p>
+                            <dl class="c-page-description__definition c-page-description--margin-m">
+                                <dt>＜ご確認ください＞</dt>
+                                <dd>
+                                    <ul class="c-page-description__bullet-point">
+                                        <li>
+                                            発送済のご注文については、お支払い時にご利用のクレジットカードを変更はいたしかねますので、ご了承ください。
+                                        </li>
+                                        <li>セールde予約等で未発送のご注文は、注文受付時にご指定いただいたクレジットカードでのお支払いとなります。<br>未発送分のお支払い方法の変更や、クレジットカードの変更をご希望の場合は、下記に記載されているご注文デスクまでお電話ください。
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <p class="c-page-description__text c-page-description--margin-m">
+                                お問合せ：ご注文デスク（TEL：0120-108648　受付時間：09:00-17:00／日祝休）</p>
+                        </div>
+
+                        <h4 class="c-title-form-m c-title-form-m--first"><p>ご登録カード一覧</p></h4>
+                        <div class="p-mypage-card__list" th:if="*{isRegistedCard()}">
+                            <br>現在、ご登録いただいてるクレジットカードはございません。
+                        </div>
+                        <div id="registedCardItems" class="p-mypage-card__list" th:if="*{!isRegistedCard()}">
+                            <div class="p-mypage-card__list">
+                                <th:block th:each="registedCardItem, stat : *{registedCardItems}">
+                                    <div class="p-mypage-card__list-unit">
+                                        <p> <span th:remove="tag" th:text="${registedCardItem.cardBrand}"></span><br>
+                                            カードNo.　<span th:remove="tag" th:id="'cardNumber-' + ${stat.index}" th:text="${registedCardItem.cardNumber}"></span><br>
+                                            有効期限　　<span th:remove="tag" th:id="'expirationDateMonth-' + ${stat.index}" th:text="${registedCardItem.expirationDateMonth}"></span>/
+                                            <span th:remove="tag" th:id="'expirationDateYear-' + ${stat.index}" th:text="${registedCardItem.expirationDateYear}"></span>
+                                        </p>
+                                        <div class="p-mypage-card__list-button">
+                                            <button th:onclick="'showDialogDeleteCredit(' + ${stat.index} + '); return false;'"
+                                                    type="button" class="c-textlink c-textlink--text c-textlink--delete js-modal" data-target="modal-delete">
+                                                <svg viewBox="0 0 10 10">
+                                                    <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/delete.svg#delete}"></use>
+                                                </svg>削除</button>
+                                            <input type="image" th:id="'doOnceDelete' + ${stat.index}" name="doOnceDelete" style="display:none"/>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+
+                        <h4 class="c-title-form-m c-title-form-m--line"><p>新しいカードを登録する</p></h4>
+                        <p>カード情報を入力後、「カードを登録する」ボタンを押してください。</p>
+                        <div class="cardList">
+                            <div class="l-form__list-wrap">
+                                <dl class="l-form__list">
+                                    <dt><p><span>カード会社選択</span></p></dt>
+                                    <dd>
+                                        <div class="c-select c-select--card" th:classappend="${#fields.hasErrors('cardBrand')} ? 'c-select--error'">
+                                            <select id="cardBrand"
+                                                    class="c-select__inner"
+                                                    th:name="cardBrand">
+                                                <option value="" selected="selected">選択してください</option>
+                                                <option th:each="cardBrandItem : *{cardBrandItems}"
+                                                        th:value="${cardBrandItem.key}"
+                                                        th:text="${cardBrandItem.value}"
+                                                        th:selected="${cardBrandItem.key} == *{cardBrand}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <span th:if="${#fields.hasErrors('cardBrand')}" th:errors="*{cardBrand}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>カード番号</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <input type="text" id="cardNewNumber" inputmode="numeric" maxlength="16"
+                                                   autocomplete="name" title="カード番号" class="c-input c-input--width-l"
+                                                   th:classappend="${#fields.hasErrors('cardNumber')} ? 'c-input--error' : ''">
+                                            <input type="hidden" id="cardNumber" th:field="*{cardNumber}"/>
+                                            <span class="l-form__list-memo">（半角数字・ハイフンなし） </span>
+                                        </p>
+                                        <span th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}" class="c-field-error c-field-error--top"></span>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt><p><span>有効期限</span></p></dt>
+                                    <dd>
+                                        <p>
+                                            <span>月&nbsp;</span>
+                                            <span class="c-select c-select--expiration" th:classappend="${#fields.hasErrors('expirationDateMonth')} ? 'c-select--error' : ''">
+                                                <select class="c-select__inner" id="expirationNewDateMonth" title="有効期限">
+                                                  <option value="" selected="selected">選択</option>
+                                                  <option th:each="expirationDateMonthItem : *{expirationDateMonthItems}"
+                                                          th:value="${expirationDateMonthItem.key}"
+                                                          th:text="${expirationDateMonthItem.value}"
+                                                          th:selected="${expirationDateMonthItem.key} == *{expirationDateMonth}"></option>
+                                                </select>
+                                            </span>
+                                            <span>&nbsp;／&nbsp;年&nbsp;</span>
+                                            <span class="c-select c-select--expiration" th:classappend="${#fields.hasErrors('expirationDateYear')} ? 'c-select--error' : ''">
+                                                <select class="c-select__inner" id="expirationNewDateYear" title="有効期限" >
+                                                  <option value="" selected="selected">選択</option>
+                                                  <option th:each="expirationDateYearItem : *{expirationDateYearItems}"
+                                                          th:value="${expirationDateYearItem.key}"
+                                                          th:text="${expirationDateYearItem.value}"
+                                                          th:selected="${expirationDateYearItem.key} == *{expirationDateYear}"></option>
+                                                </select>
+                                            </span>
+                                            <input type="hidden" id="expirationDateMonth" th:field="*{expirationDateMonth}"/>
+                                            <input type="hidden" id="expirationDateYear" th:field="*{expirationDateYear}"/>
+                                            <span th:if="${#fields.hasErrors('expirationDateMonth')}" th:errors="*{expirationDateMonth}" class="c-field-error c-field-error--top"></span>
+                                            <span th:if="${#fields.hasErrors('expirationDateYear')}" th:errors="*{expirationDateYear}" class="c-field-error c-field-error--top"></span>
+                                        </p>
+                                    </dd>
+                                </dl>
+                                <dl class="l-form__list">
+                                    <dt>
+                                        <p><span>お支払い回数</span></p>
+                                    </dt>
+                                    <dd><p>一括</p></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="c-form-lower__text">
+                            ※デビットカード・プリペイドカードはご利用いただけません。<br>
+                            ※ご利用いただけるクレジットカードは、下記のとおりです。
+                            <div style="margin-top: 3px;"><img th:src="@{/newdesign/assets/images/guide/payment/credit.jpg}" alt=""></div>
+                        </div>
+
+                        <div id="jsError"></div>
+                        <div class="c-button-wrap">
+                            <button id="doOnceRegist" name="doOnceRegist" type="submit" class="c-button c-button--primary c-button--width-l">カードを登録する</button>
+                        </div>
+                        <div class="c-button-wrap c-button-wrap--lower">
+                            <p class="c-button-wrap__text-m">お困りの場合は「<a th:href="@{/guide/faq.html}" class="c-inlinelink">お問い合わせ・よくある質問</a>」よりお問い合わせください。</p>
+                        </div>
+                        <div class="c-button-wrap c-button-wrap--line">
+                            <a th:href="@{/index.html}" class="c-button c-button--primary-line c-button--width-l">トップページ</a>
+                            <a th:href="@{/member/index.html}" class="c-button c-button--primary-line c-button--width-l">マイページトップ</a>
+                        </div>
+                        <input type="hidden" id="merchantId" th:value="*{merchantId}"/>
+                        <input type="hidden" id="paygentTokenKey" th:value="*{paygentTokenKey}"/>
+                        <input type="hidden" id="token" th:field="*{token}"/>
+                        <input type="hidden" id="keepToken" th:field="*{keepToken}"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div th:replace="~{newdesign/include/footer}"></div>
+</div>
+<div id="modal-delete" class="c-modal">
+    <div class="c-modal__overlay js-modal-close">
+        <div class="c-modal__contents c-modal__contents--normal">
+            <button type="button" class="c-modal-close js-modal-close"><span></span> <span></span></button>
+            <div class="c-modal__detail c-modal__detail--complete">
+                <div class="c-modal__detail-inner">
+                    <p class="c-modal__detail-complete-title">削除してもよろしいですか？</p>
+                </div>
+            </div>
+            <div class="c-modal__button c-modal__button--small">
+                <a href="" class="c-button c-button--primary-line c-button--width-m js-modal-close">いいえ</a>
+                <a href="" id="doOnceDeleteCredit" class="c-button c-button--primary c-button--width-m js-modal"
+                   data-target="modal-complete">はい</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="paygentJs" th:src="${@environment.getProperty('paygent.token.js.src')}"></script>
+<script>
+    // <!--
+    var jQSelectorH = {
+        isCredit1: "input[name='settlementMethod']:checked",
+        isCredit2: "span",
+        isCredit3: "span[id^='settlementMethodTypeName']",
+        isCredit4: "div.cBox",
+        isRegisterdCard: "input[name$='creditCardType']:checked",
+        merchantId: "#merchantId",
+        paygentTokenKey: "#paygentTokenKey",
+        cardNo: "input[id^='cardNewNumber']",
+        origcardNo: "input[id^='cardNumber']",
+        expire1: "[id^='expirationNewDateYear']",
+        expire2: "[id^='expirationNewDateMonth']",
+        origexpire1: "[id^='expirationDateYear']",
+        origexpire2: "[id^='expirationDateMonth']",
+        securityCode: "input[id^='securityNewCode']",
+        token: "input[id^='token']",
+        keepToken: "input[id^='keepToken']",
+        doNext: "button[id^='doOnceRegist']",
+        jsErrorDiv: "#jsError",
+        templateError: "#templateError"
+    };
+    //-->
+
+
+</script>
+<script type="text/javascript" th:src="@{/common/js/pgtoken.js}"></script>
+<script>
+    $(function () {
+        initiate();
+    });
+
+    /**
+     * 選択された決済方法へのアクセスを返す
+     */
+    function getSelected() {
+        return $(".cardList");
+    }
+
+    /**
+     * 後続処理が必要か
+     * @return true:後続処理実施必要/false：後続処理実施不要
+     */
+    function needProcess(elem) {
+        var isCredit = true;
+        if (!isCredit) {
+            return false;
+        }
+
+        if (isGotToken) {
+            return false;
+        }
+        return true;
+    }
+
+    //-->
+
+
+</script>
+<!-- テンプレートはページ独自-->
+<script type="text/template" id="templateError">
+    <br>
+    <div class="global-error-message">
+        <ul id="allMessages">
+            <li>${error}</li>
+        </ul>
+    </div>
+</script>
+<script type="text/javascript">
+    function showDialogDeleteCredit(registedCardIndex) {
+        $("#doOnceDeleteCredit").click(function () {
+            $("#modal-delete").hide();
+            if ($("#registedCardIndex")[0]) {
+                $("#registedCardIndex").remove();
+            }
+
+            $("<input>", {
+                type: 'hidden',
+                id: 'registedCardIndex',
+                name: 'registedCardIndex',
+                value: registedCardIndex
+            }).appendTo('#registedCardItems');
+            document.getElementById("doOnceDelete" + registedCardIndex).click();
+        })
+    }
+</script>
+</body>
+</html>

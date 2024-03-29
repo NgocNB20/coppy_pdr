@@ -1,0 +1,5 @@
+type: object
+description: UK-API連携関連ワードレスポンス（relatedWord）
+properties:
+  docs:
+    $ref: "./UkApiGetUkRWordResponseInfoDocsDtoResponse.yaml"

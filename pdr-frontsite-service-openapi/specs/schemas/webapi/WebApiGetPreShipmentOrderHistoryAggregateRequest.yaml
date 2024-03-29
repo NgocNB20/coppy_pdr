@@ -1,0 +1,8 @@
+type: object
+description: WEB-API連携注文履歴（過去1年）取得リクエスト
+properties:
+  customerNo:
+    type: integer
+    format: int32
+    description: 顧客番号
+    example: 2

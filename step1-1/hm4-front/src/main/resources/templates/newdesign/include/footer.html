@@ -1,0 +1,72 @@
+<div class="l-category-wrap">
+    <ul class="l-category l-category--footer sidemenuPageItems-1 l-sm"></ul>
+</div>
+
+<footer class="l-footer">
+    <div class="l-footer__inner">
+        <nav class="l-footer__nav">
+            <ul>
+                <li><a th:href="@{/guide/member.html}" class="c-textlink c-textlink--hover">会員について</a></li>
+                <li><a th:href="@{/guide/order.html}" class="c-textlink c-textlink--hover">ご注文について</a></li>
+                <li><a th:href="@{/guide/payment.html}" class="c-textlink c-textlink--hover">お支払い／配送について</a>
+                </li>
+                <li><a th:href="@{/guide/faq.html}" class="c-textlink c-textlink--hover">よくある質問</a></li>
+                <li><a th:href="@{/guide/law.html}" class="c-textlink c-textlink--hover">特定商取引法に基づく表記</a>
+                </li>
+                <li><a th:href="@{/guide/privacy.html}" class="c-textlink c-textlink--hover">プライバシーポリシー</a>
+                </li>
+                <li><a th:href="@{/inquiry/index.html}" class="c-textlink c-textlink--hover">お問い合わせ</a></li>
+                <li><a th:href="@{/special.html?fkey=companyinfo_jp&menu=no}"
+                       class="c-textlink c-textlink--hover">会社概要</a></li>
+                <li><a th:href="@{/special.html?fkey=companyinfo_eng&menu=no}" class="c-textlink c-textlink--hover">Corporate
+                    Profile</a></li>
+                <li><a th:href="@{/special.html?fkey=sitemap}" class="c-textlink c-textlink--hover">サイトマップ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="l-footer__contents">
+            <dl class="l-footer__item">
+                <dt>ご注文</dt>
+                <dd>
+                    <p class="l-footer__item-tel">
+                        <strong><span>TEL</span>0120-108648</strong><span class="l-footer__item-time">受付時間：9:00〜17:00／日祝休</span>
+                    </p>
+                    <p class="l-footer__item-fax">
+                        <strong><span>FAX</span>0120-108649</strong><span
+                            class="l-footer__item-time">受付時間：24時間／年中無休</span>
+                    </p>
+                </dd>
+            </dl>
+            <dl class="l-footer__item l-footer__item-call">
+                <dt>お問い合わせ<br><small>カスタマーサービスデスク</small></dt>
+                <dd>
+                    <p><strong>0120-108394</strong><span
+                            class="l-footer__item-time">受付時間：10:00〜16:00／土日祝休</span></p>
+                </dd>
+            </dl>
+            <dl class="l-footer__item l-footer__item-sns">
+                <dt>公式SNS</dt>
+                <dd>
+                    <a th:href="@{https://www.facebook.com/pdr.co.jp}"><img th:src="@{/newdesign/assets/images/common/facebook.svg}" alt="Facebook" width="100%" height="100%"></a>
+                    <a th:href="@{https://line.me/R/ti/p/%40fme5139a}"><img th:src="@{/newdesign/assets/images/common/line.svg}" alt="LINE" width="100%"></a>
+                    <a th:href="@{https://www.instagram.com/pdr_dental/}"><img th:src="@{/newdesign/assets/images/common/instagram.svg}" alt="Instagram" width="100%"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="l-footer__copyright">
+            <span><img th:src="@{/newdesign/assets/images/common/logo.svg}" alt="P.D.R."></span>
+            <p>Copyright(C) P.D.R. Co.,Ltd. All Rights Reserved.</p>
+        </div>
+        <a th:href="@{#gotop}" class="pagetop" data-scroll="">
+            <svg viewBox="0 0 25.7 16.6">
+                <use th:attr="'xlink:href'=@{/newdesign/assets/images/icon/pagetop.svg#pagetop}"></use>
+            </svg>
+        </a>
+    </div>
+</footer>
+
+<script th:src="@{/newdesign/assets/js/common-front.js}" defer="defer"></script>
+<script th:src="@{/newdesign/assets/js/main_custum.js}" defer="defer"></script>
+<script th:src="@{/newdesign/assets/js/category/sideMenuCategory.js}" defer="defer"></script>
+<script th:src="@{/newdesign/assets/js/category/headerMenuCategory.js}" defer="defer"></script>
+<script th:src="@{/newdesign/assets/js/datepicker.js}" defer="defer"></script>

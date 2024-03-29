@@ -1,0 +1,690 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.l-form {
+
+  // 調整済 ------------------------------------
+
+  // 単体利用のform にかかるテキスト（login/member.html で利用のみ）
+  &__input-memo {
+    margin-top: 15px;
+
+    @include media(sm) {
+      margin-top: vwset(10);
+      text-align: right;
+    }
+  }
+
+  // パスワード
+  &__password {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+
+    button {
+      position: absolute;
+      top: 75px;
+      right: 0;
+    }
+
+    &--not-memo {
+      text-align: right;
+
+      input {
+        text-align: left;
+      }
+
+      button {
+        position: inherit;
+        top: inherit;
+        margin-top: 15px;
+      }
+    }
+
+    @include media(sm) {
+
+      margin-right: 0 !important;
+
+      button {
+        top: vwset(-40);
+      }
+    }
+    
+  }
+
+
+  // フォームリスト
+  &__list {
+    border-top: 1px solid $color-table;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+
+    &:last-of-type {
+      @include media(lg) {
+        border-bottom: 1px solid $color-table;
+      }
+    }
+
+    // layout
+    dt,dd {
+      display: grid;
+      align-items: center;
+      padding: 18px 27px;
+    }
+
+    dt {
+      background: rgba($color: $color-orange-lightGray, $alpha: .7);
+      font-weight: normal;
+      position: relative;
+
+      p {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        @include font-style(16,30,normal);
+        padding-bottom: 2px; // 微調整 ちょっと下よりになるため
+      }
+    }
+
+    dd {
+      width: 100%;
+      word-break: break-all;
+
+      p {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        @include font-style(16,30,normal);
+        padding-bottom: 2px; // 微調整 ちょっと下よりになるため
+
+        > * {
+          margin-right: 15px; // pタグ内全要素、右に余白
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    &--error {
+      background: #fff2f2;
+    }
+
+    // parts
+    &-radio-unit {
+      display: grid;
+      gap: 14px;
+    }
+
+    &-checkbox-unit {
+      display: grid;
+      gap: 20px;
+    }
+
+
+    // parts / フォームの補足文（半角など）
+    &-memo {
+      @include font-style(16,40);
+    }
+
+    &-changes {
+      color: $color-primary !important;
+      font-weight: bold !important;
+    }
+
+    // parts / dd内文章
+    &-text {
+      @include font-style(16,32);
+
+      &--small {
+        @include font-style(15,30);
+      }
+
+      &--top {
+        margin-top: 10px;
+      }
+
+      &--bottom {
+        margin-bottom: 10px;
+      }
+
+      &--margin {
+        margin-block: 10px 16px;
+      }
+
+      strong {
+        color: $color-f00;
+        font-weight: normal
+      }
+    }
+
+    // parts / dt内文章
+    &-title-text {
+      @include font-style(15,25);
+      margin-top: 10px;
+    }
+
+    &-title-memo {
+      display: block;
+      @include font-style(13,22);
+    }
+
+    // 郵便番号
+    &-zicode {
+
+      input {
+        @include media(lg) {
+          width: 15vw;
+        }
+      }
+      
+    }
+
+    @include media(sm) {
+      border-top: none;
+      grid-template-columns: 1fr;
+      margin-inline: vwset(10);
+
+      &-wrap {
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          margin-inline: vwset(10);
+          width: vwset(355);
+          height: 3px;
+          background: $color-orange-lightGray;
+        }
+      }
+  
+      dt {
+        padding: vwset(10) vwset(15);
+
+        p {
+          gap: vwset(15);
+          @include font-sp-style(16,30,bold);
+        }
+      }
+  
+      dd {
+        padding: vwset(17) vwset(13) vwset(22);
+
+        p {
+          @include font-sp-style(15,30,normal);
+
+          > * {
+            margin-right: vwset(5); // pタグ内全要素、右に余白
+          }
+          
+          .c-input--width-l {
+            margin-right: 0;
+          }
+
+          .c-input {
+            margin-block: vwset(3);
+          }
+          
+        }
+      }
+  
+      &--error {
+        margin-bottom: vwset(15);
+      }
+
+      &-radio-unit {
+        gap: vwset(10);
+      }
+  
+      &-checkbox-unit {
+        gap: vwset(20);
+      }
+
+  
+      // parts > フォームの補足文（半角など）
+      &-memo {
+        @include font-sp-style(15,28);
+      }
+  
+      // parts > dd内文章
+      &-text {
+        @include font-sp-style(15,24);
+  
+        &--small {
+          @include font-sp-style(14,22);
+        }
+  
+        &--top {
+          margin-top: vwset(10);
+        }
+  
+        &--bottom {
+          margin-bottom: vwset(10);
+        }
+  
+        &--margin {
+          margin-block: vwset(10);
+        }
+      }
+  
+      // parts > dt内文章
+      &-title-text {
+        @include font-style(14,24);
+        margin-top: 0;
+      }
+
+      &-title-memo {
+        position: absolute;
+        top: 50%;
+        right: vwset(20);
+        transform: translateY(-50%);
+        @include font-style(13,22,bold);
+      }
+
+  
+      // 郵便番号
+      &-zicode {
+
+        button {
+          margin-top: vwset(12);
+        }
+      }
+    }
+  }
+
+  // テーブル
+  &__table {
+
+    // テーブル > common
+    border: solid 1px $color-orange-darkGray;
+    border-radius: 4px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+
+    th,td {
+      padding: 10px;
+      vertical-align: middle;
+      @include font-style(16,30,normal);
+      border-collapse:separate;
+      border-right: solid 1px $color-table;
+      border-bottom: solid 1px $color-table;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+    thead {
+      background: $color-orange-lightGray;
+    }
+
+    tbody {
+      tr:last-child td,
+      tr:last-child th {
+        border-bottom:none;
+      }
+
+    }
+
+    .c-checkbox {
+      vertical-align: text-bottom; // 垂直方向でズレるため
+    }
+
+  }
+
+
+ // // 調整済 ------------------------------------
+
+
+
+
+
+
+.l-form__send {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+
+  &:after {
+    content: "";
+    display: block;
+    width: 130px;
+  }
+}
+
+
+  // フォーム　ボタン
+  // ----------------------------------------------------------
+
+  &__sender {
+
+    &__navigation {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-top: 80px;
+      position: relative;
+
+      .c-textlink--left {
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .c-button--blue {
+        margin: 0 15px;
+      }
+
+      @include media(sm) {
+        display: block;
+        margin-top: vwset(64);
+        text-align: center;
+
+        .c-textlink--left {
+          left: 0;
+          margin-top: vwset(24);
+          position: static;
+          top: 0;
+          transform: translateY(0);
+        }
+
+        .c-button--blue {
+          display: flex;
+          margin: 0;
+          margin-top: vwset(10);
+          width: 100%;
+        }
+      }
+    }
+
+    &__list {
+      margin-top: 20px;
+
+      @include media(sm) {
+        margin-top: vwset(30);
+      }
+    }
+  }
+
+  
+
+
+
+
+
+  // ラジオボタン　リスト
+  // ----------------------------------------------------------
+
+  &__radio-list {
+    display: flex;
+
+    li {
+      margin-right: 60px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // タイトル + ラジオボタン
+  // ----------------------------------------------------------
+
+  &__tit-radio {
+    display: flex;
+
+    @include media(sm) {
+      display: block;
+    }
+
+    p {
+      margin-right: 45px;
+    }
+
+    &--list {
+      @include media(sm) {
+        margin-top: 8px;
+      }
+      ul {
+        display: flex;
+        &:last-of-type{
+          margin-top: 8px;
+        }
+
+        @include media(sm) {
+          flex-wrap: wrap;
+
+          &:last-of-type{
+            margin-top: 0px;
+          }
+
+          &:first-of-type li{
+            margin-top: 0;
+          }
+        }
+
+        li {
+          margin-right: 30px;
+          @include media(sm) {
+            margin-right: 5%;
+            width: 45%;
+            margin-top: 8px;
+            &:nth-child(2n) {
+              margin-right: 0;
+            }
+          }
+
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  // テキスト + セレクトボックス
+  // ----------------------------------------------------------
+
+  &__text-select {
+    display: flex;
+    align-items: flex-start;
+
+    p {
+      margin-right: 20px;
+      word-break: keep-all;
+      line-height: 40px;
+
+      @include media(sm) {
+        margin-right: vwset(20);
+        line-height: vwset(43);
+      }
+    }
+  }
+
+  // カード情報
+  // ----------------------------------------------------------
+
+  &__card-info {
+    background: #f8f8f8;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    margin-top: 20px;
+    max-width: 702px;
+    padding: 30px;
+
+    @include media(sm) {
+      display: block;
+      margin: vwset(24) 0 0;
+      padding: vwset(24) vwset(20);
+
+      .c-input{
+        margin-top: vwset(4);
+      }
+      .expiration-date__select{
+        margin-top: vwset(4);
+      }
+    }
+
+    //カード番号
+
+    .card-number {
+      margin-right: 25px;
+
+      @include media(sm) {
+        margin-right: 0;
+      }
+
+      input {
+        width: 240px;
+
+        @include media(sm) {
+          width: 100%;
+        }
+      }
+
+      .c-text--s {
+        margin-top: 8px;
+      }
+
+    }
+
+    //有効期限
+
+    .expiration-date {
+      margin: 0 25px 0 0;
+
+      @include media(sm) {
+        margin: vwset(16) 0 0 0;
+      }
+
+      .c-select--small{
+        width: 76px;
+        padding: 9px 7px 9px 10px;
+        @include media(sm){
+          width: vwset(76);
+        }
+      }
+
+      p {
+        margin: 0 8px;
+      }
+
+    }
+
+    //セキュリティコード
+
+    .security-code {
+
+      input {
+        width: 140px;
+      }
+
+      @include media(sm) {
+        margin: vwset(16) 0 0 0;
+      }
+    }
+  }
+
+  // 支払い回数
+  // ----------------------------------------------------------
+
+  &__payment-plan {
+    margin-top: 30px;
+
+    @include media(sm) {
+      margin-top: vwset(24);
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+
+    .payment-plan__list {
+      align-items: center;
+      display: flex;
+
+      @include media(sm) {
+        display: block;
+      }
+
+      li {
+        margin-right: 30px;
+
+        @include media(sm) {
+          margin-right: 0;
+          margin-top: vwset(16);
+        }
+
+        .c-select__wrap {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  // カード情報の登録
+  // ----------------------------------------------------------
+
+  &__card-register {
+    margin-top: 30px;
+
+    @include media(sm) {
+      margin-top: vwset(24);
+    }
+
+    .c-checkbox {
+      @include media(sm) {
+        margin-top: vwset(16);
+      }
+    }
+
+    label {
+      @include media(sm) {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.5;
+        
+        span {
+          display: inline-block;
+          margin-top: -2px;
+        }
+      }
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+  }
+
+  // ペイジー
+  // ----------------------------------------------------------
+
+  &__pay-easy {
+
+    .c-text--note {
+      margin-top: 25px;
+
+      @include media(sm) {
+        margin-top: vwset(24);
+      }
+    }
+
+    .c-textlink {
+      @include font-style(12, 18);
+    }
+  }
+}
+
+

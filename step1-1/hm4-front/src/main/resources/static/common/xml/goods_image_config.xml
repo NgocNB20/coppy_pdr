@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<goodsImageConfig>
+	<!-- サムネイルのレイアウト位置 D or U or L or R -->
+	<layout>D</layout>
+
+	<!-- M画像の設定 -->
+	<largeImage>
+		<width>400</width>
+		<height>400</height>
+		<margin>12</margin>
+		<borderWidth>2</borderWidth>
+		<!--borderWidth round="10">5</borderWidth--><!--角丸設定-->
+		<borderColor>E6E6E6</borderColor>
+	</largeImage>
+
+	<!-- S画像の設定 -->
+	<thmbImage>
+		<width>60</width>
+		<height>60</height>
+		<margin>4</margin>
+		<borderWidth>1</borderWidth>
+		<borderColor>E6E6E6</borderColor>
+		<borderWidthOver>1</borderWidthOver>
+		<borderColorOver>80011A</borderColorOver>
+		<borderColorSelected>E6E6E6</borderColorSelected>
+	</thmbImage>
+
+	<!-- 拡大縮小ボタンの設定 -->
+	<!--buttons>
+		<zoomIn>img/zoom_in.png</zoomIn>
+		<zoomOut>img/zoom_out.png</zoomOut>
+		<zoom1>img/zoom1.png</zoom1>
+		<zoom2>img/zoom2.png</zoom2>
+		<zoom3>img/zoom3.png</zoom3>
+		<zoom4>img/zoom4.png</zoom4>
+	</buttons-->
+</goodsImageConfig>

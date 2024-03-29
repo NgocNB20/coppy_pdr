@@ -1,0 +1,242 @@
+@charset "utf-8";
+
+@use "../Foundation/variables" as *;
+@use "../Foundation/mixin" as *;
+@use "../Foundation/functions" as *;
+@use "../Foundation/icon" as *;
+
+.c-textlink {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  transition: opacity $comMS $comES;
+
+  &:hover {
+    @include media(lg) {
+      opacity: .5;
+    }
+  }
+
+  &--text {
+    // 下線
+    line-height: 2.0;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    margin-bottom: 4px;   // offset分下に下がってしまうため
+  }
+
+  // 右矢印
+  &--right {
+    background-position: right 52%;
+    background-size: 8px auto;
+    padding-right: 16px;
+    @include icon('arrow-right', '666666');
+  
+    @include media(sm) {
+      background-size: vwset(8) auto;
+      padding-right: vwset(16);
+    }
+  }
+
+  // 左矢印
+  &--left {
+    background-position: left 52%;
+    background-size: 8px auto;
+    padding-left: 16px;
+    @include icon('arrow-left', '666666');
+  
+    @include media(sm) {
+      background-size: vwset(8) auto;
+      padding-left: vwset(16);
+    }
+  }
+
+  &--large {
+    @include font-style(15);
+    @include media(sm) {
+      @include font-sp-style(14);
+    }
+  }
+
+  // ホバーで下線
+  &--hover {
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 8px;
+    }
+  }
+
+  // 入荷お知らせ
+  &--arrival {
+    svg {
+      width: 18px;
+      fill: $color-a1;
+      margin: 6px 10px 0 0;
+    }
+
+    @include media(sm) {
+      @include font-sp-style(13,20);
+      background-size: vwset(6) auto;
+
+      svg {
+        width: vwset(15);
+        margin: vwset(4) vwset(6) 0 0;
+      }
+    }
+  }
+
+  // お気に入り
+  &--add-fav {
+
+    color: $color-a1;
+
+    span {
+      width: 23px;
+      height: 23px;
+      background: $color-ccc;
+      border-radius: 9999px;
+      margin: 3px 6px 0 0;
+      display: grid;
+      place-content: center;
+
+      svg {
+        fill: $color-fff;
+        transition: fill $comMS $comES, stroke $comMS $comES;
+        width: 15px;
+        margin-top: 1px;
+      }
+    }
+
+    p {
+      @include font-style(13,25,bold);
+    }
+
+    &:active,
+    &.is-active {
+
+      color: #ec51b0;
+
+      span {
+        background: #ec51b0;
+      }
+
+      p {
+        color: #ec51b0;
+      }
+    }
+
+    @include media(sm) {
+
+      span {
+        width: vwset(25);
+        height: vwset(25);
+        margin: vwset(3) vwset(6) 0 0;
+      }
+
+      svg {
+        width: vwset(15)
+      }
+
+      p {
+        @include font-sp-style(13,25);
+      }
+  
+
+    }
+  }
+
+  // 削除
+  &--delete {
+    color: $color-a1;
+
+    svg {
+      width: 10px;
+      fill: $color-a1;
+      margin: 6px 6px 0 0;
+    }
+
+    @include media(sm) {
+      background-size: vwset(6) auto;
+
+      svg {
+        width: vwset(10);
+        margin: vwset(4) vwset(6) 0 0;
+      }
+    }
+  }
+
+  // 選択
+  &--select {
+    color: $color-primary;
+
+    svg {
+      width: 13px;
+      fill: $color-primary;
+      margin: 6px 6px 0 0;
+    }
+
+    @include media(sm) {
+      background-size: vwset(6) auto;
+
+      svg {
+        width: vwset(13);
+        margin: vwset(4) vwset(6) 0 0;
+      }
+    }
+  }
+
+  // パスワード
+  &--password {
+
+    p {
+      margin: 0 8px;
+      padding-bottom: 3px;
+
+      @include media(sm) {
+        margin: 0 vwset(5);
+      }
+    }
+
+    span {
+      background-color: $color-fff;
+      background-position: center;
+      background-size: 15px auto;
+      background-color: $color-ccc;
+      border-radius: 50%;
+      display: block;
+      width: 24px;
+      height: 24px;
+      transition: border-color $comMS $comES, background-color $comMS $comES;
+      @include icon('check', 'ffffff');
+
+      @include media(sm) {
+        background-size: vwset(13) auto;
+        width: vwset(20);
+        height: vwset(20);
+      }
+    }
+
+    &.is-show {
+
+      span {
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+.c-inlinelink {
+  font-weight: bold;
+  color: $color-secondary;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  transition: opacity $comMS $comES;
+  cursor: pointer;
+
+  &:hover {
+    @include media(lg) {
+      opacity: .5;
+    }
+  }
+}

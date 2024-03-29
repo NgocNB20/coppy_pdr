@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:hm="http://www.itec.hankyu-hanshin.co.jp/hitmall" lang="ja">
+<head>
+    <meta th:replace="~{include/head_new}"/>
+    <title>アンケート検索｜店舗管理</title>
+    <script th:src="@{/assets/js/jquery.alerts.js}" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/css/jquery.alerts.css}"/>
+    <script>
+    jQuery(function($) {
+        // 日付補助ボタン
+        $("button[id^='targetDate_']").click(function() {
+            var mode = $(this).attr("id").replace("targetDate_", "").split("_");
+            setTargetDate(mode[0], mode[1]+"From", mode[1]+"To");
+        });
+    });
+
+    
+    /**
+     * フリーエリア削除
+     */
+    function deleteQuestionnaire(obj, pnum) {
+        var deleteButton = $(obj);
+        var message = "";
+        // 公開ステータス取得
+        var openstatus = deleteButton.prev("input:hidden[id^='displayStatus']").val();
+        if (openstatus == 1) {
+            message = "このフリーエリアは現在公開中です。\r\n";
+        }
+    
+        // 削除確認
+        var confirm = deleteConfirm(message);
+        if (confirm) {
+            var targetSeq = deleteButton.next("input:hidden[id^='questionnaireSeq']").val();
+            $("#deleteQuestionnaireSeq").val(targetSeq);
+    
+            // 画面再描画時に同じページ番号を表示するため、pageNumberにセット
+            $("#pageNumber").val(pnum);
+        }
+        return confirm
+    }
+
+    </script>
+</head>
+
+<body id="shop">
+<div id="questionnaireSearchShop" class="l-mainwrap">
+    <div th:replace="~{include/sidemenu_new}"></div>
+    <main class="l-page">
+        <div th:replace="~{include/header_new}"></div>
+        <div class="l-container">
+            <!-- contents -->
+            <div class="l-main">
+                <form id="indexForm" th:action="@{/questionnaire/}" th:object="${questionnaireModel}" method="post">
+                    <div class="l-pagetitle_wrap">
+                        <h1 class="c-pagetitle_h1">アンケート検索</h1>
+                        <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/questionnaire/registupdate(md=new)}" class="c-btn btn_move">アンケート登録</a>
+                                </li>
+                            </ul>
+                        </th:block>
+
+                    </div>
+                    <!--/* エラーメッセージ */-->
+                    <div th:if="${allMessages}"
+                         th:class="${allMessages.allInfo()?'global-info-message':'global-error-message'}">
+                        <ul th:each="message : ${allMessages}">
+                            <li th:utext="${message}"></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="limit" value="100"/>
+
+                    <div class="l-section" id="allItemsSearch">
+                        <!-- 検索 -->
+                        <div class="l-article">
+                            <div class="l-article_inner">
+                                <div class="l-inner_wrap">
+                                    <div class="c-detail-warp search_data_smp wrap">
+                                        <dl>
+                                            <dt>アンケートSEQ</dt>
+                                            <dd>
+                                                <input type="text" id="searchQuestionnaireSeq" name="searchQuestionnaireSeq"
+                                                       maxlength="8" th:field="*{searchQuestionnaireSeq}"
+                                                       class="c-form-control" title="アンケートSEQ" th:errorclass="error"
+                                                       placeholder="ここに入力してください"/>
+                                                <div th:if="${#fields.hasErrors('searchQuestionnaireSeq')}"
+                                                     th:errors="*{searchQuestionnaireSeq}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>アンケートキー</dt>
+                                            <dd>
+                                                <input type="text" id="searchQuestionnaireKey" name="searchQuestionnaireKey"
+                                                       maxlength="20" th:field="*{searchQuestionnaireKey}"
+                                                       class="c-form-control" title="アンケートキー" th:errorclass="error"
+                                                       placeholder="ここに入力してください"/>
+                                                <div th:if="${#fields.hasErrors('searchQuestionnaireKey')}"
+                                                     th:errors="*{searchQuestionnaireKey}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>アンケート名</dt>
+                                            <dd>
+                                                <input type="text" id="searchName" name="searchName"
+                                                       maxlength="100" th:field="*{searchName}"
+                                                       class="c-form-control" title="アンケート名" th:errorclass="error"
+                                                       placeholder="ここに入力してください"/>
+                                                <div th:if="${#fields.hasErrors('searchName')}"
+                                                     th:errors="*{searchName}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>回答数</dt>
+                                            <dd class="wrap_flex_center">
+                                                <input type="text" class="c-form-control count w170px " placeholder=""
+                                                       th:field="*{searchReplyCountFrom}" maxlength="8"
+                                                       th:errorclass="error"/>
+                                                <label class="sp_label">～</label>
+                                                <input type="text" class="c-form-control count w170px " placeholder=""
+                                                       th:field="*{searchReplyCountTo}" maxlength="8"
+                                                       th:errorclass="error"/>
+                                            </dd>
+                                            <div style="margin-top:6px;">回答集計日時
+                                                <th:block th:if="*{isRegistTime()}">
+                                                <span id="registTime" th:remove="tag">
+                                                    <b th:text="*{#date.convert(registTime, 'yyyy/MM/dd HH:mm:ss')}"></b>
+                                                </span>
+                                                </th:block>
+                                                <th:block th:if="*{!isRegistTime()}">&nbsp;&nbsp;&nbsp;&nbsp;</th:block>
+                                                時点の回答数
+                                            </div>
+                                            <dd>
+                                                <div th:if="${#fields.hasErrors('searchReplyCountFrom')}"
+                                                     th:errors="*{searchReplyCountFrom}" class="c-error-txt mt5"></div>
+                                                <div th:if="${#fields.hasErrors('searchReplyCountTo')}"
+                                                     th:errors="*{searchReplyCountTo}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>サイトマップ出力</dt>
+                                            <dd>
+                                                <select id="searchSiteMapFlag" class="c-form-control"
+                                                        name="searchSiteMapFlag"
+                                                        th:classappend="${#fields.hasErrors('searchSiteMapFlag')}?'error':''">
+                                                    <option value="">選択してください</option>
+                                                    <option th:each="item : *{searchSiteMapFlagItems}"
+                                                            th:value="${item.key}" th:text="${item.value}"
+                                                            th:selected="${item.key} == *{searchSiteMapFlag}">
+                                                    </option>
+                                                </select>
+                                                <div th:if="${#fields.hasErrors('searchSiteMapFlag')}"
+                                                     th:errors="*{searchSiteMapFlag}"
+                                                     class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="c-detail-warp search_data_smp wrap mt30">
+                                        <dl>
+                                            <dt>管理メモ</dt>
+                                            <dd>
+                                                <input type="text" id="searchMemo" name="searchMemo"
+                                                       th:field="*{searchMemo}"
+                                                       class="c-form-control" title="アンケート名" th:errorclass="error"
+                                                       placeholder=""/>
+                                                <div th:if="${#fields.hasErrors('searchMemo')}"
+                                                     th:errors="*{searchMemo}" class="c-error-txt mt5"></div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <!-- 詳細検索 -->
+                                    <div class="c-detail-warp search mt10">
+                                        <div class="c-btn_add"><i></i><span>詳細検索</span></div>
+                                        <div class="c-detail_inner" id="detailSearch">
+                                            <div class="l-article-un">
+                                                <div class="c-detail-warp search_data_smp wrap">
+                                                    <dl>
+                                                        <dt>公開状態</dt>
+                                                        <dd>
+                                                            <select id="searchOpenStatus" class="c-form-control"
+                                                                    name="searchOpenStatus"
+                                                                    th:classappend="${#fields.hasErrors('searchOpenStatus')}?'error':''">
+                                                                <option value="">選択してください</option>
+                                                                <option th:each="item : *{searchOpenStatusItems}"
+                                                                        th:value="${item.key}" th:text="${item.value}"
+                                                                        th:selected="${item.key} == *{searchOpenStatus}">
+                                                                </option>
+                                                            </select>
+                                                            <div th:if="${#fields.hasErrors('searchOpenStatus')}"
+                                                                 th:errors="*{searchOpenStatus}"
+                                                                 class="c-error-txt mt5"></div>
+                                                        </dd>
+                                                    </dl>
+                                                    <div class="wrap_flex_wrap">
+                                                        <dl class="search-date">
+                                                            <dt>公開開始日</dt>
+                                                            <dd class="wrap_flex_center">
+                                                                <label class="c-datepicker">
+                                                                    <input th:field="*{searchOpenStartTimeFrom}"
+                                                                           id="searchOpenStartTimeFrom"
+                                                                           maxlength="10" autocomplete="off"
+                                                                           th:errorclass="error" type="text"
+                                                                           class="c-form-control" placeholder="年/月/日">
+                                                                </label>
+                                                                <span class="ml10">〜</span>
+                                                                <label class="ml10 c-datepicker">
+                                                                    <input th:field="*{searchOpenStartTimeTo}"
+                                                                           id="searchOpenStartTimeTo"
+                                                                           maxlength="10" autocomplete="off"
+                                                                           th:errorclass="error" type="text"
+                                                                           class="c-form-control"
+                                                                           placeholder="年/月/日"></label>
+                                                                <ul class="c-list-left list_sp5 mt10 w100p">
+                                                                    <li>
+                                                                        <button id="targetDate_today_searchOpenStartTime"
+                                                                                class="c-btn-small" type="button">今日
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_yesterday_searchOpenStartTime"
+                                                                                class="c-btn-small" type="button">昨日
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_crrentMonth_searchOpenStartTime"
+                                                                                class="c-btn-small" type="button">今月
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_prevMonth_searchOpenStartTime"
+                                                                                class="c-btn-small" type="button">先月
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_clear_searchOpenStartTime"
+                                                                                class="c-btn-txt" type="button"><i
+                                                                                class="material-icons close"></i>クリア
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                                <div th:if="${#fields.hasErrors('searchOpenStartTimeFrom')}"
+                                                                     th:errors="*{searchOpenStartTimeFrom}"
+                                                                     class="c-error-txt mt5"></div>
+                                                                <div th:if="${#fields.hasErrors('searchOpenStartTimeTo')}"
+                                                                     th:errors="*{searchOpenStartTimeTo}"
+                                                                     class="c-error-txt mt5"></div>
+                                                            </dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="wrap_flex_wrap">
+                                                        <dl class="search-date">
+                                                            <dt>公開終了日</dt>
+                                                            <dd class="wrap_flex_center">
+                                                                <label class="c-datepicker">
+                                                                    <input th:field="*{searchOpenEndTimeFrom}"
+                                                                           id="searchOpenEndTimeFrom"
+                                                                           maxlength="10" autocomplete="off"
+                                                                           th:errorclass="error" type="text"
+                                                                           class="c-form-control" placeholder="年/月/日">
+                                                                </label>
+                                                                <span class="ml10">〜</span>
+                                                                <label class="ml10 c-datepicker">
+                                                                    <input th:field="*{searchOpenEndTimeTo}"
+                                                                           id="searchOpenEndTimeTo"
+                                                                           maxlength="10" autocomplete="off"
+                                                                           th:errorclass="error" type="text"
+                                                                           class="c-form-control"
+                                                                           placeholder="年/月/日"></label>
+                                                                <ul class="c-list-left list_sp5 mt10 w100p">
+                                                                    <li>
+                                                                        <button id="targetDate_today_searchOpenEndTime"
+                                                                                class="c-btn-small" type="button">今日
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_yesterday_searchOpenEndTime"
+                                                                                class="c-btn-small" type="button">昨日
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_crrentMonth_searchOpenEndTime"
+                                                                                class="c-btn-small" type="button">今月
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_prevMonth_searchOpenEndTime"
+                                                                                class="c-btn-small" type="button">先月
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button id="targetDate_clear_searchOpenEndTime"
+                                                                                class="c-btn-txt" type="button"><i
+                                                                                class="material-icons close"></i>クリア
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                                <div th:if="${#fields.hasErrors('searchOpenEndTimeFrom')}"
+                                                                     th:errors="*{searchOpenEndTimeFrom}"
+                                                                     class="c-error-txt mt5"></div>
+                                                                <div th:if="${#fields.hasErrors('searchOpenEndTimeTo')}"
+                                                                     th:errors="*{searchOpenEndTimeTo}"
+                                                                     class="c-error-txt mt5"></div>
+                                                            </dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="allItemsSearchKeywordsDiv" class="mb20" style="display: none">
+                                            <p class="as_end" id="allItemsSearchKeywords"></p>
+                                        </div>
+                                        <div class="c-contbtn_wrap_top ai_flex-start">
+                                            <button class="c-btn btn_regular" type="submit" name="doQuestionnaireSearch">
+                                                検索する
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 検索結果 -->
+                        <th:block th:if="*{isResult()}">
+                            <article class="l-article">
+                                <input type="hidden" id="orderField" th:field="*{orderField}"/>
+                                <input type="hidden" id="orderAsc" th:field="*{orderAsc}"/>
+                                <input type="hidden" id="deleteQuestionnaireSeq" name="deleteQuestionnaireSeq"/>
+                                <input type="hidden" id="pageNumber" name="pageNumber"/>
+                                <input type="submit" id="doDisplayChange" name="doDisplayChange" style="display:none"
+                                       value="表示切替"/>
+
+                                <div class="l-article_inner">
+                                    <div class="l-inner_wrap" th:if="*{resultItems.size() == 0}">
+                                        <div class="l-conttitle_wrap">
+                                            <h2 class="c-pagetitle_h2 mr10">検索結果</h2>
+                                            <span class="as_end">全0件が該当しました</span>
+                                        </div>
+                                    </div>
+                                    <div class="l-inner_wrap" th:if="*{resultItems.size() != 0}">
+                                        <div class="l-conttitle_wrap">
+                                            <div th:replace="~{include/pager_new::pager2(totalCountDisplayFlag=true)}"></div>
+                                        </div>
+                                        <table id="search_result" class="c-tbl tbl_search_results">
+                                            <thead>
+                                            <tr th:with="sortStr=*{orderAsc}?'&nbsp;▲':'&nbsp;▼'">
+                                                <th class="number">#</th>
+                                                <th class="news_seq">
+                                                    <a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerQuestionnaireSeq">アンケートSEQ
+                                                        <th:block th:if="*{orderField} == 'questionnaireSeq'">
+                                                            <span th:text="${sortStr}"></span>
+                                                        </th:block>
+                                                    </a></th>
+                                                <th class="news_seq">
+                                                    <a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerQuestionnaireKey">アンケートキー
+                                                        <th:block th:if="*{orderField} == 'questionnaireKey'">
+                                                            <span th:text="${sortStr}"></span>
+                                                        </th:block>
+                                                    </a></th>
+                                                <th class="news_seq">
+                                                    <a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerName">アンケート名
+                                                        <th:block th:if="*{orderField} == 'name'">
+                                                            <span th:text="${sortStr}"></span>
+                                                        </th:block>
+                                                    </a></th>
+                                                <th class="times">
+                                                    <a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerOpenStartTime">公開開始日時
+                                                        <th:block th:if="*{orderField} == 'openStartTime'">
+                                                            <span th:text="${sortStr}"></span>
+                                                        </th:block>
+                                                    </a>
+                                                </th>
+                                                <th class="times">
+                                                    <a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerOpenEndTime">公開終了日時
+                                                        <th:block th:if="*{orderField} == 'openEndTime'">
+                                                            <span th:text="${sortStr}"></span>
+                                                        </th:block>
+                                                    </a>
+                                                </th>
+                                                <th class="news_seq">
+                                                    <a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerReplyCount">回答数
+                                                        <th:block th:if="*{orderField} == 'replyCount'">
+                                                            <span th:text="${sortStr}"></span>
+                                                        </th:block>
+                                                    </a></th>
+                                                <th class="status">
+                                                    <a href="#" onClick="return sortActionExe(this, 'doDisplayChange');"
+                                                       id="headerSiteMapFlag">サイトマップ出力
+                                                        <th:block th:if="*{orderField} == 'siteMapFlag'">
+                                                            <span th:text="${sortStr}"></span>
+                                                        </th:block>
+                                                    </a></th>
+                                                <th class="order_status">回答出力</th>
+                                                <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                                    <th class="delete"></th>
+                                                </th:block>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="item: *{resultItems}">
+                                                <td class="number">
+                                                    <span th:text="${item.resultNo}"/>
+                                                </td>
+                                                <td class="news_seq">
+                                                    <a th:href="@{/questionnaire/details/(seq=${item.questionnaireSeq})}">
+                                                        <span th:text="${item.questionnaireSeq}"/>
+                                                    </a>
+                                                </td>
+                                                <td class="news_seq">
+                                                    <a th:href="@{/questionnaire/details/(seq=${item.questionnaireSeq})}">
+                                                        <span th:text="${item.questionnaireKey}"/>
+                                                    </a>
+                                                </td>
+                                                <td class="news_seq">
+                                                    <a th:href="@{/questionnaire/details/(seq=${item.questionnaireSeq})}">
+                                                        <span th:text="${item.name}"/>
+                                                    </a>
+                                                </td>
+                                                <td class="times">
+                                                    <a th:href="@{/questionnaire/details/(seq=${item.questionnaireSeq})}">
+                                                        <span th:text="${#date.convert(item.openStartTime, 'yyyy/MM/dd HH:mm:ss')}"/>
+                                                    </a>
+                                                </td>
+                                                <td class="times">
+                                                    <a th:href="@{/questionnaire/details/(seq=${item.questionnaireSeq})}">
+                                                        <span th:text="${#date.convert(item.openEndTime, 'yyyy/MM/dd HH:mm:ss')}"/>
+                                                    </a>
+                                                </td>
+                                                <td class="news_seq">
+                                                    <a th:href="@{/questionnaire/details/(seq=${item.questionnaireSeq})}">
+                                                        <div th:if="${item.isEmptyReplyCount()}">
+                                                            <span th:remove="tag">未集計</span>
+                                                        </div>
+                                                        <div th:if="${!item.isEmptyReplyCount()}">
+                                                            <span th:text="${item.replyCount}"/>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td class="status">
+                                                    <a th:href="@{/questionnaire/details/(seq=${item.questionnaireSeq})}">
+                                                        <!-- PDR Migrate Customization from here -->
+                                                        <span th:text="${item.siteMapFlag != null} ? ${item.siteMapFlag.label} : ''"> </span>
+                                                        <!-- PDR Migrate Customization to here -->
+                                                    </a>
+                                                </td>
+                                                <td class="goRelyTotal">
+                                                    <a th:href="@{/questionnaire/response/(questionnaireSeq=${item.questionnaireSeq})}">
+                                                        <span class="c-status02 ico_blue">参照
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                                <th:block sec:authorize="hasAnyAuthority('SHOP:8')">
+                                                    <td class="delete">
+                                                        <input type="hidden" id="displayStatus"
+                                                               name="displayStatus"
+                                                               th:value="${item.displayStatus}"/>
+                                                        <button class="c-btn-icon" type="submit" id="doQuestionnaireDelete"
+                                                                name="doQuestionnaireDelete" value="削除" alt="削除"
+                                                                th:onClick="'return deleteQuestionnaire(this,'+ __(*{pageNumber})__ +');'">
+                                                            <i class="material-icons clear"></i></button>
+                                                        <input type="hidden" id="questionnaireSeq" name="questionnaireSeq"
+                                                               th:value="${item.questionnaireSeq}"/>
+                                                    </td>
+                                                </th:block>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div th:replace="~{include/pager_new::pager1}"></div>
+                                    </div>
+                                </div>
+
+                            </article>
+
+                        </th:block>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:replace="~{include/footer_new}"></div>
+    </main>
+</div>
+</body>
+</html>
